@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คู่มือเรียนรู้ Excel</title>
+<title>คู่มือเรียนรู้ Excel สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</title>
 <style>
   :root {
     --bg: #f0f4f8;
@@ -93,6 +93,30 @@
     margin: 0 0 8px;
   }
 
+  .topic-hero {
+    height: 130px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  }
+  .topic-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.5px, transparent 1.5px);
+    background-size: 18px 18px;
+  }
+  .hero-emoji {
+    position: relative;
+    font-size: 3rem;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+  }
+
   .video-box {
     aspect-ratio: 16 / 9;
     width: 100%;
@@ -147,6 +171,91 @@
     color: var(--sub);
     font-style: italic;
   }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.88em;
+    white-space: nowrap;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0 16px;
+    padding: 16px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--placeholder-bg);
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 104px;
+    text-align: center;
+  }
+  .flow-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .flow-label {
+    font-size: 0.76rem;
+    color: var(--sub);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .flow-arrow {
+    font-size: 1.3rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
 
   .ref-link {
     display: inline-block;
@@ -165,7 +274,7 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>📊 คู่มือเรียนรู้ Excel</h1>
+  <h1>📊 คู่มือเรียนรู้ Excel สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</h1>
   <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา</p>
 
   <div class="layout">
@@ -175,57 +284,394 @@
 </div>
 
 <script>
-// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed, images ใส่ URL รูปภาพ, text ใส่คำอธิบาย
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed, images ใส่ URL รูปภาพ, text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
 const TOPICS = [
+  {
+    key: "shortcuts",
+    title: "แป้นพิมพ์ลัดที่ควรรู้ (Keyboard Shortcuts)",
+    icon: "⌨️",
+    flow: [
+      { icon: "⌨️", label: "กดคีย์ลัด" },
+      { icon: "⚡", label: "ทำงานเร็วขึ้น" },
+      { icon: "🖱️", label: "ลดการใช้เมาส์" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "<strong>แป้นพิมพ์ลัดพื้นฐานที่ใช้บ่อย:</strong> <code>Ctrl+C</code> / <code>Ctrl+V</code> คัดลอก-วาง, <code>Ctrl+Z</code> เลิกทำ, <code>Ctrl+S</code> บันทึกไฟล์, <code>Ctrl+Arrow</code> กระโดดไปเซลล์สุดท้ายของช่วงข้อมูลในทิศทางนั้น และ <code>Ctrl+Shift+Arrow</code> เลือกช่วงข้อมูลอย่างรวดเร็วโดยไม่ต้องลากเมาส์",
+      "<strong>แป้นพิมพ์ลัดเฉพาะ Excel ที่ช่วยประหยัดเวลา:</strong> <code>Ctrl+;</code> ใส่วันที่ปัจจุบัน, <code>Alt+=</code> รวมตัวเลขอัตโนมัติด้วย SUM, <code>F2</code> แก้ไขเซลล์ที่เลือกอยู่, และ <code>Ctrl+1</code> เปิดหน้าต่าง Format Cells",
+      "เคล็ดลับ: กด <code>Ctrl+Page Up</code> / <code>Page Down</code> เพื่อสลับไปมาระหว่างชีทต่างๆ ในไฟล์เดียวกันได้อย่างรวดเร็ว โดยไม่ต้องใช้เมาส์คลิกที่แท็บชีทด้านล่าง"
+    ],
+    link: "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-microsoft-365-e765366f-24fc-4054-870d-39b214f223fd"
+  },
+  {
+    key: "number-formatting",
+    title: "การจัดรูปแบบตัวเลข (Number Formatting)",
+    icon: "💰",
+    flow: [
+      { icon: "🔢", label: "ตัวเลขดิบ" },
+      { icon: "🎛️", label: "เลือกรูปแบบการแสดงผล" },
+      { icon: "💵", label: "อ่านง่าย สื่อความหมาย" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "การจัดรูปแบบตัวเลขไม่ได้เปลี่ยนค่าจริงในเซลล์ แต่เปลี่ยนวิธี<strong>แสดงผล</strong>เท่านั้น เช่น ใส่จุลภาคคั่นหลักพัน แสดงสัญลักษณ์สกุลเงิน หรือแสดงเป็นเปอร์เซ็นต์ ไปที่แท็บ <code>Home &gt; Number Format</code> แล้วเลือกรูปแบบที่ต้องการได้ทันที",
+      "วิธีใช้งาน: กด <code>Ctrl+1</code> เพื่อเปิดหน้าต่าง <code>Format Cells</code> แล้วไปที่แท็บ <code>Number</code> เพื่อเลือกรูปแบบละเอียด เช่น จำนวนทศนิยม สัญลักษณ์สกุลเงิน หรือสร้างรูปแบบกำหนดเอง (Custom) เช่น <code>#,##0.00 \"บาท\"</code> เพื่อให้ตัวเลขต่อท้ายด้วยคำว่า 'บาท' อัตโนมัติ",
+      "ข้อควรระวัง: ตัวเลขที่แสดงเป็นเปอร์เซ็นต์ในเซลล์ เบื้องหลังจะถูกเก็บเป็นทศนิยม (เช่น 50% เก็บเป็น 0.5) หากนำไปคำนวณต่อในสูตรอื่นต้องเข้าใจค่าจริงเบื้องหลัง ไม่ใช่ตัวเลขที่ตาเห็นบนหน้าจอ"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "freeze-panes",
+    title: "ตรึงแถว/คอลัมน์ (Freeze Panes)",
+    icon: "🧊",
+    flow: [
+      { icon: "📜", label: "ตารางยาวเลื่อนดูยาก" },
+      { icon: "🧊", label: "ตรึงหัวตาราง" },
+      { icon: "👀", label: "เลื่อนดูข้อมูลไม่หลงหัว" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "<strong>Freeze Panes</strong> ใช้ตรึงแถวหรือคอลัมน์ให้อยู่กับที่ขณะเลื่อนดูข้อมูลส่วนอื่น มีประโยชน์มากกับตารางที่มีหัวคอลัมน์อยู่แถวบนสุด เพราะเลื่อนลงไปดูข้อมูลแถวล่างๆ แล้วยังเห็นหัวตารางเสมอว่าคอลัมน์ไหนคือข้อมูลอะไร",
+      "วิธีใช้งาน: คลิกเซลล์ใต้แถวที่ต้องการตรึง แล้วไปที่แท็บ <code>View &gt; Freeze Panes &gt; Freeze Panes</code> หากต้องการตรึงเฉพาะแถวบนสุดหรือคอลัมน์ซ้ายสุด สามารถเลือกตัวเลือก <code>Freeze Top Row</code> หรือ <code>Freeze First Column</code> ได้โดยตรงโดยไม่ต้องเลือกเซลล์ก่อน",
+      "เคล็ดลับ: หากต้องการดูข้อมูลสองส่วนของไฟล์เดียวกันพร้อมกันโดยไม่ตรึงถาวร ให้ใช้ <code>View &gt; Split</code> แทน จะแบ่งหน้าจอเป็นช่องที่เลื่อนอิสระจากกันได้ เหมาะกับการเปรียบเทียบข้อมูลคนละช่วงในตารางเดียวกัน"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
   {
     key: "formulas",
     title: "สูตรพื้นฐาน (Basic Formulas)",
+    icon: "🧮",
+    flow: [
+      { icon: "✏️", label: "พิมพ์ = แล้วเลือกช่วงเซลล์" },
+      { icon: "🔢", label: "Excel คำนวณให้อัตโนมัติ" },
+      { icon: "✅", label: "ได้ผลลัพธ์ทันที" }
+    ],
     video: "https://www.youtube.com/embed/ZwiQ0W5lTEg",
     images: [],
     text: [
-      "สูตรใน Excel เริ่มต้นด้วยเครื่องหมาย = เสมอ เช่น =SUM(A1:A10) สำหรับรวมตัวเลข, =AVERAGE(A1:A10) สำหรับหาค่าเฉลี่ย และ =COUNT(A1:A10) สำหรับนับจำนวนเซลล์ที่มีตัวเลข การเข้าใจการอ้างอิงเซลล์แบบสัมพัทธ์ (เช่น A1) กับแบบสัมบูรณ์ (เช่น $A$1) เป็นพื้นฐานสำคัญก่อนต่อยอดไปสูตรที่ซับซ้อนขึ้น",
-      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: =MAX() และ =MIN() หาค่ามากสุด/น้อยสุด, =IF() สำหรับตรวจเงื่อนไข เช่น =IF(A1>=50,\"ผ่าน\",\"ไม่ผ่าน\") และเครื่องหมาย & สำหรับรวมข้อความจากหลายเซลล์เข้าด้วยกัน",
-      "เคล็ดลับ: กด F4 ขณะพิมพ์สูตรเพื่อสลับรูปแบบการอ้างอิงเซลล์ระหว่างสัมพัทธ์และสัมบูรณ์ได้อย่างรวดเร็ว โดยไม่ต้องพิมพ์เครื่องหมาย $ เอง"
+      "สูตรใน Excel เริ่มต้นด้วยเครื่องหมาย <code>=</code> เสมอ เช่น <code>=SUM(A1:A10)</code> สำหรับรวมตัวเลข, <code>=AVERAGE(A1:A10)</code> สำหรับหาค่าเฉลี่ย และ <code>=COUNT(A1:A10)</code> สำหรับนับจำนวนเซลล์ที่มีตัวเลข การเข้าใจการอ้างอิงเซลล์แบบ<strong>สัมพัทธ์</strong> (เช่น <code>A1</code>) กับแบบ<strong>สัมบูรณ์</strong> (เช่น <code>$A$1</code>) เป็นพื้นฐานสำคัญก่อนต่อยอดไปสูตรที่ซับซ้อนขึ้น",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: <code>=MAX()</code> และ <code>=MIN()</code> หาค่ามากสุด/น้อยสุด, <code>=IF()</code> สำหรับตรวจเงื่อนไข เช่น <code>=IF(A1&gt;=50,\"ผ่าน\",\"ไม่ผ่าน\")</code> และเครื่องหมาย <code>&amp;</code> สำหรับรวมข้อความจากหลายเซลล์เข้าด้วยกัน",
+      "เคล็ดลับ: กด <code>F4</code> ขณะพิมพ์สูตรเพื่อสลับรูปแบบการอ้างอิงเซลล์ระหว่างสัมพัทธ์และสัมบูรณ์ได้อย่างรวดเร็ว โดยไม่ต้องพิมพ์เครื่องหมาย <code>$</code> เอง"
     ],
     link: "https://support.microsoft.com/en-us/excel/get-started/overview-of-formulas-in-excel"
   },
   {
-    key: "pivot",
-    title: "PivotTable",
-    video: "https://www.youtube.com/embed/igSovq_H24A",
+    key: "text-functions",
+    title: "ฟังก์ชันจัดการข้อความ (Text Functions)",
+    icon: "🔤",
+    flow: [
+      { icon: "📝", label: "ข้อความดิบ/ยุ่งเหยิง" },
+      { icon: "✂️", label: "ตัดแยกด้วยฟังก์ชัน" },
+      { icon: "🧹", label: "ข้อความสะอาด พร้อมใช้" }
+    ],
+    video: "",
     images: [],
     text: [
-      "PivotTable คือเครื่องมือสรุปและวิเคราะห์ข้อมูลจำนวนมากให้อยู่ในรูปแบบตารางที่กระชับและปรับเปลี่ยนมุมมองได้ง่าย เพียงเลือกช่วงข้อมูลแล้วไปที่เมนู Insert > PivotTable จากนั้นลากฟิลด์ที่ต้องการไปวางในส่วน Rows, Columns, Values หรือ Filters เพื่อดูข้อมูลในมุมมองต่างๆ ได้ทันทีโดยไม่ต้องเขียนสูตรเอง",
-      "ตัวอย่างการใช้งานจริง: หากมีข้อมูลยอดขายรายวันหลายพันแถว สามารถลาก 'พนักงานขาย' ไปไว้ที่ Rows, 'เดือน' ไปไว้ที่ Columns และ 'ยอดขาย' ไปไว้ที่ Values เพื่อดูสรุปยอดขายของแต่ละคนแยกตามเดือนได้ทันทีโดยไม่ต้องกรองข้อมูลเอง",
-      "หากข้อมูลต้นทางมีการอัปเดต สามารถคลิกขวาที่ PivotTable แล้วเลือก Refresh เพื่อดึงข้อมูลล่าสุดมาคำนวณใหม่ โดยไม่ต้องสร้าง PivotTable ใหม่ทุกครั้ง"
+      "ฟังก์ชันจัดการข้อความช่วยตัด รวม หรือปรับแต่งข้อความในเซลล์โดยไม่ต้องพิมพ์ใหม่เอง เช่น <code>=LEFT(A1,3)</code> ดึงอักขระ 3 ตัวแรกจากซ้าย, <code>=RIGHT(A1,4)</code> ดึงจากขวา, <code>=MID(A1,2,5)</code> ดึงข้อความตรงกลาง และ <code>=TRIM(A1)</code> ลบช่องว่างส่วนเกินที่มองไม่เห็นแต่ทำให้สูตรอื่นพังบ่อยๆ",
+      "วิธีใช้งาน: ใช้ <code>=TEXTJOIN(\", \",TRUE,A1:A5)</code> เพื่อรวมข้อความจากหลายเซลล์เป็นข้อความเดียวโดยคั่นด้วยเครื่องหมายที่กำหนด และข้าม (skip) เซลล์ว่างอัตโนมัติ ต่างจาก <code>&amp;</code> ที่ต้องพิมพ์เครื่องหมายคั่นเองทุกครั้ง",
+      "เคล็ดลับ: หากข้อมูลนำเข้าจากระบบอื่นแล้วเทียบกันไม่ตรง (เช่น VLOOKUP หาไม่เจอ) ให้ลองครอบด้วย <code>=TRIM()</code> ก่อนเสมอ เพราะสาเหตุส่วนใหญ่มาจากช่องว่างแฝงที่ติดมากับข้อมูล"
     ],
-    link: "https://support.microsoft.com/en-us/excel/get-started/create-a-pivottable-to-analyze-worksheet-data"
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "date-time",
+    title: "ฟังก์ชันวันที่และเวลา (Date & Time)",
+    icon: "📅",
+    flow: [
+      { icon: "🗓️", label: "วันที่ในระบบ" },
+      { icon: "➗", label: "คำนวณระยะห่าง" },
+      { icon: "📆", label: "ผลลัพธ์วันที่ที่ต้องการ" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "ฟังก์ชันวันที่พื้นฐานที่ใช้บ่อย: <code>=TODAY()</code> แสดงวันที่ปัจจุบัน, <code>=NOW()</code> แสดงวันที่พร้อมเวลา และ <code>=WEEKDAY(A1)</code> บอกว่าวันที่นั้นตรงกับวันอะไรในสัปดาห์ ฟังก์ชันเหล่านี้อัปเดตค่าอัตโนมัติทุกครั้งที่เปิดไฟล์",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: <code>=DATEDIF(A1,B1,\"D\")</code> คำนวณจำนวนวันระหว่างสองวันที่ และ <code>=EOMONTH(A1,0)</code> หาวันสุดท้ายของเดือนนั้น (ใส่ 1 แทน 0 เพื่อหาวันสุดท้ายของเดือนถัดไป) มีประโยชน์มากกับรายงานที่อิงรอบบิลหรือรอบเดือน",
+      "ข้อควรระวัง: Excel เก็บวันที่เป็นตัวเลขลำดับวันเบื้องหลัง หากเซลล์แสดงเป็นตัวเลข (เช่น 45678) แทนวันที่ ให้ไปที่ <code>Format Cells &gt; Date</code> เพื่อปรับการแสดงผลใหม่ ข้อมูลจริงไม่ได้ผิดเพียงแค่รูปแบบการแสดงผลยังไม่ถูกตั้งค่า"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "sort-filter",
+    title: "การเรียงลำดับและกรองข้อมูล (Sort & Filter)",
+    icon: "🔀",
+    flow: [
+      { icon: "📃", label: "ข้อมูลดิบไม่เป็นระเบียบ" },
+      { icon: "🔀", label: "Sort / Filter" },
+      { icon: "📌", label: "เห็นเฉพาะที่ต้องการ" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "การเรียงลำดับ (<strong>Sort</strong>) ช่วยจัดเรียงข้อมูลตามลำดับตัวเลข ตัวอักษร หรือวันที่ ทั้งจากน้อยไปมากหรือมากไปน้อย ส่วนการกรอง (<strong>Filter</strong>) ช่วยแสดงเฉพาะแถวข้อมูลที่ตรงตามเงื่อนไขที่กำหนด โดยซ่อนแถวอื่นไว้ชั่วคราวโดยไม่ลบข้อมูลทิ้ง",
+      "วิธีใช้งาน: เลือกช่วงข้อมูล แล้วไปที่แท็บ <code>Data &gt; Sort</code> สำหรับเรียงลำดับ หรือกด <code>Filter</code> เพื่อเปิดปุ่มลูกศรที่หัวตารางแต่ละคอลัมน์ จากนั้นคลิกลูกศรเพื่อเลือกเงื่อนไขการกรอง เช่น กรองเฉพาะเดือนที่ต้องการ หรือค่าที่มากกว่าตัวเลขที่กำหนด",
+      "เคล็ดลับ: แปลงช่วงข้อมูลเป็น <code>Excel Table</code> ก่อน (<code>Insert &gt; Table</code>) จะได้ปุ่ม Sort และ Filter ติดมาอัตโนมัติที่หัวตาราง ทำให้จัดการข้อมูลที่อัปเดตบ่อยได้สะดวกกว่าการกรองแบบช่วงข้อมูลธรรมดา"
+    ],
+    link: "https://support.microsoft.com/en-us/excel/sort-data-in-a-range-or-table-in-excel"
+  },
+  {
+    key: "data-validation",
+    title: "สร้างรายการดรอปดาวน์ (Data Validation)",
+    icon: "✅",
+    flow: [
+      { icon: "🖊️", label: "พิมพ์เองอิสระ (เสี่ยงผิด)" },
+      { icon: "📋", label: "ตั้งรายการที่อนุญาต" },
+      { icon: "✅", label: "เลือกจาก dropdown" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "<strong>Data Validation</strong> ใช้จำกัดค่าที่กรอกลงในเซลล์ให้อยู่ในขอบเขตที่กำหนดไว้ล่วงหน้า เช่น สร้างรายการดรอปดาวน์ให้เลือกแผนก, สถานะงาน หรือจังหวัด แทนการพิมพ์เองอิสระ ช่วยลดความผิดพลาดจากการพิมพ์ผิดหรือใช้คำที่ไม่ตรงกัน (เช่น 'กทม.' กับ 'กรุงเทพฯ')",
+      "วิธีสร้าง: เลือกเซลล์ที่ต้องการ ไปที่แท็บ <code>Data &gt; Data Validation</code> เลือก <code>Allow</code> เป็น <code>List</code> แล้วพิมพ์รายการตัวเลือกคั่นด้วยจุลภาค หรืออ้างอิงไปยังช่วงเซลล์ที่มีรายการอยู่แล้วก็ได้",
+      "เคล็ดลับ: หากอยากให้รายการดรอปดาวน์ขยายอัตโนมัติเมื่อมีการเพิ่มตัวเลือกใหม่ ให้อ้างอิงไปยัง <code>Excel Table</code> แทนช่วงเซลล์ธรรมดา รายการจะอัปเดตให้เองโดยไม่ต้องแก้ไข Data Validation ใหม่ทุกครั้ง"
+    ],
+    link: "https://support.microsoft.com/en-us/office/create-a-drop-down-list-7693307a-59ef-400a-b769-c5402dce407b"
+  },
+  {
+    key: "conditional-formatting",
+    title: "การจัดรูปแบบตามเงื่อนไข (Conditional Formatting)",
+    icon: "🎨",
+    flow: [
+      { icon: "🔢", label: "ค่าตัวเลขในเซลล์" },
+      { icon: "⚙️", label: "ตั้งเงื่อนไขที่ต้องการ" },
+      { icon: "🌈", label: "ไฮไลต์สีอัตโนมัติ" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "<strong>Conditional Formatting</strong> คือฟีเจอร์ที่ปรับสี ไอคอน หรือรูปแบบตัวอักษรของเซลล์โดยอัตโนมัติตามเงื่อนไขที่กำหนด เช่น ทำให้ตัวเลขที่มากกว่า 1,000 ขึ้นเป็นสีเขียว หรือค่าที่ต่ำกว่าเป้าหมายขึ้นเป็นสีแดง ช่วยให้มองเห็นแนวโน้มหรือจุดผิดปกติในข้อมูลได้เร็วขึ้นโดยไม่ต้องอ่านตัวเลขทีละแถว",
+      "วิธีใช้งาน: เลือกช่วงเซลล์ที่ต้องการ แล้วไปที่แท็บ <code>Home &gt; Conditional Formatting</code> เลือกกฎที่ต้องการ เช่น <code>Highlight Cells Rules</code>, <code>Data Bars</code>, <code>Color Scales</code> หรือ <code>Icon Sets</code> ตามลักษณะข้อมูลที่ต้องการนำเสนอ",
+      "เคล็ดลับ: สามารถสร้างกฎแบบกำหนดเองได้ด้วยสูตร (<code>New Rule &gt; Use a formula to determine which cells to format</code>) เช่น <code>=A1&lt;0</code> เพื่อไฮไลต์ตัวเลขติดลบในรายงานการเงินโดยอัตโนมัติ"
+    ],
+    link: "https://support.microsoft.com/en-us/excel/use-conditional-formatting-to-highlight-information-in-excel"
+  },
+  {
+    key: "excel-tables",
+    title: "แปลงข้อมูลเป็นตาราง (Excel Tables)",
+    icon: "📇",
+    flow: [
+      { icon: "📃", label: "ช่วงข้อมูลธรรมดา" },
+      { icon: "🔄", label: "Insert > Table" },
+      { icon: "📇", label: "ตารางที่ขยาย/อ้างอิงอัตโนมัติ" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "<strong>Excel Table</strong> (ต่างจากตารางที่วาดด้วยเส้นขอบธรรมดา) คือช่วงข้อมูลที่ถูกแปลงให้ระบบจดจำเป็นชุดข้อมูลเดียวกัน มีปุ่ม Sort/Filter ติดที่หัวตารางอัตโนมัติ และขยายตัวเองเมื่อเพิ่มแถวใหม่ต่อท้าย โดยไม่ต้องแก้สูตรหรือ Chart ที่อ้างอิงถึงตารางนั้นใหม่",
+      "วิธีสร้าง: เลือกช่วงข้อมูล แล้วกด <code>Ctrl+T</code> หรือไปที่ <code>Insert &gt; Table</code> จากนั้นตั้งชื่อตารางในแท็บ <code>Table Design</code> เพื่อนำไปใช้อ้างอิงแบบ structured reference เช่น <code>=SUM(ตารางยอดขาย[ยอดขาย])</code> ซึ่งอ่านเข้าใจง่ายกว่าการอ้างอิงเซลล์ตรงๆ",
+      "เคล็ดลับ: เปิดแถวรวม (<code>Total Row</code>) ที่ท้ายตารางได้จากแท็บ <code>Table Design</code> เพื่อคำนวณผลรวม ค่าเฉลี่ย หรือค่าสูงสุดของแต่ละคอลัมน์ได้ทันทีโดยไม่ต้องพิมพ์สูตรเอง"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "named-ranges",
+    title: "ตั้งชื่อช่วงเซลล์ (Named Ranges)",
+    icon: "🏷️",
+    flow: [
+      { icon: "📐", label: "เลือกช่วงเซลล์" },
+      { icon: "🏷️", label: "ตั้งชื่อที่จำง่าย" },
+      { icon: "🧾", label: "ใช้ชื่อแทนที่ในสูตร" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "<strong>Named Range</strong> คือการตั้งชื่อให้ช่วงเซลล์แทนการอ้างอิงด้วยรหัสเซลล์ เช่น ตั้งชื่อ <code>ราคาสินค้า</code> แทน <code>$B$2:$B$50</code> ทำให้สูตรอ่านง่ายขึ้นมาก เช่น <code>=SUM(ราคาสินค้า)</code> แทน <code>=SUM(B2:B50)</code>",
+      "วิธีสร้าง: เลือกช่วงเซลล์ที่ต้องการ แล้วพิมพ์ชื่อลงใน <code>Name Box</code> (กล่องด้านซ้ายของแถบสูตร) แล้วกด Enter หรือไปที่แท็บ <code>Formulas &gt; Define Name</code> เพื่อกำหนดชื่อพร้อมตั้งขอบเขตการใช้งาน (Scope) ว่าใช้ได้เฉพาะชีทนี้หรือทั้งไฟล์",
+      "เคล็ดลับ: ตั้งชื่อช่วงข้อมูลที่ใช้ซ้ำบ่อยๆ เช่น รายชื่อแผนก หรือรายการจังหวัด แล้วนำไปใช้เป็นแหล่งข้อมูลใน Data Validation ได้โดยตรง ทำให้แก้ไขจุดเดียวแล้วอัปเดตทุกที่ที่เรียกใช้ชื่อนั้น"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "sumif-countif",
+    title: "SUMIF, COUNTIF และ AVERAGEIF",
+    icon: "🧮",
+    flow: [
+      { icon: "📊", label: "ข้อมูลจำนวนมาก" },
+      { icon: "🔎", label: "ระบุเงื่อนไข" },
+      { icon: "➕", label: "สรุปเฉพาะที่ตรงเงื่อนไข" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "<strong>SUMIF</strong>, <strong>COUNTIF</strong> และ <strong>AVERAGEIF</strong> ใช้สรุปข้อมูลเฉพาะแถวที่ตรงตามเงื่อนไขโดยไม่ต้องกรองข้อมูลก่อน เช่น <code>=SUMIF(B:B,\"กรุงเทพฯ\",C:C)</code> รวมยอดขายเฉพาะแถวที่จังหวัดเป็นกรุงเทพฯ และ <code>=COUNTIF(A:A,\"&gt;100\")</code> นับจำนวนเซลล์ที่มีค่ามากกว่า 100",
+      "หากต้องเช็คหลายเงื่อนไขพร้อมกัน ให้ใช้เวอร์ชัน S ต่อท้าย เช่น <code>=SUMIFS(C:C,B:B,\"กรุงเทพฯ\",D:D,\"&gt;=2569\")</code> รวมยอดขายเฉพาะที่อยู่กรุงเทพฯ และปี 2569 ขึ้นไปเท่านั้น โดยใส่คู่ (ช่วงเงื่อนไข, เงื่อนไข) ต่อกันได้เรื่อยๆ",
+      "เคล็ดลับ: ฟังก์ชันกลุ่มนี้ทำงานเร็วกว่าและอ่านง่ายกว่าการสร้าง PivotTable สำหรับงานสรุปแบบง่ายๆ ที่มีเงื่อนไขไม่ซับซ้อน จึงเหมาะกับรายงานที่ต้องอัปเดตค่าเองบ่อยๆ ในเซลล์เดียว"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "formula-errors",
+    title: "จัดการข้อผิดพลาดของสูตร (Formula Errors)",
+    icon: "🚧",
+    flow: [
+      { icon: "❌", label: "สูตรแสดง #ERROR" },
+      { icon: "🕵️", label: "ตรวจสอบสาเหตุ" },
+      { icon: "✅", label: "แก้ไข/ดักจับด้วย IFERROR" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "ข้อผิดพลาดที่พบบ่อยใน Excel แต่ละแบบบอกสาเหตุต่างกัน: <code>#DIV/0!</code> หารด้วยศูนย์, <code>#N/A</code> หาค่าที่ต้องการไม่เจอ (มักเกิดกับ VLOOKUP/XLOOKUP), <code>#REF!</code> เซลล์ที่สูตรอ้างอิงถูกลบไปแล้ว และ <code>#VALUE!</code> ชนิดข้อมูลในสูตรไม่ถูกต้อง เช่น เอาข้อความมาบวกกับตัวเลข",
+      "วิธีใช้งาน: ครอบสูตรเดิมด้วย <code>=IFERROR(สูตรเดิม, \"ค่าที่ต้องการแสดงแทน\")</code> เพื่อไม่ให้ตารางแสดงข้อความ error ที่ดูไม่เป็นมืออาชีพ เช่น <code>=IFERROR(VLOOKUP(A1,ตาราง,2,FALSE),\"ไม่พบข้อมูล\")</code>",
+      "ข้อควรระวัง: การครอบ IFERROR ทุกสูตรโดยไม่ดูสาเหตุก่อน อาจซ่อนปัญหาที่แท้จริงของข้อมูลไว้โดยไม่รู้ตัว ควรตรวจสอบต้นตอของ error อย่างน้อยหนึ่งครั้งก่อนตัดสินใจดักจับด้วย IFERROR"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "print-setup",
+    title: "ตั้งค่าและพิมพ์เอกสาร (Page Layout & Print)",
+    icon: "🖨️",
+    flow: [
+      { icon: "📐", label: "ตารางกว้างเกินหน้ากระดาษ" },
+      { icon: "🖨️", label: "ตั้งค่า Page Layout" },
+      { icon: "📄", label: "เอกสารพิมพ์ออกมาอ่านง่าย" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "ปัญหาที่พบบ่อยเวลาพิมพ์ Excel คือข้อมูลถูกตัดข้ามหน้าแบบดูยาก แก้ได้ด้วยแท็บ <code>Page Layout</code> ซึ่งสามารถกำหนดขอบเขตพื้นที่พิมพ์ (<code>Print Area</code>), การวางแนวกระดาษ และปรับให้พอดี 1 หน้าด้วย <code>Scale to Fit</code>",
+      "วิธีใช้งาน: เลือกช่วงข้อมูลที่ต้องการพิมพ์ แล้วไปที่ <code>Page Layout &gt; Print Area &gt; Set Print Area</code> จากนั้นเข้า <code>File &gt; Print</code> เพื่อดูตัวอย่างก่อนพิมพ์จริงเสมอ ป้องกันการพิมพ์กระดาษเสียโดยไม่จำเป็น",
+      "เคล็ดลับ: หากตารางยาวหลายหน้าและต้องการให้หัวตารางแสดงซ้ำทุกหน้า ให้ไปที่ <code>Page Layout &gt; Print Titles &gt; Rows to repeat at top</code> แล้วเลือกแถวหัวตาราง ผู้อ่านจะไม่หลงว่าคอลัมน์ไหนคือข้อมูลอะไรแม้พิมพ์ยาวหลายหน้า"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
   },
   {
     key: "charts",
     title: "การสร้างกราฟ (Charts)",
+    icon: "📈",
+    flow: [
+      { icon: "🔢", label: "เลือกช่วงข้อมูล" },
+      { icon: "📐", label: "Insert > Chart" },
+      { icon: "📈", label: "กราฟพร้อมนำเสนอ" }
+    ],
     video: "https://www.youtube.com/embed/4Bma9ieavIg",
     images: [],
     text: [
-      "การสร้างกราฟใน Excel เริ่มจากเลือกช่วงข้อมูลที่ต้องการนำเสนอ แล้วไปที่แท็บ Insert เลือกประเภทกราฟที่เหมาะสม เช่น กราฟแท่ง (Column) สำหรับเปรียบเทียบ, กราฟเส้น (Line) สำหรับแสดงแนวโน้มตามเวลา หรือกราฟวงกลม (Pie) สำหรับแสดงสัดส่วน หลังสร้างกราฟแล้วสามารถปรับแต่งสี ชื่อแกน และเพิ่ม Trendline เพื่อให้ข้อมูลสื่อสารได้ชัดเจนยิ่งขึ้น",
-      "เคล็ดลับการเลือกกราฟให้เหมาะกับข้อมูล: ใช้กราฟแท่งเมื่อเปรียบเทียบค่าระหว่างกลุ่ม, กราฟเส้นเมื่อต้องการดูแนวโน้มต่อเนื่องตามเวลา, กราฟวงกลมเมื่อต้องการเน้นสัดส่วนของทั้งหมด (ไม่ควรใช้กับข้อมูลที่มีหลายหมวดหมู่เกินไป)",
-      "หลังสร้างกราฟแล้ว สามารถคลิกขวาแล้วเลือก 'Change Chart Type' เพื่อเปลี่ยนรูปแบบกราฟได้ทันทีโดยไม่ต้องสร้างใหม่ หรือใช้ไอคอน Chart Elements (เครื่องหมาย +) เพื่อเพิ่ม/ลบส่วนประกอบ เช่น Data Labels หรือ Legend"
+      "การสร้างกราฟใน Excel เริ่มจากเลือกช่วงข้อมูลที่ต้องการนำเสนอ แล้วไปที่แท็บ <code>Insert</code> เลือกประเภทกราฟที่เหมาะสม เช่น <strong>กราฟแท่ง (Column)</strong> สำหรับเปรียบเทียบ, <strong>กราฟเส้น (Line)</strong> สำหรับแสดงแนวโน้มตามเวลา หรือ <strong>กราฟวงกลม (Pie)</strong> สำหรับแสดงสัดส่วน หลังสร้างกราฟแล้วสามารถปรับแต่งสี ชื่อแกน และเพิ่ม Trendline เพื่อให้ข้อมูลสื่อสารได้ชัดเจนยิ่งขึ้น",
+      "เคล็ดลับการเลือกกราฟให้เหมาะกับข้อมูล: ใช้<strong>กราฟแท่ง</strong>เมื่อเปรียบเทียบค่าระหว่างกลุ่ม, <strong>กราฟเส้น</strong>เมื่อต้องการดูแนวโน้มต่อเนื่องตามเวลา, <strong>กราฟวงกลม</strong>เมื่อต้องการเน้นสัดส่วนของทั้งหมด (ไม่ควรใช้กับข้อมูลที่มีหลายหมวดหมู่เกินไป)",
+      "เคล็ดลับเพิ่มเติม: หลังสร้างกราฟแล้ว สามารถคลิกขวาแล้วเลือก <code>Change Chart Type</code> เพื่อเปลี่ยนรูปแบบกราฟได้ทันทีโดยไม่ต้องสร้างใหม่ หรือใช้ไอคอน <code>Chart Elements</code> (เครื่องหมาย +) เพื่อเพิ่ม/ลบส่วนประกอบ เช่น <code>Data Labels</code> หรือ <code>Legend</code>"
     ],
     link: "https://support.microsoft.com/en-us/excel/get-started/create-a-chart-from-start-to-finish"
   },
   {
+    key: "share-comments",
+    title: "แชร์ไฟล์และทำงานร่วมกัน (Share & Comments)",
+    icon: "🤝",
+    flow: [
+      { icon: "☁️", label: "บันทึกไฟล์ขึ้น OneDrive" },
+      { icon: "🤝", label: "แชร์ให้เพื่อนร่วมงาน" },
+      { icon: "💬", label: "คอมเมนต์/แก้ไขพร้อมกัน" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "การบันทึกไฟล์ไว้บน <strong>OneDrive</strong> หรือ <strong>SharePoint</strong> ก่อนแชร์ ช่วยให้หลายคนเปิดและแก้ไขไฟล์เดียวกันพร้อมกันแบบเรียลไทม์ (co-authoring) โดยเห็นการเปลี่ยนแปลงของกันและกันทันที ต่างจากการส่งไฟล์แนบทางอีเมลที่มักเกิดปัญหาไฟล์หลายเวอร์ชันสับสน",
+      "วิธีใช้งาน: กดปุ่ม <code>Share</code> มุมขวาบน แล้วพิมพ์อีเมลผู้ที่ต้องการแชร์ให้ พร้อมเลือกสิทธิ์ว่าให้ <code>Can edit</code> หรือ <code>Can view</code> เท่านั้น หากต้องการแสดงความเห็นในจุดใดจุดหนึ่งโดยไม่แก้ไขข้อมูลจริง ให้คลิกขวาที่เซลล์แล้วเลือก <code>New Comment</code>",
+      "เคล็ดลับ: ใช้ <code>New Note</code> (คลิกขวา) แทน Comment เมื่อต้องการจดบันทึกส่วนตัวสั้นๆ ติดกับเซลล์ ในขณะที่ Comment เหมาะกับการพูดคุย/ตอบกลับกันเป็นเธรดระหว่างผู้ร่วมงานหลายคน"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "protect-sheet",
+    title: "ป้องกันแผ่นงานและสมุดงาน (Protect Sheet)",
+    icon: "🔐",
+    flow: [
+      { icon: "📄", label: "ไฟล์ที่แก้ไขได้อิสระ" },
+      { icon: "🔐", label: "ตั้งรหัส/ล็อกเซลล์" },
+      { icon: "🛡️", label: "ป้องกันข้อมูลถูกแก้โดยไม่ตั้งใจ" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "การป้องกันแผ่นงาน (<strong>Protect Sheet</strong>) ช่วยล็อกไม่ให้ผู้อื่นแก้ไขสูตรหรือข้อมูลสำคัญโดยไม่ได้ตั้งใจ โดยค่าเริ่มต้นทุกเซลล์ถูกตั้งเป็น 'Locked' อยู่แล้ว แต่จะยังแก้ไขได้ปกติจนกว่าจะเปิดใช้งาน Protect Sheet",
+      "วิธีใช้งาน: หากต้องการให้บางเซลล์ยังแก้ไขได้ (เช่น ช่องกรอกข้อมูล) ให้เลือกเซลล์นั้นก่อน แล้วไปที่ <code>Format Cells &gt; Protection</code> ยกเลิกติ๊ก <code>Locked</code> จากนั้นค่อยไปที่ <code>Review &gt; Protect Sheet</code> เพื่อเปิดการป้องกันทั้งชีท เซลล์ที่ยกเลิกล็อกไว้จะยังแก้ไขได้ตามปกติ",
+      "ข้อควรระวัง: การป้องกันด้วยรหัสผ่านใน Excel ไม่ได้ปลอดภัยระดับสูงเท่าการเข้ารหัสไฟล์ทั้งไฟล์ (Encrypt with Password) หากข้อมูลเป็นความลับสำคัญ ควรใช้ <code>File &gt; Info &gt; Protect Workbook &gt; Encrypt with Password</code> ควบคู่ไปด้วย"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
     key: "lookup",
     title: "VLOOKUP และ XLOOKUP",
+    icon: "🔎",
+    flow: [
+      { icon: "🔍", label: "ค่าที่ต้องการค้นหา" },
+      { icon: "📑", label: "ค้นในตาราง" },
+      { icon: "🎯", label: "ผลลัพธ์ที่ตรงกัน" }
+    ],
     video: "https://www.youtube.com/embed/DZEPA9UhLBw",
     images: [],
     text: [
-      "VLOOKUP ใช้ค้นหาข้อมูลตามแนวตั้งในตาราง เช่น =VLOOKUP(ค่าที่ค้นหา, ช่วงตาราง, เลขคอลัมน์ที่ต้องการ, FALSE) แต่มีข้อจำกัดคือค้นหาได้เฉพาะจากซ้ายไปขวาเท่านั้น XLOOKUP เป็นฟังก์ชันรุ่นใหม่ที่ยืดหยุ่นกว่า ค้นหาได้ทั้งสองทิศทางและไม่ต้องนับเลขคอลัมน์ เช่น =XLOOKUP(ค่าที่ค้นหา, ช่วงที่ค้นหา, ช่วงผลลัพธ์) แนะนำให้ใช้ XLOOKUP แทน VLOOKUP หากองค์กรใช้ Excel เวอร์ชันที่รองรับ (Microsoft 365 หรือ Excel 2021 ขึ้นไป)",
-      "ข้อควรระวังของ VLOOKUP: คอลัมน์ที่ใช้ค้นหาต้องอยู่ซ้ายสุดของช่วงข้อมูลเสมอ และควรใส่ FALSE ในพารามิเตอร์สุดท้ายเพื่อค้นหาแบบตรงทุกตัวอักษร (exact match) ไม่เช่นนั้นอาจได้ผลลัพธ์ที่คลาดเคลื่อน",
-      "XLOOKUP ยังรองรับการกำหนดค่าที่จะแสดงเมื่อค้นหาไม่พบ (if_not_found) ในตัวเอง เช่น =XLOOKUP(A1,ช่วงค้นหา,ช่วงผลลัพธ์,\"ไม่พบข้อมูล\") ช่วยลดความจำเป็นในการซ้อนฟังก์ชัน IFERROR เพิ่มเติม"
+      "<strong>VLOOKUP</strong> ใช้ค้นหาข้อมูลตามแนวตั้งในตาราง เช่น <code>=VLOOKUP(ค่าที่ค้นหา, ช่วงตาราง, เลขคอลัมน์ที่ต้องการ, FALSE)</code> แต่มีข้อจำกัดคือค้นหาได้เฉพาะจากซ้ายไปขวาเท่านั้น <strong>XLOOKUP</strong> เป็นฟังก์ชันรุ่นใหม่ที่ยืดหยุ่นกว่า ค้นหาได้ทั้งสองทิศทางและไม่ต้องนับเลขคอลัมน์ เช่น <code>=XLOOKUP(ค่าที่ค้นหา, ช่วงที่ค้นหา, ช่วงผลลัพธ์)</code> แนะนำให้ใช้ XLOOKUP แทน VLOOKUP หากองค์กรใช้ Excel เวอร์ชันที่รองรับ (Microsoft 365 หรือ Excel 2021 ขึ้นไป)",
+      "ข้อควรระวังของ VLOOKUP: คอลัมน์ที่ใช้ค้นหาต้องอยู่ซ้ายสุดของช่วงข้อมูลเสมอ และควรใส่ <code>FALSE</code> ในพารามิเตอร์สุดท้ายเพื่อค้นหาแบบตรงทุกตัวอักษร (exact match) ไม่เช่นนั้นอาจได้ผลลัพธ์ที่คลาดเคลื่อน",
+      "XLOOKUP ยังรองรับการกำหนดค่าที่จะแสดงเมื่อค้นหาไม่พบ (<code>if_not_found</code>) ในตัวเอง เช่น <code>=XLOOKUP(A1,ช่วงค้นหา,ช่วงผลลัพธ์,\"ไม่พบข้อมูล\")</code> ช่วยลดความจำเป็นในการซ้อนฟังก์ชัน <code>IFERROR</code> เพิ่มเติม"
     ],
     link: "https://support.microsoft.com/en-us/office/vlookup-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1"
+  },
+  {
+    key: "pivot",
+    title: "PivotTable",
+    icon: "📊",
+    flow: [
+      { icon: "📋", label: "ข้อมูลดิบจำนวนมาก" },
+      { icon: "🧲", label: "ลากฟิลด์ลง Rows/Values" },
+      { icon: "📊", label: "ตารางสรุปพร้อมวิเคราะห์" }
+    ],
+    video: "https://www.youtube.com/embed/igSovq_H24A",
+    images: [],
+    text: [
+      "<strong>PivotTable</strong> คือเครื่องมือสรุปและวิเคราะห์ข้อมูลจำนวนมากให้อยู่ในรูปแบบตารางที่กระชับและปรับเปลี่ยนมุมมองได้ง่าย เพียงเลือกช่วงข้อมูลแล้วไปที่เมนู <code>Insert &gt; PivotTable</code> จากนั้นลากฟิลด์ที่ต้องการไปวางในส่วน <code>Rows</code>, <code>Columns</code>, <code>Values</code> หรือ <code>Filters</code> เพื่อดูข้อมูลในมุมมองต่างๆ ได้ทันทีโดยไม่ต้องเขียนสูตรเอง",
+      "ตัวอย่างการใช้งานจริง: หากมีข้อมูลยอดขายรายวันหลายพันแถว สามารถลาก <strong>'พนักงานขาย'</strong> ไปไว้ที่ <code>Rows</code>, <strong>'เดือน'</strong> ไปไว้ที่ <code>Columns</code> และ <strong>'ยอดขาย'</strong> ไปไว้ที่ <code>Values</code> เพื่อดูสรุปยอดขายของแต่ละคนแยกตามเดือนได้ทันทีโดยไม่ต้องกรองข้อมูลเอง",
+      "เคล็ดลับ: หากข้อมูลต้นทางมีการอัปเดต สามารถคลิกขวาที่ PivotTable แล้วเลือก <code>Refresh</code> เพื่อดึงข้อมูลล่าสุดมาคำนวณใหม่ โดยไม่ต้องสร้าง PivotTable ใหม่ทุกครั้ง"
+    ],
+    link: "https://support.microsoft.com/en-us/excel/get-started/create-a-pivottable-to-analyze-worksheet-data"
+  },
+  {
+    key: "dynamic-arrays",
+    title: "ฟังก์ชันอาร์เรย์ไดนามิก (UNIQUE, SORT, FILTER)",
+    icon: "🌊",
+    flow: [
+      { icon: "📋", label: "ข้อมูลซ้ำ/ไม่เรียง" },
+      { icon: "🌊", label: "ฟังก์ชันอาร์เรย์คำนวณครั้งเดียว" },
+      { icon: "📤", label: "ผลลัพธ์กระจายอัตโนมัติ (Spill)" }
+    ],
+    video: "",
+    images: [],
+    text: [
+      "ฟังก์ชันอาร์เรย์ไดนามิกในเวอร์ชันใหม่ (Microsoft 365) คืนค่าเป็นหลายเซลล์พร้อมกันจากสูตรเดียว โดยไม่ต้องกด Ctrl+Shift+Enter เหมือนสมัยก่อน เช่น <code>=UNIQUE(A1:A100)</code> ดึงรายการที่ไม่ซ้ำกันออกมาทั้งหมด และผลลัพธ์จะ 'กระจาย' (spill) ลงเซลล์ด้านล่างให้เองอัตโนมัติ",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: <code>=SORT(A1:A100)</code> เรียงลำดับข้อมูลโดยไม่ต้องกดปุ่ม Sort เอง และ <code>=FILTER(A1:B100,B1:B100&gt;1000)</code> กรองเฉพาะแถวที่ตรงเงื่อนไขออกมาเป็นชุดข้อมูลใหม่ โดยข้อมูลต้นฉบับไม่ถูกแก้ไข",
+      "ข้อควรระวัง: หากมีข้อมูลอื่นขวางอยู่ในพื้นที่ที่สูตรต้องการกระจายผลลัพธ์ จะเกิด error <code>#SPILL!</code> ให้ลบหรือย้ายข้อมูลที่ขวางออกก่อน สูตรจะคำนวณและกระจายผลลัพธ์ใหม่ให้เองทันที"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
   }
 ];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
 
 let currentKey = TOPICS[0].key;
 
@@ -254,18 +700,26 @@ function renderContent() {
     videoHtml = '<div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
   }
 
+  const heroHtml = '<div class="topic-hero"><span class="hero-emoji">' + (topic.icon || "📘") + '</span></div>';
+
   let imagesHtml = '';
   if (topic.images.length > 0) {
-    imagesHtml = '<div class="image-grid">' +
+    imagesHtml = '<div class="section-label" style="margin-top:20px">ภาพหน้าจอเพิ่มเติม</div><div class="image-grid">' +
       topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
       '</div>';
-  } else {
-    imagesHtml = '<div class="image-grid"><div class="image-placeholder">🖼️ ยังไม่มีภาพประกอบ</div></div>';
   }
 
   const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
-  const textHtml = paragraphs.length > 0
-    ? '<div class="text-block">' + paragraphs.map(p => '<p>' + p + '</p>').join('') + '</div>'
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join('') + '</div>'
     : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
 
   const linkHtml = topic.link
@@ -274,9 +728,10 @@ function renderContent() {
 
   el.innerHTML =
     '<h2>' + topic.title + '</h2>' +
+    heroHtml +
     '<div class="section-label">วิดีโอ</div>' + videoHtml +
     '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
-    '<div class="section-label" style="margin-top:20px">ภาพประกอบ</div>' + imagesHtml;
+    imagesHtml;
 }
 
 renderTopicList();
