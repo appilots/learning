@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือเรียนรู้ Excel</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #1f7a3f;
+    --accent-2: #145c2c;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #eaf5ee;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #4caf72;
+      --accent-2: #3a8f5b;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #1c2b21;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topic-list {
+    flex: 0 0 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .image-placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.78rem;
+    text-align: center;
+    padding: 8px;
+  }
+  .image-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .text-block {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder {
+    color: var(--sub);
+    font-style: italic;
+  }
+
+  .ref-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📊 คู่มือเรียนรู้ Excel</h1>
+  <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา</p>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed, images ใส่ URL รูปภาพ, text ใส่คำอธิบาย
+const TOPICS = [
+  {
+    key: "formulas",
+    title: "สูตรพื้นฐาน (Basic Formulas)",
+    video: "https://www.youtube.com/embed/ZwiQ0W5lTEg",
+    images: [],
+    text: [
+      "สูตรใน Excel เริ่มต้นด้วยเครื่องหมาย = เสมอ เช่น =SUM(A1:A10) สำหรับรวมตัวเลข, =AVERAGE(A1:A10) สำหรับหาค่าเฉลี่ย และ =COUNT(A1:A10) สำหรับนับจำนวนเซลล์ที่มีตัวเลข การเข้าใจการอ้างอิงเซลล์แบบสัมพัทธ์ (เช่น A1) กับแบบสัมบูรณ์ (เช่น $A$1) เป็นพื้นฐานสำคัญก่อนต่อยอดไปสูตรที่ซับซ้อนขึ้น",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: =MAX() และ =MIN() หาค่ามากสุด/น้อยสุด, =IF() สำหรับตรวจเงื่อนไข เช่น =IF(A1>=50,\"ผ่าน\",\"ไม่ผ่าน\") และเครื่องหมาย & สำหรับรวมข้อความจากหลายเซลล์เข้าด้วยกัน",
+      "เคล็ดลับ: กด F4 ขณะพิมพ์สูตรเพื่อสลับรูปแบบการอ้างอิงเซลล์ระหว่างสัมพัทธ์และสัมบูรณ์ได้อย่างรวดเร็ว โดยไม่ต้องพิมพ์เครื่องหมาย $ เอง"
+    ],
+    link: "https://support.microsoft.com/en-us/excel/get-started/overview-of-formulas-in-excel"
+  },
+  {
+    key: "pivot",
+    title: "PivotTable",
+    video: "https://www.youtube.com/embed/igSovq_H24A",
+    images: [],
+    text: [
+      "PivotTable คือเครื่องมือสรุปและวิเคราะห์ข้อมูลจำนวนมากให้อยู่ในรูปแบบตารางที่กระชับและปรับเปลี่ยนมุมมองได้ง่าย เพียงเลือกช่วงข้อมูลแล้วไปที่เมนู Insert > PivotTable จากนั้นลากฟิลด์ที่ต้องการไปวางในส่วน Rows, Columns, Values หรือ Filters เพื่อดูข้อมูลในมุมมองต่างๆ ได้ทันทีโดยไม่ต้องเขียนสูตรเอง",
+      "ตัวอย่างการใช้งานจริง: หากมีข้อมูลยอดขายรายวันหลายพันแถว สามารถลาก 'พนักงานขาย' ไปไว้ที่ Rows, 'เดือน' ไปไว้ที่ Columns และ 'ยอดขาย' ไปไว้ที่ Values เพื่อดูสรุปยอดขายของแต่ละคนแยกตามเดือนได้ทันทีโดยไม่ต้องกรองข้อมูลเอง",
+      "หากข้อมูลต้นทางมีการอัปเดต สามารถคลิกขวาที่ PivotTable แล้วเลือก Refresh เพื่อดึงข้อมูลล่าสุดมาคำนวณใหม่ โดยไม่ต้องสร้าง PivotTable ใหม่ทุกครั้ง"
+    ],
+    link: "https://support.microsoft.com/en-us/excel/get-started/create-a-pivottable-to-analyze-worksheet-data"
+  },
+  {
+    key: "charts",
+    title: "การสร้างกราฟ (Charts)",
+    video: "https://www.youtube.com/embed/4Bma9ieavIg",
+    images: [],
+    text: [
+      "การสร้างกราฟใน Excel เริ่มจากเลือกช่วงข้อมูลที่ต้องการนำเสนอ แล้วไปที่แท็บ Insert เลือกประเภทกราฟที่เหมาะสม เช่น กราฟแท่ง (Column) สำหรับเปรียบเทียบ, กราฟเส้น (Line) สำหรับแสดงแนวโน้มตามเวลา หรือกราฟวงกลม (Pie) สำหรับแสดงสัดส่วน หลังสร้างกราฟแล้วสามารถปรับแต่งสี ชื่อแกน และเพิ่ม Trendline เพื่อให้ข้อมูลสื่อสารได้ชัดเจนยิ่งขึ้น",
+      "เคล็ดลับการเลือกกราฟให้เหมาะกับข้อมูล: ใช้กราฟแท่งเมื่อเปรียบเทียบค่าระหว่างกลุ่ม, กราฟเส้นเมื่อต้องการดูแนวโน้มต่อเนื่องตามเวลา, กราฟวงกลมเมื่อต้องการเน้นสัดส่วนของทั้งหมด (ไม่ควรใช้กับข้อมูลที่มีหลายหมวดหมู่เกินไป)",
+      "หลังสร้างกราฟแล้ว สามารถคลิกขวาแล้วเลือก 'Change Chart Type' เพื่อเปลี่ยนรูปแบบกราฟได้ทันทีโดยไม่ต้องสร้างใหม่ หรือใช้ไอคอน Chart Elements (เครื่องหมาย +) เพื่อเพิ่ม/ลบส่วนประกอบ เช่น Data Labels หรือ Legend"
+    ],
+    link: "https://support.microsoft.com/en-us/excel/get-started/create-a-chart-from-start-to-finish"
+  },
+  {
+    key: "lookup",
+    title: "VLOOKUP และ XLOOKUP",
+    video: "https://www.youtube.com/embed/DZEPA9UhLBw",
+    images: [],
+    text: [
+      "VLOOKUP ใช้ค้นหาข้อมูลตามแนวตั้งในตาราง เช่น =VLOOKUP(ค่าที่ค้นหา, ช่วงตาราง, เลขคอลัมน์ที่ต้องการ, FALSE) แต่มีข้อจำกัดคือค้นหาได้เฉพาะจากซ้ายไปขวาเท่านั้น XLOOKUP เป็นฟังก์ชันรุ่นใหม่ที่ยืดหยุ่นกว่า ค้นหาได้ทั้งสองทิศทางและไม่ต้องนับเลขคอลัมน์ เช่น =XLOOKUP(ค่าที่ค้นหา, ช่วงที่ค้นหา, ช่วงผลลัพธ์) แนะนำให้ใช้ XLOOKUP แทน VLOOKUP หากองค์กรใช้ Excel เวอร์ชันที่รองรับ (Microsoft 365 หรือ Excel 2021 ขึ้นไป)",
+      "ข้อควรระวังของ VLOOKUP: คอลัมน์ที่ใช้ค้นหาต้องอยู่ซ้ายสุดของช่วงข้อมูลเสมอ และควรใส่ FALSE ในพารามิเตอร์สุดท้ายเพื่อค้นหาแบบตรงทุกตัวอักษร (exact match) ไม่เช่นนั้นอาจได้ผลลัพธ์ที่คลาดเคลื่อน",
+      "XLOOKUP ยังรองรับการกำหนดค่าที่จะแสดงเมื่อค้นหาไม่พบ (if_not_found) ในตัวเอง เช่น =XLOOKUP(A1,ช่วงค้นหา,ช่วงผลลัพธ์,\"ไม่พบข้อมูล\") ช่วยลดความจำเป็นในการซ้อนฟังก์ชัน IFERROR เพิ่มเติม"
+    ],
+    link: "https://support.microsoft.com/en-us/office/vlookup-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1"
+  }
+];
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoHtml = '<div class="video-box">🎬 ยังไม่มีวิดีโอสำหรับหัวข้อนี้</div>';
+  if (topic.video) {
+    videoHtml = '<div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+  }
+
+  let imagesHtml = '';
+  if (topic.images.length > 0) {
+    imagesHtml = '<div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
+      '</div>';
+  } else {
+    imagesHtml = '<div class="image-grid"><div class="image-placeholder">🖼️ ยังไม่มีภาพประกอบ</div></div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const textHtml = paragraphs.length > 0
+    ? '<div class="text-block">' + paragraphs.map(p => '<p>' + p + '</p>').join('') + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจาก Microsoft →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    '<div class="section-label">วิดีโอ</div>' + videoHtml +
+    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    '<div class="section-label" style="margin-top:20px">ภาพประกอบ</div>' + imagesHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>

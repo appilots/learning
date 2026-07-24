@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือเรียนรู้ Microsoft Copilot</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #2b7de9;
+    --accent-2: #0f5fc7;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #eef3fa;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #5b9dff;
+      --accent-2: #3d7fe0;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #222c37;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topic-list {
+    flex: 0 0 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .image-placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.78rem;
+    text-align: center;
+    padding: 8px;
+  }
+  .image-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .text-block {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder {
+    color: var(--sub);
+    font-style: italic;
+  }
+
+  .ref-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🤖 คู่มือเรียนรู้ Microsoft Copilot</h1>
+  <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา</p>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed, images ใส่ URL รูปภาพ, text ใส่คำอธิบาย
+const TOPICS = [
+  {
+    key: "overview",
+    title: "ภาพรวม Copilot คืออะไร",
+    video: "https://www.youtube.com/embed/S7xTBa93TX8",
+    images: [],
+    text: [
+      "Microsoft 365 Copilot คือผู้ช่วยที่ขับเคลื่อนด้วย AI ซึ่งฝังอยู่ในแอปพลิเคชัน Microsoft 365 ที่ใช้งานอยู่แล้ว เช่น Word, Excel, PowerPoint, Outlook และ Teams ผู้ใช้พิมพ์คำสั่งเป็นภาษาธรรมดา (prompt) แล้ว Copilot จะช่วยร่างเอกสาร สรุปอีเมล วิเคราะห์ข้อมูล หรือสร้างงานนำเสนอให้โดยอัตโนมัติ โดยอ้างอิงทั้งความรู้ทั่วไปและข้อมูลงานที่ผู้ใช้มีสิทธิ์เข้าถึง (ผ่าน Microsoft Graph) ช่วยลดเวลาทำงานซ้ำๆ และเพิ่มประสิทธิภาพในการทำงานประจำวัน",
+      "Copilot แตกต่างจาก Chatbot ทั่วไปตรงที่สามารถเข้าถึงข้อมูลที่ผู้ใช้มีสิทธิ์อยู่แล้วผ่าน Microsoft Graph เช่น อีเมลใน Outlook ไฟล์ใน OneDrive/SharePoint และบทสนทนาใน Teams ทำให้คำตอบมีบริบทตรงกับงานจริงมากกว่าการถาม AI ทั่วไปจากภายนอก",
+      "ปัจจุบัน Copilot แบ่งเป็นสองรูปแบบหลัก คือ Copilot Chat (แชทถาม-ตอบทั่วไป) และ Copilot ที่ฝังอยู่ในแต่ละแอปพลิเคชัน (เช่น ปุ่ม Copilot ใน Word หรือ Excel) ซึ่งช่วยงานเฉพาะทางของแอปนั้นๆ โดยตรง"
+    ],
+    link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-overview"
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นใช้งาน Copilot",
+    video: "https://www.youtube.com/embed/zqH-HtQbaeU",
+    images: [],
+    text: [
+      "ก่อนเริ่มใช้งาน Copilot องค์กรต้องมีสิทธิ์ใช้งาน Microsoft 365 Copilot license ที่ผูกกับบัญชีผู้ใช้ เมื่อพร้อมแล้ว Copilot จะปรากฏเป็นไอคอนหรือแถบด้านข้างในแอป Microsoft 365 ต่างๆ ให้เริ่มต้นด้วยคำสั่งง่ายๆ เช่น \"สรุปเอกสารนี้เป็น 3 ประเด็นหลัก\" แล้วสังเกตผลลัพธ์ที่ได้ ค่อยๆ ปรับคำสั่งให้ละเอียดขึ้นตามต้องการ เพื่อให้ได้คำตอบที่ตรงจุดมากขึ้น",
+      "หากยังไม่แน่ใจว่าองค์กรมี license หรือไม่ ให้สังเกตไอคอน Copilot (สัญลักษณ์รูปดาวสีน้ำเงิน-ม่วง) ที่มุมขวาบนของแอป Microsoft 365 หากไม่มีไอคอนขึ้น ให้ติดต่อทีม IT ภายในเพื่อตรวจสอบสิทธิ์การใช้งาน",
+      "เคล็ดลับสำหรับผู้เริ่มต้น: เริ่มจากงานที่ทำซ้ำบ่อยๆ ในแต่ละวัน เช่น สรุปอีเมลยาวๆ หรือร่างข้อความตอบกลับ จะเห็นประโยชน์ของ Copilot ได้ชัดเจนที่สุด ก่อนขยับไปใช้งานที่ซับซ้อนขึ้น"
+    ],
+    link: "https://support.microsoft.com/en-us/topic/copilot-tutorial-start-using-copilot-fe837774-3f6b-4885-850d-01f0e428898c"
+  },
+  {
+    key: "apps",
+    title: "ใช้ Copilot ใน Word, Excel และ Teams",
+    video: "https://www.youtube.com/embed/1beYHq8aMyE",
+    images: [],
+    text: [
+      "Copilot ทำงานแตกต่างกันเล็กน้อยในแต่ละแอป: ใน Word ช่วยร่างและแก้ไขเอกสาร, ใน Excel ช่วยวิเคราะห์ข้อมูล สร้างสูตร และสรุปแนวโน้มจากตาราง, ใน Teams ช่วยสรุปการประชุมและติดตามงานที่ได้รับมอบหมาย เปิดแถบ Copilot ในแต่ละแอปแล้วพิมพ์คำสั่งที่เกี่ยวข้องกับงานที่กำลังทำอยู่ได้ทันที",
+      "ตัวอย่างคำสั่งที่ใช้ได้จริง: ใน Word ลองพิมพ์ \"ร่างอีเมลแจ้งเลื่อนประชุมอย่างสุภาพ\", ใน Excel ลองพิมพ์ \"สรุปยอดขายแต่ละเดือนเป็นตารางสั้นๆ\", ใน Teams ลองพิมพ์ \"สรุปประเด็นสำคัญจากการประชุมนี้เป็นข้อๆ\"",
+      "หมายเหตุ: ผลลัพธ์ที่ Copilot สร้างควรตรวจทานความถูกต้องก่อนนำไปใช้งานจริงเสมอ โดยเฉพาะข้อมูลตัวเลขหรือข้อเท็จจริงสำคัญ"
+    ],
+    link: "https://support.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-video-tutorials"
+  },
+  {
+    key: "prompting",
+    title: "เทคนิคการตั้งคำถาม (Prompting)",
+    video: "https://www.youtube.com/embed/1jnq_ucAFIc",
+    images: [],
+    text: [
+      "การตั้งคำถาม (prompt) ที่ดีควรมี 4 ส่วน: เป้าหมาย (goal), บริบท (context), ความคาดหวังต่อผลลัพธ์ (expectation) และแหล่งข้อมูลที่ต้องการให้ Copilot ใช้อ้างอิง (source) ยิ่งให้รายละเอียดชัดเจนมากเท่าไร ผลลัพธ์ที่ได้ก็จะตรงความต้องการมากขึ้นเท่านั้น",
+      "ตัวอย่าง prompt ที่ไม่ดี: \"ช่วยเขียนรายงานหน่อย\" เทียบกับ prompt ที่ดี: \"ช่วยร่างรายงานสรุปยอดขายไตรมาส 2 ปี 2569 ความยาวไม่เกิน 1 หน้า โดยเน้นเปรียบเทียบกับไตรมาสก่อนหน้า และใช้โทนภาษาทางการ\" — ยิ่งเจาะจงมากเท่าไร ผลลัพธ์ยิ่งตรงความต้องการ",
+      "หากผลลัพธ์แรกยังไม่ตรงใจ ไม่ต้องเริ่มคำถามใหม่ทั้งหมด สามารถพิมพ์ต่อในบทสนทนาเดิมเพื่อขอปรับแก้ เช่น \"ช่วยทำให้กระชับกว่านี้\" หรือ \"เปลี่ยนโทนให้เป็นกันเองมากขึ้น\" ได้เลย"
+    ],
+    link: "https://support.microsoft.com/en-us/microsoft-365-copilot/write-a-great-prompt-in-microsoft-365-copilot"
+  }
+];
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoHtml = '<div class="video-box">🎬 ยังไม่มีวิดีโอสำหรับหัวข้อนี้</div>';
+  if (topic.video) {
+    videoHtml = '<div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+  }
+
+  let imagesHtml = '';
+  if (topic.images.length > 0) {
+    imagesHtml = '<div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
+      '</div>';
+  } else {
+    imagesHtml = '<div class="image-grid"><div class="image-placeholder">🖼️ ยังไม่มีภาพประกอบ</div></div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const textHtml = paragraphs.length > 0
+    ? '<div class="text-block">' + paragraphs.map(p => '<p>' + p + '</p>').join('') + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจาก Microsoft →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    '<div class="section-label">วิดีโอ</div>' + videoHtml +
+    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    '<div class="section-label" style="margin-top:20px">ภาพประกอบ</div>' + imagesHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
