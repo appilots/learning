@@ -93,29 +93,30 @@
     margin: 0 0 8px;
   }
 
-  .topic-hero {
-    height: 130px;
-    border-radius: 14px;
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
     margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
   }
-  .topic-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.5px, transparent 1.5px);
-    background-size: 18px 18px;
+  .key-points-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--accent-2);
+    margin-bottom: 8px;
   }
-  .hero-emoji {
-    position: relative;
-    font-size: 3rem;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+  .key-points ul {
+    margin: 0;
+    padding-left: 20px;
   }
+  .key-points li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .key-points li:last-child { margin-bottom: 0; }
 
   .video-box {
     aspect-ratio: 16 / 9;
@@ -296,6 +297,11 @@ const TOPICS = [
       { icon: "🖱️", label: "ลดการใช้เมาส์" }
     ],
     video: "",
+    keyPoints: [
+      "คีย์ลัดพื้นฐาน: Ctrl+C/V คัดลอก-วาง, Ctrl+Z เลิกทำ",
+      "คีย์ลัดเฉพาะ Excel: Ctrl+; ใส่วันที่, Alt+= รวมตัวเลข",
+      "Ctrl+Page Up/Down สลับชีทได้รวดเร็ว"
+    ],
     images: [],
     text: [
       "<strong>แป้นพิมพ์ลัดพื้นฐานที่ใช้บ่อย:</strong> <code>Ctrl+C</code> / <code>Ctrl+V</code> คัดลอก-วาง, <code>Ctrl+Z</code> เลิกทำ, <code>Ctrl+S</code> บันทึกไฟล์, <code>Ctrl+Arrow</code> กระโดดไปเซลล์สุดท้ายของช่วงข้อมูลในทิศทางนั้น และ <code>Ctrl+Shift+Arrow</code> เลือกช่วงข้อมูลอย่างรวดเร็วโดยไม่ต้องลากเมาส์",
@@ -314,6 +320,11 @@ const TOPICS = [
       { icon: "💵", label: "อ่านง่าย สื่อความหมาย" }
     ],
     video: "",
+    keyPoints: [
+      "จัดรูปแบบตัวเลขไม่เปลี่ยนค่าจริง เปลี่ยนแค่การแสดงผล",
+      "Ctrl+1 เปิด Format Cells เพื่อเลือกรูปแบบละเอียด",
+      "สร้างรูปแบบกำหนดเอง (Custom Format) ได้เอง"
+    ],
     images: [],
     text: [
       "การจัดรูปแบบตัวเลขไม่ได้เปลี่ยนค่าจริงในเซลล์ แต่เปลี่ยนวิธี<strong>แสดงผล</strong>เท่านั้น เช่น ใส่จุลภาคคั่นหลักพัน แสดงสัญลักษณ์สกุลเงิน หรือแสดงเป็นเปอร์เซ็นต์ ไปที่แท็บ <code>Home &gt; Number Format</code> แล้วเลือกรูปแบบที่ต้องการได้ทันที",
@@ -332,6 +343,11 @@ const TOPICS = [
       { icon: "👀", label: "เลื่อนดูข้อมูลไม่หลงหัว" }
     ],
     video: "",
+    keyPoints: [
+      "ตรึงหัวตารางให้อยู่กับที่ขณะเลื่อนดูข้อมูล",
+      "View > Freeze Panes เลือกตรึงแถวบนสุดหรือคอลัมน์ซ้ายสุด",
+      "ใช้ Split แทนได้ถ้าต้องการดูสองส่วนพร้อมกัน"
+    ],
     images: [],
     text: [
       "<strong>Freeze Panes</strong> ใช้ตรึงแถวหรือคอลัมน์ให้อยู่กับที่ขณะเลื่อนดูข้อมูลส่วนอื่น มีประโยชน์มากกับตารางที่มีหัวคอลัมน์อยู่แถวบนสุด เพราะเลื่อนลงไปดูข้อมูลแถวล่างๆ แล้วยังเห็นหัวตารางเสมอว่าคอลัมน์ไหนคือข้อมูลอะไร",
@@ -368,6 +384,11 @@ const TOPICS = [
       { icon: "🧹", label: "ข้อความสะอาด พร้อมใช้" }
     ],
     video: "",
+    keyPoints: [
+      "LEFT/RIGHT/MID ตัดข้อความบางส่วนจากเซลล์",
+      "TRIM ลบช่องว่างส่วนเกินที่มองไม่เห็น",
+      "TEXTJOIN รวมข้อความจากหลายเซลล์พร้อมตัวคั่น"
+    ],
     images: [],
     text: [
       "ฟังก์ชันจัดการข้อความช่วยตัด รวม หรือปรับแต่งข้อความในเซลล์โดยไม่ต้องพิมพ์ใหม่เอง เช่น <code>=LEFT(A1,3)</code> ดึงอักขระ 3 ตัวแรกจากซ้าย, <code>=RIGHT(A1,4)</code> ดึงจากขวา, <code>=MID(A1,2,5)</code> ดึงข้อความตรงกลาง และ <code>=TRIM(A1)</code> ลบช่องว่างส่วนเกินที่มองไม่เห็นแต่ทำให้สูตรอื่นพังบ่อยๆ",
@@ -386,6 +407,11 @@ const TOPICS = [
       { icon: "📆", label: "ผลลัพธ์วันที่ที่ต้องการ" }
     ],
     video: "",
+    keyPoints: [
+      "TODAY()/NOW() แสดงวันที่-เวลาปัจจุบันอัตโนมัติ",
+      "DATEDIF คำนวณระยะห่างระหว่างวันที่",
+      "EOMONTH หาวันสุดท้ายของเดือน"
+    ],
     images: [],
     text: [
       "ฟังก์ชันวันที่พื้นฐานที่ใช้บ่อย: <code>=TODAY()</code> แสดงวันที่ปัจจุบัน, <code>=NOW()</code> แสดงวันที่พร้อมเวลา และ <code>=WEEKDAY(A1)</code> บอกว่าวันที่นั้นตรงกับวันอะไรในสัปดาห์ ฟังก์ชันเหล่านี้อัปเดตค่าอัตโนมัติทุกครั้งที่เปิดไฟล์",
@@ -404,6 +430,11 @@ const TOPICS = [
       { icon: "📌", label: "เห็นเฉพาะที่ต้องการ" }
     ],
     video: "",
+    keyPoints: [
+      "Sort จัดเรียงข้อมูล, Filter แสดงเฉพาะแถวที่ต้องการ",
+      "เปิดปุ่มลูกศรกรองข้อมูลได้จากแท็บ Data",
+      "แปลงเป็น Excel Table เพื่อให้ปุ่ม Sort/Filter ติดมาอัตโนมัติ"
+    ],
     images: [],
     text: [
       "การเรียงลำดับ (<strong>Sort</strong>) ช่วยจัดเรียงข้อมูลตามลำดับตัวเลข ตัวอักษร หรือวันที่ ทั้งจากน้อยไปมากหรือมากไปน้อย ส่วนการกรอง (<strong>Filter</strong>) ช่วยแสดงเฉพาะแถวข้อมูลที่ตรงตามเงื่อนไขที่กำหนด โดยซ่อนแถวอื่นไว้ชั่วคราวโดยไม่ลบข้อมูลทิ้ง",
@@ -422,6 +453,11 @@ const TOPICS = [
       { icon: "✅", label: "เลือกจาก dropdown" }
     ],
     video: "",
+    keyPoints: [
+      "จำกัดค่าที่กรอกให้เลือกจากรายการที่กำหนดไว้เท่านั้น",
+      "ลดความผิดพลาดจากการพิมพ์คำไม่ตรงกัน",
+      "อ้างอิงจาก Excel Table เพื่อให้รายการอัปเดตอัตโนมัติ"
+    ],
     images: [],
     text: [
       "<strong>Data Validation</strong> ใช้จำกัดค่าที่กรอกลงในเซลล์ให้อยู่ในขอบเขตที่กำหนดไว้ล่วงหน้า เช่น สร้างรายการดรอปดาวน์ให้เลือกแผนก, สถานะงาน หรือจังหวัด แทนการพิมพ์เองอิสระ ช่วยลดความผิดพลาดจากการพิมพ์ผิดหรือใช้คำที่ไม่ตรงกัน (เช่น 'กทม.' กับ 'กรุงเทพฯ')",
@@ -440,6 +476,11 @@ const TOPICS = [
       { icon: "🌈", label: "ไฮไลต์สีอัตโนมัติ" }
     ],
     video: "",
+    keyPoints: [
+      "ปรับสีเซลล์อัตโนมัติตามเงื่อนไขที่ตั้งไว้",
+      "ใช้ Highlight Cells, Data Bars, Color Scales หรือ Icon Sets ได้ตามต้องการ",
+      "สร้างกฎเองด้วยสูตรได้ เช่น ไฮไลต์ตัวเลขติดลบ"
+    ],
     images: [],
     text: [
       "<strong>Conditional Formatting</strong> คือฟีเจอร์ที่ปรับสี ไอคอน หรือรูปแบบตัวอักษรของเซลล์โดยอัตโนมัติตามเงื่อนไขที่กำหนด เช่น ทำให้ตัวเลขที่มากกว่า 1,000 ขึ้นเป็นสีเขียว หรือค่าที่ต่ำกว่าเป้าหมายขึ้นเป็นสีแดง ช่วยให้มองเห็นแนวโน้มหรือจุดผิดปกติในข้อมูลได้เร็วขึ้นโดยไม่ต้องอ่านตัวเลขทีละแถว",
@@ -458,6 +499,11 @@ const TOPICS = [
       { icon: "📇", label: "ตารางที่ขยาย/อ้างอิงอัตโนมัติ" }
     ],
     video: "",
+    keyPoints: [
+      "แปลงช่วงข้อมูลเป็น Excel Table ด้วย Ctrl+T",
+      "ได้ปุ่ม Sort/Filter และขยายอัตโนมัติเมื่อเพิ่มแถว",
+      "ใช้ structured reference ในสูตรอ่านง่ายขึ้น"
+    ],
     images: [],
     text: [
       "<strong>Excel Table</strong> (ต่างจากตารางที่วาดด้วยเส้นขอบธรรมดา) คือช่วงข้อมูลที่ถูกแปลงให้ระบบจดจำเป็นชุดข้อมูลเดียวกัน มีปุ่ม Sort/Filter ติดที่หัวตารางอัตโนมัติ และขยายตัวเองเมื่อเพิ่มแถวใหม่ต่อท้าย โดยไม่ต้องแก้สูตรหรือ Chart ที่อ้างอิงถึงตารางนั้นใหม่",
@@ -476,6 +522,11 @@ const TOPICS = [
       { icon: "🧾", label: "ใช้ชื่อแทนที่ในสูตร" }
     ],
     video: "",
+    keyPoints: [
+      "ตั้งชื่อช่วงเซลล์แทนการอ้างอิงด้วยรหัสเซลล์",
+      "ทำให้สูตรอ่านง่ายขึ้น เช่น =SUM(ราคาสินค้า)",
+      "ใช้เป็นแหล่งข้อมูลใน Data Validation ได้โดยตรง"
+    ],
     images: [],
     text: [
       "<strong>Named Range</strong> คือการตั้งชื่อให้ช่วงเซลล์แทนการอ้างอิงด้วยรหัสเซลล์ เช่น ตั้งชื่อ <code>ราคาสินค้า</code> แทน <code>$B$2:$B$50</code> ทำให้สูตรอ่านง่ายขึ้นมาก เช่น <code>=SUM(ราคาสินค้า)</code> แทน <code>=SUM(B2:B50)</code>",
@@ -494,6 +545,11 @@ const TOPICS = [
       { icon: "➕", label: "สรุปเฉพาะที่ตรงเงื่อนไข" }
     ],
     video: "",
+    keyPoints: [
+      "SUMIF/COUNTIF/AVERAGEIF สรุปข้อมูลตามเงื่อนไขเดียว",
+      "SUMIFS/COUNTIFS ใช้เมื่อมีหลายเงื่อนไขพร้อมกัน",
+      "เร็วกว่าการสร้าง PivotTable สำหรับงานสรุปแบบง่าย"
+    ],
     images: [],
     text: [
       "<strong>SUMIF</strong>, <strong>COUNTIF</strong> และ <strong>AVERAGEIF</strong> ใช้สรุปข้อมูลเฉพาะแถวที่ตรงตามเงื่อนไขโดยไม่ต้องกรองข้อมูลก่อน เช่น <code>=SUMIF(B:B,\"กรุงเทพฯ\",C:C)</code> รวมยอดขายเฉพาะแถวที่จังหวัดเป็นกรุงเทพฯ และ <code>=COUNTIF(A:A,\"&gt;100\")</code> นับจำนวนเซลล์ที่มีค่ามากกว่า 100",
@@ -512,6 +568,11 @@ const TOPICS = [
       { icon: "✅", label: "แก้ไข/ดักจับด้วย IFERROR" }
     ],
     video: "",
+    keyPoints: [
+      "#DIV/0!, #N/A, #REF!, #VALUE! แต่ละแบบบอกสาเหตุต่างกัน",
+      "ใช้ IFERROR ครอบสูตรเพื่อแสดงข้อความแทน error",
+      "ควรหาสาเหตุก่อนตัดสินใจดักจับด้วย IFERROR เสมอ"
+    ],
     images: [],
     text: [
       "ข้อผิดพลาดที่พบบ่อยใน Excel แต่ละแบบบอกสาเหตุต่างกัน: <code>#DIV/0!</code> หารด้วยศูนย์, <code>#N/A</code> หาค่าที่ต้องการไม่เจอ (มักเกิดกับ VLOOKUP/XLOOKUP), <code>#REF!</code> เซลล์ที่สูตรอ้างอิงถูกลบไปแล้ว และ <code>#VALUE!</code> ชนิดข้อมูลในสูตรไม่ถูกต้อง เช่น เอาข้อความมาบวกกับตัวเลข",
@@ -530,6 +591,11 @@ const TOPICS = [
       { icon: "📄", label: "เอกสารพิมพ์ออกมาอ่านง่าย" }
     ],
     video: "",
+    keyPoints: [
+      "ตั้ง Print Area ก่อนพิมพ์เพื่อไม่ให้ข้อมูลตัดข้ามหน้า",
+      "ใช้ Scale to Fit ปรับให้พอดี 1 หน้า",
+      "Print Titles ทำให้หัวตารางแสดงซ้ำทุกหน้า"
+    ],
     images: [],
     text: [
       "ปัญหาที่พบบ่อยเวลาพิมพ์ Excel คือข้อมูลถูกตัดข้ามหน้าแบบดูยาก แก้ได้ด้วยแท็บ <code>Page Layout</code> ซึ่งสามารถกำหนดขอบเขตพื้นที่พิมพ์ (<code>Print Area</code>), การวางแนวกระดาษ และปรับให้พอดี 1 หน้าด้วย <code>Scale to Fit</code>",
@@ -566,6 +632,11 @@ const TOPICS = [
       { icon: "💬", label: "คอมเมนต์/แก้ไขพร้อมกัน" }
     ],
     video: "",
+    keyPoints: [
+      "บันทึกไฟล์บน OneDrive/SharePoint เพื่อแก้ไขพร้อมกันแบบเรียลไทม์",
+      "กำหนดสิทธิ์ Can edit หรือ Can view ตอนแชร์ไฟล์",
+      "ใช้ Comment พูดคุยเป็นเธรด หรือ Note จดบันทึกส่วนตัว"
+    ],
     images: [],
     text: [
       "การบันทึกไฟล์ไว้บน <strong>OneDrive</strong> หรือ <strong>SharePoint</strong> ก่อนแชร์ ช่วยให้หลายคนเปิดและแก้ไขไฟล์เดียวกันพร้อมกันแบบเรียลไทม์ (co-authoring) โดยเห็นการเปลี่ยนแปลงของกันและกันทันที ต่างจากการส่งไฟล์แนบทางอีเมลที่มักเกิดปัญหาไฟล์หลายเวอร์ชันสับสน",
@@ -584,6 +655,11 @@ const TOPICS = [
       { icon: "🛡️", label: "ป้องกันข้อมูลถูกแก้โดยไม่ตั้งใจ" }
     ],
     video: "",
+    keyPoints: [
+      "ล็อกไม่ให้แก้ไขสูตร/ข้อมูลสำคัญโดยไม่ตั้งใจ",
+      "ปลดล็อกเฉพาะเซลล์ที่ต้องการให้แก้ไขได้ก่อน Protect Sheet",
+      "ใช้ Encrypt with Password ควบคู่หากข้อมูลเป็นความลับสำคัญ"
+    ],
     images: [],
     text: [
       "การป้องกันแผ่นงาน (<strong>Protect Sheet</strong>) ช่วยล็อกไม่ให้ผู้อื่นแก้ไขสูตรหรือข้อมูลสำคัญโดยไม่ได้ตั้งใจ โดยค่าเริ่มต้นทุกเซลล์ถูกตั้งเป็น 'Locked' อยู่แล้ว แต่จะยังแก้ไขได้ปกติจนกว่าจะเปิดใช้งาน Protect Sheet",
@@ -638,6 +714,11 @@ const TOPICS = [
       { icon: "📤", label: "ผลลัพธ์กระจายอัตโนมัติ (Spill)" }
     ],
     video: "",
+    keyPoints: [
+      "UNIQUE/SORT/FILTER คืนค่าหลายเซลล์จากสูตรเดียว",
+      "ผลลัพธ์ \"กระจาย\" (spill) ลงเซลล์ด้านล่างอัตโนมัติ",
+      "ระวัง #SPILL! หากมีข้อมูลอื่นขวางพื้นที่ผลลัพธ์"
+    ],
     images: [],
     text: [
       "ฟังก์ชันอาร์เรย์ไดนามิกในเวอร์ชันใหม่ (Microsoft 365) คืนค่าเป็นหลายเซลล์พร้อมกันจากสูตรเดียว โดยไม่ต้องกด Ctrl+Shift+Enter เหมือนสมัยก่อน เช่น <code>=UNIQUE(A1:A100)</code> ดึงรายการที่ไม่ซ้ำกันออกมาทั้งหมด และผลลัพธ์จะ 'กระจาย' (spill) ลงเซลล์ด้านล่างให้เองอัตโนมัติ",
@@ -695,12 +776,14 @@ function renderContent() {
   const topic = TOPICS.find(t => t.key === currentKey);
   const el = document.getElementById("content");
 
-  let videoHtml = '<div class="video-box">🎬 ยังไม่มีวิดีโอสำหรับหัวข้อนี้</div>';
+  let videoSectionHtml = '';
   if (topic.video) {
-    videoHtml = '<div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+    videoSectionHtml = '<div class="section-label">วิดีโอ</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
   }
-
-  const heroHtml = '<div class="topic-hero"><span class="hero-emoji">' + (topic.icon || "📘") + '</span></div>';
 
   let imagesHtml = '';
   if (topic.images.length > 0) {
@@ -728,8 +811,7 @@ function renderContent() {
 
   el.innerHTML =
     '<h2>' + topic.title + '</h2>' +
-    heroHtml +
-    '<div class="section-label">วิดีโอ</div>' + videoHtml +
+    videoSectionHtml +
     '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
     imagesHtml;
 }
