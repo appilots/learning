@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือตั้งค่าระบบขอใบส่งตัวรักษาพยาบาล (Microsoft 365) - กลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #6b3fa0;
+    --accent-2: #4f2d78;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #f1eaf9;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #a97fe0;
+      --accent-2: #8c5fc9;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #2a2136;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+  .topic-list { flex: 0 0 260px; display: flex; flex-direction: column; gap: 6px; }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title { font-weight: 700; font-size: 0.82rem; color: var(--accent-2); margin-bottom: 8px; }
+  .key-points ul { margin: 0; padding-left: 20px; }
+  .key-points li { font-size: 0.88rem; line-height: 1.6; color: var(--text); margin-bottom: 4px; }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--sub); font-size: 0.85rem; margin-bottom: 20px; overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .text-block { font-size: 0.92rem; line-height: 1.75; color: var(--text); }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.86em;
+  }
+
+  .flow {
+    display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin: 4px 0 16px; padding: 16px 12px;
+    border: 1px solid var(--border); border-radius: 12px; background: var(--placeholder-bg);
+  }
+  .flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 104px; text-align: center; }
+  .flow-icon {
+    width: 46px; height: 46px; border-radius: 12px; background: var(--pill-bg);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+  .flow-label { font-size: 0.76rem; color: var(--sub); font-weight: 600; line-height: 1.3; }
+  .flow-arrow { font-size: 1.3rem; color: var(--accent); flex-shrink: 0; }
+
+  .callout {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 10px; margin: 0 0 12px; font-size: 0.92rem; line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  .ref-note {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--sub);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🧭 คู่มือตั้งค่าระบบขอใบส่งตัวรักษาพยาบาล (Microsoft 365)</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — สำหรับทีม IT/HR ที่จะตั้งค่าระบบด้วย Microsoft Forms + SharePoint Lists + Power Automate + Power BI</p>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+const TOPICS = [
+  {
+    key: "overview",
+    title: "ภาพรวมระบบและสถาปัตยกรรม",
+    icon: "🗺️",
+    flow: [
+      { icon: "📝", label: "พนักงานกรอกฟอร์ม" },
+      { icon: "⚙️", label: "Power Automate ประมวลผล" },
+      { icon: "🏥", label: "ส่งใบส่งตัวถึงโรงพยาบาล" }
+    ],
+    video: "",
+    keyPoints: [
+      "ใช้เครื่องมือใน Microsoft 365 ทั้งหมด ไม่ต้องมี server แยก",
+      "4 ส่วนหลัก: Microsoft Forms, SharePoint Lists, Power Automate, Power BI",
+      "เกณฑ์ตัดสินใจอัตโนมัติอยู่ที่วงเงินคงเหลือ 20%"
+    ],
+    text: [
+      "ระบบขอใบส่งตัวรักษาพยาบาลนี้สร้างจากเครื่องมือใน <strong>Microsoft 365</strong> ทั้งหมด โดยไม่ต้องมี server แยกต่างหาก ประกอบด้วย 4 ส่วนหลัก: <strong>Microsoft Forms</strong> (หน้ากรอกข้อมูลของพนักงาน), <strong>SharePoint Lists</strong> (ฐานข้อมูลพนักงาน/โรงพยาบาล/ประวัติคำขอ), <strong>Power Automate</strong> (ตัวประมวลผลอัตโนมัติที่เชื่อมทุกอย่างเข้าด้วยกัน) และ <strong>Power BI</strong> (แดชบอร์ดสรุปผล)",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: เมื่อพนักงานส่งฟอร์ม ระบบจะดึงวงเงินคงเหลือจาก SharePoint มาคำนวณเป็นเปอร์เซ็นต์ทันที หากเหลือมากกว่า 20% จะสร้างใบส่งตัวและส่งอีเมลไปโรงพยาบาลอัตโนมัติ แต่ถ้าต่ำกว่า 20% จะส่งไปให้เจ้าหน้าที่ HR อนุมัติก่อนเสมอ",
+      "เคล็ดลับ: แนะนำให้สร้างและทดสอบทีละส่วนตามลำดับหัวข้อในคู่มือนี้ (SharePoint Lists ก่อน แล้วค่อยสร้างฟอร์ม แล้วค่อยต่อ Power Automate) เพราะแต่ละส่วนมีการอ้างอิงถึงกัน การสร้างข้ามลำดับอาจทำให้เชื่อมต่อกันไม่ได้"
+    ],
+    link: ""
+  },
+  {
+    key: "prerequisites",
+    title: "สิ่งที่ต้องเตรียมก่อนเริ่ม",
+    icon: "🧰",
+    flow: [
+      { icon: "🔑", label: "เช็คสิทธิ์ใช้งาน" },
+      { icon: "👥", label: "ตั้งทีมผู้ดูแลระบบ" },
+      { icon: "📐", label: "เตรียมข้อมูลตั้งต้น" }
+    ],
+    video: "",
+    keyPoints: [
+      "ต้องมี license รองรับ SharePoint / Power Automate / Power BI",
+      "ขอสิทธิ์ Site Owner ของไซต์ SharePoint ที่จะใช้",
+      "เตรียมรายชื่อโรงพยาบาลและวงเงินพนักงานล่วงหน้า"
+    ],
+    text: [
+      "ก่อนเริ่มตั้งค่า ต้องมีสิทธิ์ใช้งานใบอนุญาต (license) ที่รองรับ <strong>SharePoint Online</strong>, <strong>Power Automate</strong> (แผนที่มากับ Microsoft 365 Business/E3 ขึ้นไปเพียงพอสำหรับการใช้งานพื้นฐาน) และ <strong>Power BI</strong> (มีแผนฟรีให้เริ่มต้นได้) หากไม่แน่ใจว่าองค์กรมีสิทธิ์ครบหรือไม่ ให้ติดต่อทีม IT ตรวจสอบก่อน",
+      "วิธีใช้งาน: ขอสิทธิ์ <code>Site Owner</code> หรือ <code>Site Collection Administrator</code> ของไซต์ SharePoint ที่จะใช้เก็บข้อมูล จากทีม IT เพื่อให้สามารถสร้าง List และตั้งค่าสิทธิ์การเข้าถึงได้เอง",
+      "เตรียมข้อมูลตั้งต้น 2 รายการก่อนเริ่ม: (1) รายชื่อโรงพยาบาลคู่สัญญาและอีเมลติดต่อของแต่ละแห่ง (2) รายชื่อพนักงานพร้อมวงเงินสวัสดิการเริ่มต้นของปีนี้ (พนักงาน 80,000 บาทเต็ม + 220,000 บาทเบิกครึ่งหนึ่ง, ครอบครัวไม่เกิน 60,000 บาท/ปี) เพื่อนำเข้า SharePoint List ในขั้นตอนถัดไป"
+    ],
+    link: ""
+  },
+  {
+    key: "list-employee",
+    title: "สร้าง SharePoint List: ข้อมูลพนักงาน (EmployeeMaster)",
+    icon: "🧑‍💼",
+    flow: [
+      { icon: "➕", label: "สร้าง List ใหม่" },
+      { icon: "🏷️", label: "ตั้งคอลัมน์ข้อมูล" },
+      { icon: "📥", label: "นำเข้าข้อมูลพนักงาน" }
+    ],
+    video: "https://www.youtube.com/embed/Cn7y8plIQhk",
+    text: [
+      "สร้าง SharePoint List ชื่อ <code>EmployeeMaster</code> เพื่อเก็บข้อมูลพนักงานและวงเงินสวัสดิการ โดยมีคอลัมน์หลักดังนี้: <code>EmployeeID</code> (Single line of text, ตั้งเป็นค่าไม่ซ้ำ), <code>FullName</code>, <code>Email</code>, <code>Department</code>, <code>EmpBudgetFull</code> (Number, ค่าเริ่มต้น 80000), <code>EmpBudgetHalf</code> (Number, ค่าเริ่มต้น 220000), <code>EmpUsed</code> (Number, ค่าเริ่มต้น 0), <code>FamilyBudget</code> (Number, ค่าเริ่มต้น 60000), <code>FamilyUsed</code> (Number, ค่าเริ่มต้น 0)",
+      "วิธีใช้งาน: ไปที่ไซต์ SharePoint ของทีม HR แล้วเลือก <code>New &gt; List &gt; Blank list</code> ตั้งชื่อ <code>EmployeeMaster</code> จากนั้นกด <code>+ Add column</code> ทีละคอลัมน์ตามรายการด้านบน เลือกประเภทข้อมูล (Number/Text) ให้ตรงกับที่ระบุไว้",
+      "เคล็ดลับ: ถ้ามีรายชื่อพนักงานอยู่แล้วใน Excel สามารถนำเข้าทีเดียวได้จากเมนู <code>Import from Excel</code> แทนการพิมพ์ทีละแถว ประหยัดเวลาได้มากเมื่อมีพนักงานหลักร้อยคนขึ้นไป"
+    ],
+    link: ""
+  },
+  {
+    key: "list-hospital",
+    title: "สร้าง SharePoint List: รายชื่อโรงพยาบาล (Hospitals)",
+    icon: "🏥",
+    flow: [
+      { icon: "➕", label: "สร้าง List โรงพยาบาล" },
+      { icon: "📧", label: "เก็บอีเมลติดต่อ" },
+      { icon: "🔗", label: "ใช้เชื่อมกับฟอร์ม" }
+    ],
+    video: "",
+    keyPoints: [
+      "List ชื่อ Hospitals เก็บชื่อ, อีเมล, ผู้ติดต่อของแต่ละโรงพยาบาล",
+      "สร้างวิธีเดียวกับ EmployeeMaster",
+      "ต้องตรวจทานอีเมลให้ถูกต้องก่อนใช้งานจริง"
+    ],
+    text: [
+      "สร้าง SharePoint List ชื่อ <code>Hospitals</code> เก็บรายชื่อโรงพยาบาลคู่สัญญาที่พนักงานเลือกได้ในฟอร์ม มีคอลัมน์: <code>HospitalName</code>, <code>HospitalEmail</code> (อีเมลแผนกเวชระเบียน/ประกันสุขภาพของโรงพยาบาล), <code>ContactPerson</code>, <code>Phone</code>",
+      "วิธีใช้งาน: สร้างวิธีเดียวกับ EmployeeMaster ในหัวข้อก่อนหน้า จากนั้นกรอกรายชื่อโรงพยาบาลคู่สัญญาทั้งหมดที่บริษัทมีสัญญาไว้ ตรวจสอบอีเมลติดต่อของแต่ละโรงพยาบาลให้ถูกต้อง เพราะ Power Automate จะดึงอีเมลนี้ไปใช้ส่งเอกสารโดยตรง",
+      "ข้อควรระวัง: หากพิมพ์อีเมลโรงพยาบาลผิด เอกสารใบส่งตัวจะถูกส่งไปผิดที่โดยไม่มีการแจ้งเตือน ควรให้เจ้าหน้าที่ HR อีกคนช่วยตรวจทานอีเมลทุกแถวก่อนเปิดใช้งานจริง"
+    ],
+    link: ""
+  },
+  {
+    key: "list-requests",
+    title: "สร้าง SharePoint List: บันทึกคำขอ (ReferralRequests)",
+    icon: "📋",
+    flow: [
+      { icon: "➕", label: "สร้าง List บันทึกคำขอ" },
+      { icon: "🔄", label: "อัปเดตสถานะอัตโนมัติ" },
+      { icon: "📈", label: "ใช้เป็นข้อมูลแดชบอร์ด" }
+    ],
+    video: "",
+    keyPoints: [
+      "List ชื่อ ReferralRequests เก็บประวัติทุกคำขอ",
+      "คอลัมน์ Status ใช้ประเภท Choice 4 ค่า",
+      "ข้อมูลจะถูกเติมอัตโนมัติจาก Power Automate ภายหลัง"
+    ],
+    text: [
+      "สร้าง SharePoint List ชื่อ <code>ReferralRequests</code> เพื่อเก็บประวัติทุกคำขอที่เข้ามา ใช้เป็นทั้ง log และแหล่งข้อมูลสำหรับแดชบอร์ด Power BI ในภายหลัง คอลัมน์หลัก: <code>RequestID</code>, <code>EmployeeID</code>, <code>PatientType</code>, <code>HospitalName</code>, <code>DiseaseGroup</code>, <code>AppointmentDate</code> (Date), <code>BalancePercent</code> (Number), <code>Status</code> (Choice: <code>Auto-Approved</code>, <code>Pending HR</code>, <code>HR-Approved</code>, <code>Rejected</code>), <code>CreatedDate</code>",
+      "วิธีใช้งาน: สร้างคอลัมน์ <code>Status</code> เป็นประเภท <code>Choice</code> แล้วใส่ตัวเลือกทั้ง 4 ค่าตามที่ระบุไว้ด้านบน เพื่อให้ Power Automate เลือกอัปเดตสถานะได้ถูกต้องในแต่ละขั้นตอนของ Flow",
+      "List นี้จะยังว่างเปล่าในตอนนี้ เพราะข้อมูลจะถูกเติมเข้ามาอัตโนมัติจาก Power Automate ทุกครั้งที่มีการยื่นคำขอในหัวข้อถัดๆ ไป ไม่ต้องกรอกข้อมูลเริ่มต้นเอง"
+    ],
+    link: ""
+  },
+  {
+    key: "create-form",
+    title: "สร้างฟอร์ม Microsoft Forms",
+    icon: "📝",
+    flow: [
+      { icon: "📝", label: "สร้างฟอร์มใหม่" },
+      { icon: "🔽", label: "ตั้งคำถามแบบ Dropdown" },
+      { icon: "🔒", label: "จำกัดเฉพาะคนในองค์กร" }
+    ],
+    video: "https://www.youtube.com/embed/RE6EhuBjsmw",
+    text: [
+      "สร้างฟอร์มใน <strong>Microsoft Forms</strong> (forms.office.com) ชื่อ <code>แบบฟอร์มขอใบส่งตัวรักษาพยาบาล</code> โดยตั้งคำถามเป็นแบบ Dropdown/Choice เกือบทั้งหมดแทนการให้พิมพ์เอง เพื่อลดความผิดพลาดจากการพิมพ์ผิด (Human Error) ได้แก่: รหัสพนักงาน (Text แบบสั้น), รักษาสำหรับ (Choice: ตัวพนักงานเอง/คู่สมรส/บุตร-ธิดา/บิดา-มารดา), โรงพยาบาล (Choice ดึงรายชื่อจาก Hospitals List), กลุ่มโรค (Choice), วันที่ต้องการเข้ารักษา (Date), รายละเอียดอาการ (Text แบบยาว)",
+      "วิธีใช้งาน: ไปที่ <code>Settings (⚙️) &gt; Who can fill out this form</code> เลือก <code>Only people in my organization</code> และเปิด <code>Record name</code> วิธีนี้ทำให้ระบบบันทึกชื่อและอีเมลผู้ตอบจากบัญชีที่ล็อกอินอยู่แล้วโดยอัตโนมัติ พนักงานไม่ต้องพิมพ์ชื่อ-อีเมลเอง",
+      "เคล็ดลับ: ตัวเลือกในคำถาม 'โรงพยาบาล' ควรพิมพ์ชื่อให้ตรงกับที่กรอกไว้ใน SharePoint List <code>Hospitals</code> เป๊ะๆ ทุกตัวอักษร เพราะ Power Automate จะใช้ชื่อนี้ค้นหาอีเมลโรงพยาบาลในขั้นตอนถัดไป หากสะกดไม่ตรงกันจะหาไม่เจอ"
+    ],
+    link: ""
+  },
+  {
+    key: "flow-trigger",
+    title: "Power Automate: เริ่ม Flow และดึงข้อมูลพนักงาน",
+    icon: "⚡",
+    flow: [
+      { icon: "📨", label: "Forms ถูกส่ง" },
+      { icon: "⚡", label: "Power Automate เริ่มทำงาน" },
+      { icon: "🔍", label: "ดึงข้อมูลพนักงานที่ตรงกัน" }
+    ],
+    video: "",
+    keyPoints: [
+      "Trigger: When a new response is submitted (Forms)",
+      "ตามด้วย Get response details และ Get items (SharePoint)",
+      "ควรมีเส้นทางกรณีหาพนักงานไม่เจอด้วย"
+    ],
+    text: [
+      "เข้า <strong>make.powerautomate.com</strong> แล้วสร้าง <code>Automated cloud flow</code> ใหม่ เลือก trigger ชื่อ <code>When a new response is submitted</code> (Microsoft Forms) แล้วเลือกฟอร์มที่สร้างไว้ในหัวข้อก่อนหน้า ต่อด้วย action <code>Get response details</code> เพื่อดึงคำตอบทั้งหมดของแต่ละครั้งที่มีการส่งฟอร์ม",
+      "วิธีใช้งาน: เพิ่ม action <code>Get items</code> (SharePoint) เลือก List <code>EmployeeMaster</code> แล้วใส่ค่า <code>Filter Query</code> เป็น <code>EmployeeID eq '@{triggerOutputs()?['body/rXXX']}'</code> (แทน rXXX ด้วยชื่อฟิลด์รหัสพนักงานจากฟอร์ม) เพื่อดึงเฉพาะแถวของพนักงานที่ยื่นคำขอ",
+      "ข้อควรระวัง: หากพิมพ์รหัสพนักงานในฟอร์มผิดหรือไม่ตรงกับที่มีใน EmployeeMaster ขั้นตอนนี้จะดึงข้อมูลไม่เจอ ควรเพิ่มเงื่อนไขตรวจสอบว่า 'ไม่พบพนักงาน' แล้วส่งอีเมลแจ้งเตือนกลับไปหาผู้ยื่นคำขอด้วย เพื่อไม่ให้ Flow ค้างเงียบๆ โดยไม่มีการตอบกลับ"
+    ],
+    link: ""
+  },
+  {
+    key: "flow-condition",
+    title: "Power Automate: คำนวณ % วงเงินและแยกเงื่อนไข",
+    icon: "🔀",
+    flow: [
+      { icon: "🧮", label: "คำนวณ % วงเงินคงเหลือ" },
+      { icon: "🔀", label: "Condition แยกเส้นทาง" },
+      { icon: "🚦", label: "เลือกเส้นทางที่เหมาะสม" }
+    ],
+    video: "https://www.youtube.com/embed/QFOjEeFEQ5I",
+    text: [
+      "เพิ่ม action <code>Compose</code> เพื่อคำนวณเปอร์เซ็นต์วงเงินคงเหลือ โดยใช้สูตร (expression) ประมาณ <code>div(sub(EmpBudgetFull+EmpBudgetHalf, EmpUsed), EmpBudgetFull+EmpBudgetHalf)</code> คูณ 100 (สำหรับกรณีรักษาตัวเอง) หรือใช้ค่า <code>FamilyBudget</code>/<code>FamilyUsed</code> แทนหากเลือกรักษาสำหรับครอบครัว",
+      "วิธีใช้งาน: เพิ่ม action <code>Condition</code> ตั้งเงื่อนไขเป็น <code>ผลลัพธ์ % วงเงินคงเหลือ &gt;= 20</code> ฝั่ง <strong>Yes</strong> คือเส้นทางอนุมัติอัตโนมัติ (หัวข้อถัดไป) ฝั่ง <strong>No</strong> คือเส้นทางส่งให้ HR พิจารณา",
+      "เคล็ดลับ: ตั้งชื่อ action และ Condition ให้สื่อความหมาย (เช่น เปลี่ยนชื่อ 'Condition' เป็น 'ตรวจสอบเกณฑ์วงเงิน 20%') จะช่วยให้ทีมที่ดูแล Flow ต่อในอนาคตเข้าใจง่ายขึ้นมาก โดยเฉพาะเมื่อ Flow มีหลายสิบ action"
+    ],
+    link: ""
+  },
+  {
+    key: "flow-auto-approve",
+    title: "Power Automate: เส้นทางอนุมัติอัตโนมัติ",
+    icon: "✅",
+    flow: [
+      { icon: "📄", label: "สร้างเอกสาร PDF" },
+      { icon: "📧", label: "ส่งอีเมลถึงโรงพยาบาล" },
+      { icon: "👤", label: "CC แจ้งพนักงาน" }
+    ],
+    video: "",
+    keyPoints: [
+      "Populate a Microsoft Word template → Convert to PDF",
+      "Send an email (V2) ถึง HospitalEmail พร้อมแนบ PDF",
+      "CC อีเมลพนักงานผู้ยื่นคำขอไว้ด้วย"
+    ],
+    text: [
+      "ในฝั่ง <strong>Yes</strong> ของ Condition ให้เพิ่ม action <code>Populate a Microsoft Word template</code> (ต้องเตรียมไฟล์ Word template ใบส่งตัวที่มี placeholder เช่น <code>«EmployeeName»</code>, <code>«HospitalName»</code> ไว้ล่วงหน้าใน SharePoint/OneDrive) ตามด้วย <code>Convert Word Document to PDF</code> เพื่อแปลงเป็นไฟล์ PDF พร้อมส่ง",
+      "วิธีใช้งาน: เพิ่ม action <code>Send an email (V2)</code> ใส่อีเมลผู้รับเป็นค่า <code>HospitalEmail</code> ที่ดึงมาจาก List <code>Hospitals</code> (ต้องเพิ่ม action <code>Get items</code> ดึงข้อมูลโรงพยาบาลก่อนขั้นตอนนี้ด้วย) แนบไฟล์ PDF ที่สร้างไว้ และใส่อีเมลพนักงานผู้ยื่นคำขอไว้ในช่อง <code>CC</code>",
+      "ตัวอย่างการใช้งานจริง: หัวข้ออีเมลอาจตั้งเป็น <code>ใบส่งตัวรักษาพยาบาล - [ชื่อพนักงาน] - [ชื่อโรงพยาบาล]</code> และเนื้อหาอีเมลสรุปสั้นๆ ว่านี่คือใบส่งตัวที่ออกโดยระบบอัตโนมัติของบริษัท พร้อมแนบไฟล์ PDF"
+    ],
+    link: ""
+  },
+  {
+    key: "flow-hr-approval",
+    title: "Power Automate: เส้นทางส่งให้ HR พิจารณา",
+    icon: "👤",
+    flow: [
+      { icon: "📧", label: "แจ้งเตือนเจ้าหน้าที่ HR" },
+      { icon: "👍", label: "HR อนุมัติ/ปฏิเสธ" },
+      { icon: "🔀", label: "แยกผลลัพธ์ตามการตัดสินใจ" }
+    ],
+    video: "https://www.youtube.com/embed/F59yX2ukIxw",
+    text: [
+      "ในฝั่ง <strong>No</strong> ของ Condition (วงเงินต่ำกว่า 20%) ให้เพิ่ม action <code>Start and wait for an approval</code> เลือกประเภท <code>Approve/Reject - First to respond</code> ใส่ผู้อนุมัติเป็นอีเมลของเจ้าหน้าที่ HR ที่รับผิดชอบ พร้อมสรุปรายละเอียดคำขอ (ชื่อพนักงาน, โรงพยาบาล, วงเงินคงเหลือ) ไว้ในเนื้อหาการอนุมัติ เพื่อให้ HR ตัดสินใจได้จากอีเมลโดยตรงโดยไม่ต้องเปิดระบบอื่น",
+      "วิธีใช้งาน: หลัง action อนุมัติ ให้เพิ่ม <code>Condition</code> อีกชั้นตรวจสอบผลลัพธ์ <code>Outcome</code> ว่าเป็น <code>Approve</code> หรือ <code>Reject</code> ถ้า Approve ให้ทำ action สร้าง PDF และส่งอีเมลแบบเดียวกับหัวข้อก่อนหน้า ถ้า Reject ให้ส่งอีเมลแจ้งพนักงานว่าคำขอไม่ได้รับการอนุมัติพร้อมเหตุผล (ถ้ามี)",
+      "ข้อควรระวัง: ควรตั้งค่า <code>Time out</code> ของ action อนุมัติไว้ด้วย (เช่น 3 วันทำการ) และเพิ่มเส้นทางกรณีไม่มีการตอบกลับภายในเวลาที่กำหนด เพื่อไม่ให้คำขอของพนักงานค้างอยู่โดยไม่มีใครทราบ"
+    ],
+    link: ""
+  },
+  {
+    key: "flow-save-record",
+    title: "Power Automate: บันทึกผลลัพธ์กลับเข้า SharePoint",
+    icon: "💾",
+    flow: [
+      { icon: "📝", label: "สรุปผลคำขอ" },
+      { icon: "💾", label: "บันทึกลง ReferralRequests" },
+      { icon: "✅", label: "ปิดขั้นตอน Flow" }
+    ],
+    video: "",
+    keyPoints: [
+      "Create item ที่ ReferralRequests ทุกครั้งไม่ว่าผลจะเป็นอย่างไร",
+      "Update item ที่ EmployeeMaster เพื่ออัปเดตวงเงินที่ใช้ไป",
+      "แยก action บันทึกประวัติกับอัปเดตวงเงินออกจากกัน"
+    ],
+    text: [
+      "ไม่ว่าคำขอจะจบด้วยผลลัพธ์ใด (อนุมัติอัตโนมัติ, HR อนุมัติ, หรือถูกปฏิเสธ) ให้เพิ่ม action <code>Create item</code> (SharePoint) ที่ List <code>ReferralRequests</code> เพื่อบันทึกทุกคำขอไว้เป็นประวัติ โดยใส่ค่า <code>Status</code> ให้ตรงกับเส้นทางที่คำขอนั้นผ่านมา",
+      "วิธีใช้งาน: เพิ่ม action <code>Update item</code> ที่ List <code>EmployeeMaster</code> ควบคู่กันเพื่ออัปเดตยอด <code>EmpUsed</code> หรือ <code>FamilyUsed</code> ให้บวกเพิ่มตามค่าใช้จ่ายที่เกิดขึ้นจริง (ถ้าทราบยอดในขั้นตอนนี้) เพื่อให้วงเงินคงเหลือของพนักงานคนนั้นถูกต้องสำหรับคำขอครั้งถัดไป",
+      "เคล็ดลับ: การแยก action บันทึกประวัติ (ReferralRequests) ออกจาก action อัปเดตวงเงิน (EmployeeMaster) ทำให้ตรวจสอบย้อนหลังได้ง่ายกว่า หากวงเงินคำนวณผิดพลาด สามารถดูประวัติใน ReferralRequests เพื่อหาสาเหตุได้โดยไม่กระทบข้อมูลหลัก"
+    ],
+    link: ""
+  },
+  {
+    key: "power-bi-dashboard",
+    title: "สร้างแดชบอร์ดด้วย Power BI",
+    icon: "📊",
+    flow: [
+      { icon: "🔌", label: "เชื่อมต่อ SharePoint List" },
+      { icon: "📊", label: "สร้างกราฟสรุปผล" },
+      { icon: "📤", label: "แชร์ให้ทีม HR/ผู้บริหาร" }
+    ],
+    video: "https://www.youtube.com/embed/AFGAqA07owo",
+    text: [
+      "เปิด <strong>Power BI Desktop</strong> แล้วเลือก <code>Get Data &gt; SharePoint Online List</code> ใส่ URL ไซต์ SharePoint แล้วเลือกดึงข้อมูลจาก List <code>ReferralRequests</code> เข้ามาเป็นแหล่งข้อมูลหลักสำหรับสร้างแดชบอร์ด",
+      "วิธีใช้งาน: สร้างกราฟที่มีประโยชน์ เช่น <code>Card</code> แสดงจำนวนคำขอรวมทั้งเดือน, <code>Bar chart</code> แยกตามโรงพยาบาลที่พนักงานไปใช้บริการบ่อยที่สุด, <code>Donut chart</code> แสดงสัดส่วนกลุ่มโรคที่พบบ่อย และ <code>Line chart</code> แสดงแนวโน้มค่าใช้จ่ายรวมรายเดือน",
+      "เมื่อสร้างแดชบอร์ดเสร็จ ให้กด <code>Publish</code> ขึ้น Power BI Service แล้วแชร์สิทธิ์การดูให้เจ้าหน้าที่ HR และผู้บริหารที่เกี่ยวข้อง โดยตั้ง <code>Refresh schedule</code> ให้ดึงข้อมูลใหม่จาก SharePoint อัตโนมัติทุกวัน เพื่อให้ตัวเลขที่เห็นเป็นข้อมูลล่าสุดเสมอ"
+    ],
+    link: ""
+  },
+  {
+    key: "testing",
+    title: "ทดสอบระบบทั้งหมดก่อนใช้งานจริง",
+    icon: "🧪",
+    flow: [
+      { icon: "🧪", label: "ทดสอบด้วยข้อมูลจำลอง" },
+      { icon: "🔁", label: "ทดสอบทั้งสองเงื่อนไข" },
+      { icon: "✅", label: "ตรวจผลลัพธ์ครบทุกจุด" }
+    ],
+    video: "",
+    keyPoints: [
+      "สร้างพนักงานทดสอบ 2 คน (วงเงินเหลือมาก / น้อยกว่า 20%)",
+      "ตรวจอีเมล, PDF, การบันทึกลง SharePoint ทุกจุด",
+      "ทดสอบด้วยอีเมลภายในก่อนใช้อีเมลโรงพยาบาลจริง"
+    ],
+    text: [
+      "ก่อนเปิดใช้งานจริง ควรสร้างข้อมูลพนักงานทดสอบ 2 คนใน EmployeeMaster (คนหนึ่งวงเงินเหลือมาก, อีกคนวงเงินเหลือน้อยกว่า 20%) แล้วลองกรอกฟอร์มจริงทั้งสองกรณี เพื่อดูว่า Flow ทำงานถูกต้องครบทั้งสองเส้นทาง",
+      "วิธีใช้งาน: ตรวจสอบผลลัพธ์ทีละจุด — (1) อีเมลไปถึงโรงพยาบาลจริงหรือไม่พร้อมไฟล์ PDF แนบถูกต้อง (2) กรณีวงเงินน้อย อีเมลอนุมัติไปถึง HR หรือไม่ (3) ข้อมูลถูกบันทึกลง ReferralRequests ครบถ้วนหรือไม่ (4) วงเงินใน EmployeeMaster อัปเดตถูกต้องหรือไม่",
+      "ข้อควรระวัง: ควรทดสอบด้วยอีเมลภายในทีมงานเองก่อน (ไม่ใช่อีเมลโรงพยาบาลจริง) จนกว่าจะมั่นใจว่า Flow ทำงานถูกต้อง 100% แล้วค่อยเปลี่ยนกลับมาใช้อีเมลโรงพยาบาลจริงในขั้นตอนสุดท้ายก่อนเปิดใช้งาน"
+    ],
+    link: ""
+  },
+  {
+    key: "maintenance",
+    title: "การดูแลรักษาและแก้ปัญหาเบื้องต้น",
+    icon: "🛠️",
+    flow: [
+      { icon: "👀", label: "ติดตาม Flow run history" },
+      { icon: "🔄", label: "อัปเดตข้อมูลประจำปี" },
+      { icon: "🩹", label: "แก้ไขเมื่อพบปัญหา" }
+    ],
+    video: "",
+    keyPoints: [
+      "ดู Run history ที่ My flows เพื่อตรวจสอบความสำเร็จ/ล้มเหลว",
+      "รีเซ็ตวงเงินคงเหลือทุกต้นปีสวัสดิการใหม่",
+      "ปัญหาที่พบบ่อยสุดมักมาจากชื่อคอลัมน์ไม่ตรงกัน"
+    ],
+    text: [
+      "Power Automate เก็บประวัติการทำงานของ Flow แต่ละครั้งไว้ที่เมนู <code>My flows &gt; (เลือก Flow) &gt; Run history</code> สามารถดูได้ว่าแต่ละครั้งสำเร็จหรือล้มเหลว และดูรายละเอียด error ในแต่ละ action หากเกิดปัญหา",
+      "วิธีใช้งาน: ควรตรวจสอบ Run history อย่างน้อยสัปดาห์ละครั้งในช่วงเดือนแรกที่เริ่มใช้งานจริง และทุกต้นปีต้องอัปเดตวงเงินสวัสดิการใน EmployeeMaster ใหม่ทั้งหมด (รีเซ็ต EmpUsed และ FamilyUsed กลับเป็น 0) เพื่อเริ่มรอบสวัสดิการปีใหม่",
+      "เคล็ดลับ: หาก Flow ล้มเหลวบ่อยที่จุดใดจุดหนึ่ง ให้เปิดดู error message ใน Run history ก่อนเสมอ ข้อผิดพลาดที่พบบ่อยที่สุดมักมาจากชื่อคอลัมน์ใน SharePoint ไม่ตรงกับที่ตั้งไว้ใน expression ของ Power Automate"
+    ],
+    link: ""
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    videoSectionHtml = '<div class="section-label">วิดีโออ้างอิง</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = '<div class="text-block">' + paraHtml.join('') + '</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-note" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติม →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">ขั้นตอนการตั้งค่า</div>' + textHtml + linkHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
