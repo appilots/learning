@@ -315,6 +315,46 @@
 // เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed, images ใส่ URL รูปภาพ, text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
 const TOPICS = [
   {
+    key: "interface-overview",
+    title: "ภาพรวมเมนูและหน้าจอ Excel (Ribbon)",
+    icon: "🗺️",
+    flow: [
+      { icon: "🖥️", label: "เปิดโปรแกรม Excel" },
+      { icon: "🗺️", label: "ทำความรู้จักเมนู/ริบบิ้น" },
+      { icon: "🎯", label: "หาเครื่องมือที่ต้องการเจอเร็วขึ้น" }
+    ],
+    video: "https://www.youtube.com/embed/fHRfja_Wl4I",
+    videoTitle: "สอน Excel พื้นฐาน เบื้องต้น สำหรับมือใหม่ ดูจบทำงานได้เลย",
+    videoAuthor: "9Expert",
+    images: [],
+    text: [
+      "หน้าจอ Excel ประกอบด้วยส่วนหลักๆ ที่ควรรู้จักก่อนเริ่มใช้งาน ได้แก่ <strong>Ribbon</strong> (แถบเมนูด้านบนที่รวมเครื่องมือแยกเป็นแท็บ เช่น <code>Home</code>, <code>Insert</code>, <code>Formulas</code>, <code>Data</code>), <strong>Name Box</strong> (กล่องด้านซ้ายของแถบสูตรที่บอกตำแหน่งเซลล์ที่เลือกอยู่), <strong>Formula Bar</strong> (แถบแสดงสูตร/ข้อมูลจริงในเซลล์) และแท็บชีทด้านล่างสำหรับสลับไปมาระหว่างแผ่นงาน คู่มือนี้ใช้ Excel เวอร์ชัน <strong>Microsoft 365</strong> (ชุดที่บริษัทใช้งาน) ซึ่งอัปเดตฟีเจอร์ใหม่ให้อย่างต่อเนื่อง หน้าตาเมนูจึงอาจดูทันสมัยกว่า Excel รุ่นเก่าที่ซื้อขาดครั้งเดียว",
+      "วิธีใช้งาน: แท็บที่ใช้บ่อยที่สุดคือ <code>Home</code> (จัดรูปแบบตัวอักษร สี ตัวเลข), <code>Insert</code> (แทรกตาราง กราฟ รูปภาพ), <code>Formulas</code> (ค้นหา/แทรกฟังก์ชัน), <code>Data</code> (Sort, Filter, Power Query) และ <code>Review</code> (ตรวจสอบ คอมเมนต์ ป้องกันชีท) ลองคลิกไล่ดูแต่ละแท็บเพื่อให้คุ้นเคยว่าเครื่องมือที่ต้องการอยู่ตรงไหน",
+      "เคล็ดลับ: กด <code>Ctrl+F1</code> เพื่อย่อ/ขยาย Ribbon ให้เหลือพื้นที่ทำงานมากขึ้นเวลาต้องดูตารางข้อมูลกว้างๆ และสามารถคลิกขวาที่ปุ่มใดก็ได้บน Ribbon แล้วเลือก <code>Add to Quick Access Toolbar</code> เพื่อปักหมุดคำสั่งที่ใช้บ่อยไว้ที่แถบด้านบนสุด เข้าถึงได้เร็วขึ้นโดยไม่ต้องสลับแท็บ"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นใช้งาน Excel (สร้าง/กรอก/บันทึกไฟล์แรก)",
+    icon: "🚀",
+    flow: [
+      { icon: "📄", label: "สร้างสมุดงานใหม่" },
+      { icon: "⌨️", label: "กรอกข้อมูลลงเซลล์" },
+      { icon: "💾", label: "บันทึกไฟล์" }
+    ],
+    video: "https://www.youtube.com/embed/Sxa2Z9xyadg",
+    videoTitle: "Excel พื้นฐาน 1 : สอนใช้ Excel ครั้งแรก ง่ายๆ ไม่ต้องกลัว",
+    videoAuthor: "เทพ เอ็กเซล : Thep Excel",
+    images: [],
+    text: [
+      "ไฟล์ Excel เรียกว่า <strong>สมุดงาน (Workbook)</strong> ซึ่งภายในมี <strong>แผ่นงาน (Worksheet)</strong> ได้หลายแผ่น และแต่ละแผ่นงานแบ่งเป็นตาราง <strong>เซลล์ (Cell)</strong> ที่อ้างอิงด้วยชื่อคอลัมน์และแถว เช่น เซลล์ <code>A1</code> คือคอลัมน์ A แถวที่ 1 การคลิกเลือกเซลล์แล้วพิมพ์ข้อมูล คือการทำงานพื้นฐานที่สุดของ Excel",
+      "วิธีใช้งาน: เปิดโปรแกรม Excel แล้วเลือก <code>Blank workbook</code> เพื่อเริ่มไฟล์ใหม่ คลิกเซลล์ที่ต้องการแล้วพิมพ์ข้อมูล จากนั้นกด <code>Enter</code> เพื่อย้ายลงเซลล์ล่าง หรือกด <code>Tab</code> เพื่อย้ายไปเซลล์ขวา เมื่อกรอกเสร็จให้กด <code>Ctrl+S</code> เพื่อบันทึก ตั้งชื่อไฟล์ให้สื่อความหมาย แนะนำให้บันทึกลง OneDrive ขององค์กรเพื่อป้องกันไฟล์สูญหาย",
+      "เคล็ดลับ: เมื่อบันทึกไฟล์ลง OneDrive หรือ SharePoint แล้ว ให้เปิดสวิตช์ <code>AutoSave</code> ที่มุมซ้ายบนของหน้าจอ Excel จะบันทึกงานให้อัตโนมัติทุกครั้งที่มีการแก้ไข ไม่ต้องกังวลว่าไฟดับหรือเครื่องแฮงก์แล้วงานจะหายเหมือนสมัยก่อน"
+    ],
+    link: "https://support.microsoft.com/en-us/excel"
+  },
+  {
     key: "shortcuts",
     title: "แป้นพิมพ์ลัดที่ควรรู้ (Keyboard Shortcuts)",
     icon: "⌨️",
@@ -323,9 +363,9 @@ const TOPICS = [
       { icon: "⚡", label: "ทำงานเร็วขึ้น" },
       { icon: "🖱️", label: "ลดการใช้เมาส์" }
     ],
-    video: "https://www.youtube.com/embed/T5vSDAX1HjY",
-    videoTitle: "Excel Shortcut Keys | Full Guide",
-    videoAuthor: "Kevin Stratvert",
+    video: "https://www.youtube.com/embed/Yadr-ljUTzY",
+    videoTitle: "รวม 60 คีย์ลัด (Shortcut) Excel ที่ควรรู้ถ้าอยากทำงานไวขึ้น",
+    videoAuthor: "ครูแพรว - เพลินนิ่ง Channel",
     images: [],
     text: [
       "<strong>แป้นพิมพ์ลัดพื้นฐานที่ใช้บ่อย:</strong> <code>Ctrl+C</code> / <code>Ctrl+V</code> คัดลอก-วาง, <code>Ctrl+Z</code> เลิกทำ, <code>Ctrl+S</code> บันทึกไฟล์, <code>Ctrl+Arrow</code> กระโดดไปเซลล์สุดท้ายของช่วงข้อมูลในทิศทางนั้น และ <code>Ctrl+Shift+Arrow</code> เลือกช่วงข้อมูลอย่างรวดเร็วโดยไม่ต้องลากเมาส์",
@@ -343,9 +383,9 @@ const TOPICS = [
       { icon: "🎛️", label: "เลือกรูปแบบการแสดงผล" },
       { icon: "💵", label: "อ่านง่าย สื่อความหมาย" }
     ],
-    video: "https://www.youtube.com/embed/-1kgQL_NIPA",
-    videoTitle: "How to create a custom number format - Excel Tutorial",
-    videoAuthor: "The-IT-Fox",
+    video: "https://www.youtube.com/embed/qg-cvp80eQ4",
+    videoTitle: "ปรับรูปแบบตัวเลข แบบ Advance ใน Excel ด้วย Custom Number Format",
+    videoAuthor: "เทพเอ็กเซล : Thep Excel",
     images: [],
     text: [
       "การจัดรูปแบบตัวเลขไม่ได้เปลี่ยนค่าจริงในเซลล์ แต่เปลี่ยนวิธี<strong>แสดงผล</strong>เท่านั้น เช่น ใส่จุลภาคคั่นหลักพัน แสดงสัญลักษณ์สกุลเงิน หรือแสดงเป็นเปอร์เซ็นต์ ไปที่แท็บ <code>Home &gt; Number Format</code> แล้วเลือกรูปแบบที่ต้องการได้ทันที",
@@ -363,9 +403,9 @@ const TOPICS = [
       { icon: "🧊", label: "ตรึงหัวตาราง" },
       { icon: "👀", label: "เลื่อนดูข้อมูลไม่หลงหัว" }
     ],
-    video: "https://www.youtube.com/embed/wjGzYpdIcxY",
-    videoTitle: "How to Freeze Panes in Excel",
-    videoAuthor: "Simon Sez IT",
+    video: "https://www.youtube.com/embed/2gdc2Gv1t3U",
+    videoTitle: "[Excel] ตรึงแถว-แนว ใน Excel ทำอย่างไร How to freeze pane in Excel",
+    videoAuthor: "JR Variety",
     images: [],
     text: [
       "<strong>Freeze Panes</strong> ใช้ตรึงแถวหรือคอลัมน์ให้อยู่กับที่ขณะเลื่อนดูข้อมูลส่วนอื่น มีประโยชน์มากกับตารางที่มีหัวคอลัมน์อยู่แถวบนสุด เพราะเลื่อนลงไปดูข้อมูลแถวล่างๆ แล้วยังเห็นหัวตารางเสมอว่าคอลัมน์ไหนคือข้อมูลอะไร",
@@ -383,9 +423,9 @@ const TOPICS = [
       { icon: "🔢", label: "Excel คำนวณให้อัตโนมัติ" },
       { icon: "✅", label: "ได้ผลลัพธ์ทันที" }
     ],
-    video: "https://www.youtube.com/embed/ZwiQ0W5lTEg",
-    videoTitle: "Excel Formulas and Functions - Tutorial for Beginners",
-    videoAuthor: "Kevin Stratvert",
+    video: "https://www.youtube.com/embed/XXo8XMIrMOc",
+    videoTitle: "สรุป 10 สูตร Excel พื้นฐาน ที่คนใช้งาน Excel ต้องรู้ ใน 10 นาที",
+    videoAuthor: "ครูแพรว - เพลินนิ่ง Channel",
     images: [],
     text: [
       "สูตรใน Excel เริ่มต้นด้วยเครื่องหมาย <code>=</code> เสมอ เช่น <code>=SUM(A1:A10)</code> สำหรับรวมตัวเลข, <code>=AVERAGE(A1:A10)</code> สำหรับหาค่าเฉลี่ย และ <code>=COUNT(A1:A10)</code> สำหรับนับจำนวนเซลล์ที่มีตัวเลข การเข้าใจการอ้างอิงเซลล์แบบ<strong>สัมพัทธ์</strong> (เช่น <code>A1</code>) กับแบบ<strong>สัมบูรณ์</strong> (เช่น <code>$A$1</code>) เป็นพื้นฐานสำคัญก่อนต่อยอดไปสูตรที่ซับซ้อนขึ้น",
@@ -403,9 +443,9 @@ const TOPICS = [
       { icon: "✂️", label: "ตัดแยกด้วยฟังก์ชัน" },
       { icon: "🧹", label: "ข้อความสะอาด พร้อมใช้" }
     ],
-    video: "https://www.youtube.com/embed/02cAAs91cis",
-    videoTitle: "Text Functions in Excel: MID, LEN, LEFT, and RIGHT",
-    videoAuthor: "Simon Sez IT",
+    video: "https://www.youtube.com/embed/GyU3xgfWiwI",
+    videoTitle: "สอน Excel ทำงานกับข้อความด้วยฟังก์ชัน สูตรและเครื่องมือต่างๆ ครบจบในคลิป",
+    videoAuthor: "9Expert",
     images: [],
     text: [
       "ฟังก์ชันจัดการข้อความช่วยตัด รวม หรือปรับแต่งข้อความในเซลล์โดยไม่ต้องพิมพ์ใหม่เอง เช่น <code>=LEFT(A1,3)</code> ดึงอักขระ 3 ตัวแรกจากซ้าย, <code>=RIGHT(A1,4)</code> ดึงจากขวา, <code>=MID(A1,2,5)</code> ดึงข้อความตรงกลาง และ <code>=TRIM(A1)</code> ลบช่องว่างส่วนเกินที่มองไม่เห็นแต่ทำให้สูตรอื่นพังบ่อยๆ",
@@ -423,9 +463,9 @@ const TOPICS = [
       { icon: "➗", label: "คำนวณระยะห่าง" },
       { icon: "📆", label: "ผลลัพธ์วันที่ที่ต้องการ" }
     ],
-    video: "https://www.youtube.com/embed/UF9CijUBmAE",
-    videoTitle: "How To Use The Date And Time Functions In Microsoft Excel",
-    videoAuthor: "Simon Sez IT",
+    video: "https://www.youtube.com/embed/G19Id41LvFQ",
+    videoTitle: "การใช้ฟังก์ชั่นหรือสูตร DATE และ DATEDIF โปรแกรม Excel",
+    videoAuthor: "011 ธนาวุฒิ คงปาน",
     images: [],
     text: [
       "ฟังก์ชันวันที่พื้นฐานที่ใช้บ่อย: <code>=TODAY()</code> แสดงวันที่ปัจจุบัน, <code>=NOW()</code> แสดงวันที่พร้อมเวลา และ <code>=WEEKDAY(A1)</code> บอกว่าวันที่นั้นตรงกับวันอะไรในสัปดาห์ ฟังก์ชันเหล่านี้อัปเดตค่าอัตโนมัติทุกครั้งที่เปิดไฟล์",
@@ -443,9 +483,9 @@ const TOPICS = [
       { icon: "🔀", label: "Sort / Filter" },
       { icon: "📌", label: "เห็นเฉพาะที่ต้องการ" }
     ],
-    video: "https://www.youtube.com/embed/Trpx8b5m-vM",
-    videoTitle: "How to Sort and Filter Your Data in Excel",
-    videoAuthor: "Simply Excel",
+    video: "https://www.youtube.com/embed/dVsk6QjlH6U",
+    videoTitle: "สอน Excel ตอนที่ 5 การกรองและเรียงข้อมูล Sort Filter",
+    videoAuthor: "Suteeka Boonwang",
     images: [],
     text: [
       "การเรียงลำดับ (<strong>Sort</strong>) ช่วยจัดเรียงข้อมูลตามลำดับตัวเลข ตัวอักษร หรือวันที่ ทั้งจากน้อยไปมากหรือมากไปน้อย ส่วนการกรอง (<strong>Filter</strong>) ช่วยแสดงเฉพาะแถวข้อมูลที่ตรงตามเงื่อนไขที่กำหนด โดยซ่อนแถวอื่นไว้ชั่วคราวโดยไม่ลบข้อมูลทิ้ง",
@@ -463,9 +503,9 @@ const TOPICS = [
       { icon: "📋", label: "ตั้งรายการที่อนุญาต" },
       { icon: "✅", label: "เลือกจาก dropdown" }
     ],
-    video: "https://www.youtube.com/embed/uQd92e6ilBQ",
-    videoTitle: "Creating a Drop Down List in Excel Using Data Validation: Microsoft Excel Tutorial",
-    videoAuthor: "Simon Sez IT",
+    video: "https://www.youtube.com/embed/ktKMMjVcAnk",
+    videoTitle: "การทำ Drop down ด้วย Data Validation ใน Excel",
+    videoAuthor: "Veerachai Junhunkit",
     images: [],
     text: [
       "<strong>Data Validation</strong> ใช้จำกัดค่าที่กรอกลงในเซลล์ให้อยู่ในขอบเขตที่กำหนดไว้ล่วงหน้า เช่น สร้างรายการดรอปดาวน์ให้เลือกแผนก, สถานะงาน หรือจังหวัด แทนการพิมพ์เองอิสระ ช่วยลดความผิดพลาดจากการพิมพ์ผิดหรือใช้คำที่ไม่ตรงกัน (เช่น 'กทม.' กับ 'กรุงเทพฯ')",
@@ -483,9 +523,9 @@ const TOPICS = [
       { icon: "⚙️", label: "ตั้งเงื่อนไขที่ต้องการ" },
       { icon: "🌈", label: "ไฮไลต์สีอัตโนมัติ" }
     ],
-    video: "https://www.youtube.com/embed/Jp29JYGq5Hw",
-    videoTitle: "Conditional Formatting in Excel Tutorial",
-    videoAuthor: "Kevin Stratvert",
+    video: "https://www.youtube.com/embed/ley11vCrHXM",
+    videoTitle: "จัดรูปแบบเซลล์ขั้นเทพด้วย Conditional Formatting ใน Excel (Metro Library EP.5)",
+    videoAuthor: "Metro Systems Channel",
     images: [],
     text: [
       "<strong>Conditional Formatting</strong> คือฟีเจอร์ที่ปรับสี ไอคอน หรือรูปแบบตัวอักษรของเซลล์โดยอัตโนมัติตามเงื่อนไขที่กำหนด เช่น ทำให้ตัวเลขที่มากกว่า 1,000 ขึ้นเป็นสีเขียว หรือค่าที่ต่ำกว่าเป้าหมายขึ้นเป็นสีแดง ช่วยให้มองเห็นแนวโน้มหรือจุดผิดปกติในข้อมูลได้เร็วขึ้นโดยไม่ต้องอ่านตัวเลขทีละแถว",
@@ -503,9 +543,9 @@ const TOPICS = [
       { icon: "🔄", label: "Insert > Table" },
       { icon: "📇", label: "ตารางที่ขยาย/อ้างอิงอัตโนมัติ" }
     ],
-    video: "https://www.youtube.com/embed/7xnKNTBcxIg",
-    videoTitle: "Convert Data to Table in 1 Second - Excel Shortcut Ctrl + T",
-    videoAuthor: "Vedabala Vidyalaya",
+    video: "https://www.youtube.com/embed/wy16943X72I",
+    videoTitle: "Excel Table และประโยชน์ในการใช้งาน",
+    videoAuthor: "Athipat Chumnanpa",
     images: [],
     text: [
       "<strong>Excel Table</strong> (ต่างจากตารางที่วาดด้วยเส้นขอบธรรมดา) คือช่วงข้อมูลที่ถูกแปลงให้ระบบจดจำเป็นชุดข้อมูลเดียวกัน มีปุ่ม Sort/Filter ติดที่หัวตารางอัตโนมัติ และขยายตัวเองเมื่อเพิ่มแถวใหม่ต่อท้าย โดยไม่ต้องแก้สูตรหรือ Chart ที่อ้างอิงถึงตารางนั้นใหม่",
@@ -523,9 +563,9 @@ const TOPICS = [
       { icon: "🏷️", label: "ตั้งชื่อที่จำง่าย" },
       { icon: "🧾", label: "ใช้ชื่อแทนที่ในสูตร" }
     ],
-    video: "https://www.youtube.com/embed/pnSXJC5HJ4c",
-    videoTitle: "How to Create Named Ranges in Excel",
-    videoAuthor: "Simon Sez IT",
+    video: "https://www.youtube.com/embed/sdeOhMrUG70",
+    videoTitle: "Excel EP182 ตั้งชื่อ Name Box แทนชื่อ Cell ได้ประโยชน์มากกว่าที่คิด",
+    videoAuthor: "รูนเมืองตรัง",
     images: [],
     text: [
       "<strong>Named Range</strong> คือการตั้งชื่อให้ช่วงเซลล์แทนการอ้างอิงด้วยรหัสเซลล์ เช่น ตั้งชื่อ <code>ราคาสินค้า</code> แทน <code>$B$2:$B$50</code> ทำให้สูตรอ่านง่ายขึ้นมาก เช่น <code>=SUM(ราคาสินค้า)</code> แทน <code>=SUM(B2:B50)</code>",
@@ -543,9 +583,9 @@ const TOPICS = [
       { icon: "🔎", label: "ระบุเงื่อนไข" },
       { icon: "➕", label: "สรุปเฉพาะที่ตรงเงื่อนไข" }
     ],
-    video: "https://www.youtube.com/embed/O3GZmHdDQy8",
-    videoTitle: "How to use SUMIF, COUNTIF, and AVERAGEIF in Microsoft Excel | Excel for Beginners",
-    videoAuthor: "Elijah Butler",
+    video: "https://www.youtube.com/embed/wzsBxfd_jVQ",
+    videoTitle: "สอนการใช้สูตร SUMIF AVERAGEIF COUNTIF ใน Excel ง่ายๆ",
+    videoAuthor: "Wan Lazy Bear",
     images: [],
     text: [
       "<strong>SUMIF</strong>, <strong>COUNTIF</strong> และ <strong>AVERAGEIF</strong> ใช้สรุปข้อมูลเฉพาะแถวที่ตรงตามเงื่อนไขโดยไม่ต้องกรองข้อมูลก่อน เช่น <code>=SUMIF(B:B,\"กรุงเทพฯ\",C:C)</code> รวมยอดขายเฉพาะแถวที่จังหวัดเป็นกรุงเทพฯ และ <code>=COUNTIF(A:A,\"&gt;100\")</code> นับจำนวนเซลล์ที่มีค่ามากกว่า 100",
@@ -563,9 +603,9 @@ const TOPICS = [
       { icon: "🕵️", label: "ตรวจสอบสาเหตุ" },
       { icon: "✅", label: "แก้ไข/ดักจับด้วย IFERROR" }
     ],
-    video: "https://www.youtube.com/embed/HC4I2YTgXu8",
-    videoTitle: "How to use IFERROR in Excel - Tutorial",
-    videoAuthor: "Excel Tutorials by Y. Acosta",
+    video: "https://www.youtube.com/embed/lunzHX9KCwI",
+    videoTitle: "สอนการจัดการ Error บน Excel ด้วย IFERROR และ ISERROR",
+    videoAuthor: "ครูแพรว - เพลินนิ่ง Channel",
     images: [],
     text: [
       "ข้อผิดพลาดที่พบบ่อยใน Excel แต่ละแบบบอกสาเหตุต่างกัน: <code>#DIV/0!</code> หารด้วยศูนย์, <code>#N/A</code> หาค่าที่ต้องการไม่เจอ (มักเกิดกับ VLOOKUP/XLOOKUP), <code>#REF!</code> เซลล์ที่สูตรอ้างอิงถูกลบไปแล้ว และ <code>#VALUE!</code> ชนิดข้อมูลในสูตรไม่ถูกต้อง เช่น เอาข้อความมาบวกกับตัวเลข",
@@ -583,9 +623,9 @@ const TOPICS = [
       { icon: "🖨️", label: "ตั้งค่า Page Layout" },
       { icon: "📄", label: "เอกสารพิมพ์ออกมาอ่านง่าย" }
     ],
-    video: "https://www.youtube.com/embed/Mrt4v0ysA8w",
-    videoTitle: "How to Set the Print Area in Excel (Step by Step)",
-    videoAuthor: "Excel Tutorials by EasyClick Academy",
+    video: "https://www.youtube.com/embed/PeRSenaQFRA",
+    videoTitle: "การตั้งค่าหน้ากระดาษบน Excel ก่อน Print ให้พอดีใน 1 แผ่น",
+    videoAuthor: "ครูแพรว - เพลินนิ่ง Channel",
     images: [],
     text: [
       "ปัญหาที่พบบ่อยเวลาพิมพ์ Excel คือข้อมูลถูกตัดข้ามหน้าแบบดูยาก แก้ได้ด้วยแท็บ <code>Page Layout</code> ซึ่งสามารถกำหนดขอบเขตพื้นที่พิมพ์ (<code>Print Area</code>), การวางแนวกระดาษ และปรับให้พอดี 1 หน้าด้วย <code>Scale to Fit</code>",
@@ -603,9 +643,9 @@ const TOPICS = [
       { icon: "📐", label: "Insert > Chart" },
       { icon: "📈", label: "กราฟพร้อมนำเสนอ" }
     ],
-    video: "https://www.youtube.com/embed/4Bma9ieavIg",
-    videoTitle: "How to create a chart or graph in Excel | Microsoft",
-    videoAuthor: "Microsoft Helps",
+    video: "https://www.youtube.com/embed/uYa-aVCim-E",
+    videoTitle: "วิธีการสร้างกราฟ ใน Excel ทำได้ง่ายๆ (มือใหม่ก็ทำได้)",
+    videoAuthor: "IT Ning Ning",
     images: [],
     text: [
       "การสร้างกราฟใน Excel เริ่มจากเลือกช่วงข้อมูลที่ต้องการนำเสนอ แล้วไปที่แท็บ <code>Insert</code> เลือกประเภทกราฟที่เหมาะสม เช่น <strong>กราฟแท่ง (Column)</strong> สำหรับเปรียบเทียบ, <strong>กราฟเส้น (Line)</strong> สำหรับแสดงแนวโน้มตามเวลา หรือ <strong>กราฟวงกลม (Pie)</strong> สำหรับแสดงสัดส่วน หลังสร้างกราฟแล้วสามารถปรับแต่งสี ชื่อแกน และเพิ่ม Trendline เพื่อให้ข้อมูลสื่อสารได้ชัดเจนยิ่งขึ้น",
@@ -623,9 +663,9 @@ const TOPICS = [
       { icon: "🤝", label: "แชร์ให้เพื่อนร่วมงาน" },
       { icon: "💬", label: "คอมเมนต์/แก้ไขพร้อมกัน" }
     ],
-    video: "https://www.youtube.com/embed/eK23Fzttlyo",
-    videoTitle: "Excel: Comments and Co-authoring",
-    videoAuthor: "LearnFree",
+    video: "https://www.youtube.com/embed/_o9DIrM-s_M",
+    videoTitle: "วิธีแชร์ไฟล์ Excel ให้ทำงานร่วมกันในไฟล์เดียว รู้เลยว่าใครแก้อะไรตรงไหน (สำหรับ Excel 365)",
+    videoAuthor: "เทพเอ็กเซล : Thep Excel",
     images: [],
     text: [
       "การบันทึกไฟล์ไว้บน <strong>OneDrive</strong> หรือ <strong>SharePoint</strong> ก่อนแชร์ ช่วยให้หลายคนเปิดและแก้ไขไฟล์เดียวกันพร้อมกันแบบเรียลไทม์ (co-authoring) โดยเห็นการเปลี่ยนแปลงของกันและกันทันที ต่างจากการส่งไฟล์แนบทางอีเมลที่มักเกิดปัญหาไฟล์หลายเวอร์ชันสับสน",
@@ -643,9 +683,9 @@ const TOPICS = [
       { icon: "🔐", label: "ตั้งรหัส/ล็อกเซลล์" },
       { icon: "🛡️", label: "ป้องกันข้อมูลถูกแก้โดยไม่ตั้งใจ" }
     ],
-    video: "https://www.youtube.com/embed/HxxMxuWwoHo",
-    videoTitle: "How to Protect an Excel Sheet Made Easy (With or Without a Password)",
-    videoAuthor: "MyExcelOnline.com",
+    video: "https://www.youtube.com/embed/fdv6s78S8PE",
+    videoTitle: "การ Protect Sheet & Workbook",
+    videoAuthor: "NAT TA YA",
     images: [],
     text: [
       "การป้องกันแผ่นงาน (<strong>Protect Sheet</strong>) ช่วยล็อกไม่ให้ผู้อื่นแก้ไขสูตรหรือข้อมูลสำคัญโดยไม่ได้ตั้งใจ โดยค่าเริ่มต้นทุกเซลล์ถูกตั้งเป็น 'Locked' อยู่แล้ว แต่จะยังแก้ไขได้ปกติจนกว่าจะเปิดใช้งาน Protect Sheet",
@@ -663,9 +703,9 @@ const TOPICS = [
       { icon: "📑", label: "ค้นในตาราง" },
       { icon: "🎯", label: "ผลลัพธ์ที่ตรงกัน" }
     ],
-    video: "https://www.youtube.com/embed/DZEPA9UhLBw",
-    videoTitle: "VLOOKUP in Excel | Tutorial for Beginners",
-    videoAuthor: "Kevin Stratvert",
+    video: "https://www.youtube.com/embed/jz9IfSRUHqQ",
+    videoTitle: "สอน XLOOKUP พื้นฐาน สูตร Excel ที่จะให้ลืม VLOOKUP, HLOOKUP",
+    videoAuthor: "9Expert",
     images: [],
     text: [
       "<strong>VLOOKUP</strong> ใช้ค้นหาข้อมูลตามแนวตั้งในตาราง เช่น <code>=VLOOKUP(ค่าที่ค้นหา, ช่วงตาราง, เลขคอลัมน์ที่ต้องการ, FALSE)</code> แต่มีข้อจำกัดคือค้นหาได้เฉพาะจากซ้ายไปขวาเท่านั้น <strong>XLOOKUP</strong> เป็นฟังก์ชันรุ่นใหม่ที่ยืดหยุ่นกว่า ค้นหาได้ทั้งสองทิศทางและไม่ต้องนับเลขคอลัมน์ เช่น <code>=XLOOKUP(ค่าที่ค้นหา, ช่วงที่ค้นหา, ช่วงผลลัพธ์)</code> แนะนำให้ใช้ XLOOKUP แทน VLOOKUP หากองค์กรใช้ Excel เวอร์ชันที่รองรับ (Microsoft 365 หรือ Excel 2021 ขึ้นไป)",
@@ -703,9 +743,9 @@ const TOPICS = [
       { icon: "🧲", label: "ลากฟิลด์ลง Rows/Values" },
       { icon: "📊", label: "ตารางสรุปพร้อมวิเคราะห์" }
     ],
-    video: "https://www.youtube.com/embed/igSovq_H24A",
-    videoTitle: "Excel Pivot Table Tutorial for Beginners",
-    videoAuthor: "Teacher's Tech",
+    video: "https://www.youtube.com/embed/KgeGUBi5Kr0",
+    videoTitle: "PivotTable ใน Excel พื้นฐาน เปลี่ยนตัวเลขน่าเบื่อให้เป็น Dashboard สุดล้ำ",
+    videoAuthor: "9Expert",
     images: [],
     text: [
       "<strong>PivotTable</strong> คือเครื่องมือสรุปและวิเคราะห์ข้อมูลจำนวนมากให้อยู่ในรูปแบบตารางที่กระชับและปรับเปลี่ยนมุมมองได้ง่าย เพียงเลือกช่วงข้อมูลแล้วไปที่เมนู <code>Insert &gt; PivotTable</code> จากนั้นลากฟิลด์ที่ต้องการไปวางในส่วน <code>Rows</code>, <code>Columns</code>, <code>Values</code> หรือ <code>Filters</code> เพื่อดูข้อมูลในมุมมองต่างๆ ได้ทันทีโดยไม่ต้องเขียนสูตรเอง",
@@ -723,9 +763,9 @@ const TOPICS = [
       { icon: "🌊", label: "ฟังก์ชันอาร์เรย์คำนวณครั้งเดียว" },
       { icon: "📤", label: "ผลลัพธ์กระจายอัตโนมัติ (Spill)" }
     ],
-    video: "https://www.youtube.com/embed/D0YByKakcSw",
-    videoTitle: "Dynamic Arrays and Dynamic Array Functions in Excel (FILTER, SORT, UNIQUE)",
-    videoAuthor: "Minty Analyst",
+    video: "https://www.youtube.com/embed/RyhnAik09D0",
+    videoTitle: "คลิปสอนการใช้ฟังก์ชัน UNIQUE ใน Microsoft Excel & Google Sheets",
+    videoAuthor: "อ.บอย คนตื่น Tech",
     images: [],
     text: [
       "ฟังก์ชันอาร์เรย์ไดนามิกในเวอร์ชันใหม่ (Microsoft 365) คืนค่าเป็นหลายเซลล์พร้อมกันจากสูตรเดียว โดยไม่ต้องกด Ctrl+Shift+Enter เหมือนสมัยก่อน เช่น <code>=UNIQUE(A1:A100)</code> ดึงรายการที่ไม่ซ้ำกันออกมาทั้งหมด และผลลัพธ์จะ 'กระจาย' (spill) ลงเซลล์ด้านล่างให้เองอัตโนมัติ",
@@ -743,9 +783,9 @@ const TOPICS = [
       { icon: "🗂️", label: "=GROUPBY() / =PIVOTBY()" },
       { icon: "⚡", label: "สรุปผลแบบสด อัปเดตอัตโนมัติ" }
     ],
-    video: "https://www.youtube.com/embed/tBT7qmrFMlA",
-    videoTitle: "Master the New GROUPBY & PIVOTBY Functions in Excel",
-    videoAuthor: "Kenji Explains",
+    video: "https://www.youtube.com/embed/t57dHLomv6o",
+    videoTitle: "ฟังก์ชันใหม่ GROUPBY ใช้แทน Pivot Table ได้เลย!",
+    videoAuthor: "วิศวกรรม : Wisawakorn Report",
     images: [],
     text: [
       "<strong>GROUPBY</strong> และ <strong>PIVOTBY</strong> เป็นฟังก์ชันสรุปข้อมูลรุ่นใหม่ใน Microsoft 365 ที่ทำงานคล้าย PivotTable แต่เป็น<strong>สูตรที่คำนวณสดตลอดเวลา</strong> เช่น <code>=GROUPBY(B:B,C:C,SUM)</code> รวมยอดตาม B ทันทีที่ข้อมูลเปลี่ยน โดยไม่ต้องกด Refresh เหมือน PivotTable และไม่มีปัญหา #REF! เวลาคอลัมน์ข้อมูลต้นทางถูกสลับตำแหน่ง",
@@ -763,9 +803,9 @@ const TOPICS = [
       { icon: "⚙️", label: "เขียน/รันโค้ด Python" },
       { icon: "📊", label: "ผลลัพธ์ตาราง/กราฟในชีท" }
     ],
-    video: "https://www.youtube.com/embed/FbBXtqtRnWU",
-    videoTitle: "Introducing Python in Excel",
-    videoAuthor: "Leila Gharani",
+    video: "https://www.youtube.com/embed/z3UxKnj0bqU",
+    videoTitle: "Python in Excel: การเรียกใช้ Python function ใน Excel",
+    videoAuthor: "prasertcbs",
     images: [],
     text: [
       "<strong>Python in Excel</strong> เป็นฟีเจอร์ที่เปิดใช้งานเต็มรูปแบบแล้วบน Microsoft 365 ช่วยให้เขียนโค้ด Python วิเคราะห์ข้อมูล สร้างกราฟ หรือทำ machine learning เบื้องต้นได้โดยตรงในเซลล์ ผ่านฟังก์ชัน <code>=PY()</code> โดยโค้ดรันบนคลาวด์ที่ปลอดภัย (ขับเคลื่อนด้วย Anaconda) จึงไม่ต้องติดตั้งโปรแกรมอะไรเพิ่มในเครื่อง",
