@@ -102,6 +102,30 @@
   }
   .video-box iframe { width: 100%; height: 100%; border: 0; }
 
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
   .text-block { font-size: 0.92rem; line-height: 1.75; color: var(--text); }
   .text-block p { margin: 0 0 12px; }
   .text-block p:last-child { margin-bottom: 0; }
@@ -158,8 +182,11 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>⚡ คู่มือการใช้งาน Power Automate (ภาษาไทย)</h1>
-  <p class="subtitle">กลุ่มบริษัท ATTG — 20 หัวข้อ เรียงจากพื้นฐานไปขั้นสูง พร้อมวิดีโอประกอบ</p>
+  <h1>⚡ คู่มือการใช้งาน Power Automate (ภาษาไทย) พร้อม VDO ประกอบทุกหัวข้อ</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — 20 หัวข้อ เรียงจากพื้นฐานไปขั้นสูง</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/สถาบันที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
 
   <div class="layout">
     <nav class="topic-list" id="topicList"></nav>
@@ -179,6 +206,8 @@ const TOPICS = [
       { icon: "⏱️", label: "ประหยัดเวลา ลดผิดพลาด" }
     ],
     video: "https://www.youtube.com/embed/CWm167pXE5A",
+    videoTitle: "#powerautomate EP2. Power Automate คืออะไร?",
+    videoAuthor: "Parameter Programmer",
     text: [
       "<strong>Power Automate</strong> คือเครื่องมือสร้างระบบทำงานอัตโนมัติ (automation) ในตระกูล Microsoft Power Platform เดียวกับ Power Apps และ Power BI ช่วยให้เชื่อมต่อแอปต่างๆ เข้าด้วยกันและทำงานที่ทำซ้ำๆ ให้อัตโนมัติ โดยไม่ต้องเขียนโค้ดเอง (low-code) เช่น ส่งอีเมลแจ้งเตือนอัตโนมัติ, บันทึกข้อมูลจากฟอร์มลงตาราง, หรือขออนุมัติเอกสารผ่านอีเมล",
       "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Power Automate แบ่งเป็น 2 กลุ่มหลัก คือ <strong>Power Automate Cloud</strong> (ทำงานบนคลาวด์ เชื่อมต่อแอป Microsoft 365 และบริการออนไลน์อื่นๆ) และ <strong>Power Automate Desktop</strong> (ควบคุมโปรแกรมบนเครื่องคอมพิวเตอร์ เหมาะกับงาน RPA ที่ต้องคลิก/พิมพ์ในโปรแกรมเดสก์ท็อป)",
@@ -196,6 +225,8 @@ const TOPICS = [
       { icon: "🧭", label: "สำรวจหน้าจอหลัก" }
     ],
     video: "https://www.youtube.com/embed/40OOfnF040E",
+    videoTitle: "เริ่มต้นใช้งาน Power Automate",
+    videoAuthor: "Mon Official (Monster Connect)",
     text: [
       "เข้าใช้งาน Power Automate ได้ที่เว็บไซต์ <code>make.powerautomate.com</code> โดยใช้บัญชี Microsoft 365 ขององค์กร (บัญชีอีเมลที่ใช้งานอยู่แล้ว) ส่วนใหญ่แผน Microsoft 365 Business/E3 ขึ้นไปจะมีสิทธิ์ใช้งานพื้นฐานติดมาให้แล้วโดยไม่ต้องซื้อเพิ่ม",
       "วิธีใช้งาน: หลังล็อกอินเข้ามา จะเห็นเมนูหลักด้านซ้าย ได้แก่ <code>My flows</code> (Flow ที่สร้างไว้), <code>Create</code> (เริ่มสร้าง Flow ใหม่), <code>Templates</code> (แม่แบบสำเร็จรูปให้เลือกใช้) และ <code>Connectors</code> (รายการแอป/บริการที่เชื่อมต่อได้) ลองสำรวจแต่ละเมนูให้คุ้นเคยก่อนเริ่มสร้าง Flow จริง",
@@ -213,6 +244,8 @@ const TOPICS = [
       { icon: "⏰", label: "Scheduled" }
     ],
     video: "https://www.youtube.com/embed/qqbUush6cY4",
+    videoTitle: "ฟรี!! สอน Basic Power Automate Cloud แบบง่ายๆ แนะนำ Trigger 3 แบบ",
+    videoAuthor: "DuckyEngineer",
     text: [
       "Power Automate Cloud มี Flow หลัก 3 ประเภท: <strong>Automated cloud flow</strong> เริ่มทำงานอัตโนมัติเมื่อมีเหตุการณ์เกิดขึ้น (เช่น มีอีเมลใหม่, มีไฟล์ใหม่), <strong>Instant cloud flow</strong> เริ่มทำงานเมื่อผู้ใช้กดปุ่มเอง (เช่น กดปุ่มในมือถือ), และ <strong>Scheduled cloud flow</strong> เริ่มทำงานตามเวลาที่ตั้งไว้ล่วงหน้า (เช่น ทุกวันจันทร์ 9 โมงเช้า)",
       "ตัวอย่างการใช้งานจริง: งาน 'สรุปยอดขายส่งอีเมลทุกเช้าวันจันทร์' เหมาะกับ Scheduled flow, งาน 'แจ้งเตือนเมื่อมีคนกรอกฟอร์มร้องเรียน' เหมาะกับ Automated flow, งาน 'ปุ่มขออนุมัติลาที่กดเองตอนต้องการ' เหมาะกับ Instant flow",
@@ -230,6 +263,8 @@ const TOPICS = [
       { icon: "🧪", label: "ทดสอบรัน Flow" }
     ],
     video: "https://www.youtube.com/embed/H_bvXEnnKjc",
+    videoTitle: "เคล็ด(ไม่)ลับ! สร้าง Flow การทำงานอัตโนมัติด้วย Power Automate | Metro Library EP.45",
+    videoAuthor: "Metro Systems Channel",
     text: [
       "การสร้าง Flow แรกที่ง่ายที่สุดคือ <strong>Instant cloud flow</strong> ไปที่เมนู <code>Create &gt; Instant cloud flow</code> ตั้งชื่อ Flow แล้วเลือก trigger <code>Manually trigger a flow</code> ซึ่งจะสร้างปุ่มให้กดเริ่มทำงานเองได้ทันที เหมาะสำหรับฝึกทำความเข้าใจโครงสร้างพื้นฐานของ Flow",
       "วิธีใช้งาน: หลังตั้ง trigger แล้ว กดปุ่ม <code>+ New step</code> เพื่อเพิ่ม action แรก เช่น <code>Send an email (V2)</code> กรอกผู้รับ หัวข้อ และเนื้อหาอีเมล จากนั้นกด <code>Save</code> แล้วกด <code>Test</code> มุมขวาบนเพื่อทดลองรัน Flow ดูผลลัพธ์จริง",
@@ -247,6 +282,8 @@ const TOPICS = [
       { icon: "🏁", label: "Flow เริ่มทำงาน" }
     ],
     video: "https://www.youtube.com/embed/fXLCHbhJa_8",
+    videoTitle: "สอน Power Automate Cloud เบื้องต้น ลดงานซ้ำๆ พร้อมกรณีศึกษา Point Of Sales",
+    videoAuthor: "9Expert",
     text: [
       "<strong>Trigger</strong> คือเหตุการณ์ที่ทำให้ Flow เริ่มทำงาน เปรียบเหมือนจุดเริ่มต้นของทุก Flow ทุก Flow ต้องมี Trigger อย่างน้อย 1 ตัวเสมอ และเลือกได้เพียงตัวเดียวต่อหนึ่ง Flow เช่น <code>When a new item is created</code> (SharePoint), <code>When a new email arrives</code> (Outlook), <code>When a new response is submitted</code> (Microsoft Forms)",
       "วิธีใช้งาน: ตอนเลือก trigger ให้ค้นหาชื่อ connector ที่ต้องการในช่องค้นหา (เช่น พิมพ์ 'SharePoint') แล้วเลือก trigger ที่ตรงกับเหตุการณ์ที่ต้องการดักจับ จากนั้นกรอกรายละเอียด เช่น ชื่อไซต์ SharePoint หรือ List ที่ต้องการเฝ้าดู",
@@ -264,6 +301,8 @@ const TOPICS = [
       { icon: "➕", label: "ต่อ Action ถัดไปได้เรื่อยๆ" }
     ],
     video: "https://www.youtube.com/embed/o6cnfl2425o",
+    videoTitle: "สอนพื้นฐานการใช้งาน Power Automate",
+    videoAuthor: "Fusion Solution",
     text: [
       "<strong>Action</strong> คือขั้นตอนการทำงานแต่ละขั้นที่เกิดขึ้นหลัง Trigger เช่น ส่งอีเมล, สร้างแถวข้อมูลใหม่, แปลงไฟล์ Word เป็น PDF หนึ่ง Flow สามารถมี Action ต่อกันได้หลายสิบขั้นตอน ทำงานเรียงตามลำดับจากบนลงล่าง",
       "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Action พื้นฐานที่ใช้บ่อยที่สุด ได้แก่ <code>Send an email (V2)</code> ส่งอีเมล, <code>Create item</code>/<code>Get items</code> จัดการข้อมูลใน SharePoint/Excel, <code>Compose</code> ใช้เก็บค่าชั่วคราวหรือคำนวณ, <code>Condition</code> ตรวจสอบเงื่อนไข",
@@ -281,6 +320,8 @@ const TOPICS = [
       { icon: "📤", label: "ใช้ต่อใน Action ถัดไป" }
     ],
     video: "https://www.youtube.com/embed/qmkrD9Q2xgI",
+    videoTitle: "ทำความรู้จักกับ \"ตัวแปร (Variable)\" - รากฐานที่สำคัญของการทำ Power Automate Desktop",
+    videoAuthor: "Damrongsak Naparat",
     text: [
       "<strong>Dynamic content</strong> คือข้อมูลที่ได้จาก Trigger หรือ Action ก่อนหน้าที่สามารถนำมาแทรกใช้ใน Action ถัดไปได้ทันที เช่น ชื่อผู้ส่งอีเมล, หัวข้ออีเมล, ชื่อไฟล์ที่อัปโหลด โดยไม่ต้องพิมพ์เอง กดที่ช่องกรอกข้อมูลแล้วเลือกจากรายการ Dynamic content ที่ปรากฏขึ้นมาได้เลย",
       "วิธีใช้งาน: หากไม่เห็น Dynamic content ที่ต้องการในหน้าต่างที่เปิดมา ให้กดคำว่า <code>See more</code> เพื่อดูตัวเลือกเพิ่มเติมจาก Action ก่อนหน้าทั้งหมด หรือสลับไปแท็บ <code>Expression</code> เพื่อเขียนสูตรดึงค่าที่ซับซ้อนกว่านั้น",
@@ -298,6 +339,8 @@ const TOPICS = [
       { icon: "❌", label: "No: ทำอีกแบบหนึ่ง" }
     ],
     video: "https://www.youtube.com/embed/YOfprxmZKB8",
+    videoTitle: "อธิบายแนวคิดเรื่อง \"เงื่อนไข (Condition)\" เพื่อใช้ในการสร้าง RPA",
+    videoAuthor: "Damrongsak Naparat",
     text: [
       "action <code>Condition</code> ใช้ตรวจสอบเงื่อนไขแบบ if-else เพื่อแยกเส้นทางการทำงานของ Flow ออกเป็น 2 ทาง คือฝั่ง <strong>Yes</strong> (เงื่อนไขเป็นจริง) และฝั่ง <strong>No</strong> (เงื่อนไขเป็นเท็จ) โดยแต่ละฝั่งใส่ Action ต่อได้อิสระจากกัน",
       "วิธีใช้งาน: เพิ่ม action <code>Condition</code> แล้วเลือกค่าที่ต้องการเปรียบเทียบ (Dynamic content หรือ Expression) เลือกตัวดำเนินการ เช่น <code>is equal to</code>, <code>is greater than</code>, <code>contains</code> แล้วใส่ค่าที่จะเทียบด้วย เช่น ตรวจว่า 'สถานะ' เท่ากับ 'อนุมัติ' หรือไม่",
@@ -315,6 +358,8 @@ const TOPICS = [
       { icon: "🎯", label: "ทำตาม Case ที่ตรง" }
     ],
     video: "https://www.youtube.com/embed/0pSwkOjCmg4",
+    videoTitle: "Power Automate: Condition and Switch Controls (Power Automate Basics Series - Ep. 3)",
+    videoAuthor: "Pragmatic Works",
     text: [
       "action <code>Switch</code> ใช้แทน Condition เมื่อต้องเปรียบเทียบค่าตัวแปรเดียวกับหลายความเป็นไปได้พร้อมกัน (เหมือนคำสั่ง switch-case ในภาษาโปรแกรมมิ่งทั่วไป) แทนที่จะต้องซ้อน Condition หลายชั้นให้ยุ่งยาก เช่น แยกการทำงานตาม 'แผนก' ที่มีได้หลายค่า (ขาย, บัญชี, ผลิต, HR)",
       "วิธีใช้งาน: เพิ่ม action <code>Switch</code> ใส่ค่าที่ต้องการตรวจ (On) แล้วกด <code>+ Add case</code> เพื่อสร้างแต่ละกรณีที่เป็นไปได้ แต่ละ Case ใส่ Action ของตัวเองแยกกันได้ และมี <code>Default</code> ไว้รองรับกรณีที่ไม่ตรงกับ Case ใดเลย",
@@ -332,6 +377,8 @@ const TOPICS = [
       { icon: "✅", label: "ทำ Action ซ้ำจนครบ" }
     ],
     video: "https://www.youtube.com/embed/Sio_FSABAu8",
+    videoTitle: "Apply to Each Explained in Power Automate | Loop Through Data Step-by-Step (Part 9)",
+    videoAuthor: "helpmecoder",
     text: [
       "action <code>Apply to each</code> ใช้วนลูปทำงานซ้ำกับข้อมูลที่เป็นรายการ (array/list) ทีละรายการจนครบทุกตัว เช่น ส่งอีเมลแจ้งเตือนพนักงานทุกคนในรายชื่อ, อัปเดตสถานะทุกแถวที่ค้นเจอใน SharePoint Power Automate จะเพิ่ม Apply to each ให้อัตโนมัติเมื่อเลือก Dynamic content ที่เป็นรายการหลายค่า",
       "วิธีใช้งาน: วาง Action ที่ต้องการทำซ้ำไว้ข้างในกล่อง Apply to each เช่น <code>Send an email</code> ที่อ้างอิงถึงอีเมลของแต่ละแถวในรายการ ระบบจะรันซ้ำ Action นั้นให้เองครบทุกแถวโดยอัตโนมัติ",
@@ -349,6 +396,8 @@ const TOPICS = [
       { icon: "🛑", label: "หยุดเมื่อเงื่อนไขเป็นจริง" }
     ],
     video: "https://www.youtube.com/embed/cj_gZ5zTNSo",
+    videoTitle: "How to use a \"Do Until\" loop in Power Automate Flow - Microsoft 365",
+    videoAuthor: "WeTechCareOfYou",
     text: [
       "action <code>Do until</code> ใช้ทำงานซ้ำไปเรื่อยๆ จนกว่าเงื่อนไขที่ตั้งไว้จะเป็นจริง ต่างจาก Apply to each ตรงที่ Do until ไม่จำเป็นต้องมีรายการข้อมูลอยู่แล้ว แต่จะวนซ้ำจนกว่าเงื่อนไขจะสำเร็จ เช่น รอจนกว่าสถานะไฟล์จะเปลี่ยนเป็น 'พร้อมใช้งาน'",
       "ข้อควรระวัง: ค่าเริ่มต้นของ Do until จะหยุดวนอัตโนมัติหลัง 60 รอบ หรือ 1 ชั่วโมง แล้วแต่ว่าอย่างไหนถึงก่อน (ปรับได้ในส่วน <code>Change limits</code>) หากตั้งเงื่อนไขผิดจนไม่มีวันเป็นจริง Flow จะวนจนครบขีดจำกัดแล้วหยุดโดยไม่สำเร็จ ควรตรวจสอบเงื่อนไขให้รอบคอบก่อนใช้งานจริง",
@@ -366,6 +415,8 @@ const TOPICS = [
       { icon: "📤", label: "ได้ค่าที่ต้องการ" }
     ],
     video: "https://www.youtube.com/embed/O97IdCbfMQI",
+    videoTitle: "Power Automate flow Expressions Tutorial",
+    videoAuthor: "Reza Dorrani",
     text: [
       "<strong>Expression</strong> คือสูตร/ฟังก์ชันที่ใช้แปลงหรือคำนวณค่าข้อมูลก่อนนำไปใช้ เปิดใช้งานได้จากแท็บ <code>Expression</code> ข้างๆ Dynamic content ทุกครั้งที่กรอกข้อมูลใน Action ฟังก์ชันที่ใช้บ่อยที่สุด ได้แก่ <code>concat()</code> ต่อข้อความ, <code>formatDateTime()</code> จัดรูปแบบวันที่, <code>if()</code> ตรวจเงื่อนไขแบบสั้น, <code>length()</code> นับจำนวนรายการ",
       "ตัวอย่างการใช้งานจริง: <code>concat('สวัสดีคุณ ', triggerBody()?['FullName'])</code> ใช้สร้างข้อความทักทายที่มีชื่อผู้รับแทรกอยู่ หรือ <code>formatDateTime(utcNow(), 'dd/MM/yyyy')</code> ใช้แสดงวันที่ปัจจุบันในรูปแบบไทยที่อ่านง่าย",
@@ -383,6 +434,8 @@ const TOPICS = [
       { icon: "⚙️", label: "อ่าน/เขียนข้อมูล" }
     ],
     video: "https://www.youtube.com/embed/qjkWnqV7aKQ",
+    videoTitle: "SharePoint Online and Power Automate Integration",
+    videoAuthor: "BI Consulting Services",
     text: [
       "<strong>SharePoint connector</strong> เป็นหนึ่งใน connector ที่ใช้บ่อยที่สุดในองค์กรที่ใช้ Microsoft 365 เพราะ SharePoint List ทำหน้าที่เป็นฐานข้อมูลอย่างง่ายได้ Action หลักที่ใช้บ่อย ได้แก่ <code>Get items</code> (ดึงข้อมูล), <code>Create item</code> (เพิ่มแถวใหม่), <code>Update item</code> (แก้ไขแถวเดิม), <code>Delete item</code> (ลบแถว)",
       "วิธีใช้งาน: เมื่อเพิ่ม Action ของ SharePoint ต้องระบุ <code>Site Address</code> (URL ของไซต์) และ <code>List Name</code> ทุกครั้ง หากต้องการดึงเฉพาะบางแถว ให้ใช้ <code>Filter Query</code> ใน Get items เช่น <code>Status eq 'Active'</code> แทนการดึงข้อมูลทั้งหมดมากรองทีหลัง",
@@ -400,6 +453,8 @@ const TOPICS = [
       { icon: "💾", label: "บันทึกผลลัพธ์อัตโนมัติ" }
     ],
     video: "https://www.youtube.com/embed/IJDi4fbc__Q",
+    videoTitle: "สอนการใช้ Power Automate สั่งการ Microsoft Excel แบบง่าย ๆ ep.1",
+    videoAuthor: "9Expert",
     text: [
       "<strong>Excel Online (Business) connector</strong> ใช้เชื่อมกับไฟล์ Excel ที่เก็บอยู่บน OneDrive หรือ SharePoint เท่านั้น (ไม่รองรับไฟล์ที่เก็บบนเครื่องโดยตรง) ข้อมูลที่จะใช้งานต้องถูกจัดเป็น <strong>Table</strong> ในไฟล์ Excel ก่อนเสมอ (เลือกช่วงข้อมูลแล้วกด Ctrl+T) มิเช่นนั้น Power Automate จะมองไม่เห็นข้อมูล",
       "วิธีใช้งาน: Action หลักที่ใช้บ่อยคือ <code>Add a row into a table</code> (เพิ่มแถวใหม่เข้าตาราง), <code>List rows present in a table</code> (ดึงข้อมูลทั้งหมดในตาราง), และ <code>Update a row</code> (แก้ไขแถวที่มีอยู่) ต้องเลือกไฟล์และชื่อ Table ให้ตรงกับที่ตั้งไว้ในไฟล์จริง",
@@ -417,6 +472,8 @@ const TOPICS = [
       { icon: "📎", label: "แนบไฟล์ได้อัตโนมัติ" }
     ],
     video: "https://www.youtube.com/embed/c8s9sMeWWSI",
+    videoTitle: "EP.17 - [Power Automate] ส่ง Outlook Email พร้อม Attachment หลายๆ File ที่มาจาก SharePoint List",
+    videoAuthor: "TheCITIZEN",
     text: [
       "action <code>Send an email (V2)</code> ของ <strong>Outlook connector</strong> เป็น Action ที่ถูกใช้งานบ่อยที่สุดใน Flow เกือบทุกประเภท ใส่ผู้รับ (To/CC/BCC), หัวข้อ, และเนื้อหา โดยเนื้อหาสามารถใส่ Dynamic content หรือจัดรูปแบบ HTML ได้ (ตัวหนา, สี, ตาราง) ผ่านโหมด <code>Code View</code>",
       "ตัวอย่างการใช้งานจริง: สามารถแนบไฟล์ไปกับอีเมลได้โดยตรงในช่อง <code>Attachments</code> เช่น แนบไฟล์ PDF ที่สร้างจาก action ก่อนหน้า หรือแนบไฟล์ที่ดึงมาจาก SharePoint/OneDrive โดยใส่ชื่อไฟล์และเนื้อหาไฟล์ (Content) ให้ตรงกัน",
@@ -434,6 +491,8 @@ const TOPICS = [
       { icon: "🔀", label: "แยกผลลัพธ์ Flow ต่อ" }
     ],
     video: "https://www.youtube.com/embed/ZU7EPxJxXdw",
+    videoTitle: "EP2. สอน Power Automate สร้างระบบ Approve จาก Microsoft Forms ง่ายๆ (ฉบับจับมือทำ)",
+    videoAuthor: "Powerautomatethai",
     text: [
       "action <code>Start and wait for an approval</code> ใช้สร้างขั้นตอนขออนุมัติงานผ่าน Power Automate โดยไม่ต้องพัฒนาระบบแยกต่างหาก มีให้เลือกหลายรูปแบบ เช่น <code>Approve/Reject - First to respond</code> (ใครตอบก่อนถือเป็นผลสรุป) หรือ <code>Approve/Reject - Everyone must approve</code> (ต้องได้รับอนุมัติจากทุกคนที่ระบุไว้)",
       "วิธีใช้งาน: ผู้อนุมัติจะได้รับการแจ้งเตือนทั้งทางอีเมลและแอป Power Automate/Teams สามารถกด Approve หรือ Reject ได้ทันทีจากอีเมลโดยไม่ต้องเปิดโปรแกรมอื่น หลังจากนั้นให้เพิ่ม <code>Condition</code> ตรวจสอบค่า <code>Outcome</code> เพื่อแยกเส้นทาง Flow ต่อไปตามผลการอนุมัติ",
@@ -451,6 +510,8 @@ const TOPICS = [
       { icon: "📥", label: "รับผลลัพธ์กลับมาใช้ต่อ" }
     ],
     video: "https://www.youtube.com/embed/ZhtUQgf2pk4",
+    videoTitle: "Beginner's Guide to Power Automate API Calls (Everything Explained)",
+    videoAuthor: "Anders Jensen",
     text: [
       "action <code>HTTP</code> ใช้เชื่อมต่อกับระบบภายนอกที่ไม่มี connector สำเร็จรูปให้เลือกใน Power Automate โดยตรง เช่น ระบบภายในของบริษัทเอง หรือบริการอื่นที่เปิด API ไว้ ทำงานโดยส่งคำขอ (request) ไปยัง URL ปลายทางตามรูปแบบ <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> แล้วรับผลลัพธ์ (response) กลับมาใช้งานต่อ",
       "วิธีใช้งาน: กรอก <code>URI</code> ปลายทาง, เลือก <code>Method</code> ที่ต้องการ, ใส่ <code>Headers</code> (เช่น Authorization token) และ <code>Body</code> (ข้อมูลที่จะส่งไป ในรูปแบบ JSON) หลังจากนั้นใช้ action <code>Parse JSON</code> เพื่อแปลงผลลัพธ์ที่ได้กลับมาให้ใช้เป็น Dynamic content ในขั้นตอนถัดไปได้ง่ายขึ้น",
@@ -468,6 +529,8 @@ const TOPICS = [
       { icon: "📧", label: "แจ้งเตือนเมื่อเกิดปัญหา" }
     ],
     video: "https://www.youtube.com/embed/qLADf8ne5qQ",
+    videoTitle: "Error Handling in Power Automate flows | Try Catch Scope Action",
+    videoAuthor: "Reza Dorrani",
     text: [
       "Flow ที่ทำงานจริงในองค์กรควรมีการจัดการข้อผิดพลาด (error handling) เสมอ เพื่อไม่ให้ Flow หยุดเงียบๆ โดยไม่มีใครทราบเมื่อเกิดปัญหา เช่น เชื่อมต่อ SharePoint ไม่ได้ชั่วคราว หรือข้อมูลที่ส่งเข้ามาไม่ครบ",
       "วิธีใช้งาน: คลิกจุดสามจุด (...) ที่มุมขวาบนของ Action แล้วเลือก <code>Configure run after</code> เพื่อกำหนดว่า Action ถัดไปควรทำงานเมื่อไหร่ เช่น เมื่อ Action ก่อนหน้า <code>is successful</code>, <code>has failed</code>, หรือ <code>is skipped</code> ทำให้สร้างเส้นทางสำรอง (เช่น ส่งอีเมลแจ้งเตือนผู้ดูแลระบบเมื่อ Action หลักล้มเหลว) ได้",
@@ -485,6 +548,8 @@ const TOPICS = [
       { icon: "🔁", label: "ทำงานแทนบนหน้าจอจริง" }
     ],
     video: "https://www.youtube.com/embed/XH-JB6YGJcU",
+    videoTitle: "สอนการใช้งาน RPA ด้วย Power Automate เบื้องต้นอย่างละเอียด",
+    videoAuthor: "Fusion Solution",
     text: [
       "<strong>Power Automate Desktop</strong> (ติดตั้งฟรีบน Windows 10/11) ใช้สร้างระบบอัตโนมัติแบบ RPA (Robotic Process Automation) ที่ควบคุมโปรแกรมบนหน้าจอคอมพิวเตอร์โดยตรง เหมาะกับงานที่ต้องคลิก พิมพ์ หรือคัดลอกข้อมูลระหว่างโปรแกรมที่ไม่มี API/connector ให้เชื่อมต่อ เช่น โปรแกรมบัญชีรุ่นเก่าที่ใช้ในองค์กร",
       "วิธีใช้งาน: ใช้ฟีเจอร์ <code>Record</code> (บันทึกหน้าจอ) เพื่อจับการคลิกเมาส์และพิมพ์คีย์บอร์ดของผู้ใช้ไว้เป็นขั้นตอนอัตโนมัติ แล้วนำมาปรับแต่งต่อในหน้า Editor เพิ่มตัวแปร เงื่อนไข หรือลูปได้เหมือนกับ Power Automate Cloud",
@@ -502,6 +567,8 @@ const TOPICS = [
       { icon: "🩹", label: "แก้ไขเมื่อพบปัญหา" }
     ],
     video: "https://www.youtube.com/embed/duWAxZI0pT0",
+    videoTitle: "How to manage your flows: Save, test, turn off, share, and troubleshoot",
+    videoAuthor: "Microsoft Power Platform",
     text: [
       "ทุก Flow มีหน้า <code>Run history</code> เก็บบันทึกการทำงานทุกครั้งไว้ ดูได้ว่าสำเร็จ (Succeeded), ล้มเหลว (Failed) หรือกำลังทำงาน (Running) พร้อมรายละเอียดของแต่ละ Action ในรอบนั้นๆ เป็นเครื่องมือหลักในการตรวจสอบและแก้ปัญหา",
       "วิธีใช้งาน: ไปที่ <code>My flows</code> เลือก Flow ที่ต้องการ แล้วไปแท็บ <code>Owners</code> เพื่อเพิ่มเพื่อนร่วมทีมเป็น <code>Co-owner</code> (แก้ไข/ลบ Flow ได้) หรือ <code>Run only user</code> (รันได้อย่างเดียว แก้ไขไม่ได้) เพื่อให้ทีมช่วยกันดูแล Flow ต่อได้แม้ผู้สร้างคนแรกไม่อยู่",
@@ -560,7 +627,14 @@ function renderContent() {
 
   let videoSectionHtml = '';
   if (topic.video) {
-    videoSectionHtml = '<div class="section-label">วิดีโอ</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
   } else if (topic.keyPoints && topic.keyPoints.length > 0) {
     videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
       topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
