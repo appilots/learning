@@ -266,6 +266,30 @@
   }
   .ref-link:hover { text-decoration: underline; }
 
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
   @media (max-width: 640px) {
     .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
     .topic-btn { flex: 0 0 auto; white-space: nowrap; }
@@ -274,8 +298,11 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>🤖 คู่มือเรียนรู้ Microsoft Copilot สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</h1>
-  <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา</p>
+  <h1>🤖 คู่มือเรียนรู้ Microsoft Copilot พร้อม VDO ประกอบทุกหัวข้อ</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/สถาบันที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
 
   <div class="layout">
     <nav class="topic-list" id="topicList"></nav>
@@ -288,26 +315,43 @@
 const TOPICS = [
   {
     key: "overview",
-    title: "ภาพรวม Copilot คืออะไร",
+    title: "ภาพรวม Copilot คืออะไร (อัปเดตล่าสุด 2569)",
     icon: "🤖",
     flow: [
       { icon: "💬", label: "พิมพ์คำสั่งภาษาคน" },
       { icon: "🤖", label: "Copilot ประมวลผล" },
       { icon: "📄", label: "ได้งานร่าง/สรุปทันที" }
     ],
-    video: "",
-    keyPoints: [
-      "Microsoft 365 Copilot คือ AI ที่ฝังอยู่ในแอปที่ใช้งานอยู่แล้ว เช่น Word, Excel, PowerPoint, Outlook, Teams",
-      "อ้างอิงข้อมูลที่ผู้ใช้มีสิทธิ์อยู่แล้วผ่าน Microsoft Graph ทำให้คำตอบตรงกับบริบทงานจริง",
-      "มีสองรูปแบบหลัก: Copilot Chat (แชททั่วไป) และ Copilot ที่ฝังอยู่ในแต่ละแอป"
-    ],
+    video: "https://www.youtube.com/embed/0_mqsU7yh5Q",
+    videoTitle: "Microsoft 365 Copilot: Complete Tutorial for Beginners (2026)",
+    videoAuthor: "Lisa Crosbie",
     images: [],
     text: [
-      "<strong>Microsoft 365 Copilot</strong> คือผู้ช่วยที่ขับเคลื่อนด้วย AI ซึ่งฝังอยู่ในแอปพลิเคชัน Microsoft 365 ที่ใช้งานอยู่แล้ว เช่น <strong>Word</strong>, <strong>Excel</strong>, <strong>PowerPoint</strong>, <strong>Outlook</strong> และ <strong>Teams</strong> ผู้ใช้พิมพ์คำสั่งเป็นภาษาธรรมดา (prompt) แล้ว Copilot จะช่วยร่างเอกสาร สรุปอีเมล วิเคราะห์ข้อมูล หรือสร้างงานนำเสนอให้โดยอัตโนมัติ โดยอ้างอิงทั้งความรู้ทั่วไปและข้อมูลงานที่ผู้ใช้มีสิทธิ์เข้าถึง (ผ่าน <strong>Microsoft Graph</strong>) ช่วยลดเวลาทำงานซ้ำๆ และเพิ่มประสิทธิภาพในการทำงานประจำวัน",
-      "Copilot แตกต่างจาก Chatbot ทั่วไปตรงที่สามารถเข้าถึงข้อมูลที่ผู้ใช้มีสิทธิ์อยู่แล้วผ่าน <strong>Microsoft Graph</strong> เช่น อีเมลใน Outlook ไฟล์ใน OneDrive/SharePoint และบทสนทนาใน Teams ทำให้คำตอบมีบริบทตรงกับงานจริงมากกว่าการถาม AI ทั่วไปจากภายนอก",
-      "ปัจจุบัน Copilot แบ่งเป็นสองรูปแบบหลัก คือ <strong>Copilot Chat</strong> (แชทถาม-ตอบทั่วไป) และ Copilot ที่ฝังอยู่ในแต่ละแอปพลิเคชัน (เช่น ปุ่ม Copilot ใน Word หรือ Excel) ซึ่งช่วยงานเฉพาะทางของแอปนั้นๆ โดยตรง"
+      "<strong>Microsoft 365 Copilot</strong> คือผู้ช่วยที่ขับเคลื่อนด้วย AI ซึ่งฝังอยู่ในแอปพลิเคชัน Microsoft 365 ที่ใช้งานอยู่แล้ว เช่น <strong>Word</strong>, <strong>Excel</strong>, <strong>PowerPoint</strong>, <strong>Outlook</strong> และ <strong>Teams</strong> ผู้ใช้พิมพ์คำสั่งเป็นภาษาธรรมดา (prompt) แล้ว Copilot จะช่วยร่างเอกสาร สรุปอีเมล วิเคราะห์ข้อมูล หรือสร้างงานนำเสนอให้โดยอัตโนมัติ โดยอ้างอิงทั้งความรู้ทั่วไปและข้อมูลงานที่ผู้ใช้มีสิทธิ์เข้าถึง (ผ่าน <strong>Microsoft Graph</strong>)",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Copilot อัปเดตฟีเจอร์ใหม่แทบทุกเดือน ล่าสุด (กลางปี 2569) มีทั้งความสามารถแบบ <strong>Agent</strong> ที่ทำงานหลายขั้นตอนแทนแบบอัตโนมัติ (เช่น Researcher, Analyst) และพื้นที่ทำงาน <strong>Copilot Notebooks</strong> สำหรับรวมไฟล์/โน้ตไว้ค้นคว้าร่วมกัน ซึ่งจะกล่าวถึงในหัวข้อถัดๆ ไปของคู่มือนี้",
+      "เคล็ดลับ: เนื่องจาก Copilot อัปเดตบ่อยมาก ควรติดตามประกาศ 'What's New in Microsoft 365 Copilot' ที่ Microsoft เผยแพร่เป็นรายเดือน เพื่อไม่พลาดฟีเจอร์ใหม่ที่อาจช่วยงานได้มากขึ้น"
     ],
     link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-overview"
+  },
+  {
+    key: "chat-vs-premium",
+    title: "Copilot Chat (ฟรี) กับ Microsoft 365 Copilot (Premium)",
+    icon: "🆚",
+    flow: [
+      { icon: "💬", label: "Copilot Chat (ฟรี)" },
+      { icon: "⭐", label: "Microsoft 365 Copilot (Premium)" },
+      { icon: "🎯", label: "เลือกให้ตรงกับงาน" }
+    ],
+    video: "https://www.youtube.com/embed/uca0mKLHq3w",
+    videoTitle: "Microsoft Copilot vs Copilot Chat vs M365 Copilot - What's the Difference?",
+    videoAuthor: "Lisa Crosbie",
+    images: [],
+    text: [
+      "Microsoft แบ่ง Copilot ออกเป็น 2 ระดับหลักที่มักสร้างความสับสน คือ <strong>Copilot Chat</strong> (บางครั้งเรียก Basic) ซึ่งมาพร้อมบัญชี Microsoft 365 ส่วนใหญ่โดยไม่มีค่าใช้จ่ายเพิ่ม และ <strong>Microsoft 365 Copilot</strong> (Premium) ซึ่งเป็นสิทธิ์แบบเสียเงินเพิ่มต่อผู้ใช้หนึ่งคน",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Copilot Chat ตอบคำถามโดยอ้างอิงข้อมูลจากเว็บเป็นหลัก เหมาะกับงานค้นคว้า ร่างข้อความ หรือระดมความคิดทั่วไป ส่วน Microsoft 365 Copilot (Premium) เข้าใจ 'งานของผู้ใช้' โดยตรง อ้างอิงอีเมล ไฟล์ การประชุม และบทสนทนาที่ผู้ใช้มีสิทธิ์เข้าถึงมาเชื่อมโยงกันเพื่อตอบคำถามที่ตรงบริบทงานจริง และเป็นสิทธิ์เดียวที่ปลดล็อกฟีเจอร์ Copilot ฝังในแอป Word, Excel, PowerPoint และ OneNote",
+      "หมายเหตุ: ตั้งแต่กลางปี 2569 Microsoft ปรับให้ฟีเจอร์ Copilot ที่ฝังอยู่ในตัวแอป Word, Excel, PowerPoint และ OneNote ใช้งานได้เฉพาะผู้ที่มีสิทธิ์ Microsoft 365 Copilot (Premium) เท่านั้น ผู้ใช้ Copilot Chat แบบฟรียังคงใช้แชทถาม-ตอบทั่วไปได้ แต่จะไม่เห็นปุ่ม Copilot ฝังอยู่ในแอปเหล่านี้โดยตรง"
+    ],
+    link: "https://support.microsoft.com/en-us/copilot"
   },
   {
     key: "getting-started",
@@ -319,9 +363,11 @@ const TOPICS = [
       { icon: "💡", label: "ลองคำสั่งง่ายๆ ก่อน" }
     ],
     video: "https://www.youtube.com/embed/zqH-HtQbaeU",
+    videoTitle: "What is Microsoft 365 Copilot and how to use it | Microsoft",
+    videoAuthor: "Microsoft Helps",
     images: [],
     text: [
-      "ก่อนเริ่มใช้งาน Copilot องค์กรต้องมีสิทธิ์ใช้งาน <strong>Microsoft 365 Copilot license</strong> ที่ผูกกับบัญชีผู้ใช้ เมื่อพร้อมแล้ว Copilot จะปรากฏเป็นไอคอนหรือแถบด้านข้างในแอป Microsoft 365 ต่างๆ ให้เริ่มต้นด้วยคำสั่งง่ายๆ เช่น <code>\"สรุปเอกสารนี้เป็น 3 ประเด็นหลัก\"</code> แล้วสังเกตผลลัพธ์ที่ได้ ค่อยๆ ปรับคำสั่งให้ละเอียดขึ้นตามต้องการ เพื่อให้ได้คำตอบที่ตรงจุดมากขึ้น",
+      "ก่อนเริ่มใช้งาน Copilot องค์กรต้องมีสิทธิ์ใช้งาน <strong>Microsoft 365 Copilot license</strong> ที่ผูกกับบัญชีผู้ใช้ เมื่อพร้อมแล้ว Copilot จะปรากฏเป็นไอคอนหรือแถบด้านข้างในแอป Microsoft 365 ต่างๆ ให้เริ่มต้นด้วยคำสั่งง่ายๆ เช่น <code>\"สรุปเอกสารนี้เป็น 3 ประเด็นหลัก\"</code> แล้วสังเกตผลลัพธ์ที่ได้ ค่อยๆ ปรับคำสั่งให้ละเอียดขึ้นตามต้องการ",
       "หมายเหตุ: หากยังไม่แน่ใจว่าองค์กรมี license หรือไม่ ให้สังเกตไอคอน Copilot (สัญลักษณ์รูปดาวสีน้ำเงิน-ม่วง) ที่มุมขวาบนของแอป Microsoft 365 หากไม่มีไอคอนขึ้น ให้ติดต่อทีม IT ภายในเพื่อตรวจสอบสิทธิ์การใช้งาน",
       "เคล็ดลับสำหรับผู้เริ่มต้น: เริ่มจากงานที่ทำซ้ำบ่อยๆ ในแต่ละวัน เช่น สรุปอีเมลยาวๆ หรือร่างข้อความตอบกลับ จะเห็นประโยชน์ของ Copilot ได้ชัดเจนที่สุด ก่อนขยับไปใช้งานที่ซับซ้อนขึ้น"
     ],
@@ -329,24 +375,21 @@ const TOPICS = [
   },
   {
     key: "licensing",
-    title: "แผนใบอนุญาตและการใช้งานในองค์กร (Licensing)",
+    title: "แผนใบอนุญาตและราคา (Licensing & Pricing)",
     icon: "🧾",
     flow: [
       { icon: "🧾", label: "ประเภทใบอนุญาตต่างกัน" },
       { icon: "👤", label: "ผูกกับบัญชีผู้ใช้แต่ละคน" },
       { icon: "🔓", label: "ปลดล็อกฟีเจอร์ตามสิทธิ์" }
     ],
-    video: "",
-    keyPoints: [
-      "มีตั้งแต่ Copilot Chat พื้นฐานไปจนถึง license แบบเต็มรูปแบบ",
-      "ฟีเจอร์ที่ใช้ได้ขึ้นกับประเภทใบอนุญาตของแต่ละบัญชี",
-      "ควรประเมินความคุ้มค่าก่อนขอเพิ่ม license"
-    ],
+    video: "https://www.youtube.com/embed/MugG3BD5DDc",
+    videoTitle: "Microsoft 365 Copilot Licensing Explained | Updated June 2026",
+    videoAuthor: "David Fortin",
     images: [],
     text: [
-      "Microsoft 365 Copilot มีหลายรูปแบบการใช้งาน ตั้งแต่ <strong>Copilot Chat</strong> ที่มากับบัญชี Microsoft 365 บางแผนโดยไม่ต้องซื้อเพิ่ม ไปจนถึง <strong>Microsoft 365 Copilot license</strong> แบบเต็มรูปแบบที่ต้องซื้อเพิ่มต่อผู้ใช้หนึ่งคน เพื่อปลดล็อกฟีเจอร์ในแอปอย่าง Word, Excel, PowerPoint แบบเต็มรูปแบบ",
-      "หมายเหตุ: ฟีเจอร์ที่ใช้ได้จะแตกต่างกันตามประเภทใบอนุญาตที่บัญชีผู้ใช้ได้รับ พนักงานสองคนในองค์กรเดียวกันอาจเห็นความสามารถของ Copilot ไม่เท่ากัน หากไม่แน่ใจว่าบัญชีตนเองมีสิทธิ์ระดับใด ให้ตรวจสอบกับทีม IT",
-      "แนวทางที่ดี: ก่อนขอเพิ่มใบอนุญาต Copilot ให้ทีมงาน ควรประเมินก่อนว่าใช้ Copilot Chat แบบพื้นฐานเพียงพอกับลักษณะงานหรือไม่ เพื่อให้การลงทุนด้าน license คุ้มค่ากับประโยชน์ที่ได้จริง"
+      "Microsoft 365 Copilot (Premium) เป็นสิทธิ์เสริมที่ต้องซื้อเพิ่มต่อผู้ใช้หนึ่งคน โดยราคาตั้งต้นอยู่ที่ประมาณ $30/ผู้ใช้/เดือน แต่ล่าสุด (ตั้งแต่ 1 ธันวาคม 2568) Microsoft ปรับราคาลงถาวรเหลือประมาณ $21/ผู้ใช้/เดือน (แบบผูกสัญญารายปี) หรือ $25/ผู้ใช้/เดือน (แบบรายเดือนไม่ผูกสัญญา) ต้องมีบัญชีฐาน Microsoft 365 ระดับ E3, E5 หรือ Business Premium ก่อนจึงจะซื้อสิทธิ์นี้เพิ่มได้",
+      "หมายเหตุ: สำหรับองค์กรขนาดเล็ก มีแพ็กเกจ Business Standard + Copilot และ Business Premium + Copilot ให้เลือกในราคาที่ถูกลง รวมถึงมีโปรโมชัน Copilot Business แบบสแตนด์อโลนสำหรับองค์กรที่ยังไม่มี Microsoft 365 base license ครบ ราคาที่แน่นอนควรตรวจสอบกับทีม IT หรือหน้าราคาทางการของ Microsoft เสมอ เพราะมีการปรับเปลี่ยนบ่อย",
+      "แนวทางที่ดี: ก่อนขอเพิ่มสิทธิ์ Microsoft 365 Copilot (Premium) ให้ทีมงาน ควรประเมินก่อนว่า Copilot Chat แบบฟรีเพียงพอกับลักษณะงานหรือไม่ (ดูความแตกต่างในหัวข้อก่อนหน้า) หากงานหลักคือดึงข้อมูลจากไฟล์/อีเมลในองค์กรมาใช้งานจริง จึงจะคุ้มค่ากับการซื้อสิทธิ์ Premium เพิ่ม"
     ],
     link: "https://support.microsoft.com/en-us/copilot"
   },
@@ -360,6 +403,8 @@ const TOPICS = [
       { icon: "✨", label: "คำตอบตรงใจ" }
     ],
     video: "https://www.youtube.com/embed/1jnq_ucAFIc",
+    videoTitle: "Microsoft 365 Copilot - Getting Started - The Basics of Prompting",
+    videoAuthor: "M365 Copilot Connection",
     images: [],
     text: [
       "การตั้งคำถาม (prompt) ที่ดีควรมี 4 ส่วน: <strong>เป้าหมาย</strong> (goal), <strong>บริบท</strong> (context), <strong>ความคาดหวังต่อผลลัพธ์</strong> (expectation) และ<strong>แหล่งข้อมูล</strong>ที่ต้องการให้ Copilot ใช้อ้างอิง (source) ยิ่งให้รายละเอียดชัดเจนมากเท่าไร ผลลัพธ์ที่ได้ก็จะตรงความต้องการมากขึ้นเท่านั้น",
@@ -377,12 +422,9 @@ const TOPICS = [
       { icon: "🔁", label: "พิมพ์ขอปรับแก้ต่อ" },
       { icon: "✨", label: "ผลลัพธ์ตรงใจมากขึ้น" }
     ],
-    video: "",
-    keyPoints: [
-      "Copilot จำบริบทบทสนทนาเดิมได้ ไม่ต้องพิมพ์คำถามใหม่ทั้งหมด",
-      "พิมพ์ขอปรับแก้ต่อได้ทันที เช่น \"ทำให้สั้นลง\"",
-      "หากบทสนทนายาวเกินไปจนเพี้ยน ให้เริ่มแชทใหม่"
-    ],
+    video: "https://www.youtube.com/embed/Xg5UY-o3HbU",
+    videoTitle: "How to chat with Microsoft Copilot to get what you want | Microsoft Copilot Tutorial",
+    videoAuthor: "Microsoft",
     images: [],
     text: [
       "Copilot จดจำบริบทของบทสนทนาในเซสชันเดียวกันได้ ทำให้ไม่จำเป็นต้องพิมพ์คำถามใหม่ทั้งหมดทุกครั้งที่ต้องการปรับแก้ผลลัพธ์ สามารถพิมพ์ต่อในกล่องเดิมเพื่อขอปรับเปลี่ยนได้ทันที เหมือนคุยกับผู้ช่วยที่จำสิ่งที่คุยกันไปแล้ว",
@@ -392,91 +434,104 @@ const TOPICS = [
     link: "https://support.microsoft.com/en-us/copilot"
   },
   {
-    key: "apps",
-    title: "ใช้ Copilot ใน Word, Excel และ Teams",
-    icon: "🧩",
+    key: "word-deep",
+    title: "ใช้ Copilot ใน Word (อัปเดตล่าสุด)",
+    icon: "📃",
     flow: [
-      { icon: "📝", label: "Word / Excel / Teams" },
-      { icon: "🤖", label: "Copilot ในแอปนั้นๆ" },
-      { icon: "🎯", label: "ผลลัพธ์เฉพาะงาน" }
+      { icon: "📄", label: "เอกสารว่าง/ไฟล์อ้างอิง" },
+      { icon: "🤖", label: "Copilot ร่าง/แก้ไข/สรุป" },
+      { icon: "✏️", label: "เอกสารพร้อมเผยแพร่" }
     ],
-    video: "https://www.youtube.com/embed/1beYHq8aMyE",
+    video: "https://www.youtube.com/embed/1Ln4ypWgHME",
+    videoTitle: "How to Draft Documents with Copilot in Microsoft Word (PC, Mac & Web)",
+    videoAuthor: "Erin Wright Writing",
     images: [],
     text: [
-      "Copilot ทำงานแตกต่างกันเล็กน้อยในแต่ละแอป: ใน <strong>Word</strong> ช่วยร่างและแก้ไขเอกสาร, ใน <strong>Excel</strong> ช่วยวิเคราะห์ข้อมูล สร้างสูตร และสรุปแนวโน้มจากตาราง, ใน <strong>Teams</strong> ช่วยสรุปการประชุมและติดตามงานที่ได้รับมอบหมาย เปิดแถบ Copilot ในแต่ละแอปแล้วพิมพ์คำสั่งที่เกี่ยวข้องกับงานที่กำลังทำอยู่ได้ทันที",
-      "ตัวอย่างคำสั่งที่ใช้ได้จริง: ใน Word ลองพิมพ์ <code>\"ร่างอีเมลแจ้งเลื่อนประชุมอย่างสุภาพ\"</code>, ใน Excel ลองพิมพ์ <code>\"สรุปยอดขายแต่ละเดือนเป็นตารางสั้นๆ\"</code>, ใน Teams ลองพิมพ์ <code>\"สรุปประเด็นสำคัญจากการประชุมนี้เป็นข้อๆ\"</code>",
-      "หมายเหตุ: ผลลัพธ์ที่ Copilot สร้างควรตรวจทานความถูกต้องก่อนนำไปใช้งานจริงเสมอ โดยเฉพาะข้อมูลตัวเลขหรือข้อเท็จจริงสำคัญ"
+      "Copilot ใน <strong>Word</strong> ทำได้มากกว่าการร่างเอกสารจากศูนย์ ยังสามารถแก้ไขปรับปรุงเอกสารที่มีอยู่แล้ว เช่น ทำให้กระชับขึ้น ปรับโทนภาษา หรือแปลงร่างประชุมแบบหยาบให้เป็นรายงานที่มีโครงสร้างชัดเจน โดยเลือกเฉพาะย่อหน้าที่ต้องการแก้แล้วสั่งงานผ่าน Copilot ได้ทันที",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: อัปเดตล่าสุดของ Word เพิ่มความสามารถ <strong>สลับโมเดล AI</strong> ที่ใช้ประมวลผลได้เอง, <strong>สร้างรูปภาพ</strong> แทรกในเอกสารได้โดยตรงจากคำสั่ง, <strong>สานต่อบทสนทนา Copilot เดิม</strong> ได้แม้ปิดไฟล์ไปแล้ว, สรุป <strong>Catchup</strong> บอกว่าเอกสารมีการแก้ไขอะไรไปบ้างตั้งแต่เปิดดูครั้งล่าสุด และรองรับการแก้ไขตามคอมเมนต์อัตโนมัติผ่านมือถือ (iPhone/iPad)",
+      "เคล็ดลับ: ใช้ Copilot ช่วยร่างโครงร่าง (outline) ก่อนเขียนเนื้อหาเต็ม จะช่วยจัดระเบียบความคิดได้เร็วกว่าการเริ่มเขียนจากหน้าว่างโดยตรง แล้วค่อยขยายความในแต่ละหัวข้อทีละส่วน"
     ],
-    link: "https://support.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-video-tutorials"
+    link: "https://support.microsoft.com/en-us/copilot"
   },
   {
-    key: "outlook",
-    title: "ใช้ Copilot ใน Outlook (สรุปและร่างอีเมล)",
-    icon: "📧",
+    key: "excel-deep",
+    title: "ใช้ Copilot ใน Excel (อัปเดตล่าสุด)",
+    icon: "📈",
     flow: [
-      { icon: "📧", label: "อีเมล/เธรดยาว" },
-      { icon: "🤖", label: "Summary by Copilot" },
-      { icon: "📝", label: "สรุปสั้น กระชับ" }
+      { icon: "📊", label: "ข้อมูลดิบในตาราง" },
+      { icon: "🤖", label: "ขอให้ Copilot วิเคราะห์" },
+      { icon: "💡", label: "insight + สูตรพร้อมใช้" }
     ],
-    video: "",
-    keyPoints: [
-      "สรุปอีเมล/เธรดยาวให้เหลือประเด็นสำคัญไม่กี่บรรทัด",
-      "ช่วยร่างอีเมลตอบกลับตามคำสั่งที่ให้ไว้",
-      "สรุปเนื้อหาในไฟล์แนบได้โดยไม่ต้องเปิดอ่านเอง"
-    ],
+    video: "https://www.youtube.com/embed/iF1u3YMXnn0",
+    videoTitle: "Microsoft Copilot in Excel: Here's How to Use It",
+    videoAuthor: "Lisa Crosbie",
     images: [],
     text: [
-      "Copilot ใน <strong>Outlook</strong> ช่วยลดเวลาจัดการอีเมลจำนวนมาก โดยสามารถสรุปอีเมลยาวๆ หรือทั้งเธรดการสนทนาให้เหลือเพียงประเด็นสำคัญไม่กี่บรรทัด และช่วยร่างอีเมลตอบกลับตามคำสั่งที่ให้ไว้ เช่น <code>\"ร่างอีเมลตอบรับนัดประชุมแบบสุภาพ\"</code>",
-      "วิธีใช้งาน: เปิดอีเมลหรือเธรดที่ต้องการ แล้วมองหาปุ่ม <code>Summary by Copilot</code> ที่ด้านบนของอีเมล หรือเมื่อต้องการร่างอีเมลใหม่ ให้กดไอคอน Copilot ในหน้าต่างเขียนอีเมล แล้วพิมพ์คำสั่งสิ่งที่ต้องการสื่อสาร",
-      "เคล็ดลับ: หากเธรดอีเมลมีไฟล์แนบ เช่น PDF, Word หรือ PowerPoint สามารถขอให้ Copilot สรุปเนื้อหาในไฟล์แนบนั้นได้ด้วย ไม่ต้องเปิดไฟล์อ่านเองทีละหน้า"
-    ],
-    link: "https://support.microsoft.com/en-us/office/summarize-an-email-thread-with-copilot-in-outlook-a79873f2-396b-46dc-b852-7fe5947ab640"
-  },
-  {
-    key: "teams-copilot",
-    title: "ใช้ Copilot ใน Teams (สรุปประชุมและติดตามงาน)",
-    icon: "👥",
-    flow: [
-      { icon: "🎤", label: "การประชุมสด/บันทึกไว้" },
-      { icon: "🤖", label: "Copilot สรุประหว่าง/หลังประชุม" },
-      { icon: "✅", label: "ประเด็นสำคัญ + งานที่ต้องทำ" }
-    ],
-    video: "",
-    keyPoints: [
-      "สรุปสิ่งที่พลาดหากเข้าประชุมสาย",
-      "ดึงรายการงานที่ถูกมอบหมาย (action items) ออกมาเป็นข้อๆ",
-      "ต้องเปิดการบันทึก/ถอดเสียงไว้ก่อนจึงจะสรุปได้"
-    ],
-    images: [],
-    text: [
-      "Copilot ใน <strong>Teams</strong> ช่วยสรุปสิ่งที่พลาดหากเข้าประชุมสาย พร้อมดึงประเด็นสำคัญและรายการงานที่ถูกมอบหมาย (action items) ออกมาเป็นข้อๆ ระหว่างหรือหลังการประชุมจบ โดยไม่ต้องนั่งอ่าน transcript ทั้งหมดเอง",
-      "วิธีใช้งาน: ระหว่างประชุม กดไอคอน Copilot ที่แถบด้านบนของหน้าต่างประชุม แล้วพิมพ์คำสั่งเช่น <code>\"สรุปสิ่งที่คุยกันมาจนถึงตอนนี้\"</code> หรือหลังประชุมจบ เปิดหน้าบันทึกการประชุมแล้วขอให้ Copilot สรุปทั้งหมดพร้อมแยกเป็นหัวข้อ",
-      "หมายเหตุ: การใช้งาน Copilot ในที่ประชุมต้องเปิดการบันทึก (recording) หรือถอดเสียง (transcription) ไว้ก่อน หากองค์กรปิดฟีเจอร์นี้ไว้ด้วยเหตุผลด้านความเป็นส่วนตัว Copilot จะไม่สามารถสรุปเนื้อหาการประชุมได้"
+      "Copilot ใน <strong>Excel</strong> ช่วยได้ตั้งแต่การเขียนสูตรที่ซับซ้อนให้โดยอธิบายเป็นภาษาคน ไปจนถึงการวิเคราะห์หาแนวโน้มหรือความผิดปกติในข้อมูล (insight) ที่อาจมองข้ามไปหากดูตัวเลขด้วยตาเปล่าเพียงอย่างเดียว โดยข้อมูลต้องอยู่ในรูปแบบ Excel Table ก่อนจึงจะใช้งานได้เต็มประสิทธิภาพ",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: อัปเดตล่าสุดเพิ่ม <strong>Skills</strong> (ชุดคำสั่งสำเร็จรูปที่บันทึกไว้ใช้ซ้ำได้), การจดจำ <strong>ค่ากำหนดส่วนตัว</strong> ที่เคยตั้งไว้ให้ใช้ต่อในไฟล์อื่น และ <strong>Rules sheet</strong> ที่ให้ผู้ใช้เขียนกฎเฉพาะของสมุดงานนั้นๆ ให้ Copilot ทำตามอัตโนมัติทุกครั้งที่เปิดไฟล์",
+      "ข้อควรระวัง: ควรตรวจสอบสูตรที่ Copilot สร้างให้ก่อนนำไปใช้จริงเสมอ โดยเฉพาะกับไฟล์การเงินหรือรายงานสำคัญ เพราะ Copilot อาจตีความคอลัมน์หรือเงื่อนไขผิดพลาดได้หากหัวตารางตั้งชื่อไม่ชัดเจน"
     ],
     link: "https://support.microsoft.com/en-us/copilot"
   },
   {
     key: "powerpoint",
-    title: "ใช้ Copilot ใน PowerPoint (สร้างงานนำเสนอ)",
+    title: "ใช้ Copilot ใน PowerPoint (อัปเดตล่าสุด)",
     icon: "📽️",
     flow: [
       { icon: "💭", label: "หัวข้อ + จำนวนสไลด์" },
       { icon: "🤖", label: "Copilot ร่างให้" },
       { icon: "📽️", label: "สไลด์พร้อมนำเสนอ" }
     ],
-    video: "",
-    keyPoints: [
-      "สร้างสไลด์ทั้งชุดจากคำสั่งเดียว",
-      "แปลงเอกสาร Word เป็นงานนำเสนอที่มีโครงสร้างได้ทันที",
-      "ระบุเทมเพลตให้ตรงแบรนด์องค์กรได้"
-    ],
+    video: "https://www.youtube.com/embed/g0bc6B-WFls",
+    videoTitle: "How To Create A Presentation With Copilot In PowerPoint (2026 Easy Guide)",
+    videoAuthor: "Guides by Leo",
     images: [],
     text: [
-      "Copilot ใน <strong>PowerPoint</strong> ช่วยสร้างงานนำเสนอตั้งแต่หน้าว่างได้จากการพิมพ์คำสั่งเดียว เช่น <code>\"สร้างสไลด์แนะนำผลิตภัณฑ์ใหม่ 8 หน้า\"</code> และยังสามารถแปลงเอกสาร Word หรือไฟล์ที่มีอยู่แล้วให้กลายเป็นงานนำเสนอที่มีโครงสร้างชัดเจนได้ทันที",
-      "วิธีใช้งาน: เปิด PowerPoint ใหม่ แล้วกดไอคอน Copilot ที่มุมขวาล่าง พิมพ์คำสั่งอธิบายหัวข้อ กลุ่มผู้ฟัง และจำนวนสไลด์ที่ต้องการ Copilot จะสร้างโครงร่างพร้อมภาพประกอบให้อัตโนมัติ ซึ่งสามารถแก้ไขปรับแต่งต่อได้เหมือนสไลด์ปกติ",
-      "เคล็ดลับ: หากต้องการให้งานนำเสนอตรงตามแบรนด์องค์กร สามารถระบุเทมเพลตหรือไฟล์ตัวอย่างที่มีอยู่แล้วให้ Copilot ใช้อ้างอิงโทนสีและสไตล์ได้ ผ่านคำสั่ง <code>\"สร้างจากไฟล์นี้\"</code>"
+      "Copilot ใน <strong>PowerPoint</strong> ช่วยสร้างงานนำเสนอตั้งแต่หน้าว่างได้จากการพิมพ์คำสั่งเดียว และยังสามารถแปลงเอกสาร Word หรือไฟล์ที่มีอยู่แล้วให้กลายเป็นงานนำเสนอที่มีโครงสร้างชัดเจนได้ทันที",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: อัปเดตล่าสุดเพิ่ม <strong>Brand Kit Picker</strong> ให้เลือกใช้เทมเพลตที่ตรงตามแบรนด์องค์กรที่ได้รับการอนุมัติไว้แล้ว, <strong>Presentation Skills</strong> แบบใช้ซ้ำได้ และความสามารถสร้างงานนำเสนอโดยดึงเนื้อหาโดยตรงจากคลัง SharePoint หรือโฟลเดอร์ OneDrive ที่กำหนด",
+      "เคล็ดลับ: หากต้องการให้งานนำเสนอตรงตามแบรนด์องค์กรอย่างสม่ำเสมอ ควรตั้งค่า Brand Kit ไว้ล่วงหน้าแทนการระบุเทมเพลตเองทุกครั้ง จะช่วยประหยัดเวลาและคุมมาตรฐานได้ดีกว่า"
     ],
     link: "https://support.microsoft.com/en-us/powerpoint/copilot/create-a-new-presentation-with-copilot-in-powerpoint"
+  },
+  {
+    key: "outlook",
+    title: "ใช้ Copilot ใน Outlook (อัปเดตล่าสุด)",
+    icon: "📧",
+    flow: [
+      { icon: "📧", label: "อีเมล/เธรดยาว" },
+      { icon: "🤖", label: "Summary by Copilot" },
+      { icon: "📝", label: "สรุปสั้น กระชับ" }
+    ],
+    video: "https://www.youtube.com/embed/FLd9djxseVI",
+    videoTitle: "How to Use Copilot in Outlook: Write and Summarize Emails Using AI",
+    videoAuthor: "Microsoft 365",
+    images: [],
+    text: [
+      "Copilot ใน <strong>Outlook</strong> ช่วยลดเวลาจัดการอีเมลจำนวนมาก โดยสามารถสรุปอีเมลยาวๆ หรือทั้งเธรดการสนทนาให้เหลือเพียงประเด็นสำคัญไม่กี่บรรทัด และช่วยร่างอีเมลตอบกลับตามคำสั่งที่ให้ไว้",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: อัปเดตล่าสุดเพิ่มความสามารถ <strong>เขียนใหม่เฉพาะบางส่วน</strong> ของอีเมลที่เลือกไว้ แทนที่จะต้องให้ Copilot ร่างใหม่ทั้งฉบับทุกครั้งที่ต้องการแก้เพียงบางประโยค ช่วยประหยัดเวลาได้มากเมื่อร่างอีเมลใกล้เสร็จแล้ว",
+      "เคล็ดลับ: หากเธรดอีเมลมีไฟล์แนบ เช่น PDF, Word หรือ PowerPoint สามารถขอให้ Copilot สรุปเนื้อหาในไฟล์แนบนั้นได้ด้วย ไม่ต้องเปิดไฟล์อ่านเองทีละหน้า"
+    ],
+    link: "https://support.microsoft.com/en-us/office/summarize-an-email-thread-with-copilot-in-outlook-a79873f2-396b-46dc-b852-7fe5947ab640"
+  },
+  {
+    key: "teams-copilot",
+    title: "ใช้ Copilot ใน Teams (อัปเดตล่าสุด)",
+    icon: "👥",
+    flow: [
+      { icon: "🎤", label: "การประชุมสด/บันทึกไว้" },
+      { icon: "🤖", label: "Copilot สรุประหว่าง/หลังประชุม" },
+      { icon: "✅", label: "ประเด็นสำคัญ + งานที่ต้องทำ" }
+    ],
+    video: "https://www.youtube.com/embed/l0nh1sYtY5A",
+    videoTitle: "How to Use Copilot in Microsoft Teams Meetings | 5 Powerful Features (2026)",
+    videoAuthor: "Mike Tholfsen",
+    images: [],
+    text: [
+      "Copilot ใน <strong>Teams</strong> ช่วยสรุปสิ่งที่พลาดหากเข้าประชุมสาย พร้อมดึงประเด็นสำคัญและรายการงานที่ถูกมอบหมาย (action items) ออกมาเป็นข้อๆ ระหว่างหรือหลังการประชุมจบ โดยไม่ต้องนั่งอ่าน transcript ทั้งหมดเอง",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: อัปเดตล่าสุดเพิ่มตัวเลือกให้ Copilot สร้าง <strong>สรุปการประชุม (Recap) แบบไม่ต้องบันทึกวิดีโอหรือ transcript ไว้เลย</strong> เหมาะกับการประชุมที่มีเนื้อหาละเอียดอ่อน และผู้จัดประชุมยังลบเนื้อหาที่ระบบสร้างไว้ (บันทึก, transcript, สรุป) ออกจากหน้า Recap ได้ภายหลังตามต้องการ",
+      "หมายเหตุ: การใช้งาน Copilot สรุปเนื้อหาการประชุมยังต้องเปิดการบันทึกหรือถอดเสียงไว้ก่อนเสมอ (ยกเว้นใช้โหมด Recap แบบไม่บันทึกที่กล่าวถึงข้างต้น) หากองค์กรปิดฟีเจอร์นี้ไว้ Copilot จะไม่สามารถสรุปเนื้อหาการประชุมแบบละเอียดได้"
+    ],
+    link: "https://support.microsoft.com/en-us/copilot"
   },
   {
     key: "onenote-loop",
@@ -487,12 +542,9 @@ const TOPICS = [
       { icon: "🤖", label: "Copilot จัดระเบียบให้" },
       { icon: "🗂️", label: "บันทึกที่เป็นระบบ ค้นหาง่าย" }
     ],
-    video: "",
-    keyPoints: [
-      "สรุปโน้ตยาวๆ ให้กระชับและจัดหมวดหมู่ให้อัตโนมัติ",
-      "ร่างเนื้อหาเริ่มต้นในหน้า Loop ที่ทีมแก้ไขร่วมกันได้",
-      "เหมาะกับการระดมความคิดสดๆ ในที่ประชุม"
-    ],
+    video: "https://www.youtube.com/embed/9cmZ4cuVMXw",
+    videoTitle: "How To Use Microsoft Copilot in OneNote | Note Taker (Updated 2025)",
+    videoAuthor: "AI Mastery",
     images: [],
     text: [
       "Copilot ใน <strong>OneNote</strong> ช่วยสรุปโน้ตยาวๆ ให้กระชับ หรือจัดหมวดหมู่บันทึกที่เขียนแบบอิสระให้เป็นระเบียบ ส่วนใน <strong>Loop</strong> Copilot ช่วยร่างเนื้อหาเริ่มต้นในหน้า Loop ที่ทีมงานร่วมกันแก้ไขแบบเรียลไทม์ได้",
@@ -510,12 +562,9 @@ const TOPICS = [
       { icon: "📎", label: "พิมพ์ @ แล้วเลือกไฟล์/คน" },
       { icon: "🎯", label: "คำตอบอ้างอิงจากไฟล์นั้นโดยตรง" }
     ],
-    video: "",
-    keyPoints: [
-      "พิมพ์ @ ตามด้วยชื่อไฟล์หรือชื่อคนเพื่อระบุแหล่งอ้างอิง",
-      "ลดโอกาสเกิด hallucination เพราะมีขอบเขตข้อมูลชัดเจน",
-      "เข้าถึงได้เฉพาะไฟล์/คนที่ผู้ใช้มีสิทธิ์อยู่แล้ว"
-    ],
+    video: "https://www.youtube.com/embed/ETJp67gDKgI",
+    videoTitle: "8 ways to refer to files in Copilot | @efficiency365",
+    videoAuthor: "Efficiency 365 by Dr Nitin",
     images: [],
     text: [
       "การพิมพ์เครื่องหมาย <code>@</code> ตามด้วยชื่อไฟล์หรือชื่อบุคคลในกล่องข้อความ Copilot ช่วยระบุให้ชัดเจนว่าต้องการให้ Copilot อ้างอิงข้อมูลจากแหล่งไหนโดยเฉพาะ แทนที่จะปล่อยให้ Copilot ค้นหาแบบกว้างๆ ทั่วทั้งองค์กร",
@@ -533,12 +582,9 @@ const TOPICS = [
       { icon: "🤖", label: "Copilot ค้นหาให้" },
       { icon: "📄", label: "สรุปไฟล์ที่เกี่ยวข้องทันที" }
     ],
-    video: "",
-    keyPoints: [
-      "ค้นหาและสรุปไฟล์ใน SharePoint/OneDrive จากหน้าต่างแชทได้เลย",
-      "ค้นหาได้เฉพาะไฟล์ที่ผู้ใช้มีสิทธิ์เข้าถึงเท่านั้น",
-      "แนบลิงก์ไฟล์ต้นฉบับมาให้เปิดดูเพิ่มเติมได้"
-    ],
+    video: "https://www.youtube.com/embed/7ypKuSZ5Wu4",
+    videoTitle: "How to Use the NEW Copilot in OneDrive & SharePoint!",
+    videoAuthor: "Scott Brant",
     images: [],
     text: [
       "Copilot Chat สามารถค้นหาและสรุปไฟล์ที่เก็บอยู่ใน <strong>SharePoint</strong> หรือ <strong>OneDrive</strong> ขององค์กรได้โดยตรงจากหน้าต่างแชท โดยไม่ต้องเปิดไฟล์ทีละไฟล์เพื่อหาว่าไฟล์ไหนมีข้อมูลที่ต้องการ",
@@ -556,12 +602,9 @@ const TOPICS = [
       { icon: "🔗", label: "แนบลิงก์แหล่งอ้างอิง" },
       { icon: "🧐", label: "ผู้ใช้ตรวจสอบย้อนกลับได้" }
     ],
-    video: "",
-    keyPoints: [
-      "คำตอบที่อ้างอิงไฟล์จริงจะมีเชิงอรรถ (citation) ต่อท้าย",
-      "คลิกเลขอ้างอิงเพื่อเปิดดูไฟล์ต้นฉบับได้ทันที",
-      "คำตอบที่ไม่มีอ้างอิงควรตรวจสอบเป็นพิเศษ"
-    ],
+    video: "https://www.youtube.com/embed/E8ZzeDHWK5Q",
+    videoTitle: "AI for citations: How to insert references with Copilot in Word | Microsoft 365",
+    videoAuthor: "Microsoft 365",
     images: [],
     text: [
       "คำตอบของ Copilot ที่อ้างอิงจากไฟล์หรืออีเมลในองค์กร มักจะแสดง<strong>เชิงอรรถอ้างอิง (citations)</strong> เป็นตัวเลขหรือลิงก์ต่อท้ายประโยค บอกว่าข้อมูลส่วนนั้นมาจากไฟล์หรือแหล่งใด ช่วยให้ตรวจสอบความถูกต้องย้อนกลับไปที่ต้นฉบับได้",
@@ -571,48 +614,122 @@ const TOPICS = [
     link: "https://support.microsoft.com/en-us/copilot"
   },
   {
-    key: "word-deep",
-    title: "ใช้ Copilot ใน Word เชิงลึก (ร่าง แก้ไข จัดรูปแบบ)",
-    icon: "📃",
+    key: "researcher-agent",
+    title: "Researcher Agent: วิจัยเชิงลึกพร้อมอ้างอิง",
+    icon: "🔬",
     flow: [
-      { icon: "📄", label: "เอกสารว่าง/ไฟล์อ้างอิง" },
-      { icon: "🤖", label: "Copilot ร่าง/แก้ไข/สรุป" },
-      { icon: "✏️", label: "เอกสารพร้อมเผยแพร่" }
+      { icon: "❓", label: "ตั้งคำถามวิจัยเชิงลึก" },
+      { icon: "🔬", label: "Researcher ค้นทั้งเว็บ+งานของคุณ" },
+      { icon: "📄", label: "ได้รายงานพร้อมอ้างอิงแหล่งที่มา" }
     ],
-    video: "",
-    keyPoints: [
-      "แก้ไข/ปรับโทนภาษาเอกสารที่มีอยู่แล้วได้ ไม่ใช่แค่ร่างใหม่",
-      "เลือกข้อความแล้วสั่งงาน Copilot ได้ทันที",
-      "ใช้ร่างโครงร่าง (outline) ก่อนเขียนเนื้อหาเต็มช่วยประหยัดเวลา"
-    ],
+    video: "https://www.youtube.com/embed/HCu2u7iQF_M",
+    videoTitle: "How to Use Copilot Researcher in Microsoft 365 Copilot (2026 Guide)",
+    videoAuthor: "Breaking Divide",
     images: [],
     text: [
-      "Copilot ใน <strong>Word</strong> ทำได้มากกว่าการร่างเอกสารจากศูนย์ ยังสามารถแก้ไขปรับปรุงเอกสารที่มีอยู่แล้ว เช่น ทำให้กระชับขึ้น ปรับโทนภาษา หรือแปลงร่างประชุมแบบหยาบให้เป็นรายงานที่มีโครงสร้างชัดเจน โดยเลือกเฉพาะย่อหน้าที่ต้องการแก้แล้วสั่งงานผ่าน Copilot ได้ทันที",
-      "วิธีใช้งาน: เลือกข้อความที่ต้องการแก้ไข แล้วกดไอคอน Copilot ที่ปรากฏข้างๆ พิมพ์คำสั่ง เช่น <code>\"ทำให้เป็นทางการมากขึ้น\"</code> หรือ <code>\"สรุปย่อหน้านี้เหลือ 2 บรรทัด\"</code> หากต้องการสร้างเอกสารใหม่จากไฟล์อื่น ให้ใช้คำสั่ง <code>\"ร่างจาก @ชื่อไฟล์\"</code>",
-      "เคล็ดลับ: ใช้ Copilot ช่วยร่างโครงร่าง (outline) ก่อนเขียนเนื้อหาเต็ม จะช่วยจัดระเบียบความคิดได้เร็วกว่าการเริ่มเขียนจากหน้าว่างโดยตรง แล้วค่อยขยายความในแต่ละหัวข้อทีละส่วน"
+      "<strong>Researcher</strong> คือ Agent ในตัวของ Microsoft 365 Copilot ที่ออกแบบมาสำหรับงานวิจัยเชิงลึกแบบหลายขั้นตอน ต่างจากแชทถาม-ตอบทั่วไปตรงที่ Researcher จะค้นคว้าทั้งจากเว็บและจากข้อมูลงานของผู้ใช้ (ไฟล์ อีเมล การประชุม แชท เท่าที่มีสิทธิ์เข้าถึง) แล้วสรุปเป็นรายงานที่มีโครงสร้างชัดเจนพร้อมอ้างอิงแหล่งที่มา",
+      "วิธีใช้งาน: เปิดแอป Copilot แล้วเลือก Agent ชื่อ <code>Researcher</code> ก่อนพิมพ์คำถาม สามารถเลือกโมเดลและโหมดการค้นคว้าที่ต้องการได้ตามความลึกของงาน เมื่อได้รายงานแล้ว สามารถแปลงผลลัพธ์เป็น PowerPoint, PDF, อินโฟกราฟิก หรือแม้แต่ไฟล์เสียงสรุป (audio overview) ได้ในคลิกเดียว",
+      "เคล็ดลับ: เหมาะกับงานที่ต้องรวบรวมข้อมูลจากหลายแหล่งมาสรุปเป็นรายงานเดียว เช่น วิเคราะห์คู่แข่ง สรุปแนวโน้มตลาด หรือรวบรวมข้อมูลประกอบการตัดสินใจ ที่ปกติต้องใช้เวลาค้นคว้าเองหลายชั่วโมง"
     ],
     link: "https://support.microsoft.com/en-us/copilot"
   },
   {
-    key: "excel-deep",
-    title: "ใช้ Copilot ใน Excel เชิงลึก (วิเคราะห์และสร้างสูตร)",
-    icon: "📈",
+    key: "analyst-agent",
+    title: "Analyst Agent: วิเคราะห์ข้อมูลอัตโนมัติ",
+    icon: "📊",
     flow: [
-      { icon: "📊", label: "ข้อมูลดิบในตาราง" },
-      { icon: "🤖", label: "ขอให้ Copilot วิเคราะห์" },
-      { icon: "💡", label: "insight + สูตรพร้อมใช้" }
+      { icon: "📁", label: "มอบหมายงานวิเคราะห์ข้อมูล" },
+      { icon: "📊", label: "Analyst ประมวลผล/เขียนโค้ดให้" },
+      { icon: "💡", label: "ได้ insight พร้อมกราฟสรุป" }
     ],
-    video: "",
-    keyPoints: [
-      "เขียนสูตรซับซ้อนให้จากคำอธิบายภาษาคน",
-      "วิเคราะห์หาแนวโน้ม/ความผิดปกติในข้อมูล (insight)",
-      "ควรตรวจสอบสูตรที่ได้ก่อนใช้กับไฟล์การเงินจริงเสมอ"
-    ],
+    video: "https://www.youtube.com/embed/NUvD3UilSmo",
+    videoTitle: "Microsoft 365 Copilot Analyst Agent: Charts, Code & Data Summaries in Seconds",
+    videoAuthor: "Power Tech Speck (Girish Uppal)",
     images: [],
     text: [
-      "Copilot ใน <strong>Excel</strong> ช่วยได้ตั้งแต่การเขียนสูตรที่ซับซ้อนให้โดยอธิบายเป็นภาษาคน ไปจนถึงการวิเคราะห์หาแนวโน้มหรือความผิดปกติในข้อมูล (insight) ที่อาจมองข้ามไปหากดูตัวเลขด้วยตาเปล่าเพียงอย่างเดียว โดยข้อมูลต้องอยู่ในรูปแบบ Excel Table ก่อนจึงจะใช้งานได้เต็มประสิทธิภาพ",
-      "ตัวอย่างการใช้งานจริง: พิมพ์คำสั่ง <code>\"เขียนสูตรรวมยอดขายเฉพาะเดือนล่าสุด\"</code> หรือ <code>\"หาว่าพนักงานคนไหนมียอดขายเพิ่มขึ้นเร็วที่สุด\"</code> Copilot จะเสนอสูตรหรือสรุปคำตอบพร้อมอธิบายที่มาของผลลัพธ์",
-      "ข้อควรระวัง: ควรตรวจสอบสูตรที่ Copilot สร้างให้ก่อนนำไปใช้จริงเสมอ โดยเฉพาะกับไฟล์การเงินหรือรายงานสำคัญ เพราะ Copilot อาจตีความคอลัมน์หรือเงื่อนไขผิดพลาดได้หากหัวตารางตั้งชื่อไม่ชัดเจน"
+      "<strong>Analyst</strong> คือ Agent อีกตัวที่เน้นงานวิเคราะห์ข้อมูลโดยเฉพาะ ทำหน้าที่เหมือน 'นักวิเคราะห์ข้อมูลส่วนตัว' ที่รับมอบหมายงานทั้งก้อน (ไม่ใช่แค่ตอบคำถามสั้นๆ ทีละครั้ง) แล้วไปประมวลผล เขียนโค้ดวิเคราะห์ และสรุปผลลัพธ์กลับมาเป็นกราฟและคำอธิบายให้เข้าใจง่าย",
+      "วิธีใช้งาน: อัปโหลดหรืออ้างอิงไฟล์ข้อมูล (เช่น ไฟล์ Excel ยอดขาย) แล้วมอบหมายงานให้ Analyst เช่น <code>\"หาสาเหตุที่ยอดขายไตรมาสนี้ลดลง แล้วสรุปเป็นกราฟ\"</code> Analyst จะวางแผนขั้นตอนวิเคราะห์เอง รันคำนวณ และนำเสนอผลลัพธ์กลับมาพร้อมคำอธิบายประกอบ",
+      "เคล็ดลับ: ต่างจาก Copilot ใน Excel ที่เหมาะกับคำถามเจาะจงทีละสูตร Analyst เหมาะกับงานที่ต้องสำรวจข้อมูลแบบเปิดกว้าง (exploratory analysis) ที่ยังไม่รู้ล่วงหน้าว่าจะต้องถามอะไรบ้าง เพราะ Analyst จะเป็นฝ่ายตั้งคำถามย่อยและหาคำตอบให้เองเป็นลำดับขั้น"
+    ],
+    link: "https://support.microsoft.com/en-us/copilot"
+  },
+  {
+    key: "copilot-notebooks",
+    title: "Copilot Notebooks: พื้นที่ทำงาน AI รวมไฟล์/โน้ต",
+    icon: "📔",
+    flow: [
+      { icon: "📁", label: "รวมไฟล์/โน้ต/PDF" },
+      { icon: "🤖", label: "Copilot วิเคราะห์เนื้อหาทั้งหมด" },
+      { icon: "🎧", label: "สรุปเป็นข้อความ/เสียง/วิดีโอ" }
+    ],
+    video: "https://www.youtube.com/embed/oalNUvFK_oA",
+    videoTitle: "Copilot Notebooks Full Tutorial 2026",
+    videoAuthor: "Pragmatic Works AI Academy",
+    images: [],
+    text: [
+      "<strong>Copilot Notebooks</strong> คือพื้นที่ทำงานที่รวบรวมโน้ต ไฟล์ PDF และเอกสารหลายประเภท (Word, Excel, PDF) ไว้ในที่เดียว ให้ Copilot ใช้เป็นแหล่งอ้างอิงเฉพาะสำหรับงานหรือหัวข้อนั้นๆ เหมาะกับการค้นคว้า เรียนรู้ หรือทำงานร่วมกันเป็นทีมโดยไม่ต้องสลับไปมาระหว่างหลายแอป",
+      "วิธีใช้งาน: สร้าง Notebook ใหม่แล้วเพิ่มไฟล์/ลิงก์ที่เกี่ยวข้องเข้าไป จากนั้นถาม Copilot ได้เฉพาะเจาะจงจากเนื้อหาใน Notebook นั้นเท่านั้น ทีมงานหลายคนสามารถเข้ามาแก้ไขเนื้อหาร่วมกันแบบเรียลไทม์ได้เหมือนเอกสารทั่วไป",
+      "เคล็ดลับ: อัปเดตล่าสุดเพิ่มความสามารถสรุปเนื้อหาเป็น <strong>เสียง (audio overview)</strong> และ <strong>วิดีโอสรุป</strong> รวมถึงสร้างภาพประกอบได้ดีขึ้น เหมาะกับการทบทวนเนื้อหาระหว่างเดินทางโดยไม่ต้องอ่านข้อความยาวๆ"
+    ],
+    link: "https://support.microsoft.com/en-us/copilot"
+  },
+  {
+    key: "copilot-studio",
+    title: "Copilot Studio: สร้าง Agent ใช้งานเฉพาะทาง",
+    icon: "🛠️",
+    flow: [
+      { icon: "🎯", label: "งานเฉพาะทางซ้ำๆ" },
+      { icon: "🛠️", label: "สร้าง Agent ด้วย Copilot Studio" },
+      { icon: "🤖", label: "ผู้ช่วย AI เฉพาะทีม/แผนก" }
+    ],
+    video: "https://www.youtube.com/embed/dX9MJM5EokE",
+    videoTitle: "How to Use Microsoft Copilot Studio (Step-by-Step Tutorial)",
+    videoAuthor: "Kevin Stratvert",
+    images: [],
+    text: [
+      "<strong>Copilot Studio</strong> คือเครื่องมือสำหรับสร้าง 'Agent' หรือผู้ช่วย AI เฉพาะทางโดยไม่ต้องเขียนโค้ด เหมาะกับงานที่ทำซ้ำในแผนกใดแผนกหนึ่ง เช่น ตอบคำถาม HR ที่พบบ่อย หรือช่วยกรอกแบบฟอร์มขอเบิกค่าใช้จ่ายตามขั้นตอนที่กำหนดไว้",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: อัปเดตล่าสุดของ Copilot Studio เพิ่มความสามารถสร้าง <strong>Computer-using agent</strong> (Agent ที่ควบคุมโปรแกรมบนหน้าจอได้เหมือนคนจริง) และเชื่อมต่อกับ <strong>Work IQ</strong> ซึ่งเป็นระบบทำความเข้าใจบริบทงานขององค์กรที่ลึกขึ้น ทำให้ Agent ที่สร้างขึ้นเข้าใจงานจริงขององค์กรได้แม่นยำกว่าเดิม",
+      "หมายเหตุ: การสร้าง Agent มักต้องมีสิทธิ์และใบอนุญาตเพิ่มเติมนอกเหนือจาก Microsoft 365 Copilot license ปกติ หากแผนกสนใจสร้าง Agent เฉพาะทาง ควรติดต่อทีม IT เพื่อประเมินความเหมาะสมและสิทธิ์การใช้งานก่อน"
+    ],
+    link: "https://support.microsoft.com/en-us/copilot"
+  },
+  {
+    key: "agent-store",
+    title: "Agent Store: ติดตั้ง Agent สำเร็จรูป",
+    icon: "🏪",
+    flow: [
+      { icon: "🏪", label: "เปิด Agent Store" },
+      { icon: "🔍", label: "เลือก Agent สำเร็จรูป" },
+      { icon: "⚡", label: "ติดตั้งใช้งานได้ทันที" }
+    ],
+    video: "https://www.youtube.com/embed/jqbQZjoDuKg",
+    videoTitle: "Explore Agent Store in Microsoft 365 Copilot",
+    videoAuthor: "Power Tech Speck (Girish Uppal)",
+    images: [],
+    text: [
+      "<strong>Agent Store</strong> คือตลาดกลางที่รวบรวม Agent สำเร็จรูปที่สร้างโดย Microsoft และพาร์ทเนอร์ ให้เลือกติดตั้งใช้งานได้ทันทีโดยไม่ต้องสร้างเองผ่าน Copilot Studio เข้าถึงได้จากภายในแอป Microsoft 365 เช่น Teams, Outlook, Word, Excel และ PowerPoint",
+      "วิธีใช้งาน: เปิด Agent Store จากเมนู Copilot ในแอปที่ใช้งานอยู่ เลือก Agent ที่ตรงกับงาน (เช่น Agent ช่วยงานขาย, Agent ช่วยงานบัญชี) แล้วกดติดตั้ง ผู้ดูแลระบบสามารถควบคุมได้ว่า Agent ใดบ้างที่อนุญาตให้พนักงานติดตั้งใช้งานในองค์กร",
+      "เคล็ดลับ: ก่อนติดตั้ง Agent จากพาร์ทเนอร์ภายนอก ควรตรวจสอบสิทธิ์การเข้าถึงข้อมูลที่ Agent นั้นร้องขอให้รอบคอบ เช่นเดียวกับการติดตั้งแอปใหม่ทั่วไป เพื่อป้องกันการให้สิทธิ์เข้าถึงข้อมูลองค์กรมากเกินความจำเป็น"
+    ],
+    link: "https://support.microsoft.com/en-us/copilot"
+  },
+  {
+    key: "agent-365",
+    title: "Agent 365: ควบคุมดูแล AI Agent ทั้งองค์กร",
+    icon: "🕹️",
+    flow: [
+      { icon: "🤖", label: "Agent จำนวนมากในองค์กร" },
+      { icon: "🕹️", label: "Agent 365 ควบคุมส่วนกลาง" },
+      { icon: "🛡️", label: "ปลอดภัย ตรวจสอบย้อนหลังได้" }
+    ],
+    video: "https://www.youtube.com/embed/fqMC3pfgywM",
+    videoTitle: "Microsoft Agent 365 Explained: Observe, Govern & Secure AI",
+    videoAuthor: "RioCloudSync",
+    images: [],
+    text: [
+      "<strong>Agent 365</strong> คือระบบควบคุมส่วนกลาง (control plane) ที่เปิดตัวพร้อมกับ Microsoft 365 E7 ใช้ให้ทีม IT และฝ่ายความปลอดภัยมองเห็นและบริหารจัดการ AI Agent ทั้งหมดที่ทำงานอยู่ในองค์กรได้จากที่เดียว โดย Agent แต่ละตัวจะมีตัวตนของตัวเอง (identity) คล้ายพนักงานคนหนึ่ง เช่น มีอีเมล มี OneDrive และมีตัวตนใน Teams เป็นของตัวเอง",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Agent 365 ช่วยให้องค์กร <strong>ค้นพบ (discover)</strong> Agent ที่มีอยู่ทั้งหมด, <strong>กำหนดนโยบาย (apply policies)</strong> ควบคุมสิทธิ์การเข้าถึง, <strong>จัดการวงจรชีวิต (lifecycle)</strong> ของ Agent ตั้งแต่สร้างจนถึงปลดระวาง, และ <strong>ตรวจสอบพฤติกรรม (monitor)</strong> พร้อมเก็บบันทึกไว้ตรวจสอบย้อนหลังได้",
+      "หมายเหตุ: Agent 365 เปิดให้ใช้งานทั่วไป (GA) ตั้งแต่ 1 พฤษภาคม 2569 มาพร้อมกับแพ็กเกจ Microsoft 365 E7 เหมาะกับองค์กรขนาดใหญ่ที่เริ่มมี AI Agent ทำงานอยู่หลายตัวและต้องการการกำกับดูแลที่เป็นระบบ มากกว่าองค์กรขนาดเล็กที่ยังใช้ Agent ไม่กี่ตัว"
     ],
     link: "https://support.microsoft.com/en-us/copilot"
   },
@@ -625,12 +742,9 @@ const TOPICS = [
       { icon: "🛡️", label: "Microsoft 365 boundary" },
       { icon: "🚫", label: "ไม่รั่วไหลออกนอกองค์กร" }
     ],
-    video: "",
-    keyPoints: [
-      "ข้อมูลประมวลผลภายใน Microsoft 365 service boundary เดียวกับไฟล์ปกติ",
-      "เข้าถึงได้เฉพาะข้อมูลที่ผู้ใช้มีสิทธิ์อยู่แล้วเท่านั้น",
-      "ควรตรวจทานผลลัพธ์ก่อนใช้จริงเสมอ โดยเฉพาะข้อมูลลับ"
-    ],
+    video: "https://www.youtube.com/embed/BLKs9LQwG9g",
+    videoTitle: "Is Microsoft Copilot Safe? (Data Privacy Explained)",
+    videoAuthor: "Michelle Kaye (Computer Tips)",
     images: [],
     text: [
       "ข้อมูลที่ป้อนเข้า Copilot และผลลัพธ์ที่ได้จะถูกประมวลผลภายในขอบเขตความปลอดภัยของ Microsoft 365 (<strong>Microsoft 365 service boundary</strong>) เดียวกับที่ใช้ปกป้องอีเมลและไฟล์ขององค์กรอยู่แล้ว โดยไม่ถูกนำไปใช้ฝึกโมเดล AI สาธารณะหรือแชร์ให้องค์กรอื่นเห็น",
@@ -648,12 +762,9 @@ const TOPICS = [
       { icon: "🏷️", label: "ติด Sensitivity Label" },
       { icon: "🚦", label: "Copilot เคารพสิทธิ์ตามป้าย" }
     ],
-    video: "",
-    keyPoints: [
-      "Sensitivity Labels กำหนดระดับความลับของเอกสาร",
-      "Copilot เคารพสิทธิ์ตามป้ายกำกับเสมอ",
-      "เอกสารใหม่ที่รวมจากหลายไฟล์ควรตรวจสอบป้ายอีกครั้ง"
-    ],
+    video: "https://www.youtube.com/embed/xtmWt1T2wDM",
+    videoTitle: "How to Configure Sensitivity Labels in Microsoft Purview to Protect Data | Copilot, ChatGPT & Gemini",
+    videoAuthor: "Joshua Addae",
     images: [],
     text: [
       "<strong>Sensitivity Labels</strong> คือป้ายกำกับระดับความลับของเอกสาร เช่น 'ทั่วไป', 'ภายในองค์กร' หรือ 'ลับเฉพาะ' ที่ฝ่ายความปลอดภัยข้อมูลตั้งค่าไว้ Copilot จะเคารพป้ายกำกับเหล่านี้และไม่นำเนื้อหาจากไฟล์ที่ผู้ใช้ไม่มีสิทธิ์เข้าถึงมาตอบคำถาม",
@@ -661,6 +772,49 @@ const TOPICS = [
       "ข้อควรระวัง: หาก Copilot สร้างเอกสารใหม่จากการรวมข้อมูลของหลายไฟล์ที่มีระดับความลับต่างกัน เอกสารใหม่ควรได้รับการตรวจสอบและติดป้ายระดับความลับที่เหมาะสมด้วยตนเองอีกครั้ง ไม่ควรปล่อยเป็นค่าเริ่มต้นโดยไม่ตรวจสอบ"
     ],
     link: "https://support.microsoft.com/en-us/copilot"
+  },
+  {
+    key: "e5-highlights",
+    title: "จุดเด่นสำหรับองค์กรที่ใช้ Microsoft 365 E5",
+    icon: "🛡️",
+    flow: [
+      { icon: "🛡️", label: "สิทธิ์ E5 ครอบคลุมความปลอดภัย" },
+      { icon: "🤖", label: "Copilot ทำงานร่วมกับ Purview/eDiscovery" },
+      { icon: "🔍", label: "ตรวจสอบ/ป้องกันข้อมูลได้ลึกขึ้น" }
+    ],
+    video: "",
+    keyPoints: [
+      "Security Copilot แถมฟรีไม่มีค่าใช้จ่ายเพิ่มสำหรับผู้ใช้ Microsoft 365 E5",
+      "Microsoft Purview Suite เต็มรูปแบบช่วยป้องกันข้อมูล Copilot รั่วไหล/ถูกใช้เกินสิทธิ์",
+      "eDiscovery ระดับพรีเมียมค้นหา/ตรวจสอบ Copilot activity ย้อนหลังได้"
+    ],
+    images: [],
+    text: [
+      "องค์กรที่ใช้ <strong>Microsoft 365 E5</strong> จะได้ฟีเจอร์ด้านความปลอดภัยและการกำกับดูแลข้อมูลเพิ่มเติมที่ทำงานร่วมกับ Copilot โดยตรง ซึ่งแผน E3 ทั่วไปไม่มีให้ เช่น <strong>Security Copilot</strong> (ผู้ช่วย AI ด้านความปลอดภัยไซเบอร์) ที่แถมมาให้ใช้ฟรีโดยไม่มีค่าใช้จ่ายเพิ่มสำหรับผู้ใช้ E5",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: <strong>Microsoft Purview Suite</strong> เต็มรูปแบบรวมอยู่ใน E5 ช่วยป้องกันไม่ให้ข้อมูลที่ Copilot เข้าถึงรั่วไหลออกไปโดยไม่ตั้งใจ และช่วยควบคุมให้การใช้งาน Copilot เป็นไปตามข้อกำหนดกฎหมาย/นโยบายองค์กร นอกจากนี้ <strong>eDiscovery</strong> ระดับพรีเมียมยังค้นหาและตรวจสอบ 'Copilot activity' (คำถามและคำตอบที่เกิดขึ้นจริง) ย้อนหลังได้ ซึ่งจำเป็นมากในกรณีต้องสอบสวนหรือตรวจสอบการใช้งาน",
+      "เคล็ดลับ: ทีมกฎหมาย/ผู้ตรวจสอบภายในสามารถสร้างเคสค้นหาใน eDiscovery แล้วเลือกเงื่อนไข <code>Copilot activity</code> เพื่อดึงประวัติคำถาม-คำตอบของ Copilot จากกล่องข้อความของผู้ใช้ที่ต้องการตรวจสอบได้โดยตรง โดยไม่ต้องขอข้อมูลจากผู้ใช้เอง"
+    ],
+    link: "https://learn.microsoft.com/en-us/purview/ai-m365-copilot"
+  },
+  {
+    key: "e7-frontier",
+    title: "Microsoft 365 E7 Frontier Suite: แพ็กเกจสูงสุดใหม่",
+    icon: "🚀",
+    flow: [
+      { icon: "📦", label: "รวม E5 + Copilot + Agent 365" },
+      { icon: "🧠", label: "ขับเคลื่อนด้วย Work IQ" },
+      { icon: "🏢", label: "เหมาะกับองค์กรขนาดใหญ่" }
+    ],
+    video: "https://www.youtube.com/embed/TIj2wG7fYes",
+    videoTitle: "Microsoft 365 E7 Explained: Who It's For, Who It Isn't & How to Decide",
+    videoAuthor: "ultimabusiness",
+    images: [],
+    text: [
+      "<strong>Microsoft 365 E7 (Frontier Suite)</strong> คือแพ็กเกจระดับสูงสุดใหม่ล่าสุดของ Microsoft 365 เปิดให้ใช้งานทั่วไปตั้งแต่ 1 พฤษภาคม 2569 ในราคาประมาณ $99/ผู้ใช้/เดือน โดยรวม <strong>Microsoft 365 E5</strong>, <strong>Microsoft 365 Copilot</strong> และ <strong>Agent 365</strong> ไว้ในสิทธิ์เดียว พร้อมขับเคลื่อนด้วยระบบทำความเข้าใจบริบทงานที่เรียกว่า <strong>Work IQ</strong>",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: นอกจาก Copilot และ Agent 365 แล้ว E7 ยังรวม <strong>Microsoft Entra Suite</strong> (จัดการตัวตนและการเข้าถึงขั้นสูง) และฟีเจอร์ความปลอดภัยระดับสูงของ <strong>Defender, Intune และ Purview</strong> ที่ครอบคลุมทั้งพนักงานและ AI Agent ในองค์กรเดียวกัน แทนที่จะต้องซื้อสิทธิ์เหล่านี้แยกกันหลายรายการ",
+      "แนวทางที่ดี: E7 เหมาะกับองค์กรขนาดใหญ่ที่ใช้งาน AI Agent จำนวนมากอยู่แล้วและต้องการความปลอดภัย/การกำกับดูแลระดับสูงสุดแบบรวมศูนย์ หากองค์กรยังอยู่ในช่วงเริ่มต้นใช้งาน Copilot ควรเริ่มจาก E5 + Microsoft 365 Copilot ตามปกติก่อน แล้วค่อยพิจารณาอัปเกรดเป็น E7 เมื่อมีความจำเป็นด้านการกำกับดูแล Agent จริงๆ"
+    ],
+    link: ""
   },
   {
     key: "limitations",
@@ -671,12 +825,9 @@ const TOPICS = [
       { icon: "🧠", label: "อาจเกิด hallucination" },
       { icon: "🔍", label: "ควรตรวจทานก่อนใช้จริง" }
     ],
-    video: "",
-    keyPoints: [
-      "อาจเกิด hallucination เมื่อคำถามกว้างหรือข้อมูลไม่พอ",
-      "ทำงานได้ดีที่สุดเมื่อมีไฟล์/อีเมลอ้างอิงชัดเจน",
-      "การตัดสินใจสุดท้ายยังเป็นความรับผิดชอบของผู้ใช้เสมอ"
-    ],
+    video: "https://www.youtube.com/embed/rQnNRHcwa9A",
+    videoTitle: "HOW TO Reduce Hallucinations in Microsoft 365 Copilot",
+    videoAuthor: "NILC Training",
     images: [],
     text: [
       "Copilot อาจให้คำตอบที่ฟังดูมั่นใจแต่ไม่ถูกต้องทั้งหมด (เรียกว่า <strong>hallucination</strong>) โดยเฉพาะเมื่อคำถามกว้างเกินไปหรือข้อมูลอ้างอิงไม่เพียงพอ จึงไม่ควรนำผลลัพธ์ไปใช้โดยไม่ตรวจสอบ โดยเฉพาะตัวเลข วันที่ หรือข้อเท็จจริงสำคัญ",
@@ -684,29 +835,6 @@ const TOPICS = [
       "แนวทางที่ดี: ใช้ Copilot เป็นผู้ช่วยร่างเบื้องต้นหรือประหยัดเวลาในงานที่ทำซ้ำ แต่การตัดสินใจสุดท้ายและความรับผิดชอบต่อผลลัพธ์ยังคงเป็นของผู้ใช้งานเสมอ"
     ],
     link: "https://support.microsoft.com/en-us/microsoft-365-copilot/"
-  },
-  {
-    key: "copilot-studio",
-    title: "Copilot Studio: สร้าง Agent ใช้งานเฉพาะทาง",
-    icon: "🛠️",
-    flow: [
-      { icon: "🎯", label: "งานเฉพาะทางซ้ำๆ" },
-      { icon: "🛠️", label: "สร้าง Agent ด้วย Copilot Studio" },
-      { icon: "🤖", label: "ผู้ช่วย AI เฉพาะทีม/แผนก" }
-    ],
-    video: "",
-    keyPoints: [
-      "สร้าง Agent ผู้ช่วย AI เฉพาะทางโดยไม่ต้องเขียนโค้ด",
-      "เหมาะกับงานซ้ำๆ เฉพาะแผนก เช่น ตอบคำถาม HR",
-      "มักต้องมีสิทธิ์/ใบอนุญาตเพิ่มเติมนอกเหนือ Copilot ปกติ"
-    ],
-    images: [],
-    text: [
-      "<strong>Copilot Studio</strong> คือเครื่องมือสำหรับสร้าง 'Agent' หรือผู้ช่วย AI เฉพาะทางโดยไม่ต้องเขียนโค้ด เหมาะกับงานที่ทำซ้ำในแผนกใดแผนกหนึ่ง เช่น ตอบคำถาม HR ที่พบบ่อย หรือช่วยกรอกแบบฟอร์มขอเบิกค่าใช้จ่ายตามขั้นตอนที่กำหนดไว้",
-      "วิธีใช้งาน: ผู้ดูแลระบบหรือทีมที่ได้รับสิทธิ์สามารถสร้าง Agent ผ่านหน้าเว็บ Copilot Studio โดยกำหนดหัวข้อที่ตอบได้ แหล่งข้อมูลที่ใช้อ้างอิง และขั้นตอนการทำงานเป็นลำดับ (topics/flows) จากนั้นเผยแพร่ให้ทีมงานใช้งานผ่าน Teams ได้",
-      "หมายเหตุ: การสร้าง Agent มักต้องมีสิทธิ์และใบอนุญาตเพิ่มเติมนอกเหนือจาก Microsoft 365 Copilot license ปกติ หากแผนกสนใจสร้าง Agent เฉพาะทาง ควรติดต่อทีม IT เพื่อประเมินความเหมาะสมและสิทธิ์การใช้งานก่อน"
-    ],
-    link: "https://support.microsoft.com/en-us/copilot"
   },
   {
     key: "troubleshooting",
@@ -717,12 +845,9 @@ const TOPICS = [
       { icon: "🔍", label: "ตรวจสอบสาเหตุทีละจุด" },
       { icon: "✅", label: "ใช้งานได้ตามปกติ" }
     ],
-    video: "",
-    keyPoints: [
-      "ไอคอนไม่ขึ้น มักเป็นเพราะ license หรือแอปเวอร์ชันเก่า",
-      "\"ไม่พบข้อมูล\" ให้เช็คสิทธิ์เข้าถึงไฟล์ก่อน",
-      "ผลลัพธ์เพี้ยน ให้เริ่มแชทใหม่แทนแก้ไขเธรดเดิม"
-    ],
+    video: "https://www.youtube.com/embed/8qJ-CHLMnhs",
+    videoTitle: "8 Microsoft 365 Copilot Hacks You Need To Know!",
+    videoAuthor: "Scott Brant",
     images: [],
     text: [
       "หากไอคอน Copilot ไม่ปรากฏในแอป สาเหตุที่พบบ่อยที่สุดคือบัญชีผู้ใช้ยังไม่ได้รับใบอนุญาต หรือแอปเวอร์ชันที่ใช้อยู่เก่าเกินไป ให้ลองอัปเดตแอป Microsoft 365 เป็นเวอร์ชันล่าสุดก่อน แล้วปิดเปิดแอปใหม่อีกครั้ง",
@@ -765,7 +890,7 @@ function renderTopicList() {
   TOPICS.forEach(t => {
     const btn = document.createElement("button");
     btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
-    btn.textContent = t.title;
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
     btn.onclick = () => {
       currentKey = t.key;
       renderTopicList();
@@ -781,7 +906,14 @@ function renderContent() {
 
   let videoSectionHtml = '';
   if (topic.video) {
-    videoSectionHtml = '<div class="section-label">วิดีโอ</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
   } else if (topic.keyPoints && topic.keyPoints.length > 0) {
     videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
       topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
