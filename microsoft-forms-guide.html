@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน Microsoft Forms (ภาษาไทย) - กลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #c2410c;
+    --accent-2: #9a3412;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #fdece2;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #fb923c;
+      --accent-2: #f97316;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #33210f;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+  .topic-list { flex: 0 0 260px; display: flex; flex-direction: column; gap: 6px; }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title { font-weight: 700; font-size: 0.82rem; color: var(--accent-2); margin-bottom: 8px; }
+  .key-points ul { margin: 0; padding-left: 20px; }
+  .key-points li { font-size: 0.88rem; line-height: 1.6; color: var(--text); margin-bottom: 4px; }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--sub); font-size: 0.85rem; margin-bottom: 20px; overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  .text-block { font-size: 0.92rem; line-height: 1.75; color: var(--text); }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.86em;
+  }
+
+  .flow {
+    display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin: 4px 0 16px; padding: 16px 12px;
+    border: 1px solid var(--border); border-radius: 12px; background: var(--placeholder-bg);
+  }
+  .flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 104px; text-align: center; }
+  .flow-icon {
+    width: 46px; height: 46px; border-radius: 12px; background: var(--pill-bg);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+  .flow-label { font-size: 0.76rem; color: var(--sub); font-weight: 600; line-height: 1.3; }
+  .flow-arrow { font-size: 1.3rem; color: var(--accent); flex-shrink: 0; }
+
+  .callout {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 10px; margin: 0 0 12px; font-size: 0.92rem; line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📝 คู่มือการใช้งาน Microsoft Forms (ภาษาไทย) พร้อม VDO ประกอบทุกหัวข้อ</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — 20 หัวข้อ เรียงจากพื้นฐานไปขั้นสูง</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/สถาบันที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+const TOPICS = [
+  {
+    key: "overview",
+    title: "Microsoft Forms คืออะไร",
+    icon: "📝",
+    flow: [
+      { icon: "📝", label: "สร้างแบบฟอร์ม/แบบสอบถาม" },
+      { icon: "📤", label: "แชร์ให้คนตอบ" },
+      { icon: "📊", label: "ดูผลสรุปอัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/zA72HU4jShg",
+    videoTitle: "แนะนำ Microsoft Forms และวิธีการใช้งานเบื้องต้น",
+    videoAuthor: "Microsoft Thailand",
+    text: [
+      "<strong>Microsoft Forms</strong> คือเครื่องมือสร้างแบบฟอร์มออนไลน์ในตระกูล Microsoft 365 ใช้สร้างแบบสอบถาม แบบสำรวจความคิดเห็น หรือแบบทดสอบ (Quiz) ได้ง่ายๆ ผ่านเว็บเบราว์เซอร์ โดยไม่ต้องติดตั้งโปรแกรมเพิ่ม และเชื่อมต่อกับแอปอื่นในองค์กร เช่น Excel, SharePoint, Power Automate ได้โดยตรง",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Forms แบ่งเป็น 2 โหมดหลัก คือ <strong>Form</strong> (เก็บข้อมูลทั่วไป เช่น แบบสำรวจ, แบบฟอร์มขอข้อมูล) และ <strong>Quiz</strong> (แบบทดสอบที่ตั้งเฉลยและให้คะแนนอัตโนมัติได้) เลือกโหมดได้ตั้งแต่ตอนสร้างฟอร์มใหม่",
+      "เคล็ดลับ: Microsoft Forms เหมาะกับงานเก็บข้อมูลระยะสั้นและใช้งานง่าย หากต้องการฟีเจอร์ขั้นสูงกว่า เช่น แบบสอบถามหลายภาษา หรือ workflow ที่ซับซ้อน ควรพิจารณา Dynamics 365 Customer Voice แทน (ดูรายละเอียดเปรียบเทียบได้ในหัวข้อท้ายคู่มือนี้)"
+    ],
+    link: ""
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นใช้งาน Microsoft Forms",
+    icon: "🚀",
+    flow: [
+      { icon: "🔑", label: "เข้าสู่ระบบด้วยบัญชีองค์กร" },
+      { icon: "🖥️", label: "เปิด forms.office.com" },
+      { icon: "🧭", label: "สำรวจหน้าจอหลัก" }
+    ],
+    video: "https://www.youtube.com/embed/1uAjWveA1f0",
+    videoTitle: "การใช้งาน Microsoft Form ฉบับสมบูรณ์ จบในคลิปเดียว | เครื่องมือเก็บข้อมูลออนไลน์ | แบบสอบถามออนไลน์",
+    videoAuthor: "iT For Life by Aj Nu",
+    text: [
+      "เข้าใช้งาน Microsoft Forms ได้ที่เว็บไซต์ <code>forms.office.com</code> โดยใช้บัญชี Microsoft 365 ขององค์กร หรือเข้าผ่านไอคอน Forms ในหน้า <code>office.com</code> ก็ได้เช่นกัน ไม่มีค่าใช้จ่ายเพิ่มเติมหากองค์กรมีสิทธิ์ใช้งาน Microsoft 365 อยู่แล้ว",
+      "วิธีใช้งาน: หน้าจอหลักแบ่งเป็น 3 แท็บสำคัญ ได้แก่ <code>My forms</code> (ฟอร์มที่สร้างไว้เอง), <code>Group forms</code> (ฟอร์มที่สร้างร่วมกับทีม/กลุ่ม) และ <code>Templates</code> (แม่แบบสำเร็จรูปให้เลือกใช้ เช่น แบบสำรวจความพึงพอใจ, แบบลงทะเบียนอีเวนต์)",
+      "เคล็ดลับ: เมนู <code>Templates</code> มีแบบฟอร์มสำเร็จรูปที่ออกแบบมาอย่างดีให้เลือกใช้ฟรี เหมาะกับผู้เริ่มต้นที่ยังไม่แน่ใจว่าจะจัดวางคำถามอย่างไร ลองเลือกแม่แบบใกล้เคียงงานที่ต้องการแล้วปรับแก้ต่อจะเร็วกว่าสร้างจากศูนย์"
+    ],
+    link: ""
+  },
+  {
+    key: "first-form",
+    title: "สร้างฟอร์มแรก",
+    icon: "🛠️",
+    flow: [
+      { icon: "➕", label: "กด New Form" },
+      { icon: "❓", label: "เพิ่มคำถาม" },
+      { icon: "📤", label: "กด Share เพื่อแจกจ่าย" }
+    ],
+    video: "https://www.youtube.com/embed/KUK5a_CYXYA",
+    videoTitle: "สอนสร้างแบบสอบถาม แบบสำรวจ ออนไลน์ ด้วย Microsoft Forms",
+    videoAuthor: "9Expert",
+    text: [
+      "การสร้างฟอร์มแรกเริ่มจากกดปุ่ม <code>+ New Form</code> ตั้งชื่อฟอร์มและคำอธิบายสั้นๆ (ผู้ตอบจะเห็นข้อความนี้ที่ด้านบนฟอร์ม) จากนั้นกด <code>+ Add new</code> เพื่อเพิ่มคำถามทีละข้อ",
+      "วิธีใช้งาน: แต่ละคำถามเลือกประเภทได้จากเมนูด้านบน (Choice, Text, Rating, Date เป็นต้น) พิมพ์ข้อความคำถาม แล้วตั้งค่าว่าคำถามนี้ <code>Required</code> (บังคับตอบ) หรือไม่ เมื่อครบทุกคำถามแล้วกดปุ่ม <code>Preview</code> มุมขวาบนเพื่อดูตัวอย่างฟอร์มก่อนแจกจ่ายจริง",
+      "เคล็ดลับ: กดปุ่ม <code>Share</code> เมื่อพร้อมแจกจ่ายฟอร์ม จะได้ลิงก์สำหรับส่งให้ผู้ตอบ สามารถกลับมาแก้ไขคำถามภายหลังได้เสมอแม้จะแชร์ลิงก์ไปแล้ว การเปลี่ยนแปลงจะอัปเดตทันทีที่ลิงก์เดิม"
+    ],
+    link: ""
+  },
+  {
+    key: "question-types",
+    title: "ประเภทคำถามที่ใช้ได้",
+    icon: "❓",
+    flow: [
+      { icon: "📋", label: "เลือกประเภทคำถาม" },
+      { icon: "✍️", label: "ตั้งค่ารายละเอียด" },
+      { icon: "✅", label: "ได้คำถามที่ตรงความต้องการ" }
+    ],
+    video: "https://www.youtube.com/embed/klYo6jr55UU",
+    videoTitle: "Basic Microsoft Form - 101 สร้าง Form ตอบคำถามพร้อมให้อัพโหลดไฟล์ง่ายๆ",
+    videoAuthor: "DuckyEngineer",
+    text: [
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Microsoft Forms รองรับคำถามหลายประเภท ได้แก่ <code>Choice</code> (ตัวเลือกให้เลือก 1 หรือหลายข้อ), <code>Text</code> (พิมพ์คำตอบสั้น/ยาว), <code>Rating</code> (ให้คะแนนเป็นดาวหรือตัวเลข), <code>Date</code> (เลือกวันที่), <code>Ranking</code> (จัดอันดับตัวเลือก), และ <code>Likert</code> (ให้คะแนนความเห็นด้วยหลายหัวข้อพร้อมกัน)",
+      "วิธีใช้งาน: กดปุ่ม <code>+ Add new</code> แล้วเลือกประเภทคำถามจากแถบเมนูด้านบนก่อนพิมพ์คำถาม แต่ละประเภทจะมีตัวเลือกการตั้งค่าที่ต่างกัน เช่น Choice ต้องกำหนดตัวเลือกคำตอบ ส่วน Rating ต้องกำหนดจำนวนระดับคะแนน (เช่น 1-5 หรือ 1-10)",
+      "เคล็ดลับ: กดไอคอนจุดสามจุด (...) ท้ายคำถามแต่ละข้อ จะเห็นตัวเลือก <code>Copy</code> (คัดลอกคำถาม) ซึ่งมีประโยชน์มากเมื่อต้องสร้างคำถามคล้ายกันหลายข้อ แทนที่จะตั้งค่าใหม่ทุกครั้ง"
+    ],
+    link: ""
+  },
+  {
+    key: "dropdown-choice",
+    title: "การตั้งค่าคำถามแบบ Choice/Dropdown",
+    icon: "🔽",
+    flow: [
+      { icon: "📋", label: "คำถามแบบ Choice" },
+      { icon: "🔽", label: "สลับเป็น Dropdown" },
+      { icon: "📱", label: "ตอบง่ายขึ้นบนจอเล็ก" }
+    ],
+    video: "https://www.youtube.com/embed/znxmd2m1VJQ",
+    videoTitle: "Microsoft Forms - Change choice field to dropdown",
+    videoAuthor: "WeTechCareOfYou",
+    text: [
+      "คำถามประเภท <strong>Choice</strong> แสดงผลเป็นปุ่มตัวเลือก (radio button) ตามค่าเริ่มต้น แต่เมื่อมีตัวเลือกจำนวนมาก (มากกว่า 4-5 ข้อ) ควรเปลี่ยนเป็นรูปแบบ <strong>Dropdown</strong> แทน เพื่อให้หน้าฟอร์มไม่ยาวเกินไปและดูเป็นระเบียบมากขึ้น โดยเฉพาะเมื่อผู้ตอบใช้งานผ่านมือถือ",
+      "วิธีใช้งาน: ในคำถามประเภท Choice กดไอคอนจุดสามจุด (...) ท้ายคำถาม แล้วเลือก <code>Settings</code> จากนั้นเปิดตัวเลือก <code>Dropdown</code> ระบบจะเปลี่ยนการแสดงผลตัวเลือกทั้งหมดเป็นเมนูแบบเลือกลงทันที",
+      "เคล็ดลับ: หากตัวเลือกมีไม่เกิน 4 ข้อ แนะนำให้ใช้รูปแบบปุ่มตัวเลือกปกติต่อไป เพราะผู้ตอบเห็นตัวเลือกทั้งหมดพร้อมกันโดยไม่ต้องกดเปิดเมนู ทำให้ตอบเร็วกว่า Dropdown เหมาะกับกรณีตัวเลือกเยอะเท่านั้น"
+    ],
+    link: ""
+  },
+  {
+    key: "security-settings",
+    title: "การตั้งค่าความปลอดภัย (ใครตอบได้บ้าง)",
+    icon: "🔒",
+    flow: [
+      { icon: "⚙️", label: "เปิด Settings ฟอร์ม" },
+      { icon: "🔒", label: "เลือกใครตอบได้บ้าง" },
+      { icon: "✅", label: "ควบคุมการเข้าถึง" }
+    ],
+    video: "https://www.youtube.com/embed/iYgGaPkbFh8",
+    videoTitle: "การตั้งค่า Microsoft Forms เพื่อใช้ในการสอบออนไลน์",
+    videoAuthor: "Supoet Srinutapong",
+    text: [
+      "การตั้งค่าความปลอดภัยของฟอร์มทำได้ที่ไอคอนจุดสามจุด (...) มุมขวาบนของหน้าสร้างฟอร์ม แล้วเลือก <code>Settings</code> ส่วนสำคัญที่สุดคือ <code>Who can fill out this form</code> ซึ่งมีตัวเลือกหลักคือ <code>Anyone can respond</code> (ใครก็ตอบได้แม้ไม่มีบัญชีองค์กร) และ <code>Only people in my organization can respond</code> (จำกัดเฉพาะคนในองค์กรเท่านั้น)",
+      "วิธีใช้งาน: หากต้องการเก็บข้อมูลเฉพาะพนักงานในบริษัท ให้เลือก <code>Only people in my organization</code> และเปิด <code>Record name</code> ด้วย เพื่อให้ระบบบันทึกชื่อ-อีเมลผู้ตอบจากบัญชีที่ล็อกอินอยู่โดยอัตโนมัติ ไม่ต้องให้ผู้ตอบพิมพ์ชื่ออีเมลเอง",
+      "ข้อควรระวัง: หากฟอร์มเก็บข้อมูลที่มีความอ่อนไหว (เช่น ข้อมูลสุขภาพ, เงินเดือน) ควรตั้งค่าจำกัดเฉพาะคนในองค์กรเสมอ และพิจารณาเปิด <code>One response per person</code> เพื่อป้องกันการตอบซ้ำจากคนเดียวกันหลายครั้ง"
+    ],
+    link: ""
+  },
+  {
+    key: "share-form",
+    title: "การแชร์ฟอร์ม (ลิงก์, QR Code, Embed)",
+    icon: "📤",
+    flow: [
+      { icon: "🔗", label: "กด Share" },
+      { icon: "📱", label: "เลือกลิงก์หรือ QR Code" },
+      { icon: "📨", label: "ส่งให้ผู้ตอบ" }
+    ],
+    video: "https://www.youtube.com/embed/Q-frQJjAElI",
+    videoTitle: "วิธีแชร์ฟอร์มใน Microsoft Forms",
+    videoAuthor: "Fusion Solution",
+    text: [
+      "กดปุ่ม <code>Share</code> มุมขวาบนของหน้าสร้างฟอร์ม จะเห็นช่องทางแจกจ่ายฟอร์มหลายแบบ ได้แก่ <strong>ลิงก์ (Link)</strong> คัดลอกไปวางในอีเมล/แชท, <strong>QR Code</strong> สำหรับให้สแกนจากมือถือ (เหมาะกับงานอีเวนต์หรือติดป้ายหน้างาน), และ <strong>Embed</strong> ฝังฟอร์มลงในเว็บเพจ/SharePoint โดยตรง",
+      "วิธีใช้งาน: หากต้องการลิงก์ที่สั้นและจำง่ายขึ้น กดตัวเลือก <code>Shorten URL</code> ในหน้าต่างแชร์ ระบบจะย่อลิงก์ยาวให้สั้นลงอัตโนมัติ เหมาะสำหรับพิมพ์ลงเอกสารหรือประกาศที่ต้องพิมพ์ URL ด้วยมือ",
+      "เคล็ดลับ: ปุ่ม <code>Generate QR code</code> สร้าง QR Code ให้ดาวน์โหลดเป็นรูปภาพได้ทันที นำไปติดในโปสเตอร์ หรือแสดงบนสไลด์นำเสนอ ให้ผู้เข้าร่วมสแกนตอบแบบสอบถามได้ทันทีโดยไม่ต้องพิมพ์ลิงก์เอง"
+    ],
+    link: ""
+  },
+  {
+    key: "theme-customization",
+    title: "การปรับแต่งธีมและหน้าตาฟอร์ม",
+    icon: "🎨",
+    flow: [
+      { icon: "🎨", label: "เลือกธีม/สี" },
+      { icon: "🖼️", label: "ใส่รูปพื้นหลัง" },
+      { icon: "➕", label: "จัดกลุ่มคำถามด้วย Section" }
+    ],
+    video: "https://www.youtube.com/embed/BnyDlJSE_2g",
+    videoTitle: "Microsoft Forms เพิ่มฟีเจอร์การเพิ่มส่วน (คลิก +Add new เลือก ... แล้ว Section)",
+    videoAuthor: "Supoet Srinutapong",
+    text: [
+      "ปรับแต่งหน้าตาฟอร์มได้จากไอคอนถังสีที่มุมขวาบนของหน้าสร้างฟอร์ม เลือกสีธีมสำเร็จรูป หรืออัปโหลดรูปภาพพื้นหลังของตัวเองเพื่อให้ฟอร์มดูตรงกับแบรนด์องค์กรมากขึ้น เช่น ใส่โลโก้บริษัทเป็นพื้นหลัง",
+      "วิธีใช้งาน: หากฟอร์มมีคำถามจำนวนมาก ให้ใช้ฟีเจอร์ <code>Section</code> (กด +Add new แล้วเลือก Section) เพื่อแบ่งฟอร์มเป็นหลายหน้าตามหมวดหมู่ เช่น หน้าแรกเก็บข้อมูลส่วนตัว หน้าถัดไปเป็นคำถามความพึงพอใจ ช่วยให้ฟอร์มยาวๆ ดูไม่น่ากลัวเกินไป",
+      "เคล็ดลับ: หลีกเลี่ยงการใช้รูปพื้นหลังที่มีสีสันจัดจ้านเกินไปจนกลบตัวอักษรคำถาม ควรเลือกภาพที่มีพื้นที่ว่าง/สีอ่อนเพียงพอให้อ่านข้อความชัดเจน โดยเฉพาะเมื่อดูผ่านมือถือหน้าจอเล็ก"
+    ],
+    link: ""
+  },
+  {
+    key: "rating-likert",
+    title: "Rating Scale และ Likert Scale",
+    icon: "⭐",
+    flow: [
+      { icon: "⭐", label: "เพิ่มคำถาม Rating/Likert" },
+      { icon: "🎚️", label: "ตั้งระดับคะแนน" },
+      { icon: "📊", label: "วิเคราะห์ค่าเฉลี่ยได้ง่าย" }
+    ],
+    video: "https://www.youtube.com/embed/Qkw85mYthXY",
+    videoTitle: "สาธิตรูปแบบคำถามใหม่ใน Microsoft Forms ในรูปแบบ Likert Scale",
+    videoAuthor: "Supoet Srinutapong",
+    text: [
+      "คำถามประเภท <strong>Rating</strong> ใช้ให้ผู้ตอบให้คะแนนเป็นดาวหรือตัวเลข (เช่น 1-5) เหมาะกับคำถามเดี่ยวๆ เช่น 'พึงพอใจกับบริการมากน้อยแค่ไหน' ส่วน <strong>Likert scale</strong> ใช้เมื่อต้องการถามหลายหัวข้อพร้อมกันด้วยมาตรวัดเดียวกัน เช่น ถามความเห็นด้วย 5 ข้อ โดยแต่ละข้อให้เลือกระดับ 'ไม่เห็นด้วยอย่างยิ่ง' ถึง 'เห็นด้วยอย่างยิ่ง'",
+      "วิธีใช้งาน: กด <code>+ Add new</code> แล้วเลือกประเภท <code>Likert</code> จากนั้นพิมพ์หัวข้อคำถามย่อยแต่ละแถว (Statement) และตั้งค่าระดับคะแนนในคอลัมน์ (เช่น 5 ระดับ) ระบบจะแสดงเป็นตารางให้เลือกตอบทีละแถวได้สะดวก",
+      "เคล็ดลับ: ใช้ Likert scale เมื่อต้องการเปรียบเทียบความเห็นในหลายประเด็นภายใต้มาตรวัดเดียวกัน จะช่วยให้วิเคราะห์และเปรียบเทียบผลลัพธ์ระหว่างหัวข้อต่างๆ ได้ง่ายกว่าการสร้างคำถาม Rating แยกทีละข้อ"
+    ],
+    link: ""
+  },
+  {
+    key: "mobile-app",
+    title: "การใช้งานบนมือถือ",
+    icon: "📱",
+    flow: [
+      { icon: "📲", label: "เปิดแอป Microsoft Forms/365" },
+      { icon: "✍️", label: "สร้าง/แก้ไขฟอร์มบนมือถือ" },
+      { icon: "📊", label: "ดูผลตอบแบบเรียลไทม์" }
+    ],
+    video: "https://www.youtube.com/embed/V5r3BwtCc6c",
+    videoTitle: "EP.93 - Microsoft 365 Mobile App: ทุกการทำงานในแอปเดียวจบ",
+    videoAuthor: "TheCITIZEN",
+    text: [
+      "Microsoft Forms ใช้งานผ่านเบราว์เซอร์บนมือถือได้ทันทีโดยไม่ต้องติดตั้งแอปแยก เพียงเปิด <code>forms.office.com</code> บนมือถือแล้วล็อกอินด้วยบัญชีเดิม หรือจะใช้งานผ่านแอป <strong>Microsoft 365 (Office)</strong> ที่รวมทุกเครื่องมือไว้ในที่เดียวก็ได้เช่นกัน",
+      "วิธีใช้งาน: บนแอป Microsoft 365 ค้นหาคำว่า 'Forms' ในช่องค้นหา หรือกดไอคอนแอปที่ปักหมุดไว้ จะเข้าสู่หน้าฟอร์มของตัวเองได้ทันที สามารถสร้างฟอร์มใหม่ ดูผลตอบ หรือแชร์ลิงก์ได้ครบเหมือนบนคอมพิวเตอร์",
+      "เคล็ดลับ: การตอบฟอร์มผ่านมือถือเป็นวิธีที่ผู้ตอบส่วนใหญ่นิยมใช้จริง (โดยเฉพาะเมื่อแชร์ผ่าน QR Code) จึงควรทดลองเปิดดูฟอร์มของตัวเองผ่านมือถือก่อนแจกจ่ายจริงเสมอ เพื่อตรวจสอบว่าคำถามและตัวเลือกแสดงผลเรียบร้อยดี"
+    ],
+    link: ""
+  },
+  {
+    key: "responses-summary",
+    title: "การดูผลตอบแบบสำรวจ (Responses/Summary)",
+    icon: "📈",
+    flow: [
+      { icon: "👀", label: "เปิดแท็บ Responses" },
+      { icon: "📊", label: "ดูสรุปอัตโนมัติ" },
+      { icon: "🔍", label: "ดูคำตอบรายบุคคล" }
+    ],
+    video: "https://www.youtube.com/embed/nwhTMmxXSeQ",
+    videoTitle: "Microsoft Forms | The Response Summary",
+    videoAuthor: "Collaboration Coach",
+    text: [
+      "หลังมีคนตอบฟอร์มแล้ว ไปที่แท็บ <code>Responses</code> ด้านบนของหน้าฟอร์ม จะเห็นสรุปผลแบบกราฟอัตโนมัติทันที (Response Summary) เช่น กราฟวงกลมแสดงสัดส่วนคำตอบของคำถามแบบ Choice หรือค่าเฉลี่ยของคำถามแบบ Rating โดยไม่ต้องคำนวณเอง",
+      "วิธีใช้งาน: เลื่อนลงมาดูได้ทีละคำถาม หรือกด <code>View results</code> เพื่อดูคำตอบเป็นรายบุคคลทีละคน มีประโยชน์เมื่อต้องการตรวจสอบคำตอบแบบข้อความยาว (Text) ที่กราฟสรุปไม่สามารถแสดงได้ครบ",
+      "เคล็ดลับ: กดไอคอนจุดสามจุด (...) ในแท็บ Responses แล้วเลือก <code>Create a summary link</code> เพื่อสร้างลิงก์แชร์หน้าสรุปผลให้คนอื่นดูได้โดยไม่ต้องมีสิทธิ์เข้าถึงฟอร์มต้นฉบับ เหมาะกับการแชร์ผลสำรวจให้ทีมหรือผู้บริหารดูโดยไม่ต้องให้สิทธิ์แก้ไข"
+    ],
+    link: ""
+  },
+  {
+    key: "export-excel",
+    title: "การส่งออกข้อมูลไป Excel",
+    icon: "📊",
+    flow: [
+      { icon: "📥", label: "เปิดแท็บ Responses" },
+      { icon: "📗", label: "กด Open in Excel" },
+      { icon: "💾", label: "ได้ไฟล์ Excel พร้อมวิเคราะห์" }
+    ],
+    video: "https://www.youtube.com/embed/_H9nH6qITwI",
+    videoTitle: "Export your Microsoft Form results to an Excel Spreadsheet",
+    videoAuthor: "Alice Keeler",
+    text: [
+      "หากต้องการนำข้อมูลคำตอบไปวิเคราะห์ต่อ เช่น ทำ PivotTable หรือกรองข้อมูลแบบละเอียด สามารถส่งออกเป็นไฟล์ Excel ได้จากแท็บ <code>Responses</code> กดปุ่ม <code>Open in Excel</code> ระบบจะดาวน์โหลดไฟล์ .xlsx ที่มีคำตอบทั้งหมดพร้อมหัวคอลัมน์ตรงกับคำถามแต่ละข้อ",
+      "วิธีใช้งาน: ไฟล์ Excel ที่ได้จะมี 1 แถวต่อผู้ตอบ 1 คน และ 1 คอลัมน์ต่อคำถาม 1 ข้อ พร้อมคอลัมน์ระบบ เช่น เวลาที่เริ่มตอบ (Start time) และเวลาที่ตอบเสร็จ (Completion time) ทำให้นำไปวิเคราะห์แนวโน้มเวลาการตอบได้ด้วย",
+      "เคล็ดลับ: หากต้องการให้ข้อมูลอัปเดตเข้า Excel อัตโนมัติทุกครั้งที่มีคนตอบใหม่ (ไม่ต้องกด Open in Excel ซ้ำทุกครั้ง) ให้ใช้ Power Automate เชื่อมต่อแทน (ดูรายละเอียดในหัวข้อ 'เชื่อมต่อกับ Power Automate' ของคู่มือนี้)"
+    ],
+    link: ""
+  },
+  {
+    key: "quiz-creation",
+    title: "การสร้างฟอร์มแบบ Quiz",
+    icon: "📝",
+    flow: [
+      { icon: "📝", label: "เลือกโหมด Quiz" },
+      { icon: "✅", label: "ตั้งเฉลยและคะแนน" },
+      { icon: "🎯", label: "ให้คะแนนอัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/WN--SdLxz0E",
+    videoTitle: "Quiz in Forms 101 การสร้างควิซ / แบบทดสอบ ด้วย Microsoft Forms",
+    videoAuthor: "Talk2Geek",
+    text: [
+      "โหมด <strong>Quiz</strong> ใน Microsoft Forms ใช้สร้างแบบทดสอบที่ตรวจให้คะแนนอัตโนมัติได้ เลือกโหมดนี้ได้ตั้งแต่ตอนกด <code>+ New Form</code> แล้วเลือก <code>New Quiz</code> แทน <code>New Form</code> ปกติ",
+      "วิธีใช้งาน: ในแต่ละคำถามแบบ Choice ให้กด <code>Answer options</code> เพื่อกำหนดว่าตัวเลือกใดเป็นคำตอบที่ถูกต้อง และกำหนดคะแนน (Points) ที่จะได้หากตอบถูก ระบบจะรวมคะแนนและแสดงผลให้ผู้ตอบเห็นทันทีหลังส่งคำตอบ (ถ้าเปิดการตั้งค่าให้แสดง)",
+      "เคล็ดลับ: เปิดตัวเลือก <code>Shuffle questions</code> และ <code>Shuffle answer options</code> ใน Settings เพื่อสลับลำดับคำถามและตัวเลือกคำตอบในแต่ละคนที่เข้าทำ ช่วยลดการลอกคำตอบกันเมื่อใช้สอบพร้อมกันหลายคน"
+    ],
+    link: ""
+  },
+  {
+    key: "branching-logic",
+    title: "Branching (แยกเส้นทางคำถาม)",
+    icon: "🔀",
+    flow: [
+      { icon: "❓", label: "ตอบคำถามข้อหนึ่ง" },
+      { icon: "🔀", label: "Branching ตรวจคำตอบ" },
+      { icon: "➡️", label: "พาไปคำถามที่เกี่ยวข้อง" }
+    ],
+    video: "https://www.youtube.com/embed/GQDwV_m2y68",
+    videoTitle: "HOW TO GUIDE: Branching in Microsoft Forms",
+    videoAuthor: "Cloud Design Box",
+    text: [
+      "<strong>Branching</strong> (แยกเส้นทางคำถาม) ใช้กำหนดว่าหลังตอบคำถามข้อหนึ่งแล้ว ผู้ตอบจะถูกพาไปยังคำถามข้อใดต่อไป โดยขึ้นอยู่กับคำตอบที่เลือก เช่น หากตอบ 'เคยใช้บริการ' ให้ถามคำถามชุด A ต่อ แต่ถ้าตอบ 'ไม่เคยใช้บริการ' ให้ข้ามไปคำถามชุด B แทน ช่วยให้ฟอร์มไม่ถามคำถามที่ไม่เกี่ยวข้องกับผู้ตอบแต่ละคน",
+      "วิธีใช้งาน: ใช้งานได้กับคำถามประเภท Choice เท่านั้น กดไอคอนจุดสามจุด (...) ท้ายคำถามที่ต้องการ แล้วเลือก <code>Add branching</code> จากนั้นกำหนดว่าแต่ละตัวเลือกคำตอบจะพาไปยังคำถามข้อใดต่อไป หรือจะข้ามไปจบฟอร์มเลยก็ได้",
+      "ข้อควรระวัง: ฟอร์มที่ใช้ Branching จะไม่สามารถสลับลำดับ (Shuffle) คำถามได้อีกต่อไป เพราะลำดับคำถามต้องคงที่เพื่อให้เส้นทางแยกทำงานถูกต้อง หากเปิด Shuffle ไว้ ตัวเลือก Branching จะถูกปิดใช้งานโดยอัตโนมัติ"
+    ],
+    link: ""
+  },
+  {
+    key: "collaborate",
+    title: "การใช้ฟอร์มร่วมกัน (Collaborate)",
+    icon: "🤝",
+    flow: [
+      { icon: "👥", label: "เพิ่มเจ้าของร่วม" },
+      { icon: "✍️", label: "แก้ไขฟอร์มพร้อมกัน" },
+      { icon: "📋", label: "ดูผลตอบร่วมกันได้" }
+    ],
+    video: "https://www.youtube.com/embed/xKvyCQQcLPM",
+    videoTitle: "การคัดลอกฟอร์มใน Microsoft Form",
+    videoAuthor: "iT For Life by Aj Nu",
+    text: [
+      "Microsoft Forms รองรับการทำงานร่วมกันหลายคนในฟอร์มเดียว ผ่านฟีเจอร์ <strong>Group forms</strong> หรือการเพิ่มเจ้าของร่วม (Co-author) ทำให้ทีมช่วยกันออกแบบคำถามและดูผลตอบพร้อมกันได้ โดยไม่ต้องส่งไฟล์ไปมา",
+      "วิธีใช้งาน: กดไอคอนจุดสามจุด (...) มุมขวาบนของหน้าสร้างฟอร์ม เลือก <code>Collaborate or duplicate</code> แล้วกด <code>Invite people to edit</code> เพื่อคัดลอกลิงก์เชิญเพื่อนร่วมทีมมาแก้ไขฟอร์มร่วมกันแบบเรียลไทม์",
+      "เคล็ดลับ: หากต้องการนำฟอร์มเดิมไปปรับใช้กับงานใหม่โดยไม่แก้ไขฟอร์มต้นฉบับ ให้ใช้ปุ่ม <code>Duplicate it</code> ในเมนูเดียวกัน เพื่อคัดลอกฟอร์มทั้งหมด (คำถาม, การตั้งค่า) เป็นฟอร์มใหม่แยกต่างหากได้ทันที"
+    ],
+    link: ""
+  },
+  {
+    key: "excel-sharepoint-integration",
+    title: "เชื่อมต่อกับ Excel Online/SharePoint",
+    icon: "📗",
+    flow: [
+      { icon: "📗", label: "เปิด Excel Online" },
+      { icon: "➕", label: "แทรกฟอร์มจากเมนู Insert" },
+      { icon: "🔄", label: "คำตอบไหลเข้าตารางอัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/G8lgxTlwSy8",
+    videoTitle: "Create Microsoft Forms Through Excel Online",
+    videoAuthor: "HelpingAll",
+    text: [
+      "สามารถสร้าง Microsoft Forms ได้โดยตรงจากภายใน <strong>Excel Online</strong> ผ่านเมนู <code>Insert &gt; Forms &gt; New Form</code> วิธีนี้ทำให้คำตอบทุกข้อไหลเข้ามาบันทึกในแท็บ (Sheet) ของไฟล์ Excel นั้นโดยอัตโนมัติทันทีที่มีคนตอบ ไม่ต้องกด Export เอง",
+      "วิธีใช้งาน: หลังสร้างฟอร์มจาก Excel Online แล้ว คำถามและคำตอบจะผูกกับไฟล์ Excel นั้นตลอดไป การแก้ไขคำถามยังทำได้ปกติผ่านหน้า Forms แต่ผลลัพธ์จะอัปเดตเข้าไฟล์ Excel เดิมเสมอ เหมาะกับการเก็บข้อมูลระยะยาวที่ต้องวิเคราะห์ต่อบ่อยๆ",
+      "เคล็ดลับ: หากไฟล์ Excel นั้นเก็บอยู่บน SharePoint ที่ทีมทั้งแผนกเข้าถึงได้ ทุกคนที่มีสิทธิ์เปิดไฟล์จะเห็นคำตอบใหม่แบบเรียลไทม์โดยไม่ต้องขอไฟล์ต่อกันเอง เหมาะกับการเก็บข้อมูลที่ต้องให้หลายฝ่ายติดตามพร้อมกัน"
+    ],
+    link: ""
+  },
+  {
+    key: "power-automate-integration",
+    title: "เชื่อมต่อกับ Power Automate",
+    icon: "⚡",
+    flow: [
+      { icon: "📨", label: "มีคนส่งฟอร์ม" },
+      { icon: "⚡", label: "Power Automate ทำงานต่อ" },
+      { icon: "📧", label: "แจ้งเตือน/บันทึกอัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/iEm0M_2EP_Y",
+    videoTitle: "Microsoft Power Automate Tutorial - Microsoft Forms Connector",
+    videoAuthor: "Jon Levesque",
+    text: [
+      "<strong>Microsoft Forms connector</strong> ใน Power Automate ใช้ trigger <code>When a new response is submitted</code> เพื่อเริ่มระบบอัตโนมัติทันทีที่มีคนตอบฟอร์ม เช่น ส่งอีเมลแจ้งเตือนทีมงาน, บันทึกข้อมูลลง SharePoint List, หรือสร้างเอกสารต่อจากคำตอบที่ได้รับ",
+      "วิธีใช้งาน: หลัง trigger แล้ว เพิ่ม action <code>Get response details</code> เพื่อดึงคำตอบทั้งหมดของครั้งนั้นออกมาเป็น Dynamic content ใช้งานต่อใน Action อื่นๆ เช่น ส่งอีเมลสรุปคำตอบ หรือส่งเข้าเงื่อนไข Condition ตามค่าที่ตอบมา",
+      "เคล็ดลับ: ดูรายละเอียดการสร้าง Trigger, Condition และ Action แบบเต็มรูปแบบได้ในคู่มือ 'การใช้งาน Power Automate' แยกต่างหาก ซึ่งครอบคลุมการเชื่อมต่อ Forms เข้ากับระบบอัตโนมัติอื่นๆ ขององค์กรอย่างละเอียด"
+    ],
+    link: ""
+  },
+  {
+    key: "forms-pro-customer-voice",
+    title: "Microsoft Forms Pro / Customer Voice",
+    icon: "🔄",
+    flow: [
+      { icon: "📝", label: "Microsoft Forms (ฟรี)" },
+      { icon: "🔄", label: "Forms Pro (เดิม)" },
+      { icon: "📊", label: "Dynamics 365 Customer Voice" }
+    ],
+    video: "https://www.youtube.com/embed/KFItjFL0V1Q",
+    videoTitle: "Microsoft Forms Vs Customer Voice",
+    videoAuthor: "Microsoft Dynamics 365 Community",
+    text: [
+      "หลายคนอาจเคยได้ยินชื่อ <strong>Forms Pro</strong> ซึ่งเป็นเวอร์ชันขั้นสูงของ Forms ในอดีต แต่ปัจจุบัน Microsoft ได้เปลี่ยนชื่อและย้ายฟีเจอร์ทั้งหมดไปเป็น <strong>Dynamics 365 Customer Voice</strong> แล้วตั้งแต่ปี 2020 โดย Customer Voice เน้นการสำรวจความคิดเห็นลูกค้าระดับองค์กรที่มีผู้ตอบจำนวนมากและต้องการรายงานเชิงลึก",
+      "หมายเหตุ: ความแตกต่างหลักคือ Microsoft Forms (ฟรี มากับ Microsoft 365) เหมาะกับแบบสำรวจ/แบบทดสอบทั่วไปภายในองค์กร ส่วน Dynamics 365 Customer Voice (ต้องมีสิทธิ์ใช้งานแยกต่างหาก) เหมาะกับการสำรวจลูกค้าภายนอกที่ต้องการฟีเจอร์ขั้นสูง เช่น การวิเคราะห์ความรู้สึก (sentiment analysis) และการส่งแบบสำรวจตามช่วงเวลาที่กำหนด",
+      "เคล็ดลับ: สำหรับการใช้งานภายในองค์กรทั่วไป เช่น แบบสำรวจความพึงพอใจพนักงานหรือแบบทดสอบอบรม Microsoft Forms ที่มีอยู่แล้วเพียงพอสำหรับเกือบทุกกรณี ไม่จำเป็นต้องขอสิทธิ์ Customer Voice เพิ่มเติมเว้นแต่จะทำแบบสำรวจลูกค้าระดับองค์กรจริงจัง"
+    ],
+    link: ""
+  },
+  {
+    key: "troubleshooting",
+    title: "ปัญหาที่พบบ่อยและการแก้ไข",
+    icon: "🧯",
+    flow: [
+      { icon: "⚠️", label: "พบปัญหาการใช้งาน" },
+      { icon: "🔍", label: "ตรวจสอบสาเหตุ" },
+      { icon: "✅", label: "แก้ไขและใช้งานต่อได้" }
+    ],
+    video: "https://www.youtube.com/embed/3yQ7KhXDdhE",
+    videoTitle: "ทำข้อสอบด้วย ms forms พร้อมเทคนิค",
+    videoAuthor: "หมากดิจิทัล - Mark Digital",
+    text: [
+      "ปัญหาที่พบบ่อยที่สุดคือผู้ตอบแจ้งว่า <strong>'เปิดลิงก์ไม่ได้'</strong> ซึ่งส่วนใหญ่เกิดจากตั้งค่า <code>Who can fill out this form</code> เป็น 'Only people in my organization' ทำให้คนนอกองค์กรเปิดไม่ได้ ควรตรวจสอบการตั้งค่านี้ก่อนเสมอเมื่อได้รับแจ้งปัญหานี้",
+      "วิธีใช้งาน: หากคำตอบบางส่วนหายไปหรือไม่ครบ ให้ตรวจสอบว่าคำถามนั้นถูกลบหรือแก้ไขหลังจากมีคนตอบไปแล้วหรือไม่ (การแก้ไขคำถามหลังมีคำตอบเข้ามาแล้ว อาจทำให้ข้อมูลเก่ากับใหม่ไม่ตรงคอลัมน์กันในรายงานสรุป) แนะนำให้ล็อกคำถามให้นิ่งก่อนเริ่มแจกจ่ายฟอร์มจริง",
+      "เคล็ดลับ: หากฟอร์มมีผู้ตอบพร้อมกันจำนวนมาก (เช่น งานอีเวนต์ใหญ่) ควรทดสอบเปิดฟอร์มด้วยบัญชีอื่นล่วงหน้าเพื่อยืนยันว่าฟอร์มเข้าถึงได้จริงและไม่มีข้อจำกัดด้านสิทธิ์ที่ลืมตั้งค่าไว้"
+    ],
+    link: ""
+  },
+  {
+    key: "best-practices",
+    title: "แนวทางออกแบบฟอร์มที่ดี",
+    icon: "🌟",
+    flow: [
+      { icon: "✍️", label: "เขียนคำถามให้ชัดเจน" },
+      { icon: "📏", label: "ฟอร์มสั้น กระชับ" },
+      { icon: "📈", label: "อัตราตอบกลับสูงขึ้น" }
+    ],
+    video: "https://www.youtube.com/embed/wtQbMdqXjxQ",
+    videoTitle: "Top 25 Microsoft Forms tips and tricks",
+    videoAuthor: "Mike Tholfsen",
+    text: [
+      "แนวทางที่ดี: ตั้งคำถามให้สั้น ชัดเจน และถามทีละประเด็นเดียวต่อคำถาม หลีกเลี่ยงคำถามที่ถามหลายเรื่องพร้อมกันในข้อเดียว (เช่น 'พอใจกับราคาและบริการหรือไม่' ควรแยกเป็น 2 คำถาม) เพราะทำให้วิเคราะห์ผลลัพธ์ภายหลังยากขึ้น",
+      "แนวทางที่ดี: จำกัดจำนวนคำถามให้พอเหมาะ (ควรตอบเสร็จภายใน 3-5 นาที) และจัดคำถามที่ <code>Required</code> เฉพาะข้อที่จำเป็นจริงๆ เท่านั้น ฟอร์มที่ยาวเกินไปหรือบังคับตอบทุกข้อมักทำให้อัตราการตอบกลับ (response rate) ลดลง",
+      "เคล็ดลับ: ใส่คำอธิบายสั้นๆ ใต้ชื่อฟอร์มบอกวัตถุประสงค์และเวลาที่ใช้โดยประมาณ (เช่น 'แบบสำรวจนี้ใช้เวลาประมาณ 2 นาที') จะช่วยให้ผู้ตอบตัดสินใจกดเข้าตอบง่ายขึ้น และทดสอบฟอร์มด้วยตัวเองก่อนแจกจ่ายจริงเสมอเพื่อจับจุดที่อาจสร้างความสับสน"
+    ],
+    link: ""
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = '<div class="text-block">' + paraHtml.join('') + '</div>';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำอธิบาย</div>' + textHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
