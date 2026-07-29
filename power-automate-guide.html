@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน Power Automate (ภาษาไทย) - กลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #0f7a6c;
+    --accent-2: #0b5c51;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #e6f5f2;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #4fd6c1;
+      --accent-2: #38b3a0;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #163330;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+  .topic-list { flex: 0 0 260px; display: flex; flex-direction: column; gap: 6px; }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title { font-weight: 700; font-size: 0.82rem; color: var(--accent-2); margin-bottom: 8px; }
+  .key-points ul { margin: 0; padding-left: 20px; }
+  .key-points li { font-size: 0.88rem; line-height: 1.6; color: var(--text); margin-bottom: 4px; }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--sub); font-size: 0.85rem; margin-bottom: 20px; overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .text-block { font-size: 0.92rem; line-height: 1.75; color: var(--text); }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.86em;
+  }
+
+  .flow {
+    display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin: 4px 0 16px; padding: 16px 12px;
+    border: 1px solid var(--border); border-radius: 12px; background: var(--placeholder-bg);
+  }
+  .flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 104px; text-align: center; }
+  .flow-icon {
+    width: 46px; height: 46px; border-radius: 12px; background: var(--pill-bg);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+  .flow-label { font-size: 0.76rem; color: var(--sub); font-weight: 600; line-height: 1.3; }
+  .flow-arrow { font-size: 1.3rem; color: var(--accent); flex-shrink: 0; }
+
+  .callout {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 10px; margin: 0 0 12px; font-size: 0.92rem; line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⚡ คู่มือการใช้งาน Power Automate (ภาษาไทย)</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — 20 หัวข้อ เรียงจากพื้นฐานไปขั้นสูง พร้อมวิดีโอประกอบ</p>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+const TOPICS = [
+  {
+    key: "overview",
+    title: "Power Automate คืออะไร",
+    icon: "🤖",
+    flow: [
+      { icon: "📋", label: "งานที่ทำซ้ำๆ ทุกวัน" },
+      { icon: "🤖", label: "Power Automate ทำแทน" },
+      { icon: "⏱️", label: "ประหยัดเวลา ลดผิดพลาด" }
+    ],
+    video: "https://www.youtube.com/embed/CWm167pXE5A",
+    text: [
+      "<strong>Power Automate</strong> คือเครื่องมือสร้างระบบทำงานอัตโนมัติ (automation) ในตระกูล Microsoft Power Platform เดียวกับ Power Apps และ Power BI ช่วยให้เชื่อมต่อแอปต่างๆ เข้าด้วยกันและทำงานที่ทำซ้ำๆ ให้อัตโนมัติ โดยไม่ต้องเขียนโค้ดเอง (low-code) เช่น ส่งอีเมลแจ้งเตือนอัตโนมัติ, บันทึกข้อมูลจากฟอร์มลงตาราง, หรือขออนุมัติเอกสารผ่านอีเมล",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Power Automate แบ่งเป็น 2 กลุ่มหลัก คือ <strong>Power Automate Cloud</strong> (ทำงานบนคลาวด์ เชื่อมต่อแอป Microsoft 365 และบริการออนไลน์อื่นๆ) และ <strong>Power Automate Desktop</strong> (ควบคุมโปรแกรมบนเครื่องคอมพิวเตอร์ เหมาะกับงาน RPA ที่ต้องคลิก/พิมพ์ในโปรแกรมเดสก์ท็อป)",
+      "เคล็ดลับ: หากเพิ่งเริ่มต้น แนะนำให้โฟกัสที่ Power Automate Cloud ก่อน เพราะใช้งานง่ายกว่าและครอบคลุมงานส่วนใหญ่ในสำนักงาน เช่น อีเมล, SharePoint, Excel Online ส่วน Desktop ค่อยเรียนรู้เพิ่มเมื่อต้องทำงานกับโปรแกรมที่ไม่มี connector ให้ใช้โดยตรง"
+    ],
+    link: ""
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นใช้งาน Power Automate",
+    icon: "🚀",
+    flow: [
+      { icon: "🔑", label: "เข้าสู่ระบบด้วยบัญชีองค์กร" },
+      { icon: "🖥️", label: "เปิด make.powerautomate.com" },
+      { icon: "🧭", label: "สำรวจหน้าจอหลัก" }
+    ],
+    video: "https://www.youtube.com/embed/40OOfnF040E",
+    text: [
+      "เข้าใช้งาน Power Automate ได้ที่เว็บไซต์ <code>make.powerautomate.com</code> โดยใช้บัญชี Microsoft 365 ขององค์กร (บัญชีอีเมลที่ใช้งานอยู่แล้ว) ส่วนใหญ่แผน Microsoft 365 Business/E3 ขึ้นไปจะมีสิทธิ์ใช้งานพื้นฐานติดมาให้แล้วโดยไม่ต้องซื้อเพิ่ม",
+      "วิธีใช้งาน: หลังล็อกอินเข้ามา จะเห็นเมนูหลักด้านซ้าย ได้แก่ <code>My flows</code> (Flow ที่สร้างไว้), <code>Create</code> (เริ่มสร้าง Flow ใหม่), <code>Templates</code> (แม่แบบสำเร็จรูปให้เลือกใช้) และ <code>Connectors</code> (รายการแอป/บริการที่เชื่อมต่อได้) ลองสำรวจแต่ละเมนูให้คุ้นเคยก่อนเริ่มสร้าง Flow จริง",
+      "เคล็ดลับ: เมนู <code>Templates</code> มีประโยชน์มากสำหรับผู้เริ่มต้น เพราะมีตัวอย่าง Flow สำเร็จรูปหลายร้อยแบบให้เลือกใช้และปรับแต่งต่อ แทนที่จะเริ่มจากหน้าว่างเปล่าทุกครั้ง"
+    ],
+    link: ""
+  },
+  {
+    key: "flow-types",
+    title: "ประเภทของ Flow",
+    icon: "🗂️",
+    flow: [
+      { icon: "⚡", label: "Automated" },
+      { icon: "👆", label: "Instant" },
+      { icon: "⏰", label: "Scheduled" }
+    ],
+    video: "https://www.youtube.com/embed/qqbUush6cY4",
+    text: [
+      "Power Automate Cloud มี Flow หลัก 3 ประเภท: <strong>Automated cloud flow</strong> เริ่มทำงานอัตโนมัติเมื่อมีเหตุการณ์เกิดขึ้น (เช่น มีอีเมลใหม่, มีไฟล์ใหม่), <strong>Instant cloud flow</strong> เริ่มทำงานเมื่อผู้ใช้กดปุ่มเอง (เช่น กดปุ่มในมือถือ), และ <strong>Scheduled cloud flow</strong> เริ่มทำงานตามเวลาที่ตั้งไว้ล่วงหน้า (เช่น ทุกวันจันทร์ 9 โมงเช้า)",
+      "ตัวอย่างการใช้งานจริง: งาน 'สรุปยอดขายส่งอีเมลทุกเช้าวันจันทร์' เหมาะกับ Scheduled flow, งาน 'แจ้งเตือนเมื่อมีคนกรอกฟอร์มร้องเรียน' เหมาะกับ Automated flow, งาน 'ปุ่มขออนุมัติลาที่กดเองตอนต้องการ' เหมาะกับ Instant flow",
+      "เคล็ดลับ: ยังมี Flow ประเภทอื่นอีก เช่น <strong>Business process flow</strong> (กำหนดขั้นตอนงานที่ต้องทำตามลำดับ) และ <strong>Desktop flow</strong> (ควบคุมโปรแกรมบนเครื่อง) แต่สำหรับผู้เริ่มต้น ควรฝึกใช้ 3 ประเภทแรกให้คล่องก่อน"
+    ],
+    link: ""
+  },
+  {
+    key: "first-flow",
+    title: "สร้าง Flow แรกแบบง่ายๆ",
+    icon: "🛠️",
+    flow: [
+      { icon: "➕", label: "เลือก Create" },
+      { icon: "🧩", label: "ตั้ง Trigger + Action" },
+      { icon: "🧪", label: "ทดสอบรัน Flow" }
+    ],
+    video: "https://www.youtube.com/embed/H_bvXEnnKjc",
+    text: [
+      "การสร้าง Flow แรกที่ง่ายที่สุดคือ <strong>Instant cloud flow</strong> ไปที่เมนู <code>Create &gt; Instant cloud flow</code> ตั้งชื่อ Flow แล้วเลือก trigger <code>Manually trigger a flow</code> ซึ่งจะสร้างปุ่มให้กดเริ่มทำงานเองได้ทันที เหมาะสำหรับฝึกทำความเข้าใจโครงสร้างพื้นฐานของ Flow",
+      "วิธีใช้งาน: หลังตั้ง trigger แล้ว กดปุ่ม <code>+ New step</code> เพื่อเพิ่ม action แรก เช่น <code>Send an email (V2)</code> กรอกผู้รับ หัวข้อ และเนื้อหาอีเมล จากนั้นกด <code>Save</code> แล้วกด <code>Test</code> มุมขวาบนเพื่อทดลองรัน Flow ดูผลลัพธ์จริง",
+      "เคล็ดลับ: ทุกครั้งที่รัน Flow (ไม่ว่าจะสำเร็จหรือ error) Power Automate จะบันทึกไว้ใน <code>Run history</code> ให้ดูย้อนหลังได้เสมอ เป็นเครื่องมือสำคัญที่สุดในการแก้ปัญหาเมื่อ Flow ทำงานไม่ตรงตามที่ต้องการ"
+    ],
+    link: ""
+  },
+  {
+    key: "trigger",
+    title: "Trigger คืออะไร",
+    icon: "⚡",
+    flow: [
+      { icon: "📨", label: "เหตุการณ์เกิดขึ้น" },
+      { icon: "⚡", label: "Trigger ตรวจจับได้" },
+      { icon: "🏁", label: "Flow เริ่มทำงาน" }
+    ],
+    video: "https://www.youtube.com/embed/fXLCHbhJa_8",
+    text: [
+      "<strong>Trigger</strong> คือเหตุการณ์ที่ทำให้ Flow เริ่มทำงาน เปรียบเหมือนจุดเริ่มต้นของทุก Flow ทุก Flow ต้องมี Trigger อย่างน้อย 1 ตัวเสมอ และเลือกได้เพียงตัวเดียวต่อหนึ่ง Flow เช่น <code>When a new item is created</code> (SharePoint), <code>When a new email arrives</code> (Outlook), <code>When a new response is submitted</code> (Microsoft Forms)",
+      "วิธีใช้งาน: ตอนเลือก trigger ให้ค้นหาชื่อ connector ที่ต้องการในช่องค้นหา (เช่น พิมพ์ 'SharePoint') แล้วเลือก trigger ที่ตรงกับเหตุการณ์ที่ต้องการดักจับ จากนั้นกรอกรายละเอียด เช่น ชื่อไซต์ SharePoint หรือ List ที่ต้องการเฝ้าดู",
+      "ข้อควรระวัง: Trigger บางตัวมีการหน่วงเวลา (polling interval) เช่น เช็คทุก 1-5 นาที ไม่ได้ทำงานทันทีแบบ real-time เสมอไป หากงานต้องการความเร็วสูงมาก ควรเลือก trigger ประเภท webhook/instant แทน trigger แบบ polling"
+    ],
+    link: ""
+  },
+  {
+    key: "action-basics",
+    title: "Action พื้นฐานที่ควรรู้",
+    icon: "⚙️",
+    flow: [
+      { icon: "🧩", label: "เลือก Action ที่ต้องการ" },
+      { icon: "✍️", label: "กรอกรายละเอียด" },
+      { icon: "➕", label: "ต่อ Action ถัดไปได้เรื่อยๆ" }
+    ],
+    video: "https://www.youtube.com/embed/o6cnfl2425o",
+    text: [
+      "<strong>Action</strong> คือขั้นตอนการทำงานแต่ละขั้นที่เกิดขึ้นหลัง Trigger เช่น ส่งอีเมล, สร้างแถวข้อมูลใหม่, แปลงไฟล์ Word เป็น PDF หนึ่ง Flow สามารถมี Action ต่อกันได้หลายสิบขั้นตอน ทำงานเรียงตามลำดับจากบนลงล่าง",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Action พื้นฐานที่ใช้บ่อยที่สุด ได้แก่ <code>Send an email (V2)</code> ส่งอีเมล, <code>Create item</code>/<code>Get items</code> จัดการข้อมูลใน SharePoint/Excel, <code>Compose</code> ใช้เก็บค่าชั่วคราวหรือคำนวณ, <code>Condition</code> ตรวจสอบเงื่อนไข",
+      "เคล็ดลับ: กดไอคอนดินสอ (Rename) ที่มุมขวาบนของแต่ละ Action เพื่อเปลี่ยนชื่อให้สื่อความหมาย (เช่น เปลี่ยนจาก 'Send an email (V2)' เป็น 'แจ้งเตือน HR') จะช่วยให้อ่าน Flow ที่มีหลาย Action เข้าใจง่ายขึ้นมาก"
+    ],
+    link: ""
+  },
+  {
+    key: "dynamic-content",
+    title: "ตัวแปรและ Dynamic Content",
+    icon: "🔤",
+    flow: [
+      { icon: "📥", label: "ข้อมูลจาก Trigger/Action ก่อนหน้า" },
+      { icon: "🔤", label: "แทรกเป็น Dynamic content" },
+      { icon: "📤", label: "ใช้ต่อใน Action ถัดไป" }
+    ],
+    video: "https://www.youtube.com/embed/qmkrD9Q2xgI",
+    text: [
+      "<strong>Dynamic content</strong> คือข้อมูลที่ได้จาก Trigger หรือ Action ก่อนหน้าที่สามารถนำมาแทรกใช้ใน Action ถัดไปได้ทันที เช่น ชื่อผู้ส่งอีเมล, หัวข้ออีเมล, ชื่อไฟล์ที่อัปโหลด โดยไม่ต้องพิมพ์เอง กดที่ช่องกรอกข้อมูลแล้วเลือกจากรายการ Dynamic content ที่ปรากฏขึ้นมาได้เลย",
+      "วิธีใช้งาน: หากไม่เห็น Dynamic content ที่ต้องการในหน้าต่างที่เปิดมา ให้กดคำว่า <code>See more</code> เพื่อดูตัวเลือกเพิ่มเติมจาก Action ก่อนหน้าทั้งหมด หรือสลับไปแท็บ <code>Expression</code> เพื่อเขียนสูตรดึงค่าที่ซับซ้อนกว่านั้น",
+      "<strong>ตัวแปร (Variable)</strong> ต่างจาก Dynamic content ตรงที่ต้องสร้างขึ้นเองด้วย action <code>Initialize variable</code> ก่อน แล้วใช้ <code>Set variable</code> เพื่อเปลี่ยนค่าในภายหลัง เหมาะกับกรณีที่ต้องเก็บค่าที่เปลี่ยนแปลงระหว่างการทำงานของ Flow เช่น ตัวนับจำนวนรอบ"
+    ],
+    link: ""
+  },
+  {
+    key: "condition",
+    title: "Condition (เงื่อนไข if-else)",
+    icon: "🔀",
+    flow: [
+      { icon: "❓", label: "ตั้งเงื่อนไข" },
+      { icon: "✅", label: "Yes: ทำแบบหนึ่ง" },
+      { icon: "❌", label: "No: ทำอีกแบบหนึ่ง" }
+    ],
+    video: "https://www.youtube.com/embed/YOfprxmZKB8",
+    text: [
+      "action <code>Condition</code> ใช้ตรวจสอบเงื่อนไขแบบ if-else เพื่อแยกเส้นทางการทำงานของ Flow ออกเป็น 2 ทาง คือฝั่ง <strong>Yes</strong> (เงื่อนไขเป็นจริง) และฝั่ง <strong>No</strong> (เงื่อนไขเป็นเท็จ) โดยแต่ละฝั่งใส่ Action ต่อได้อิสระจากกัน",
+      "วิธีใช้งาน: เพิ่ม action <code>Condition</code> แล้วเลือกค่าที่ต้องการเปรียบเทียบ (Dynamic content หรือ Expression) เลือกตัวดำเนินการ เช่น <code>is equal to</code>, <code>is greater than</code>, <code>contains</code> แล้วใส่ค่าที่จะเทียบด้วย เช่น ตรวจว่า 'สถานะ' เท่ากับ 'อนุมัติ' หรือไม่",
+      "เคล็ดลับ: กดปุ่ม <code>+ Add</code> ใต้เงื่อนไขเพื่อเพิ่มเงื่อนไขย่อยแบบ <strong>And</strong> (ต้องจริงทุกข้อ) หรือ <strong>Or</strong> (จริงข้อใดข้อหนึ่งก็พอ) เพื่อสร้างเงื่อนไขที่ซับซ้อนขึ้นได้โดยไม่ต้องซ้อน Condition หลายชั้น"
+    ],
+    link: ""
+  },
+  {
+    key: "switch",
+    title: "Switch (หลายเงื่อนไข)",
+    icon: "🔁",
+    flow: [
+      { icon: "📥", label: "ค่าตัวแปรเดียว" },
+      { icon: "🔀", label: "เทียบกับหลายกรณี" },
+      { icon: "🎯", label: "ทำตาม Case ที่ตรง" }
+    ],
+    video: "https://www.youtube.com/embed/0pSwkOjCmg4",
+    text: [
+      "action <code>Switch</code> ใช้แทน Condition เมื่อต้องเปรียบเทียบค่าตัวแปรเดียวกับหลายความเป็นไปได้พร้อมกัน (เหมือนคำสั่ง switch-case ในภาษาโปรแกรมมิ่งทั่วไป) แทนที่จะต้องซ้อน Condition หลายชั้นให้ยุ่งยาก เช่น แยกการทำงานตาม 'แผนก' ที่มีได้หลายค่า (ขาย, บัญชี, ผลิต, HR)",
+      "วิธีใช้งาน: เพิ่ม action <code>Switch</code> ใส่ค่าที่ต้องการตรวจ (On) แล้วกด <code>+ Add case</code> เพื่อสร้างแต่ละกรณีที่เป็นไปได้ แต่ละ Case ใส่ Action ของตัวเองแยกกันได้ และมี <code>Default</code> ไว้รองรับกรณีที่ไม่ตรงกับ Case ใดเลย",
+      "เคล็ดลับ: ใช้ Switch แทน Condition ที่ซ้อนกันหลายชั้น (nested condition) จะทำให้ Flow อ่านง่ายและดูแลรักษาง่ายกว่ามาก โดยเฉพาะเมื่อมีมากกว่า 3 เงื่อนไขขึ้นไป"
+    ],
+    link: ""
+  },
+  {
+    key: "apply-to-each",
+    title: "Apply to Each (การวนลูป)",
+    icon: "🔄",
+    flow: [
+      { icon: "📃", label: "รายการข้อมูลหลายแถว" },
+      { icon: "🔄", label: "Apply to each วนทีละแถว" },
+      { icon: "✅", label: "ทำ Action ซ้ำจนครบ" }
+    ],
+    video: "https://www.youtube.com/embed/Sio_FSABAu8",
+    text: [
+      "action <code>Apply to each</code> ใช้วนลูปทำงานซ้ำกับข้อมูลที่เป็นรายการ (array/list) ทีละรายการจนครบทุกตัว เช่น ส่งอีเมลแจ้งเตือนพนักงานทุกคนในรายชื่อ, อัปเดตสถานะทุกแถวที่ค้นเจอใน SharePoint Power Automate จะเพิ่ม Apply to each ให้อัตโนมัติเมื่อเลือก Dynamic content ที่เป็นรายการหลายค่า",
+      "วิธีใช้งาน: วาง Action ที่ต้องการทำซ้ำไว้ข้างในกล่อง Apply to each เช่น <code>Send an email</code> ที่อ้างอิงถึงอีเมลของแต่ละแถวในรายการ ระบบจะรันซ้ำ Action นั้นให้เองครบทุกแถวโดยอัตโนมัติ",
+      "ข้อควรระวัง: ยิ่งรายการมีจำนวนแถวมาก Flow ก็ยิ่งใช้เวลานานขึ้นตามจำนวนรอบ หากมีข้อมูลหลักพันแถว ควรพิจารณาใช้ตัวเลือก <code>Concurrency control</code> เพื่อให้ทำงานหลายแถวพร้อมกันแทนการทำทีละแถวตามลำดับ"
+    ],
+    link: ""
+  },
+  {
+    key: "do-until",
+    title: "Do Until (วนซ้ำจนกว่าจะสำเร็จ)",
+    icon: "⏳",
+    flow: [
+      { icon: "🔁", label: "ทำ Action ซ้ำ" },
+      { icon: "❓", label: "เช็คเงื่อนไขทุกรอบ" },
+      { icon: "🛑", label: "หยุดเมื่อเงื่อนไขเป็นจริง" }
+    ],
+    video: "https://www.youtube.com/embed/cj_gZ5zTNSo",
+    text: [
+      "action <code>Do until</code> ใช้ทำงานซ้ำไปเรื่อยๆ จนกว่าเงื่อนไขที่ตั้งไว้จะเป็นจริง ต่างจาก Apply to each ตรงที่ Do until ไม่จำเป็นต้องมีรายการข้อมูลอยู่แล้ว แต่จะวนซ้ำจนกว่าเงื่อนไขจะสำเร็จ เช่น รอจนกว่าสถานะไฟล์จะเปลี่ยนเป็น 'พร้อมใช้งาน'",
+      "ข้อควรระวัง: ค่าเริ่มต้นของ Do until จะหยุดวนอัตโนมัติหลัง 60 รอบ หรือ 1 ชั่วโมง แล้วแต่ว่าอย่างไหนถึงก่อน (ปรับได้ในส่วน <code>Change limits</code>) หากตั้งเงื่อนไขผิดจนไม่มีวันเป็นจริง Flow จะวนจนครบขีดจำกัดแล้วหยุดโดยไม่สำเร็จ ควรตรวจสอบเงื่อนไขให้รอบคอบก่อนใช้งานจริง",
+      "เคล็ดลับ: ใส่ action <code>Delay</code> ไว้ในลูป Do until เสมอ (เช่น รอ 30 วินาทีต่อรอบ) เพื่อไม่ให้ Flow ยิงตรวจสอบถี่เกินไปจนสิ้นเปลืองโควตาการเรียกใช้ (API call) โดยไม่จำเป็น"
+    ],
+    link: ""
+  },
+  {
+    key: "expression-functions",
+    title: "Expression และฟังก์ชันที่ใช้บ่อย",
+    icon: "🧮",
+    flow: [
+      { icon: "✍️", label: "เปิด Expression editor" },
+      { icon: "🧮", label: "เขียนฟังก์ชัน" },
+      { icon: "📤", label: "ได้ค่าที่ต้องการ" }
+    ],
+    video: "https://www.youtube.com/embed/O97IdCbfMQI",
+    text: [
+      "<strong>Expression</strong> คือสูตร/ฟังก์ชันที่ใช้แปลงหรือคำนวณค่าข้อมูลก่อนนำไปใช้ เปิดใช้งานได้จากแท็บ <code>Expression</code> ข้างๆ Dynamic content ทุกครั้งที่กรอกข้อมูลใน Action ฟังก์ชันที่ใช้บ่อยที่สุด ได้แก่ <code>concat()</code> ต่อข้อความ, <code>formatDateTime()</code> จัดรูปแบบวันที่, <code>if()</code> ตรวจเงื่อนไขแบบสั้น, <code>length()</code> นับจำนวนรายการ",
+      "ตัวอย่างการใช้งานจริง: <code>concat('สวัสดีคุณ ', triggerBody()?['FullName'])</code> ใช้สร้างข้อความทักทายที่มีชื่อผู้รับแทรกอยู่ หรือ <code>formatDateTime(utcNow(), 'dd/MM/yyyy')</code> ใช้แสดงวันที่ปัจจุบันในรูปแบบไทยที่อ่านง่าย",
+      "เคล็ดลับ: ไม่จำเป็นต้องจำสูตรทั้งหมด เพราะ Expression editor มีรายการฟังก์ชันแยกหมวดให้เลือก (String functions, Date functions, Logical functions ฯลฯ) พร้อมคำอธิบายการใช้งานในตัว กดเลือกแล้วเติมค่าตามช่องว่างได้เลย"
+    ],
+    link: ""
+  },
+  {
+    key: "sharepoint-connector",
+    title: "เชื่อมต่อกับ SharePoint",
+    icon: "📋",
+    flow: [
+      { icon: "🔌", label: "เลือก SharePoint connector" },
+      { icon: "📋", label: "เลือก Site และ List" },
+      { icon: "⚙️", label: "อ่าน/เขียนข้อมูล" }
+    ],
+    video: "https://www.youtube.com/embed/qjkWnqV7aKQ",
+    text: [
+      "<strong>SharePoint connector</strong> เป็นหนึ่งใน connector ที่ใช้บ่อยที่สุดในองค์กรที่ใช้ Microsoft 365 เพราะ SharePoint List ทำหน้าที่เป็นฐานข้อมูลอย่างง่ายได้ Action หลักที่ใช้บ่อย ได้แก่ <code>Get items</code> (ดึงข้อมูล), <code>Create item</code> (เพิ่มแถวใหม่), <code>Update item</code> (แก้ไขแถวเดิม), <code>Delete item</code> (ลบแถว)",
+      "วิธีใช้งาน: เมื่อเพิ่ม Action ของ SharePoint ต้องระบุ <code>Site Address</code> (URL ของไซต์) และ <code>List Name</code> ทุกครั้ง หากต้องการดึงเฉพาะบางแถว ให้ใช้ <code>Filter Query</code> ใน Get items เช่น <code>Status eq 'Active'</code> แทนการดึงข้อมูลทั้งหมดมากรองทีหลัง",
+      "ข้อควรระวัง: Get items มีขีดจำกัดจำนวนแถวที่ดึงมาได้ต่อครั้ง (ค่าเริ่มต้น 100 แถว) หากต้องการมากกว่านั้น ต้องเปิด <code>Pagination</code> ในส่วน Settings ของ action ไม่เช่นนั้นข้อมูลบางส่วนอาจหายไปโดยไม่รู้ตัว"
+    ],
+    link: ""
+  },
+  {
+    key: "excel-connector",
+    title: "เชื่อมต่อกับ Excel",
+    icon: "📊",
+    flow: [
+      { icon: "📂", label: "เลือกไฟล์ Excel ใน OneDrive/SharePoint" },
+      { icon: "📊", label: "อ่าน/เขียนตาราง (Table)" },
+      { icon: "💾", label: "บันทึกผลลัพธ์อัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/IJDi4fbc__Q",
+    text: [
+      "<strong>Excel Online (Business) connector</strong> ใช้เชื่อมกับไฟล์ Excel ที่เก็บอยู่บน OneDrive หรือ SharePoint เท่านั้น (ไม่รองรับไฟล์ที่เก็บบนเครื่องโดยตรง) ข้อมูลที่จะใช้งานต้องถูกจัดเป็น <strong>Table</strong> ในไฟล์ Excel ก่อนเสมอ (เลือกช่วงข้อมูลแล้วกด Ctrl+T) มิเช่นนั้น Power Automate จะมองไม่เห็นข้อมูล",
+      "วิธีใช้งาน: Action หลักที่ใช้บ่อยคือ <code>Add a row into a table</code> (เพิ่มแถวใหม่เข้าตาราง), <code>List rows present in a table</code> (ดึงข้อมูลทั้งหมดในตาราง), และ <code>Update a row</code> (แก้ไขแถวที่มีอยู่) ต้องเลือกไฟล์และชื่อ Table ให้ตรงกับที่ตั้งไว้ในไฟล์จริง",
+      "เคล็ดลับ: เหมาะกับงานที่มีข้อมูลไม่มากนักและต้องการให้ทีมงานเปิดดู/แก้ไขข้อมูลผ่านหน้าตา Excel ที่คุ้นเคยอยู่แล้ว หากข้อมูลมีปริมาณมากหรือหลายคนต้องเข้าถึงพร้อมกันบ่อยๆ ควรพิจารณาย้ายไปใช้ SharePoint List แทน"
+    ],
+    link: ""
+  },
+  {
+    key: "outlook-email",
+    title: "ส่งอีเมล Outlook อัตโนมัติ",
+    icon: "📧",
+    flow: [
+      { icon: "📝", label: "เตรียมเนื้อหาอีเมล" },
+      { icon: "📧", label: "Send an email (V2)" },
+      { icon: "📎", label: "แนบไฟล์ได้อัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/c8s9sMeWWSI",
+    text: [
+      "action <code>Send an email (V2)</code> ของ <strong>Outlook connector</strong> เป็น Action ที่ถูกใช้งานบ่อยที่สุดใน Flow เกือบทุกประเภท ใส่ผู้รับ (To/CC/BCC), หัวข้อ, และเนื้อหา โดยเนื้อหาสามารถใส่ Dynamic content หรือจัดรูปแบบ HTML ได้ (ตัวหนา, สี, ตาราง) ผ่านโหมด <code>Code View</code>",
+      "ตัวอย่างการใช้งานจริง: สามารถแนบไฟล์ไปกับอีเมลได้โดยตรงในช่อง <code>Attachments</code> เช่น แนบไฟล์ PDF ที่สร้างจาก action ก่อนหน้า หรือแนบไฟล์ที่ดึงมาจาก SharePoint/OneDrive โดยใส่ชื่อไฟล์และเนื้อหาไฟล์ (Content) ให้ตรงกัน",
+      "หมายเหตุ: ยังมี action <code>Send an email from a shared mailbox</code> สำหรับส่งในนามอีเมลกลางของแผนก (เช่น hr@company.com) แทนอีเมลส่วนตัวของผู้สร้าง Flow เหมาะกับ Flow ที่ต้องดูเป็นทางการหรือให้หลายคนดูแลร่วมกันได้"
+    ],
+    link: ""
+  },
+  {
+    key: "approval-flow",
+    title: "Approval Flow (ระบบอนุมัติ)",
+    icon: "✅",
+    flow: [
+      { icon: "📨", label: "ส่งคำขออนุมัติ" },
+      { icon: "👍", label: "ผู้อนุมัติตอบกลับ" },
+      { icon: "🔀", label: "แยกผลลัพธ์ Flow ต่อ" }
+    ],
+    video: "https://www.youtube.com/embed/ZU7EPxJxXdw",
+    text: [
+      "action <code>Start and wait for an approval</code> ใช้สร้างขั้นตอนขออนุมัติงานผ่าน Power Automate โดยไม่ต้องพัฒนาระบบแยกต่างหาก มีให้เลือกหลายรูปแบบ เช่น <code>Approve/Reject - First to respond</code> (ใครตอบก่อนถือเป็นผลสรุป) หรือ <code>Approve/Reject - Everyone must approve</code> (ต้องได้รับอนุมัติจากทุกคนที่ระบุไว้)",
+      "วิธีใช้งาน: ผู้อนุมัติจะได้รับการแจ้งเตือนทั้งทางอีเมลและแอป Power Automate/Teams สามารถกด Approve หรือ Reject ได้ทันทีจากอีเมลโดยไม่ต้องเปิดโปรแกรมอื่น หลังจากนั้นให้เพิ่ม <code>Condition</code> ตรวจสอบค่า <code>Outcome</code> เพื่อแยกเส้นทาง Flow ต่อไปตามผลการอนุมัติ",
+      "เคล็ดลับ: ใส่รายละเอียดสำคัญไว้ในเนื้อหาการอนุมัติให้ครบ (ชื่อผู้ขอ, จำนวนเงิน, เหตุผล ฯลฯ) เพื่อให้ผู้อนุมัติตัดสินใจได้จากอีเมลโดยตรง ไม่ต้องเปิดระบบอื่นเพิ่มเพื่อดูรายละเอียดประกอบ"
+    ],
+    link: ""
+  },
+  {
+    key: "http-api",
+    title: "HTTP Request และการเชื่อมต่อ API",
+    icon: "🌐",
+    flow: [
+      { icon: "🌐", label: "เตรียม URL/API endpoint" },
+      { icon: "📨", label: "ส่ง HTTP request" },
+      { icon: "📥", label: "รับผลลัพธ์กลับมาใช้ต่อ" }
+    ],
+    video: "https://www.youtube.com/embed/ZhtUQgf2pk4",
+    text: [
+      "action <code>HTTP</code> ใช้เชื่อมต่อกับระบบภายนอกที่ไม่มี connector สำเร็จรูปให้เลือกใน Power Automate โดยตรง เช่น ระบบภายในของบริษัทเอง หรือบริการอื่นที่เปิด API ไว้ ทำงานโดยส่งคำขอ (request) ไปยัง URL ปลายทางตามรูปแบบ <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> แล้วรับผลลัพธ์ (response) กลับมาใช้งานต่อ",
+      "วิธีใช้งาน: กรอก <code>URI</code> ปลายทาง, เลือก <code>Method</code> ที่ต้องการ, ใส่ <code>Headers</code> (เช่น Authorization token) และ <code>Body</code> (ข้อมูลที่จะส่งไป ในรูปแบบ JSON) หลังจากนั้นใช้ action <code>Parse JSON</code> เพื่อแปลงผลลัพธ์ที่ได้กลับมาให้ใช้เป็น Dynamic content ในขั้นตอนถัดไปได้ง่ายขึ้น",
+      "ข้อควรระวัง: การเชื่อมต่อ API ภายนอกมักต้องใช้ความรู้พื้นฐานเรื่อง Authentication (เช่น API Key, OAuth) ควรตรวจสอบเอกสาร API ของปลายทางให้เข้าใจก่อน และไม่ควรฝังรหัสผ่าน/token ไว้ตรงๆ ใน Flow แบบเปิดเผย ควรใช้ Connection แบบปลอดภัยหรือ Azure Key Vault แทน"
+    ],
+    link: ""
+  },
+  {
+    key: "error-handling",
+    title: "การจัดการข้อผิดพลาด (Error Handling)",
+    icon: "🚧",
+    flow: [
+      { icon: "⚠️", label: "Action อาจล้มเหลว" },
+      { icon: "🛡️", label: "ตั้ง Configure run after" },
+      { icon: "📧", label: "แจ้งเตือนเมื่อเกิดปัญหา" }
+    ],
+    video: "https://www.youtube.com/embed/qLADf8ne5qQ",
+    text: [
+      "Flow ที่ทำงานจริงในองค์กรควรมีการจัดการข้อผิดพลาด (error handling) เสมอ เพื่อไม่ให้ Flow หยุดเงียบๆ โดยไม่มีใครทราบเมื่อเกิดปัญหา เช่น เชื่อมต่อ SharePoint ไม่ได้ชั่วคราว หรือข้อมูลที่ส่งเข้ามาไม่ครบ",
+      "วิธีใช้งาน: คลิกจุดสามจุด (...) ที่มุมขวาบนของ Action แล้วเลือก <code>Configure run after</code> เพื่อกำหนดว่า Action ถัดไปควรทำงานเมื่อไหร่ เช่น เมื่อ Action ก่อนหน้า <code>is successful</code>, <code>has failed</code>, หรือ <code>is skipped</code> ทำให้สร้างเส้นทางสำรอง (เช่น ส่งอีเมลแจ้งเตือนผู้ดูแลระบบเมื่อ Action หลักล้มเหลว) ได้",
+      "แนวทางที่ดี: จัดกลุ่ม Action สำคัญไว้ใน <code>Scope</code> แล้วตั้งค่า Scope อีกอันให้รันเมื่อ Scope แรก <code>has failed</code> เพื่อทำหน้าที่เหมือน Try-Catch ในภาษาโปรแกรมมิ่งทั่วไป วิธีนี้ทำให้จัดการข้อผิดพลาดของ Flow ที่มีหลาย Action ได้เป็นระบบมากขึ้น"
+    ],
+    link: ""
+  },
+  {
+    key: "desktop-flow-rpa",
+    title: "Desktop Flow / RPA เบื้องต้น",
+    icon: "🖥️",
+    flow: [
+      { icon: "🖱️", label: "บันทึกการคลิก/พิมพ์" },
+      { icon: "🤖", label: "Desktop flow เล่นซ้ำอัตโนมัติ" },
+      { icon: "🔁", label: "ทำงานแทนบนหน้าจอจริง" }
+    ],
+    video: "https://www.youtube.com/embed/XH-JB6YGJcU",
+    text: [
+      "<strong>Power Automate Desktop</strong> (ติดตั้งฟรีบน Windows 10/11) ใช้สร้างระบบอัตโนมัติแบบ RPA (Robotic Process Automation) ที่ควบคุมโปรแกรมบนหน้าจอคอมพิวเตอร์โดยตรง เหมาะกับงานที่ต้องคลิก พิมพ์ หรือคัดลอกข้อมูลระหว่างโปรแกรมที่ไม่มี API/connector ให้เชื่อมต่อ เช่น โปรแกรมบัญชีรุ่นเก่าที่ใช้ในองค์กร",
+      "วิธีใช้งาน: ใช้ฟีเจอร์ <code>Record</code> (บันทึกหน้าจอ) เพื่อจับการคลิกเมาส์และพิมพ์คีย์บอร์ดของผู้ใช้ไว้เป็นขั้นตอนอัตโนมัติ แล้วนำมาปรับแต่งต่อในหน้า Editor เพิ่มตัวแปร เงื่อนไข หรือลูปได้เหมือนกับ Power Automate Cloud",
+      "ข้อควรระวัง: Desktop flow ขึ้นอยู่กับตำแหน่งและรูปแบบหน้าจอของโปรแกรมที่บันทึกไว้ หากอินเทอร์เฟซของโปรแกรมเปลี่ยนแปลง (เช่นอัปเดตเวอร์ชันใหม่) Flow อาจทำงานผิดพลาดได้ ควรทดสอบซ้ำหลังจากมีการอัปเดตโปรแกรมที่เกี่ยวข้องเสมอ"
+    ],
+    link: ""
+  },
+  {
+    key: "monitor-share-flow",
+    title: "การดูแลรักษาและแชร์ Flow ให้ทีม",
+    icon: "🔧",
+    flow: [
+      { icon: "👀", label: "ดู Run history" },
+      { icon: "🤝", label: "แชร์ให้เพื่อนร่วมทีม" },
+      { icon: "🩹", label: "แก้ไขเมื่อพบปัญหา" }
+    ],
+    video: "https://www.youtube.com/embed/duWAxZI0pT0",
+    text: [
+      "ทุก Flow มีหน้า <code>Run history</code> เก็บบันทึกการทำงานทุกครั้งไว้ ดูได้ว่าสำเร็จ (Succeeded), ล้มเหลว (Failed) หรือกำลังทำงาน (Running) พร้อมรายละเอียดของแต่ละ Action ในรอบนั้นๆ เป็นเครื่องมือหลักในการตรวจสอบและแก้ปัญหา",
+      "วิธีใช้งาน: ไปที่ <code>My flows</code> เลือก Flow ที่ต้องการ แล้วไปแท็บ <code>Owners</code> เพื่อเพิ่มเพื่อนร่วมทีมเป็น <code>Co-owner</code> (แก้ไข/ลบ Flow ได้) หรือ <code>Run only user</code> (รันได้อย่างเดียว แก้ไขไม่ได้) เพื่อให้ทีมช่วยกันดูแล Flow ต่อได้แม้ผู้สร้างคนแรกไม่อยู่",
+      "เคล็ดลับ: ตั้งชื่อ Flow และ Action ให้สื่อความหมายชัดเจนตั้งแต่แรก และเขียนคำอธิบายสั้นๆ ไว้ใน <code>Description</code> ของ Flow จะช่วยให้เพื่อนร่วมทีมที่มาดูแลต่อในอนาคตเข้าใจการทำงานได้เร็วขึ้นมาก โดยไม่ต้องไล่เปิดดูทุก Action ทีละอัน"
+    ],
+    link: ""
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    videoSectionHtml = '<div class="section-label">วิดีโอ</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>';
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = '<div class="text-block">' + paraHtml.join('') + '</div>';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำอธิบาย</div>' + textHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
