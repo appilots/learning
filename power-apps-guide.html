@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน Power Apps (ภาษาไทย) - กลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #4338ca;
+    --accent-2: #3730a3;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #eceafd;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #818cf8;
+      --accent-2: #6366f1;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #211f3a;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+  .topic-list { flex: 0 0 260px; display: flex; flex-direction: column; gap: 6px; }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title { font-weight: 700; font-size: 0.82rem; color: var(--accent-2); margin-bottom: 8px; }
+  .key-points ul { margin: 0; padding-left: 20px; }
+  .key-points li { font-size: 0.88rem; line-height: 1.6; color: var(--text); margin-bottom: 4px; }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--sub); font-size: 0.85rem; margin-bottom: 20px; overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  .text-block { font-size: 0.92rem; line-height: 1.75; color: var(--text); }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.86em;
+  }
+
+  .flow {
+    display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin: 4px 0 16px; padding: 16px 12px;
+    border: 1px solid var(--border); border-radius: 12px; background: var(--placeholder-bg);
+  }
+  .flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 104px; text-align: center; }
+  .flow-icon {
+    width: 46px; height: 46px; border-radius: 12px; background: var(--pill-bg);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+  .flow-label { font-size: 0.76rem; color: var(--sub); font-weight: 600; line-height: 1.3; }
+  .flow-arrow { font-size: 1.3rem; color: var(--accent); flex-shrink: 0; }
+
+  .callout {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 10px; margin: 0 0 12px; font-size: 0.92rem; line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🧩 คู่มือการใช้งาน Power Apps (ภาษาไทย) พร้อม VDO ประกอบทุกหัวข้อ</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — 20 หัวข้อ เรียงจากพื้นฐานไปขั้นสูง</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/สถาบันที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+const TOPICS = [
+  {
+    key: "overview",
+    title: "Power Apps คืออะไร",
+    icon: "🧩",
+    flow: [
+      { icon: "🧱", label: "เลือกประเภทแอปที่ต้องการ" },
+      { icon: "🎨", label: "ออกแบบด้วย Low-Code" },
+      { icon: "📱", label: "ใช้งานได้ทั้งมือถือและเว็บ" }
+    ],
+    video: "https://www.youtube.com/embed/d_R3GWmo6Tw",
+    videoTitle: "Power Apps 101 | สอนสร้างแอป ตั้งแต่เปิดโปรแกรม 2025",
+    videoAuthor: "Fusion Solution",
+    text: [
+      "<strong>Power Apps</strong> คือเครื่องมือสร้างแอปพลิเคชันทางธุรกิจแบบ <strong>Low-Code/No-Code</strong> ในตระกูล Microsoft Power Platform ช่วยให้พนักงานที่ไม่มีพื้นฐานเขียนโปรแกรมสามารถสร้างแอปใช้งานเองได้ เช่น แอปเบิกค่าใช้จ่าย, แอปเช็คอินเข้างาน, แอปติดตามสต็อกสินค้า โดยไม่ต้องพึ่งทีมพัฒนาซอฟต์แวร์ทุกครั้ง",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Power Apps เชื่อมต่อกับแหล่งข้อมูลได้หลากหลาย เช่น Excel, SharePoint, Dataverse, SQL Server และเชื่อมต่อกับเครื่องมืออื่นในตระกูลเดียวกันได้โดยตรง เช่น Power Automate (ทำงานอัตโนมัติ) และ Power BI (แดชบอร์ดวิเคราะห์ข้อมูล)",
+      "เคล็ดลับ: หากเพิ่งเริ่มต้น แนะนำให้ลองสร้างแอปจากข้อมูลที่มีอยู่แล้วใน Excel หรือ SharePoint ก่อน เพราะ Power Apps จะช่วยสร้างหน้าจอพื้นฐาน (ดู/เพิ่ม/แก้ไข/ลบข้อมูล) ให้อัตโนมัติภายในไม่กี่วินาที เป็นจุดเริ่มต้นที่เร็วกว่าสร้างจากหน้าว่างเปล่ามาก"
+    ],
+    link: ""
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นใช้งาน Power Apps",
+    icon: "🚀",
+    flow: [
+      { icon: "🔑", label: "เข้าสู่ระบบด้วยบัญชีองค์กร" },
+      { icon: "🖥️", label: "เปิด make.powerapps.com" },
+      { icon: "🧭", label: "สำรวจหน้าจอหลัก" }
+    ],
+    video: "https://www.youtube.com/embed/20B-cCFssjc",
+    videoTitle: "Power Apps 101 EP.1/3: เริ่มต้น Power Apps ไม่ยาก!",
+    videoAuthor: "ZyGen - Innovative Consultancy",
+    text: [
+      "เข้าใช้งาน Power Apps ได้ที่เว็บไซต์ <code>make.powerapps.com</code> โดยใช้บัญชี Microsoft 365 ขององค์กร ส่วนใหญ่แผน Microsoft 365 Business/E3 ขึ้นไปมีสิทธิ์ใช้งานพื้นฐานติดมาให้แล้ว (มีข้อจำกัดเรื่องแหล่งข้อมูลที่เชื่อมต่อได้ หากต้องการเชื่อมต่อ Dataverse เต็มรูปแบบอาจต้องมีสิทธิ์เพิ่มเติม)",
+      "วิธีใช้งาน: หน้าจอหลักแบ่งเป็นเมนูสำคัญด้านซ้าย ได้แก่ <code>Apps</code> (แอปที่สร้างไว้), <code>Create</code> (เริ่มสร้างแอปใหม่), <code>Tables</code> (ตารางข้อมูลใน Dataverse) และ <code>Flows</code> (เข้าถึง Power Automate ได้จากที่เดียวกัน)",
+      "เคล็ดลับ: หน้า <code>Create</code> มีตัวเลือกเริ่มต้นหลายแบบ เช่น 'Start with data' (สร้างจากข้อมูลที่มีอยู่), 'Start with a page design' (ให้ AI ช่วยออกแบบจากคำอธิบาย), และ 'Start with a blank canvas' (เริ่มจากหน้าว่างเปล่า) เลือกให้เหมาะกับงานที่ทำ"
+    ],
+    link: ""
+  },
+  {
+    key: "app-types",
+    title: "ประเภทของแอป (Canvas vs Model-driven)",
+    icon: "🧱",
+    flow: [
+      { icon: "🖼️", label: "Canvas App" },
+      { icon: "🗄️", label: "Model-driven App" },
+      { icon: "🎯", label: "เลือกให้เหมาะกับงาน" }
+    ],
+    video: "https://www.youtube.com/embed/D5rHJsBShMQ",
+    videoTitle: "Power Apps: Canvas vs Model-Driven Explained",
+    videoAuthor: "Lisa Crosbie",
+    text: [
+      "Power Apps มี 2 ประเภทหลัก: <strong>Canvas app</strong> ออกแบบหน้าตาอิสระเหมือนวาดบนผืนผ้าใบ ลากวาง control ได้ตามต้องการ เหมาะกับแอปที่ต้องการควบคุมหน้าตาละเอียด และ <strong>Model-driven app</strong> สร้างจากโครงสร้างข้อมูลใน Dataverse โดยระบบจัดหน้าตาให้อัตโนมัติตามข้อมูล เหมาะกับระบบธุรกิจขนาดใหญ่ที่มีความสัมพันธ์ข้อมูลซับซ้อน",
+      "วิธีใช้งาน: หากข้อมูลไม่ซับซ้อนมาก ต้องการควบคุมหน้าตาเอง หรือใช้กับ Excel/SharePoint เป็นหลัก ให้เลือก Canvas app แต่ถ้าองค์กรมีข้อมูลจำนวนมากที่เชื่อมโยงกันหลายตาราง (เช่น ระบบ CRM, ระบบจัดการโปรเจกต์) และต้องการ business logic ที่ซับซ้อน ให้เลือก Model-driven app แทน",
+      "เคล็ดลับ: สำหรับผู้เริ่มต้นในองค์กรทั่วไป แนะนำให้เริ่มจาก Canvas app ก่อนเสมอ เพราะเรียนรู้ง่ายกว่าและเห็นผลลัพธ์เร็วกว่า ค่อยขยับไปศึกษา Model-driven app เมื่อมีความต้องการระบบข้อมูลที่ซับซ้อนขึ้นจริงๆ (ดูรายละเอียดเพิ่มเติมได้ในหัวข้อท้ายคู่มือ)"
+    ],
+    link: ""
+  },
+  {
+    key: "first-template",
+    title: "สร้างแอปแรกจาก Template",
+    icon: "🛠️",
+    flow: [
+      { icon: "📂", label: "เลือก Template สำเร็จรูป" },
+      { icon: "👀", label: "ดูตัวอย่างแอป" },
+      { icon: "✏️", label: "ปรับแต่งต่อได้ทันที" }
+    ],
+    video: "https://www.youtube.com/embed/2OuK2OZ-uKY",
+    videoTitle: "Power Apps - เรียน Power Apps จาก Template Part 1",
+    videoAuthor: "PenBot เป็นบอท",
+    text: [
+      "วิธีเริ่มต้นที่ง่ายที่สุดสำหรับผู้เริ่มต้นคือสร้างแอปจาก <strong>Template</strong> สำเร็จรูป ไปที่ <code>Create &gt; Browse all templates</code> จะเห็นแม่แบบแอปสำหรับงานทั่วไป เช่น การอนุมัติงาน, การจัดการสินค้าคงคลัง, การเก็บข้อมูลลูกค้า พร้อมโครงสร้างหน้าจอและสูตรพื้นฐานให้แล้ว",
+      "วิธีใช้งาน: เลือก Template ที่ใกล้เคียงกับงานที่ต้องการมากที่สุด กด <code>Use this template</code> ระบบจะสร้างแอปพร้อมข้อมูลตัวอย่างให้ทันที จากนั้นเข้าไปแก้ไขหน้าจอ, เปลี่ยนแหล่งข้อมูลเป็นของจริง, และปรับสูตรตามความต้องการขององค์กร",
+      "เคล็ดลับ: การศึกษาโครงสร้างของ Template ที่มีอยู่แล้ว เป็นวิธีเรียนรู้ Power Fx และเทคนิคการออกแบบที่ดีได้เร็วที่สุด ลองเปิดดู control และสูตรในแต่ละหน้าจอของ Template เพื่อทำความเข้าใจว่านักพัฒนามืออาชีพจัดโครงสร้างแอปอย่างไร"
+    ],
+    link: ""
+  },
+  {
+    key: "excel-sharepoint-app",
+    title: "สร้างแอปจากข้อมูล (Excel/SharePoint) อัตโนมัติ",
+    icon: "📗",
+    flow: [
+      { icon: "📊", label: "เตรียมข้อมูลใน Excel/SharePoint" },
+      { icon: "⚡", label: "กด Start with data" },
+      { icon: "✅", label: "ได้แอป 3 หน้าจอทันที" }
+    ],
+    video: "https://www.youtube.com/embed/xa0hHrtHR84",
+    videoTitle: "สร้าง App 📱 ด้วย Power Apps เก็บข้อมูลใน Excel ได้ สำหรับผู้เริ่มต้น",
+    videoAuthor: "9Expert",
+    text: [
+      "หากมีข้อมูลอยู่แล้วใน <strong>Excel</strong> (ต้องจัดเป็น Table ก่อนด้วย Ctrl+T) หรือ <strong>SharePoint List</strong> สามารถสร้างแอปจากข้อมูลนั้นได้ทันทีโดยไม่ต้องออกแบบเอง ไปที่ <code>Create &gt; Start with data</code> แล้วเลือกไฟล์/List ที่ต้องการ ระบบจะสร้างแอป 3 หน้าจอให้อัตโนมัติ (Browse, Detail, Edit)",
+      "วิธีใช้งาน: หน้า <strong>Browse screen</strong> แสดงรายการข้อมูลทั้งหมด, <strong>Detail screen</strong> แสดงรายละเอียดของแถวที่เลือก, และ <strong>Edit screen</strong> ใช้เพิ่ม/แก้ไขข้อมูล ทั้ง 3 หน้าจอเชื่อมโยงกันพร้อมปุ่มนำทางให้เสร็จสรรพ สามารถแตะเข้าไปแก้ไขแต่ละหน้าจอต่อได้ทันที",
+      "ข้อควรระวัง: ไฟล์ Excel ที่ใช้สร้างแอปต้องเก็บอยู่บน OneDrive หรือ SharePoint เท่านั้น (ไม่ใช่ไฟล์บนเครื่องโดยตรง) และข้อมูลต้องถูกจัดเป็น Table ไว้ก่อนเสมอ มิเช่นนั้น Power Apps จะไม่สามารถอ่านโครงสร้างข้อมูลได้ถูกต้อง"
+    ],
+    link: ""
+  },
+  {
+    key: "screens-navigation",
+    title: "หน้าจอและการนำทาง (Screens & Navigation)",
+    icon: "🧭",
+    flow: [
+      { icon: "📱", label: "หลายหน้าจอในแอปเดียว" },
+      { icon: "➡️", label: "ใช้ Navigate() เปลี่ยนหน้า" },
+      { icon: "🔙", label: "กลับหน้าเดิมด้วย Back()" }
+    ],
+    video: "https://www.youtube.com/embed/4oY1rNlOFzY",
+    videoTitle: "Power App Tutorial ตอน เปลี่ยนรายการข้อมูลที่แสดงใน three-screen app",
+    videoAuthor: "Wanchai Khanti",
+    text: [
+      "แอป Canvas สามารถมีได้หลายหน้าจอ (<strong>Screen</strong>) ในไฟล์เดียว เพิ่มหน้าจอใหม่ได้จากปุ่ม <code>+ New screen</code> ที่แถบด้านซ้าย การเปลี่ยนไปมาระหว่างหน้าจอควบคุมด้วยฟังก์ชัน <code>Navigate()</code> ซึ่งใส่ไว้ที่ property <code>OnSelect</code> ของปุ่มหรือรายการที่ต้องการให้กดแล้วเปลี่ยนหน้า",
+      "วิธีใช้งาน: ตัวอย่างสูตร <code>Navigate(DetailScreen, ScreenTransition.Fade)</code> ใช้พาไปยังหน้าจอ DetailScreen พร้อมเอฟเฟกต์เฟดสวยงาม ส่วนฟังก์ชัน <code>Back()</code> ใช้ย้อนกลับไปหน้าจอก่อนหน้าที่เพิ่งมาจาก โดยไม่ต้องระบุชื่อหน้าจอปลายทางเอง",
+      "เคล็ดลับ: ตั้งชื่อหน้าจอให้สื่อความหมายชัดเจนตั้งแต่แรก (เช่น <code>ScreenBrowse</code>, <code>ScreenDetail</code>, <code>ScreenEdit</code>) แทนชื่อเริ่มต้นอย่าง Screen1, Screen2 จะช่วยให้เขียนสูตร Navigate() และแก้ไขแอปในภายหลังง่ายขึ้นมาก โดยเฉพาะเมื่อแอปมีหน้าจอจำนวนมาก"
+    ],
+    link: ""
+  },
+  {
+    key: "controls-basics",
+    title: "Controls พื้นฐาน (ปุ่ม, ข้อความ, รูปภาพ)",
+    icon: "🧩",
+    flow: [
+      { icon: "🧩", label: "ลาก Control จากแถบเมนู" },
+      { icon: "⚙️", label: "ตั้งค่า Properties" },
+      { icon: "🎨", label: "ปรับแต่งหน้าตา" }
+    ],
+    video: "https://www.youtube.com/embed/REN93Y-kME8",
+    videoTitle: "Power Apps Button Control for Beginners | OnSelect, Style, Properties",
+    videoAuthor: "Reza Dorrani",
+    text: [
+      "<strong>Control</strong> คือส่วนประกอบที่ใช้สร้างหน้าตาแอป เช่น <code>Label</code> (ข้อความ), <code>Button</code> (ปุ่มกด), <code>Text input</code> (ช่องกรอกข้อความ), <code>Image</code> (รูปภาพ) เพิ่มได้จากเมนู <code>Insert</code> แล้วลากวางลงบนหน้าจอที่ต้องการ ปรับตำแหน่งและขนาดได้อิสระเหมือนโปรแกรมออกแบบทั่วไป",
+      "วิธีใช้งาน: ทุก control มี <strong>Properties</strong> ให้ตั้งค่าที่แผงด้านขวา หรือเลือกจาก Dropdown เหนือแถบสูตร (เช่นเลือก property <code>OnSelect</code> ของปุ่ม) แล้วพิมพ์สูตร Power Fx เพื่อกำหนดพฤติกรรมเมื่อ control นั้นถูกโต้ตอบ เช่น กดปุ่มแล้วบันทึกข้อมูล",
+      "เคล็ดลับ: property <code>OnSelect</code> ของ Button ใช้บ่อยที่สุด ควรฝึกเขียนสูตรง่ายๆ ในนี้ก่อน เช่น <code>Navigate(NextScreen)</code> หรือ <code>SubmitForm(Form1)</code> จะช่วยให้เข้าใจแนวคิดการเขียนสูตรตอบสนองการโต้ตอบ (event-driven) ของ Power Apps ได้เร็วขึ้น"
+    ],
+    link: ""
+  },
+  {
+    key: "gallery",
+    title: "Gallery (แสดงรายการข้อมูล)",
+    icon: "📃",
+    flow: [
+      { icon: "➕", label: "แทรก Gallery" },
+      { icon: "🔗", label: "เชื่อมกับแหล่งข้อมูล" },
+      { icon: "📃", label: "แสดงรายการอัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/FhTRLQv0iwc",
+    videoTitle: "Power Apps Galleries for Beginners (Don't Make These Mistakes!)",
+    videoAuthor: "Pragmatic Works",
+    text: [
+      "<strong>Gallery</strong> คือ control ที่ใช้แสดงรายการข้อมูลหลายแถวพร้อมกัน (คล้ายรายการสินค้าในแอปช้อปปิ้ง) เพิ่มได้จาก <code>Insert &gt; Gallery</code> แล้วเลือกรูปแบบ Layout ที่ต้องการ เช่น แนวตั้ง, แนวนอน, หรือแบบ 2 คอลัมน์",
+      "วิธีใช้งาน: ตั้งค่า property <code>Items</code> ของ Gallery ให้ชี้ไปยังแหล่งข้อมูล เช่น <code>Filter(ตารางข้อมูล, สถานะ = \"ใช้งาน\")</code> เพื่อแสดงเฉพาะข้อมูลที่ตรงเงื่อนไข จากนั้นลาก control ย่อยเข้าไปในการ์ดตัวอย่างของ Gallery เพื่อกำหนดว่าแต่ละแถวจะแสดงข้อมูลคอลัมน์ไหนบ้าง",
+      "เคล็ดลับ: ใช้ property <code>Gallery1.Selected</code> เพื่ออ้างอิงถึงแถวที่ผู้ใช้กำลังเลือกอยู่ใน Gallery นั้น มีประโยชน์มากเมื่อต้องการนำค่าจากแถวที่เลือกไปแสดงในหน้าจอรายละเอียด หรือส่งต่อไปยัง Form สำหรับแก้ไข"
+    ],
+    link: ""
+  },
+  {
+    key: "forms",
+    title: "Forms (เพิ่ม/แก้ไขข้อมูล)",
+    icon: "📋",
+    flow: [
+      { icon: "➕", label: "แทรก Edit Form" },
+      { icon: "🔗", label: "เชื่อมกับแหล่งข้อมูล" },
+      { icon: "💾", label: "SubmitForm() บันทึกข้อมูล" }
+    ],
+    video: "https://www.youtube.com/embed/P1BJBxKYKrM",
+    videoTitle: "ฉันจะเขียน Power Apps ให้ได้ - Add a Form",
+    videoAuthor: "PenBot เป็นบอท",
+    text: [
+      "<strong>Form</strong> (Edit form) ใช้สำหรับเพิ่มหรือแก้ไขข้อมูลแบบมีโครงสร้าง ต่างจาก Text input ทีละช่องตรงที่ Form จะสร้างช่องกรอกข้อมูลให้ครบทุกคอลัมน์ของแหล่งข้อมูลโดยอัตโนมัติ เพิ่มได้จาก <code>Insert &gt; Forms &gt; Edit</code>",
+      "วิธีใช้งาน: ตั้งค่า property <code>DataSource</code> ของ Form ให้ชี้ไปยังตารางข้อมูล และตั้งค่า <code>Item</code> เป็นแถวข้อมูลที่ต้องการแก้ไข (เช่น <code>Gallery1.Selected</code>) จากนั้นใส่สูตร <code>SubmitForm(Form1)</code> ในปุ่มบันทึก เพื่อส่งข้อมูลที่กรอกกลับไปบันทึกที่แหล่งข้อมูลจริง",
+      "เคล็ดลับ: หากต้องการซ่อนหรือแสดงบางฟิลด์ใน Form ตามเงื่อนไข ให้กดที่ฟิลด์นั้นในแผง Fields ทางขวา แล้วตั้งค่า property <code>Visible</code> เป็นสูตรเงื่อนไข แทนการลบฟิลด์ทิ้งไปเลย จะยืดหยุ่นกว่าและแก้ไขกลับได้ง่าย"
+    ],
+    link: ""
+  },
+  {
+    key: "data-sources",
+    title: "Data Sources และการเชื่อมต่อข้อมูล",
+    icon: "🔌",
+    flow: [
+      { icon: "🔌", label: "เลือก Data source" },
+      { icon: "➕", label: "Add data ในแอป" },
+      { icon: "📊", label: "ดึงข้อมูลมาใช้งาน" }
+    ],
+    video: "https://www.youtube.com/embed/N7sUGhLX_cs",
+    videoTitle: "สอนสร้าง Power Apps กับ Dataverse",
+    videoAuthor: "Fusion Solution",
+    text: [
+      "Power Apps เชื่อมต่อแหล่งข้อมูล (<strong>Data source</strong>) ได้หลากหลาย เช่น <strong>Excel</strong> (บน OneDrive/SharePoint), <strong>SharePoint List</strong> (ฟรี เหมาะกับข้อมูลไม่ซับซ้อน), และ <strong>Dataverse</strong> (ฐานข้อมูลเต็มรูปแบบ รองรับความสัมพันธ์ข้อมูลซับซ้อน แต่ต้องมีสิทธิ์ใช้งานเพิ่มเติม)",
+      "วิธีใช้งาน: ในหน้าสร้างแอป ไปที่แท็บ <code>Data</code> ด้านซ้าย กด <code>+ Add data</code> แล้วค้นหาชื่อ connector ที่ต้องการ (เช่น พิมพ์ 'SharePoint') เลือกไซต์และ List ที่ต้องการเชื่อมต่อ ข้อมูลจะพร้อมใช้งานในสูตรของแอปทันที",
+      "เคล็ดลับ: หากยังไม่แน่ใจว่าจะเลือกแหล่งข้อมูลแบบไหน ให้เริ่มจาก SharePoint List ก่อน เพราะฟรี ตั้งค่าง่าย และเพียงพอกับงานส่วนใหญ่ในองค์กร ค่อยพิจารณา Dataverse เมื่อข้อมูลมีความสัมพันธ์ซับซ้อนและต้องการฟีเจอร์ความปลอดภัยระดับสูงขึ้น"
+    ],
+    link: ""
+  },
+  {
+    key: "power-fx-basics",
+    title: "สูตร Power Fx เบื้องต้น",
+    icon: "🧮",
+    flow: [
+      { icon: "✍️", label: "เลือก Property + พิมพ์สูตร" },
+      { icon: "🧮", label: "Power Fx คำนวณ/ตัดสินใจ" },
+      { icon: "✅", label: "แอปตอบสนองตามสูตร" }
+    ],
+    video: "https://www.youtube.com/embed/rdl26xnj7yk",
+    videoTitle: "Power Apps - เริ่มเขียน Power Fx ยังไงดี",
+    videoAuthor: "PenBot เป็นบอท",
+    text: [
+      "<strong>Power Fx</strong> คือภาษาสูตรของ Power Apps มีหน้าตาคล้ายสูตร Excel มาก ทำให้ผู้ที่คุ้นเคยกับ Excel อยู่แล้วเรียนรู้ได้เร็ว ใช้เขียนกำหนดพฤติกรรมและการคำนวณต่างๆ ในแอป เช่น การตรวจเงื่อนไข การกรองข้อมูล การคำนวณตัวเลข",
+      "วิธีใช้งาน: เลือก control และ property ที่ต้องการ (เช่น <code>Text</code> ของ Label หรือ <code>OnSelect</code> ของ Button) แล้วพิมพ์สูตรลงในแถบสูตรด้านบน (คล้ายแถบสูตรใน Excel) เช่น <code>If(คะแนน &gt;= 50, \"ผ่าน\", \"ไม่ผ่าน\")</code> เพื่อแสดงผลตามเงื่อนไข",
+      "เคล็ดลับ: Power Fx มี IntelliSense ช่วยแนะนำฟังก์ชันและ property ที่เกี่ยวข้องขณะพิมพ์ ลองพิมพ์ชื่อฟังก์ชันบางส่วนแล้วดูตัวเลือกที่ขึ้นมา จะช่วยให้ค้นพบฟังก์ชันใหม่ๆ ที่ยังไม่เคยรู้จักมาก่อนได้ระหว่างทาง"
+    ],
+    link: ""
+  },
+  {
+    key: "common-functions",
+    title: "ฟังก์ชันที่ใช้บ่อย (Filter, LookUp, Patch)",
+    icon: "🔍",
+    flow: [
+      { icon: "🔍", label: "Filter/LookUp ค้นข้อมูล" },
+      { icon: "✏️", label: "Patch แก้ไขข้อมูล" },
+      { icon: "✅", label: "จัดการข้อมูลได้ครบ" }
+    ],
+    video: "https://www.youtube.com/embed/UkhSPu7zf-8",
+    videoTitle: "How to Use the Filter, Lookup, and Search Formula in Power Apps with Examples",
+    videoAuthor: "Michael Alex",
+    text: [
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: <code>Filter()</code> ใช้กรองข้อมูลตามเงื่อนไข คืนค่าเป็นหลายแถว เช่น <code>Filter(พนักงาน, แผนก = \"ขาย\")</code>, <code>LookUp()</code> ใช้ค้นหาแถวเดียวที่ตรงเงื่อนไขแรกที่เจอ เช่น <code>LookUp(พนักงาน, รหัส = \"E001\")</code>, และ <code>Patch()</code> ใช้เพิ่มหรือแก้ไขข้อมูลโดยไม่ต้องผ่าน Form",
+      "วิธีใช้งาน: <code>Patch()</code> มีประโยชน์มากเมื่อต้องการบันทึกข้อมูลจากหลาย control พร้อมกันโดยไม่ใช้ Edit form เช่น <code>Patch(ตารางคำขอ, Defaults(ตารางคำขอ), {ชื่อ: TextInput1.Text, วันที่: DatePicker1.SelectedDate})</code> สร้างแถวใหม่พร้อมกำหนดค่าแต่ละคอลัมน์ได้ในคำสั่งเดียว",
+      "เคล็ดลับ: ฟังก์ชัน Filter และ LookUp ทำงานคล้ายกันแต่ต่างกันที่ผลลัพธ์ — Filter คืนค่าหลายแถวเสมอ (แม้เจอแค่แถวเดียวก็ยังเป็นตาราง) ส่วน LookUp คืนค่าแถวเดียวโดยตรง เลือกใช้ให้ถูกต้องตามรูปแบบข้อมูลที่ต้องการนำไปใช้ต่อ"
+    ],
+    link: ""
+  },
+  {
+    key: "variables",
+    title: "ตัวแปร (Variables) ใน Power Apps",
+    icon: "📦",
+    flow: [
+      { icon: "📦", label: "Set()/UpdateContext() เก็บค่า" },
+      { icon: "🔄", label: "ค่าคงอยู่ระหว่างใช้งาน" },
+      { icon: "🔁", label: "เรียกใช้ซ้ำได้ทุกหน้าจอ" }
+    ],
+    video: "https://www.youtube.com/embed/v1PtqyfffKs",
+    videoTitle: "EP.7 - [Power Apps] ตัวแปร 3 รูปแบบ (Variable, Context, Collection)",
+    videoAuthor: "TheCITIZEN",
+    text: [
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Power Apps มีตัวแปร 3 รูปแบบหลัก คือ <strong>Global variable</strong> (สร้างด้วย <code>Set()</code> ใช้ได้ทุกหน้าจอในแอป), <strong>Context variable</strong> (สร้างด้วย <code>UpdateContext()</code> ใช้ได้เฉพาะหน้าจอที่สร้างเท่านั้น), และ <strong>Collection</strong> (สร้างด้วย <code>Collect()</code> เก็บข้อมูลเป็นตารางในหน่วยความจำชั่วคราว)",
+      "วิธีใช้งาน: ตัวอย่าง <code>Set(กำลังโหลด, true)</code> ตั้งค่าตัวแปร Global ชื่อ 'กำลังโหลด' เป็น true เพื่อใช้ควบคุมการแสดง/ซ่อน loading spinner ในหลายหน้าจอ ส่วน <code>UpdateContext({นับจำนวน: นับจำนวน + 1})</code> ใช้เพิ่มค่าตัวแปรเฉพาะหน้าจอปัจจุบัน",
+      "เคล็ดลับ: ใช้ Global variable เมื่อค่านั้นต้องใช้ร่วมกันข้ามหน้าจอ และใช้ Context variable เมื่อค่านั้นเกี่ยวข้องเฉพาะหน้าจอนั้นๆ เท่านั้น (เช่น สถานะเปิด/ปิด popup) การเลือกประเภทตัวแปรให้ถูกจะช่วยให้แอปทำงานเร็วและดูแลรักษาง่ายกว่า"
+    ],
+    link: ""
+  },
+  {
+    key: "media-attachments",
+    title: "การจัดการรูปภาพ/กล้อง/ไฟล์แนบ",
+    icon: "📷",
+    flow: [
+      { icon: "📷", label: "เพิ่ม Camera/Add picture control" },
+      { icon: "📤", label: "อัปโหลดรูป/ไฟล์" },
+      { icon: "💾", label: "บันทึกแนบกับข้อมูล" }
+    ],
+    video: "https://www.youtube.com/embed/D9xWtzZUtUM",
+    videoTitle: "Power Apps Add Picture Control Explained | Upload Images in Canvas App (Step-by-Step)",
+    videoAuthor: "Microsoft Dynamics 365 & Power Platform",
+    text: [
+      "Power Apps รองรับการถ่ายรูปและแนบไฟล์ผ่าน control สำเร็จรูป ได้แก่ <code>Camera</code> (ถ่ายภาพจากกล้องอุปกรณ์โดยตรง) และ <code>Add picture</code> (เลือกภาพจากคลังภาพหรือถ่ายใหม่) เหมาะกับแอปภาคสนาม เช่น แอปตรวจสอบหน้างาน, แอปบันทึกความเสียหาย",
+      "วิธีใช้งาน: เพิ่ม control <code>Add picture</code> จากเมนู Insert แล้วตั้งค่า <code>OnSelect</code> เพื่อบันทึกภาพที่ได้เข้าตัวแปรหรือ collection เช่น <code>Collect(รูปที่ถ่าย, AddPicture1.Photo)</code> จากนั้นใช้ Patch() บันทึกภาพนั้นแนบไปกับแถวข้อมูลที่เกี่ยวข้อง",
+      "ข้อควรระวัง: หากแหล่งข้อมูลเป็น SharePoint List ต้องเปิดใช้งานคอลัมน์ประเภท <strong>Attachments</strong> ไว้ก่อนจึงจะแนบรูปภาพเข้าไปได้ และควรตรวจสอบขนาดไฟล์ภาพที่อนุญาต เพราะไฟล์ภาพความละเอียดสูงอาจทำให้แอปโหลดช้าเมื่อมีข้อมูลจำนวนมาก"
+    ],
+    link: ""
+  },
+  {
+    key: "ui-design",
+    title: "การออกแบบ UI/UX ที่ดี (Themes, Responsive)",
+    icon: "🎨",
+    flow: [
+      { icon: "📐", label: "ใช้ Responsive Layout" },
+      { icon: "🎨", label: "ตั้งธีมสีให้สอดคล้องกัน" },
+      { icon: "📱", label: "ใช้ได้ดีทุกขนาดจอ" }
+    ],
+    video: "https://www.youtube.com/embed/UWSViEjJfpU",
+    videoTitle: "สอนสร้าง UI แบบ Responsive ปรับตามขนาดหน้าจอ ด้วย Power Apps | Power Platform",
+    videoAuthor: "Fusion Solution",
+    text: [
+      "การออกแบบแอปให้ปรับขนาดตามหน้าจอ (<strong>Responsive design</strong>) ทำได้โดยตั้งค่า property ของ control ให้อ้างอิงกับขนาดหน้าจอแทนตัวเลขคงที่ เช่น ตั้งค่า <code>Width</code> เป็น <code>Parent.Width</code> แทนการใส่ตัวเลขตายตัว เพื่อให้ control ขยาย/หดตามขนาดจอที่เปิดใช้งาน",
+      "วิธีใช้งาน: ใช้ container ประเภท <code>Horizontal/Vertical auto-layout</code> (เพิ่มจาก Insert &gt; Layout) เพื่อจัดวาง control เรียงกันอัตโนมัติโดยไม่ต้องคำนวณตำแหน่ง x, y เอง เหมาะกับแอปที่ต้องรองรับทั้งจอมือถือและจอคอมพิวเตอร์",
+      "เคล็ดลับ: กำหนดชุดสีธีม (เช่น สีหลัก สีรอง สีพื้นหลัง) ไว้เป็นตัวแปร Global ตั้งแต่ต้น แล้วให้ทุก control อ้างอิงสีจากตัวแปรชุดนี้แทนการใส่โค้ดสีตรงๆ ทีละจุด เมื่อต้องการเปลี่ยนธีมทั้งแอปในภายหลัง จะแก้ไขแค่จุดเดียวแล้วเปลี่ยนทั้งหมดพร้อมกัน"
+    ],
+    link: ""
+  },
+  {
+    key: "power-automate-integration",
+    title: "เชื่อมต่อกับ Power Automate",
+    icon: "⚡",
+    flow: [
+      { icon: "👆", label: "ผู้ใช้กดปุ่มในแอป" },
+      { icon: "⚡", label: "เรียก Power Automate Flow" },
+      { icon: "✅", label: "ทำงานอัตโนมัติต่อ" }
+    ],
+    video: "https://www.youtube.com/embed/yaCTf1eimUQ",
+    videoTitle: "สอน อบรม มือใหม่สำหรับ Power Apps and Power Automate Part 2",
+    videoAuthor: "Fusion Solution",
+    text: [
+      "Power Apps เรียกใช้ <strong>Power Automate</strong> ได้โดยตรงจากภายในแอป เหมาะกับงานที่ปุ่มกดเดียวต้องกระตุ้นกระบวนการอัตโนมัติหลายขั้นตอน เช่น กดปุ่ม 'ส่งขออนุมัติ' ในแอป แล้วให้ Power Automate ส่งอีเมลแจ้งหัวหน้างานต่อทันที",
+      "วิธีใช้งาน: ไปที่แท็บ <code>Power Automate</code> ในเมนู Data เพื่อสร้างหรือเชื่อมโยง Flow ที่มีอยู่แล้วเข้ากับแอป จากนั้นเรียกใช้งานได้ในสูตรผ่านชื่อ Flow เช่น <code>ชื่อFlow.Run(พารามิเตอร์)</code> ใน property <code>OnSelect</code> ของปุ่ม",
+      "เคล็ดลับ: แบ่งหน้าที่ให้ชัดเจนระหว่างสองเครื่องมือ — ให้ Power Apps ดูแลส่วนหน้าจอที่ผู้ใช้โต้ตอบโดยตรง และให้ Power Automate ดูแลงานเบื้องหลังที่ไม่ต้องมีคนรอดูผลทันที (เช่น ส่งอีเมล, บันทึกลง log) จะทำให้แอปตอบสนองเร็วและออกแบบระบบได้เป็นระเบียบกว่า"
+    ],
+    link: ""
+  },
+  {
+    key: "sharing-permissions",
+    title: "การแชร์แอปให้ทีม (Share & Permissions)",
+    icon: "🔗",
+    flow: [
+      { icon: "👥", label: "กด Share" },
+      { icon: "🔑", label: "กำหนดสิทธิ์ User/Co-owner" },
+      { icon: "📤", label: "ทีมเข้าใช้งานแอปได้" }
+    ],
+    video: "https://www.youtube.com/embed/NEM1StcJzUI",
+    videoTitle: "Share Power Apps with Users and Guests",
+    videoAuthor: "Reza Dorrani",
+    text: [
+      "การแชร์แอปให้ทีมใช้งานทำได้จากปุ่ม <code>Share</code> ในหน้ารายการแอป เลือกชื่อผู้ใช้หรือกลุ่มที่ต้องการให้สิทธิ์ แล้วกำหนดระดับสิทธิ์เป็น <strong>User</strong> (ใช้งานแอปได้อย่างเดียว) หรือ <strong>Co-owner</strong> (แก้ไขแอปได้ด้วย)",
+      "วิธีใช้งาน: หากแหล่งข้อมูลของแอปเป็น SharePoint List หรือ Excel ต้องตรวจสอบด้วยว่าผู้ใช้ที่ได้รับสิทธิ์เข้าแอป มีสิทธิ์เข้าถึงไฟล์/List ต้นทางด้วยหรือไม่ เพราะการแชร์แอปเพียงอย่างเดียวไม่ได้ให้สิทธิ์เข้าถึงข้อมูลเบื้องหลังโดยอัตโนมัติ",
+      "ข้อควรระวัง: ควรให้สิทธิ์ Co-owner เฉพาะคนที่ต้องแก้ไขแอปจริงๆ เท่านั้น เพราะ Co-owner สามารถแก้ไขหรือลบแอปทั้งหมดได้ ส่วนผู้ใช้งานทั่วไปควรได้รับสิทธิ์ระดับ User เพียงพอสำหรับการทำงานประจำวันอยู่แล้ว"
+    ],
+    link: ""
+  },
+  {
+    key: "model-driven-apps",
+    title: "Model-driven Apps เบื้องต้น",
+    icon: "🗄️",
+    flow: [
+      { icon: "🗄️", label: "ออกแบบตาราง Dataverse" },
+      { icon: "🔗", label: "กำหนดความสัมพันธ์ข้อมูล" },
+      { icon: "⚙️", label: "ระบบจัดหน้าตาให้อัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/55qbocm96-M",
+    videoTitle: "[วิศวกรเป็ด] Free Class \"Model Driven App & Dataverse 101\" [MVP Series 2024]",
+    videoAuthor: "DuckyEngineer",
+    text: [
+      "<strong>Model-driven app</strong> เริ่มต้นจากการออกแบบโครงสร้างข้อมูลใน <strong>Dataverse</strong> ก่อน (สร้างตาราง, คอลัมน์, ความสัมพันธ์ระหว่างตาราง) จากนั้น Power Apps จะสร้างหน้าจอ ฟอร์ม และเมนูนำทางให้อัตโนมัติตามโครงสร้างข้อมูลที่ออกแบบไว้ โดยไม่ต้องจัดวาง control เองทีละชิ้นเหมือน Canvas app",
+      "วิธีใช้งาน: ไปที่ <code>Tables</code> เพื่อสร้างตารางข้อมูลใหม่ กำหนดคอลัมน์และประเภทข้อมูล จากนั้นไปที่ <code>Apps &gt; Create &gt; Model-driven app</code> เลือกตารางที่ต้องการรวมเข้าแอป ระบบจะสร้าง Site map (เมนูนำทาง), Views (มุมมองรายการ), และ Forms ให้อัตโนมัติ",
+      "เคล็ดลับ: Model-driven app เหมาะกับทีมที่มี Dataverse license อยู่แล้วและมีข้อมูลเชื่อมโยงกันหลายตาราง เช่น ระบบขาย (ลูกค้า-คำสั่งซื้อ-สินค้า) หากยังไม่มีความจำเป็นด้านโครงสร้างข้อมูลซับซ้อนขนาดนี้ Canvas app ยังคงเป็นทางเลือกที่เรียบง่ายกว่าสำหรับงานส่วนใหญ่"
+    ],
+    link: ""
+  },
+  {
+    key: "testing-monitor",
+    title: "การทดสอบและแก้ปัญหา (Monitor)",
+    icon: "🧪",
+    flow: [
+      { icon: "🐞", label: "แอปทำงานผิดพลาด" },
+      { icon: "🔍", label: "เปิด Monitor ตรวจสอบ" },
+      { icon: "✅", label: "หาสาเหตุและแก้ไข" }
+    ],
+    video: "https://www.youtube.com/embed/Libig2_v1RA",
+    videoTitle: "Demo: Debugging Power Apps with Monitor",
+    videoAuthor: "Microsoft 365 Developer",
+    text: [
+      "<strong>Monitor</strong> คือเครื่องมือ debug ของ Power Apps ใช้ตรวจสอบว่าสูตรและการเรียกข้อมูลแต่ละครั้งทำงานถูกต้องหรือไม่ เปิดใช้งานได้จากเมนู <code>Advanced tools &gt; Monitor</code> ในหน้าแก้ไขแอป จะเห็นรายการเหตุการณ์ (event) แบบเรียลไทม์ขณะทดลองใช้งานแอป",
+      "วิธีใช้งาน: เปิด Monitor ไว้ก่อนแล้วค่อยทดลองกดปุ่ม/ทำงานในแอปจริง ทุก event ที่เกิดขึ้น (เช่น การเรียกสูตร, การเชื่อมต่อข้อมูล) จะปรากฏเป็นรายการให้คลิกดูรายละเอียดได้ รวมถึงเวลาที่ใช้ในแต่ละขั้นตอน ช่วยหาจุดที่ทำงานช้าหรือเกิด error ได้ตรงจุด",
+      "เคล็ดลับ: หากแอปทำงานช้าผิดปกติ ให้สังเกตจาก Monitor ว่า action ใดใช้เวลานานที่สุด บ่อยครั้งสาเหตุมาจากการดึงข้อมูลจำนวนมากเกินจำเป็น (เช่น ไม่ได้ใส่ Filter ก่อนแสดงผลใน Gallery) แก้ไขได้โดยกรองข้อมูลตั้งแต่ต้นทางแทนการดึงมาทั้งหมดแล้วกรองทีหลัง"
+    ],
+    link: ""
+  },
+  {
+    key: "publish-maintain",
+    title: "การเผยแพร่และดูแลรักษาแอป (Publish)",
+    icon: "🚀",
+    flow: [
+      { icon: "💾", label: "Save ฉบับร่าง" },
+      { icon: "🚀", label: "Publish เผยแพร่จริง" },
+      { icon: "🔄", label: "อัปเดต/ย้อนเวอร์ชันได้" }
+    ],
+    video: "https://www.youtube.com/embed/FZptWEOFTp4",
+    videoTitle: "How to Save, Publish, and Share Your Power Apps with Users",
+    videoAuthor: "Rudimar | Microsoft MVP | Power Apps in English",
+    text: [
+      "การ <strong>Save</strong> แอปจะบันทึกเป็นฉบับร่าง (draft) เก็บไว้ในระบบ แต่ผู้ใช้ที่ได้รับสิทธิ์เข้าแอปจะยังไม่เห็นการเปลี่ยนแปลงจนกว่าจะกด <strong>Publish</strong> เพื่อเผยแพร่เวอร์ชันล่าสุดให้ใช้งานจริง แยกขั้นตอนนี้ออกจากกันเพื่อให้แก้ไข/ทดสอบได้อย่างปลอดภัยก่อนปล่อยให้คนอื่นใช้",
+      "วิธีใช้งาน: กดปุ่ม <code>Publish</code> มุมขวาบนของหน้าแก้ไขแอปเมื่อพร้อมเผยแพร่ ระบบจะบันทึกเป็นเวอร์ชันใหม่และอัปเดตให้ผู้ใช้ทุกคนเห็นทันที หากพบปัญหาหลัง Publish สามารถไปที่ <code>App settings &gt; Versions</code> เพื่อย้อนกลับไปใช้เวอร์ชันก่อนหน้าได้",
+      "เคล็ดลับ: ก่อน Publish แอปที่มีคนใช้งานจริงอยู่แล้ว ควรทดสอบการเปลี่ยนแปลงในโหมด Preview (กด F5 หรือไอคอนรูปตาในหน้าแก้ไข) ให้ครบทุกจุดที่แก้ไขก่อนเสมอ เพื่อลดความเสี่ยงที่ผู้ใช้จริงจะเจอข้อผิดพลาดทันทีหลังเผยแพร่"
+    ],
+    link: ""
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = '<div class="text-block">' + paraHtml.join('') + '</div>';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำอธิบาย</div>' + textHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
