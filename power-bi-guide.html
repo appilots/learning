@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน Power BI (ภาษาไทย) - กลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #b45309;
+    --accent-2: #92400e;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #fdf1e2;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #f2b134;
+      --accent-2: #e09a1f;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #322613;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+  .topic-list { flex: 0 0 260px; display: flex; flex-direction: column; gap: 6px; }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title { font-weight: 700; font-size: 0.82rem; color: var(--accent-2); margin-bottom: 8px; }
+  .key-points ul { margin: 0; padding-left: 20px; }
+  .key-points li { font-size: 0.88rem; line-height: 1.6; color: var(--text); margin-bottom: 4px; }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--sub); font-size: 0.85rem; margin-bottom: 20px; overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  .text-block { font-size: 0.92rem; line-height: 1.75; color: var(--text); }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.86em;
+  }
+
+  .flow {
+    display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin: 4px 0 16px; padding: 16px 12px;
+    border: 1px solid var(--border); border-radius: 12px; background: var(--placeholder-bg);
+  }
+  .flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 104px; text-align: center; }
+  .flow-icon {
+    width: 46px; height: 46px; border-radius: 12px; background: var(--pill-bg);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+  .flow-label { font-size: 0.76rem; color: var(--sub); font-weight: 600; line-height: 1.3; }
+  .flow-arrow { font-size: 1.3rem; color: var(--accent); flex-shrink: 0; }
+
+  .callout {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 10px; margin: 0 0 12px; font-size: 0.92rem; line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📊 คู่มือการใช้งาน Power BI (ภาษาไทย) พร้อม VDO ประกอบทุกหัวข้อ</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — 20 หัวข้อ เรียงจากพื้นฐานไปขั้นสูง</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/สถาบันที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+const TOPICS = [
+  {
+    key: "overview",
+    title: "Power BI คืออะไร",
+    icon: "📊",
+    flow: [
+      { icon: "📥", label: "นำเข้าข้อมูลดิบ" },
+      { icon: "🧮", label: "แปลง+วิเคราะห์" },
+      { icon: "📊", label: "แดชบอร์ดสวยงาม" }
+    ],
+    video: "https://www.youtube.com/embed/kg4pW18f4gc",
+    videoTitle: "Power BI คืออะไร?",
+    videoAuthor: "วิศวกรรม พอร์ต : Wisawakorn Report",
+    text: [
+      "<strong>Power BI</strong> คือเครื่องมือวิเคราะห์ข้อมูลและสร้างแดชบอร์ด (Business Intelligence) ในตระกูล Microsoft Power Platform ช่วยแปลงข้อมูลดิบจำนวนมาก เช่น ยอดขาย สต็อกสินค้า หรือข้อมูลการเงิน ให้กลายเป็นกราฟและรายงานที่เข้าใจง่าย ช่วยผู้บริหารตัดสินใจได้เร็วขึ้นโดยไม่ต้องเปิดไฟล์ Excel นับสิบแท็บ",
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: Power BI ทำงานเป็น 3 ขั้นตอนหลัก คือ <strong>นำเข้าข้อมูล</strong> จากแหล่งต่างๆ, <strong>แปลง/ทำความสะอาดข้อมูล</strong> ด้วย Power Query, และ <strong>สร้างภาพ (Visualize)</strong> เป็นกราฟ ตาราง หรือแดชบอร์ด โดยทุกขั้นตอนเชื่อมโยงกันในไฟล์เดียว",
+      "เคล็ดลับ: หากคุ้นเคยกับ Excel PivotTable และ Power Query อยู่แล้ว จะเรียนรู้ Power BI ได้เร็วมาก เพราะแนวคิดเบื้องหลังคล้ายกันมาก เพียงแต่ Power BI ออกแบบมาเพื่อสร้างแดชบอร์ดโดยเฉพาะและรองรับข้อมูลปริมาณมากกว่า Excel ได้ดีกว่า"
+    ],
+    link: ""
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นใช้งาน Power BI Desktop",
+    icon: "🚀",
+    flow: [
+      { icon: "⬇️", label: "ดาวน์โหลด Power BI Desktop" },
+      { icon: "🔑", label: "ล็อกอินด้วยบัญชีองค์กร" },
+      { icon: "🧭", label: "สำรวจหน้าจอหลัก" }
+    ],
+    video: "https://www.youtube.com/embed/VgGBxnlhYAk",
+    videoTitle: "สอน Power BI Desktop EP.1: ลองใช้งานครั้งแรก...Like เลย😊",
+    videoAuthor: "Somkiat Chuaymak",
+    text: [
+      "<strong>Power BI Desktop</strong> เป็นโปรแกรมฟรีที่ต้องติดตั้งบนเครื่องคอมพิวเตอร์ (Windows เท่านั้น) ดาวน์โหลดได้จาก Microsoft Store หรือเว็บไซต์ Power BI โดยตรง ใช้สำหรับสร้างและออกแบบรายงานก่อนนำไปเผยแพร่ต่อใน Power BI Service",
+      "วิธีใช้งาน: เปิดโปรแกรมแล้วล็อกอินด้วยบัญชี Microsoft 365 ขององค์กรที่มุมขวาบน หน้าจอหลักแบ่งเป็น 3 มุมมอง (ไอคอนด้านซ้าย) ได้แก่ <strong>Report</strong> (ออกแบบรายงาน/กราฟ), <strong>Data</strong> (ดูข้อมูลดิบที่นำเข้ามา), และ <strong>Model</strong> (จัดการความสัมพันธ์ระหว่างตาราง)",
+      "เคล็ดลับ: Power BI Desktop อัปเดตบ่อยมาก (เกือบทุกเดือน) มีฟีเจอร์ใหม่เพิ่มเข้ามาเรื่อยๆ ควรอัปเดตโปรแกรมให้เป็นเวอร์ชันล่าสุดอยู่เสมอผ่าน Microsoft Store เพื่อให้ใช้งานฟีเจอร์ใหม่ๆ ได้ครบถ้วน"
+    ],
+    link: ""
+  },
+  {
+    key: "components-licensing",
+    title: "ส่วนประกอบของ Power BI (Desktop/Service/Mobile)",
+    icon: "🧩",
+    flow: [
+      { icon: "🖥️", label: "Power BI Desktop (สร้างรายงาน)" },
+      { icon: "☁️", label: "Power BI Service (เผยแพร่/แชร์)" },
+      { icon: "📱", label: "Power BI Mobile (ดูผ่านมือถือ)" }
+    ],
+    video: "https://www.youtube.com/embed/kYmaurNi28U",
+    videoTitle: "🎯 แนะนำ Power BI license ให้เหมาะกับงาน แบบ Free Pro Premium PPU PPC",
+    videoAuthor: "9Expert",
+    text: [
+      "Power BI ประกอบด้วย 3 ส่วนหลักที่ทำงานร่วมกัน: <strong>Power BI Desktop</strong> (โปรแกรมฟรีสำหรับสร้างรายงานบนเครื่อง), <strong>Power BI Service</strong> (เว็บไซต์ app.powerbi.com สำหรับเผยแพร่ แชร์ และดูรายงานออนไลน์), และ <strong>Power BI Mobile</strong> (แอปมือถือสำหรับดูแดชบอร์ดระหว่างเดินทาง)",
+      "หมายเหตุ: Power BI มีหลายระดับใบอนุญาต ได้แก่ <strong>Free</strong> (สร้างรายงานส่วนตัวได้ แต่แชร์ในทีมได้จำกัด), <strong>Pro</strong> (แชร์และทำงานร่วมกันได้เต็มรูปแบบ คิดค่าใช้จ่ายรายเดือนต่อผู้ใช้), และ <strong>Premium</strong> (สำหรับองค์กรขนาดใหญ่ รองรับข้อมูลจำนวนมากและ Workspace ไม่จำกัด)",
+      "เคล็ดลับ: หากต้องการเพียงสร้างรายงานไว้ดูคนเดียวหรือทดลองใช้งาน Free license ก็เพียงพอแล้ว แต่หากต้องการแชร์แดชบอร์ดให้ทีมงานหรือผู้บริหารดูร่วมกัน จำเป็นต้องมี Pro license อย่างน้อยสำหรับผู้ที่เผยแพร่รายงาน"
+    ],
+    link: ""
+  },
+  {
+    key: "get-data",
+    title: "นำเข้าข้อมูล (Get Data) จากแหล่งต่างๆ",
+    icon: "📥",
+    flow: [
+      { icon: "🔌", label: "เลือกแหล่งข้อมูล" },
+      { icon: "📥", label: "Get Data นำเข้า" },
+      { icon: "✅", label: "ข้อมูลพร้อมใช้งาน" }
+    ],
+    video: "https://www.youtube.com/embed/GFgmkfO5NCk",
+    videoTitle: "กระบวนการทำงานของ Power BI EP.1 การนำเข้าข้อมูล (Get Data)",
+    videoAuthor: "ajsmittichai-X-beyondtraining",
+    text: [
+      "Power BI เชื่อมต่อแหล่งข้อมูลได้หลากหลายมากผ่านปุ่ม <code>Get Data</code> เช่น <strong>Excel</strong>, <strong>SharePoint</strong>, <strong>SQL Server</strong>, <strong>Web</strong> (ดึงข้อมูลจากหน้าเว็บ), และ <strong>Folder</strong> (รวมไฟล์หลายไฟล์ในโฟลเดอร์เดียวกันเข้าเป็นตารางเดียว)",
+      "วิธีใช้งาน: กด <code>Home &gt; Get Data</code> เลือกประเภทแหล่งข้อมูล ระบุตำแหน่งไฟล์หรือรายละเอียดการเชื่อมต่อ จากนั้นเลือกตาราง/ชีตที่ต้องการนำเข้า ก่อนกด <code>Load</code> เพื่อนำข้อมูลเข้าสู่ Power BI หรือกด <code>Transform Data</code> เพื่อแก้ไขข้อมูลก่อนนำเข้าจริง",
+      "เคล็ดลับ: หากมีไฟล์ Excel หลายไฟล์ที่มีโครงสร้างเหมือนกัน (เช่น ยอดขายแยกไฟล์ตามเดือน) ให้ใช้ <code>Get Data &gt; Folder</code> แทนการนำเข้าทีละไฟล์ Power BI จะรวมทุกไฟล์ในโฟลเดอร์เข้าเป็นตารางเดียวให้อัตโนมัติ"
+    ],
+    link: ""
+  },
+  {
+    key: "visualizations",
+    title: "สร้างกราฟ/Visualizations พื้นฐาน",
+    icon: "📈",
+    flow: [
+      { icon: "📊", label: "เลือกประเภทกราฟ" },
+      { icon: "🖱️", label: "ลากฟิลด์ข้อมูลใส่" },
+      { icon: "🎨", label: "ได้กราฟทันที" }
+    ],
+    video: "https://www.youtube.com/embed/2vrGhIwiiaw",
+    videoTitle: "พื้นฐานการสร้างและปรับแต่ง visual (กราฟ) ใน Power BI",
+    videoAuthor: "Dusit Srisroy",
+    text: [
+      "การสร้างกราฟ (<strong>Visual</strong>) ใน Power BI ทำได้ง่ายมาก เพียงเลือกประเภทกราฟจากแผง Visualizations ด้านขวา (เช่น Bar chart, Line chart, Pie chart, Card, Table) แล้วลากฟิลด์ข้อมูลจากแผง Fields มาวางในช่อง Axis และ Values ระบบจะวาดกราฟให้ทันที",
+      "วิธีใช้งาน: หากยังไม่แน่ใจว่าจะใช้กราฟแบบไหน ให้เลือกฟิลด์ข้อมูลที่ต้องการก่อน (ติ๊กเลือกในแผง Fields) แล้ว Power BI จะแนะนำและวาดกราฟที่เหมาะสมให้อัตโนมัติ จากนั้นค่อยเปลี่ยนประเภทกราฟภายหลังได้หากต้องการรูปแบบอื่น",
+      "เคล็ดลับ: ใช้ <code>Card</code> สำหรับตัวเลขสรุปสำคัญเดี่ยวๆ (เช่น ยอดขายรวมทั้งปี), <code>Bar/Column chart</code> สำหรับเปรียบเทียบระหว่างหมวดหมู่, และ <code>Line chart</code> สำหรับแสดงแนวโน้มตามเวลา เลือกประเภทกราฟให้ตรงกับเรื่องที่ต้องการสื่อสาร ไม่ใช่แค่เลือกกราฟที่สวยที่สุด"
+    ],
+    link: ""
+  },
+  {
+    key: "filters-slicers",
+    title: "Filters และ Slicers",
+    icon: "🔎",
+    flow: [
+      { icon: "🔎", label: "เพิ่ม Slicer/Filter" },
+      { icon: "👆", label: "ผู้ใช้เลือกกรองข้อมูล" },
+      { icon: "📊", label: "กราฟอัปเดตตามทันที" }
+    ],
+    video: "https://www.youtube.com/embed/IeREQm5Cu2k",
+    videoTitle: "Power BI Tips Ep.15: การใช้งานรีพอร์ตฟิลเตอร์ (Filter pane)",
+    videoAuthor: "Frame Wongsakorn",
+    text: [
+      "<strong>Filter</strong> และ <strong>Slicer</strong> ใช้กรองข้อมูลที่แสดงในรายงาน ต่างกันตรงที่ Filter อยู่ในแผง Filters pane ด้านขวา (ไม่แสดงบนหน้ารายงานโดยตรง) ส่วน Slicer เป็น visual ชนิดหนึ่งที่วางบนหน้ารายงานให้ผู้ดูรายงานคลิกเลือกกรองข้อมูลได้เอง เช่น เลือกปีหรือจังหวัดที่ต้องการดู",
+      "วิธีใช้งาน: Filter มี 3 ระดับ คือ <strong>Visual level</strong> (กรองเฉพาะกราฟที่เลือก), <strong>Page level</strong> (กรองทั้งหน้ารายงาน), และ <strong>Report level</strong> (กรองทั้งไฟล์รายงานทุกหน้า) เลือกระดับให้เหมาะกับสิ่งที่ต้องการกรอง",
+      "เคล็ดลับ: หากต้องการให้ผู้ดูรายงานกรองข้อมูลเองได้ง่ายๆ โดยไม่ต้องเปิด Filters pane ให้ใช้ Slicer วางไว้บนหน้ารายงานแทน ผู้ใช้ทั่วไปมักคุ้นเคยกับการคลิกเลือกจาก Slicer มากกว่าการเปิดแผง Filter ที่ซ่อนอยู่"
+    ],
+    link: ""
+  },
+  {
+    key: "report-design",
+    title: "การจัดรูปแบบและออกแบบ Report",
+    icon: "🎨",
+    flow: [
+      { icon: "🎨", label: "เลือก Theme สี" },
+      { icon: "📐", label: "จัดวางกราฟให้เป็นระเบียบ" },
+      { icon: "✨", label: "รายงานดูเป็นมืออาชีพ" }
+    ],
+    video: "https://www.youtube.com/embed/imIm4zcvNI4",
+    videoTitle: "รู้ไหม? Power BI มี Theme ช่วยปรับแต่งรายงานให้เป็นมืออาชีพ",
+    videoAuthor: "ZyGen - Innovative Consultancy",
+    text: [
+      "Power BI มีฟีเจอร์ <strong>Theme</strong> ช่วยกำหนดชุดสีและฟอนต์ของทั้งรายงานให้สอดคล้องกันในคลิกเดียว ไปที่ <code>View &gt; Themes</code> เลือกธีมสำเร็จรูป หรือสร้างธีมกำหนดเองให้ตรงกับสีแบรนด์องค์กรได้",
+      "วิธีใช้งาน: จัดวางกราฟให้เป็นระเบียบด้วยการจัดตำแหน่งและขนาดให้เท่ากัน (ใช้ <code>Format &gt; Align</code> เพื่อจัดแนวหลายกราฟพร้อมกัน) และเว้นพื้นที่ว่างระหว่างกราฟให้พอเหมาะ ไม่ควรอัดกราฟแน่นจนดูรก",
+      "เคล็ดลับ: หากต้องการใช้ฟอนต์ภาษาไทยในรายงาน ควรกำหนดฟอนต์ผ่าน Theme ตั้งแต่ต้น แทนการตั้งค่าฟอนต์ทีละ visual เพราะจะช่วยประหยัดเวลาและทำให้ทั้งรายงานใช้ฟอนต์เดียวกันสม่ำเสมอ"
+    ],
+    link: ""
+  },
+  {
+    key: "power-query-basics",
+    title: "Power Query เบื้องต้น (แปลง/ทำความสะอาดข้อมูล)",
+    icon: "🧹",
+    flow: [
+      { icon: "📥", label: "ข้อมูลดิบไม่เป็นระเบียบ" },
+      { icon: "🧹", label: "Power Query แปลง/ทำความสะอาด" },
+      { icon: "✅", label: "ข้อมูลพร้อมวิเคราะห์" }
+    ],
+    video: "https://www.youtube.com/embed/GN1QmvticCw",
+    videoTitle: "สรุป Power Query พื้นฐาน 10 รูปแบบ : คลิปเดียวจบ พร้อมรบกับข้อมูลเน่า",
+    videoAuthor: "เทพเอ็กเซล : Thep Excel",
+    text: [
+      "<strong>Power Query</strong> คือเครื่องมือแปลงและทำความสะอาดข้อมูล (Data Preparation) ที่มีอยู่ทั้งใน Excel และ Power BI เปิดใช้งานได้จากปุ่ม <code>Transform Data</code> ใช้จัดการปัญหาข้อมูลที่พบบ่อย เช่น ลบแถวว่าง, รวมคอลัมน์, แยกคอลัมน์, เปลี่ยนประเภทข้อมูล ก่อนนำไปวิเคราะห์จริง",
+      "วิธีใช้งาน: ทุกขั้นตอนที่ทำใน Power Query Editor จะถูกบันทึกเป็นรายการ <code>Applied Steps</code> ทางด้านขวา สามารถย้อนกลับไปแก้ไขขั้นตอนก่อนหน้าได้ตลอดเวลาโดยไม่ต้องเริ่มใหม่ทั้งหมด และเมื่อข้อมูลต้นทางอัปเดต Power Query จะทำขั้นตอนเดิมซ้ำให้อัตโนมัติทุกครั้ง",
+      "เคล็ดลับ: ฟังก์ชันที่ใช้บ่อยที่สุดใน Power Query ได้แก่ <code>Remove Duplicates</code> (ลบข้อมูลซ้ำ), <code>Fill Down</code> (เติมค่าว่างด้วยค่าจากแถวบน), และ <code>Unpivot Columns</code> (แปลงตารางจากแนวกว้างเป็นแนวยาว) ควรฝึกใช้ 3 ฟังก์ชันนี้ให้คล่องก่อนเพราะครอบคลุมปัญหาข้อมูลส่วนใหญ่ที่พบเจอ"
+    ],
+    link: ""
+  },
+  {
+    key: "data-model-relationships",
+    title: "Data Model และความสัมพันธ์ระหว่างตาราง",
+    icon: "🔗",
+    flow: [
+      { icon: "📊", label: "หลายตารางข้อมูล" },
+      { icon: "🔗", label: "สร้างความสัมพันธ์ (Relationship)" },
+      { icon: "🧮", label: "วิเคราะห์ข้ามตารางได้" }
+    ],
+    video: "https://www.youtube.com/embed/1Tp_HtD1p4o",
+    videoTitle: "สอน Power BI จัดการกับความสัมพันธ์ของตารางข้อมูล ep.3",
+    videoAuthor: "9Expert",
+    text: [
+      "เมื่อนำเข้าข้อมูลหลายตาราง (เช่น ตารางยอดขาย + ตารางรายชื่อสินค้า) Power BI ต้องมี <strong>Relationship</strong> เชื่อมโยงตารางเหล่านั้นเข้าด้วยกันก่อน จึงจะนำฟิลด์จากหลายตารางมาสร้างกราฟร่วมกันได้ถูกต้อง ดูและจัดการความสัมพันธ์ได้ที่มุมมอง <code>Model</code>",
+      "วิธีใช้งาน: ลากคอลัมน์ที่เป็นตัวเชื่อม (เช่น รหัสสินค้า) จากตารางหนึ่งไปวางบนคอลัมน์เดียวกันในอีกตารางหนึ่ง Power BI จะสร้างเส้นความสัมพันธ์ให้อัตโนมัติ พร้อมกำหนดทิศทางและชนิดความสัมพันธ์ (เช่น one-to-many) ให้เอง",
+      "เคล็ดลับ: ควรออกแบบข้อมูลให้เป็นรูปแบบ <strong>Star schema</strong> (มีตารางข้อมูลหลักตรงกลาง เชื่อมกับตารางมิติข้อมูลย่อยรอบๆ) แทนการยัดทุกอย่างไว้ในตารางเดียว จะทำให้ Power BI คำนวณได้เร็วกว่าและจัดการความสัมพันธ์ได้ง่ายกว่ามาก"
+    ],
+    link: ""
+  },
+  {
+    key: "hierarchies-drilldown",
+    title: "Hierarchies และ Drill Down",
+    icon: "🪜",
+    flow: [
+      { icon: "🪜", label: "สร้าง Hierarchy" },
+      { icon: "👆", label: "คลิก Drill down" },
+      { icon: "🔍", label: "ดูรายละเอียดระดับลึกขึ้น" }
+    ],
+    video: "https://www.youtube.com/embed/pAMI-lq2Q4c",
+    videoTitle: "How to create Hierarchy and enable Drill Down in Power BI",
+    videoAuthor: "PowerBI with Bogdan",
+    text: [
+      "<strong>Hierarchy</strong> คือการจัดกลุ่มฟิลด์ตามลำดับชั้น เช่น ปี &gt; ไตรมาส &gt; เดือน &gt; วัน หรือ ประเทศ &gt; จังหวัด &gt; อำเภอ ทำให้กราฟรองรับการ <strong>Drill down</strong> (คลิกเจาะลึกจากภาพรวมไปยังรายละเอียด) ได้โดยไม่ต้องสร้างกราฟแยกหลายอัน",
+      "วิธีใช้งาน: ลากฟิลด์วันที่ลงในกราฟ Power BI จะสร้าง Hierarchy วันที่ (ปี/ไตรมาส/เดือน/วัน) ให้อัตโนมัติ หรือสร้างเองได้โดยคลิกขวาที่ฟิลด์ในแผง Fields แล้วเลือก <code>New hierarchy</code> จากนั้นลากฟิลด์อื่นเข้ามาเป็นระดับย่อย",
+      "เคล็ดลับ: ใช้ปุ่มลูกศรมุมซ้ายบนของกราฟ (เปิดใช้งานเมื่อมี Hierarchy) เพื่อ Drill down ทีละระดับ หรือกดปุ่มสายฟ้าคู่เพื่อเปิด <code>Drill down</code> โหมดคลิกตรงจุดในกราฟได้เลย ช่วยให้ผู้ดูรายงานสำรวจข้อมูลได้อิสระโดยไม่ต้องสร้างรายงานแยกหลายหน้า"
+    ],
+    link: ""
+  },
+  {
+    key: "dax-basics",
+    title: "DAX เบื้องต้น (สูตรคำนวณ)",
+    icon: "🧮",
+    flow: [
+      { icon: "❓", label: "ต้องการคำนวณค่าเพิ่ม" },
+      { icon: "🧮", label: "เขียนสูตร DAX" },
+      { icon: "📊", label: "ได้ Measure ใหม่ใช้ในกราฟ" }
+    ],
+    video: "https://www.youtube.com/embed/RTCh52jx3Ts",
+    videoTitle: "#PowerBI #PowerBIDesktop EP12. DAX คืออะไร ทำไมใช้ Power BI Desktop แล้วต้องรู้จัก DAX??",
+    videoAuthor: "Parameter Programmer",
+    text: [
+      "<strong>DAX</strong> (Data Analysis Expressions) คือภาษาสูตรของ Power BI ใช้สร้างการคำนวณที่ซับซ้อนกว่าการลากฟิลด์ธรรมดา เช่น หายอดขายสะสมตั้งแต่ต้นปี, หาสัดส่วนเทียบกับยอดรวม, หรือเปรียบเทียบกับปีก่อนหน้า มีหน้าตาคล้ายสูตร Excel แต่ทำงานกับข้อมูลทั้งตาราง (Data Model) แทนที่จะเป็นเซลล์เดี่ยวๆ",
+      "วิธีใช้งาน: คลิกขวาที่ตารางในแผง Fields แล้วเลือก <code>New measure</code> จากนั้นพิมพ์สูตร DAX ในแถบสูตรด้านบน เช่น <code>ยอดขายรวม = SUM(ยอดขาย[จำนวนเงิน])</code> เมื่อกด Enter จะได้ Measure ใหม่พร้อมนำไปใช้ในกราฟได้ทันที",
+      "เคล็ดลับ: ไม่จำเป็นต้องเขียน DAX เองทุกครั้ง Power BI มีฟีเจอร์ <code>Quick measures</code> ที่สร้างสูตรสำเร็จรูปให้เลือกใช้ตามสถานการณ์ทั่วไป (เช่น ผลรวมสะสม, เปอร์เซ็นต์เปลี่ยนแปลง) เหมาะสำหรับผู้เริ่มต้นที่ยังไม่คุ้นเคยกับการเขียนสูตร DAX เอง"
+    ],
+    link: ""
+  },
+  {
+    key: "measures-vs-columns",
+    title: "Measures vs Calculated Columns",
+    icon: "⚖️",
+    flow: [
+      { icon: "📏", label: "Calculated Column: คำนวณทีละแถว" },
+      { icon: "📐", label: "Measure: คำนวณตามบริบทกราฟ" },
+      { icon: "🎯", label: "เลือกให้ตรงกับงาน" }
+    ],
+    video: "https://www.youtube.com/embed/ePPi1LLX0sA",
+    videoTitle: "Measures vs. calculated columns in DAX and Power BI",
+    videoAuthor: "SQLBI",
+    text: [
+      "<strong>Calculated Column</strong> คำนวณค่าทีละแถวแล้วเก็บผลลัพธ์ไว้ในตาราง (คล้ายการลากสูตร Excel ลงมาทุกแถว) เหมาะกับข้อมูลที่ต้องการใช้เป็นตัวกรองหรือจัดกลุ่ม เช่น แบ่งช่วงอายุ ส่วน <strong>Measure</strong> คำนวณค่าแบบไดนามิกตามบริบทของกราฟ ณ ขณะนั้น (เช่น ตามตัวกรองที่เลือกอยู่) ไม่ได้เก็บค่าตายตัวไว้ในตาราง",
+      "วิธีใช้งาน: ใช้ Calculated Column เมื่อต้องการนำผลลัพธ์ไปวางบนแกน (Axis) ของกราฟหรือใช้เป็น Slicer เช่น คอลัมน์ 'กลุ่มอายุ' ส่วน Measure ใช้เมื่อต้องการตัวเลขสรุป เช่น ผลรวม ค่าเฉลี่ย หรือเปอร์เซ็นต์ ที่เปลี่ยนไปตามตัวกรองที่ผู้ใช้เลือก",
+      "เคล็ดลับ: ควรใช้ Measure มากกว่า Calculated Column เมื่อทำได้ เพราะ Measure คำนวณตามความจำเป็น (ไม่เปลืองพื้นที่เก็บข้อมูล) และยืดหยุ่นกว่ามาก ใช้ Calculated Column เฉพาะกรณีที่จำเป็นต้องเก็บค่าคงที่ไว้ในตารางจริงๆ เท่านั้น"
+    ],
+    link: ""
+  },
+  {
+    key: "common-dax-functions",
+    title: "ฟังก์ชัน DAX ที่ใช้บ่อย (SUM, CALCULATE, FILTER)",
+    icon: "🔢",
+    flow: [
+      { icon: "🧮", label: "SUM/AVERAGE พื้นฐาน" },
+      { icon: "🔀", label: "CALCULATE เปลี่ยนบริบท" },
+      { icon: "📊", label: "FILTER กรองก่อนคำนวณ" }
+    ],
+    video: "https://www.youtube.com/embed/oXtLGZiwaCA",
+    videoTitle: "DAX Quick Measure ของ Power BI สร้าง Measures ด้วยความรวดเร็ว แบบไม่ต้องเขียนสูตรเอง",
+    videoAuthor: "9Expert",
+    text: [
+      "ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม: <code>SUM()</code> รวมค่าตัวเลขทั้งคอลัมน์, <code>AVERAGE()</code> หาค่าเฉลี่ย, <code>COUNTROWS()</code> นับจำนวนแถว ส่วนฟังก์ชันที่ทรงพลังที่สุดคือ <code>CALCULATE()</code> ใช้เปลี่ยนบริบทการคำนวณ (filter context) ของ Measure อื่น เช่น คำนวณยอดขายเฉพาะปีที่แล้วแม้ว่าผู้ใช้จะเลือกดูปีนี้อยู่",
+      "วิธีใช้งาน: ตัวอย่าง <code>ยอดขายปีที่แล้ว = CALCULATE([ยอดขายรวม], SAMEPERIODLASTYEAR('ตารางวันที่'[วันที่]))</code> ใช้ดึงยอดขายของปีก่อนหน้ามาเทียบกับปีปัจจุบันในกราฟเดียวกัน เป็นรูปแบบการเขียน DAX ที่พบบ่อยที่สุดในรายงานเชิงธุรกิจ",
+      "เคล็ดลับ: Power BI มีฟีเจอร์ <code>Quick measure</code> ที่สร้างสูตร CALCULATE ซับซ้อนๆ แบบนี้ให้อัตโนมัติจากเมนู โดยไม่ต้องพิมพ์สูตรเอง เหมาะสำหรับเรียนรู้โครงสร้างสูตรจากตัวอย่างที่ระบบสร้างให้ก่อนจะเขียนเองในภายหลัง"
+    ],
+    link: ""
+  },
+  {
+    key: "dashboard-service",
+    title: "สร้างแดชบอร์ดใน Power BI Service",
+    icon: "📌",
+    flow: [
+      { icon: "📤", label: "Publish ขึ้น Power BI Service" },
+      { icon: "📌", label: "Pin กราฟเข้า Dashboard" },
+      { icon: "👀", label: "ดูภาพรวมหน้าเดียว" }
+    ],
+    video: "https://www.youtube.com/embed/XMvToJ2YzHk",
+    videoTitle: "เริ่มต้น สร้าง Dashboard ด้วย Power BI สำหรับมือใหม่ (ฉบับจับมือทำ)",
+    videoAuthor: "Coding Duck",
+    text: [
+      "<strong>Dashboard</strong> ใน Power BI Service ต่างจาก Report ตรงที่เป็นหน้าสรุปภาพรวม (เพจเดียว) ที่รวมกราฟเด่นๆ จากหลาย Report เข้าไว้ด้วยกัน เหมาะสำหรับผู้บริหารที่ต้องการดูภาพรวมทุกอย่างในหน้าจอเดียวโดยไม่ต้องสลับไปมาระหว่างหลายรายงาน",
+      "วิธีใช้งาน: กด <code>Publish</code> จาก Power BI Desktop เพื่อส่งรายงานขึ้น Power BI Service จากนั้นเปิดรายงานบนเว็บ แล้วกดไอคอนหมุด (Pin) ที่มุมกราฟที่ต้องการ เพื่อ 'ปักหมุด' กราฟนั้นเข้าไปยัง Dashboard ที่เลือกไว้",
+      "เคล็ดลับ: กราฟที่ถูกปักหมุดเข้า Dashboard ยังคลิกกลับไปเปิด Report ต้นฉบับได้เสมอ ทำให้ Dashboard ทำหน้าที่เป็นทางลัดสรุปภาพรวม ส่วนรายละเอียดเชิงลึกยังคงอยู่ใน Report แบบเดิมที่เชื่อมโยงกันไว้"
+    ],
+    link: ""
+  },
+  {
+    key: "sharing-workspace",
+    title: "การแชร์รายงานและ Workspace",
+    icon: "🤝",
+    flow: [
+      { icon: "📁", label: "สร้าง Workspace" },
+      { icon: "📤", label: "Publish รายงานเข้า Workspace" },
+      { icon: "👥", label: "เพิ่มสมาชิกทีมเข้าถึงได้" }
+    ],
+    video: "https://www.youtube.com/embed/8Xm0X7rhqX0",
+    videoTitle: "บทที่ 6 | แชร์รายงานใน Power BI",
+    videoAuthor: "Microsoft Thailand",
+    text: [
+      "<strong>Workspace</strong> คือพื้นที่ทำงานร่วมกันใน Power BI Service ใช้เก็บรวบรวม Report, Dashboard และ Dataset ของทีมหรือแผนกไว้ในที่เดียว แทนการแชร์ไฟล์แยกกันเป็นรายบุคคล สร้างได้จากเมนู <code>Workspaces &gt; Create a workspace</code>",
+      "วิธีใช้งาน: เพิ่มสมาชิกเข้า Workspace ได้จาก <code>Access</code> โดยกำหนดบทบาทเป็น <strong>Viewer</strong> (ดูอย่างเดียว), <strong>Contributor</strong> (แก้ไขรายงานได้), หรือ <strong>Admin</strong> (จัดการ Workspace ได้เต็มรูปแบบ) สมาชิกที่ได้รับสิทธิ์จะเห็นรายงานทั้งหมดใน Workspace นั้นทันที",
+      "เคล็ดลับ: แยก Workspace ตามแผนกหรือโครงการ (เช่น Workspace ฝ่ายขาย, Workspace ฝ่ายการเงิน) แทนการรวมทุกรายงานไว้ใน Workspace เดียว จะช่วยให้จัดการสิทธิ์การเข้าถึงข้อมูลที่ละเอียดอ่อนของแต่ละแผนกได้ง่ายกว่ามาก"
+    ],
+    link: ""
+  },
+  {
+    key: "mobile-app",
+    title: "Power BI Mobile App",
+    icon: "📱",
+    flow: [
+      { icon: "📲", label: "ติดตั้งแอป Power BI Mobile" },
+      { icon: "🔑", label: "ล็อกอินบัญชีเดิม" },
+      { icon: "📊", label: "ดูแดชบอร์ดได้ทุกที่" }
+    ],
+    video: "https://www.youtube.com/embed/Q7UZrupi-c4",
+    videoTitle: "สอนการนำ Power BI ใช้งานร่วมกับ Microsoft Teams, Mobile App, Personalized view เพื่อแชร์ข้อมูลในองค์กร",
+    videoAuthor: "Microsoft Thailand",
+    text: [
+      "<strong>Power BI Mobile</strong> เป็นแอปฟรีสำหรับ iOS และ Android ใช้ดู Dashboard และ Report ที่เผยแพร่ไว้แล้วใน Power BI Service ได้ทุกที่ทุกเวลา เหมาะกับผู้บริหารที่ต้องการติดตามตัวเลขสำคัญระหว่างเดินทางโดยไม่ต้องเปิดคอมพิวเตอร์",
+      "วิธีใช้งาน: ดาวน์โหลดแอป Power BI จาก App Store/Play Store แล้วล็อกอินด้วยบัญชี Microsoft 365 เดียวกับที่ใช้บน Power BI Service รายงานทั้งหมดที่มีสิทธิ์เข้าถึงจะปรากฏให้เปิดดูได้ทันทีโดยไม่ต้องตั้งค่าเพิ่มเติม",
+      "เคล็ดลับ: ก่อนเผยแพร่รายงานให้ทีมใช้งานบนมือถือเป็นหลัก ควรออกแบบ <strong>Mobile layout</strong> แยกต่างหาก (ไปที่ <code>View &gt; Mobile layout</code> ใน Power BI Desktop) เพื่อจัดวางกราฟให้เหมาะกับหน้าจอแนวตั้งขนาดเล็ก แทนการใช้เลย์เอาต์เดียวกับหน้าจอคอมพิวเตอร์"
+    ],
+    link: ""
+  },
+  {
+    key: "row-level-security",
+    title: "Row-Level Security (RLS)",
+    icon: "🔐",
+    flow: [
+      { icon: "👤", label: "ผู้ใช้แต่ละคนล็อกอิน" },
+      { icon: "🔐", label: "RLS กรองข้อมูลตามสิทธิ์" },
+      { icon: "👀", label: "เห็นเฉพาะข้อมูลที่ตัวเองมีสิทธิ์" }
+    ],
+    video: "https://www.youtube.com/embed/CfhsStIhDKs",
+    videoTitle: "EP.72 - Row Level Security (RLS) ใน Power BI: ควบคุมสิทธิ์การเข้าถึงข้อมูลระดับ Row!",
+    videoAuthor: "TheCITIZEN",
+    text: [
+      "<strong>Row-Level Security (RLS)</strong> ใช้จำกัดให้แต่ละคนที่เปิดรายงานเดียวกัน เห็นเฉพาะข้อมูลบางแถวที่ตัวเองมีสิทธิ์เท่านั้น เช่น พนักงานขายภาคเหนือเห็นเฉพาะข้อมูลยอดขายภาคเหนือ โดยไม่ต้องสร้างรายงานแยกหลายไฟล์ตามแต่ละภาค",
+      "วิธีใช้งาน: ไปที่ <code>Modeling &gt; Manage roles</code> สร้าง Role ใหม่ แล้วตั้งกฎกรองข้อมูลด้วย DAX เช่น <code>[ภาค] = USERPRINCIPALNAME()</code> จากนั้นไปที่ Power BI Service กำหนดว่าผู้ใช้แต่ละคนอยู่ใน Role ไหนที่หน้า <code>Security</code> ของ Dataset นั้น",
+      "ข้อควรระวัง: ควรทดสอบ RLS ด้วยฟีเจอร์ <code>View as</code> ใน Power BI Desktop ก่อนเผยแพร่จริงเสมอ เพื่อยืนยันว่าแต่ละ Role เห็นข้อมูลถูกต้องตามที่ตั้งใจไว้ เพราะการตั้งกฎผิดพลาดอาจทำให้ข้อมูลที่ควรเป็นความลับรั่วไหลไปยังผู้ใช้ที่ไม่ควรเห็นได้"
+    ],
+    link: ""
+  },
+  {
+    key: "scheduled-refresh",
+    title: "Refresh ข้อมูลอัตโนมัติ (Scheduled Refresh / Gateway)",
+    icon: "🔄",
+    flow: [
+      { icon: "📊", label: "ข้อมูลต้นทางอัปเดต" },
+      { icon: "⏰", label: "Scheduled Refresh ทำงานตามเวลา" },
+      { icon: "✅", label: "รายงานเป็นข้อมูลล่าสุดเสมอ" }
+    ],
+    video: "https://www.youtube.com/embed/1mR4gPEuh9g",
+    videoTitle: "EP. 16 l วิธีแชร์และตั้งค่า Schedule Refresh เพื่อกำหนดเวลาอัพเดตข้อมูลอัตโนมัติบน Power BI Service",
+    videoAuthor: "Power BI ง่ายนิดเดียว",
+    text: [
+      "<strong>Scheduled Refresh</strong> ใช้ตั้งเวลาให้ Power BI Service ดึงข้อมูลใหม่จากแหล่งข้อมูลต้นทางมาอัปเดตรายงานโดยอัตโนมัติ (เช่น ทุกวันตอนตี 6) โดยไม่ต้องเปิด Power BI Desktop มากด Publish ใหม่เองทุกครั้งที่ข้อมูลเปลี่ยน",
+      "วิธีใช้งาน: ไปที่หน้า <code>Settings</code> ของ Dataset ใน Power BI Service เปิด <code>Scheduled refresh</code> แล้วตั้งความถี่และเวลาที่ต้องการ (สูงสุด 8 ครั้ง/วันสำหรับ Pro license) หากแหล่งข้อมูลอยู่บนเครื่อง (ไม่ใช่คลาวด์) ต้องติดตั้ง <strong>On-premises data gateway</strong> เพิ่มเพื่อให้ Power BI Service เข้าถึงข้อมูลนั้นได้",
+      "เคล็ดลับ: หากตั้ง Scheduled refresh แล้วพบว่าล้มเหลวบ่อยๆ มักมีสาเหตุมาจาก credential การเชื่อมต่อข้อมูลหมดอายุหรือ Gateway ออฟไลน์ ควรตรวจสอบ <code>Refresh history</code> เป็นประจำเพื่อจับปัญหาได้ทันก่อนที่ผู้ใช้จะสังเกตเห็นว่าข้อมูลไม่อัปเดต"
+    ],
+    link: ""
+  },
+  {
+    key: "power-automate-integration",
+    title: "เชื่อมต่อกับ Power Automate/Power Apps",
+    icon: "⚡",
+    flow: [
+      { icon: "📊", label: "เหตุการณ์ในรายงาน Power BI" },
+      { icon: "⚡", label: "Power Automate ทำงานต่อ" },
+      { icon: "📧", label: "แจ้งเตือน/ส่งต่อข้อมูลอัตโนมัติ" }
+    ],
+    video: "https://www.youtube.com/embed/ocCfITP0I-Y",
+    videoTitle: "Power BI vs Power Automate เพิ่มพลัง Dashboard ด้วย RPA",
+    videoAuthor: "9Expert",
+    text: [
+      "Power BI เชื่อมต่อกับ <strong>Power Automate</strong> ได้ทั้งสองทิศทาง เช่น ใช้ Power Automate สั่งรีเฟรชข้อมูล Power BI ตามเงื่อนไขพิเศษ หรือใช้ visual ประเภท <code>Power Automate for Power BI</code> ฝังไว้ในรายงาน เพื่อให้ผู้ดูรายงานกดปุ่มแล้วเริ่มกระบวนการอัตโนมัติได้ทันที เช่น กดปุ่มแล้วส่งอีเมลอนุมัติงบประมาณ",
+      "วิธีใช้งาน: เพิ่ม visual <code>Power Automate for Power BI</code> จากแผง Visualizations ลงในรายงาน แล้วผูกกับ Flow ที่สร้างไว้ใน Power Automate โดยส่งค่าจากแถวข้อมูลที่เลือกในรายงานไปเป็นพารามิเตอร์ให้ Flow ใช้งานต่อได้",
+      "เคล็ดลับ: ใช้ Power Automate ตั้งการแจ้งเตือนอัตโนมัติเมื่อตัวเลขในรายงาน Power BI ถึงเกณฑ์ที่กำหนด (เช่น ยอดขายต่ำกว่าเป้า) ผ่าน <code>Data-driven alerts</code> ร่วมกับ Power Automate เพื่อส่งอีเมลแจ้งทีมที่เกี่ยวข้องโดยไม่ต้องมีใครนั่งเฝ้าแดชบอร์ดตลอดเวลา"
+    ],
+    link: ""
+  },
+  {
+    key: "best-practices",
+    title: "เทคนิคการออกแบบแดชบอร์ดที่ดี",
+    icon: "🌟",
+    flow: [
+      { icon: "🎯", label: "เริ่มจากคำถามทางธุรกิจ" },
+      { icon: "📐", label: "จัดวางเรียบง่าย ไม่รก" },
+      { icon: "✅", label: "แดชบอร์ดอ่านง่าย ใช้งานจริงได้" }
+    ],
+    video: "https://www.youtube.com/embed/PSqBgS-efiY",
+    videoTitle: "How to Design a Dashboard in Power BI in 6 Steps",
+    videoAuthor: "Maven Analytics",
+    text: [
+      "แนวทางที่ดี: ก่อนสร้างแดชบอร์ด ควรเริ่มจากตั้งคำถามทางธุรกิจที่ต้องการตอบให้ชัดเจนก่อนเสมอ (เช่น 'สาขาไหนขายดีที่สุดเดือนนี้') แล้วค่อยออกแบบกราฟที่ตอบคำถามนั้นโดยตรง แทนการใส่กราฟทุกอย่างที่ทำได้ลงไปโดยไม่มีจุดประสงค์ชัดเจน",
+      "แนวทางที่ดี: จำกัดจำนวนกราฟต่อหน้าไม่ให้มากเกินไป (ไม่ควรเกิน 5-7 visual ต่อหน้า) และวางตัวเลขสรุปสำคัญที่สุดไว้มุมซ้ายบนเสมอ เพราะเป็นจุดที่สายตาคนมองเห็นก่อนเป็นอันดับแรกตามธรรมชาติการอ่าน",
+      "เคล็ดลับ: ใช้สีอย่างมีความหมาย เช่น สีเขียวแทนค่าที่ดี สีแดงแทนค่าที่ต้องระวัง แทนการใช้สีสุ่มไปเรื่อยเพื่อความสวยงามเพียงอย่างเดียว และหลีกเลี่ยงการใช้กราฟ 3 มิติหรือ Pie chart ที่มีหมวดหมู่มากเกินไป เพราะทำให้อ่านและเปรียบเทียบค่าได้ยากกว่ากราฟแท่งธรรมดา"
+    ],
+    link: ""
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = '<div class="text-block">' + paraHtml.join('') + '</div>';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำอธิบาย</div>' + textHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
