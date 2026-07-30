@@ -150,6 +150,39 @@
   .q-mark.ok { color: var(--ok); }
   .q-mark.bad { color: var(--bad); }
 
+  .q-block.locked { opacity: 0.92; }
+  .q-retry-hint {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--bad);
+    margin: 0 0 10px;
+  }
+
+  .progress-summary {
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border: 1px solid var(--border);
+    display: none;
+  }
+  .progress-summary.pass { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); }
+  .progress-summary.fail { background: var(--pill-bg); border-color: var(--accent); color: var(--text); }
+  .progress-summary p { margin: 0; }
+  .restart-link {
+    display: inline-block;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
   .submit-btn, .retry-btn, .print-btn {
     display: inline-block;
     padding: 12px 22px;
@@ -226,6 +259,18 @@
     margin-top: 8px;
   }
 
+  .save-status {
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  .save-status.ok { color: var(--ok); background: var(--ok-bg); }
+  .save-status.warn { color: var(--bad); background: var(--bad-bg); }
+  .save-status.pending { color: var(--sub); background: var(--placeholder-bg); }
+
   .back-link {
     display: inline-block;
     margin-bottom: 14px;
@@ -248,11 +293,11 @@
 <div class="wrap">
   <a class="back-link" href="ai-safety-guide.html">← กลับไปที่คู่มือการใช้งาน AI อย่างปลอดภัย</a>
   <h1>📝 แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย</h1>
-  <p class="subtitle">กลุ่มบริษัท ATTG — แบบทดสอบนี้มี 27 ข้อ ครอบคลุมเนื้อหาทั้งหมดในคู่มือ (รวมมาตรฐานกลุ่ม AISIN/Toyota, แนวทาง Generative AI ของ Toyota และ Phishing Mail) ต้องตอบถูกอย่างน้อย <strong>90%</strong> (25 จาก 27 ข้อ) จึงจะถือว่าผ่านเกณฑ์ หากไม่ผ่าน ระบบจะให้ทำแบบทดสอบใหม่ทันที</p>
+  <p class="subtitle">กลุ่มบริษัท ATTG — แบบทดสอบนี้มี 27 ข้อ ครอบคลุมเนื้อหาทั้งหมดในคู่มือ (รวมมาตรฐานกลุ่ม AISIN/Toyota, แนวทาง Generative AI ของ Toyota และ Phishing Mail) ต้องตอบถูกอย่างน้อย <strong>90%</strong> (25 จาก 27 ข้อ) จึงจะถือว่าผ่านเกณฑ์</p>
 
   <div class="card">
     <div class="rules">
-      📋 <strong>คำชี้แจง:</strong> อ่านคู่มือ "การใช้งาน AI อย่างปลอดภัย" ให้ครบทุกหัวข้อก่อนทำแบบทดสอบนี้ เลือกคำตอบที่ถูกต้องที่สุดในแต่ละข้อ เมื่อตอบครบทุกข้อแล้วกดปุ่ม "ส่งคำตอบ" ระบบจะแสดงคะแนนและเฉลยทันที
+      📋 <strong>คำชี้แจง:</strong> อ่านคู่มือ "การใช้งาน AI อย่างปลอดภัย" ให้ครบทุกหัวข้อก่อนทำแบบทดสอบนี้ เลือกคำตอบที่ถูกต้องที่สุดในแต่ละข้อ แล้วกดปุ่ม "ตรวจคำตอบ" — <strong>ข้อที่ตอบถูกจะถูกล็อกไว้ว่าถูกต้องทันที</strong> ส่วนข้อที่ตอบผิดจะมีเครื่องหมาย ❌ กำกับให้แก้ไขและกด "ตรวจคำตอบ" ใหม่ได้เรื่อยๆ จนกว่าจะผ่านเกณฑ์ 90% โดยไม่ต้องเริ่มทำใหม่ทั้งหมด
     </div>
 
     <div class="name-field">
@@ -260,12 +305,17 @@
       <input type="text" id="quizName" placeholder="กรอกชื่อของคุณ">
     </div>
 
+    <div class="progress-summary" id="progressSummary">
+      <p id="progressText"></p>
+      <button type="button" class="restart-link" id="restartMidwayBtn">เริ่มทำใหม่ทั้งหมด (ล้างคำตอบที่ถูกไว้ด้วย)</button>
+    </div>
+
     <form id="quizForm"></form>
 
-    <p class="unanswered-warning" id="unansweredWarning">⚠️ กรุณาตอบให้ครบทุกข้อก่อนส่งคำตอบ (เหลืออีก <span id="unansweredCount">0</span> ข้อ)</p>
+    <p class="unanswered-warning" id="unansweredWarning">⚠️ กรุณาตอบให้ครบทุกข้อที่เหลือก่อนตรวจคำตอบ (เหลืออีก <span id="unansweredCount">0</span> ข้อ)</p>
 
     <div class="btn-row">
-      <button type="button" class="submit-btn" id="submitBtn">ส่งคำตอบ</button>
+      <button type="button" class="submit-btn" id="submitBtn">ตรวจคำตอบ</button>
     </div>
   </div>
 
@@ -274,6 +324,7 @@
     <div class="result-score" id="resultScore"></div>
     <div class="result-detail" id="resultDetail"></div>
     <div class="result-badge" id="resultBadge"></div>
+    <p class="save-status" id="saveStatus"></p>
     <div class="btn-row" style="justify-content:center">
       <button type="button" class="retry-btn" id="retryBtn">🔄 ทำแบบทดสอบใหม่</button>
       <button type="button" class="print-btn" id="printBtn">🖨️ พิมพ์/บันทึกผลลัพธ์</button>
@@ -283,10 +334,36 @@
 </div>
 
 <script>
+// =============================================================================
+// การบันทึกผลลง SharePoint List (ทำครั้งเดียวโดยทีม IT/Power Platform)
+// =============================================================================
+// หน้านี้เป็นไฟล์ HTML แบบ static ไม่มีระบบ login จึงเรียก SharePoint REST/Graph API
+// ตรงๆ จากเบราว์เซอร์ไม่ได้ (ไม่มีทางยืนยันตัวตนอย่างปลอดภัยโดยไม่ฝังรหัสลับไว้ในหน้าเว็บ)
+// วิธีที่ปลอดภัยและเข้ากับชุดเครื่องมือที่ ATTG ใช้อยู่แล้วคือให้ Power Automate เป็นตัวกลาง:
+//
+// ขั้นตอนตั้งค่า (ทำครั้งเดียว):
+// 1. สร้าง SharePoint List ชื่อ เช่น "AI Safety Quiz Results" ในไซต์ของ ATTG
+//    พร้อมคอลัมน์: Title (Single line text, ใช้เก็บชื่อผู้ทำ), Score (Number, %),
+//    CorrectCount (Number), TotalQuestions (Number), Passed (Yes/No),
+//    SubmittedAt (Date and Time)
+// 2. เปิด Power Automate > Create > Instant cloud flow > เลือก Trigger
+//    "When an HTTP request is received"
+// 3. ใน Trigger วาง Request Body JSON Schema แบบ Generate จาก Sample payload นี้:
+//    { "name": "สมชาย ใจดี", "score": 93, "correctCount": 25,
+//      "totalQuestions": 27, "passed": true, "submittedAt": "2026-01-01T09:00:00.000Z" }
+// 4. เพิ่ม Action "Create item" (SharePoint) เชื่อมกับ List ที่สร้างไว้ในข้อ 1
+//    แมปแต่ละฟิลด์จาก Dynamic content ของ Trigger เข้าคอลัมน์ที่ตรงกัน
+// 5. Save Flow แล้วคัดลอก HTTP POST URL ที่ได้ (เปิด Trigger กลับมาดูอีกครั้งจะเห็น URL)
+//    นำมาใส่แทนค่าว่างในตัวแปร RESULT_SUBMIT_URL ด้านล่างนี้
+//
+// ก่อนตั้งค่า URL นี้ แบบทดสอบยังใช้งานและให้คะแนนได้ตามปกติทุกอย่าง เพียงแต่ผลจะไม่ถูก
+// บันทึกส่วนกลาง (จะขึ้นข้อความแจ้งเตือนสีเหลืองให้ผู้ทำแบบทดสอบทราบ)
+const RESULT_SUBMIT_URL = ""; // <-- นำ HTTP POST URL จาก Power Automate มาใส่ตรงนี้
+
 // เพิ่ม/แก้ไขคำถามได้ที่นี่ — correct คือ index (0-based) ของตัวเลือกที่ถูกต้องใน options
 const QUESTIONS = [
   {
-    topic: "ภาพรวม",
+    topic: "ตรวจสอบความถูกต้องของคำตอบ AI",
     q: "AI อย่าง ChatGPT หรือ Claude สร้างคำตอบขึ้นมาอย่างไร?",
     options: [
       "ค้นหาคำตอบจากฐานข้อมูลที่ถูกต้อง 100% เสมอ",
@@ -586,6 +663,25 @@ const QUESTIONS = [
 
 const PASS_THRESHOLD = 90; // เปอร์เซ็นต์ขั้นต่ำที่ต้องได้เพื่อผ่าน
 let attemptCount = 0;
+// สถานะต่อข้อ: locked=true คือตอบถูกแล้ว ล็อกไว้ไม่ต้องตอบซ้ำ, attempted=true คือเคยตอบผิดมาก่อน (ยังต้องแก้)
+let questionState = QUESTIONS.map(() => ({ locked: false, attempted: false }));
+
+// ส่งผลไปบันทึกที่ SharePoint List ผ่าน Power Automate flow (ดูคำแนะนำตั้งค่าด้านบน)
+async function submitResultToSharePoint(payload) {
+  if (!RESULT_SUBMIT_URL) {
+    return { ok: false, reason: "not-configured" };
+  }
+  try {
+    const res = await fetch(RESULT_SUBMIT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    return { ok: res.ok, reason: res.ok ? null : "http-" + res.status };
+  } catch (e) {
+    return { ok: false, reason: "network" };
+  }
+}
 
 function renderQuestions() {
   const form = document.getElementById("quizForm");
@@ -616,7 +712,11 @@ function renderQuestions() {
       input.name = "q" + qi;
       input.value = oi;
       input.addEventListener("change", () => {
-        optsWrap.querySelectorAll(".q-option").forEach(o => o.classList.remove("selected"));
+        optsWrap.querySelectorAll(".q-option").forEach(o => {
+          o.classList.remove("selected", "result-wrong");
+          const m = o.querySelector(".q-mark");
+          if (m) m.remove();
+        });
         label.classList.add("selected");
         updateUnansweredWarning();
       });
@@ -634,6 +734,7 @@ function renderQuestions() {
 function countUnanswered() {
   let count = 0;
   QUESTIONS.forEach((item, qi) => {
+    if (questionState[qi].locked) return;
     const checked = document.querySelector('input[name="q' + qi + '"]:checked');
     if (!checked) count++;
   });
@@ -658,42 +759,87 @@ function gradeQuiz() {
     document.getElementById("unansweredWarning").scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
+  document.getElementById("unansweredWarning").style.display = "none";
 
-  let correctCount = 0;
+  let firstWrongBlock = null;
+
   QUESTIONS.forEach((item, qi) => {
+    if (questionState[qi].locked) return; // ตอบถูกไปแล้วในรอบก่อน ไม่ต้องตรวจซ้ำ
+
     const block = document.querySelector('.q-block[data-qi="' + qi + '"]');
     const checked = document.querySelector('input[name="q' + qi + '"]:checked');
     const selectedIndex = parseInt(checked.value, 10);
     const isCorrect = selectedIndex === item.correct;
-    if (isCorrect) correctCount++;
 
     block.querySelectorAll(".q-option").forEach(optEl => {
-      const oi = parseInt(optEl.dataset.oi, 10);
-      optEl.querySelectorAll("input").forEach(inp => inp.disabled = true);
-      const existingMark = optEl.querySelector(".q-mark");
-      if (existingMark) existingMark.remove();
-      if (oi === item.correct) {
-        optEl.classList.add("result-correct");
-        const mark = document.createElement("span");
-        mark.className = "q-mark ok";
-        mark.textContent = "✓ คำตอบที่ถูกต้อง";
-        optEl.appendChild(mark);
-      } else if (oi === selectedIndex && !isCorrect) {
-        optEl.classList.add("result-wrong");
-        const mark = document.createElement("span");
-        mark.className = "q-mark bad";
-        mark.textContent = "✗ คำตอบของคุณ";
-        optEl.appendChild(mark);
-      }
+      optEl.classList.remove("result-wrong", "result-correct");
+      const m = optEl.querySelector(".q-mark");
+      if (m) m.remove();
     });
+
+    const selectedLabel = block.querySelector('.q-option[data-oi="' + selectedIndex + '"]');
+
+    if (isCorrect) {
+      questionState[qi].locked = true;
+      block.classList.add("locked");
+      block.querySelectorAll("input").forEach(inp => inp.disabled = true);
+      selectedLabel.classList.add("result-correct");
+      const mark = document.createElement("span");
+      mark.className = "q-mark ok";
+      mark.textContent = "✓ ถูกต้อง";
+      selectedLabel.appendChild(mark);
+      const hint = block.querySelector(".q-retry-hint");
+      if (hint) hint.remove();
+    } else {
+      questionState[qi].attempted = true;
+      selectedLabel.classList.add("result-wrong");
+      const mark = document.createElement("span");
+      mark.className = "q-mark bad";
+      mark.textContent = "✗ ไม่ถูกต้อง";
+      selectedLabel.appendChild(mark);
+      let hint = block.querySelector(".q-retry-hint");
+      if (!hint) {
+        hint = document.createElement("p");
+        hint.className = "q-retry-hint";
+        block.insertBefore(hint, block.querySelector(".q-options"));
+      }
+      hint.textContent = "❌ คำตอบนี้ยังไม่ถูกต้อง กรุณากลับไปทบทวนคู่มือแล้วเลือกใหม่";
+      if (!firstWrongBlock) firstWrongBlock = block;
+    }
   });
 
+  const correctCount = questionState.filter(s => s.locked).length;
   const percent = Math.round((correctCount / QUESTIONS.length) * 100);
   const passed = percent >= PASS_THRESHOLD;
   attemptCount++;
 
+  updateProgressSummary(correctCount, percent, passed);
+
+  if (passed) {
+    finalizePass(correctCount, percent);
+  } else if (firstWrongBlock) {
+    firstWrongBlock.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+function updateProgressSummary(correctCount, percent, passed) {
+  const el = document.getElementById("progressSummary");
+  const text = document.getElementById("progressText");
+  el.style.display = "block";
+  if (passed) {
+    text.innerHTML = "✅ <strong>ผ่านเกณฑ์แล้ว!</strong> ตอบถูก " + correctCount + " / " + QUESTIONS.length + " ข้อ (" + percent + "%)";
+    el.className = "progress-summary pass";
+  } else {
+    const remaining = QUESTIONS.length - correctCount;
+    text.innerHTML = "ตอบถูกแล้ว <strong>" + correctCount + " / " + QUESTIONS.length + " ข้อ (" + percent + "%)</strong> — ยังไม่ผ่านเกณฑ์ 90% เหลืออีก " + remaining + " ข้อที่มีเครื่องหมาย ❌ กำกับไว้ กรุณาแก้ไขแล้วกด \"ตรวจคำตอบ\" อีกครั้ง (ไม่ต้องทำข้อที่ล็อกไว้ว่าถูกแล้วซ้ำ)";
+    el.className = "progress-summary fail";
+  }
+}
+
+function finalizePass(correctCount, percent) {
   document.getElementById("submitBtn").style.display = "none";
   document.getElementById("unansweredWarning").style.display = "none";
+  document.querySelectorAll('#quizForm input[type="radio"]').forEach(inp => inp.disabled = true);
 
   const resultsSection = document.getElementById("resultsSection");
   const resultLabel = document.getElementById("resultLabel");
@@ -705,35 +851,61 @@ function gradeQuiz() {
   const nameVal = document.getElementById("quizName").value.trim();
 
   resultLabel.textContent = (nameVal ? nameVal + " — " : "") + "ผลการทำแบบทดสอบ";
-  resultLabel.className = "result-label " + (passed ? "pass" : "fail");
+  resultLabel.className = "result-label pass";
   resultScore.textContent = percent + "%";
-  resultScore.className = "result-score " + (passed ? "pass" : "fail");
+  resultScore.className = "result-score pass";
   resultDetail.textContent = "ตอบถูก " + correctCount + " จาก " + QUESTIONS.length + " ข้อ (เกณฑ์ผ่าน: 90%)";
-
-  if (passed) {
-    resultBadge.textContent = "✅ ผ่านเกณฑ์ — เข้าใจแนวปฏิบัติการใช้ AI อย่างปลอดภัยแล้ว";
-    resultBadge.className = "result-badge pass";
-  } else {
-    resultBadge.textContent = "❌ ยังไม่ผ่านเกณฑ์ — กรุณากลับไปทบทวนคู่มือแล้วทำแบบทดสอบใหม่";
-    resultBadge.className = "result-badge fail";
-  }
-
-  attemptNote.textContent = "จำนวนครั้งที่ทำแบบทดสอบในเซสชันนี้: " + attemptCount + (passed ? "" : " · กรุณาทบทวนคู่มือก่อนทำใหม่อีกครั้ง");
+  resultBadge.textContent = "✅ ผ่านเกณฑ์ — เข้าใจแนวปฏิบัติการใช้ AI อย่างปลอดภัยแล้ว";
+  resultBadge.className = "result-badge pass";
+  attemptNote.textContent = "จำนวนครั้งที่กดตรวจคำตอบในเซสชันนี้: " + attemptCount;
 
   resultsSection.style.display = "block";
   resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const saveStatus = document.getElementById("saveStatus");
+  saveStatus.textContent = "⏳ กำลังบันทึกผลลง SharePoint...";
+  saveStatus.className = "save-status pending";
+
+  const payload = {
+    name: nameVal || "(ไม่ระบุชื่อ)",
+    score: percent,
+    correctCount,
+    totalQuestions: QUESTIONS.length,
+    passed: true,
+    submittedAt: new Date().toISOString()
+  };
+
+  submitResultToSharePoint(payload).then((result) => {
+    if (result.ok) {
+      saveStatus.textContent = "✅ บันทึกผลลง SharePoint เรียบร้อยแล้ว";
+      saveStatus.className = "save-status ok";
+    } else if (result.reason === "not-configured") {
+      saveStatus.textContent = "⚠️ ยังไม่ได้เชื่อมต่อระบบบันทึกผลส่วนกลาง (แจ้งทีม IT ให้ตั้งค่า) — กรุณากดพิมพ์/บันทึกผลลัพธ์ไว้เป็นหลักฐานแทน";
+      saveStatus.className = "save-status warn";
+    } else {
+      saveStatus.textContent = "⚠️ บันทึกผลไปยัง SharePoint ไม่สำเร็จ — กรุณากดพิมพ์/บันทึกผลลัพธ์ไว้เป็นหลักฐาน แล้วแจ้งทีม IT";
+      saveStatus.className = "save-status warn";
+    }
+  });
 }
 
 function resetQuiz() {
+  questionState = QUESTIONS.map(() => ({ locked: false, attempted: false }));
+  attemptCount = 0;
   document.getElementById("resultsSection").style.display = "none";
+  document.getElementById("progressSummary").style.display = "none";
   document.getElementById("submitBtn").style.display = "inline-block";
   document.getElementById("unansweredWarning").style.display = "none";
+  const saveStatus = document.getElementById("saveStatus");
+  saveStatus.textContent = "";
+  saveStatus.className = "save-status";
   renderQuestions();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 document.getElementById("submitBtn").addEventListener("click", gradeQuiz);
 document.getElementById("retryBtn").addEventListener("click", resetQuiz);
+document.getElementById("restartMidwayBtn").addEventListener("click", resetQuiz);
 document.getElementById("printBtn").addEventListener("click", () => window.print());
 
 renderQuestions();
