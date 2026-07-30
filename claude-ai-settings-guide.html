@@ -312,7 +312,7 @@
   <h1>⚙️ คู่มือเมนู Settings ของ Claude AI สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</h1>
   <p class="subtitle">อธิบายว่าแต่ละเมนูในหน้า Settings (ตามภาพหน้าจอแอป Claude) ใช้ทำอะไรได้บ้าง — คลิกหัวข้อด้านซ้ายเพื่อดูรายละเอียด</p>
   <div class="copyright-banner">
-    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/ครีเอเตอร์ที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง เมนูบางหัวข้อยังไม่มีคลิปสอนภาษาไทยโดยตรงเนื่องจากเป็นฟีเจอร์ที่เพิ่งเปิดตัว จึงสรุปเป็นคำอธิบายละเอียดแทน
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/ครีเอเตอร์ที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง หัวข้อที่มีป้าย <strong>🇬🇧 English</strong> ยังไม่มีคลิปสอนภาษาไทยโดยตรง (เป็นฟีเจอร์ที่เพิ่งเปิดตัว) จึงเลือกคลิปภาษาอังกฤษที่พูดช้า ฟังง่าย อธิบายทีละขั้นตอนชัดเจนมาใช้แทน — คำบรรยายสรุปด้านล่างวิดีโอยังคงเป็นภาษาไทยทุกหัวข้อ
   </div>
 
   <div class="layout">
@@ -356,6 +356,10 @@ const TOPICS = [
       { icon: "🔗", label: "เชื่อมต่ออุปกรณ์/อีเมล" },
       { icon: "🔒", label: "ดูแลความปลอดภัยของบัญชี" }
     ],
+    video: "https://www.youtube.com/embed/O3pRpCUsPTE",
+    videoTitle: "Claude Settings From Scratch: How To Set Up Claude Properly",
+    videoAuthor: "GenAI Skills Academy",
+    videoLang: "en",
     keyPoints: [
       "จัดการอีเมลที่ผูกไว้ ชื่อผู้ใช้ และองค์กร (Workspace) ที่บัญชีสังกัดอยู่",
       "ตรวจสอบและออกจากระบบในอุปกรณ์อื่นที่เคยล็อกอินไว้ได้จากหน้านี้",
@@ -379,6 +383,10 @@ const TOPICS = [
       { icon: "🔒", label: "ควบคุมสิทธิ์การใช้ข้อมูล" },
       { icon: "🛡️", label: "ข้อมูลบริษัทปลอดภัยขึ้น" }
     ],
+    video: "https://www.youtube.com/embed/lgqrBeCRIKY",
+    videoTitle: "How To Secure Your Claude AI Account: The Best Privacy Settings And Login Protection Guide (2026)",
+    videoAuthor: "ProgrammingKnowledge2",
+    videoLang: "en",
     keyPoints: [
       "ควบคุมว่า Anthropic นำบทสนทนาไปใช้ฝึกโมเดล AI หรือไม่ — บัญชีองค์กรมักปิดไว้เป็นค่าเริ่มต้น",
       "ลบประวัติการสนทนาทั้งหมด หรือตั้งเวลาลบอัตโนมัติได้จากหน้านี้",
@@ -402,6 +410,10 @@ const TOPICS = [
       { icon: "💳", label: "จัดการวิธีชำระเงิน" },
       { icon: "🔄", label: "อัปเกรด/ดาวน์เกรดแผนได้" }
     ],
+    video: "https://www.youtube.com/embed/IkEZ2znRBhw",
+    videoTitle: "Claude AI Pricing Explained | Free vs Pro vs Team vs Enterprise Plans",
+    videoAuthor: "Talentelgia Technologies",
+    videoLang: "en",
     keyPoints: [
       "ดูและจัดการแผนการใช้งาน (Free, Pro, Max, Team, Enterprise) และประวัติการเรียกเก็บเงิน",
       "หากอยู่ใน Workspace ขององค์กร การเรียกเก็บเงินมักบริหารโดยผู้ดูแลระบบส่วนกลาง",
@@ -425,6 +437,10 @@ const TOPICS = [
       { icon: "📊", label: "เทียบกับโควตาของแผน" },
       { icon: "⚖️", label: "วางแผนการใช้งานได้ดีขึ้น" }
     ],
+    video: "https://www.youtube.com/embed/9BUH3ai1Rvc",
+    videoTitle: "How To Check Usage Limits In Claude AI (2026) (Complete Guide)",
+    videoAuthor: "Three Step Guide",
+    videoLang: "en",
     keyPoints: [
       "แสดงปริมาณการใช้งานเทียบกับโควตาของแผนที่ใช้อยู่ในรอบบิลปัจจุบัน",
       "มีประโยชน์มากเมื่อใช้ Claude Code หรือ API เพราะช่วยติดตามค่าใช้จ่ายที่อาจเกิดขึ้น",
@@ -448,6 +464,10 @@ const TOPICS = [
       { icon: "🧩", label: "เปิด/ปิดความสามารถที่ต้องการ" },
       { icon: "✅", label: "Claude ทำงานได้ตรงจุดประสงค์" }
     ],
+    video: "https://www.youtube.com/embed/08ebMP_zRws",
+    videoTitle: "Claude AI - How To Enable Web Searching in Claude (Easy Tutorial)",
+    videoAuthor: "Tech Academy",
+    videoLang: "en",
     keyPoints: [
       "เปิด/ปิดความสามารถเสริม เช่น Web Search (ค้นข้อมูลสด), Artifacts (สร้างเว็บ/แอปแบบโต้ตอบ) และการวิเคราะห์ไฟล์",
       "เปิด Web Search เมื่อต้องการข้อมูลล่าสุด เช่น ข่าวสารหรือราคาปัจจุบัน แทนการตอบจากความรู้เดิม",
@@ -513,6 +533,10 @@ const TOPICS = [
       { icon: "🖱️", label: "Claude มองเห็น/โต้ตอบหน้าเว็บ" },
       { icon: "⚡", label: "สั่งงานบนเว็บที่เปิดอยู่ได้ทันที" }
     ],
+    video: "https://www.youtube.com/embed/52Fc0xjVCBc",
+    videoTitle: "Claude in Chrome Clearly Explained (beginner setup guide & uses)",
+    videoAuthor: "Eliot Prince",
+    videoLang: "en",
     keyPoints: [
       "ส่วนขยาย (Extension) ที่ให้ Claude มองเห็นและโต้ตอบกับหน้าเว็บที่เปิดอยู่ได้โดยตรง เช่น กรอกฟอร์ม สรุปเนื้อหา",
       "ติดตั้งจาก Chrome Web Store แล้วล็อกอินด้วยบัญชี Claude เดียวกับที่ใช้อยู่",
@@ -536,6 +560,10 @@ const TOPICS = [
       { icon: "🔄", label: "เช่น เปิดแอปอัตโนมัติ" },
       { icon: "✅", label: "แอปพร้อมใช้งานทุกครั้งที่เปิดเครื่อง" }
     ],
+    video: "https://www.youtube.com/embed/laZxA0O8Hmw",
+    videoTitle: "How to Set Up Claude AI Desktop App | Complete Setup Tutorial for Beginners",
+    videoAuthor: "ITeePK",
+    videoLang: "en",
     keyPoints: [
       "เป็นการตั้งค่าเฉพาะตัวโปรแกรม Desktop ที่ติดตั้งในเครื่อง เช่น เปิดแอปอัตโนมัติตอนเปิดเครื่อง",
       "แยกจากการตั้งค่าบัญชี (Account/Privacy) ที่ผูกกับผู้ใช้และซิงก์ข้ามเครื่อง",
@@ -559,6 +587,10 @@ const TOPICS = [
       { icon: "⚙️", label: "เปิด/ปิด/ลบ Extension" },
       { icon: "🔗", label: "Claude เข้าถึงเครื่องมือเพิ่มเติมได้" }
     ],
+    video: "https://www.youtube.com/embed/MI1IEN9QORk",
+    videoTitle: "Claude Desktop Extensions: How to Install & Best Tricks & vs MCP",
+    videoAuthor: "Autoclient . AI",
+    videoLang: "en",
     keyPoints: [
       "จัดการส่วนเสริมที่เชื่อม Claude Desktop กับโปรแกรม/ไฟล์ในเครื่อง เช่นผ่าน MCP",
       "ต่างจาก Connectors ตรงที่ Extensions เน้นเชื่อมกับซอฟต์แวร์ในเครื่อง ไม่ใช่บริการออนไลน์",
@@ -582,6 +614,10 @@ const TOPICS = [
       { icon: "🔌", label: "เชื่อมต่อ MCP Server เอง" },
       { icon: "⚠️", label: "เหมาะกับทีมพัฒนา/IT เท่านั้น" }
     ],
+    video: "https://www.youtube.com/embed/5dCbms3dF5E",
+    videoTitle: "How to Enable Developer Mode in Claude Desktop (Step-by-Step Guide)",
+    videoAuthor: "HowToMastery",
+    videoLang: "en",
     keyPoints: [
       "เปิดโหมดสำหรับตั้งค่าขั้นสูง เช่น เชื่อมต่อ MCP Server ของตัวเอง",
       "เหมาะสำหรับทีมพัฒนาที่ต้องการเชื่อม Claude Desktop กับระบบภายในองค์กร",
@@ -626,6 +662,10 @@ const TOPICS = [
       { icon: "📁", label: "เช่น Google Drive, Slack, GitHub" },
       { icon: "💬", label: "อ้างอิงข้อมูลได้ในบทสนทนาทันที" }
     ],
+    video: "https://www.youtube.com/embed/FpRNId-jeTQ",
+    videoTitle: "Claude Connectors Tutorial for Beginners",
+    videoAuthor: "Kevin Stratvert",
+    videoLang: "en",
     keyPoints: [
       "เชื่อม Claude เข้ากับบริการออนไลน์ภายนอก เช่น Google Drive, Calendar, Slack, GitHub",
       "หลังเชื่อมต่อแล้ว ถามคำถามที่อ้างอิงไฟล์ในบริการนั้นได้ทันทีโดยไม่ต้องอัปโหลดเอง",
@@ -649,6 +689,10 @@ const TOPICS = [
       { icon: "🔍", label: "Browse ดูรายการที่มี" },
       { icon: "➕", label: "Add ติดตั้ง Plugin ที่ต้องการ" }
     ],
+    video: "https://www.youtube.com/embed/wvELMwC-LOI",
+    videoTitle: "Claude COWORK Plugins clearly explained & how to actually set it up",
+    videoAuthor: "Elena Kell",
+    videoLang: "en",
     keyPoints: [
       "ส่วนเสริมที่ต่อยอดความสามารถของ Claude เพิ่มเติมจากฟีเจอร์มาตรฐาน คล้าย Extension ในเบราว์เซอร์",
       "กด Browse เพื่อดูรายการ Plugin ที่เปิดให้ติดตั้ง และ Add เพื่อติดตั้ง",
@@ -722,8 +766,11 @@ function renderContent() {
   let videoSectionHtml = '';
   if (topic.video) {
     const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const langBadge = topic.videoLang === 'en'
+      ? '<span style="display:inline-block;background:var(--pill-bg);color:var(--accent-2);border:1px solid var(--accent);border-radius:6px;padding:1px 7px;font-size:0.72rem;font-weight:700;margin-right:6px;">🇬🇧 English</span>'
+      : '';
     const creditHtml = (topic.videoTitle || topic.videoAuthor)
-      ? '<div class="video-credit">📺 ' +
+      ? '<div class="video-credit">📺 ' + langBadge +
         (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
         (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
         ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
