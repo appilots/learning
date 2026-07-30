@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือเมนู Settings ของ Claude AI สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #faf6f8;
+    --card-bg: #ffffff;
+    --text: #2b2028;
+    --sub: #7a6a76;
+    --accent: #a8577e;
+    --accent-2: #7c3f5d;
+    --border: #ecdfe6;
+    --shadow: 0 2px 10px rgba(90, 40, 65, 0.08);
+    --pill-bg: #f5e6ee;
+    --placeholder-bg: #fbf6f9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #19141a;
+      --card-bg: #221b22;
+      --text: #f2e9ef;
+      --sub: #b5a4b0;
+      --accent: #d98bab;
+      --accent-2: #c06f92;
+      --border: #362b34;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #2e1f28;
+      --placeholder-bg: #271f26;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topic-list {
+    flex: 0 0 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-group-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 14px 0 2px;
+    padding: 0 4px;
+  }
+  .topic-group-label:first-child { margin-top: 0; }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--accent-2);
+    margin-bottom: 8px;
+  }
+  .key-points ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .key-points li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .image-placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.78rem;
+    text-align: center;
+    padding: 8px;
+  }
+  .image-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .text-block {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder {
+    color: var(--sub);
+    font-style: italic;
+  }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.88em;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0 16px;
+    padding: 16px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--placeholder-bg);
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 104px;
+    text-align: center;
+  }
+  .flow-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .flow-label {
+    font-size: 0.76rem;
+    color: var(--sub);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .flow-arrow {
+    font-size: 1.3rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  .ref-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-group-label { display: none; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⚙️ คู่มือเมนู Settings ของ Claude AI สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</h1>
+  <p class="subtitle">อธิบายว่าแต่ละเมนูในหน้า Settings (ตามภาพหน้าจอแอป Claude) ใช้ทำอะไรได้บ้าง — คลิกหัวข้อด้านซ้ายเพื่อดูรายละเอียด</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/ครีเอเตอร์ที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง เมนูบางหัวข้อยังไม่มีคลิปสอนภาษาไทยโดยตรงเนื่องจากเป็นฟีเจอร์ที่เพิ่งเปิดตัว จึงสรุปเป็นคำอธิบายละเอียดแทน
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — group ใช้จัดกลุ่มเมนูด้านซ้ายให้ตรงกับหมวดในแอป (Settings / Desktop app / Customize)
+// video ใส่ลิงก์ YouTube embed (ถ้าไม่มีให้ใส่ keyPoints แทน), text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
+const TOPICS = [
+  {
+    key: "general",
+    group: "Settings",
+    title: "General",
+    icon: "⚙️",
+    flow: [
+      { icon: "🎨", label: "เลือกธีม/ภาษา/ชื่อที่แสดง" },
+      { icon: "⚙️", label: "ปรับให้เหมาะกับตัวเอง" },
+      { icon: "✅", label: "ใช้งาน Claude ได้สะดวกขึ้น" }
+    ],
+    video: "https://www.youtube.com/embed/YkwGwMh7g7c",
+    videoTitle: "สอนวิธีใช้ Claude AI สำหรับมือใหม่ ใช้เป็นใน 19 นาที ครบทุกฟีเจอร์ ฉบับอัปเดต 2026",
+    videoAuthor: "Readyplanet",
+    images: [],
+    text: [
+      "หน้า <strong>General</strong> คือจุดตั้งค่าพื้นฐานของบัญชี Claude เช่น ธีมสี (สว่าง/มืด), ภาษาที่ใช้แสดงผล, ชื่อที่ใช้เรียก และการตั้งค่าพฤติกรรมพื้นฐานอื่นๆ ของการสนทนา เหมาะเป็นจุดแรกที่ควรเข้าไปตั้งค่าก่อนเริ่มใช้งานจริง",
+      "วิธีใช้งาน: เข้าไปที่ไอคอนรูปคน/โปรไฟล์มุมล่างซ้าย เลือก <code>Settings &gt; General</code> ปรับธีมให้เข้ากับสภาพแสงที่ใช้งาน และตั้งชื่อที่ต้องการให้ Claude เรียกเพื่อให้การสนทนาเป็นกันเองมากขึ้น",
+      "เคล็ดลับ: หากต้องการให้ Claude ตอบเป็นภาษาไทยตลอดโดยไม่ต้องสั่งซ้ำทุกครั้ง สามารถระบุไว้ในคำแนะนำส่วนตัว (Custom instructions) ที่อยู่ในหน้า General ได้เลย ไม่ต้องพิมพ์กำกับในทุกข้อความ"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "account",
+    group: "Settings",
+    title: "Account",
+    icon: "👤",
+    flow: [
+      { icon: "👤", label: "ข้อมูลบัญชีผู้ใช้" },
+      { icon: "🔗", label: "เชื่อมต่ออุปกรณ์/อีเมล" },
+      { icon: "🔒", label: "ดูแลความปลอดภัยของบัญชี" }
+    ],
+    keyPoints: [
+      "จัดการอีเมลที่ผูกไว้ ชื่อผู้ใช้ และองค์กร (Workspace) ที่บัญชีสังกัดอยู่",
+      "ตรวจสอบและออกจากระบบในอุปกรณ์อื่นที่เคยล็อกอินไว้ได้จากหน้านี้",
+      "การเปลี่ยนอีเมลหรือลบบัญชีทำได้ที่นี่เท่านั้น — การลบบัญชีไม่สามารถย้อนกลับได้"
+    ],
+    images: [],
+    text: [
+      "หน้า <strong>Account</strong> ใช้จัดการข้อมูลบัญชี เช่น อีเมลที่ผูกไว้ ชื่อผู้ใช้ และองค์กร (Workspace) ที่บัญชีสังกัดอยู่ หากใช้งานผ่านบัญชีองค์กร จะเห็นชื่อ Workspace ของบริษัทแสดงอยู่ในหน้านี้ด้วย",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Account</code> เพื่อตรวจสอบว่าอุปกรณ์ไหนบ้างที่เคยล็อกอินเข้าบัญชีนี้ไว้ หากพบอุปกรณ์ที่ไม่รู้จักหรือไม่ได้ใช้งานแล้ว สามารถกด Sign out ออกจากอุปกรณ์นั้นได้ทันทีจากหน้านี้เพื่อความปลอดภัย",
+      "ข้อควรระวัง: การเปลี่ยนอีเมลหรือลบบัญชีต้องทำผ่านหน้า Account เท่านั้น และการลบบัญชีไม่สามารถย้อนกลับได้ ควรตรวจสอบให้แน่ใจและสำรองข้อมูลสำคัญ (เช่น Projects หรือ Skills ที่สร้างไว้) ก่อนดำเนินการ"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "privacy",
+    group: "Settings",
+    title: "Privacy",
+    icon: "🔒",
+    flow: [
+      { icon: "💬", label: "บทสนทนาของเรา" },
+      { icon: "🔒", label: "ควบคุมสิทธิ์การใช้ข้อมูล" },
+      { icon: "🛡️", label: "ข้อมูลบริษัทปลอดภัยขึ้น" }
+    ],
+    keyPoints: [
+      "ควบคุมว่า Anthropic นำบทสนทนาไปใช้ฝึกโมเดล AI หรือไม่ — บัญชีองค์กรมักปิดไว้เป็นค่าเริ่มต้น",
+      "ลบประวัติการสนทนาทั้งหมด หรือตั้งเวลาลบอัตโนมัติได้จากหน้านี้",
+      "ควรตรวจสอบก่อนนำข้อมูลลูกค้า/ข้อมูลภายในที่เป็นความลับไปสนทนากับ Claude"
+    ],
+    images: [],
+    text: [
+      "หน้า <strong>Privacy</strong> ควบคุมว่า Anthropic นำบทสนทนาของเราไปใช้ฝึกโมเดล AI หรือไม่ ค่าเริ่มต้นของบัญชีองค์กร (Business/Enterprise) มักปิดการใช้ข้อมูลฝึกโมเดลไว้อยู่แล้วเพื่อความปลอดภัยของข้อมูลบริษัท",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Privacy</code> ตรวจสอบสถานะการอนุญาตให้ใช้ข้อมูลสนทนาไปฝึกโมเดล และสามารถลบประวัติการสนทนาทั้งหมด หรือตั้งเวลาลบอัตโนมัติหลังผ่านไปกี่วันได้จากหน้านี้",
+      "ข้อควรระวัง: ควรตรวจสอบการตั้งค่านี้ก่อนนำข้อมูลลูกค้าหรือข้อมูลภายในบริษัทที่เป็นความลับไปสนทนากับ Claude เสมอ เพื่อให้มั่นใจว่าข้อมูลจะไม่ถูกนำไปใช้ฝึกโมเดลโดยไม่ได้ตั้งใจ โดยเฉพาะหากใช้งานผ่านบัญชีส่วนตัว (Free/Pro) แทนบัญชีองค์กร"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "billing",
+    group: "Settings",
+    title: "Billing",
+    icon: "💳",
+    flow: [
+      { icon: "📋", label: "ดูแผนการใช้งานปัจจุบัน" },
+      { icon: "💳", label: "จัดการวิธีชำระเงิน" },
+      { icon: "🔄", label: "อัปเกรด/ดาวน์เกรดแผนได้" }
+    ],
+    keyPoints: [
+      "ดูและจัดการแผนการใช้งาน (Free, Pro, Max, Team, Enterprise) และประวัติการเรียกเก็บเงิน",
+      "หากอยู่ใน Workspace ขององค์กร การเรียกเก็บเงินมักบริหารโดยผู้ดูแลระบบส่วนกลาง",
+      "อัปเกรด/ดาวน์เกรดแผนได้จากหน้านี้เมื่อโควตาการใช้งานไม่พอ"
+    ],
+    images: [],
+    text: [
+      "หน้า <strong>Billing</strong> ใช้ดูและจัดการแผนการใช้งาน (Free, Pro, Max, Team, Enterprise) รวมถึงประวัติการเรียกเก็บเงินและวิธีการชำระเงินที่ผูกไว้กับบัญชี",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Billing</code> เพื่อดูแผนปัจจุบัน วันครบกำหนดชำระเงินรอบถัดไป และสามารถอัปเกรด/ดาวน์เกรดแผนได้จากหน้านี้โดยตรง หากรู้สึกว่าโควตาการใช้งานไม่พอกับความต้องการใช้งานประจำวัน",
+      "หมายเหตุ: หากบัญชีอยู่ภายใต้ Workspace ขององค์กร (เช่น ATTG) การเรียกเก็บเงินมักบริหารจัดการโดยผู้ดูแลระบบส่วนกลาง พนักงานทั่วไปมักไม่มีสิทธิ์แก้ไขข้อมูลการชำระเงินเอง หากต้องการเปลี่ยนแผนควรติดต่อผู้ดูแลระบบของบริษัทแทน"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "usage",
+    group: "Settings",
+    title: "Usage",
+    icon: "📊",
+    flow: [
+      { icon: "📈", label: "ดูปริมาณการใช้งาน" },
+      { icon: "📊", label: "เทียบกับโควตาของแผน" },
+      { icon: "⚖️", label: "วางแผนการใช้งานได้ดีขึ้น" }
+    ],
+    keyPoints: [
+      "แสดงปริมาณการใช้งานเทียบกับโควตาของแผนที่ใช้อยู่ในรอบบิลปัจจุบัน",
+      "มีประโยชน์มากเมื่อใช้ Claude Code หรือ API เพราะช่วยติดตามค่าใช้จ่ายที่อาจเกิดขึ้น",
+      "หากใกล้เต็มโควตาบ่อยๆ ควรปรับพฤติกรรมการใช้งานหรือพิจารณาอัปเกรดแผน"
+    ],
+    images: [],
+    text: [
+      "หน้า <strong>Usage</strong> แสดงปริมาณการใช้งานเทียบกับโควตาของแผนที่ใช้อยู่ เช่น จำนวนข้อความหรือ Token ที่ใช้ไปในรอบบิลปัจจุบัน ช่วยให้วางแผนการใช้งานได้ก่อนโควตาจะหมด",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Usage</code> เพื่อดูกราฟหรือตัวเลขสรุปการใช้งานตามช่วงเวลา มีประโยชน์มากเมื่อใช้ Claude Code หรือ API เพราะช่วยติดตามการใช้งานที่อาจส่งผลต่อค่าใช้จ่าย โดยเฉพาะงานที่รันอัตโนมัติเป็นเวลานาน",
+      "เคล็ดลับ: หากใกล้เต็มโควตาบ่อยๆ ให้ลองปรับพฤติกรรมการใช้งาน เช่น ใช้คำสั่ง <code>/clear</code> ล้างบริบทบทสนทนาที่ไม่จำเป็นบ่อยขึ้น หรือพิจารณาอัปเกรดแผนหากใช้งานหนักเป็นประจำทุกวัน"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "capabilities",
+    group: "Settings",
+    title: "Capabilities",
+    icon: "🧩",
+    flow: [
+      { icon: "🌐", label: "Web Search / Artifacts" },
+      { icon: "🧩", label: "เปิด/ปิดความสามารถที่ต้องการ" },
+      { icon: "✅", label: "Claude ทำงานได้ตรงจุดประสงค์" }
+    ],
+    keyPoints: [
+      "เปิด/ปิดความสามารถเสริม เช่น Web Search (ค้นข้อมูลสด), Artifacts (สร้างเว็บ/แอปแบบโต้ตอบ) และการวิเคราะห์ไฟล์",
+      "เปิด Web Search เมื่อต้องการข้อมูลล่าสุด เช่น ข่าวสารหรือราคาปัจจุบัน แทนการตอบจากความรู้เดิม",
+      "ปิดความสามารถที่ไม่ได้ใช้เพื่อควบคุมไม่ให้ Claude เข้าถึงอินเทอร์เน็ตในงานที่ต้องการความเป็นส่วนตัวสูง"
+    ],
+    images: [],
+    text: [
+      "หน้า <strong>Capabilities</strong> ใช้เปิด/ปิดความสามารถเสริมของ Claude เช่น <strong>Web Search</strong> (ค้นข้อมูลจากอินเทอร์เน็ตแบบสด), <strong>Artifacts</strong> (สร้างเว็บ/แอปแบบโต้ตอบได้ในหน้าต่างแยก) และการวิเคราะห์ไฟล์ประเภทต่างๆ",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Capabilities</code> เปิดสวิตช์ Web Search เมื่อต้องการให้ Claude ตอบด้วยข้อมูลล่าสุด เช่น ข่าวสาร ราคาปัจจุบัน หรือข้อมูลที่เปลี่ยนแปลงบ่อย แทนที่จะตอบจากความรู้ที่มีอยู่เดิมเพียงอย่างเดียว ส่วน Artifacts ควรเปิดไว้เสมอหากต้องการให้ Claude สร้างเว็บเพจ กราฟ หรือเอกสารที่ดูผลได้ทันทีในหน้าต่างแยก",
+      "เคล็ดลับ: ปิดความสามารถที่ไม่ได้ใช้เพื่อลดความสับสน หรือเพื่อควบคุมไม่ให้ Claude เข้าถึงอินเทอร์เน็ตในงานที่ต้องการความเป็นส่วนตัวสูง เช่น การวิเคราะห์ข้อมูลภายในที่ยังไม่ต้องการให้อ้างอิงแหล่งข้อมูลภายนอก"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "claude-code-settings",
+    group: "Settings",
+    title: "Claude Code",
+    icon: "💻",
+    flow: [
+      { icon: "💻", label: "ตั้งค่าการเชื่อมต่อ Claude Code" },
+      { icon: "🔑", label: "ตรวจสอบบัญชี/แผนที่ใช้" },
+      { icon: "🚀", label: "พร้อมใช้ Claude Code ใน VS Code/เทอร์มินัล" }
+    ],
+    video: "https://www.youtube.com/embed/o77vCJg2Fp8",
+    videoTitle: "Claude Code พื้นฐานสำหรับมือใหม่ เริ่มยังไงให้ใช้เป็นเร็วที่สุด",
+    videoAuthor: "BoomBigNose",
+    images: [],
+    text: [
+      "หน้า <strong>Claude Code</strong> ใน Settings เป็นจุดตั้งค่าการเชื่อมต่อระหว่างบัญชี Claude กับ Claude Code (Coding Agent ที่ใช้ใน VS Code หรือเทอร์มินัล) เช่น การจัดการ API key, การดูสถานะการเชื่อมต่อ และลิงก์ไปยังเอกสารเพิ่มเติม",
+      "วิธีใช้งาน: หากยังไม่เคยตั้งค่าการเชื่อมต่อ ให้เข้าไปที่หน้านี้เพื่อดูสถานะบัญชีที่ใช้กับ Claude Code และยืนยันว่าเชื่อมกับแผนการใช้งานที่ถูกต้อง (เช่น Claude Pro/Max หรือ API ขององค์กร) รายละเอียดการใช้งาน Claude Code แบบเต็มดูได้จากคู่มือ 'Claude Code ร่วมกับ VS Code' แยกต่างหาก",
+      "เคล็ดลับ: หากทีมพัฒนาในองค์กรต้องการใช้ Claude Code พร้อมกันหลายคน ควรตรวจสอบกับผู้ดูแลระบบว่าใช้ Seat/แผนแบบใด เพื่อไม่ให้โควตาการใช้งานหมดเร็วเกินคาดในช่วงที่มีงานเร่งด่วน"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "cowork",
+    group: "Settings",
+    title: "Cowork",
+    icon: "🤝",
+    flow: [
+      { icon: "🎯", label: "อธิบายเป้าหมายงาน" },
+      { icon: "🤝", label: "Claude วางแผน/ทำงานต่อเนื่องให้" },
+      { icon: "✅", label: "งานหลายขั้นตอนเสร็จโดยไม่ต้องนั่งสั่งทีละคำสั่ง" }
+    ],
+    video: "https://www.youtube.com/embed/UJWi5Rcfo6o",
+    videoTitle: "Claude Cowork แบบละเอียด แบบจับมือทำ แบบเริ่มต้นตั้งแต่ 0 ตัวอย่างใช้งานแบบง่ายๆ",
+    videoAuthor: "Chubbie me (ผู้หญิงแก้มกลม)",
+    images: [],
+    text: [
+      "<strong>Cowork</strong> คือโหมดที่ให้ Claude ทำงานเป็นชุดขั้นตอนต่อเนื่องแทนเราได้ยาวขึ้น เช่น ค้นคว้าข้อมูล จัดระเบียบไฟล์ สรุปเอกสารจำนวนมาก หรือทำงานหลายขั้นตอนที่ปกติต้องนั่งสั่งทีละคำสั่ง โดย Claude จะวางแผนและทำงานต่อเนื่องให้จนเสร็จ",
+      "วิธีใช้งาน: เปิดโหมด Cowork แล้วอธิบายเป้าหมายงานที่ต้องการให้ Claude ทำ เช่น 'ช่วยรวบรวมข้อมูลคู่แข่ง 5 เจ้าในตลาดนี้ สรุปจุดเด่นจุดด้อยเป็นตารางเปรียบเทียบ' Claude จะแบ่งงานเป็นขั้นตอนย่อยและทำงานต่อเนื่องโดยรายงานความคืบหน้าเป็นระยะ",
+      "ข้อควรระวัง: งานที่ให้ Cowork ทำเป็นเวลานานควรตรวจสอบผลลัพธ์ระหว่างทางเป็นระยะ ไม่ควรปล่อยทิ้งไว้แล้วมาดูผลตอนจบเพียงอย่างเดียว เพราะหากทิศทางเริ่มคลาดเคลื่อนตั้งแต่ต้น จะเสียเวลาแก้ไขผลงานทั้งหมดในตอนท้าย"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "claude-in-chrome",
+    group: "Settings",
+    title: "Claude in Chrome",
+    icon: "🌐",
+    flow: [
+      { icon: "🌐", label: "ติดตั้งส่วนขยายใน Chrome" },
+      { icon: "🖱️", label: "Claude มองเห็น/โต้ตอบหน้าเว็บ" },
+      { icon: "⚡", label: "สั่งงานบนเว็บที่เปิดอยู่ได้ทันที" }
+    ],
+    keyPoints: [
+      "ส่วนขยาย (Extension) ที่ให้ Claude มองเห็นและโต้ตอบกับหน้าเว็บที่เปิดอยู่ได้โดยตรง เช่น กรอกฟอร์ม สรุปเนื้อหา",
+      "ติดตั้งจาก Chrome Web Store แล้วล็อกอินด้วยบัญชี Claude เดียวกับที่ใช้อยู่",
+      "ควรระวังการให้สิทธิ์ควบคุมเบราว์เซอร์ในหน้าเว็บที่มีข้อมูลอ่อนไหว เช่น ระบบธนาคารหรือ HR"
+    ],
+    images: [],
+    text: [
+      "<strong>Claude in Chrome</strong> คือส่วนขยาย (Extension) ที่ให้ Claude มองเห็นและโต้ตอบกับหน้าเว็บที่เปิดอยู่ในเบราว์เซอร์ได้โดยตรง เช่น กรอกฟอร์ม สรุปเนื้อหาในหน้าเว็บ หรือคลิกทำงานแทนเราตามคำสั่ง",
+      "วิธีใช้งาน: ติดตั้งได้จาก Chrome Web Store แล้วล็อกอินด้วยบัญชี Claude เดียวกับที่ใช้อยู่ หลังติดตั้งจะมีไอคอน Claude ปรากฏบนแถบเครื่องมือของ Chrome คลิกไอคอนแล้วพิมพ์คำสั่งที่ต้องการให้ Claude ทำกับหน้าเว็บที่กำลังเปิดอยู่ได้ทันที",
+      "ข้อควรระวัง: ควรระวังการให้สิทธิ์ Claude ควบคุมเบราว์เซอร์ในหน้าเว็บที่มีข้อมูลอ่อนไหว เช่น ระบบธนาคารหรือระบบ HR เพราะส่วนขยายมีสิทธิ์อ่านและโต้ตอบกับหน้าเว็บที่เปิดอยู่โดยตรง ควรปิดการใช้งานส่วนขยายชั่วคราวเมื่อเข้าเว็บไซต์ที่มีข้อมูลสำคัญ"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "desktop-general",
+    group: "Desktop app",
+    title: "General",
+    icon: "🖥️",
+    flow: [
+      { icon: "🖥️", label: "ตั้งค่าเฉพาะแอป Desktop" },
+      { icon: "🔄", label: "เช่น เปิดแอปอัตโนมัติ" },
+      { icon: "✅", label: "แอปพร้อมใช้งานทุกครั้งที่เปิดเครื่อง" }
+    ],
+    keyPoints: [
+      "เป็นการตั้งค่าเฉพาะตัวโปรแกรม Desktop ที่ติดตั้งในเครื่อง เช่น เปิดแอปอัตโนมัติตอนเปิดเครื่อง",
+      "แยกจากการตั้งค่าบัญชี (Account/Privacy) ที่ผูกกับผู้ใช้และซิงก์ข้ามเครื่อง",
+      "ต้องตั้งค่าแยกกันในแต่ละเครื่องที่ติดตั้งแอป Claude Desktop"
+    ],
+    images: [],
+    text: [
+      "หมวด <strong>General</strong> ใต้ Desktop app แยกจากการตั้งค่าบัญชีทั่วไป โดยเป็นการตั้งค่าเฉพาะตัวโปรแกรม Desktop ที่ติดตั้งอยู่ในเครื่อง เช่น การเปิดแอปอัตโนมัติตอนเปิดเครื่อง หรือพฤติกรรมของหน้าต่างแอป",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Desktop app &gt; General</code> เพื่อปรับค่าต่างๆ เช่น ให้แอปเริ่มทำงานอัตโนมัติเมื่อเปิดเครื่อง เหมาะสำหรับผู้ที่ใช้ Claude Desktop เป็นประจำทุกวัน และต้องการให้แอปพร้อมใช้งานทันทีโดยไม่ต้องเปิดเองทุกครั้ง",
+      "หมายเหตุ: การตั้งค่าในหมวดนี้จะมีผลเฉพาะเครื่องที่ติดตั้งแอปนั้นๆ ไม่ซิงก์ข้ามเครื่องเหมือนการตั้งค่าบัญชี (Account/Privacy) ที่ผูกกับบัญชีผู้ใช้โดยตรง หากใช้ Claude Desktop หลายเครื่อง ต้องตั้งค่าแยกกันในแต่ละเครื่อง"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "extensions",
+    group: "Desktop app",
+    title: "Extensions",
+    icon: "🧩",
+    flow: [
+      { icon: "🧩", label: "เชื่อม Claude กับโปรแกรมในเครื่อง" },
+      { icon: "⚙️", label: "เปิด/ปิด/ลบ Extension" },
+      { icon: "🔗", label: "Claude เข้าถึงเครื่องมือเพิ่มเติมได้" }
+    ],
+    keyPoints: [
+      "จัดการส่วนเสริมที่เชื่อม Claude Desktop กับโปรแกรม/ไฟล์ในเครื่อง เช่นผ่าน MCP",
+      "ต่างจาก Connectors ตรงที่ Extensions เน้นเชื่อมกับซอฟต์แวร์ในเครื่อง ไม่ใช่บริการออนไลน์",
+      "ควรติดตั้งเฉพาะจากแหล่งที่เชื่อถือได้ เพราะมีสิทธิ์เข้าถึงข้อมูลในเครื่องตามที่กำหนดไว้"
+    ],
+    images: [],
+    text: [
+      "หมวด <strong>Extensions</strong> ในแอป Desktop ใช้จัดการส่วนเสริมที่ติดตั้งให้ Claude Desktop เชื่อมกับโปรแกรมอื่นในเครื่อง เช่น ไฟล์ระบบ หรือแอปพลิเคชันที่รองรับ MCP (Model Context Protocol)",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Desktop app &gt; Extensions</code> เพื่อดูรายการ Extension ที่ติดตั้งไว้ เปิด/ปิด หรือลบออกได้ตามต้องการ ต่างจาก Connectors (ในหมวด Customize) ตรงที่ Extensions มักเป็นการเชื่อมต่อกับซอฟต์แวร์ที่ติดตั้งอยู่ในเครื่องโดยตรง ในขณะที่ Connectors เน้นเชื่อมกับบริการออนไลน์ภายนอก",
+      "ข้อควรระวัง: ควรติดตั้งเฉพาะ Extension จากแหล่งที่เชื่อถือได้ เพราะมีสิทธิ์เข้าถึงข้อมูลในเครื่องตามขอบเขตที่กำหนดไว้ตอนติดตั้ง หากไม่แน่ใจแหล่งที่มา ควรปรึกษาทีม IT ก่อนติดตั้ง"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "developer",
+    group: "Desktop app",
+    title: "Developer",
+    icon: "🛠️",
+    flow: [
+      { icon: "🛠️", label: "เปิดโหมดนักพัฒนา" },
+      { icon: "🔌", label: "เชื่อมต่อ MCP Server เอง" },
+      { icon: "⚠️", label: "เหมาะกับทีมพัฒนา/IT เท่านั้น" }
+    ],
+    keyPoints: [
+      "เปิดโหมดสำหรับตั้งค่าขั้นสูง เช่น เชื่อมต่อ MCP Server ของตัวเอง",
+      "เหมาะสำหรับทีมพัฒนาที่ต้องการเชื่อม Claude Desktop กับระบบภายในองค์กร",
+      "ไม่แนะนำให้ผู้ใช้ทั่วไปเปิดเอง ควรปรึกษาทีม IT ก่อนหากไม่คุ้นเคยกับ MCP"
+    ],
+    images: [],
+    text: [
+      "หมวด <strong>Developer</strong> เปิดโหมดสำหรับผู้ใช้ที่ต้องการตั้งค่าขั้นสูง เช่น เชื่อมต่อ MCP Server ของตัวเอง หรือดูรายละเอียดทางเทคนิคของการเชื่อมต่อต่างๆ ที่ปกติซ่อนไว้จากผู้ใช้ทั่วไป",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Desktop app &gt; Developer</code> เพื่อเปิดโหมดนักพัฒนา จากนั้นสามารถเพิ่ม MCP Server แบบกำหนดเองผ่านไฟล์ config ได้ เหมาะสำหรับทีมพัฒนาที่ต้องการปรับแต่ง Claude Desktop ให้เชื่อมกับระบบภายในขององค์กรเอง",
+      "ข้อควรระวัง: หากไม่คุ้นเคยกับ MCP หรือการตั้งค่าระดับนักพัฒนา ไม่แนะนำให้เปิดโหมดนี้เอง ควรปรึกษาทีม IT ก่อน เพราะการตั้งค่าผิดพลาดอาจทำให้แอปเชื่อมต่อกับระบบที่ไม่ตั้งใจ หรือเปิดช่องโหว่ด้านความปลอดภัยโดยไม่รู้ตัว"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "skills",
+    group: "Customize",
+    title: "Skills",
+    icon: "🧠",
+    flow: [
+      { icon: "📝", label: "งานที่ทำซ้ำเป็นประจำ" },
+      { icon: "🧠", label: "บันทึกเป็น Skill" },
+      { icon: "⚡", label: "Claude ทำตามฟอร์แมตที่ต้องการทุกครั้ง" }
+    ],
+    video: "https://www.youtube.com/embed/eU3tDHE5774",
+    videoTitle: "Claude Skills คืออะไร สร้างยังไง และใช้งานแบบไหน - สอน Claude Skills",
+    videoAuthor: "AI UNLOCKED สอน AI มือใหม่ก็ทำได้",
+    images: [],
+    text: [
+      "<strong>Skills</strong> คือชุดคำสั่งและความรู้เฉพาะทางที่บันทึกไว้ล่วงหน้า ให้ Claude ทำงานบางประเภทได้ตรงรูปแบบที่ต้องการทุกครั้งโดยไม่ต้องอธิบายซ้ำ เช่น Skill สำหรับสรุปรายงานตามฟอร์แมตของบริษัท หรือ Skill สำหรับตรวจสอบเอกสารตามเกณฑ์ที่กำหนดไว้",
+      "วิธีใช้งาน: ไปที่ <code>Settings &gt; Skills</code> กด <code>Add</code> เพื่อสร้าง Skill ใหม่ หรือเลือก <code>Browse</code> เพื่อดู Skill สำเร็จรูปที่ Anthropic เตรียมไว้ให้ เช่น Skill <code>skill-creator</code> ที่ช่วยสร้าง Skill อื่นต่อได้อีกที เมื่อสร้างแล้วสามารถเรียกใช้ Skill นั้นได้ในทุกบทสนทนาโดยพิมพ์ชื่อ Skill หรือให้ Claude เลือกใช้เองเมื่อคำสั่งตรงกับหน้าที่ของ Skill นั้น",
+      "เคล็ดลับ: หากทีมมีรูปแบบงานที่ทำซ้ำเป็นประจำ เช่น เขียนสรุปการประชุมตามฟอร์แมตเดียวกันทุกครั้ง ควรสร้างเป็น Skill กลางให้ทั้งทีมใช้ร่วมกัน แทนที่แต่ละคนจะเขียนคำสั่งอธิบายฟอร์แมตเองซ้ำๆ ช่วยให้ผลลัพธ์ของทั้งทีมมีมาตรฐานเดียวกัน"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "connectors",
+    group: "Customize",
+    title: "Connectors",
+    icon: "🔌",
+    flow: [
+      { icon: "🔌", label: "เชื่อมต่อบริการออนไลน์" },
+      { icon: "📁", label: "เช่น Google Drive, Slack, GitHub" },
+      { icon: "💬", label: "อ้างอิงข้อมูลได้ในบทสนทนาทันที" }
+    ],
+    keyPoints: [
+      "เชื่อม Claude เข้ากับบริการออนไลน์ภายนอก เช่น Google Drive, Calendar, Slack, GitHub",
+      "หลังเชื่อมต่อแล้ว ถามคำถามที่อ้างอิงไฟล์ในบริการนั้นได้ทันทีโดยไม่ต้องอัปโหลดเอง",
+      "ควรเชื่อมต่อเฉพาะบริการที่จำเป็น และตรวจสอบสิทธิ์การเข้าถึงเป็นระยะ"
+    ],
+    images: [],
+    text: [
+      "<strong>Connectors</strong> ใช้เชื่อม Claude เข้ากับบริการออนไลน์ภายนอก เช่น Google Drive, Google Calendar, Slack หรือ GitHub เพื่อให้ Claude อ่าน/ค้นข้อมูลจากบริการเหล่านั้นได้โดยตรงในบทสนทนา โดยไม่ต้องอัปโหลดไฟล์เอง",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Connectors</code> กด <code>Add</code> เลือกบริการที่ต้องการเชื่อมต่อ แล้วล็อกอินยืนยันสิทธิ์ตามขั้นตอนของบริการนั้น หลังเชื่อมต่อ Google Drive สำเร็จแล้ว สามารถถามคำถามที่อ้างอิงไฟล์ในไดรฟ์ได้ทันที เช่น 'สรุปเนื้อหาในไฟล์ Budget2026.xlsx ที่อยู่ใน Drive ให้หน่อย'",
+      "ข้อควรระวัง: ควรเชื่อมต่อเฉพาะบัญชีและบริการที่จำเป็นต่อการทำงานจริง และตรวจสอบสิทธิ์การเข้าถึงที่ให้ไว้เป็นระยะ โดยเฉพาะเมื่อเชื่อมกับบัญชีองค์กรที่มีข้อมูลลูกค้าหรือข้อมูลภายใน ควรถอดการเชื่อมต่อ (Disconnect) ทันทีเมื่อไม่ได้ใช้งานแล้ว"
+    ],
+    link: "https://support.claude.com/en/"
+  },
+  {
+    key: "plugins",
+    group: "Customize",
+    title: "Plugins",
+    icon: "🧰",
+    flow: [
+      { icon: "🧰", label: "เข้า Settings > Plugins" },
+      { icon: "🔍", label: "Browse ดูรายการที่มี" },
+      { icon: "➕", label: "Add ติดตั้ง Plugin ที่ต้องการ" }
+    ],
+    keyPoints: [
+      "ส่วนเสริมที่ต่อยอดความสามารถของ Claude เพิ่มเติมจากฟีเจอร์มาตรฐาน คล้าย Extension ในเบราว์เซอร์",
+      "กด Browse เพื่อดูรายการ Plugin ที่เปิดให้ติดตั้ง และ Add เพื่อติดตั้ง",
+      "เป็นฟีเจอร์ที่ยังพัฒนาต่อเนื่อง ควรทดลองกับงานที่ไม่กระทบข้อมูลสำคัญก่อน"
+    ],
+    images: [],
+    text: [
+      "<strong>Plugins</strong> คือส่วนเสริมที่ต่อยอดความสามารถของ Claude เพิ่มเติมจากฟีเจอร์มาตรฐาน คล้ายกับ Extensions ในเบราว์เซอร์ทั่วไป ช่วยให้ Claude ทำงานเฉพาะทางบางอย่างได้ดีขึ้นโดยไม่ต้องรอ Anthropic เพิ่มฟีเจอร์นั้นเข้ามาในตัวหลัก",
+      "วิธีใช้งาน: เข้าไปที่ <code>Settings &gt; Plugins</code> กด <code>Browse</code> เพื่อดูรายการ Plugin ที่เปิดให้ติดตั้ง และกด <code>Add</code> เพื่อติดตั้ง Plugin ที่ต้องการ หลังติดตั้งแล้ว Claude จะเรียกใช้ Plugin นั้นเองเมื่อคำสั่งที่พิมพ์เกี่ยวข้องกับความสามารถของ Plugin",
+      "หมายเหตุ: เนื่องจาก Plugins เป็นฟีเจอร์ที่ยังพัฒนาต่อเนื่อง ควรติดตามการอัปเดตจากหน้านี้เป็นระยะ และทดลองใช้กับงานที่ไม่กระทบข้อมูลสำคัญก่อน เพื่อประเมินว่าเหมาะกับรูปแบบงานของทีมหรือไม่ก่อนนำไปใช้กับงานจริง"
+    ],
+    link: "https://support.claude.com/en/"
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  let lastGroup = null;
+  TOPICS.forEach(t => {
+    if (t.group && t.group !== lastGroup) {
+      const label = document.createElement("div");
+      label.className = "topic-group-label";
+      label.textContent = t.group;
+      el.appendChild(label);
+      lastGroup = t.group;
+    }
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ยังไม่มีคลิปสอนภาษาไทยโดยตรงสำหรับหัวข้อนี้ — สรุปประเด็นสำคัญไว้ด้านล่าง</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  let imagesHtml = '';
+  if (topic.images.length > 0) {
+    imagesHtml = '<div class="section-label" style="margin-top:20px">ภาพหน้าจอเพิ่มเติม</div><div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
+      '</div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join('') + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจากศูนย์ช่วยเหลือของ Claude →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    imagesHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
