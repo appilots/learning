@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #fbf3f2;
+    --card-bg: #ffffff;
+    --text: #2a1c1a;
+    --sub: #7a625d;
+    --accent: #c0392b;
+    --accent-2: #922b21;
+    --border: #f0ddda;
+    --shadow: 0 2px 10px rgba(120, 40, 30, 0.08);
+    --pill-bg: #fbe9e7;
+    --placeholder-bg: #fdf6f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1211;
+      --card-bg: #241a18;
+      --text: #f5e8e6;
+      --sub: #b89e99;
+      --accent: #e57368;
+      --accent-2: #cf5347;
+      --border: #392724;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #2e1512;
+      --placeholder-bg: #281c1a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topic-list {
+    flex: 0 0 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .quiz-cta {
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--accent);
+    background: var(--pill-bg);
+    text-align: center;
+  }
+  .quiz-cta a {
+    display: inline-block;
+    color: #fff;
+    background: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 9px 14px;
+    border-radius: 8px;
+    margin-top: 6px;
+  }
+  .quiz-cta p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--accent-2);
+    line-height: 1.5;
+  }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--accent-2);
+    margin-bottom: 8px;
+  }
+  .key-points ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .key-points li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .image-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .text-block {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder {
+    color: var(--sub);
+    font-style: italic;
+  }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.88em;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0 16px;
+    padding: 16px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--placeholder-bg);
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 104px;
+    text-align: center;
+  }
+  .flow-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .flow-label {
+    font-size: 0.76rem;
+    color: var(--sub);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .flow-arrow {
+    font-size: 1.3rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  .ref-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+    .quiz-cta { flex: 0 0 auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🛡️ คู่มือการใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</h1>
+  <p class="subtitle">อ่านให้ครบทุกหัวข้อ แล้วทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ (ต้องได้คะแนนอย่างน้อย 90%)</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอที่แนบมาคัดเลือกจากช่อง YouTube ของสื่อ/ผู้เชี่ยวชาญที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น ลิขสิทธิ์เนื้อหาวิดีโอเป็นของเจ้าของช่องต้นฉบับ มีชื่อช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิป หัวข้อที่เป็นนโยบายเฉพาะของ ATTG จะไม่มีวิดีโอประกอบ เนื่องจากเป็นแนวปฏิบัติภายในที่ไม่มีคลิปสาธารณะให้อ้างอิงตรงๆ
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList">
+      <div class="quiz-cta">
+        <p>อ่านครบทุกหัวข้อแล้ว?<br>ทำแบบทดสอบเพื่อยืนยันความเข้าใจ</p>
+        <a href="ai-safety-quiz.html" target="_blank" rel="noopener">📝 ไปทำแบบทดสอบ</a>
+      </div>
+    </nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed (ถ้าไม่มีให้ใส่ keyPoints แทน), text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
+const TOPICS = [
+  {
+    key: "overview",
+    title: "ภาพรวม: ทำไมต้องใช้ AI อย่างปลอดภัย",
+    icon: "🛡️",
+    flow: [
+      { icon: "🤖", label: "AI ช่วยงานได้เร็วขึ้นมาก" },
+      { icon: "⚠️", label: "แต่มีความเสี่ยงถ้าใช้ไม่ระวัง" },
+      { icon: "🛡️", label: "ใช้อย่างมีสติ = ปลอดภัยและได้ประโยชน์เต็มที่" }
+    ],
+    keyPoints: [
+      "AI ช่วยเพิ่มประสิทธิภาพงานได้มาก แต่มาพร้อมความเสี่ยงใหม่ๆ ที่พนักงานทุกคนควรรู้จัก",
+      "ความเสี่ยงหลัก 3 กลุ่ม: (1) ข้อมูลรั่วไหล (2) เชื่อคำตอบ AI ที่ผิดพลาดโดยไม่ตรวจสอบ (3) ตกเป็นเหยื่อมิจฉาชีพที่ใช้ AI หลอกลวง",
+      "อ่านคู่มือนี้ครบแล้วต้องทำแบบทดสอบท้ายคู่มือ ต้องได้อย่างน้อย 90% จึงจะผ่านเกณฑ์"
+    ],
+    images: [],
+    text: [
+      "AI อย่าง ChatGPT, Claude หรือ Microsoft Copilot ช่วยให้พนักงานทำงานได้เร็วและมีประสิทธิภาพขึ้นมาก แต่การนำ AI มาใช้ในงานประจำวันก็มาพร้อมความเสี่ยงใหม่ๆ ที่ไม่เคยมีมาก่อน หากใช้งานโดยไม่เข้าใจข้อจำกัดและแนวปฏิบัติที่ถูกต้อง อาจนำไปสู่ข้อมูลรั่วไหล การตัดสินใจผิดพลาด หรือแม้แต่ตกเป็นเหยื่อของมิจฉาชีพที่ใช้ AI เป็นเครื่องมือ",
+      "วิธีใช้งาน: ความเสี่ยงหลักที่คู่มือนี้ครอบคลุมแบ่งเป็น 3 กลุ่มใหญ่ ได้แก่ (1) <strong>ข้อมูลรั่วไหล</strong> จากการป้อนข้อมูลลับของบริษัทหรือลูกค้าเข้า AI สาธารณะ (2) <strong>ความน่าเชื่อถือของคำตอบ</strong> เพราะ AI อาจตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัว (Hallucination) และ (3) <strong>ภัยคุกคามจากมิจฉาชีพ</strong> ที่ใช้ AI สร้างเสียง ภาพ หรือข้อความปลอมเพื่อหลอกลวง",
+      "หมายเหตุ: หลังอ่านคู่มือนี้ครบทุกหัวข้อแล้ว พนักงานทุกคนต้องทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ โดยต้องได้คะแนนอย่างน้อย 90% จึงจะถือว่าผ่าน หากได้คะแนนต่ำกว่านี้ให้กลับไปทบทวนเนื้อหาแล้วทำแบบทดสอบใหม่อีกครั้ง"
+    ]
+  },
+  {
+    key: "data-classification",
+    title: "ข้อมูลที่ห้ามป้อนเข้า AI สาธารณะ",
+    icon: "🔒",
+    flow: [
+      { icon: "📄", label: "มีข้อมูลที่ต้องประมวลผล" },
+      { icon: "🚦", label: "ตรวจสอบระดับความลับก่อนป้อนเข้า AI" },
+      { icon: "✅", label: "ป้อนเฉพาะข้อมูลที่อนุญาตเท่านั้น" }
+    ],
+    images: [],
+    text: [
+      "เมื่อพิมพ์ข้อความหรืออัปโหลดไฟล์เข้า AI สาธารณะ (เช่น ChatGPT, Claude เวอร์ชันฟรีหรือ Plus ส่วนบุคคล) ข้อมูลนั้นอาจถูกส่งออกไปประมวลผลนอกระบบขององค์กร และในบางกรณีอาจถูกนำไปใช้ฝึกโมเดลต่อได้หากไม่ได้ปิดการตั้งค่าไว้ จึงต้องระมัดระวังเป็นพิเศษว่าข้อมูลใดป้อนได้และข้อมูลใดห้ามป้อนเด็ดขาด",
+      "ข้อควรระวัง: <strong>ห้ามป้อนข้อมูลต่อไปนี้เข้า AI สาธารณะโดยเด็ดขาด</strong> — ข้อมูลลูกค้า (ชื่อ เบอร์โทร ที่อยู่ เลขบัตรประชาชน), ข้อมูลทางการเงินของบริษัทที่ยังไม่เปิดเผยต่อสาธารณะ, รหัสผ่านหรือ API key, ข้อมูลสัญญา/ข้อตกลงที่มีข้อผูกมัดไม่เปิดเผย (NDA) และข้อมูลพนักงานที่เป็นความลับ เช่น เงินเดือนหรือผลประเมิน",
+      "แนวทางที่ดี: หากจำเป็นต้องให้ AI ช่วยวิเคราะห์ข้อมูลที่มีความอ่อนไหว ให้ใช้เฉพาะเครื่องมือที่บริษัทอนุมัติและเชื่อมกับบัญชีองค์กรที่ปิดการใช้ข้อมูลฝึกโมเดลแล้วเท่านั้น (ดูหัวข้อ 'เครื่องมือ AI ที่บริษัทอนุมัติ') หรือแปลงข้อมูลให้ไม่ระบุตัวตน (Anonymize) ก่อนป้อนเข้า AI เสมอ เช่น แทนชื่อจริงด้วย 'ลูกค้า A'"
+    ]
+  },
+  {
+    key: "verify-output",
+    title: "ตรวจสอบความถูกต้องของคำตอบ AI",
+    icon: "🔍",
+    flow: [
+      { icon: "❓", label: "AI ให้คำตอบมา" },
+      { icon: "🔍", label: "ตรวจสอบกับแหล่งข้อมูลจริง" },
+      { icon: "✅", label: "นำไปใช้ได้อย่างมั่นใจ" }
+    ],
+    images: [],
+    text: [
+      "AI สร้างคำตอบจากรูปแบบภาษาที่เรียนรู้มา ไม่ได้ 'รู้จริง' เหมือนฐานข้อมูล บางครั้งจึงตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัว เรียกว่า <strong>Hallucination</strong> เช่น อ้างอิงกฎหมายที่ไม่มีจริง สร้างตัวเลขสถิติที่ไม่ถูกต้อง หรือสรุปเนื้อหาผิดจากต้นฉบับ",
+      "ข้อควรระวัง: ห้ามคัดลอกคำตอบจาก AI ไปใช้ในเอกสารทางการ รายงานต่อผู้บริหาร หรือสื่อสารกับลูกค้าโดยไม่ตรวจสอบก่อน โดยเฉพาะข้อมูลที่เป็นตัวเลข วันที่ ชื่อกฎหมาย/ระเบียบ หรือข้อเท็จจริงเฉพาะทางที่ผิดพลาดแล้วจะส่งผลกระทบต่อชื่อเสียงหรือการตัดสินใจของบริษัท",
+      "แนวทางที่ดี: ใช้ AI เป็นผู้ช่วยร่างหรือหาไอเดียเบื้องต้น แล้วตรวจทานเทียบกับแหล่งข้อมูลที่เชื่อถือได้เสมอก่อนนำไปใช้จริง หากไม่แน่ใจว่า AI ตอบถูกหรือไม่ ให้ถามกลับตรงๆ ว่า 'มั่นใจแค่ไหนกับคำตอบนี้ และมีแหล่งอ้างอิงหรือไม่' หรือเปิดใช้ฟีเจอร์ Web Search เพื่อให้ AI อ้างอิงแหล่งที่มาจริงประกอบคำตอบ"
+    ]
+  },
+  {
+    key: "privacy-pdpa",
+    title: "ความเป็นส่วนตัวและ PDPA",
+    icon: "📜",
+    flow: [
+      { icon: "👤", label: "ข้อมูลส่วนบุคคลของลูกค้า/พนักงาน" },
+      { icon: "⚖️", label: "อยู่ภายใต้ พ.ร.บ. PDPA" },
+      { icon: "🛡️", label: "ต้องขอความยินยอมและป้องกันการรั่วไหล" }
+    ],
+    video: "https://www.youtube.com/embed/0VMVaDzLUp0",
+    videoTitle: "PDPA คืออะไร? พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล คือกฎหมายที่บังคับใช้ 1 มิ.ย.65 สรุปต้องทำยังไง?",
+    videoAuthor: "iT24Hrs",
+    images: [],
+    text: [
+      "<strong>PDPA</strong> (พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล) คือกฎหมายไทยที่คุ้มครองข้อมูลส่วนบุคคล เช่น ชื่อ ที่อยู่ เบอร์โทร อีเมล หรือข้อมูลที่ระบุตัวตนได้ การนำข้อมูลเหล่านี้ไปประมวลผลผ่าน AI โดยไม่ระมัดระวังอาจถือเป็นการละเมิดกฎหมายและมีบทลงโทษทั้งทางแพ่งและอาญา",
+      "วิธีใช้งาน: ก่อนป้อนข้อมูลที่มีข้อมูลส่วนบุคคลเข้า AI ใดๆ ให้ถามตัวเองก่อนว่า (1) ข้อมูลนี้จำเป็นต้องใช้ AI ประมวลผลจริงหรือไม่ (2) เจ้าของข้อมูลยินยอมให้นำไปประมวลผลด้วย AI หรือไม่ (3) เครื่องมือ AI ที่ใช้อยู่ในรายการที่บริษัทอนุมัติหรือไม่ หากไม่แน่ใจข้อใดข้อหนึ่ง ให้ปรึกษาฝ่ายกฎหมายหรือผู้ดูแลข้อมูลส่วนบุคคล (DPO) ของบริษัทก่อนเสมอ",
+      "ข้อควรระวัง: แม้จะเป็นข้อมูลที่ดูเหมือนไม่สำคัญ เช่น รายชื่อผู้เข้าร่วมประชุมหรือเบอร์โทรลูกค้าเพียงไม่กี่รายการ ก็ถือเป็นข้อมูลส่วนบุคคลภายใต้ PDPA เช่นกัน การป้อนข้อมูลเหล่านี้เข้า AI สาธารณะโดยไม่มีมาตรการป้องกันที่เหมาะสมมีความเสี่ยงทางกฎหมายต่อทั้งพนักงานและบริษัท"
+    ],
+    link: "https://www.pdpc.or.th/"
+  },
+  {
+    key: "privacy-settings",
+    title: "ปิดการใช้ข้อมูลสนทนาไปฝึกโมเดล",
+    icon: "⚙️",
+    flow: [
+      { icon: "⚙️", label: "เข้า Settings > Privacy" },
+      { icon: "🚫", label: "ปิดการใช้ข้อมูลฝึกโมเดล" },
+      { icon: "✅", label: "บทสนทนาไม่ถูกนำไปใช้ต่อ" }
+    ],
+    images: [],
+    text: [
+      "เครื่องมือ AI ส่วนใหญ่มีการตั้งค่าที่ควบคุมว่าจะนำบทสนทนาของเราไปใช้ฝึกโมเดล AI รุ่นถัดไปหรือไม่ หากไม่ปิดการตั้งค่านี้ ข้อมูลที่พิมพ์เข้าไปอาจถูกเก็บและนำไปใช้พัฒนาโมเดลต่อ ซึ่งเพิ่มความเสี่ยงข้อมูลรั่วไหลโดยไม่ตั้งใจ",
+      "วิธีใช้งาน: ตรวจสอบและปิดการตั้งค่านี้ในทุกเครื่องมือ AI ที่ใช้งาน เช่น ChatGPT ไปที่ <code>Settings &gt; Data Controls</code>, Claude ไปที่ <code>Settings &gt; Privacy</code> โดยทั่วไปบัญชีระดับองค์กร (Business/Team/Enterprise) มักปิดการใช้ข้อมูลฝึกโมเดลไว้เป็นค่าเริ่มต้นอยู่แล้ว แต่บัญชีส่วนตัว (Free/Plus ส่วนบุคคล) มักไม่ได้ปิดไว้ให้อัตโนมัติ",
+      "แนวทางที่ดี: ควรใช้บัญชี AI ที่บริษัทจัดสรรให้ (บัญชีองค์กร) สำหรับงานที่เกี่ยวข้องกับข้อมูลบริษัท แทนการใช้บัญชีส่วนตัว เพราะบัญชีองค์กรมักมีการตั้งค่าความเป็นส่วนตัวและมาตรฐานความปลอดภัยที่เหมาะสมกับการใช้งานเชิงธุรกิจมากกว่า"
+    ]
+  },
+  {
+    key: "copyright-ip",
+    title: "ลิขสิทธิ์และทรัพย์สินทางปัญญา",
+    icon: "©️",
+    flow: [
+      { icon: "🎨", label: "ใช้ AI สร้างเนื้อหา/ภาพ/โค้ด" },
+      { icon: "©️", label: "ตรวจสอบสิทธิ์การใช้งาน" },
+      { icon: "✅", label: "ใช้เผยแพร่ได้อย่างถูกต้อง" }
+    ],
+    images: [],
+    text: [
+      "เนื้อหาที่ AI สร้างขึ้น เช่น ข้อความ ภาพ หรือโค้ด อาจมีประเด็นด้านลิขสิทธิ์ที่ซับซ้อน เพราะ AI เรียนรู้จากข้อมูลจำนวนมหาศาลที่รวมงานที่มีลิขสิทธิ์อยู่ด้วย ผลลัพธ์ที่ได้จึงอาจคล้ายคลึงกับงานที่มีอยู่แล้วโดยไม่ตั้งใจ",
+      "ข้อควรระวัง: ก่อนนำเนื้อหาที่ AI สร้างไปใช้เผยแพร่ต่อสาธารณะ เช่น โพสต์โซเชียล โฆษณา หรือเอกสารทางการของบริษัท ควรตรวจสอบว่าไม่ซ้ำหรือคล้ายคลึงกับงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป โดยเฉพาะภาพที่มีสไตล์เฉพาะตัวหรือโค้ดที่คัดลอกมาทั้งฟังก์ชัน",
+      "แนวทางที่ดี: ใช้ AI เป็นจุดเริ่มต้นในการสร้างไอเดียหรือร่างเนื้อหา แล้วนำมาปรับแต่งให้เป็นเอกลักษณ์ของบริษัทก่อนเผยแพร่จริง หากมีข้อสงสัยเรื่องลิขสิทธิ์ของเนื้อหาสำคัญ (เช่น โลโก้ หรือสื่อโฆษณาหลัก) ควรปรึกษาฝ่ายกฎหมายหรือฝ่ายการตลาดก่อนเผยแพร่"
+    ]
+  },
+  {
+    key: "approved-tools",
+    title: "ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ",
+    icon: "✅",
+    flow: [
+      { icon: "🔍", label: "อยากลองใช้ AI ตัวใหม่" },
+      { icon: "📋", label: "ตรวจสอบรายการที่บริษัทอนุมัติก่อน" },
+      { icon: "✅", label: "ใช้เฉพาะเครื่องมือที่ผ่านการตรวจสอบแล้ว" }
+    ],
+    images: [],
+    text: [
+      "<strong>Shadow AI</strong> คือการที่พนักงานนำเครื่องมือ AI ที่ไม่ผ่านการตรวจสอบจากบริษัทมาใช้ในงานโดยไม่ได้รับอนุญาต เช่น สมัครบัญชี AI ใหม่ด้วยอีเมลบริษัทเพื่อทดลองใช้ฟีเจอร์บางอย่าง โดยไม่รู้ว่าเครื่องมือนั้นมีนโยบายด้านข้อมูลอย่างไร ซึ่งเป็นความเสี่ยงด้านความปลอดภัยข้อมูลที่มองไม่เห็นและควบคุมได้ยาก",
+      "วิธีใช้งาน: ก่อนเริ่มใช้เครื่องมือ AI ใหม่ในการทำงาน ให้ตรวจสอบรายการเครื่องมือที่บริษัทอนุมัติแล้วกับทีม IT ก่อนเสมอ หากต้องการทดลองใช้เครื่องมือที่ไม่อยู่ในรายการ ให้แจ้งขออนุมัติจากทีม IT หรือผู้ดูแลความปลอดภัยข้อมูลก่อนเริ่มใช้งานจริงกับข้อมูลของบริษัท",
+      "ข้อควรระวัง: แม้เครื่องมือ AI ตัวใหม่จะดูน่าสนใจหรือมีรีวิวดีแค่ไหน ก็ไม่ควรนำข้อมูลบริษัทไปทดลองใช้ก่อนได้รับการอนุมัติ เพราะไม่มีทางรู้แน่ชัดว่าผู้ให้บริการมีมาตรฐานความปลอดภัยข้อมูลอย่างไร ข้อมูลอาจรั่วไหลไปโดยที่บริษัทไม่มีทางทราบหรือแก้ไขได้ทัน"
+    ]
+  },
+  {
+    key: "account-security",
+    title: "รหัสผ่านและการยืนยันตัวตน",
+    icon: "🔐",
+    flow: [
+      { icon: "🔑", label: "ตั้งรหัสผ่านที่คาดเดายาก" },
+      { icon: "📱", label: "เปิดใช้ 2FA" },
+      { icon: "🔐", label: "บัญชี AI ปลอดภัยจากการถูกแฮก" }
+    ],
+    video: "https://www.youtube.com/embed/0_U5JoLqfdo",
+    videoTitle: "วิธีใช้ Google Authenticator เพื่อเพิ่มความปลอดภัยให้บัญชี | วิธีตั้งค่า 2FA",
+    videoAuthor: "รูมารก ออนไลน์",
+    images: [],
+    text: [
+      "บัญชี AI ที่เชื่อมกับอีเมลบริษัทหรือมีประวัติการสนทนาที่เกี่ยวข้องกับงาน หากถูกแฮกจะทำให้ผู้ไม่หวังดีเข้าถึงข้อมูลและประวัติการใช้งานทั้งหมดได้ทันที การป้องกันบัญชีจึงสำคัญไม่แพ้การระวังข้อมูลที่ป้อนเข้า AI",
+      "วิธีใช้งาน: ตั้งรหัสผ่านที่คาดเดายาก ไม่ซ้ำกับบัญชีอื่น และเปิดใช้การยืนยันตัวตนสองชั้น (2FA) ในทุกบัญชี AI ที่ใช้งาน โดยเฉพาะบัญชีที่เชื่อมต่อกับ Connectors ต่างๆ เช่น Google Drive หรือ Slack เพราะหากบัญชี AI ถูกแฮก ผู้ไม่หวังดีอาจเข้าถึงไฟล์ในบริการที่เชื่อมต่อไว้ได้ด้วย",
+      "เคล็ดลับ: ใช้แอปยืนยันตัวตน (Authenticator App) แทนการรับรหัส OTP ทาง SMS เพราะปลอดภัยกว่า และหมั่นตรวจสอบรายการอุปกรณ์ที่เคยล็อกอินเข้าบัญชี AI เป็นระยะ หากพบอุปกรณ์ที่ไม่รู้จักให้ Sign out ทันทีและเปลี่ยนรหัสผ่าน"
+    ]
+  },
+  {
+    key: "ai-phishing",
+    title: "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง",
+    icon: "🎣",
+    flow: [
+      { icon: "📧", label: "ได้รับอีเมล/ข้อความน่าสงสัย" },
+      { icon: "🤔", label: "ตั้งสติ ตรวจสอบก่อนเชื่อ" },
+      { icon: "🛡️", label: "ไม่ตกเป็นเหยื่อมิจฉาชีพ" }
+    ],
+    video: "https://www.youtube.com/embed/shWWkrG6U1M",
+    videoTitle: "วิธีจับผิด AI ไม่ให้โดนหลอก! อันไหนของจริง อันไหน AI ดูยังไง? รู้ทันมิจฉาชีพยุคเอไอ",
+    videoAuthor: "iT24Hrs",
+    images: [],
+    text: [
+      "มิจฉาชีพใช้ AI สร้างอีเมลหลอกลวง (Phishing) ที่เขียนได้เนียนขึ้นมาก ไม่มีคำผิดหรือสำนวนแปลกๆ เหมือนก่อน รวมถึงใช้ AI ปลอมเสียงหรือวิดีโอคอลเป็นผู้บริหารหรือคนรู้จัก เพื่อหลอกให้โอนเงินหรือเปิดเผยข้อมูลสำคัญ",
+      "ข้อควรระวัง: หากได้รับอีเมลหรือข้อความที่เร่งรัดให้ทำธุรกรรมด่วน โอนเงิน หรือเปิดเผยข้อมูลสำคัญ แม้จะดูเหมือนมาจากผู้บริหารหรือเพื่อนร่วมงานที่รู้จัก ให้ตั้งสติและตรวจสอบผ่านช่องทางอื่นก่อนเสมอ เช่น โทรกลับด้วยเบอร์ที่บันทึกไว้เดิม ไม่ใช่เบอร์ที่แนบมาในข้อความนั้น",
+      "แนวทางที่ดี: กำหนด 'รหัสลับ' หรือขั้นตอนยืนยันตัวตนภายในทีมสำหรับธุรกรรมสำคัญ เช่น การโอนเงินจำนวนมาก เพื่อให้ตรวจสอบได้ว่าเป็นคำสั่งจากคนจริงไม่ใช่เสียง/วิดีโอปลอมที่สร้างจาก AI หากไม่แน่ใจ ให้สงสัยไว้ก่อนเสมอและแจ้งทีม IT หรือหัวหน้างานทันที"
+    ],
+    link: "https://www.thaicert.or.th/"
+  },
+  {
+    key: "deepfake",
+    title: "Deepfake: ปลอมแปลงเสียง/วิดีโอ",
+    icon: "🎭",
+    flow: [
+      { icon: "📹", label: "เห็นคลิปวิดีโอ/เสียงที่น่าสงสัย" },
+      { icon: "🔍", label: "สังเกตจุดผิดปกติ" },
+      { icon: "⚠️", label: "ตรวจสอบก่อนเชื่อหรือแชร์ต่อ" }
+    ],
+    video: "https://www.youtube.com/embed/Eix3btX_HCc",
+    videoTitle: "ถอดรหัส \"Deepfake\" เมื่อ AI หลอก ซึม ลึก! | ชัวร์ก่อนแชร์ in FOCUS",
+    videoAuthor: "ชัวร์ก่อนแชร์ Sure And Share",
+    images: [],
+    text: [
+      "<strong>Deepfake</strong> คือเทคโนโลยี AI ที่สร้างภาพ เสียง หรือวิดีโอปลอมเลียนแบบบุคคลจริงได้สมจริงมาก ปัจจุบันถูกนำไปใช้ในการหลอกลวง เช่น ปลอมเป็นผู้บริหารสั่งโอนเงินผ่านวิดีโอคอล หรือปลอมเป็นคนดังเชิญชวนลงทุนที่ไม่มีอยู่จริง",
+      "วิธีใช้งาน: สังเกตจุดผิดปกติที่มักพบใน Deepfake เช่น การกระพริบตาที่ผิดธรรมชาติ แสงเงาบนใบหน้าไม่สอดคล้องกับสภาพแวดล้อม เสียงกับปากขยับไม่ตรงกัน หรือน้ำเสียงที่ราบเรียบผิดปกติ หากพบวิดีโอคอลหรือคลิปเสียงที่น่าสงสัยเกี่ยวกับธุรกรรมสำคัญ ให้ยืนยันตัวตนผ่านช่องทางอื่นก่อนดำเนินการใดๆ เสมอ",
+      "ข้อควรระวัง: ห้ามดำเนินการทางการเงินหรือเปิดเผยข้อมูลสำคัญตามคำสั่งที่ได้รับผ่านวิดีโอคอลหรือข้อความเสียงเพียงอย่างเดียว แม้จะดูและฟังเหมือนคนที่รู้จักมากแค่ไหนก็ตาม ควรยืนยันผ่านช่องทางที่สองเสมอ เช่น โทรกลับเบอร์เดิมที่บันทึกไว้ หรือถามคำถามที่มีแต่ตัวจริงเท่านั้นที่ตอบได้"
+    ],
+    link: "https://www.thaicert.or.th/"
+  },
+  {
+    key: "sharing-prompts",
+    title: "แชร์ Prompt/Custom GPT อย่างปลอดภัย",
+    icon: "🔗",
+    flow: [
+      { icon: "✍️", label: "เขียน Prompt/สร้าง Custom GPT" },
+      { icon: "🔍", label: "ตรวจสอบเนื้อหาก่อนแชร์" },
+      { icon: "🔗", label: "แชร์ได้อย่างปลอดภัย" }
+    ],
+    images: [],
+    text: [
+      "การแชร์บทสนทนา Prompt หรือ Custom GPT ที่สร้างไว้ให้เพื่อนร่วมงานหรือเผยแพร่สาธารณะ (เช่นใน GPT Store) อาจมีข้อมูลภายในหลุดไปโดยไม่ตั้งใจ หากไม่ตรวจสอบเนื้อหาให้ดีก่อนแชร์",
+      "ข้อควรระวัง: ก่อนสร้างลิงก์แชร์บทสนทนาหรือเผยแพร่ Custom GPT ให้ตรวจสอบว่าไม่มีข้อมูลลับของบริษัท ข้อมูลลูกค้า หรือความรู้ภายใน (Knowledge files ที่อัปโหลดไว้ใน Custom GPT) ปะปนอยู่ เพราะลิงก์ที่แชร์แล้วมักเป็นสาธารณะ ใครมีลิงก์ก็เข้าดูหรือใช้งานได้ทันที",
+      "แนวทางที่ดี: หากต้องการสร้าง Custom GPT หรือ Prompt Template สำหรับใช้ภายในทีม ให้ตั้งค่าการเข้าถึงเป็น 'เฉพาะทีม/องค์กร' แทนการเผยแพร่สู่สาธารณะ และตรวจสอบไฟล์ความรู้ที่อัปโหลดเข้าไปว่าไม่มีข้อมูลที่ไม่ควรเปิดเผยก่อนบันทึกทุกครั้ง"
+    ]
+  },
+  {
+    key: "incident-report",
+    title: "พบสิ่งผิดปกติ แจ้งใคร ทำอย่างไร (สรุป Do/Don't)",
+    icon: "🚨",
+    flow: [
+      { icon: "🚨", label: "พบเหตุการณ์ผิดปกติ/สงสัยข้อมูลรั่วไหล" },
+      { icon: "📞", label: "แจ้งทีม IT/ผู้ดูแลระบบทันที" },
+      { icon: "🛡️", label: "ลดความเสียหายได้ทันเวลา" }
+    ],
+    images: [],
+    text: [
+      "หากสงสัยว่าข้อมูลบริษัทหลุดเข้าไปใน AI สาธารณะโดยไม่ตั้งใจ ได้รับอีเมล/ข้อความหลอกลวงที่ใช้ AI สร้าง หรือพบพฤติกรรมผิดปกติในบัญชี AI ที่ใช้งาน ให้แจ้งทีม IT หรือผู้ดูแลระบบของบริษัททันที ยิ่งแจ้งเร็วเท่าไร ก็ยิ่งจำกัดความเสียหายได้มากเท่านั้น ไม่ต้องกังวลว่าจะถูกตำหนิ เพราะการแจ้งเร็วสำคัญกว่าการปิดบังความผิดพลาด",
+      "แนวทางที่ดี: สรุปแนวปฏิบัติที่ควรทำ (Do) — ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ, ตรวจสอบคำตอบ AI ก่อนนำไปใช้จริงเสมอ, เปิดใช้ 2FA ทุกบัญชี, ปิดการใช้ข้อมูลฝึกโมเดลในบัญชีองค์กร, ตั้งสติและตรวจสอบก่อนเชื่อสิ่งที่เห็น/ได้ยินผ่านสื่อดิจิทัล และแจ้งทีม IT ทันทีเมื่อพบสิ่งผิดปกติ",
+      "ข้อควรระวัง: สรุปสิ่งที่ห้ามทำ (Don't) — ห้ามป้อนข้อมูลลับ/ข้อมูลส่วนบุคคลเข้า AI สาธารณะ, ห้ามใช้เครื่องมือ AI ที่ไม่ได้รับอนุมัติกับข้อมูลบริษัท, ห้ามเชื่อหรือดำเนินการตามคำสั่งทางการเงินที่ได้รับผ่านเสียง/วิดีโอคอลโดยไม่ยืนยันซ้ำ, ห้ามแชร์บทสนทนา/Custom GPT ที่มีข้อมูลภายในสู่สาธารณะ และห้ามใช้รหัสผ่านซ้ำกันข้ามบัญชี"
+    ]
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  const cta = el.querySelector(".quiz-cta");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+  el.appendChild(cta);
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  let imagesHtml = '';
+  if (topic.images && topic.images.length > 0) {
+    imagesHtml = '<div class="section-label" style="margin-top:20px">ภาพประกอบเพิ่มเติม</div><div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
+      '</div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join('') + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจากหน่วยงานทางการ →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    imagesHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
