@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือเรียนรู้ PowerPoint สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #1a2634;
+    --sub: #5b6b7a;
+    --accent: #c0392b;
+    --accent-2: #922b21;
+    --border: #e1e8ef;
+    --shadow: 0 2px 10px rgba(20, 40, 70, 0.08);
+    --pill-bg: #fbeae7;
+    --placeholder-bg: #f7f9fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181f;
+      --card-bg: #1b232c;
+      --text: #eef2f6;
+      --sub: #9aa7b4;
+      --accent: #e57368;
+      --accent-2: #cc5147;
+      --border: #2a3541;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #3a211d;
+      --placeholder-bg: #212a34;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topic-list {
+    flex: 0 0 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--accent-2);
+    margin-bottom: 8px;
+  }
+  .key-points ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .key-points li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .image-placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.78rem;
+    text-align: center;
+    padding: 8px;
+  }
+  .image-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .text-block {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder {
+    color: var(--sub);
+    font-style: italic;
+  }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.88em;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0 16px;
+    padding: 16px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--placeholder-bg);
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 104px;
+    text-align: center;
+  }
+  .flow-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .flow-label {
+    font-size: 0.76rem;
+    color: var(--sub);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .flow-arrow {
+    font-size: 1.3rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  .ref-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📽️ คู่มือเรียนรู้ PowerPoint สำหรับผู้ใช้งานกลุ่มบริษัท ATTG พร้อม VDO ประกอบทุกหัวข้อ</h1>
+  <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/สถาบันที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed, images ใส่ URL รูปภาพ, text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
+const TOPICS = [
+  {
+    key: "interface-overview",
+    title: "ภาพรวมเมนูและหน้าจอ PowerPoint (Ribbon)",
+    icon: "🗺️",
+    flow: [
+      { icon: "🖥️", label: "เปิดโปรแกรม PowerPoint" },
+      { icon: "🗺️", label: "ทำความรู้จักเมนู/ริบบิ้น" },
+      { icon: "🎯", label: "หาเครื่องมือที่ต้องการเจอเร็วขึ้น" }
+    ],
+    video: "https://www.youtube.com/embed/FjODCexyC7k",
+    videoTitle: "การใช้งานโปรแกรม Microsoft PowerPoint เบื้องต้น | สอนใช้ PowerPoint ฟรี PowerPoint EP.1",
+    videoAuthor: "จารย์ลือ Tech & IT",
+    images: [],
+    text: [
+      "หน้าจอ PowerPoint แบ่งเป็นส่วนหลักๆ ได้แก่ <strong>Ribbon</strong> (แถบเมนูด้านบนรวมเครื่องมือแยกเป็นแท็บ เช่น <code>Home</code>, <code>Insert</code>, <code>Design</code>, <code>Transitions</code>, <code>Animations</code>, <code>Slide Show</code>), <strong>Slide Panel</strong> (แถบย่อสไลด์ด้านซ้ายมือแสดงลำดับทุกสไลด์) และ<strong>พื้นที่ทำงานหลัก</strong>ตรงกลางสำหรับแก้ไขสไลด์ที่เลือกอยู่ คู่มือนี้ใช้ PowerPoint เวอร์ชัน <strong>Microsoft 365</strong> ซึ่งอัปเดตฟีเจอร์ใหม่ต่อเนื่อง หน้าตาเมนูจึงทันสมัยกว่ารุ่นเก่าที่ซื้อขาดครั้งเดียว",
+      "วิธีใช้งาน: แท็บที่ใช้บ่อยที่สุดคือ <code>Home</code> (จัดรูปแบบข้อความ/เค้าโครง), <code>Insert</code> (แทรกรูปภาพ ตาราง กราฟ), <code>Design</code> (เลือกธีม), <code>Transitions</code>/<code>Animations</code> (เอฟเฟกต์เคลื่อนไหว) และ <code>Slide Show</code> (นำเสนอ) ลองคลิกไล่ดูแต่ละแท็บให้คุ้นเคยก่อนเริ่มสร้างงานจริง",
+      "เคล็ดลับ: กด <code>Ctrl+F1</code> เพื่อย่อ/ขยาย Ribbon ให้เหลือพื้นที่แก้ไขสไลด์มากขึ้น และคลิกขวาที่แถบสไลด์ด้านซ้ายเพื่อสลับมุมมองระหว่าง <code>Normal</code> กับ <code>Slide Sorter</code> ได้อย่างรวดเร็ว"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นสร้างงานนำเสนอ",
+    icon: "🚀",
+    flow: [
+      { icon: "📄", label: "เลือก Blank/Template" },
+      { icon: "✏️", label: "ใส่หัวข้อ/เนื้อหา" },
+      { icon: "💾", label: "บันทึกไฟล์" }
+    ],
+    video: "https://www.youtube.com/embed/Puxi-eCYo5Q",
+    videoTitle: "EP.1 สอนใช้ PowerPoint 101 อัพเดต 2023 - เริ่มต้นหัดใช้",
+    videoAuthor: "PowerPoint Boy",
+    images: [],
+    text: [
+      "การเริ่มงานนำเสนอใหม่ทำได้จากหน้า <code>Start</code> เลือก <strong>Blank Presentation</strong> เพื่อเริ่มจากศูนย์ หรือเลือกจากแม่แบบ (<strong>Template</strong>) สำเร็จรูปที่มีธีมและเค้าโครงพร้อมใช้ สไลด์แรกที่ได้จะเป็น <strong>Title Slide</strong> ซึ่งมีกล่องใส่ชื่อเรื่องและคำบรรยายรองให้กรอกทันที",
+      "วิธีใช้งาน: คลิกที่กล่อง Placeholder แล้วพิมพ์ข้อความได้ทันทีโดยไม่ต้องสร้างกล่องข้อความเอง กด <code>Enter</code> เพื่อสร้างสไลด์ใหม่ต่อจากสไลด์ปัจจุบันในแถบสไลด์ด้านซ้าย จากนั้นกด <code>Ctrl+S</code> เพื่อบันทึก ตั้งชื่อไฟล์ให้สื่อความหมาย แนะนำให้บันทึกลง OneDrive ขององค์กร",
+      "เคล็ดลับ: เปิด <code>AutoSave</code> ที่มุมซ้ายบนเมื่อบันทึกไฟล์ลง OneDrive/SharePoint แล้ว PowerPoint จะบันทึกงานให้อัตโนมัติทุกครั้งที่แก้ไข ไม่ต้องกังวลว่างานจะหายหากเครื่องแฮงก์"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "slide-management",
+    title: "จัดการสไลด์ (เพิ่ม/ลบ/จัดเรียง/ทำซ้ำ)",
+    icon: "🗂️",
+    flow: [
+      { icon: "➕", label: "เพิ่มสไลด์ใหม่" },
+      { icon: "🔀", label: "ลาก/จัดลำดับใหม่" },
+      { icon: "🗂️", label: "โครงสร้างงานนำเสนอชัดเจน" }
+    ],
+    video: "https://www.youtube.com/embed/NejGSnrj8tQ",
+    videoTitle: "วิธีการสลับหรือย้ายสไลด์ในการนำเสนอ ใน Microsoft PowerPoint",
+    videoAuthor: "โอภาส สุรินโยธา",
+    images: [],
+    text: [
+      "จัดการสไลด์ทั้งหมดได้จากแถบสไลด์ด้านซ้าย (Thumbnail Pane) คลิกขวาที่สไลด์เพื่อเลือก <code>New Slide</code> เพิ่มสไลด์ใหม่, <code>Duplicate Slide</code> ทำซ้ำสไลด์ที่เลือก หรือ <code>Delete Slide</code> ลบสไลด์ที่ไม่ต้องการ และลากสไลด์ขึ้น-ลงเพื่อจัดลำดับใหม่ได้โดยตรง",
+      "วิธีใช้งาน: สลับไปมุมมอง <code>View &gt; Slide Sorter</code> เพื่อดูสไลด์ทั้งหมดพร้อมกันแบบย่อ เหมาะกับการจัดลำดับเนื้อหาใหม่ทั้งงานนำเสนอในคราวเดียว โดยไม่ต้องเลื่อนดูทีละสไลด์",
+      "เคล็ดลับ: จัดกลุ่มสไลด์เป็นหมวดหมู่ด้วย <code>Add Section</code> (คลิกขวาระหว่างสไลด์) เช่น แบ่งเป็น 'บทนำ', 'เนื้อหาหลัก', 'สรุป' ช่วยให้จัดการงานนำเสนอยาวๆ ได้เป็นระเบียบและย้ายทั้งหมวดได้ในคลิกเดียว"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "layouts-placeholders",
+    title: "เค้าโครงสไลด์และ Placeholder (Layouts)",
+    icon: "🧩",
+    flow: [
+      { icon: "📐", label: "เลือกสไลด์" },
+      { icon: "🧩", label: "Home > Layout" },
+      { icon: "🎯", label: "เนื้อหาจัดวางเป็นระเบียบ" }
+    ],
+    video: "https://www.youtube.com/embed/0Q8jb_WQ4Jk",
+    videoTitle: "สร้าง Layout เองในโปรแกรม PowerPoint",
+    videoAuthor: "TechTorial",
+    images: [],
+    text: [
+      "<strong>Layout</strong> คือโครงสร้างที่กำหนดตำแหน่งของหัวข้อ ข้อความ รูปภาพ หรือกราฟบนสไลด์ไว้ล่วงหน้าผ่าน <strong>Placeholder</strong> (กรอบเส้นประ) แทนการวางองค์ประกอบเองอย่างอิสระทุกครั้ง ช่วยให้สไลด์แต่ละแผ่นมีความสม่ำเสมอทั้งงานนำเสนอ",
+      "วิธีใช้งาน: ไปที่ <code>Home &gt; Layout</code> แล้วเลือกเค้าโครงที่ต้องการ เช่น <code>Title and Content</code>, <code>Two Content</code> (แบ่งซ้าย-ขวา) หรือ <code>Comparison</code> Placeholder ที่ว่างจะแสดงไอคอนให้แทรกรูปภาพ ตาราง หรือกราฟได้ทันทีโดยคลิกที่ไอคอนกลาง Placeholder",
+      "ข้อควรระวัง: การลบ Placeholder ที่ไม่ใช้ทิ้งไปเลย (แทนการปล่อยว่างไว้) จะทำให้พิมพ์ข้อความใหม่ในตำแหน่งนั้นไม่ได้อีก หากต้องการเอาคืน ให้ไปที่ <code>Home &gt; Reset</code> เพื่อดึง Layout เดิมกลับมา"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "text-formatting",
+    title: "ใส่ข้อความและจัดรูปแบบตัวอักษร",
+    icon: "🔤",
+    flow: [
+      { icon: "📝", label: "คลิก Text Box/Placeholder" },
+      { icon: "🎨", label: "จัดรูปแบบ ฟอนต์ สี ขนาด" },
+      { icon: "✅", label: "ข้อความอ่านง่าย โดดเด่น" }
+    ],
+    video: "https://www.youtube.com/embed/eMkSyVDN9CI",
+    videoTitle: "ไขปริศนากล่องข้อความสามแบบ ใน PowerPoint (Metro Library EP.14)",
+    videoAuthor: "Metro Systems Channel",
+    images: [],
+    text: [
+      "นอกจาก Placeholder ที่มีมากับ Layout แล้ว ยังสามารถแทรก <strong>Text Box</strong> อิสระเพิ่มเองได้จาก <code>Insert &gt; Text Box</code> แล้วลากวาดกรอบในตำแหน่งที่ต้องการ จากนั้นจัดรูปแบบตัวอักษรได้จากแท็บ <code>Home</code> เช่น เปลี่ยนฟอนต์ ขนาด สี ตัวหนา/ตัวเอียง เหมือนโปรแกรมเอกสารทั่วไป",
+      "วิธีใช้งาน: เลือกข้อความแล้วไปที่ <code>Home &gt; Font</code> เพื่อปรับฟอนต์และขนาด หรือใช้ <code>Shape Format &gt; Text Effects</code> เพื่อใส่เงา แสงเรือง หรือเปลี่ยนรูปทรงตัวอักษรให้โดดเด่นขึ้น สำหรับจัดตำแหน่งข้อความในกล่อง ใช้ปุ่มจัดชิดซ้าย/กลาง/ขวาในแท็บ Home เช่นเดียวกับ Word",
+      "เคล็ดลับ: หลีกเลี่ยงการใส่ข้อความยาวเกินไปในสไลด์เดียว ควรใช้หลักการ 'หนึ่งสไลด์ หนึ่งประเด็นหลัก' และเลือกขนาดฟอนต์อย่างน้อย 24pt เพื่อให้ผู้ฟังที่นั่งไกลจอยังอ่านออก"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "themes-design",
+    title: "เลือกธีมและออกแบบสไลด์ (Themes)",
+    icon: "🎨",
+    flow: [
+      { icon: "📄", label: "งานนำเสนอเปล่า" },
+      { icon: "🎨", label: "Design > Themes" },
+      { icon: "✨", label: "สไลด์มีสไตล์เป็นเอกภาพ" }
+    ],
+    video: "https://www.youtube.com/embed/6n5WY0CrJIU",
+    videoTitle: "PowerPoint : ออกแบบสไลด์สไตล์เท่ๆ",
+    videoAuthor: "ครูอภิวัฒน์ สอนสร้างสื่อ",
+    images: [],
+    text: [
+      "<strong>Theme</strong> คือชุดสี ฟอนต์ และลวดลายพื้นหลังที่ออกแบบไว้ล่วงหน้า ช่วยให้ทุกสไลด์ในงานนำเสนอมีสไตล์เดียวกันโดยไม่ต้องจัดแต่งเองทีละหน้า เลือกได้จากแท็บ <code>Design &gt; Themes</code> ซึ่งมีธีมสำเร็จรูปให้เลือกหลายสิบแบบ",
+      "วิธีใช้งาน: คลิกธีมที่ต้องการเพื่อใช้งานทันที และเลือก <code>Variants</code> ข้างๆ เพื่อปรับโทนสีของธีมเดิมให้ต่างออกไปโดยไม่ต้องเปลี่ยนธีมทั้งหมด เหมาะกับการปรับให้เข้ากับสีองค์กร",
+      "เคล็ดลับ: หากต้องการใช้สีแบรนด์องค์กรที่แน่นอน ให้ไปที่ <code>Design &gt; Variants &gt; Colors &gt; Customize Colors</code> เพื่อกำหนดชุดสีเอง (Custom Theme Colors) แล้วบันทึกไว้ใช้ซ้ำได้ทุกไฟล์ในอนาคต"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "images-icons",
+    title: "แทรกรูปภาพและไอคอน",
+    icon: "🖼️",
+    flow: [
+      { icon: "🖼️", label: "Insert > Pictures/Icons" },
+      { icon: "🎯", label: "จัดวาง/ปรับขนาด" },
+      { icon: "✨", label: "สไลด์มีภาพประกอบชัดเจน" }
+    ],
+    video: "https://www.youtube.com/embed/Fjuv_KXYfIM",
+    videoTitle: "สอน PowerPoint: การ Insert Icons (Office 365)",
+    videoAuthor: "prasertcbs",
+    images: [],
+    text: [
+      "การแทรกรูปภาพทำได้จาก <code>Insert &gt; Pictures</code> เลือกไฟล์จากเครื่องหรือค้นหาจาก <strong>Stock Images</strong> ที่มีมาให้ในตัวโปรแกรม ส่วน <strong>Icons</strong> (ไอคอนเวกเตอร์) แทรกได้จาก <code>Insert &gt; Icons</code> ซึ่งปรับสีให้เข้ากับธีมสไลด์ได้ง่ายกว่ารูปภาพทั่วไปเพราะเป็นภาพเวกเตอร์",
+      "วิธีใช้งาน: หลังแทรกรูปภาพแล้ว ลากมุมเพื่อปรับขนาดโดยกดปุ่ม <code>Shift</code> ค้างไว้เพื่อไม่ให้สัดส่วนภาพเพี้ยน และใช้ <code>Picture Format &gt; Remove Background</code> เพื่อลบพื้นหลังรูปภาพออกอัตโนมัติโดยไม่ต้องใช้โปรแกรมแต่งภาพแยก",
+      "เคล็ดลับ: เลือกไอคอนแล้วไปที่ <code>Graphics Format &gt; Graphics Fill</code> เพื่อเปลี่ยนสีไอคอนให้ตรงกับโทนสีธีมของสไลด์ได้ทันที ช่วยให้ภาพประกอบดูเป็นชุดเดียวกันทั้งงานนำเสนอ"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "tables",
+    title: "ตารางใน PowerPoint",
+    icon: "📋",
+    flow: [
+      { icon: "📊", label: "ข้อมูลเปรียบเทียบ" },
+      { icon: "📋", label: "Insert > Table" },
+      { icon: "🎨", label: "จัดสไตล์ตารางให้อ่านง่าย" }
+    ],
+    video: "https://www.youtube.com/embed/ngfBTCB1hp0",
+    videoTitle: "3 Steps ง่ายๆ ในการออกแบบและแต่งตารางใน PowerPoint",
+    videoAuthor: "PowerPoint Boy",
+    images: [],
+    text: [
+      "การนำเสนอข้อมูลแบบเปรียบเทียบหรือเป็นแถว-คอลัมน์ ควรใช้ <strong>Table</strong> แทนการพิมพ์ข้อความเรียงกัน แทรกได้จาก <code>Insert &gt; Table</code> แล้วกำหนดจำนวนแถวและคอลัมน์ที่ต้องการ",
+      "วิธีใช้งาน: หลังสร้างตารางแล้ว ไปที่แท็บ <code>Table Design</code> เพื่อเลือกสไตล์สำเร็จรูป หรือปรับสีแถวเฉพาะ (Banded Rows) ให้อ่านง่ายขึ้น และใช้แท็บ <code>Layout</code> เพื่อเพิ่ม/ลบแถวคอลัมน์ หรือรวมเซลล์ (Merge Cells) ตามต้องการ",
+      "เคล็ดลับ: หากมีตารางข้อมูลอยู่ใน Excel อยู่แล้ว สามารถคัดลอกมาวางแบบ <code>Paste Special &gt; Link</code> ในสไลด์ เพื่อให้ตารางอัปเดตอัตโนมัติทุกครั้งที่ไฟล์ Excel ต้นทางเปลี่ยนแปลง โดยไม่ต้องพิมพ์ข้อมูลใหม่เอง"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "charts",
+    title: "กราฟและแผนภูมิ",
+    icon: "📊",
+    flow: [
+      { icon: "🔢", label: "ข้อมูลตัวเลข" },
+      { icon: "📊", label: "Insert > Chart" },
+      { icon: "📈", label: "กราฟพร้อมนำเสนอ" }
+    ],
+    video: "https://www.youtube.com/embed/aGdBJvkBcQg",
+    videoTitle: "PowerPoint : EP4 การสร้างกราฟใน PowerPoint",
+    videoAuthor: "รูนเมืองตรัง",
+    images: [],
+    text: [
+      "การแทรกกราฟทำได้จาก <code>Insert &gt; Chart</code> เลือกประเภทกราฟที่เหมาะกับข้อมูล เช่น <strong>กราฟแท่ง</strong>สำหรับเปรียบเทียบ, <strong>กราฟเส้น</strong>สำหรับแนวโน้มตามเวลา หรือ<strong>กราฟวงกลม</strong>สำหรับสัดส่วน เมื่อเลือกแล้วจะมีหน้าต่าง Excel ย่อยเปิดขึ้นให้กรอกข้อมูลของกราฟ",
+      "วิธีใช้งาน: แก้ไขข้อมูลกราฟภายหลังได้โดยคลิกขวาที่กราฟแล้วเลือก <code>Edit Data</code> เพื่อเปิดหน้าต่าง Excel ย่อยขึ้นมาแก้ไขอีกครั้ง กราฟบนสไลด์จะอัปเดตให้ทันทีตามข้อมูลใหม่โดยไม่ต้องสร้างกราฟใหม่",
+      "เคล็ดลับ: ใช้ <code>Chart Design &gt; Add Chart Element</code> เพื่อเพิ่ม Data Labels แสดงตัวเลขบนกราฟโดยตรง ช่วยให้ผู้ฟังเห็นตัวเลขชัดเจนโดยไม่ต้องเพ่งดูแกนกราฟ เหมาะกับการนำเสนอที่มีเวลาจำกัด"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint/get-started/create-a-chart-from-start-to-finish"
+  },
+  {
+    key: "smartart",
+    title: "SmartArt แผนภาพความคิด",
+    icon: "🧠",
+    flow: [
+      { icon: "📝", label: "รายการข้อความ/ขั้นตอน" },
+      { icon: "🧠", label: "Insert > SmartArt" },
+      { icon: "🗺️", label: "แผนภาพสื่อความหมายชัดเจน" }
+    ],
+    video: "https://www.youtube.com/embed/b0o96qMI544",
+    videoTitle: "สอน PowerPoint: เทคนิคการสร้าง SmartArt",
+    videoAuthor: "prasertcbs",
+    images: [],
+    text: [
+      "<strong>SmartArt</strong> ใช้แปลงข้อความเป็นแผนภาพสำเร็จรูป เช่น ผังลำดับขั้นตอน (Process), ผังองค์กร (Hierarchy) หรือวงจร (Cycle) แทนการพิมพ์เป็น bullet list ธรรมดา ช่วยให้ผู้ฟังเข้าใจความสัมพันธ์ของข้อมูลได้เร็วขึ้น แทรกได้จาก <code>Insert &gt; SmartArt</code>",
+      "วิธีใช้งาน: เลือกรูปแบบ SmartArt ที่ตรงกับโครงสร้างข้อมูล เช่น เลือก <code>Process</code> สำหรับขั้นตอนต่อเนื่อง หรือ <code>Hierarchy</code> สำหรับผังองค์กร แล้วพิมพ์ข้อความลงใน Text Pane ด้านซ้ายของ SmartArt แต่ละกล่องจะอัปเดตข้อความให้อัตโนมัติ",
+      "เคล็ดลับ: หากมี bullet list ข้อความอยู่แล้วในสไลด์ สามารถเลือกข้อความทั้งหมดแล้วคลิกขวาเลือก <code>Convert to SmartArt</code> เพื่อแปลงเป็นแผนภาพได้ทันทีโดยไม่ต้องพิมพ์ใหม่"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "transitions",
+    title: "การเปลี่ยนสไลด์ (Transitions)",
+    icon: "🔄",
+    flow: [
+      { icon: "🖱️", label: "เลือกสไลด์" },
+      { icon: "🔄", label: "Transitions > เลือกเอฟเฟกต์" },
+      { icon: "✨", label: "เปลี่ยนสไลด์ลื่นไหล" }
+    ],
+    video: "https://www.youtube.com/embed/rkV5qKSrK8U",
+    videoTitle: "การเปลี่ยนสไลด์ | MS PowerPoint",
+    videoAuthor: "KRUDOOK-SATITNRRU",
+    images: [],
+    text: [
+      "<strong>Transition</strong> คือเอฟเฟกต์ตอนเปลี่ยนจากสไลด์หนึ่งไปอีกสไลด์หนึ่ง เลือกได้จากแท็บ <code>Transitions</code> มีให้เลือกตั้งแต่แบบเรียบง่าย เช่น <code>Fade</code> ไปจนถึงแบบเคลื่อนไหวซับซ้อน เช่น <code>Morph</code>",
+      "วิธีใช้งาน: เลือกสไลด์แล้วคลิกเอฟเฟกต์ที่ต้องการในแท็บ Transitions ปรับความเร็วได้ที่ <code>Duration</code> และกด <code>Apply to All</code> หากต้องการใช้เอฟเฟกต์เดียวกันกับทุกสไลด์ในงานนำเสนอ",
+      "ข้อควรระวัง: ควรเลือกใช้ Transition แบบเดียวกันตลอดทั้งงานนำเสนอ (หรือใช้เพียง 1-2 แบบ) การสลับเอฟเฟกต์หลากหลายรูปแบบเกินไปอาจทำให้ดูไม่เป็นมืออาชีพและเบี่ยงเบนความสนใจจากเนื้อหา"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "animations",
+    title: "แอนิเมชัน (Animations)",
+    icon: "✨",
+    flow: [
+      { icon: "🎯", label: "เลือกวัตถุในสไลด์" },
+      { icon: "✨", label: "Animations > เลือกเอฟเฟกต์" },
+      { icon: "🎬", label: "วัตถุปรากฏ/เคลื่อนไหวตามจังหวะ" }
+    ],
+    video: "https://www.youtube.com/embed/SjXjRj7Gshw",
+    videoTitle: "การทำให้ภาพใน PowerPoint เคลื่อนไหว แบบง่ายๆ เพิ่มความน่าสนใจให้กับงานนำเสนอ",
+    videoAuthor: "TA Channel คลังความรู้ คู่คิดครูไทย",
+    images: [],
+    text: [
+      "<strong>Animation</strong> ใช้กำหนดการเคลื่อนไหวของวัตถุแต่ละชิ้น (ข้อความ รูปภาพ กราฟ) ภายในสไลด์เดียวกัน ต่างจาก Transition ที่เป็นเอฟเฟกต์ระหว่างสไลด์ เลือกวัตถุแล้วไปที่แท็บ <code>Animations</code> เพื่อกำหนดเอฟเฟกต์ เช่น <code>Entrance</code> (ปรากฏขึ้น), <code>Emphasis</code> (เน้น) หรือ <code>Exit</code> (หายไป)",
+      "วิธีใช้งาน: ใช้ <code>Animation Pane</code> (เปิดจาก <code>Animations &gt; Animation Pane</code>) เพื่อดูลำดับและจัดเรียงแอนิเมชันของวัตถุหลายชิ้นในสไลด์เดียวกัน สามารถกำหนดให้เล่นแอนิเมชันแบบ <code>On Click</code>, <code>With Previous</code> หรือ <code>After Previous</code> ได้ตามจังหวะที่ต้องการ",
+      "เคล็ดลับ: ใช้แอนิเมชันอย่างมีเหตุผล เช่น ให้ bullet ข้อความปรากฏทีละบรรทัดเพื่อควบคุมจังหวะการพูด แทนการใส่เอฟเฟกต์หวือหวาที่ไม่เกี่ยวกับเนื้อหา เพราะอาจทำให้ผู้ฟังเสียสมาธิจากประเด็นหลัก"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "design-ideas",
+    title: "Designer / Design Ideas (AI จัดวางอัตโนมัติ)",
+    icon: "💡",
+    flow: [
+      { icon: "📝", label: "ใส่เนื้อหา/รูปภาพในสไลด์" },
+      { icon: "💡", label: "Design > Design Ideas" },
+      { icon: "🎨", label: "เลือกเค้าโครงที่ AI ออกแบบให้" }
+    ],
+    video: "https://www.youtube.com/embed/Rl0gqaLBqjw",
+    videoTitle: "PowerPoint การใช้ Design Ideas ปรับแต่งสไลด์ในคลิกเดียว",
+    videoAuthor: "PowerPoint Boy",
+    images: [],
+    text: [
+      "<strong>Design Ideas</strong> (หรือ Designer) คือฟีเจอร์ที่ให้ AI ช่วยจัดวางองค์ประกอบในสไลด์ให้สวยงามอัตโนมัติ เพียงใส่ข้อความหรือรูปภาพลงในสไลด์แล้ว PowerPoint จะเสนอเค้าโครงหลายแบบให้เลือกใช้ในคลิกเดียว โดยไม่ต้องจัดวางเองทีละองค์ประกอบ",
+      "วิธีใช้งาน: หลังใส่เนื้อหาในสไลด์แล้ว ไปที่ <code>Design &gt; Design Ideas</code> แผงตัวเลือกจะแสดงทางด้านขวา คลิกเลือกแบบที่ถูกใจเพื่อนำมาใช้ทันที หากไม่ขึ้นให้ตรวจสอบว่าเชื่อมต่ออินเทอร์เน็ตอยู่ เพราะฟีเจอร์นี้ประมวลผลผ่านระบบคลาวด์",
+      "เคล็ดลับ: Design Ideas ทำงานได้ดีที่สุดเมื่อสไลด์มีรูปภาพหรือข้อความอยู่แล้วอย่างน้อยหนึ่งอย่าง หากเป็นสไลด์เปล่าทั้งหมด ระบบจะยังไม่มีข้อมูลพอให้แนะนำเค้าโครง"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "slide-master",
+    title: "Slide Master (แม่แบบ/แบรนด์องค์กร)",
+    icon: "🏛️",
+    flow: [
+      { icon: "🏛️", label: "View > Slide Master" },
+      { icon: "🖊️", label: "แก้ไขแม่แบบครั้งเดียว" },
+      { icon: "📑", label: "ทุกสไลด์อัปเดตตามแม่แบบ" }
+    ],
+    video: "https://www.youtube.com/embed/zN0E716IspE",
+    videoTitle: "สอนเทคนิคการใช้ PowerPoint Slide Master แบบง่าย (Metro Library EP.41)",
+    videoAuthor: "Metro Systems Channel",
+    images: [],
+    text: [
+      "<strong>Slide Master</strong> คือแม่แบบกลางที่ควบคุมหน้าตาของทุกสไลด์ในงานนำเสนอ เช่น ตำแหน่งโลโก้ เลขหน้า ฟอนต์ และสีพื้นหลัง แก้ไขที่ Slide Master เพียงครั้งเดียว การเปลี่ยนแปลงจะมีผลกับทุกสไลด์ที่ใช้เค้าโครงนั้นโดยอัตโนมัติ",
+      "วิธีใช้งาน: ไปที่ <code>View &gt; Slide Master</code> จะเห็นสไลด์แม่แบบใหญ่ด้านบนและเค้าโครงย่อยด้านล่าง แก้ไขที่สไลด์แม่แบบใหญ่เพื่อให้มีผลกับทุกเค้าโครง หรือแก้เฉพาะเค้าโครงย่อยหากต้องการเปลี่ยนเฉพาะบางแบบ เสร็จแล้วกด <code>Close Master View</code> เพื่อกลับสู่การแก้ไขปกติ",
+      "เคล็ดลับ: ใส่โลโก้บริษัทและเลขหน้าที่ Slide Master เพียงครั้งเดียว แทนการคัดลอกวางโลโก้ในทุกสไลด์ด้วยมือ ช่วยประหยัดเวลาและทำให้ทุกสไลด์มีแบรนด์องค์กรสม่ำเสมอกัน"
+    ],
+    link: "https://support.microsoft.com/en-us/office/what-is-a-slide-master-eb62a259-069f-4954-a5b9-6e6cbf10ce41"
+  },
+  {
+    key: "audio-video",
+    title: "แทรกวิดีโอและเสียง",
+    icon: "🎬",
+    flow: [
+      { icon: "🎬", label: "Insert > Video/Audio" },
+      { icon: "⚙️", label: "ตั้งค่าการเล่น" },
+      { icon: "▶️", label: "สื่อเล่นในสไลด์โดยตรง" }
+    ],
+    video: "https://www.youtube.com/embed/mk2sW1sR60Y",
+    videoTitle: "การแทรกวิดีโอใน PowerPoint 2021 สำหรับผู้เริ่มต้น",
+    videoAuthor: "Tom Sean",
+    images: [],
+    text: [
+      "PowerPoint แทรกไฟล์วิดีโอหรือเสียงลงในสไลด์ได้โดยตรงจาก <code>Insert &gt; Video</code> หรือ <code>Insert &gt; Audio</code> โดยเลือกได้ทั้งไฟล์จากเครื่องหรือวิดีโอออนไลน์ (เช่น ลิงก์ YouTube) โดยไม่ต้องสลับไปเปิดโปรแกรมเล่นสื่ออื่นระหว่างนำเสนอ",
+      "วิธีใช้งาน: หลังแทรกวิดีโอ/เสียงแล้ว ไปที่แท็บ <code>Playback</code> เพื่อตั้งค่าว่าจะให้เล่นแบบ <code>Automatically</code> (เล่นทันทีที่เข้าสไลด์) หรือ <code>On Click</code> (คลิกเพื่อเล่น) และตัดช่วงวิดีโอที่ไม่ต้องการด้วย <code>Trim Video</code> ได้โดยไม่ต้องใช้โปรแกรมตัดต่อแยก",
+      "ข้อควรระวัง: หากแทรกไฟล์วิดีโอจากเครื่องแล้วนำไฟล์ PowerPoint ไปเปิดที่เครื่องอื่น ต้องนำไฟล์วิดีโอต้นฉบับติดไปด้วยหรือใช้คำสั่ง <code>File &gt; Export &gt; Package for CD</code> เพื่อรวมไฟล์สื่อทั้งหมดไว้ด้วยกัน ไม่เช่นนั้นวิดีโอจะเล่นไม่ได้เมื่อเปิดที่เครื่องอื่น"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "speaker-notes",
+    title: "Speaker Notes และ Presenter View",
+    icon: "📝",
+    flow: [
+      { icon: "📝", label: "พิมพ์โน้ตใต้สไลด์" },
+      { icon: "🎤", label: "เปิด Presenter View ตอนนำเสนอ" },
+      { icon: "👀", label: "เห็นโน้ตได้ ผู้ฟังไม่เห็น" }
+    ],
+    video: "https://www.youtube.com/embed/cv-w63ekflE",
+    videoTitle: "PowerPoint Presenter View and Speaker Notes [Complete Tutorial]",
+    videoAuthor: "digitidea",
+    images: [],
+    text: [
+      "<strong>Speaker Notes</strong> คือพื้นที่จดบันทึกใต้สไลด์แต่ละแผ่น ใช้เขียนสิ่งที่ต้องการพูดประกอบ โดยผู้ฟังจะไม่เห็นข้อความส่วนนี้ระหว่างนำเสนอ เปิดพื้นที่นี้ได้จาก <code>View &gt; Notes</code> หรือคลิกแถบ Notes ด้านล่างหน้าต่างแก้ไข",
+      "วิธีใช้งาน: ระหว่างนำเสนอจริง ให้เปิด <code>Presenter View</code> จากแท็บ <code>Slide Show &gt; Use Presenter View</code> จอที่ผู้บรรยายเห็นจะแสดงสไลด์ปัจจุบัน สไลด์ถัดไป โน้ตของตนเอง และเวลาที่ใช้ไป ในขณะที่จอโปรเจกเตอร์ที่ผู้ฟังเห็นจะแสดงเฉพาะสไลด์เท่านั้น",
+      "เคล็ดลับ: เขียน Speaker Notes เป็นหัวข้อสั้นๆ ที่ช่วยเตือนความจำ ไม่ควรเขียนเป็นสคริปต์ยาวทั้งประโยค เพราะจะทำให้เผลออ่านตามโน้ตแทนการพูดกับผู้ฟังโดยตรง"
+    ],
+    link: "https://support.microsoft.com/en-us/office/see-your-speaker-notes-as-you-deliver-your-slide-show-29b0eae8-3ca5-4c96-870d-fe23f7add8f3"
+  },
+  {
+    key: "rehearse-record",
+    title: "ซ้อมนำเสนอและบันทึกสไลด์โชว์",
+    icon: "⏱️",
+    flow: [
+      { icon: "⏱️", label: "Slide Show > Rehearse Timings" },
+      { icon: "🎙️", label: "ซ้อมพูดจับเวลาจริง" },
+      { icon: "📼", label: "บันทึกเสียง/วิดีโอประกอบ" }
+    ],
+    video: "https://www.youtube.com/embed/WIwtMrq9A-0",
+    videoTitle: "EP.2 สอนใช้ PowerPoint 101 - วิธีใช้งานฟังก์ชันการนำเสนอ",
+    videoAuthor: "PowerPoint Boy",
+    images: [],
+    text: [
+      "<strong>Rehearse Timings</strong> ช่วยจับเวลาที่ใช้พูดในแต่ละสไลด์ระหว่างซ้อมนำเสนอจริง โดยระบบจะบันทึกเวลาของแต่ละสไลด์ไว้อัตโนมัติ ใช้ตรวจสอบว่าเนื้อหาส่วนไหนใช้เวลานานเกินไปก่อนนำเสนอจริง",
+      "วิธีใช้งาน: ไปที่ <code>Slide Show &gt; Rehearse Timings</code> โปรแกรมจะเข้าสู่โหมดนำเสนอเต็มจอพร้อมตัวจับเวลา พูดตามที่ซ้อมไว้แล้วเปลี่ยนสไลด์ตามจังหวะปกติ เมื่อจบจะมีหน้าต่างถามว่าต้องการบันทึกเวลาที่ใช้ในแต่ละสไลด์หรือไม่ หากต้องการบันทึกเสียง/วิดีโอประกอบไปด้วย ให้ใช้ <code>Record Slide Show</code> แทน",
+      "เคล็ดลับ: ใช้เวลาที่บันทึกได้จาก Rehearse Timings มาปรับเนื้อหาสไลด์ที่ใช้เวลานานเกินสัดส่วนที่ควรจะเป็น เช่น หากมีเวลานำเสนอทั้งหมด 20 นาที แต่สไลด์เดียวใช้ไป 5 นาที อาจต้องแบ่งเนื้อหาสไลด์นั้นออกเป็นหลายสไลด์"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "presenting-live",
+    title: "การนำเสนอสด (Slide Show, Laser Pointer, Ink)",
+    icon: "🎤",
+    flow: [
+      { icon: "▶️", label: "F5 เริ่มนำเสนอ" },
+      { icon: "🖊️", label: "ใช้ Pen/Laser Pointer เน้นจุดสำคัญ" },
+      { icon: "🎯", label: "ผู้ฟังโฟกัสตามที่ต้องการ" }
+    ],
+    video: "https://www.youtube.com/embed/5sfC9xyWu-E",
+    videoTitle: "สอน PowerPoint: เทคนิคการใช้ Slide Show และ Presenter View",
+    videoAuthor: "prasertcbs",
+    images: [],
+    text: [
+      "เริ่มนำเสนอแบบเต็มจอได้ด้วยการกด <code>F5</code> (เริ่มจากสไลด์แรก) หรือ <code>Shift+F5</code> (เริ่มจากสไลด์ปัจจุบัน) ระหว่างนำเสนอสามารถใช้เครื่องมือชี้นำผู้ฟัง เช่น <strong>Laser Pointer</strong>, <strong>Pen</strong> (เขียนวาดบนสไลด์) หรือ <strong>Highlighter</strong> เพื่อเน้นจุดสำคัญแบบสดๆ",
+      "วิธีใช้งาน: ระหว่างนำเสนอ คลิกขวาแล้วเลือก <code>Pointer Options</code> เพื่อเปลี่ยนเป็น Laser Pointer, Pen หรือ Highlighter หรือใช้คีย์ลัด <code>Ctrl+L</code> (Laser Pointer), <code>Ctrl+P</code> (Pen) และ <code>Ctrl+I</code> (Highlighter) เพื่อสลับเครื่องมือได้รวดเร็วโดยไม่ต้องเปิดเมนู",
+      "เคล็ดลับ: หากเขียนวาดบนสไลด์ด้วย Pen ระหว่างนำเสนอ เมื่อกด <code>Esc</code> ออกจากโหมดนำเสนอ ระบบจะถามว่าต้องการเก็บรอยขีดเขียนไว้บนสไลด์หรือไม่ เลือก <code>Keep</code> เพื่อบันทึกไว้ใช้อ้างอิงภายหลัง"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "morph-zoom",
+    title: "Morph Transition และ Zoom (Section/Summary Zoom)",
+    icon: "🌀",
+    flow: [
+      { icon: "📑", label: "สไลด์คล้ายกัน 2 แผ่น" },
+      { icon: "🌀", label: "ใส่ Morph Transition" },
+      { icon: "🎬", label: "เปลี่ยนสไลด์ลื่นไหลเหมือนวิดีโอ" }
+    ],
+    video: "https://www.youtube.com/embed/8gq1idKzdpU",
+    videoTitle: "สอน Morph Transition ทำตัวหนังสือวิ่งใน PowerPoint",
+    videoAuthor: "PowerPoint Boy",
+    images: [],
+    text: [
+      "<strong>Morph</strong> คือ Transition ขั้นสูงที่สร้างการเคลื่อนไหวลื่นไหลระหว่างสไลด์สองแผ่นที่มีวัตถุคล้ายกัน เช่น ขยับตำแหน่งรูปภาพหรือซูมเข้าไปยังจุดที่ต้องการ โดยไม่ต้องสร้างแอนิเมชันเองทีละขั้นตอน ส่วน <strong>Zoom</strong> (Section Zoom/Summary Zoom) ใช้สร้างเมนูนำทางแบบไม่เรียงลำดับ ให้กระโดดไปยังส่วนใดของงานนำเสนอก่อนก็ได้",
+      "วิธีใช้งาน: สำหรับ Morph ให้ทำสำเนาสไลด์ (Duplicate) แล้วขยับ/ปรับขนาดวัตถุในสไลด์ที่สองให้ต่างจากสไลด์แรก จากนั้นไปที่ <code>Transitions</code> เลือก <code>Morph</code> PowerPoint จะคำนวณการเคลื่อนไหวเชื่อมสองสไลด์ให้อัตโนมัติ ส่วน Zoom ใช้ <code>Insert &gt; Zoom &gt; Summary Zoom</code> เพื่อสร้างหน้าเมนูรวมลิงก์ไปยังแต่ละ Section ของงานนำเสนอ",
+      "เคล็ดลับ: Morph เหมาะกับการนำเสนอที่ต้องการเอฟเฟกต์ซูมเข้าไปยังรายละเอียดของภาพ เช่น แผนที่หรือแผนภาพ ให้ผลลัพธ์ดูมืออาชีพโดยใช้เวลาตั้งค่าไม่นาน"
+    ],
+    link: "https://support.microsoft.com/en-us/office/use-morph-transition-in-powerpoint-8dd1c7b2-b935-44f5-a74c-741d16d0d1e5"
+  },
+  {
+    key: "share-collab",
+    title: "แชร์และทำงานร่วมกัน (Share & Co-authoring)",
+    icon: "🤝",
+    flow: [
+      { icon: "☁️", label: "บันทึกไฟล์ขึ้น OneDrive" },
+      { icon: "🤝", label: "แชร์ให้เพื่อนร่วมงาน" },
+      { icon: "💬", label: "คอมเมนต์/แก้ไขพร้อมกัน" }
+    ],
+    video: "https://www.youtube.com/embed/HL3v5clECTw",
+    videoTitle: "ทำงานร่วมกันอย่างไรบน Office 365 - OneDrive & Office Online",
+    videoAuthor: "ARIT Thailand",
+    images: [],
+    text: [
+      "การบันทึกไฟล์ไว้บน <strong>OneDrive</strong> หรือ <strong>SharePoint</strong> ก่อนแชร์ ช่วยให้หลายคนเปิดและแก้ไขงานนำเสนอเดียวกันพร้อมกันแบบเรียลไทม์ (co-authoring) เห็นว่าใครกำลังแก้ไขสไลด์ไหนอยู่ ต่างจากการส่งไฟล์แนบทางอีเมลที่มักเกิดปัญหาไฟล์หลายเวอร์ชันสับสน",
+      "วิธีใช้งาน: กดปุ่ม <code>Share</code> มุมขวาบน พิมพ์อีเมลผู้ที่ต้องการแชร์ พร้อมเลือกสิทธิ์ <code>Can edit</code> หรือ <code>Can view</code> หากต้องการแสดงความเห็นในสไลด์ใดสไลด์หนึ่งโดยไม่แก้ไขเนื้อหาจริง ให้ไปที่ <code>Review &gt; New Comment</code>",
+      "เคล็ดลับ: ใช้ <code>Review &gt; Compare</code> เพื่อเปรียบเทียบไฟล์งานนำเสนอสองเวอร์ชันและดูว่าแต่ละคนแก้ไขอะไรไปบ้าง มีประโยชน์มากเมื่อได้รับไฟล์กลับมาจากเพื่อนร่วมงานหลายคนที่แก้ไขแยกกัน"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "export-share",
+    title: "Export เป็น PDF/วิดีโอ/Handout",
+    icon: "📤",
+    flow: [
+      { icon: "📤", label: "File > Export" },
+      { icon: "⚙️", label: "เลือกรูปแบบไฟล์" },
+      { icon: "📁", label: "ไฟล์พร้อมส่งต่อ/พิมพ์" }
+    ],
+    video: "https://www.youtube.com/embed/U19-kMzSENo",
+    videoTitle: "แปลงไฟล์ PowerPoint เป็นไฟล์ PDF ทำตามได้ง่ายๆ (ไม่ถึงนาที)",
+    videoAuthor: "IT Ning Ning",
+    images: [],
+    text: [
+      "งานนำเสนอที่ทำเสร็จแล้วสามารถส่งออกเป็นไฟล์รูปแบบอื่นได้จาก <code>File &gt; Export</code> เช่น <strong>PDF</strong> สำหรับส่งให้ผู้อื่นดูโดยไม่ต้องมีโปรแกรม PowerPoint, <strong>วิดีโอ (MP4)</strong> สำหรับเผยแพร่บนโซเชียลมีเดีย หรือ <strong>Handout</strong> สำหรับพิมพ์แจกผู้ฟังระหว่างการประชุม",
+      "วิธีใช้งาน: เลือก <code>File &gt; Export &gt; Create PDF/XPS Document</code> เพื่อบันทึกเป็น PDF หรือ <code>File &gt; Export &gt; Create a Video</code> เพื่อแปลงเป็นวิดีโอพร้อมเสียงบรรยายและจังหวะเวลาที่ตั้งไว้จาก Rehearse Timings",
+      "เคล็ดลับ: หากต้องการพิมพ์เอกสารแจกผู้ฟังพร้อมพื้นที่จดบันทึก ให้เลือก <code>File &gt; Print &gt; Handouts</code> แล้วเลือกจำนวนสไลด์ต่อหน้า เช่น 3 สไลด์ต่อหน้าพร้อมเส้นสำหรับจดบันทึกข้างๆ"
+    ],
+    link: "https://support.microsoft.com/en-us/powerpoint"
+  },
+  {
+    key: "copilot-powerpoint",
+    title: "Copilot ใน PowerPoint (สร้างสไลด์ด้วย AI)",
+    icon: "🤖",
+    flow: [
+      { icon: "💬", label: "พิมพ์หัวข้อ/อัปโหลดเอกสาร" },
+      { icon: "🤖", label: "Copilot ร่างสไลด์ให้อัตโนมัติ" },
+      { icon: "🎨", label: "ปรับแต่งต่อได้ทันที" }
+    ],
+    video: "https://www.youtube.com/embed/8CqLXwI_ttA",
+    videoTitle: "พามารู้จัก Copilot ใน PowerPoint AI ช่วยทำสไลด์!",
+    videoAuthor: "PowerPoint Boy",
+    images: [],
+    text: [
+      "<strong>Copilot ใน PowerPoint</strong> ช่วยสร้างงานนำเสนอตั้งแต่หน้าว่างได้จากการพิมพ์คำสั่งเดียว หรือแปลงเอกสาร Word/ไฟล์ที่มีอยู่แล้วให้กลายเป็นงานนำเสนอที่มีโครงสร้างชัดเจนได้ทันที ลดเวลาการจัดวางเนื้อหาและเลือกภาพประกอบเองทีละสไลด์",
+      "วิธีใช้งาน: กดปุ่ม Copilot แล้วพิมพ์คำสั่ง เช่น 'สร้างงานนำเสนอแนะนำบริษัท 8 สไลด์ โทนสีน้ำเงิน' หรือพิมพ์ <code>@</code> ตามด้วยชื่อไฟล์เอกสารที่มีอยู่แล้วเพื่อให้ Copilot สรุปเนื้อหาจากไฟล์นั้นมาสร้างเป็นสไลด์ให้อัตโนมัติ",
+      "ข้อควรระวัง: ควรตรวจทานเนื้อหาและตัวเลขที่ Copilot สร้างให้เสมอก่อนนำไปใช้นำเสนอจริง โดยเฉพาะข้อมูลตัวเลขหรือข้อเท็จจริงสำคัญ เพราะ AI อาจสรุปหรือตีความเนื้อหาต้นฉบับคลาดเคลื่อนได้"
+    ],
+    link: "https://support.microsoft.com/en-us/copilot"
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  let imagesHtml = '';
+  if (topic.images.length > 0) {
+    imagesHtml = '<div class="section-label" style="margin-top:20px">ภาพหน้าจอเพิ่มเติม</div><div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
+      '</div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join('') + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจาก Microsoft →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    imagesHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
