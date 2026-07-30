@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือเรียนรู้ ChatGPT สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #f2faf7;
+    --card-bg: #ffffff;
+    --text: #182620;
+    --sub: #5c6f68;
+    --accent: #10a37f;
+    --accent-2: #0d8a6c;
+    --border: #dcece5;
+    --shadow: 0 2px 10px rgba(16, 90, 70, 0.08);
+    --pill-bg: #e3f5f0;
+    --placeholder-bg: #f6fbf9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101613;
+      --card-bg: #19211d;
+      --text: #eaf4ef;
+      --sub: #9db3aa;
+      --accent: #3dbfa0;
+      --accent-2: #2a9c81;
+      --border: #26332d;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #12261f;
+      --placeholder-bg: #1c2521;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topic-list {
+    flex: 0 0 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--accent-2);
+    margin-bottom: 8px;
+  }
+  .key-points ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .key-points li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .image-placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.78rem;
+    text-align: center;
+    padding: 8px;
+  }
+  .image-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .text-block {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder {
+    color: var(--sub);
+    font-style: italic;
+  }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.88em;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0 16px;
+    padding: 16px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--placeholder-bg);
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 104px;
+    text-align: center;
+  }
+  .flow-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .flow-label {
+    font-size: 0.76rem;
+    color: var(--sub);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .flow-arrow {
+    font-size: 1.3rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  .ref-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🤖 คู่มือเรียนรู้ ChatGPT สำหรับผู้ใช้งานกลุ่มบริษัท ATTG พร้อม VDO ประกอบทุกหัวข้อ</h1>
+  <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/ครีเอเตอร์ที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed (ถ้าไม่มีให้ใส่ keyPoints แทน), images ใส่ URL รูปภาพ, text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
+const TOPICS = [
+  {
+    key: "what-is-chatgpt",
+    title: "ChatGPT คืออะไร (ภาพรวม)",
+    icon: "🤖",
+    flow: [
+      { icon: "💬", label: "พิมพ์คำถามภาษาธรรมดา" },
+      { icon: "🤖", label: "ChatGPT วิเคราะห์และตอบกลับ" },
+      { icon: "✅", label: "ได้คำตอบ/ช่วยงานได้ทันที" }
+    ],
+    video: "https://www.youtube.com/embed/-QtgAiwGdL4",
+    videoTitle: "chat GPT คืออะไร วิธีการใช้งาน chat GPT",
+    videoAuthor: "KRUPARW",
+    images: [],
+    text: [
+      "<strong>ChatGPT</strong> คือแชทบอท AI จาก OpenAI ที่เข้าใจและตอบโต้ภาษามนุษย์ได้อย่างเป็นธรรมชาติ ใช้พิมพ์คุยได้เหมือนคุยกับผู้ช่วยที่มีความรู้กว้างขวาง ช่วยได้ตั้งแต่ตอบคำถามทั่วไป เขียนเอกสาร สรุปข้อมูล ไปจนถึงช่วยคิดวิเคราะห์และแก้ปัญหาซับซ้อน",
+      "วิธีใช้งาน: เข้าไปที่ <code>chatgpt.com</code> หรือเปิดแอป ChatGPT บนมือถือ พิมพ์คำถามหรือสิ่งที่ต้องการในช่องแชทแล้วกด Enter ChatGPT รองรับภาษาไทยได้ดี สามารถพิมพ์คุยเป็นภาษาไทยได้ตามปกติโดยไม่ต้องแปลเป็นภาษาอังกฤษก่อน",
+      "เคล็ดลับ: ChatGPT ไม่ได้มีความรู้แบบตายตัวเหมือนเสิร์ชเอนจิน แต่เป็นการ 'สร้าง' คำตอบขึ้นใหม่ทุกครั้งจากรูปแบบภาษาที่เรียนรู้มา จึงควรตรวจสอบข้อมูลสำคัญ เช่น ตัวเลข วันที่ หรือข้อเท็จจริงเฉพาะทาง ก่อนนำไปใช้งานจริงเสมอ"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "getting-started",
+    title: "เริ่มต้นใช้งานครั้งแรก",
+    icon: "🚀",
+    flow: [
+      { icon: "🌐", label: "เข้า chatgpt.com" },
+      { icon: "📝", label: "สมัครบัญชี/ล็อกอิน" },
+      { icon: "💬", label: "เริ่มแชทแรกได้ทันที" }
+    ],
+    video: "https://www.youtube.com/embed/5k2TZxndr2M",
+    videoTitle: "สอนสมัครใช้งาน ChatGPT แค่ 2 นาทีเสร็จ (Update 2025)",
+    videoAuthor: "DigitalNook - ดิจิตอลนุก",
+    images: [],
+    text: [
+      "การเริ่มใช้งาน ChatGPT ทำได้ฟรีโดยไม่ต้องใช้บัตรเครดิต เข้าไปที่เว็บไซต์ <code>chatgpt.com</code> หรือดาวน์โหลดแอปบนมือถือ แล้วสมัครบัญชีด้วยอีเมล บัญชี Google หรือ Apple ก็ได้",
+      "วิธีใช้งาน: กด <code>Sign up</code> เลือกวิธีสมัครที่สะดวก กรอกข้อมูลยืนยันตัวตนตามขั้นตอน เมื่อสมัครเสร็จจะเข้าสู่หน้าแชทหลักทันที สามารถเริ่มพิมพ์คำถามแรกได้เลยโดยไม่ต้องตั้งค่าอะไรเพิ่มเติม",
+      "เคล็ดลับ: แผน Free ใช้งานได้โดยไม่เสียค่าใช้จ่าย แต่จะมีข้อจำกัดด้านจำนวนข้อความและโมเดลที่ใช้ได้ต่อวัน หากใช้งานหนักเป็นประจำ ควรพิจารณาแผน Plus หรือ Go ที่ราคาย่อมเยาลง (ดูรายละเอียดในหัวข้อ 'แผนราคา')"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "interface-overview",
+    title: "ทำความรู้จักหน้าตาการใช้งาน",
+    icon: "🖥️",
+    flow: [
+      { icon: "📋", label: "แถบด้านซ้าย: ประวัติแชท" },
+      { icon: "💬", label: "กลางจอ: พื้นที่สนทนา" },
+      { icon: "⚙️", label: "มุมขวาบน: ตั้งค่า/โมเดล" }
+    ],
+    video: "https://www.youtube.com/embed/axvZJswmolM",
+    videoTitle: "Chat GPT เริ่มต้นใช้งานยังไง ใช้ภาษาไทยได้ด้วยหรือ",
+    videoAuthor: "ครูคุณ - Kru Kun",
+    images: [],
+    text: [
+      "หน้าจอ ChatGPT แบ่งเป็น 3 ส่วนหลัก คือ <strong>แถบด้านซ้าย</strong> (ประวัติการสนทนาเก่า, Projects, GPTs ที่สร้างไว้), <strong>พื้นที่สนทนากลางจอ</strong> (พิมพ์คำถามและดูคำตอบ) และ<strong>เมนูมุมขวาบน</strong> (เลือกโมเดล, ตั้งค่าบัญชี)",
+      "วิธีใช้งาน: คลิก <code>New chat</code> มุมซ้ายบนเพื่อเริ่มบทสนทนาใหม่แยกจากเดิม ประวัติแชทเก่าจะถูกเก็บไว้ในแถบด้านซ้ายให้กลับมาดูหรือคุยต่อได้ทุกเมื่อ คลิกชื่อโมเดลด้านบนเพื่อสลับไปใช้โมเดลอื่นตามความเหมาะสมของงาน",
+      "เคล็ดลับ: ตั้งชื่อบทสนทนาให้สื่อความหมาย (คลิกขวาที่แชทในแถบด้านซ้ายเพื่อ Rename) โดยเฉพาะแชทที่ใช้ทำงานต่อเนื่องหลายวัน จะช่วยให้หาแชทเก่าเจอง่ายขึ้นมากเมื่อมีประวัติสะสมจำนวนมาก"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "basic-chat",
+    title: "เริ่มบทสนทนาแรก/พิมพ์คำถาม",
+    icon: "💬",
+    flow: [
+      { icon: "⌨️", label: "พิมพ์คำถาม/คำสั่ง" },
+      { icon: "🤖", label: "ChatGPT ตอบกลับ" },
+      { icon: "🔄", label: "พิมพ์ต่อเพื่อปรับแก้คำตอบ" }
+    ],
+    video: "https://www.youtube.com/embed/mGKu45JcFcQ",
+    videoTitle: "มือใหม่หัดใช้ A.i. - 5 วิธีใช้ ChatGPT ภาษาไทย แบบฟรี! ในชีวิตประจำวัน",
+    videoAuthor: "Chubbie me (ผู้หญิงแก้มกลม)",
+    images: [],
+    text: [
+      "การสนทนากับ ChatGPT ทำได้เหมือนพิมพ์แชทคุยกับคนทั่วไป พิมพ์คำถามหรือสิ่งที่ต้องการแล้วกด Enter ChatGPT จะจดจำบริบทของบทสนทนาทั้งหมดในแชทนั้น จึงสามารถพิมพ์ถามต่อเนื่องโดยไม่ต้องอธิบายซ้ำได้",
+      "วิธีใช้งาน: หากคำตอบแรกยังไม่ตรงใจ ให้พิมพ์บอกต่อในแชทเดิมว่าต้องการปรับอะไร เช่น 'สั้นลงกว่านี้หน่อย' หรือ 'อธิบายให้เข้าใจง่ายขึ้นสำหรับคนที่ไม่มีพื้นฐาน' ChatGPT จะปรับคำตอบตามบริบทของบทสนทนาที่ผ่านมาทั้งหมด ไม่ใช่เริ่มคิดใหม่จากศูนย์",
+      "เคล็ดลับ: กด <code>Regenerate</code> ใต้คำตอบเพื่อให้ ChatGPT ลองตอบคำถามเดิมใหม่อีกครั้งด้วยมุมมองที่ต่างออกไป มีประโยชน์เมื่อคำตอบแรกยังไม่ถูกใจแต่ไม่รู้จะปรับคำสั่งอย่างไร"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "prompt-writing",
+    title: "เทคนิคเขียน Prompt ให้ได้ผลดี",
+    icon: "✍️",
+    flow: [
+      { icon: "❓", label: "คำสั่งคลุมเครือ" },
+      { icon: "✍️", label: "ระบุเป้าหมาย/บริบท/รูปแบบ" },
+      { icon: "✅", label: "ได้คำตอบตรงใจตั้งแต่รอบแรก" }
+    ],
+    video: "https://www.youtube.com/embed/gq0_V5_tFb8",
+    videoTitle: "สอนเขียน Prompt ให้ ChatGPT ตอบตรงใจ สู่การเป็น Prompt Master ใน 8 นาที!",
+    videoAuthor: "Readyplanet",
+    images: [],
+    text: [
+      "คุณภาพคำตอบของ ChatGPT ขึ้นอยู่กับคำสั่ง (Prompt) ที่พิมพ์เป็นอย่างมาก คำสั่งที่คลุมเครือ เช่น 'ช่วยเขียนอีเมลหน่อย' มักได้คำตอบทั่วไปที่ต้องแก้ไขต่อ ในขณะที่คำสั่งที่ระบุรายละเอียดชัดเจนจะได้คำตอบที่ใช้ได้เลยตั้งแต่รอบแรก",
+      "วิธีใช้งาน: โครงสร้าง Prompt ที่ดีควรระบุ (1) บทบาทที่ต้องการให้ ChatGPT สวมบทบาท เช่น 'ในฐานะนักการตลาด' (2) เป้าหมายที่ชัดเจน (3) บริบท/ข้อมูลประกอบ และ (4) รูปแบบผลลัพธ์ที่ต้องการ เช่น 'เขียนเป็นตาราง' หรือ 'ความยาวไม่เกิน 200 คำ' ยิ่งระบุครบยิ่งได้ผลลัพธ์ตรงใจ",
+      "เคล็ดลับ: หากไม่แน่ใจว่าจะเขียน Prompt อย่างไรให้ดี ลองถาม ChatGPT ตรงๆ ว่า 'ช่วยถามคำถามกลับมาเพื่อให้เข้าใจงานนี้ชัดเจนขึ้นก่อนเริ่มทำ' ChatGPT จะช่วยไล่เก็บรายละเอียดที่จำเป็นให้เอง ก่อนลงมือตอบจริง"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "custom-instructions",
+    title: "Custom Instructions (คำแนะนำส่วนตัว)",
+    icon: "🎛️",
+    flow: [
+      { icon: "⚙️", label: "Settings > Custom Instructions" },
+      { icon: "📝", label: "บอกข้อมูล/สไตล์ที่ต้องการ" },
+      { icon: "🔁", label: "ChatGPT จำไว้ใช้ทุกแชทใหม่" }
+    ],
+    video: "https://www.youtube.com/embed/8PdSLF4Lu-E",
+    videoTitle: "EP.151 - ChatGPT - Custom Instruction กำหนดกรอบการตอบของ AI ด้วยตัวคุณเอง (ไม่เสียเงิน จ่าย 0 บาท)",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "<strong>Custom Instructions</strong> คือการตั้งค่าคำแนะนำล่วงหน้าให้ ChatGPT รู้จักตัวเราและรูปแบบคำตอบที่ต้องการ โดยไม่ต้องพิมพ์อธิบายซ้ำทุกครั้งที่เริ่มแชทใหม่ เช่น อาชีพ บริบทการทำงาน หรือโทนภาษาที่ต้องการให้ตอบ",
+      "วิธีใช้งาน: ไปที่ไอคอนโปรไฟล์มุมขวาบน เลือก <code>Settings &gt; Personalization &gt; Custom instructions</code> กรอกข้อมูลสองช่อง คือ 'อยากให้ ChatGPT รู้อะไรเกี่ยวกับคุณบ้าง' และ 'อยากให้ ChatGPT ตอบแบบไหน' เช่น 'ตอบกระชับ เป็นทางการ ไม่ต้องทักทายยืดยาว'",
+      "เคล็ดลับ: หากทำงานหลายบทบาท เช่น ทั้งเขียนโค้ดและเขียนการตลาด ให้ระบุ Custom Instructions แบบกลางๆ ที่ใช้ได้กับทุกงาน แล้วค่อยระบุรายละเอียดเฉพาะเจาะจงเพิ่มในแต่ละแชทแทน เพื่อไม่ให้คำแนะนำส่วนตัวขัดแย้งกับงานบางประเภท"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "memory",
+    title: "ChatGPT Memory (จดจำข้อมูล)",
+    icon: "🧠",
+    flow: [
+      { icon: "💬", label: "คุยกับ ChatGPT ตามปกติ" },
+      { icon: "🧠", label: "ChatGPT จดจำข้อมูลสำคัญอัตโนมัติ" },
+      { icon: "🔁", label: "นำมาใช้ในแชทถัดไปได้" }
+    ],
+    video: "https://www.youtube.com/embed/5lDEFxWWWpk",
+    videoTitle: "EP.148 - ChatGPT Memory จำความชอบและบริบทของคุณได้อัตโนมัติ",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "<strong>Memory</strong> คือความสามารถที่ให้ ChatGPT จดจำข้อมูลสำคัญจากบทสนทนาที่ผ่านมา แล้วนำมาใช้อ้างอิงในแชทใหม่ได้อัตโนมัติ เช่น จำได้ว่าทำงานตำแหน่งอะไร ชอบให้ตอบสไตล์ไหน หรือกำลังทำโปรเจกต์อะไรอยู่ โดยไม่ต้องอธิบายซ้ำทุกครั้ง",
+      "วิธีใช้งาน: ChatGPT จะบันทึกความจำให้อัตโนมัติเมื่อเห็นว่าข้อมูลนั้นสำคัญ หรือสามารถสั่งตรงๆ ได้ เช่น 'จำไว้ว่าฉันทำงานฝ่ายบัญชี' ตรวจสอบและจัดการรายการที่จำไว้ทั้งหมดได้ที่ <code>Settings &gt; Personalization &gt; Manage memories</code>",
+      "ข้อควรระวัง: หากไม่ต้องการให้ ChatGPT จำข้อมูลบางเรื่อง เช่น ข้อมูลลูกค้าหรือข้อมูลที่เป็นความลับของบริษัท สามารถลบความจำนั้นออกได้ทันทีจากหน้า Manage memories หรือปิดฟีเจอร์ Memory ทั้งหมดได้หากต้องการความเป็นส่วนตัวสูงสุด"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "gpt-models",
+    title: "เลือกโมเดล (Fast / Thinking)",
+    icon: "🧩",
+    flow: [
+      { icon: "🧩", label: "งานแต่ละแบบเหมาะกับโมเดลต่างกัน" },
+      { icon: "🔀", label: "เลือกโมเดลจากเมนูด้านบน" },
+      { icon: "✅", label: "ได้คำตอบเร็ว/แม่นยำตามที่ต้องการ" }
+    ],
+    keyPoints: [
+      "มีโมเดลตอบเร็วสำหรับงานทั่วไป และโมเดล 'Thinking' ที่ใช้เวลาคิดนานขึ้นเพื่อความแม่นยำในงานซับซ้อน",
+      "คลิกชื่อโมเดลมุมบนของหน้าแชทเพื่อสลับ — งานทั่วไปใช้โมเดลเร็ว งานคำนวณ/วิเคราะห์ซับซ้อนสลับไปโหมด Thinking",
+      "บัญชี Free มักจำกัดจำนวนครั้งที่ใช้โมเดลขั้นสูงต่อวัน หากใช้บ่อยควรพิจารณาแผน Plus ขึ้นไป"
+    ],
+    images: [],
+    text: [
+      "ChatGPT มีโมเดลให้เลือกใช้หลายแบบ แบ่งกว้างๆ เป็นโมเดลที่ตอบเร็วเหมาะกับงานทั่วไป และโมเดล 'Thinking' ที่ใช้เวลาคิดไตร่ตรองนานขึ้นก่อนตอบ เหมาะกับงานที่ต้องการความแม่นยำสูง เช่น คำนวณ วิเคราะห์เชิงลึก หรือเขียนโค้ดที่ซับซ้อน",
+      "วิธีใช้งาน: คลิกชื่อโมเดลที่แสดงอยู่มุมบนของหน้าแชท จะเห็นรายการโมเดลให้เลือก งานถามตอบทั่วไป เขียนอีเมล หรือสรุปเนื้อหาสั้นๆ ใช้โมเดลปกติ (เร็ว) ก็เพียงพอแล้ว แต่หากเป็นโจทย์ที่ต้องคิดหลายขั้นตอน เช่น วางแผนโปรเจกต์ซับซ้อน หรือแก้โจทย์คณิตศาสตร์ยากๆ ให้เลือกโหมด Thinking เพื่อความแม่นยำที่มากขึ้น",
+      "หมายเหตุ: บัญชี Free มักจำกัดจำนวนครั้งที่ใช้โมเดลขั้นสูงหรือโหมด Thinking ต่อวัน หากงานที่ทำต้องใช้การวิเคราะห์เชิงลึกเป็นประจำ ควรพิจารณาอัปเกรดเป็นแผน Plus ขึ้นไปเพื่อให้ใช้งานได้โดยไม่สะดุด"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "web-browsing",
+    title: "ค้นข้อมูลจากอินเทอร์เน็ต (Search)",
+    icon: "🔍",
+    flow: [
+      { icon: "🌐", label: "เปิดใช้ Search" },
+      { icon: "🔍", label: "ChatGPT ค้นข้อมูลสดจากอินเทอร์เน็ต" },
+      { icon: "📎", label: "ตอบพร้อมอ้างอิงแหล่งที่มา" }
+    ],
+    video: "https://www.youtube.com/embed/rqzvVDpPabI",
+    videoTitle: "ChatGPT Search อัปเกรดแล้ว! ใช้ฟรีทุกคน เจาะลึกฟีเจอร์ใหม่ พร้อมวิธีใช้งาน ท้าชน Google",
+    videoAuthor: "The AI Coach (Generativeai.in.th)",
+    images: [],
+    text: [
+      "ตามค่าเริ่มต้น ChatGPT ตอบจากความรู้ที่เรียนรู้มาถึงช่วงเวลาหนึ่งเท่านั้น แต่เมื่อเปิดใช้ <strong>Search</strong> (ค้นเว็บ) ChatGPT จะค้นข้อมูลล่าสุดจากอินเทอร์เน็ตจริงมาประกอบคำตอบ พร้อมแนบลิงก์อ้างอิงแหล่งที่มาให้ตรวจสอบได้",
+      "วิธีใช้งาน: คลิกไอคอนลูกโลก/Search ใต้ช่องพิมพ์ข้อความ หรือถามคำถามที่ต้องการข้อมูลล่าสุดโดยตรง เช่น 'ข่าวเศรษฐกิจไทยวันนี้มีอะไรบ้าง' ChatGPT จะเปิดใช้ Search อัตโนมัติเมื่อเห็นว่าคำถามต้องการข้อมูลปัจจุบันที่ไม่มีในความรู้เดิม",
+      "เคล็ดลับ: ควรใช้ Search เมื่อถามเรื่องที่เปลี่ยนแปลงบ่อย เช่น ราคา ข่าวสาร หรือเหตุการณ์ล่าสุด แต่สำหรับงานที่ไม่ต้องการข้อมูลสดจากเว็บ เช่น เขียนเรียงความหรือแก้ไขข้อความ ไม่จำเป็นต้องเปิด Search เพราะจะช้ากว่าการตอบจากความรู้เดิมโดยตรง"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "file-upload",
+    title: "อัปโหลดไฟล์/วิเคราะห์เอกสาร",
+    icon: "📄",
+    flow: [
+      { icon: "📎", label: "คลิกไอคอนแนบไฟล์" },
+      { icon: "📄", label: "อัปโหลด PDF/Word/Excel" },
+      { icon: "✅", label: "ถาม-สรุป-วิเคราะห์เนื้อหาในไฟล์ได้" }
+    ],
+    video: "https://www.youtube.com/embed/agNB9o533yQ",
+    videoTitle: "AI Booster EP.7 | ChatGPT / Claude สรุปเนื้อหา PDF ไฟล์ภาษาไทย ได้หรือไม่?",
+    videoAuthor: "Benzio (เบนซิโอ)",
+    images: [],
+    text: [
+      "ChatGPT อ่านและวิเคราะห์ไฟล์ที่แนบเข้ามาได้หลายประเภท เช่น PDF, Word, Excel, PowerPoint หรือไฟล์ข้อความทั่วไป ช่วยสรุปเนื้อหา ค้นหาข้อมูลเฉพาะจุด หรือตอบคำถามที่อ้างอิงเนื้อหาในไฟล์ได้ทันทีโดยไม่ต้องอ่านเองทั้งหมด",
+      "วิธีใช้งาน: คลิกไอคอนหนีบกระดาษ (📎) ข้างช่องพิมพ์ข้อความ เลือกไฟล์จากเครื่อง แล้วพิมพ์คำสั่งที่ต้องการ เช่น 'สรุปสาระสำคัญของรายงานนี้เป็นข้อๆ' หรือ 'หาตัวเลขยอดขายไตรมาส 3 ในไฟล์นี้ให้หน่อย' ChatGPT จะอ่านและตอบตามเนื้อหาในไฟล์ที่แนบมา",
+      "ข้อควรระวัง: ไฟล์ที่มีเนื้อหาเป็นภาษาไทยบางแบบอักษรหรือไฟล์สแกนที่เป็นรูปภาพ อาจอ่านเนื้อหาผิดเพี้ยนได้ ควรตรวจสอบคำตอบเทียบกับต้นฉบับก่อนนำไปใช้จริง โดยเฉพาะไฟล์ที่มีตัวเลขหรือข้อมูลสำคัญทางการเงิน"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "image-generation",
+    title: "สร้างรูปภาพด้วย AI",
+    icon: "🎨",
+    flow: [
+      { icon: "✍️", label: "บอกลักษณะภาพที่ต้องการ" },
+      { icon: "🎨", label: "ChatGPT สร้างภาพให้" },
+      { icon: "🔁", label: "ขอปรับแก้ต่อได้ในแชทเดิม" }
+    ],
+    video: "https://www.youtube.com/embed/2x7Jurcjkas",
+    videoTitle: "5 เทคนิค ใช้ ChatGPT สร้างรูป อัพเดท 2026",
+    videoAuthor: "Chubbie me (ผู้หญิงแก้มกลม)",
+    images: [],
+    text: [
+      "ChatGPT สร้างภาพจากคำบรรยาย (Text-to-Image) ได้โดยตรงในแชท เพียงพิมพ์บรรยายลักษณะภาพที่ต้องการเป็นภาษาไทยหรืออังกฤษก็ได้ เหมาะกับงานสร้างภาพประกอบ โปสเตอร์ หรือไอเดียภาพเบื้องต้นโดยไม่ต้องใช้โปรแกรมออกแบบ",
+      "วิธีใช้งาน: พิมพ์คำสั่งบรรยายภาพที่ต้องการให้ละเอียด เช่น 'วาดภาพโปสเตอร์โปรโมชั่นร้านกาแฟ โทนสีน้ำตาล-ครีม มีถ้วยกาแฟและใบไม้ประกอบ สไตล์มินิมอล' ยิ่งระบุสไตล์ โทนสี และองค์ประกอบชัดเจน ภาพที่ได้จะยิ่งตรงความต้องการ หากยังไม่พอใจให้พิมพ์บอกจุดที่อยากแก้ต่อในแชทเดิมได้",
+      "เคล็ดลับ: หากต้องการภาพที่มีข้อความภาษาไทยประกอบ เช่น ป้ายโฆษณา ให้ระบุข้อความที่ต้องการให้ปรากฏในภาพอย่างชัดเจนในคำสั่ง ChatGPT เวอร์ชันปัจจุบันวางตัวอักษรไทยในภาพได้แม่นยำขึ้นมากกว่ารุ่นก่อนหน้า"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "image-analysis",
+    title: "วิเคราะห์รูปภาพ (Vision)",
+    icon: "📸",
+    flow: [
+      { icon: "📷", label: "อัปโหลด/ถ่ายรูป" },
+      { icon: "👁️", label: "ChatGPT มองเห็นและวิเคราะห์ภาพ" },
+      { icon: "💬", label: "ถามคำถามเกี่ยวกับภาพได้" }
+    ],
+    video: "https://www.youtube.com/embed/hpeQxh6Cucc",
+    videoTitle: "howto ใช้ chatgpt วิเคราะห์ภาพถ่าย ai จะกำหนดพร้อมได้เอง!",
+    videoAuthor: "varu flashfly",
+    images: [],
+    text: [
+      "นอกจากสร้างภาพ ChatGPT ยัง 'มองเห็น' และวิเคราะห์รูปภาพที่อัปโหลดเข้ามาได้ (Vision) เช่น อ่านข้อความในภาพ อธิบายว่าภาพคืออะไร ตรวจสอบกราฟ หรือช่วยแก้โจทย์จากภาพถ่ายโจทย์เลข",
+      "วิธีใช้งาน: คลิกไอคอนแนบไฟล์แล้วเลือกรูปภาพ หรือถ่ายรูปจากแอปมือถือได้โดยตรง จากนั้นพิมพ์คำถามเกี่ยวกับภาพนั้น เช่น 'ในภาพนี้เขียนอะไรไว้บ้าง' หรือ 'ช่วยอธิบายกราฟนี้ให้หน่อยว่าแนวโน้มเป็นอย่างไร' ChatGPT จะวิเคราะห์และตอบตามสิ่งที่เห็นในภาพ",
+      "เคล็ดลับ: ถ่ายภาพในที่มีแสงเพียงพอและให้เนื้อหาที่ต้องการวิเคราะห์อยู่ในกรอบชัดเจน จะช่วยให้ ChatGPT อ่านและวิเคราะห์ภาพได้แม่นยำขึ้นมาก โดยเฉพาะภาพที่มีตัวอักษรขนาดเล็กหรือรายละเอียดเยอะ"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "data-analysis",
+    title: "วิเคราะห์ข้อมูล/สร้างกราฟ",
+    icon: "📊",
+    flow: [
+      { icon: "📎", label: "อัปโหลดไฟล์ Excel/CSV" },
+      { icon: "📊", label: "สั่งให้วิเคราะห์/สร้างกราฟ" },
+      { icon: "📈", label: "ได้ผลวิเคราะห์+กราฟทันที" }
+    ],
+    video: "https://www.youtube.com/embed/kncahVbCAdM",
+    videoTitle: "EP.158 - ใช้ GPT4o/GPT4 ทำ Data Analysis ได้ง่ายมากขึ้น",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "ฟีเจอร์ <strong>Data Analysis</strong> (เดิมชื่อ Code Interpreter) ให้ ChatGPT อ่านไฟล์ข้อมูล เช่น Excel หรือ CSV แล้วช่วยวิเคราะห์ ทำความสะอาดข้อมูล สร้างกราฟ หรือคำนวณสถิติให้อัตโนมัติ โดยเบื้องหลัง ChatGPT จะเขียนและรันโค้ดจริงเพื่อประมวลผลข้อมูล ทำให้ผลลัพธ์แม่นยำกว่าการคำนวณแบบข้อความล้วน",
+      "วิธีใช้งาน: อัปโหลดไฟล์ข้อมูลแล้วสั่งงานเป็นภาษาธรรมดา เช่น 'วิเคราะห์ยอดขายรายเดือนแล้วทำกราฟเส้นเปรียบเทียบแต่ละสาขา' หรือ 'หาว่าคอลัมน์ไหนมีข้อมูลขาดหายบ้าง' ChatGPT จะประมวลผลและแสดงกราฟหรือตารางผลลัพธ์ให้ดูทันทีในแชท",
+      "เคล็ดลับ: หากไฟล์ข้อมูลมีขนาดใหญ่หรือซับซ้อน ให้อธิบายโครงสร้างข้อมูลคร่าวๆ ก่อน เช่น 'คอลัมน์ A คือวันที่ คอลัมน์ B คือยอดขาย' จะช่วยให้ ChatGPT วิเคราะห์ได้ถูกต้องแม่นยำขึ้น โดยเฉพาะไฟล์ที่มีหัวตารางไม่ชัดเจนหรือมีหลายชีทปนกัน"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "canvas",
+    title: "Canvas (พื้นที่ทำงานร่วมกับ AI)",
+    icon: "📝",
+    flow: [
+      { icon: "📝", label: "เปิดโหมด Canvas" },
+      { icon: "✏️", label: "แก้ไขเนื้อหา/โค้ดแบบเห็นภาพ" },
+      { icon: "🔁", label: "ทำงานร่วมกับ AI ทีละจุดได้" }
+    ],
+    video: "https://www.youtube.com/embed/AMHJeGKgbNU",
+    videoTitle: "EP.175 - Canvas ใน ChatGPT: เขียนโค้ด & บทความ ระดับโปร โคตรง่ายเลย!",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "<strong>Canvas</strong> คือพื้นที่ทำงานแยกต่างหากจากช่องแชทปกติ เหมาะกับงานเขียนบทความยาวหรือเขียนโค้ด เพราะแสดงเนื้อหาเต็มจอให้แก้ไขได้โดยตรง แทนที่จะต้องอ่านคำตอบยาวๆ ในช่องแชทแล้วขอแก้ทีละรอบ",
+      "วิธีใช้งาน: เมื่อสั่งงานเขียนบทความหรือโค้ดที่ยาว ChatGPT จะเสนอเปิด Canvas ให้อัตโนมัติ หรือพิมพ์ขอตรงๆ ว่า 'เปิด Canvas ช่วยเขียน...' ในพื้นที่ Canvas สามารถเลือกข้อความบางส่วนแล้วขอให้ ChatGPT แก้ไขเฉพาะจุดนั้น เช่น เลือกย่อหน้าที่ไม่ชอบแล้วกด 'ปรับให้กระชับขึ้น' โดยไม่กระทบส่วนอื่น",
+      "เคล็ดลับ: สำหรับงานเขียนโค้ด Canvas จะแสดงโค้ดพร้อม Syntax Highlighting และมีปุ่มรันโค้ดบางภาษาได้ทันทีเพื่อดูผลลัพธ์ ช่วยลดการคัดลอกโค้ดไปทดสอบในโปรแกรมอื่นแยกต่างหาก"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "voice-mode",
+    title: "โหมดสนทนาด้วยเสียง (Voice Mode)",
+    icon: "🎙️",
+    flow: [
+      { icon: "🎙️", label: "กดไอคอนไมโครโฟน" },
+      { icon: "🗣️", label: "พูดคุยกับ ChatGPT ด้วยเสียง" },
+      { icon: "🔊", label: "ฟังคำตอบเป็นเสียงพูดกลับ" }
+    ],
+    video: "https://www.youtube.com/embed/28aEZ6qR6Lw",
+    videoTitle: "EP.173 - คุยไทย Advanced Voice Mode | ChatGPT พูดเหมือนคน",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "<strong>Voice Mode</strong> ให้พูดคุยกับ ChatGPT ด้วยเสียงแทนการพิมพ์ เหมือนคุยโทรศัพท์กับผู้ช่วยจริงๆ รองรับภาษาไทยทั้งการฟังและการตอบกลับเป็นเสียง เหมาะกับตอนขับรถ ทำงานอื่นไปด้วย หรือฝึกพูดภาษาต่างประเทศ",
+      "วิธีใช้งาน: กดไอคอนคลื่นเสียง/ไมโครโฟนที่มุมล่างขวาของแอปมือถือเพื่อเริ่ม Voice Mode พูดคำถามหรือสิ่งที่ต้องการออกมาได้เลย ChatGPT จะฟัง ประมวลผล และตอบกลับเป็นเสียงพูดโดยอัตโนมัติ สามารถพูดแทรกระหว่าง ChatGPT กำลังตอบได้เหมือนคุยกับคนจริง",
+      "เคล็ดลับ: ใช้ Voice Mode ฝึกพูดภาษาอังกฤษหรือภาษาอื่นได้ดีมาก โดยขอให้ ChatGPT ช่วยแก้ไขการออกเสียงหรือไวยากรณ์ระหว่างสนทนา เพราะได้ฝึกทั้งการฟังและการพูดโต้ตอบแบบสดในเวลาเดียวกัน"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "custom-gpts",
+    title: "สร้าง Custom GPT / ใช้ GPT Store",
+    icon: "🛠️",
+    flow: [
+      { icon: "⚙️", label: "ตั้งค่า Instructions/ความรู้เฉพาะทาง" },
+      { icon: "🛠️", label: "สร้าง GPT ของตัวเอง" },
+      { icon: "🏪", label: "ใช้เองหรือเผยแพร่ใน GPT Store" }
+    ],
+    video: "https://www.youtube.com/embed/UP8885MHNuA",
+    videoTitle: "EP.166 - My GPT (Custom GPT) สร้าง AI มาช่วยงาน หรือ ส่งเข้า GPTs Store บน ChatGPT",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "<strong>Custom GPT</strong> (My GPTs) ให้สร้าง ChatGPT เวอร์ชันเฉพาะทางของตัวเองได้ โดยกำหนดคำสั่งพื้นฐาน ความรู้เฉพาะ (อัปโหลดไฟล์อ้างอิง) และขอบเขตการตอบไว้ล่วงหน้า เหมาะกับงานที่ทำซ้ำเป็นประจำ เช่น GPT สำหรับตอบคำถามลูกค้าตามคู่มือบริษัท หรือ GPT ผู้ช่วยเขียนโค้ดตามมาตรฐานทีม",
+      "วิธีใช้งาน: ไปที่ <code>Explore GPTs &gt; Create</code> ตั้งชื่อ อธิบายหน้าที่ และกำหนด Instructions ว่า GPT ตัวนี้ควรตอบอย่างไร สามารถอัปโหลดไฟล์ความรู้เฉพาะ (Knowledge) ให้ GPT อ้างอิงคำตอบจากเอกสารนั้นโดยเฉพาะ เมื่อสร้างเสร็จเลือกได้ว่าจะใช้คนเดียว แชร์เฉพาะทีม หรือเผยแพร่ใน <strong>GPT Store</strong> ให้คนอื่นค้นหาและใช้งานได้ (ต้องมีบัญชี Plus/Team ขึ้นไป)",
+      "เคล็ดลับ: นอกจากสร้างเอง ยังค้นหา GPT ที่คนอื่นสร้างไว้แล้วใน GPT Store มาใช้งานได้ทันทีโดยไม่ต้องตั้งค่าเอง เช่น GPT ผู้ช่วยออกแบบ GPT ผู้ช่วยเขียนสัญญา ลองค้นด้วยคำที่เกี่ยวกับงานที่ต้องการก่อนสร้างเองเสมอ อาจมีคนสร้างไว้ให้แล้ว"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "projects",
+    title: "Projects (จัดกลุ่มบทสนทนา/ไฟล์)",
+    icon: "🗂️",
+    flow: [
+      { icon: "🗂️", label: "สร้าง Project ใหม่" },
+      { icon: "📎", label: "รวมไฟล์/แชทที่เกี่ยวข้องไว้ที่เดียว" },
+      { icon: "✅", label: "ทำงานเป็นระบบ ไม่ปนกับแชทอื่น" }
+    ],
+    video: "https://www.youtube.com/embed/j6QqACNFP6w",
+    videoTitle: "ChatGPT Project: สร้าง Folder จัดการ Chats และ Files รวมทั้งการสร้างคำสั่งคุม Prompt | EP.186",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "<strong>Projects</strong> ใช้จัดกลุ่มบทสนทนา ไฟล์ และคำแนะนำเฉพาะที่เกี่ยวข้องกับงานเดียวกันไว้ในที่เดียว แทนที่จะกระจัดกระจายอยู่ในประวัติแชททั่วไป เหมาะกับงานระยะยาวที่มีหลายบทสนทนาต่อเนื่อง เช่น โปรเจกต์วิจัย หรืองานที่ต้องอ้างอิงเอกสารชุดเดิมซ้ำๆ",
+      "วิธีใช้งาน: คลิก <code>New project</code> ที่แถบด้านซ้าย ตั้งชื่อ Project แล้วอัปโหลดไฟล์อ้างอิงที่เกี่ยวข้องไว้ล่วงหน้า ทุกแชทใหม่ที่เริ่มภายใน Project นี้จะเห็นไฟล์และบริบทเดียวกันโดยอัตโนมัติ ไม่ต้องอัปโหลดไฟล์ซ้ำทุกครั้ง",
+      "เคล็ดลับ: ตั้งคำแนะนำเฉพาะของ Project ได้แยกจาก Custom Instructions ทั่วไป เช่น สำหรับ Project งานวิจัย อาจตั้งให้ตอบแบบมีการอ้างอิงแหล่งที่มาเสมอ ในขณะที่ Project อื่นตั้งค่าต่างออกไปได้ตามลักษณะงาน"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "connectors",
+    title: "Connectors (เชื่อมต่อ Google Drive ฯลฯ)",
+    icon: "🔌",
+    flow: [
+      { icon: "🔌", label: "เชื่อมต่อ Google Drive/บริการอื่น" },
+      { icon: "📁", label: "ChatGPT อ่านไฟล์จากบริการนั้นได้" },
+      { icon: "💬", label: "ถามคำถามอ้างอิงไฟล์ได้ทันที" }
+    ],
+    video: "https://www.youtube.com/embed/Wi0c3rMrOtc",
+    videoTitle: "ChatGPT-4o เชื่อมต่อข้อมูลกับ Google Drive ได้แล้ว เชื่อมต่อแบบง่ายสุดๆ",
+    videoAuthor: "IT around U",
+    images: [],
+    text: [
+      "<strong>Connectors</strong> ใช้เชื่อม ChatGPT เข้ากับบริการออนไลน์ภายนอก เช่น Google Drive, Google Calendar หรือ SharePoint เพื่อให้ ChatGPT ค้นหาและอ้างอิงไฟล์จากบริการเหล่านั้นได้โดยตรงในบทสนทนา โดยไม่ต้องดาวน์โหลดมาอัปโหลดเอง",
+      "วิธีใช้งาน: ไปที่ <code>Settings &gt; Connectors</code> เลือกบริการที่ต้องการเชื่อมต่อแล้วล็อกอินยืนยันสิทธิ์ตามขั้นตอน หลังเชื่อมต่อ Google Drive สำเร็จ สามารถถามคำถามที่อ้างอิงไฟล์ในไดรฟ์ได้ทันที เช่น 'สรุปเนื้อหาในไฟล์ Report_Q3.docx ที่อยู่ใน Drive ให้หน่อย'",
+      "ข้อควรระวัง: ควรเชื่อมต่อเฉพาะบัญชีและบริการที่จำเป็นต่อการทำงานจริง และตรวจสอบสิทธิ์การเข้าถึงที่ให้ไว้เป็นระยะ โดยเฉพาะเมื่อเชื่อมกับบัญชีองค์กรที่มีข้อมูลลูกค้าหรือข้อมูลภายใน ควรถอดการเชื่อมต่อทันทีเมื่อไม่ได้ใช้งานแล้ว"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "share-export",
+    title: "แชร์บทสนทนา/Export",
+    icon: "🔗",
+    flow: [
+      { icon: "🔗", label: "กด Share ที่มุมบนแชท" },
+      { icon: "⚙️", label: "เลือกสิทธิ์การเข้าถึงลิงก์" },
+      { icon: "📤", label: "ส่งลิงก์ให้คนอื่นดูบทสนทนาได้" }
+    ],
+    video: "https://www.youtube.com/embed/Myrrso0gcx4",
+    videoTitle: "สรุปการใช้งาน ฟีเจอร์ใหม่ \"Shared Link\" ChatGPT ใช้ทำไม? ดียังไง? เงื่อนไขการใช้? ข้อควรระวัง?",
+    videoAuthor: "หรือว่า AI คือพระเจ้า",
+    images: [],
+    text: [
+      "การแชร์บทสนทนาทำได้โดยสร้างลิงก์สาธารณะให้คนอื่นเข้ามาดูบทสนทนานั้นได้ โดยไม่ต้องมีบัญชี ChatGPT เหมาะกับการแชร์ความรู้ที่ได้จากการคุยกับ AI ให้เพื่อนร่วมงานหรือแชร์ตัวอย่างการใช้งานให้ทีม",
+      "วิธีใช้งาน: คลิกไอคอน <code>Share</code> มุมบนขวาของหน้าแชท เลือก <code>Create link</code> ระบบจะสร้างลิงก์สาธารณะให้คัดลอกไปแชร์ต่อ ผู้ที่เปิดลิงก์จะเห็นบทสนทนาทั้งหมด ณ เวลาที่แชร์ แต่จะไม่เห็นข้อความที่พิมพ์เพิ่มเติมหลังจากนั้น",
+      "ข้อควรระวัง: ห้ามแชร์บทสนทนาที่มีข้อมูลส่วนตัว ข้อมูลลูกค้า หรือข้อมูลภายในบริษัทที่เป็นความลับ เพราะลิงก์ที่สร้างแล้วเป็นสาธารณะ ใครมีลิงก์ก็เข้าดูได้ ควรตรวจสอบเนื้อหาทั้งหมดในแชทก่อนกดสร้างลิงก์แชร์ทุกครั้ง และลบลิงก์ทิ้งได้ภายหลังหากไม่ต้องการให้เข้าถึงอีก"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "plans-pricing",
+    title: "แผนการใช้งาน (Free/Go/Plus/Team)",
+    icon: "💳",
+    flow: [
+      { icon: "🆓", label: "Free" },
+      { icon: "💰", label: "Go / Plus" },
+      { icon: "🏢", label: "Team / Enterprise" }
+    ],
+    video: "https://www.youtube.com/embed/bTVHEKP5fx4",
+    videoTitle: "ChatGPT Go เปิดตัวในไทยแล้ว! แพ็กเกจใหม่สุดคุ้ม เริ่มต้นแค่ 259 บาท",
+    videoAuthor: "TechOffside ล้ำหน้าโชว์",
+    images: [],
+    text: [
+      "ChatGPT มีหลายแผนให้เลือกตามความถี่ในการใช้งาน ตั้งแต่ <strong>Free</strong> (ใช้ฟรี มีข้อจำกัดจำนวนข้อความ), <strong>Go</strong> (แผนราคาประหยัดสำหรับผู้ใช้ทั่วไปในไทย), <strong>Plus</strong> (ใช้งานหนักขึ้น เข้าถึงโมเดลขั้นสูงและฟีเจอร์ครบ) ไปจนถึง <strong>Team/Enterprise</strong> สำหรับองค์กรที่ต้องการจัดการผู้ใช้หลายคนพร้อมความปลอดภัยข้อมูลระดับสูง",
+      "วิธีใช้งาน: ไปที่ <code>Settings &gt; Upgrade plan</code> เพื่อดูรายละเอียดและเปรียบเทียบแต่ละแผน หากใช้งานส่วนตัวทั่วไปไม่บ่อยมาก แผน Free หรือ Go ก็เพียงพอ แต่หากต้องใช้โมเดล Thinking บ่อย สร้างภาพเยอะ หรือใช้ Data Analysis เป็นประจำ ควรพิจารณา Plus ขึ้นไป",
+      "หมายเหตุ: หากบัญชีอยู่ภายใต้ Workspace ขององค์กร (Team/Enterprise) การจัดการแผนและการเรียกเก็บเงินมักบริหารโดยผู้ดูแลระบบส่วนกลาง พนักงานทั่วไปมักไม่มีสิทธิ์เปลี่ยนแผนเอง หากต้องการฟีเจอร์เพิ่มเติมควรติดต่อผู้ดูแลระบบของบริษัท"
+    ],
+    link: "https://help.openai.com/en/"
+  },
+  {
+    key: "chatgpt-for-work",
+    title: "ใช้ ChatGPT ในงานสำนักงาน",
+    icon: "💼",
+    flow: [
+      { icon: "💼", label: "งานประจำวันที่ทำซ้ำ" },
+      { icon: "🤖", label: "ให้ ChatGPT ช่วยร่าง/สรุป/วิเคราะห์" },
+      { icon: "⚡", label: "ทำงานเสร็จเร็วขึ้นอย่างเห็นได้ชัด" }
+    ],
+    video: "https://www.youtube.com/embed/QK_FLM8w150",
+    videoTitle: "สอนวิธีใช้ ChatGPT ฉบับคนทำงาน ครบทุกฟีเจอร์ และ Prompt Framework แบบเข้าใจง่าย ใช้ทำงานได้ทันที",
+    videoAuthor: "Readyplanet",
+    images: [],
+    text: [
+      "ChatGPT ใช้เพิ่มประสิทธิภาพงานสำนักงานได้หลากหลาย เช่น ร่างอีเมล/บันทึกข้อความ สรุปรายงานยาวๆ เตรียมสไลด์นำเสนอ วิเคราะห์ข้อมูล Excel หรือช่วยตอบคำถามลูกค้าเบื้องต้น แทนที่จะทำเองทุกขั้นตอนตั้งแต่ต้น",
+      "วิธีใช้งาน: เริ่มจากงานที่ทำซ้ำเป็นประจำและใช้เวลานาน เช่น สรุปรายงานประชุม หรือร่างอีเมลตอบลูกค้า ลองมอบหมายให้ ChatGPT ร่างให้ก่อน แล้วเราตรวจทานและปรับแก้ แทนที่จะเขียนเองทั้งหมดตั้งแต่ต้น จะประหยัดเวลาได้มากในระยะยาว",
+      "แนวทางที่ดี: สร้าง Custom Instructions หรือ Custom GPT เฉพาะสำหรับงานที่ทำซ้ำบ่อยในทีม เช่น GPT สำหรับสรุปรายงานตามฟอร์แมตบริษัท เพื่อให้ทุกคนในทีมได้ผลลัพธ์มาตรฐานเดียวกัน แทนที่แต่ละคนจะเขียนคำสั่งอธิบายฟอร์แมตเองซ้ำๆ ทุกครั้ง"
+    ],
+    link: "https://help.openai.com/en/"
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  let imagesHtml = '';
+  if (topic.images.length > 0) {
+    imagesHtml = '<div class="section-label" style="margin-top:20px">ภาพหน้าจอเพิ่มเติม</div><div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
+      '</div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join('') + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจากศูนย์ช่วยเหลือของ OpenAI →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    imagesHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
