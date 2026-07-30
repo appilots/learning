@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือเรียนรู้ Claude Code ร่วมกับ VS Code สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #faf6f3;
+    --card-bg: #ffffff;
+    --text: #2b2019;
+    --sub: #7a6a5e;
+    --accent: #cc785c;
+    --accent-2: #a35940;
+    --border: #ece1d9;
+    --shadow: 0 2px 10px rgba(90, 60, 40, 0.08);
+    --pill-bg: #f5e6df;
+    --placeholder-bg: #fbf7f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #191411;
+      --card-bg: #221b17;
+      --text: #f2e9e2;
+      --sub: #b5a496;
+      --accent: #e0917a;
+      --accent-2: #c97a5f;
+      --border: #362b24;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #2e211c;
+      --placeholder-bg: #271f1a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+
+  .layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topic-list {
+    flex: 0 0 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topic-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-btn:hover { border-color: var(--accent); }
+  .topic-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .content {
+    flex: 1 1 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 280px;
+  }
+  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+
+  .key-points {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--pill-bg);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .key-points-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--accent-2);
+    margin-bottom: 8px;
+  }
+  .key-points ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .key-points li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .key-points li:last-child { margin-bottom: 0; }
+
+  .video-box {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .image-placeholder {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    font-size: 0.78rem;
+    text-align: center;
+    padding: 8px;
+  }
+  .image-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .text-block {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .text-block p { margin: 0 0 12px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder {
+    color: var(--sub);
+    font-style: italic;
+  }
+  .text-block strong { color: var(--accent-2); font-weight: 700; }
+  .text-block code, .callout-body code {
+    background: var(--pill-bg);
+    color: var(--accent-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 0.88em;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0 16px;
+    padding: 16px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--placeholder-bg);
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 104px;
+    text-align: center;
+  }
+  .flow-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .flow-label {
+    font-size: 0.76rem;
+    color: var(--sub);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .flow-arrow {
+    font-size: 1.3rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout-icon { flex-shrink: 0; }
+  .callout-label { font-weight: 700; }
+
+  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
+  .callout-tip .callout-label { color: var(--accent); }
+
+  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
+  .callout-warn .callout-label { color: #b5650a; }
+
+  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
+  .callout-howto .callout-label { color: #1f66c4; }
+
+  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
+  .callout-example .callout-label { color: #8e44ad; }
+
+  @media (prefers-color-scheme: dark) {
+    .callout-warn .callout-label { color: #f0a868; }
+    .callout-howto .callout-label { color: #6fa8f5; }
+    .callout-example .callout-label { color: #cfa0e0; }
+  }
+
+  .ref-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  .video-credit {
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: var(--placeholder-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  .copyright-banner {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    color: var(--accent-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin: 14px 0 22px;
+  }
+
+  @media (max-width: 640px) {
+    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
+    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🤖 คู่มือเรียนรู้ Claude Code ร่วมกับ VS Code สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</h1>
+  <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา — บางหัวข้อขั้นสูงยังไม่มีคลิปสอนภาษาไทยโดยตรง จึงสรุปเป็นคำอธิบายละเอียดแทน</p>
+  <div class="copyright-banner">
+    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/ครีเอเตอร์ที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
+  </div>
+
+  <div class="layout">
+    <nav class="topic-list" id="topicList"></nav>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed (ถ้าไม่มีให้ใส่ keyPoints แทน), images ใส่ URL รูปภาพ, text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
+const TOPICS = [
+  {
+    key: "what-is-claude-code",
+    title: "Claude Code คืออะไร (ภาพรวม)",
+    icon: "🤖",
+    flow: [
+      { icon: "💬", label: "พิมพ์คำสั่งภาษาธรรมดา" },
+      { icon: "🤖", label: "Claude อ่านโค้ด/วางแผน/ลงมือทำ" },
+      { icon: "✅", label: "งานเขียนโค้ดเสร็จเร็วขึ้น" }
+    ],
+    video: "https://www.youtube.com/embed/o77vCJg2Fp8",
+    videoTitle: "Claude Code พื้นฐานสำหรับมือใหม่ เริ่มยังไงให้ใช้เป็นเร็วที่สุด",
+    videoAuthor: "BoomBigNose",
+    images: [],
+    text: [
+      "<strong>Claude Code</strong> คือ Coding Agent จาก Anthropic ที่ทำงานร่วมกับโปรเจกต์จริงในเครื่องของเรา ต่างจาก Chatbot ทั่วไปตรงที่ Claude Code อ่านไฟล์ในโปรเจกต์ได้เอง เขียน/แก้โค้ดให้จริง รันคำสั่งเทอร์มินัลได้ และทำงานต่อเนื่องหลายขั้นตอนโดยไม่ต้องคัดลอกโค้ดไปมาระหว่างหน้าต่างแชทกับโปรแกรมแก้ไขโค้ด",
+      "วิธีใช้งาน: เมื่อติดตั้ง Extension ใน VS Code แล้ว Claude Code จะทำงานเป็นพาเนลข้าง Editor พิมพ์สิ่งที่ต้องการเป็นภาษาธรรมดา เช่น 'เพิ่มปุ่ม logout ในหน้า Navbar' Claude จะอ่านโค้ดที่เกี่ยวข้อง วางแผน แล้วแก้ไฟล์ให้โดยตรง",
+      "เคล็ดลับ: Claude Code เหมาะกับงานตั้งแต่แก้บั๊กเล็กๆ ไปจนถึงงานใหญ่ที่ต้องแก้หลายไฟล์พร้อมกัน ยิ่งอธิบายบริบทและเป้าหมายชัดเจนเท่าไร ผลลัพธ์ที่ได้ก็จะยิ่งตรงความต้องการมากขึ้นเท่านั้น"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "install-setup",
+    title: "ติดตั้งและเชื่อมต่อ VS Code Extension",
+    icon: "⚙️",
+    flow: [
+      { icon: "🔍", label: "เปิด Extensions ใน VS Code" },
+      { icon: "⬇️", label: "ติดตั้ง Claude Code" },
+      { icon: "🔑", label: "ล็อกอินด้วยบัญชี Claude" }
+    ],
+    video: "https://www.youtube.com/embed/7MO8GqcLtKI",
+    videoTitle: "มาติดตั้ง Claude Code บน Windows และใช้งานบน VS Code",
+    videoAuthor: "Puy P",
+    images: [],
+    text: [
+      "ติดตั้ง Claude Code ใน VS Code ได้จากแท็บ <code>Extensions</code> (ไอคอนสี่เหลี่ยมด้านซ้าย) ค้นหาคำว่า <strong>Claude Code</strong> แล้วกด Install หรือดาวน์โหลดจาก Marketplace ของ Visual Studio Code โดยตรง หลังติดตั้งเสร็จจะมีไอคอน Claude ปรากฏในแถบด้านข้าง",
+      "วิธีใช้งาน: เปิดพาเนล Claude Code แล้วเข้าสู่ระบบด้วยบัญชี Claude.ai หรือ Anthropic Console ตามแผนการใช้งานขององค์กร (เช่น Claude Pro, Max หรือ API) เมื่อล็อกอินสำเร็จ Claude จะเชื่อมกับโฟลเดอร์โปรเจกต์ที่เปิดอยู่ใน VS Code โดยอัตโนมัติ",
+      "ข้อควรระวัง: ควรเปิด VS Code จากโฟลเดอร์โปรเจกต์ที่ต้องการทำงานจริง (ผ่าน File &gt; Open Folder) ก่อนเริ่มใช้ Claude Code เพราะ Claude จะอ้างอิงบริบทจากโฟลเดอร์ที่เปิดอยู่เป็นหลัก หากเปิดไฟล์เดี่ยวๆ โดยไม่เปิดทั้งโฟลเดอร์ Claude อาจมองไม่เห็นไฟล์อื่นในโปรเจกต์"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "interface-tour",
+    title: "ทำความรู้จักหน้าตาการใช้งาน",
+    icon: "🖥️",
+    flow: [
+      { icon: "🖥️", label: "เปิดพาเนล Claude Code" },
+      { icon: "⌨️", label: "พิมพ์คำสั่งในช่องแชท" },
+      { icon: "📝", label: "ดูการแก้ไขแบบ diff ข้าง Editor" }
+    ],
+    video: "https://www.youtube.com/embed/yCP9BNxIY6Y",
+    videoTitle: "Claude Code พื้นฐาน 101 สำหรับมือใหม่ ใช้ยังไงให้คุ้มที่สุด",
+    videoAuthor: "BoomBigNose",
+    images: [],
+    text: [
+      "หน้าตาการทำงานของ Claude Code แบ่งเป็นสองส่วนหลัก คือ <strong>ช่องแชท</strong> (พิมพ์คำสั่ง/คำถามและดูคำตอบของ Claude) และ<strong>พื้นที่ Editor</strong> ที่แสดงไฟล์และการแก้ไขแบบ diff (โค้ดที่ถูกลบขึ้นแดง โค้ดที่เพิ่มขึ้นเขียว) ทำงานคู่ขนานกันโดยไม่ต้องสลับหน้าต่างไปมา",
+      "วิธีใช้งาน: เมื่อ Claude เสนอการแก้ไข จะเห็นปุ่ม <code>Accept</code> เพื่อยอมรับการเปลี่ยนแปลง หรือ <code>Reject</code> เพื่อปฏิเสธ สามารถกดดูไฟล์ที่เปลี่ยนแปลงทีละไฟล์ก่อนตัดสินใจ ไม่จำเป็นต้องยอมรับทุกอย่างพร้อมกันทั้งหมด",
+      "เคล็ดลับ: ใช้แถบด้านล่างของพาเนลตรวจสอบว่ากำลังอยู่ในโหมดไหน (ปกติ/Plan Mode) และดูจำนวน Token หรือ Context ที่ใช้ไป ช่วยให้วางแผนงานยาวๆ ได้ดีขึ้นโดยไม่ให้บริบทเต็มก่อนงานเสร็จ"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "first-conversation",
+    title: "เริ่มบทสนทนาและสั่งงานครั้งแรก",
+    icon: "💬",
+    flow: [
+      { icon: "💬", label: "พิมพ์สิ่งที่ต้องการเป็นภาษาธรรมดา" },
+      { icon: "🔍", label: "Claude สำรวจโค้ดที่เกี่ยวข้อง" },
+      { icon: "✏️", label: "ได้ผลลัพธ์/การแก้ไขที่ต้องการ" }
+    ],
+    video: "https://www.youtube.com/embed/eOglbMi2W2Q",
+    videoTitle: "สอนใช้งาน Claude ฉบับง่ายสุดๆ (Cowork + Code + Chat)",
+    videoAuthor: "BoomBigNose",
+    images: [],
+    text: [
+      "การเริ่มบทสนทนาแรกทำได้ง่ายๆ เพียงพิมพ์สิ่งที่ต้องการในช่องแชทเป็นภาษาธรรมดา เช่น 'อธิบายว่าโปรเจกต์นี้ทำงานยังไง' หรือ 'เพิ่ม validation ให้ฟอร์มสมัครสมาชิก' ไม่จำเป็นต้องรู้คำสั่งเฉพาะทางเพื่อเริ่มใช้งาน",
+      "วิธีใช้งาน: เริ่มจากคำสั่งง่ายๆ ที่ให้ Claude สำรวจโปรเจกต์ก่อน เช่น 'สรุปโครงสร้างโปรเจกต์นี้ให้ฟังหน่อย' เพื่อให้ Claude เข้าใจภาพรวมก่อนเริ่มสั่งงานที่ซับซ้อนขึ้น ช่วยให้ผลลัพธ์ในคำสั่งถัดๆ ไปแม่นยำกว่าการสั่งงานเฉพาะจุดทันทีโดยไม่มีบริบท",
+      "เคล็ดลับ: หากต้องการยกเลิกงานที่ Claude กำลังทำอยู่ กด <code>Esc</code> ได้ทันที และสามารถพิมพ์คำสั่งใหม่ต่อในบทสนทนาเดิมได้เลยโดยไม่ต้องเริ่มแชทใหม่ Claude จะจำบริบทของงานก่อนหน้าไว้"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "hands-on-project",
+    title: "ลองใช้งานกับโปรเจกต์จริง",
+    icon: "🚀",
+    flow: [
+      { icon: "📂", label: "เปิดโปรเจกต์จริง" },
+      { icon: "🎯", label: "สั่งงานเฉพาะจุด (แก้บั๊ก/เพิ่มฟีเจอร์)" },
+      { icon: "🔁", label: "ทำซ้ำ/ปรับจนได้ผลลัพธ์ที่พอใจ" }
+    ],
+    video: "https://www.youtube.com/embed/cvrwOk2vTAk",
+    videoTitle: "ลองเล่น Claude Code กัน",
+    videoAuthor: "mikelopster",
+    images: [],
+    text: [
+      "การฝึกใช้งานกับโปรเจกต์จริงคือวิธีเรียนรู้ Claude Code ที่ได้ผลที่สุด เริ่มจากงานเล็กๆ ที่มีขอบเขตชัดเจน เช่น แก้บั๊กหนึ่งจุด หรือเพิ่มฟีเจอร์เล็กๆ ก่อนขยับไปงานที่ซับซ้อนขึ้น เพื่อให้คุ้นเคยกับรูปแบบการสั่งงานและตรวจสอบผลลัพธ์",
+      "วิธีใช้งาน: อธิบายเป้าหมายให้ชัดเจนพร้อมบอกไฟล์หรือส่วนของโค้ดที่เกี่ยวข้องถ้ารู้อยู่แล้ว เช่น 'แก้บั๊กที่ปุ่มส่งฟอร์มใน LoginForm.tsx ไม่ทำงานเมื่อกรอกอีเมลผิดรูปแบบ' ยิ่งระบุจุดที่ต้องการชัดเจน Claude ก็จะหาสาเหตุและแก้ไขได้ตรงจุดเร็วขึ้น",
+      "แนวทางที่ดี: หลัง Claude แก้ไขเสร็จ ให้รันโปรแกรม/เทสต์จริงเพื่อยืนยันว่าใช้งานได้ตามที่ตั้งใจ อย่าเพียงแค่กด Accept การเปลี่ยนแปลงโดยไม่ทดสอบ เพราะโค้ดที่ดูถูกต้องอาจยังมีจุดที่พลาดในการใช้งานจริง"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "learning-mode",
+    title: "ใช้ Claude Code เป็นครูสอนเขียนโค้ด",
+    icon: "🎓",
+    flow: [
+      { icon: "❓", label: "ถามวิธีทำงานของโค้ด" },
+      { icon: "🎓", label: "ขอให้ Claude อธิบายทีละขั้นตอน" },
+      { icon: "🧠", label: "เข้าใจโค้ดลึกขึ้น ไม่ใช่แค่ได้ผลลัพธ์" }
+    ],
+    video: "https://www.youtube.com/embed/mby89M6W-OM",
+    videoTitle: "Claude Code จะเป็นครูของคุณเอง (คอร์สฟรี) - การเรียน AI จะไม่เหมือนเดิม",
+    videoAuthor: "ลงทุน Diary",
+    images: [],
+    text: [
+      "นอกจากใช้แก้โค้ดให้ ยังใช้ Claude Code เป็นเครื่องมือเรียนรู้ได้ดีมาก โดยเฉพาะกับผู้เริ่มต้นเขียนโปรแกรม ขอให้ Claude อธิบายว่าโค้ดแต่ละส่วนทำงานอย่างไร ทำไมถึงเลือกวิธีนี้ หรือให้เปรียบเทียบวิธีแก้ปัญหาหลายแบบ แทนที่จะรับผลลัพธ์ไปใช้โดยไม่เข้าใจที่มา",
+      "วิธีใช้งาน: แทนที่จะสั่งให้แก้ไขตรงๆ ลองพิมพ์ 'อย่าเพิ่งแก้โค้ด ช่วยอธิบายก่อนว่าทำไมฟังก์ชันนี้ถึง error และมีวิธีแก้กี่แบบ พร้อมข้อดีข้อเสียของแต่ละแบบ' Claude จะอธิบายเหตุผลเชิงลึกให้ก่อน ช่วยให้เข้าใจหลักการเบื้องหลังแทนที่จะแค่ copy โค้ดที่ได้ไปใช้",
+      "เคล็ดลับ: สำหรับผู้เริ่มต้น ควรอ่านคำอธิบายและ diff ที่ Claude เสนอทุกครั้งก่อนกด Accept แม้จะยังไม่เข้าใจโค้ดทั้งหมด เพราะเป็นวิธีเรียนรู้ที่ได้ผลจริง ยิ่งอ่านและถามคำถามตามบ่อยเท่าไร ก็จะยิ่งเขียนโค้ดเป็นเร็วขึ้นเท่านั้น"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "claude-md-slash-skills",
+    title: "CLAUDE.md, Slash Commands และ Skills",
+    icon: "📋",
+    flow: [
+      { icon: "📄", label: "สร้างไฟล์ CLAUDE.md" },
+      { icon: "📋", label: "เขียนบริบท/กฎของโปรเจกต์" },
+      { icon: "⚡", label: "Claude ทำงานสอดคล้องกับทีมทุกครั้ง" }
+    ],
+    video: "https://www.youtube.com/embed/jKajm2xe8RM",
+    videoTitle: "สอน Claude Code Part 1 : เริ่มใช้งานจริง! รู้จัก CLAUDE.md, Slash Command และ Skills",
+    videoAuthor: "เทพเอ็กเซล : Thep Excel",
+    images: [],
+    text: [
+      "<strong>CLAUDE.md</strong> คือไฟล์พิเศษที่วางไว้ในโปรเจกต์เพื่อบอกบริบทให้ Claude Code รู้ล่วงหน้า เช่น โครงสร้างโปรเจกต์ กฎการเขียนโค้ด หรือคำสั่งที่ใช้บ่อย (เช่น วิธีรันเทสต์) ทำให้ไม่ต้องอธิบายซ้ำทุกครั้งที่เริ่มบทสนทนาใหม่ ส่วน <strong>Slash Commands</strong> (พิมพ์ <code>/</code> ตามด้วยชื่อคำสั่ง) คือทางลัดสำหรับงานที่ทำซ้ำบ่อยๆ",
+      "วิธีใช้งาน: สร้างไฟล์ชื่อ <code>CLAUDE.md</code> ไว้ที่ root ของโปรเจกต์ เขียนข้อมูลสำคัญ เช่น 'โปรเจกต์นี้ใช้ React + TypeScript ห้ามใช้ any type' หรือ 'รันเทสต์ด้วยคำสั่ง npm test' จากนั้นลองพิมพ์ <code>/</code> ในช่องแชทเพื่อดูรายการ Slash Commands ที่มีให้ใช้ เช่น <code>/init</code> เพื่อให้ Claude ช่วยสร้าง CLAUDE.md เริ่มต้นให้อัตโนมัติ",
+      "เคล็ดลับ: สามารถสร้าง Slash Command ของตัวเองได้โดยเขียนไฟล์ไว้ในโฟลเดอร์ <code>.claude/commands/</code> เพื่อให้ทั้งทีมเรียกใช้ Workflow เดิมซ้ำได้ง่ายด้วยคำสั่งสั้นๆ แทนการพิมพ์คำอธิบายยาวทุกครั้ง"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "plan-mode-review",
+    title: "Plan Mode และการตรวจสอบการแก้ไข (Diff Review)",
+    icon: "🗺️",
+    flow: [
+      { icon: "🗺️", label: "เปิด Plan Mode (Shift+Tab)" },
+      { icon: "📝", label: "Claude เสนอแผนก่อนแก้ไฟล์จริง" },
+      { icon: "✅", label: "อนุมัติแผนแล้วค่อยลงมือแก้โค้ด" }
+    ],
+    keyPoints: [
+      "<strong>Plan Mode</strong> ให้ Claude สำรวจโค้ดและเสนอแผนการทำงานก่อน โดยยังไม่แก้ไฟล์จริงจนกว่าจะกดอนุมัติแผน เหมาะกับงานใหญ่หรือซับซ้อนที่อยากตรวจสอบทิศทางก่อนลงมือจริง",
+      "สลับเข้า Plan Mode ได้ด้วยการกด <code>Shift+Tab</code> ในช่องแชท เมื่อ Claude เสนอแผนมาแล้ว สามารถให้ข้อเสนอแนะปรับแผนก่อนให้ Claude เริ่มแก้โค้ดจริงได้",
+      "ทุกการแก้ไขที่ Claude เสนอจะแสดงเป็น diff ให้ตรวจสอบก่อนกด Accept เสมอ ควรอ่านอย่างละเอียดโดยเฉพาะไฟล์สำคัญ เช่น ไฟล์ config หรือ logic การชำระเงิน"
+    ],
+    images: [],
+    text: [
+      "<strong>Plan Mode</strong> คือโหมดที่ให้ Claude สำรวจโค้ดและวางแผนการทำงานก่อน โดยยังไม่แก้ไขไฟล์จริงจนกว่าจะได้รับการอนุมัติแผนจากผู้ใช้ เหมาะมากกับงานที่ซับซ้อนหรือกระทบหลายไฟล์ ซึ่งอยากเห็นทิศทางการแก้ไขก่อนปล่อยให้ Claude ลงมือจริง",
+      "วิธีใช้งาน: กด <code>Shift+Tab</code> ในช่องแชทเพื่อสลับเข้า Plan Mode จากนั้นอธิบายงานที่ต้องการตามปกติ Claude จะตอบกลับมาเป็นแผนขั้นตอนแทนที่จะแก้โค้ดทันที สามารถให้ข้อเสนอแนะเพื่อปรับแผนก่อน แล้วค่อยยืนยันให้ Claude เริ่มลงมือแก้ไขจริงตามแผนที่ตกลงกันไว้",
+      "ข้อควรระวัง: ไม่ว่าจะอยู่ใน Plan Mode หรือโหมดปกติ ทุกการแก้ไขที่ Claude เสนอจะแสดงเป็น diff (โค้ดที่ถูกลบ/เพิ่ม) ให้ตรวจสอบก่อนกด Accept เสมอ ควรอ่าน diff อย่างละเอียดเป็นพิเศษกับไฟล์สำคัญ เช่น ไฟล์ตั้งค่าระบบหรือ logic ที่เกี่ยวกับการเงิน เพราะการกด Accept ทั้งหมดโดยไม่ตรวจสอบอาจปล่อยให้ข้อผิดพลาดหลุดเข้าไปในโค้ดจริง"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "coding-debugging",
+    title: "ให้ Claude ช่วยเขียนและแก้บั๊กโค้ด",
+    icon: "🐛",
+    flow: [
+      { icon: "🐛", label: "เจอบั๊ก/error message" },
+      { icon: "📋", label: "วางข้อความ error ให้ Claude" },
+      { icon: "🔧", label: "Claude หาสาเหตุและแก้ให้" }
+    ],
+    video: "https://www.youtube.com/embed/bcWBYh3hz4U",
+    videoTitle: "สอน Claude Code ช่วยเขียนโค้ด 99%",
+    videoAuthor: "BorntoDev",
+    images: [],
+    text: [
+      "Claude Code ช่วยเขียนโค้ดใหม่ตั้งแต่ต้น และช่วยแก้บั๊กในโค้ดที่มีอยู่แล้วได้ทั้งคู่ เมื่อเจอ error สามารถคัดลอกข้อความ error หรือ stack trace มาวางในช่องแชท พร้อมอธิบายว่าเกิดขึ้นตอนไหน แล้วให้ Claude ช่วยวิเคราะห์สาเหตุและเสนอวิธีแก้",
+      "วิธีใช้งาน: วางข้อความ error เต็มๆ (ไม่ตัดทอน) พร้อมบอกขั้นตอนที่ทำให้เกิด error เช่น 'กดปุ่มบันทึกแล้วเจอ error นี้ในคอนโซล [วาง error]' Claude จะไล่ดูโค้ดที่เกี่ยวข้องกับ error นั้น หาจุดที่ผิดพลาด และเสนอการแก้ไขพร้อมอธิบายสาเหตุให้เข้าใจ ไม่ใช่แค่แก้ให้เฉยๆ",
+      "เคล็ดลับ: หากมีเทสต์อัตโนมัติอยู่แล้วในโปรเจกต์ ให้บอก Claude ว่า 'แก้จนกว่าเทสต์จะผ่านทั้งหมด' Claude จะรันเทสต์ซ้ำๆ หลังแก้ไขแต่ละรอบเพื่อยืนยันด้วยตัวเองว่าปัญหาถูกแก้จริง แทนที่จะเดาว่าน่าจะถูกต้องแล้ว"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "common-commands-tips",
+    title: "รวมคำสั่งและเคล็ดลับที่ใช้บ่อย",
+    icon: "⚡",
+    flow: [
+      { icon: "⚡", label: "คำสั่งที่ใช้บ่อยในชีวิตประจำวัน" },
+      { icon: "⌨️", label: "จำ Shortcut สำคัญ" },
+      { icon: "🚀", label: "ทำงานได้เร็วขึ้นมาก" }
+    ],
+    video: "https://www.youtube.com/embed/kOIq3CWeuu0",
+    videoTitle: "ใช้ Claude Code ให้เป็นเซียน! รวมคำสั่งใช้บ่อยในการทำงาน ดูจบบรรลุ!",
+    videoAuthor: "MilerDev",
+    images: [],
+    text: [
+      "นอกจากพิมพ์คำสั่งภาษาธรรมดา Claude Code ยังมี Shortcut และคำสั่งที่ช่วยให้ทำงานคล่องขึ้น เช่น การอ้างอิงไฟล์ด้วย <code>@</code> ตามด้วยชื่อไฟล์เพื่อให้ Claude โฟกัสที่ไฟล์นั้นโดยเฉพาะ ช่วยประหยัดเวลาค้นหาไฟล์เองในบทสนทนา",
+      "วิธีใช้งาน: พิมพ์ <code>@</code> แล้วเลือกชื่อไฟล์จากรายการที่ขึ้นมาเพื่อดึงไฟล์นั้นเข้ามาเป็นบริบทของคำสั่ง เช่น 'ดูโค้ดใน @UserService.ts แล้วอธิบายว่า authenticate ทำงานยังไง' ช่วยให้ Claude โฟกัสตรงจุดแทนที่จะค้นหาทั่วทั้งโปรเจกต์ ซึ่งเร็วกว่าและแม่นยำกว่า",
+      "เคล็ดลับ: กด <code>Esc</code> เพื่อหยุดงานที่ Claude กำลังทำอยู่ทันทีหากเห็นว่ากำลังไปผิดทาง และใช้คำสั่ง <code>/clear</code> เพื่อล้างบริบทบทสนทนาเดิมเมื่อเริ่มงานใหม่ที่ไม่เกี่ยวข้องกับงานก่อนหน้า ช่วยประหยัด Context ไม่ให้เต็มเร็วเกินไป"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "git-workflow",
+    title: "ใช้ Claude ช่วยงาน Git และ Pull Request",
+    icon: "🔀",
+    flow: [
+      { icon: "📝", label: "แก้ไขโค้ดเสร็จแล้ว" },
+      { icon: "🔀", label: "ให้ Claude ช่วย commit/สร้าง PR" },
+      { icon: "✅", label: "ประวัติ Git อ่านง่าย เป็นระเบียบ" }
+    ],
+    keyPoints: [
+      "Claude Code เชื่อมกับ Git ในเครื่องได้โดยตรง ช่วยตรวจดูการเปลี่ยนแปลง เขียนข้อความ commit และเปิด Pull Request บน GitHub ให้อัตโนมัติ",
+      "สั่งงานง่ายๆ เช่น 'ช่วย commit การเปลี่ยนแปลงนี้ให้หน่อย' หรือ 'สร้าง Pull Request ไป branch main' โดยไม่ต้องพิมพ์คำสั่ง Git เอง",
+      "ควรตรวจสอบ git status ก่อนยืนยัน commit ทุกครั้ง เพื่อไม่ให้ไฟล์ทดลองหรือไฟล์ตั้งค่าส่วนตัวหลุดเข้าไปโดยไม่ตั้งใจ"
+    ],
+    images: [],
+    text: [
+      "Claude Code เชื่อมกับ Git ในเครื่องได้โดยตรง สามารถขอให้ช่วยตรวจดูการเปลี่ยนแปลง (git diff), เขียนข้อความ commit ที่สื่อความหมาย, สร้าง branch ใหม่ หรือแม้แต่เปิด Pull Request บน GitHub ให้อัตโนมัติ โดยไม่ต้องพิมพ์คำสั่ง Git เองทุกขั้นตอน",
+      "วิธีใช้งาน: หลังแก้โค้ดเสร็จ พิมพ์คำสั่ง เช่น 'ช่วย commit การเปลี่ยนแปลงนี้ให้หน่อย' Claude จะดู git diff ของไฟล์ที่เปลี่ยน สรุปเป็นข้อความ commit ที่อธิบายว่าทำอะไรและทำไม แล้วรันคำสั่ง commit ให้ หากต้องการเปิด PR ให้พิมพ์ต่อว่า 'สร้าง Pull Request ไป branch main' ระบบจะ push โค้ดและเปิด PR ให้ผ่านคำสั่ง GitHub CLI",
+      "ข้อควรระวัง: ควรตรวจสอบว่า Claude commit เฉพาะไฟล์ที่ต้องการจริงๆ ไม่ใช่ทุกไฟล์ที่เปลี่ยนแปลงในเครื่อง โดยเฉพาะเมื่อมีไฟล์ทดลอง (draft) หรือไฟล์ตั้งค่าส่วนตัวปนอยู่ในโปรเจกต์ ให้ตรวจ git status ก่อนยืนยันเสมอเพื่อไม่ให้ไฟล์ที่ไม่ต้องการหลุดเข้าไปใน commit"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "mcp-tools",
+    title: "เชื่อมต่อเครื่องมือภายนอกด้วย MCP",
+    icon: "🔌",
+    flow: [
+      { icon: "🔌", label: "เชื่อมต่อ MCP Server" },
+      { icon: "🧰", label: "Claude ใช้เครื่องมือภายนอกได้" },
+      { icon: "🌐", label: "ดึงข้อมูล/ทำงานข้ามระบบได้" }
+    ],
+    video: "https://www.youtube.com/embed/WVfSJIXPF4A",
+    videoTitle: "สอนติดตั้ง MCP แบบ Step-by-Step ใน Cursor & Claude | มือใหม่ทำตามได้เลย!",
+    videoAuthor: "Little Moments",
+    images: [],
+    text: [
+      "<strong>MCP (Model Context Protocol)</strong> คือมาตรฐานที่ให้ Claude Code เชื่อมต่อกับเครื่องมือและแหล่งข้อมูลภายนอกได้ เช่น ฐานข้อมูล, Linear, GitHub หรือ Design tool ต่างๆ ทำให้ Claude ทำงานที่นอกเหนือจากการแก้โค้ดในเครื่องได้ เช่น ดึง ticket จาก Linear มาอ้างอิงตอนแก้บั๊ก",
+      "วิธีใช้งาน: เพิ่ม MCP Server ได้ผ่านคำสั่ง <code>claude mcp add</code> ในเทอร์มินัล หรือแก้ไฟล์ config ของโปรเจกต์โดยตรง หลังเชื่อมต่อสำเร็จ Claude จะเห็นเครื่องมือใหม่และเลือกใช้เองอัตโนมัติเมื่อคำสั่งที่พิมพ์เกี่ยวข้องกับระบบนั้น เช่น 'ดู ticket PROJ-123 ใน Linear แล้วแก้ตามที่ระบุ'",
+      "ข้อควรระวัง: ควรเชื่อมต่อ MCP Server เฉพาะจากแหล่งที่เชื่อถือได้เท่านั้น เพราะ MCP Server มีสิทธิ์เข้าถึงข้อมูลและเครื่องมือที่เชื่อมต่อไว้ การเชื่อมต่อ Server ที่ไม่รู้จักอาจเปิดช่องให้ข้อมูลรั่วไหลหรือถูกใช้งานโดยไม่ได้ตั้งใจ"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "subagents",
+    title: "ใช้ Subagents สร้างทีม AI ผู้ช่วยเฉพาะทาง",
+    icon: "👥",
+    flow: [
+      { icon: "🎯", label: "งานเฉพาะทางที่ต้องการผู้เชี่ยวชาญ" },
+      { icon: "👥", label: "มอบหมายให้ Subagent เฉพาะด้าน" },
+      { icon: "⚡", label: "ทำงานคู่ขนาน แต่ละงานโฟกัสชัดเจน" }
+    ],
+    video: "https://www.youtube.com/embed/V3g0R6q8YnE",
+    videoTitle: "สอนใช้ Claude Code Sub agents สร้างทีม Dev AI แต่ละตำแหน่ง ทำงานแยกกันหยั่งกับมืออาชีพ",
+    videoAuthor: "AI UNLOCKED สอน AI มือใหม่ก็ทำได้",
+    images: [],
+    text: [
+      "<strong>Subagents</strong> คือ Claude อีกชุดหนึ่งที่ทำงานแยกบริบทจาก Agent หลัก แต่ละตัวตั้งค่าคำสั่งเฉพาะทางได้ เช่น Subagent สำหรับรีวิวโค้ดโดยเฉพาะ หรือ Subagent สำหรับเขียนเทสต์โดยเฉพาะ ช่วยให้งานใหญ่แบ่งเป็นงานย่อยที่แต่ละส่วนโฟกัสชัดเจน ไม่ปนกันจนบริบทสับสน",
+      "วิธีใช้งาน: สร้าง Subagent ได้จากคำสั่ง <code>/agents</code> ในช่องแชท ตั้งชื่อและอธิบายหน้าที่เฉพาะของ Subagent นั้น เช่น 'ตรวจสอบโค้ดที่เปลี่ยนแปลงและหาช่องโหว่ด้านความปลอดภัยเท่านั้น' เมื่อมอบหมายงานให้ Subagent ตัวนี้ทำงาน มันจะโฟกัสเฉพาะหน้าที่ที่กำหนดไว้โดยไม่ทำอย่างอื่นนอกเหนือขอบเขต",
+      "เคล็ดลับ: ใช้ Subagents เมื่องานมีหลายด้านที่ต้องความเชี่ยวชาญต่างกัน เช่น ให้ Subagent หนึ่งเขียนโค้ด อีกตัวรีวิวโค้ดที่เขียนเสร็จแล้วอย่างเป็นอิสระ ช่วยจับข้อผิดพลาดได้ดีกว่าให้ Agent เดียวเขียนแล้วตรวจสอบงานตัวเองทั้งหมด"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "permissions-safety",
+    title: "ตั้งค่าสิทธิ์การอนุมัติและความปลอดภัย",
+    icon: "🔐",
+    flow: [
+      { icon: "❓", label: "Claude ขออนุมัติก่อนทำงานเสี่ยง" },
+      { icon: "⚙️", label: "ตั้งค่ากฎ allow/ask/deny" },
+      { icon: "🛡️", label: "ควบคุมสิทธิ์ให้เหมาะกับงาน" }
+    ],
+    keyPoints: [
+      "ตามค่าเริ่มต้น Claude Code จะขออนุมัติก่อนทำการเปลี่ยนแปลงที่มีความเสี่ยง เช่น ลบไฟล์ หรือแก้ไฟล์นอกโฟลเดอร์โปรเจกต์",
+      "ตั้งค่าสิทธิ์ผ่านไฟล์ <code>settings.json</code> ในโฟลเดอร์ <code>.claude/</code> กำหนดเป็นกฎ allow / ask / deny แยกตามชนิดคำสั่งได้",
+      "ไม่ควรเปิด auto-approve ทั้งหมดในโปรเจกต์ที่มีข้อมูลสำคัญหรือเชื่อมกับระบบจริง ควรคงโหมดขออนุมัติไว้สำหรับคำสั่งที่มีผลกระทบสูง"
+    ],
+    images: [],
+    text: [
+      "ตามค่าเริ่มต้น Claude Code จะหยุดขออนุมัติก่อนทำการเปลี่ยนแปลงที่มีความเสี่ยง เช่น รันคำสั่งที่ลบไฟล์ หรือแก้ไฟล์นอกโฟลเดอร์โปรเจกต์ เพื่อป้องกันไม่ให้เกิดความเสียหายโดยไม่ได้ตั้งใจ ผู้ใช้สามารถตั้งค่าสิทธิ์เหล่านี้ให้เข้มงวดขึ้นหรือผ่อนคลายลงได้ตามความเหมาะสมของแต่ละโปรเจกต์",
+      "วิธีใช้งาน: ตั้งค่าสิทธิ์ผ่านไฟล์ <code>settings.json</code> ในโฟลเดอร์ <code>.claude/</code> ของโปรเจกต์ กำหนดเป็นกฎ <code>allow</code> (อนุญาตอัตโนมัติ), <code>ask</code> (ต้องขออนุมัติก่อนทุกครั้ง) หรือ <code>deny</code> (ห้ามทำเด็ดขาด) แยกตามชนิดคำสั่ง เช่น อนุญาตให้รัน <code>npm test</code> อัตโนมัติ แต่ต้องขออนุมัติก่อนรันคำสั่งที่เกี่ยวกับ git push เสมอ",
+      "ข้อควรระวัง: ไม่ควรตั้งค่าให้ Claude ทำงานทุกอย่างแบบอนุมัติอัตโนมัติทั้งหมด (auto-approve) ในโปรเจกต์ที่มีข้อมูลสำคัญหรือเชื่อมกับระบบจริง (production) ควรเปิดโหมดขออนุมัติไว้อย่างน้อยสำหรับคำสั่งที่ลบไฟล์ เปลี่ยนแปลงฐานข้อมูล หรือ deploy ระบบ เพื่อให้มีจุดตรวจสอบก่อนที่ผลกระทบจะเกิดขึ้นจริง"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "prompt-best-practices",
+    title: "เทคนิคเขียน Prompt ให้ได้ผลดี",
+    icon: "✍️",
+    flow: [
+      { icon: "✍️", label: "เขียนคำสั่งให้ชัดเจน" },
+      { icon: "🎯", label: "ระบุเป้าหมาย/บริบท/ข้อจำกัด" },
+      { icon: "✅", label: "ได้ผลลัพธ์ตรงใจตั้งแต่รอบแรก" }
+    ],
+    video: "https://www.youtube.com/embed/eAoTlDBR9AQ",
+    videoTitle: "สอนใช้ AI 101 Ep.1 | Claude คืออะไร เขียน Prompt ยังไงให้ได้ผล | อ.เอิญ สุริยะฉาย (KMUTNB)",
+    videoAuthor: "Aj Earn KMUTNB",
+    images: [],
+    text: [
+      "คุณภาพของผลลัพธ์จาก Claude Code ขึ้นอยู่กับความชัดเจนของคำสั่งที่พิมพ์เป็นอย่างมาก คำสั่งที่คลุมเครือ เช่น 'ทำให้โค้ดดีขึ้น' มักได้ผลลัพธ์ที่ไม่ตรงใจ เพราะ Claude ต้องเดาเป้าหมายเอง ในขณะที่คำสั่งที่ระบุเป้าหมาย บริบท และข้อจำกัดชัดเจนจะได้ผลลัพธ์ที่ตรงความต้องการตั้งแต่รอบแรก",
+      "วิธีใช้งาน: โครงสร้างคำสั่งที่ดีควรมี 3 ส่วน คือ (1) เป้าหมายที่ต้องการ (2) บริบทที่เกี่ยวข้อง เช่น ไฟล์หรือฟังก์ชันที่เกี่ยวข้อง และ (3) ข้อจำกัดหรือมาตรฐานที่ต้องทำตาม เช่น 'เพิ่มฟังก์ชันส่งออก CSV ในหน้ารายงาน (ExportButton.tsx) โดยใช้ library ที่มีอยู่แล้วในโปรเจกต์เท่านั้น ห้ามติดตั้ง package ใหม่'",
+      "เคล็ดลับ: หากงานมีหลายขั้นตอน ให้แบ่งสั่งทีละขั้นตอนแทนการยัดทุกอย่างไว้ในคำสั่งเดียวยาวๆ เพราะช่วยให้ตรวจสอบผลลัพธ์แต่ละขั้นได้ก่อนไปต่อ และแก้ไขทิศทางได้ทันทีหากรอบแรกยังไม่ตรงตามที่ต้องการ"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "app-building-prompts",
+    title: "เทคนิคเขียน Prompt เพื่อสร้าง Application ได้ง่าย",
+    icon: "🏗️",
+    flow: [
+      { icon: "💡", label: "อธิบายไอเดียแอปที่ต้องการ" },
+      { icon: "🏗️", label: "ระบุ Stack/หน้าจอ/ฟีเจอร์หลัก" },
+      { icon: "🚀", label: "ได้แอปที่ใช้งานได้จริงเร็วขึ้น" }
+    ],
+    video: "https://www.youtube.com/embed/XsomZ1clSm8",
+    videoTitle: "ลืมวิธีเขียนเว็บแบบเดิมๆ! ใช้ Claude Design & Code สร้างระบบใช้จริงในองค์กร",
+    videoAuthor: "บริหารงานแบบคนไอที",
+    images: [],
+    text: [
+      "การสั่งให้ Claude Code สร้างแอปพลิเคชันทั้งระบบตั้งแต่ต้น ต่างจากการสั่งแก้ไขจุดเล็กๆ ตรงที่ต้องให้ข้อมูลภาพรวมของแอปให้ครบก่อนเริ่มลงมือ เพื่อให้ Claude ออกแบบโครงสร้างโปรเจกต์ได้ถูกต้องตั้งแต่รอบแรก ลดการรื้อโครงสร้างทีหลัง",
+      "วิธีใช้งาน: เขียน Prompt ให้ครอบคลุม 4 ส่วนหลัก คือ (1) แอปนี้ทำอะไร/ใช้กับใคร (2) หน้าจอหลักที่ต้องมี (3) ข้อมูล/ฐานข้อมูลที่ต้องเก็บ และ (4) เทคโนโลยีที่ต้องการใช้ (ถ้ามีข้อกำหนด) เช่น 'สร้างเว็บแอปจัดการสต็อกสินค้าสำหรับพนักงานคลังสินค้า มีหน้ารายการสินค้า หน้าเพิ่ม/ตัดสต็อก และหน้าประวัติการเคลื่อนไหว เก็บข้อมูลด้วย SQLite ใช้ React กับ Node.js'",
+      "แนวทางที่ดี: แนะนำให้เริ่มจากสั่งสร้าง MVP (เวอร์ชันที่ใช้งานได้ฟีเจอร์หลักครบแต่ยังไม่สมบูรณ์แบบ) ก่อน แล้วค่อยสั่งเพิ่มฟีเจอร์ทีละอย่างในบทสนทนาถัดไป แทนที่จะยัดทุกฟีเจอร์ไว้ใน Prompt เดียวยาวๆ ตั้งแต่แรก เพราะช่วยให้ตรวจสอบและปรับทิศทางได้เร็วกว่า และ Claude เองก็สร้างงานได้แม่นยำกว่าเมื่อขอบเขตของงานไม่ใหญ่เกินไป"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  },
+  {
+    key: "dashboard-executive-prompts",
+    title: "เขียน Prompt สร้างหน้า Dashboard สำหรับผู้บริหาร",
+    icon: "📊",
+    flow: [
+      { icon: "📊", label: "ระบุตัวชี้วัด (KPI) ที่ผู้บริหารต้องดู" },
+      { icon: "🎨", label: "กำหนดรูปแบบ/การจัดวางที่อ่านง่าย" },
+      { icon: "📈", label: "ได้ Dashboard สรุปภาพรวมในหน้าเดียว" }
+    ],
+    keyPoints: [
+      "Dashboard ผู้บริหารต้องเน้น 'สรุปภาพรวม' ไม่ใช่ข้อมูลดิบทั้งหมด — Prompt ควรระบุ KPI สำคัญ 3-5 ตัวที่ผู้บริหารต้องใช้ตัดสินใจ",
+      "ระบุแหล่งข้อมูลและรูปแบบกราฟที่ต้องการให้ชัดเจน เช่น 'ยอดขายรายเดือนเป็นกราฟเส้น เปรียบเทียบเป้าหมายเป็นกราฟแท่งซ้อน' แทนการบอกแค่ 'ทำกราฟสวยๆ'",
+      "ขอให้ Claude ทำข้อมูลตัวอย่าง (mock data) ไปพร้อมกันก่อน เพื่อดูหน้าตาจริงและปรับ Layout ให้ลงตัว ก่อนต่อกับข้อมูลจริงจากระบบ"
+    ],
+    images: [],
+    text: [
+      "หน้า <strong>Dashboard สำหรับผู้บริหาร</strong> มีจุดต่างจากหน้าจอทำงานทั่วไป ตรงที่เน้นให้เห็นภาพรวมและตัวชี้วัดสำคัญ (KPI) ได้ในสายตาเดียว ไม่ใช่ตารางข้อมูลดิบยาวๆ Prompt ที่ดีจึงต้องระบุให้ชัดว่าใครจะดู เพื่อการตัดสินใจอะไร และตัวเลขไหนสำคัญที่สุด",
+      "วิธีใช้งาน: เขียน Prompt โดยระบุ (1) กลุ่มผู้ใช้ เช่น 'ผู้บริหารระดับสูงที่ต้องดูภาพรวมทุกเช้า' (2) ตัวชี้วัดหลัก เช่น ยอดขายรวม กำไรสุทธิ จำนวนลูกค้าใหม่ (3) รูปแบบกราฟที่เหมาะกับข้อมูลแต่ละประเภท เช่น 'ยอดขายรายเดือนเป็นกราฟเส้นเทียบปีก่อนหน้า สัดส่วนยอดขายตามภูมิภาคเป็นกราฟวงกลม' และ (4) โทนสี/สไตล์ที่ต้องการให้ดูเป็นทางการ เช่น 'ใช้โทนสีน้ำเงิน-เทา ไม่ฉูดฉาด เหมาะกับการนำเสนอในที่ประชุม'",
+      "เคล็ดลับ: ขอให้ Claude สร้างข้อมูลตัวอย่าง (mock data) ประกอบไปพร้อมกับ Dashboard ก่อน เพื่อดูหน้าตาและ Layout จริงได้ทันทีโดยไม่ต้องรอเชื่อมข้อมูลจริง เมื่อพอใจกับหน้าตาแล้วค่อยบอก Claude ให้เปลี่ยนจาก mock data เป็นการดึงข้อมูลจริงจากฐานข้อมูลหรือ API ขององค์กรในขั้นตอนถัดไป"
+    ],
+    link: "https://docs.claude.com/en/docs/claude-code/overview"
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" },
+  { re: /^ฟังก์ชันพื้นฐานที่ควรรู้เพิ่มเติม[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="callout callout-' + rule.cls + '">' +
+        '<span class="callout-icon">' + rule.icon + '</span>' +
+        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach(t => {
+    const btn = document.createElement("button");
+    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
+    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const topic = TOPICS.find(t => t.key === currentKey);
+  const el = document.getElementById("content");
+
+  let videoSectionHtml = '';
+  if (topic.video) {
+    const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">📺 ' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : '';
+    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ยังไม่มีคลิปสอนภาษาไทยโดยตรงสำหรับหัวข้อนี้ — สรุปประเด็นสำคัญไว้ด้านล่าง</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+      '</ul></div>';
+  }
+
+  let imagesHtml = '';
+  if (topic.images.length > 0) {
+    imagesHtml = '<div class="section-label" style="margin-top:20px">ภาพหน้าจอเพิ่มเติม</div><div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
+      '</div>';
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    ).join('') + '</div>';
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join('') + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจากเอกสารทางการของ Claude Code →</a>'
+    : '';
+
+  el.innerHTML =
+    '<h2>' + topic.title + '</h2>' +
+    videoSectionHtml +
+    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    imagesHtml;
+}
+
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
