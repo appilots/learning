@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย — กลุ่มบริษัท ATTG</title>
+<style>
+  :root {
+    --bg: #fbf3f2;
+    --card-bg: #ffffff;
+    --text: #2a1c1a;
+    --sub: #7a625d;
+    --accent: #c0392b;
+    --accent-2: #922b21;
+    --border: #f0ddda;
+    --shadow: 0 2px 10px rgba(120, 40, 30, 0.08);
+    --pill-bg: #fbe9e7;
+    --placeholder-bg: #fdf6f5;
+    --ok: #1d8f5e;
+    --ok-bg: #e5f6ee;
+    --bad: #c0392b;
+    --bad-bg: #fbe9e7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1211;
+      --card-bg: #241a18;
+      --text: #f5e8e6;
+      --sub: #b89e99;
+      --accent: #e57368;
+      --accent-2: #cf5347;
+      --border: #392724;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --pill-bg: #2e1512;
+      --placeholder-bg: #281c1a;
+      --ok: #4fce9c;
+      --ok-bg: #12281f;
+      --bad: #e57368;
+      --bad-bg: #2e1512;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+  h1 { font-size: 1.35rem; margin: 0 0 6px; }
+  .subtitle { color: var(--sub); margin: 0 0 20px; font-size: 0.9rem; line-height: 1.6; }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 18px;
+  }
+
+  .rules {
+    background: var(--pill-bg);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .rules strong { color: var(--accent-2); }
+
+  .name-field {
+    margin-bottom: 22px;
+  }
+  .name-field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-2);
+    margin-bottom: 6px;
+  }
+  .name-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--placeholder-bg);
+    color: var(--text);
+    font-size: 0.92rem;
+    font-family: inherit;
+  }
+
+  .q-block {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .q-block:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .q-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .q-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+    line-height: 1.6;
+  }
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .q-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--placeholder-bg);
+    cursor: pointer;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .q-option:hover { border-color: var(--accent); }
+  .q-option input { margin-top: 3px; accent-color: var(--accent); flex-shrink: 0; }
+  .q-option.selected { border-color: var(--accent); background: var(--pill-bg); }
+
+  .q-option.result-correct {
+    border-color: var(--ok);
+    background: var(--ok-bg);
+  }
+  .q-option.result-wrong {
+    border-color: var(--bad);
+    background: var(--bad-bg);
+  }
+  .q-mark {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .q-mark.ok { color: var(--ok); }
+  .q-mark.bad { color: var(--bad); }
+
+  .submit-btn, .retry-btn, .print-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .submit-btn:hover, .retry-btn:hover, .print-btn:hover { background: var(--accent-2); }
+  .submit-btn:disabled {
+    background: var(--sub);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .print-btn { background: var(--card-bg); color: var(--accent); border: 1px solid var(--accent); }
+  .print-btn:hover { background: var(--pill-bg); color: var(--accent-2); }
+
+  .unanswered-warning {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-top: 10px;
+    display: none;
+  }
+
+  .result-summary {
+    text-align: center;
+    padding: 28px 20px;
+  }
+  .result-score {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin: 6px 0;
+  }
+  .result-score.pass { color: var(--ok); }
+  .result-score.fail { color: var(--bad); }
+  .result-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .result-label.pass { color: var(--ok); }
+  .result-label.fail { color: var(--bad); }
+  .result-detail {
+    font-size: 0.88rem;
+    color: var(--sub);
+    margin-bottom: 4px;
+  }
+  .result-badge {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .result-badge.pass { background: var(--ok-bg); color: var(--ok); }
+  .result-badge.fail { background: var(--bad-bg); color: var(--bad); }
+
+  .attempt-note {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--sub);
+    margin-top: 8px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  #resultsSection { display: none; }
+
+  @media print {
+    .back-link, #quizForm .submit-btn, .btn-row, .rules { display: none !important; }
+    body { background: #fff; color: #000; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="ai-safety-guide.html">← กลับไปที่คู่มือการใช้งาน AI อย่างปลอดภัย</a>
+  <h1>📝 แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย</h1>
+  <p class="subtitle">กลุ่มบริษัท ATTG — แบบทดสอบนี้มี 20 ข้อ ครอบคลุมเนื้อหาทั้งหมดในคู่มือ ต้องตอบถูกอย่างน้อย <strong>90%</strong> (18 จาก 20 ข้อ) จึงจะถือว่าผ่านเกณฑ์ หากไม่ผ่าน ระบบจะให้ทำแบบทดสอบใหม่ทันที</p>
+
+  <div class="card">
+    <div class="rules">
+      📋 <strong>คำชี้แจง:</strong> อ่านคู่มือ "การใช้งาน AI อย่างปลอดภัย" ให้ครบทุกหัวข้อก่อนทำแบบทดสอบนี้ เลือกคำตอบที่ถูกต้องที่สุดในแต่ละข้อ เมื่อตอบครบทุกข้อแล้วกดปุ่ม "ส่งคำตอบ" ระบบจะแสดงคะแนนและเฉลยทันที
+    </div>
+
+    <div class="name-field">
+      <label for="quizName">ชื่อ-นามสกุล (สำหรับบันทึกผล — ไม่บังคับ)</label>
+      <input type="text" id="quizName" placeholder="กรอกชื่อของคุณ">
+    </div>
+
+    <form id="quizForm"></form>
+
+    <p class="unanswered-warning" id="unansweredWarning">⚠️ กรุณาตอบให้ครบทุกข้อก่อนส่งคำตอบ (เหลืออีก <span id="unansweredCount">0</span> ข้อ)</p>
+
+    <div class="btn-row">
+      <button type="button" class="submit-btn" id="submitBtn">ส่งคำตอบ</button>
+    </div>
+  </div>
+
+  <div class="card result-summary" id="resultsSection">
+    <div class="result-label" id="resultLabel"></div>
+    <div class="result-score" id="resultScore"></div>
+    <div class="result-detail" id="resultDetail"></div>
+    <div class="result-badge" id="resultBadge"></div>
+    <div class="btn-row" style="justify-content:center">
+      <button type="button" class="retry-btn" id="retryBtn">🔄 ทำแบบทดสอบใหม่</button>
+      <button type="button" class="print-btn" id="printBtn">🖨️ พิมพ์/บันทึกผลลัพธ์</button>
+    </div>
+    <p class="attempt-note" id="attemptNote"></p>
+  </div>
+</div>
+
+<script>
+// เพิ่ม/แก้ไขคำถามได้ที่นี่ — correct คือ index (0-based) ของตัวเลือกที่ถูกต้องใน options
+const QUESTIONS = [
+  {
+    topic: "ภาพรวม",
+    q: "AI อย่าง ChatGPT หรือ Claude สร้างคำตอบขึ้นมาอย่างไร?",
+    options: [
+      "ค้นหาคำตอบจากฐานข้อมูลที่ถูกต้อง 100% เสมอ",
+      "โทรศัพท์ถามผู้เชี่ยวชาญจริงก่อนตอบทุกครั้ง",
+      "สร้างคำตอบขึ้นใหม่จากรูปแบบภาษาที่เรียนรู้มา ซึ่งอาจผิดพลาดได้",
+      "คัดลอกคำตอบจากวิกิพีเดียเสมอ"
+    ],
+    correct: 2
+  },
+  {
+    topic: "ข้อมูลที่ห้ามป้อนเข้า AI",
+    q: "ข้อมูลใดต่อไปนี้ห้ามป้อนเข้า AI สาธารณะโดยเด็ดขาด?",
+    options: [
+      "เลขบัตรประชาชนและข้อมูลส่วนตัวของลูกค้า",
+      "หัวข้อบทความทั่วไปที่ไม่เกี่ยวกับบริษัท",
+      "สูตรอาหารที่หาได้ทั่วไป",
+      "ชื่อวันหยุดนักขัตฤกษ์"
+    ],
+    correct: 0
+  },
+  {
+    topic: "ข้อมูลที่ห้ามป้อนเข้า AI",
+    q: "หากจำเป็นต้องให้ AI วิเคราะห์ข้อมูลที่มีความอ่อนไหว ควรทำอย่างไร?",
+    options: [
+      "ป้อนข้อมูลจริงทั้งหมดเพื่อความแม่นยำ",
+      "ส่งข้อมูลให้เพื่อนช่วยตรวจสอบแทน",
+      "ไม่ต้องกังวลเพราะ AI ทุกตัวปลอดภัยเหมือนกันหมด",
+      "ใช้เครื่องมือที่บริษัทอนุมัติและปิดการใช้ข้อมูลฝึกโมเดล หรือทำข้อมูลให้ไม่ระบุตัวตนก่อน"
+    ],
+    correct: 3
+  },
+  {
+    topic: "ตรวจสอบความถูกต้องของคำตอบ AI",
+    q: "\"Hallucination\" ในบริบทของ AI หมายถึงอะไร?",
+    options: [
+      "AI ปฏิเสธที่จะตอบคำถาม",
+      "AI ทำงานช้าผิดปกติ",
+      "AI ตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัวว่าผิด",
+      "AI ขอข้อมูลเพิ่มเติมก่อนตอบ"
+    ],
+    correct: 2
+  },
+  {
+    topic: "ตรวจสอบความถูกต้องของคำตอบ AI",
+    q: "ก่อนนำคำตอบจาก AI ไปใช้ในรายงานทางการ ควรทำอย่างไร?",
+    options: [
+      "ตรวจสอบความถูกต้องกับแหล่งข้อมูลที่เชื่อถือได้ก่อนเสมอ",
+      "คัดลอกไปใช้ได้ทันทีเพราะ AI ฉลาดกว่ามนุษย์",
+      "ส่งให้ AI ตัวอื่นตรวจสอบซ้ำก็เพียงพอโดยไม่ต้องตรวจเอง",
+      "ใช้เฉพาะตัวเลขที่ AI ให้มา ไม่ต้องสนใจข้อความอื่น"
+    ],
+    correct: 0
+  },
+  {
+    topic: "ความเป็นส่วนตัวและ PDPA",
+    q: "PDPA คุ้มครองข้อมูลประเภทใด?",
+    options: [
+      "ข้อมูลของบริษัทคู่แข่งเท่านั้น",
+      "ข้อมูลสภาพอากาศ",
+      "ข้อมูลราคาน้ำมันรายวัน",
+      "ข้อมูลส่วนบุคคลที่ระบุตัวตนได้ เช่น ชื่อ เบอร์โทร อีเมล"
+    ],
+    correct: 3
+  },
+  {
+    topic: "ความเป็นส่วนตัวและ PDPA",
+    q: "ก่อนป้อนข้อมูลที่มีข้อมูลส่วนบุคคลเข้า AI ควรทำอย่างไรตามหลัก PDPA?",
+    options: [
+      "ป้อนได้เลยเพราะ AI เป็นความลับอยู่แล้ว",
+      "ตรวจสอบความจำเป็น ความยินยอม และเครื่องมือที่ใช้ว่าได้รับอนุมัติหรือไม่",
+      "แจ้งลูกค้าหลังป้อนข้อมูลไปแล้ว",
+      "ไม่ต้องทำอะไรเพิ่มเติม"
+    ],
+    correct: 1
+  },
+  {
+    topic: "ปิดการใช้ข้อมูลฝึกโมเดล",
+    q: "เหตุใดควรปิดการตั้งค่า \"ใช้ข้อมูลสนทนาไปฝึกโมเดล\" ในบัญชี AI ที่ใช้ทำงาน?",
+    options: [
+      "เพื่อให้ AI ตอบเร็วขึ้น",
+      "เพื่อประหยัดพื้นที่เก็บข้อมูล",
+      "เพื่อป้องกันไม่ให้ข้อมูลที่พิมพ์เข้าไปถูกเก็บไปใช้พัฒนาโมเดลต่อโดยไม่ตั้งใจ",
+      "เป็นการตั้งค่าที่ไม่มีผลกระทบใดๆ"
+    ],
+    correct: 2
+  },
+  {
+    topic: "ลิขสิทธิ์และทรัพย์สินทางปัญญา",
+    q: "ก่อนนำเนื้อหาที่ AI สร้างไปเผยแพร่สู่สาธารณะ ควรทำอย่างไร?",
+    options: [
+      "ตรวจสอบว่าไม่ซ้ำหรือคล้ายกับงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป",
+      "เผยแพร่ได้ทันทีเพราะ AI สร้างเนื้อหาใหม่เสมอ",
+      "ไม่ต้องตรวจสอบถ้าเป็นแค่ข้อความสั้นๆ",
+      "เปลี่ยนแค่สีตัวอักษรก็เพียงพอ"
+    ],
+    correct: 0
+  },
+  {
+    topic: "เครื่องมือ AI ที่บริษัทอนุมัติ",
+    q: "\"Shadow AI\" หมายถึงอะไร?",
+    options: [
+      "AI ที่ทำงานเฉพาะตอนกลางคืน",
+      "ฟีเจอร์ Dark Mode ของแอป AI",
+      "AI ที่ใช้ตรวจจับการทุจริต",
+      "การใช้เครื่องมือ AI ที่ไม่ผ่านการอนุมัติจากบริษัทมาทำงานกับข้อมูลบริษัท"
+    ],
+    correct: 3
+  },
+  {
+    topic: "เครื่องมือ AI ที่บริษัทอนุมัติ",
+    q: "หากอยากลองใช้เครื่องมือ AI ตัวใหม่ที่ยังไม่อยู่ในรายการที่บริษัทอนุมัติ ควรทำอย่างไร?",
+    options: [
+      "ใช้ทดลองกับข้อมูลบริษัทได้เลยถ้าดูน่าเชื่อถือ",
+      "แจ้งขออนุมัติจากทีม IT ก่อนเริ่มใช้งานกับข้อมูลบริษัท",
+      "ใช้ได้ถ้าเพื่อนร่วมงานแนะนำมา",
+      "ใช้ได้โดยไม่ต้องแจ้งใคร เพราะเป็นเรื่องส่วนตัว"
+    ],
+    correct: 1
+  },
+  {
+    topic: "รหัสผ่านและการยืนยันตัวตน",
+    q: "วิธีเพิ่มความปลอดภัยให้บัญชี AI ที่ดีที่สุดคือข้อใด?",
+    options: [
+      "ใช้รหัสผ่านเดียวกับทุกบัญชีเพื่อจำง่าย",
+      "เปิดเผยรหัสผ่านให้เพื่อนร่วมทีมทุกคน",
+      "ตั้งรหัสผ่านคาดเดายากและเปิดใช้การยืนยันตัวตนสองชั้น (2FA)",
+      "ปิดฟีเจอร์เตือนความปลอดภัยเพื่อความสะดวก"
+    ],
+    correct: 2
+  },
+  {
+    topic: "รหัสผ่านและการยืนยันตัวตน",
+    q: "ควรใช้วิธีใดรับรหัสยืนยันตัวตนแทน SMS เพื่อความปลอดภัยที่สูงกว่า?",
+    options: [
+      "แอป Authenticator",
+      "อีเมลสำรอง",
+      "บอกรหัสทางโทรศัพท์",
+      "เขียนรหัสไว้บนกระดาษติดหน้าจอ"
+    ],
+    correct: 0
+  },
+  {
+    topic: "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง",
+    q: "หากได้รับข้อความเร่งรัดให้โอนเงินด่วนจากผู้บริหาร ควรทำอย่างไรก่อน?",
+    options: [
+      "โอนเงินทันทีเพราะเป็นคำสั่งเร่งด่วน",
+      "ตอบกลับข้อความยืนยันว่าจะโอนให้",
+      "ส่งต่อข้อความให้เพื่อนร่วมงานแล้วรอดูว่าใครจะทำก่อน",
+      "ตั้งสติและตรวจสอบผ่านช่องทางอื่น เช่น โทรกลับเบอร์เดิมที่บันทึกไว้"
+    ],
+    correct: 3
+  },
+  {
+    topic: "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง",
+    q: "เหตุใดอีเมล Phishing ในปัจจุบันจึงตรวจจับได้ยากขึ้น?",
+    options: [
+      "เพราะมิจฉาชีพเลิกใช้อีเมลแล้ว",
+      "เพราะ AI ช่วยให้เขียนข้อความหลอกลวงได้เนียนขึ้น ไม่มีคำผิดเหมือนก่อน",
+      "เพราะอีเมลทุกฉบับถูกเข้ารหัสอัตโนมัติ",
+      "เพราะบริษัทอีเมลหยุดกรองสแปมแล้ว"
+    ],
+    correct: 1
+  },
+  {
+    topic: "Deepfake",
+    q: "Deepfake คือเทคโนโลยีที่ใช้ทำอะไร?",
+    options: [
+      "เพิ่มความเร็วอินเทอร์เน็ต",
+      "ตรวจจับไวรัสคอมพิวเตอร์",
+      "สร้างภาพ เสียง หรือวิดีโอปลอมเลียนแบบบุคคลจริงได้สมจริง",
+      "แปลภาษาแบบเรียลไทม์"
+    ],
+    correct: 2
+  },
+  {
+    topic: "Deepfake",
+    q: "หากได้รับวิดีโอคอลที่อ้างว่าเป็นผู้บริหารสั่งให้โอนเงินด่วน ควรทำอย่างไร?",
+    options: [
+      "ยืนยันตัวตนผ่านช่องทางที่สองก่อนดำเนินการใดๆ เสมอ",
+      "โอนทันทีเพราะเห็นหน้าและได้ยินเสียงชัดเจน",
+      "ถามคำถามในวิดีโอคอลนั้นต่อไปเรื่อยๆ จนมั่นใจ",
+      "ไม่ต้องทำอะไร เพราะ Deepfake ตรวจจับไม่ได้อยู่แล้ว"
+    ],
+    correct: 0
+  },
+  {
+    topic: "แชร์ Prompt/Custom GPT อย่างปลอดภัย",
+    q: "ก่อนสร้างลิงก์แชร์บทสนทนา AI หรือเผยแพร่ Custom GPT ควรทำอย่างไร?",
+    options: [
+      "แชร์ได้ทันทีโดยไม่ต้องตรวจสอบ",
+      "ลบชื่อบริษัทออกจากลิงก์เท่านั้นก็เพียงพอ",
+      "แชร์เฉพาะตอนกลางคืนเพื่อความปลอดภัย",
+      "ตรวจสอบว่าไม่มีข้อมูลลับของบริษัทหรือลูกค้าปะปนอยู่ในเนื้อหา"
+    ],
+    correct: 3
+  },
+  {
+    topic: "พบสิ่งผิดปกติ แจ้งใคร",
+    q: "หากสงสัยว่าข้อมูลบริษัทหลุดเข้าไปใน AI สาธารณะโดยไม่ตั้งใจ ควรทำอย่างไร?",
+    options: [
+      "เก็บเงียบไว้คนเดียวเพราะกลัวถูกตำหนิ",
+      "แจ้งทีม IT หรือผู้ดูแลระบบทันที ยิ่งเร็วยิ่งจำกัดความเสียหายได้ดี",
+      "รอดูสถานการณ์ก่อนสัก 1 เดือน",
+      "ลบประวัติการสนทนาแล้วไม่บอกใคร"
+    ],
+    correct: 1
+  },
+  {
+    topic: "สรุป Do/Don't",
+    q: "ข้อใดคือแนวปฏิบัติที่ถูกต้องเมื่อใช้ AI ทำงาน?",
+    options: [
+      "ใช้เครื่องมือ AI ที่บริษัทอนุมัติ ตรวจสอบคำตอบก่อนใช้จริง และเปิด 2FA ทุกบัญชี",
+      "ป้อนข้อมูลลูกค้าทั้งหมดเข้า AI ฟรีเพื่อความรวดเร็ว",
+      "เชื่อคำตอบ AI ทุกอย่างโดยไม่ต้องตรวจสอบ",
+      "ใช้รหัสผ่านเดียวกันกับทุกเครื่องมือ AI เพื่อความสะดวก"
+    ],
+    correct: 0
+  }
+];
+
+const PASS_THRESHOLD = 90; // เปอร์เซ็นต์ขั้นต่ำที่ต้องได้เพื่อผ่าน
+let attemptCount = 0;
+
+function renderQuestions() {
+  const form = document.getElementById("quizForm");
+  form.innerHTML = "";
+  QUESTIONS.forEach((item, qi) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.dataset.qi = qi;
+
+    const numEl = document.createElement("div");
+    numEl.className = "q-num";
+    numEl.textContent = "ข้อ " + (qi + 1) + " / " + QUESTIONS.length + " · " + item.topic;
+    block.appendChild(numEl);
+
+    const qText = document.createElement("p");
+    qText.className = "q-text";
+    qText.textContent = item.q;
+    block.appendChild(qText);
+
+    const optsWrap = document.createElement("div");
+    optsWrap.className = "q-options";
+    item.options.forEach((opt, oi) => {
+      const label = document.createElement("label");
+      label.className = "q-option";
+      label.dataset.oi = oi;
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "q" + qi;
+      input.value = oi;
+      input.addEventListener("change", () => {
+        optsWrap.querySelectorAll(".q-option").forEach(o => o.classList.remove("selected"));
+        label.classList.add("selected");
+        updateUnansweredWarning();
+      });
+      const span = document.createElement("span");
+      span.textContent = opt;
+      label.appendChild(input);
+      label.appendChild(span);
+      optsWrap.appendChild(label);
+    });
+    block.appendChild(optsWrap);
+    form.appendChild(block);
+  });
+}
+
+function countUnanswered() {
+  let count = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const checked = document.querySelector('input[name="q' + qi + '"]:checked');
+    if (!checked) count++;
+  });
+  return count;
+}
+
+function updateUnansweredWarning() {
+  const remaining = countUnanswered();
+  const warn = document.getElementById("unansweredWarning");
+  if (remaining > 0) {
+    document.getElementById("unansweredCount").textContent = remaining;
+    warn.style.display = "block";
+  } else {
+    warn.style.display = "none";
+  }
+}
+
+function gradeQuiz() {
+  const remaining = countUnanswered();
+  if (remaining > 0) {
+    updateUnansweredWarning();
+    document.getElementById("unansweredWarning").scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+
+  let correctCount = 0;
+  QUESTIONS.forEach((item, qi) => {
+    const block = document.querySelector('.q-block[data-qi="' + qi + '"]');
+    const checked = document.querySelector('input[name="q' + qi + '"]:checked');
+    const selectedIndex = parseInt(checked.value, 10);
+    const isCorrect = selectedIndex === item.correct;
+    if (isCorrect) correctCount++;
+
+    block.querySelectorAll(".q-option").forEach(optEl => {
+      const oi = parseInt(optEl.dataset.oi, 10);
+      optEl.querySelectorAll("input").forEach(inp => inp.disabled = true);
+      const existingMark = optEl.querySelector(".q-mark");
+      if (existingMark) existingMark.remove();
+      if (oi === item.correct) {
+        optEl.classList.add("result-correct");
+        const mark = document.createElement("span");
+        mark.className = "q-mark ok";
+        mark.textContent = "✓ คำตอบที่ถูกต้อง";
+        optEl.appendChild(mark);
+      } else if (oi === selectedIndex && !isCorrect) {
+        optEl.classList.add("result-wrong");
+        const mark = document.createElement("span");
+        mark.className = "q-mark bad";
+        mark.textContent = "✗ คำตอบของคุณ";
+        optEl.appendChild(mark);
+      }
+    });
+  });
+
+  const percent = Math.round((correctCount / QUESTIONS.length) * 100);
+  const passed = percent >= PASS_THRESHOLD;
+  attemptCount++;
+
+  document.getElementById("submitBtn").style.display = "none";
+  document.getElementById("unansweredWarning").style.display = "none";
+
+  const resultsSection = document.getElementById("resultsSection");
+  const resultLabel = document.getElementById("resultLabel");
+  const resultScore = document.getElementById("resultScore");
+  const resultDetail = document.getElementById("resultDetail");
+  const resultBadge = document.getElementById("resultBadge");
+  const attemptNote = document.getElementById("attemptNote");
+
+  const nameVal = document.getElementById("quizName").value.trim();
+
+  resultLabel.textContent = (nameVal ? nameVal + " — " : "") + "ผลการทำแบบทดสอบ";
+  resultLabel.className = "result-label " + (passed ? "pass" : "fail");
+  resultScore.textContent = percent + "%";
+  resultScore.className = "result-score " + (passed ? "pass" : "fail");
+  resultDetail.textContent = "ตอบถูก " + correctCount + " จาก " + QUESTIONS.length + " ข้อ (เกณฑ์ผ่าน: 90%)";
+
+  if (passed) {
+    resultBadge.textContent = "✅ ผ่านเกณฑ์ — เข้าใจแนวปฏิบัติการใช้ AI อย่างปลอดภัยแล้ว";
+    resultBadge.className = "result-badge pass";
+  } else {
+    resultBadge.textContent = "❌ ยังไม่ผ่านเกณฑ์ — กรุณากลับไปทบทวนคู่มือแล้วทำแบบทดสอบใหม่";
+    resultBadge.className = "result-badge fail";
+  }
+
+  attemptNote.textContent = "จำนวนครั้งที่ทำแบบทดสอบในเซสชันนี้: " + attemptCount + (passed ? "" : " · กรุณาทบทวนคู่มือก่อนทำใหม่อีกครั้ง");
+
+  resultsSection.style.display = "block";
+  resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function resetQuiz() {
+  document.getElementById("resultsSection").style.display = "none";
+  document.getElementById("submitBtn").style.display = "inline-block";
+  document.getElementById("unansweredWarning").style.display = "none";
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("submitBtn").addEventListener("click", gradeQuiz);
+document.getElementById("retryBtn").addEventListener("click", resetQuiz);
+document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+renderQuestions();
+</script>
+</body>
+</html>
