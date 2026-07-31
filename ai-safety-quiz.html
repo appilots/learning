@@ -81,7 +81,8 @@
   ::selection { background: var(--accent-soft); color: var(--accent-deep); }
   .inline-en { font-style: italic; font-weight: 400; color: var(--ink-soft); }
 
-  .frame { max-width: 760px; margin: 0 auto; padding: 28px 20px 64px; }
+  .frame { max-width: 1100px; margin: 0 auto; padding: 28px clamp(20px, 3.5vw, 56px) 64px; }
+  .prose-cap { max-width: 74ch; }
 
   .back-tag {
     display: inline-flex; align-items: center; gap: 5px;
@@ -186,8 +187,8 @@
   .q-topic-en { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-soft); opacity: 0.75; font-style: italic; }
   .q-count { font-size: 0.7rem; color: var(--ink-soft); }
   .q-block.locked .q-num { background: var(--ok); border-color: var(--ok); color: #fff; }
-  .q-text { font-size: 1rem; font-weight: 700; margin: 0 0 3px; line-height: 1.6; color: var(--steel); }
-  .q-text-en { display: block; font-size: 0.85rem; font-weight: 400; font-style: italic; margin: 0 0 14px; line-height: 1.55; color: var(--ink-soft); }
+  .q-text { font-size: 1rem; font-weight: 700; margin: 0 0 3px; line-height: 1.6; color: var(--steel); max-width: 74ch; }
+  .q-text-en { display: block; font-size: 0.85rem; font-weight: 400; font-style: italic; margin: 0 0 14px; line-height: 1.55; color: var(--ink-soft); max-width: 74ch; }
 
   .q-retry-hint {
     font-size: 0.82rem; font-weight: 600; color: var(--warn);
@@ -298,9 +299,9 @@
     </div>
     <h1>📝 แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย</h1>
     <span class="masthead-h1-en">AI Safety Usage Assessment</span>
-    <p class="masthead-sub">กลุ่มบริษัท ATTG — แบบทดสอบนี้มี 27 ข้อ ครอบคลุมเนื้อหาทั้งหมดในคู่มือ 15 หัวข้อ (รวมมาตรฐานกลุ่ม AISIN/Toyota, แนวทาง Generative AI ของ Toyota และ Phishing Mail) ต้องตอบถูกอย่างน้อย <strong>90%</strong> (25 จาก 27 ข้อ) จึงจะถือว่าผ่านเกณฑ์</p>
-    <p class="masthead-sub-en">ATTG Group — this assessment has 27 questions covering all 15 topics in the guide (including AISIN/Toyota Group standards, Toyota's Generative AI approach, and phishing email). You must score at least 90% (25 out of 27) to pass.</p>
-    <div class="masthead-note">
+    <p class="masthead-sub prose-cap">กลุ่มบริษัท ATTG — แบบทดสอบนี้มี 27 ข้อ ครอบคลุมเนื้อหาทั้งหมดในคู่มือ 15 หัวข้อ (รวมมาตรฐานกลุ่ม AISIN/Toyota, แนวทาง Generative AI ของ Toyota และ Phishing Mail) ต้องตอบถูกอย่างน้อย <strong>90%</strong> (25 จาก 27 ข้อ) จึงจะถือว่าผ่านเกณฑ์</p>
+    <p class="masthead-sub-en prose-cap">ATTG Group — this assessment has 27 questions covering all 15 topics in the guide (including AISIN/Toyota Group standards, Toyota's Generative AI approach, and phishing email). You must score at least 90% (25 out of 27) to pass.</p>
+    <div class="masthead-note prose-cap">
       📋 <strong>คำชี้แจง:</strong> อ่านคู่มือ "การใช้งาน AI อย่างปลอดภัย" ให้ครบทุกหัวข้อก่อนทำแบบทดสอบนี้ เลือกคำตอบที่ถูกต้องที่สุดในแต่ละข้อ แล้วกดปุ่ม "ตรวจคำตอบ" — <strong>ข้อที่ตอบถูกจะถูกล็อกไว้ว่าถูกต้องทันที</strong> ส่วนข้อที่ตอบผิดจะมีเครื่องหมาย ✗ กำกับให้แก้ไขและกด "ตรวจคำตอบ" ใหม่ได้เรื่อยๆ จนกว่าจะผ่านเกณฑ์ 90% โดยไม่ต้องเริ่มทำใหม่ทั้งหมด
       <div class="masthead-note-en">
         📋 <strong>Instructions:</strong> Read every topic in the "Using AI Safely" guide before taking this assessment. Choose the best answer for each question, then click "Check Answers" — <strong>correct answers are locked in immediately</strong>, while incorrect ones are marked ✗ so you can fix them and click "Check Answers" again as many times as needed until you reach the 90% pass threshold, without starting over.
