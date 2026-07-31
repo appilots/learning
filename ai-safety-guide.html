@@ -6,326 +6,528 @@
 <title>คู่มือการใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</title>
 <style>
   :root {
-    --bg: #fbf3f2;
-    --card-bg: #ffffff;
-    --text: #2a1c1a;
-    --sub: #7a625d;
-    --accent: #c0392b;
-    --accent-2: #922b21;
-    --border: #f0ddda;
-    --shadow: 0 2px 10px rgba(120, 40, 30, 0.08);
-    --pill-bg: #fbe9e7;
-    --placeholder-bg: #fdf6f5;
+    --ink: #16202c;
+    --ink-soft: #4b5a6a;
+    --paper: #eef1f2;
+    --surface: #ffffff;
+    --line: #d7dde0;
+    --accent: #b9791f;
+    --accent-deep: #8a5a15;
+    --accent-soft: #f2e6d2;
+    --steel: #3d6280;
+    --steel-soft: #e3edf3;
+    --tip: var(--steel);
+    --tip-soft: var(--steel-soft);
+    --warn: #b23b3b;
+    --warn-soft: #f5e3e1;
+    --howto: #2f8577;
+    --howto-soft: #e1efec;
+    --example: #7c5ba6;
+    --example-soft: #ede4f4;
+    --ok: #2f7d5c;
+    --ok-soft: #e1f0e8;
+    --shadow: 0 1px 2px rgba(22,32,44,0.05), 0 10px 28px -16px rgba(22,32,44,0.22);
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, monospace;
+    --sans: "Noto Sans Thai", "Sarabun", -apple-system, "Segoe UI", sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1211;
-      --card-bg: #241a18;
-      --text: #f5e8e6;
-      --sub: #b89e99;
-      --accent: #e57368;
-      --accent-2: #cf5347;
-      --border: #392724;
-      --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-      --pill-bg: #2e1512;
-      --placeholder-bg: #281c1a;
+      --ink: #e8edf0;
+      --ink-soft: #a7b6c0;
+      --paper: #0f161d;
+      --surface: #16212b;
+      --line: #283440;
+      --accent: #e0a34a;
+      --accent-deep: #c98a30;
+      --accent-soft: #35291a;
+      --steel: #7ea8c9;
+      --steel-soft: #1b2a35;
+      --warn: #e0847a;
+      --warn-soft: #3a2320;
+      --howto: #5cc0b0;
+      --howto-soft: #15302b;
+      --example: #b79bdb;
+      --example-soft: #291f38;
+      --ok: #4fce9c;
+      --ok-soft: #14302a;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 10px 28px -16px rgba(0,0,0,0.55);
     }
   }
+  :root[data-theme="dark"] {
+    --ink: #e8edf0;
+    --ink-soft: #a7b6c0;
+    --paper: #0f161d;
+    --surface: #16212b;
+    --line: #283440;
+    --accent: #e0a34a;
+    --accent-deep: #c98a30;
+    --accent-soft: #35291a;
+    --steel: #7ea8c9;
+    --steel-soft: #1b2a35;
+    --warn: #e0847a;
+    --warn-soft: #3a2320;
+    --howto: #5cc0b0;
+    --howto-soft: #15302b;
+    --example: #b79bdb;
+    --example-soft: #291f38;
+    --ok: #4fce9c;
+    --ok-soft: #14302a;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 10px 28px -16px rgba(0,0,0,0.55);
+  }
+  :root[data-theme="light"] {
+    --ink: #16202c;
+    --ink-soft: #4b5a6a;
+    --paper: #eef1f2;
+    --surface: #ffffff;
+    --line: #d7dde0;
+    --accent: #b9791f;
+    --accent-deep: #8a5a15;
+    --accent-soft: #f2e6d2;
+    --steel: #3d6280;
+    --steel-soft: #e3edf3;
+    --warn: #b23b3b;
+    --warn-soft: #f5e3e1;
+    --howto: #2f8577;
+    --howto-soft: #e1efec;
+    --example: #7c5ba6;
+    --example-soft: #ede4f4;
+    --ok: #2f7d5c;
+    --ok-soft: #e1f0e8;
+    --shadow: 0 1px 2px rgba(22,32,44,0.05), 0 10px 28px -16px rgba(22,32,44,0.22);
+  }
+
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: -apple-system, "Segoe UI", "Noto Sans Thai", "Sarabun", sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
     min-height: 100vh;
   }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
-  h1 { font-size: 1.4rem; margin: 0 0 4px; }
-  .subtitle { color: var(--sub); margin: 0 0 24px; font-size: 0.9rem; }
+  ::selection { background: var(--accent-soft); color: var(--accent-deep); }
 
-  .layout {
+  .frame { max-width: 1180px; margin: 0 auto; padding: 32px 20px 64px; }
+
+  /* ---------- Masthead (document control block) ---------- */
+  .masthead {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 22px;
+    margin-bottom: 30px;
+  }
+  .masthead-top {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
     align-items: flex-start;
+    gap: 20px;
     flex-wrap: wrap;
+    margin-bottom: 16px;
   }
-
-  .topic-list {
-    flex: 0 0 240px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .topic-btn {
-    text-align: left;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    color: var(--text);
-    cursor: pointer;
-    font-size: 0.88rem;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-  }
-  .topic-btn:hover { border-color: var(--accent); }
-  .topic-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-  .quiz-cta {
-    margin-top: 10px;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid var(--accent);
-    background: var(--pill-bg);
-    text-align: center;
-  }
-  .quiz-cta a {
-    display: inline-block;
-    color: #fff;
-    background: var(--accent);
-    text-decoration: none;
+  .brand-code {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-deep);
     font-weight: 700;
-    font-size: 0.85rem;
-    padding: 9px 14px;
-    border-radius: 8px;
-    margin-top: 6px;
-  }
-  .quiz-cta p {
-    margin: 0;
-    font-size: 0.78rem;
-    color: var(--accent-2);
-    line-height: 1.5;
-  }
-
-  .content {
-    flex: 1 1 400px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-    padding: 24px;
-    min-width: 280px;
-  }
-  .content h2 { margin: 0 0 16px; font-size: 1.2rem; }
-
-  .section-label {
-    font-size: 0.75rem;
-    color: var(--sub);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+  }
+  .brand-doc {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    margin-top: 3px;
+    letter-spacing: 0.03em;
+  }
+  .masthead-stats { display: flex; gap: 22px; margin: 0; }
+  .masthead-stats > div { text-align: right; }
+  .masthead-stats dt {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .masthead-stats dd {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 2px 0 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .masthead h1 {
+    font-family: var(--sans);
+    font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+    font-weight: 800;
     margin: 0 0 8px;
+    text-wrap: balance;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .masthead-sub {
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+    margin: 0 0 16px;
+    max-width: 66ch;
+    line-height: 1.65;
+  }
+  .masthead-note {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 12px 15px;
+    font-size: 0.79rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .masthead-note strong { color: var(--ink); }
+
+  /* ---------- Layout ---------- */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 284px 1fr;
+    gap: 28px;
+    align-items: start;
   }
 
-  .key-points {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--pill-bg);
-    padding: 14px 16px;
-    margin-bottom: 20px;
+  /* ---------- Rail (routing card nav) ---------- */
+  .rail { display: flex; flex-direction: column; gap: 0; }
+  .station {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    width: 100%;
+    padding: 8px 10px 8px 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: var(--sans);
+    transition: background-color 0.12s ease;
   }
-  .key-points-title {
+  .station:hover { background: var(--surface); }
+  .station-num-wrap { position: relative; flex: 0 0 30px; height: 30px; }
+  .station-num-wrap::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    bottom: -6px;
+    width: 1.5px;
+    background: var(--line);
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+  .station:first-of-type .station-num-wrap::before { top: 50%; }
+  .station:last-of-type .station-num-wrap::before { bottom: 50%; }
+  .station-num {
+    position: relative;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  }
+  .station-info { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .station-icon { font-size: 1rem; flex-shrink: 0; }
+  .station-title {
+    font-size: 0.84rem;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    transition: color 0.12s ease;
+  }
+  .station.active .station-num { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .station.active .station-title { color: var(--ink); font-weight: 700; }
+  .station:hover .station-title { color: var(--accent-deep); }
+  .station:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .rail-cta {
+    margin-top: 14px;
+    padding: 14px 15px;
+    border: 1px solid var(--accent);
+    background: var(--accent-soft);
+  }
+  .rail-cta-label {
+    margin: 0 0 4px;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--accent-deep);
+    font-weight: 700;
+  }
+  .rail-cta p:not(.rail-cta-label) { margin: 0 0 10px; font-size: 0.82rem; color: var(--ink); line-height: 1.55; }
+  .rail-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+    background: var(--accent-deep);
+    text-decoration: none;
     font-weight: 700;
     font-size: 0.82rem;
-    color: var(--accent-2);
-    margin-bottom: 8px;
+    padding: 9px 13px;
   }
-  .key-points ul {
-    margin: 0;
-    padding-left: 20px;
-  }
-  .key-points li {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .key-points li:last-child { margin-bottom: 0; }
+  .rail-cta a:hover { background: var(--ink); }
+  .rail-cta a:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 2px; }
 
-  .video-box {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    border-radius: 12px;
-    border: 1px dashed var(--border);
-    background: var(--placeholder-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--sub);
-    font-size: 0.85rem;
-    margin-bottom: 20px;
-    overflow: hidden;
+  /* ---------- Sheet (bulletin content panel) ---------- */
+  .sheet {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 30px 32px 34px;
+    min-width: 0;
   }
-  .video-box iframe { width: 100%; height: 100%; border: 0; }
-
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
+  .sheet-head { margin-bottom: 6px; }
+  .sheet-ref {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    color: var(--accent-deep);
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    font-weight: 700;
   }
-  .image-grid img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-  }
-
-  .text-block {
-    font-size: 0.92rem;
-    line-height: 1.7;
-    color: var(--text);
-  }
-  .text-block p { margin: 0 0 12px; }
-  .text-block p:last-child { margin-bottom: 0; }
-  .text-block.placeholder {
-    color: var(--sub);
-    font-style: italic;
-  }
-  .text-block strong { color: var(--accent-2); font-weight: 700; }
-  .text-block code, .callout-body code {
-    background: var(--pill-bg);
-    color: var(--accent-2);
-    padding: 1px 6px;
-    border-radius: 5px;
-    font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
-    font-size: 0.88em;
-  }
-
-  .flow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin: 4px 0 16px;
-    padding: 16px 12px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--placeholder-bg);
-  }
-  .flow-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    width: 104px;
-    text-align: center;
-  }
-  .flow-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    background: var(--pill-bg);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-  }
-  .flow-label {
-    font-size: 0.76rem;
-    color: var(--sub);
-    font-weight: 600;
+  .sheet-head h2 {
+    font-family: var(--sans);
+    font-size: 1.42rem;
+    font-weight: 800;
+    margin: 0 0 20px;
+    color: var(--ink);
+    text-wrap: balance;
     line-height: 1.3;
   }
-  .flow-arrow {
-    font-size: 1.3rem;
-    color: var(--accent);
-    flex-shrink: 0;
+
+  /* ---------- Hero illustration (per-topic figure) ---------- */
+  .hero-illo {
+    position: relative;
+    width: 100%;
+    height: clamp(150px, 20vw, 210px);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    margin-bottom: 22px;
+    background: var(--paper);
   }
-
-  .callout {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 12px 14px;
-    border-radius: 10px;
-    margin: 0 0 12px;
-    font-size: 0.92rem;
-    line-height: 1.7;
+  .hero-illo svg { width: 100%; height: 100%; display: block; }
+  .hero-illo-caption {
+    position: absolute;
+    left: 12px;
+    bottom: 8px;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    background: var(--surface);
+    padding: 2px 8px;
+    border: 1px solid var(--line);
+    max-width: calc(100% - 24px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .callout:last-child { margin-bottom: 0; }
-  .callout-icon { flex-shrink: 0; }
-  .callout-label { font-weight: 700; }
+  .hero-illo.tone-accent { background: var(--accent-soft); }
+  .hero-illo.tone-steel { background: var(--steel-soft); }
+  .hero-illo.tone-warn { background: var(--warn-soft); }
+  .hero-illo.tone-howto { background: var(--howto-soft); }
+  .hero-illo.tone-example { background: var(--example-soft); }
 
-  .callout-tip { background: var(--pill-bg); border: 1px solid var(--accent); }
-  .callout-tip .callout-label { color: var(--accent); }
-
-  .callout-warn { background: rgba(230, 126, 34, 0.12); border: 1px solid #e08a2e; }
-  .callout-warn .callout-label { color: #b5650a; }
-
-  .callout-howto { background: rgba(43, 125, 233, 0.08); border: 1px solid #2b7de9; }
-  .callout-howto .callout-label { color: #1f66c4; }
-
-  .callout-example { background: rgba(155, 89, 182, 0.1); border: 1px solid #9b59b6; }
-  .callout-example .callout-label { color: #8e44ad; }
-
-  @media (prefers-color-scheme: dark) {
-    .callout-warn .callout-label { color: #f0a868; }
-    .callout-howto .callout-label { color: #6fa8f5; }
-    .callout-example .callout-label { color: #cfa0e0; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    display: block;
+    margin: 24px 0 10px;
   }
+  .section-label:first-of-type { margin-top: 0; }
 
-  .ref-link {
-    display: inline-block;
-    margin-top: 14px;
-    color: var(--accent);
-    font-size: 0.85rem;
-    text-decoration: none;
+  /* field notes = keyPoints fallback box */
+  .field-notes {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    background: var(--paper);
+    padding: 15px 17px;
+    margin-bottom: 22px;
   }
-  .ref-link:hover { text-decoration: underline; }
+  .field-notes-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-deep);
+    margin-bottom: 9px;
+    font-weight: 700;
+  }
+  .field-notes ul { margin: 0; padding-left: 20px; }
+  .field-notes li { font-size: 0.9rem; line-height: 1.65; color: var(--ink); margin-bottom: 6px; }
+  .field-notes li:last-child { margin-bottom: 0; }
 
+  /* video */
+  .video-frame {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
   .video-credit {
     font-size: 0.78rem;
-    color: var(--sub);
-    margin: -12px 0 20px;
-    padding: 8px 12px;
-    background: var(--placeholder-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    padding: 9px 12px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    line-height: 1.65;
   }
-  .video-credit a { color: var(--accent); text-decoration: none; }
+  .video-credit a { color: var(--accent-deep); text-decoration: none; font-weight: 600; }
   .video-credit a:hover { text-decoration: underline; }
-
-  .copyright-banner {
-    background: var(--pill-bg);
+  .lang-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
     border: 1px solid var(--accent);
-    color: var(--accent-2);
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 0.78rem;
-    line-height: 1.6;
-    margin: 14px 0 22px;
+    padding: 1px 7px;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    margin-right: 7px;
   }
 
-  @media (max-width: 640px) {
-    .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
-    .topic-btn { flex: 0 0 auto; white-space: nowrap; }
-    .quiz-cta { flex: 0 0 auto; }
+  .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+  .image-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); }
+
+  /* body text */
+  .text-block { font-family: var(--sans); font-size: 0.95rem; line-height: 1.85; color: var(--ink); max-width: 68ch; }
+  .text-block p { margin: 0 0 15px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block.placeholder { color: var(--ink-soft); font-style: italic; }
+  .text-block strong { color: var(--accent-deep); font-weight: 700; }
+  .text-block code, .note-body code {
+    font-family: var(--mono);
+    background: var(--paper);
+    color: var(--accent-deep);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    font-size: 0.86em;
+  }
+
+  /* flow strip */
+  .flow-strip {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin: 4px 0 24px;
+    padding: 15px 2px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .flow-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 8px; min-width: 0; }
+  .flow-step-idx { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+  .flow-glyph {
+    font-size: 1.2rem;
+    line-height: 1;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+  }
+  .flow-text { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.45; }
+  .flow-connector { align-self: center; color: var(--line); font-family: var(--mono); font-size: 1rem; padding-top: 22px; flex: 0 0 auto; }
+
+  /* notes (callouts) */
+  .note { display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; border-left: 3px solid var(--tip); background: var(--tip-soft); margin: 0 0 13px; font-size: 0.92rem; line-height: 1.78; }
+  .note:last-child { margin-bottom: 0; }
+  .note-icon { flex-shrink: 0; }
+  .note-label { font-weight: 700; }
+
+  .note-tip { border-color: var(--tip); background: var(--tip-soft); }
+  .note-tip .note-label { color: var(--tip); }
+  .note-warn { border-color: var(--warn); background: var(--warn-soft); }
+  .note-warn .note-label { color: var(--warn); }
+  .note-howto { border-color: var(--howto); background: var(--howto-soft); }
+  .note-howto .note-label { color: var(--howto); }
+  .note-example { border-color: var(--example); background: var(--example-soft); }
+  .note-example .note-label { color: var(--example); }
+
+  .sheet-ref-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    padding: 9px 13px;
+    border: 1px solid var(--line);
+    font-size: 0.82rem;
+    font-family: var(--mono);
+    color: var(--accent-deep);
+    text-decoration: none;
+  }
+  .sheet-ref-link:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .sheet-ref-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media (max-width: 860px) {
+    .body-grid { grid-template-columns: 1fr; }
+    .rail { flex-direction: row; overflow-x: auto; gap: 4px; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
+    .station { flex: 0 0 auto; padding: 8px 10px; }
+    .station-num-wrap::before { display: none; }
+    .station-title { white-space: nowrap; }
+    .rail-cta { flex: 0 0 auto; white-space: nowrap; }
+    .sheet { padding: 22px 18px 26px; }
+    .masthead-stats { gap: 16px; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>🛡️ คู่มือการใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</h1>
-  <p class="subtitle">อ่านให้ครบทุกหัวข้อ แล้วทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ (ต้องได้คะแนนอย่างน้อย 90%)</p>
-  <div class="copyright-banner">
-    🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอที่แนบมาคัดเลือกจากช่อง YouTube ของสื่อ/ผู้เชี่ยวชาญที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น ลิขสิทธิ์เนื้อหาวิดีโอเป็นของเจ้าของช่องต้นฉบับ มีชื่อช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิป หัวข้อที่เป็นนโยบายเฉพาะของ ATTG จะไม่มีวิดีโอประกอบ เนื่องจากเป็นแนวปฏิบัติภายในที่ไม่มีคลิปสาธารณะให้อ้างอิงตรงๆ
+<div class="frame">
+
+  <header class="masthead">
+    <div class="masthead-top">
+      <div>
+        <span class="brand-code">AISIN GROUP · ATTG</span>
+        <span class="brand-doc">DOC. AI-SAFETY-GUIDE · REV. 2026</span>
+      </div>
+      <dl class="masthead-stats">
+        <div><dt>หัวข้อ</dt><dd id="statTopics">15</dd></div>
+        <div><dt>เกณฑ์ผ่าน</dt><dd>90%</dd></div>
+      </dl>
+    </div>
+    <h1>🛡️ คู่มือการใช้งาน AI อย่างปลอดภัย</h1>
+    <p class="masthead-sub">สำหรับพนักงานกลุ่มบริษัท ATTG — อ่านให้ครบทุกสถานีด้านซ้าย แล้วทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ (ต้องได้คะแนนอย่างน้อย 90%)</p>
+    <div class="masthead-note">
+      🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอที่แนบมาคัดเลือกจากช่อง YouTube ของสื่อ/ผู้เชี่ยวชาญที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น ลิขสิทธิ์เนื้อหาวิดีโอเป็นของเจ้าของช่องต้นฉบับ มีชื่อช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิป ค้นหาคลิปภาษาไทยเป็นอันดับแรกเสมอ หัวข้อไหนไม่มีคลิปไทยจะใช้คลิปภาษาญี่ปุ่น 🇯🇵 หรือภาษาอังกฤษ 🇬🇧 แทน (มีป้ายกำกับภาษาไว้ใต้วิดีโอให้สังเกตง่าย) หัวข้อที่เป็นนโยบายเฉพาะของ ATTG ยังคงไม่มีวิดีโอประกอบ เนื่องจากเป็นแนวปฏิบัติภายในที่ไม่มีคลิปสาธารณะให้อ้างอิงตรงๆ
+    </div>
+  </header>
+
+  <div class="body-grid">
+    <nav class="rail" id="topicList" aria-label="สถานีหัวข้อในคู่มือ"></nav>
+    <main class="sheet" id="content"></main>
   </div>
 
-  <div class="layout">
-    <nav class="topic-list" id="topicList">
-      <div class="quiz-cta">
-        <p>อ่านครบทุกหัวข้อแล้ว?<br>ทำแบบทดสอบเพื่อยืนยันความเข้าใจ</p>
-        <a href="ai-safety-quiz.html" target="_blank" rel="noopener">📝 ไปทำแบบทดสอบ</a>
-      </div>
-    </nav>
-    <main class="content" id="content"></main>
-  </div>
 </div>
 
 <script>
@@ -366,6 +568,10 @@ const TOPICS = [
       "ยึดมาตรฐานสากล ISO 27001, TISAX, JAMA/JAPIA Cybersecurity Guidelines และ ISO 21434 (มาตรฐานความปลอดภัยไซเบอร์เฉพาะยานยนต์) พร้อมมีทีมเฝ้าระวังภัยคุกคามตลอด 24 ชั่วโมงทุกวันทั่วทั้งกลุ่ม",
       "กลุ่ม AISIN จัดอบรมและซ้อมรับมืออีเมลหลอกลวง (Phishing) ให้พนักงานปีละ 3 ครั้ง พร้อมเดือนรณรงค์ความปลอดภัยไซเบอร์ประจำปีทุกปี — ATTG ในฐานะบริษัทในเครือควรเข้าร่วมกิจกรรมเหล่านี้อย่างจริงจัง"
     ],
+    video: "https://www.youtube.com/embed/h7l92MqfOVg",
+    videoTitle: "【30分で理解】セキュリティ超入門｜情報セキュリティ・サイバー攻撃・暗号化の仕組みなどを解説",
+    videoAuthor: "キノコード / AI・プログラミング学習チャンネル",
+    videoLang: "ja",
     images: [],
     text: [
       "ATTG เป็นบริษัทในเครือ <strong>AISIN Group</strong> ซึ่งมี <strong>Toyota</strong> เป็นผู้ถือหุ้นใหญ่ (ถือสิทธิ์ออกเสียงราว 22.4% ของ AISIN Corporation) และมียอดขายส่วนใหญ่เกี่ยวข้องกับกลุ่ม Toyota โดยตรง AISIN Group จึงมีนโยบายความปลอดภัยไซเบอร์อย่างเป็นทางการที่เผยแพร่สู่สาธารณะคือ <strong>AISIN Group Information Security Basic Policy</strong> ซึ่งดูแลโดย Information Security Promotion Department ภายใต้ความรับผิดชอบของ DX Strategy Center และมี Risk Management Committee เป็นผู้เสนอนโยบายให้ทั้งเครือปฏิบัติตามร่วมกัน ความเสี่ยงไซเบอร์ของบริษัทในเครือเพียงจุดเดียวจึงส่งผลกระทบต่อทั้ง Supply Chain ได้จริง — เช่นกรณีต้นปี 2022 ที่ Toyota ต้องหยุดสายการผลิตในญี่ปุ่นทั้งหมดชั่วคราว เพราะซัพพลายเออร์รายหนึ่งถูกโจมตีด้วย Ransomware",
@@ -388,6 +594,10 @@ const TOPICS = [
       "Toyota จัดตั้ง Responsible AI Organization และ Responsible AI Review Board ตรวจสอบโครงการ AI ทุกโครงการแบบข้ามฝ่าย (Data, Compliance, Privacy, Legal, Cybersecurity) ก่อนนำไปใช้จริง",
       "หลักการของ Toyota คือ AI ควร 'เสริมความสามารถของคน ไม่ใช่มาแทนที่คน' — เป็นข้อมูลที่ Toyota เปิดเผยต่อสาธารณะ ไม่ใช่นโยบายบังคับ ATTG โดยตรง แต่เป็นแนวทางที่ดีควรพิจารณานำมาปรับใช้"
     ],
+    video: "https://www.youtube.com/embed/DFZZs3_WFC4",
+    videoTitle: "【OpenAIも称賛】トヨタコネクティッド流 生成AIリスキリング〜導入2ヶ月で227種のGPTsを作成し、業務50％削減などの事例を創出した取組とは",
+    videoAuthor: "いけともch",
+    videoLang: "ja",
     images: [],
     text: [
       "Toyota ในฐานะผู้ถือหุ้นใหญ่ของ AISIN Group ได้วางแนวทางการใช้ Generative AI ของตัวเองอย่างเป็นระบบ โดยตระหนักว่า ChatGPT สาธารณะมีความเสี่ยงสำคัญคือ ข้อมูลที่พนักงานพิมพ์เข้าไปจะถูกส่งไปเก็บไว้ที่เซิร์ฟเวอร์ของผู้ให้บริการภายนอก (เช่น OpenAI) ซึ่งอาจหลุดออกจากการควบคุมของบริษัทได้",
@@ -405,6 +615,10 @@ const TOPICS = [
       { icon: "🚦", label: "ตรวจสอบระดับความลับก่อนป้อนเข้า AI" },
       { icon: "✅", label: "ป้อนเฉพาะข้อมูลที่อนุญาตเท่านั้น" }
     ],
+    video: "https://www.youtube.com/embed/02t0QddFY_E",
+    videoTitle: "Company Data on ChatGPT: Why What You Share Could Stay Forever | Security Confidential",
+    videoAuthor: "Dark Rhiino Security",
+    videoLang: "en",
     images: [],
     text: [
       "เมื่อพิมพ์ข้อความหรืออัปโหลดไฟล์เข้า AI สาธารณะ (เช่น ChatGPT, Claude เวอร์ชันฟรีหรือ Plus ส่วนบุคคล) ข้อมูลนั้นอาจถูกส่งออกไปประมวลผลนอกระบบขององค์กร และในบางกรณีอาจถูกนำไปใช้ฝึกโมเดลต่อได้หากไม่ได้ปิดการตั้งค่าไว้ จึงต้องระมัดระวังเป็นพิเศษว่าข้อมูลใดป้อนได้และข้อมูลใดห้ามป้อนเด็ดขาด",
@@ -421,6 +635,10 @@ const TOPICS = [
       { icon: "🔍", label: "ตรวจสอบกับแหล่งข้อมูลจริง" },
       { icon: "✅", label: "นำไปใช้ได้อย่างมั่นใจ" }
     ],
+    video: "https://www.youtube.com/embed/Jw_BdvyvSUg",
+    videoTitle: "AI Hallucination: Why does AI just make stuff up? | ChatGPT | Is Artificial Intelligence reliable?",
+    videoAuthor: "Business Standard",
+    videoLang: "en",
     images: [],
     text: [
       "AI สร้างคำตอบจากรูปแบบภาษาที่เรียนรู้มา ไม่ได้ 'รู้จริง' เหมือนฐานข้อมูล บางครั้งจึงตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัว เรียกว่า <strong>Hallucination</strong> เช่น อ้างอิงกฎหมายที่ไม่มีจริง สร้างตัวเลขสถิติที่ไม่ถูกต้อง หรือสรุปเนื้อหาผิดจากต้นฉบับ",
@@ -457,6 +675,10 @@ const TOPICS = [
       { icon: "🚫", label: "ปิดการใช้ข้อมูลฝึกโมเดล" },
       { icon: "✅", label: "บทสนทนาไม่ถูกนำไปใช้ต่อ" }
     ],
+    video: "https://www.youtube.com/embed/ay6JlbNvccc",
+    videoTitle: "How to Stop ChatGPT from Using Your Content for Training - ChatGPT Privacy Setting",
+    videoAuthor: "Gauging Gadgets",
+    videoLang: "en",
     images: [],
     text: [
       "เครื่องมือ AI ส่วนใหญ่มีการตั้งค่าที่ควบคุมว่าจะนำบทสนทนาของเราไปใช้ฝึกโมเดล AI รุ่นถัดไปหรือไม่ หากไม่ปิดการตั้งค่านี้ ข้อมูลที่พิมพ์เข้าไปอาจถูกเก็บและนำไปใช้พัฒนาโมเดลต่อ ซึ่งเพิ่มความเสี่ยงข้อมูลรั่วไหลโดยไม่ตั้งใจ",
@@ -473,6 +695,10 @@ const TOPICS = [
       { icon: "©️", label: "ตรวจสอบสิทธิ์การใช้งาน" },
       { icon: "✅", label: "ใช้เผยแพร่ได้อย่างถูกต้อง" }
     ],
+    video: "https://www.youtube.com/embed/JSKEaeYloYk",
+    videoTitle: "Who Owns AI-Generated Content? Copyright Law Explained (2026)",
+    videoAuthor: "Mahela Liyanage",
+    videoLang: "en",
     images: [],
     text: [
       "เนื้อหาที่ AI สร้างขึ้น เช่น ข้อความ ภาพ หรือโค้ด อาจมีประเด็นด้านลิขสิทธิ์ที่ซับซ้อน เพราะ AI เรียนรู้จากข้อมูลจำนวนมหาศาลที่รวมงานที่มีลิขสิทธิ์อยู่ด้วย ผลลัพธ์ที่ได้จึงอาจคล้ายคลึงกับงานที่มีอยู่แล้วโดยไม่ตั้งใจ",
@@ -489,6 +715,10 @@ const TOPICS = [
       { icon: "📋", label: "ตรวจสอบรายการที่บริษัทอนุมัติก่อน" },
       { icon: "✅", label: "ใช้เฉพาะเครื่องมือที่ผ่านการตรวจสอบแล้ว" }
     ],
+    video: "https://www.youtube.com/embed/FTbeJJi6C2c",
+    videoTitle: "Shadow AI Explained: The Cybersecurity Risk Companies Can't Ignore",
+    videoAuthor: "Tenable",
+    videoLang: "en",
     images: [],
     text: [
       "<strong>Shadow AI</strong> คือการที่พนักงานนำเครื่องมือ AI ที่ไม่ผ่านการตรวจสอบจากบริษัทมาใช้ในงานโดยไม่ได้รับอนุญาต เช่น สมัครบัญชี AI ใหม่ด้วยอีเมลบริษัทเพื่อทดลองใช้ฟีเจอร์บางอย่าง โดยไม่รู้ว่าเครื่องมือนั้นมีนโยบายด้านข้อมูลอย่างไร ซึ่งเป็นความเสี่ยงด้านความปลอดภัยข้อมูลที่มองไม่เห็นและควบคุมได้ยาก",
@@ -584,6 +814,10 @@ const TOPICS = [
       { icon: "🔍", label: "ตรวจสอบเนื้อหาก่อนแชร์" },
       { icon: "🔗", label: "แชร์ได้อย่างปลอดภัย" }
     ],
+    video: "https://www.youtube.com/embed/M1Cw1hXlZ5k",
+    videoTitle: "Is ChatGPT Sharing Your Data? 6 Settings To Protect Your Privacy",
+    videoAuthor: "Privacy International",
+    videoLang: "en",
     images: [],
     text: [
       "การแชร์บทสนทนา Prompt หรือ Custom GPT ที่สร้างไว้ให้เพื่อนร่วมงานหรือเผยแพร่สาธารณะ (เช่นใน GPT Store) อาจมีข้อมูลภายในหลุดไปโดยไม่ตั้งใจ หากไม่ตรวจสอบเนื้อหาให้ดีก่อนแชร์",
@@ -619,15 +853,184 @@ const CALLOUT_RULES = [
   { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" }
 ];
 
+const LANG_BADGES = { ja: "🇯🇵 日本語", en: "🇬🇧 English" };
+
+// Custom-drawn figures (no stock photos — self-contained SVG, no licensing/hotlink risk)
+// keyed by topic.key. Each entry is the inner markup for a 0 0 200 150 viewBox.
+const TOPIC_ILLUSTRATIONS = {
+  overview: { tone: "accent", svg: `
+    <line x1="100" y1="35" x2="100" y2="22" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+    <circle cx="100" cy="18" r="6" style="fill:var(--accent)"/>
+    <rect x="62" y="35" width="76" height="58" rx="16" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <circle cx="84" cy="62" r="7" style="fill:var(--accent)"/>
+    <circle cx="116" cy="62" r="7" style="fill:var(--steel)"/>
+    <line x1="80" y1="80" x2="120" y2="80" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
+    <rect x="72" y="98" width="56" height="34" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <circle cx="100" cy="115" r="8" style="fill:none;stroke:var(--accent);stroke-width:3"/>
+    <line x1="40" y1="60" x2="58" y2="60" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <line x1="40" y1="60" x2="40" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <line x1="40" y1="76" x2="54" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <circle cx="40" cy="60" r="3.5" style="fill:var(--steel)"/>
+    <line x1="160" y1="60" x2="142" y2="60" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <line x1="160" y1="60" x2="160" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <line x1="160" y1="76" x2="146" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <circle cx="160" cy="60" r="3.5" style="fill:var(--steel)"/>
+  ` },
+  "group-standards": { tone: "steel", svg: `
+    <polygon points="100,20 148,38 148,76 100,136 52,76 52,38" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
+    <rect x="76" y="82" width="48" height="26" rx="3" style="fill:var(--steel)"/>
+    <rect x="82" y="62" width="8" height="22" style="fill:var(--steel)"/>
+    <rect x="110" y="54" width="8" height="30" style="fill:var(--steel)"/>
+    <circle cx="86" cy="58" r="4" style="fill:var(--accent)"/>
+    <circle cx="114" cy="50" r="4" style="fill:var(--accent)"/>
+  ` },
+  "toyota-genai": { tone: "accent", svg: `
+    <rect x="40" y="95" width="120" height="26" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <rect x="66" y="72" width="68" height="26" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <circle cx="66" cy="121" r="11" style="fill:var(--ink)"/>
+    <circle cx="134" cy="121" r="11" style="fill:var(--ink)"/>
+    <circle cx="66" cy="121" r="4" style="fill:var(--surface)"/>
+    <circle cx="134" cy="121" r="4" style="fill:var(--surface)"/>
+    <rect x="118" y="16" width="58" height="32" rx="10" style="fill:var(--accent)"/>
+    <polygon points="130,48 130,58 142,48" style="fill:var(--accent)"/>
+    <circle cx="134" cy="32" r="2.5" style="fill:var(--surface)"/>
+    <circle cx="146" cy="32" r="2.5" style="fill:var(--surface)"/>
+    <circle cx="158" cy="32" r="2.5" style="fill:var(--surface)"/>
+  ` },
+  "data-classification": { tone: "warn", svg: `
+    <polygon points="28,55 70,55 80,45 130,45 130,110 28,110" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
+    <rect x="120" y="70" width="50" height="42" rx="8" style="fill:var(--warn)"/>
+    <path d="M132 70 v-14 a13 13 0 0 1 26 0 v14" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+    <circle cx="145" cy="90" r="6" style="fill:var(--surface)"/>
+    <rect x="142" y="90" width="6" height="12" style="fill:var(--surface)"/>
+  ` },
+  "verify-output": { tone: "howto", svg: `
+    <rect x="35" y="35" width="90" height="80" rx="8" style="fill:var(--surface);stroke:var(--ink);stroke-width:3"/>
+    <line x1="50" y1="55" x2="95" y2="55" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="50" y1="72" x2="95" y2="72" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="50" y1="89" x2="80" y2="89" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <circle cx="128" cy="88" r="28" style="fill:var(--surface);stroke:var(--howto);stroke-width:6"/>
+    <line x1="148" y1="108" x2="168" y2="128" style="stroke:var(--howto);stroke-width:7;stroke-linecap:round"/>
+    <polyline points="115,88 124,97 141,78" style="fill:none;stroke:var(--howto);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
+  ` },
+  "privacy-pdpa": { tone: "accent", svg: `
+    <rect x="45" y="25" width="80" height="100" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:3"/>
+    <polygon points="105,25 125,25 125,45" style="fill:var(--paper);stroke:var(--ink);stroke-width:2;stroke-linejoin:round"/>
+    <line x1="58" y1="50" x2="98" y2="50" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="58" y1="65" x2="112" y2="65" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="58" y1="80" x2="105" y2="80" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <circle cx="140" cy="100" r="24" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:3;stroke-dasharray:3 3"/>
+    <polyline points="130,100 137,107 152,90" style="fill:none;stroke:var(--accent-deep);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
+  ` },
+  "privacy-settings": { tone: "steel", svg: `
+    <circle cx="80" cy="74" r="30" style="fill:var(--surface);stroke:var(--steel);stroke-width:5"/>
+    <circle cx="80" cy="74" r="10" style="fill:none;stroke:var(--steel);stroke-width:4"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(0 80 74)"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(45 80 74)"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(90 80 74)"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(135 80 74)"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(180 80 74)"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(225 80 74)"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(270 80 74)"/>
+    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(315 80 74)"/>
+    <rect x="120" y="80" width="46" height="36" rx="7" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <path d="M131 80 v-12 a12 12 0 0 1 24 0 v12" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+    <circle cx="143" cy="96" r="5" style="fill:var(--ink)"/>
+  ` },
+  "copyright-ip": { tone: "example", svg: `
+    <polygon points="100,20 148,38 148,76 100,136 52,76 52,38" style="fill:var(--example-soft);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
+    <text x="100" y="92" text-anchor="middle" style="font-size:56px;font-weight:700;fill:var(--example);font-family:var(--sans)">&#169;</text>
+  ` },
+  "approved-tools": { tone: "accent", svg: `
+    <rect x="50" y="30" width="100" height="110" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <rect x="80" y="20" width="40" height="16" rx="6" style="fill:var(--accent)"/>
+    <circle cx="70" cy="58" r="7" style="fill:var(--accent)"/>
+    <polyline points="66,58 69,61 75,54" style="fill:none;stroke:var(--surface);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"/>
+    <line x1="85" y1="58" x2="132" y2="58" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.55"/>
+    <circle cx="70" cy="82" r="7" style="fill:var(--accent)"/>
+    <polyline points="66,82 69,85 75,78" style="fill:none;stroke:var(--surface);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"/>
+    <line x1="85" y1="82" x2="125" y2="82" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.55"/>
+    <circle cx="70" cy="106" r="7" style="fill:none;stroke:var(--ink);stroke-width:3;opacity:0.4"/>
+    <line x1="85" y1="106" x2="118" y2="106" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.3"/>
+  ` },
+  "account-security": { tone: "steel", svg: `
+    <rect x="45" y="60" width="60" height="50" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <path d="M58 60 v-16 a17 17 0 0 1 34 0 v16" style="fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round"/>
+    <circle cx="75" cy="82" r="7" style="fill:var(--steel)"/>
+    <rect x="72" y="82" width="6" height="12" style="fill:var(--steel)"/>
+    <rect x="128" y="45" width="34" height="60" rx="8" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <line x1="134" y1="92" x2="156" y2="92" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.4"/>
+    <circle cx="145" cy="63" r="10" style="fill:none;stroke:var(--accent);stroke-width:3"/>
+    <text x="145" y="67" text-anchor="middle" style="font-size:11px;font-family:var(--mono);font-weight:700;fill:var(--accent-deep)">2FA</text>
+  ` },
+  "phishing-email": { tone: "warn", svg: `
+    <rect x="35" y="45" width="110" height="72" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <polyline points="35,49 90,90 145,49" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
+    <path d="M150 60 v40 a14 14 0 0 1 -28 0" style="fill:none;stroke:var(--warn);stroke-width:6;stroke-linecap:round"/>
+    <circle cx="150" cy="58" r="5" style="fill:var(--warn)"/>
+  ` },
+  "ai-phishing": { tone: "warn", svg: `
+    <circle cx="100" cy="75" r="45" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <rect x="65" y="65" width="70" height="20" rx="8" style="fill:var(--ink)"/>
+    <circle cx="82" cy="75" r="5" style="fill:var(--warn)"/>
+    <circle cx="118" cy="75" r="5" style="fill:var(--warn)"/>
+    <line x1="90" y1="100" x2="110" y2="100" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
+    <line x1="100" y1="20" x2="100" y2="30" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
+    <circle cx="100" cy="16" r="5" style="fill:var(--warn)"/>
+  ` },
+  deepfake: { tone: "warn", svg: `
+    <circle cx="100" cy="75" r="45" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <line x1="100" y1="30" x2="100" y2="120" style="stroke:var(--ink);stroke-width:2;stroke-dasharray:3 3;opacity:0.5"/>
+    <circle cx="86" cy="68" r="5" style="fill:var(--ink)"/>
+    <line x1="80" y1="95" x2="94" y2="95" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
+    <rect x="106" y="52" width="9" height="9" style="fill:var(--warn);opacity:0.7"/>
+    <rect x="117" y="52" width="9" height="9" style="fill:var(--warn);opacity:0.4"/>
+    <rect x="106" y="63" width="9" height="9" style="fill:var(--warn);opacity:0.5"/>
+    <rect x="117" y="63" width="9" height="9" style="fill:var(--warn);opacity:0.8"/>
+    <rect x="106" y="74" width="9" height="9" style="fill:var(--warn);opacity:0.3"/>
+    <rect x="117" y="74" width="9" height="9" style="fill:var(--warn);opacity:0.6"/>
+    <rect x="106" y="85" width="9" height="9" style="fill:var(--warn);opacity:0.5"/>
+    <rect x="117" y="85" width="9" height="9" style="fill:var(--warn);opacity:0.4"/>
+  ` },
+  "sharing-prompts": { tone: "example", svg: `
+    <rect x="35" y="35" width="90" height="55" rx="14" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <polygon points="55,90 55,105 72,90" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
+    <line x1="52" y1="55" x2="108" y2="55" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="52" y1="70" x2="90" y2="70" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <circle cx="150" cy="45" r="9" style="fill:var(--example)"/>
+    <circle cx="150" cy="105" r="9" style="fill:var(--example)"/>
+    <circle cx="122" cy="75" r="9" style="fill:var(--example)"/>
+    <line x1="130" y1="70" x2="143" y2="50" style="stroke:var(--example);stroke-width:3"/>
+    <line x1="130" y1="80" x2="143" y2="100" style="stroke:var(--example);stroke-width:3"/>
+  ` },
+  "incident-report": { tone: "warn", svg: `
+    <path d="M100 30 a30 30 0 0 1 30 30 v20 l10 14 h-80 l10 -14 v-20 a30 30 0 0 1 30 -30 z" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
+    <circle cx="100" cy="104" r="9" style="fill:var(--warn)"/>
+    <line x1="65" y1="45" x2="50" y2="30" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.7"/>
+    <line x1="135" y1="45" x2="150" y2="30" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.7"/>
+    <line x1="55" y1="65" x2="38" y2="65" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.5"/>
+    <line x1="145" y1="65" x2="162" y2="65" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.5"/>
+  ` }
+};
+
+function renderHeroIllustration(topic, idx) {
+  const illo = TOPIC_ILLUSTRATIONS[topic.key];
+  if (!illo) return "";
+  return '<div class="hero-illo tone-' + illo.tone + '">' +
+    '<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="ภาพประกอบหัวข้อ: ' + topic.title + '">' + illo.svg + '</svg>' +
+    '<span class="hero-illo-caption">FIG. ' + String(idx + 1).padStart(2, "0") + ' — ' + topic.title + '</span>' +
+    '</div>';
+}
+
 function renderParagraph(text) {
   for (const rule of CALLOUT_RULES) {
     const m = text.match(rule.re);
     if (m) {
       const label = m[0].replace(/:\s*$/, "");
       const rest = text.slice(m[0].length);
-      return '<div class="callout callout-' + rule.cls + '">' +
-        '<span class="callout-icon">' + rule.icon + '</span>' +
-        '<div class="callout-body"><span class="callout-label">' + label + ':</span> ' + rest + '</div>' +
+      return '<div class="note note-' + rule.cls + '">' +
+        '<span class="note-icon">' + rule.icon + '</span>' +
+        '<div class="note-body"><span class="note-label">' + label + ':</span> ' + rest + '</div>' +
         '</div>';
     }
   }
@@ -638,12 +1041,25 @@ let currentKey = TOPICS[0].key;
 
 function renderTopicList() {
   const el = document.getElementById("topicList");
-  const cta = el.querySelector(".quiz-cta");
   el.innerHTML = "";
-  TOPICS.forEach(t => {
+  TOPICS.forEach((t, i) => {
     const btn = document.createElement("button");
-    btn.className = "topic-btn" + (t.key === currentKey ? " active" : "");
-    btn.textContent = (t.icon ? t.icon + " " : "") + t.title;
+    btn.className = "station" + (t.key === currentKey ? " active" : "");
+    btn.setAttribute("aria-current", t.key === currentKey ? "true" : "false");
+
+    const numWrap = document.createElement("span");
+    numWrap.className = "station-num-wrap";
+    const num = document.createElement("span");
+    num.className = "station-num";
+    num.textContent = String(i + 1).padStart(2, "0");
+    numWrap.appendChild(num);
+
+    const info = document.createElement("span");
+    info.className = "station-info";
+    info.innerHTML = '<span class="station-icon">' + (t.icon || "") + '</span><span class="station-title">' + t.title + '</span>';
+
+    btn.appendChild(numWrap);
+    btn.appendChild(info);
     btn.onclick = () => {
       currentKey = t.key;
       renderTopicList();
@@ -651,32 +1067,43 @@ function renderTopicList() {
     };
     el.appendChild(btn);
   });
+
+  const cta = document.createElement("div");
+  cta.className = "rail-cta";
+  cta.innerHTML =
+    '<p class="rail-cta-label">ขั้นตอนสุดท้าย</p>' +
+    '<p>อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ</p>' +
+    '<a href="ai-safety-quiz.html" target="_blank" rel="noopener">ไปทำแบบทดสอบ →</a>';
   el.appendChild(cta);
 }
 
 function renderContent() {
-  const topic = TOPICS.find(t => t.key === currentKey);
+  const idx = TOPICS.findIndex(t => t.key === currentKey);
+  const topic = TOPICS[idx];
   const el = document.getElementById("content");
 
-  let videoSectionHtml = '';
+  let mediaHtml = '';
   if (topic.video) {
     const watchUrl = topic.video.replace('/embed/', '/watch?v=');
+    const langBadge = LANG_BADGES[topic.videoLang]
+      ? '<span class="lang-badge">' + LANG_BADGES[topic.videoLang] + '</span>'
+      : '';
     const creditHtml = (topic.videoTitle || topic.videoAuthor)
-      ? '<div class="video-credit">📺 ' +
+      ? '<div class="video-credit">' + langBadge +
         (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
         (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
         ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
       : '';
-    videoSectionHtml = '<div class="section-label">🎥 VDO</div><div class="video-box"><iframe src="' + topic.video + '" allowfullscreen></iframe></div>' + creditHtml;
+    mediaHtml = '<span class="section-label">🎥 วิดีโอประกอบ</span><div class="video-frame"><iframe src="' + topic.video + '" allowfullscreen loading="lazy"></iframe></div>' + creditHtml;
   } else if (topic.keyPoints && topic.keyPoints.length > 0) {
-    videoSectionHtml = '<div class="key-points"><div class="key-points-title">✨ ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+    mediaHtml = '<div class="field-notes"><div class="field-notes-title">ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
       topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
       '</ul></div>';
   }
 
   let imagesHtml = '';
   if (topic.images && topic.images.length > 0) {
-    imagesHtml = '<div class="section-label" style="margin-top:20px">ภาพประกอบเพิ่มเติม</div><div class="image-grid">' +
+    imagesHtml = '<span class="section-label" style="margin-top:20px">ภาพประกอบเพิ่มเติม</span><div class="image-grid">' +
       topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
       '</div>';
   }
@@ -684,9 +1111,9 @@ function renderContent() {
   const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
   const paraHtml = paragraphs.map(renderParagraph);
   if (topic.flow && topic.flow.length > 0) {
-    const flowHtml = '<div class="flow">' + topic.flow.map((step, i) =>
-      '<div class="flow-step"><span class="flow-icon">' + step.icon + '</span><span class="flow-label">' + step.label + '</span></div>' +
-      (i < topic.flow.length - 1 ? '<span class="flow-arrow">→</span>' : '')
+    const flowHtml = '<div class="flow-strip">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-step-idx">STEP ' + (i + 1) + '</span><span class="flow-glyph">' + step.icon + '</span><span class="flow-text">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-connector">→</span>' : '')
     ).join('') + '</div>';
     paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
   }
@@ -695,16 +1122,20 @@ function renderContent() {
     : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
 
   const linkHtml = topic.link
-    ? '<a class="ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจากหน่วยงานทางการ →</a>'
+    ? '<a class="sheet-ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจากหน่วยงานทางการ →</a>'
     : '';
 
   el.innerHTML =
-    '<h2>' + topic.title + '</h2>' +
-    videoSectionHtml +
-    '<div class="section-label">คำบรรยายสรุป (ภาษาไทย)</div>' + textHtml + linkHtml +
+    '<div class="sheet-head"><span class="sheet-ref">หัวข้อที่ ' + String(idx + 1).padStart(2, '0') + ' / ' + TOPICS.length + '</span><h2>' + topic.title + '</h2></div>' +
+    renderHeroIllustration(topic, idx) +
+    mediaHtml +
+    '<span class="section-label">คำบรรยายสรุป</span>' + textHtml + linkHtml +
     imagesHtml;
+
+  el.scrollIntoView === undefined || window.innerWidth < 861 ? null : null;
 }
 
+document.getElementById("statTopics").textContent = TOPICS.length;
 renderTopicList();
 renderContent();
 </script>
