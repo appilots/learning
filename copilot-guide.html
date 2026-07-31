@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน Microsoft Copilot ร่วมกับ Word, Excel, PowerPoint และ Outlook</title>
+<style>
+  :root {
+    --ink: #1b1420;
+    --ink-soft: #7a7186;
+    --paper: #fdf3e4;
+    --surface: #ffffff;
+    --line: #ecdcc4;
+    --accent: #e2841f;
+    --accent-deep: #a85e12;
+    --accent-soft: #ffe0ad;
+    --steel: #1f7fc4;
+    --steel-soft: #cdecfb;
+    --tip: var(--steel);
+    --tip-soft: var(--steel-soft);
+    --warn: #e0473a;
+    --warn-soft: #ffdcd6;
+    --howto: #12a389;
+    --howto-soft: #cdf5ea;
+    --example: #9a4fd1;
+    --example-soft: #f0ddfc;
+    --ok: #1c9d5c;
+    --ok-soft: #d1f5e0;
+    --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
+    --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, monospace;
+    --sans: "Noto Sans Thai", "Sarabun", -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f3ecf7;
+      --ink-soft: #b7a9c4;
+      --paper: #1e1726;
+      --surface: #241c30;
+      --line: #3a2e46;
+      --accent: #f2a63f;
+      --accent-deep: #ffc06b;
+      --accent-soft: #3a2a12;
+      --steel: #5cb2f0;
+      --steel-soft: #16324a;
+      --warn: #f0796a;
+      --warn-soft: #3c1c1a;
+      --howto: #4fd6bb;
+      --howto-soft: #0f342c;
+      --example: #c795f0;
+      --example-soft: #33224a;
+      --ok: #5ce09a;
+      --ok-soft: #103a26;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
+      --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
+    --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
+    --steel: #5cb2f0; --steel-soft: #16324a;
+    --warn: #f0796a; --warn-soft: #3c1c1a;
+    --howto: #4fd6bb; --howto-soft: #0f342c;
+    --example: #c795f0; --example-soft: #33224a;
+    --ok: #5ce09a; --ok-soft: #103a26;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
+    --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
+  }
+  :root[data-theme="light"] {
+    --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
+    --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
+    --steel: #1f7fc4; --steel-soft: #cdecfb;
+    --warn: #e0473a; --warn-soft: #ffdcd6;
+    --howto: #12a389; --howto-soft: #cdf5ea;
+    --example: #9a4fd1; --example-soft: #f0ddfc;
+    --ok: #1c9d5c; --ok-soft: #d1f5e0;
+    --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
+    --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  ::selection { background: var(--accent-soft); color: var(--accent-deep); }
+
+  .frame { max-width: 1680px; margin: 0 auto; padding: 32px clamp(20px, 3.5vw, 64px) 64px; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    border-bottom: 2px solid var(--ink);
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 22px 24px 22px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+  }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .brand-code { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--accent-deep); font-weight: 700; text-transform: uppercase; }
+  .brand-doc { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--ink-soft); margin-top: 2px; }
+  .masthead-stats { display: flex; gap: 18px; margin: 0; }
+  .masthead-stats > div { text-align: right; }
+  .masthead-stats dt { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin: 0; }
+  .masthead-stats dd { font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin: 0; font-variant-numeric: tabular-nums; }
+  .masthead h1 { font-family: var(--sans); font-size: clamp(1.5rem, 2.6vw, 1.9rem); font-weight: 800; margin: 0 0 6px; text-wrap: balance; color: var(--steel); letter-spacing: -0.01em; }
+  .masthead-sub { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 16px; max-width: 66ch; line-height: 1.6; }
+  .masthead-note { border: 1px solid var(--line); background: var(--surface); padding: 11px 14px; font-size: 0.78rem; line-height: 1.65; color: var(--ink-soft); }
+  .masthead-note strong { color: var(--ink); }
+
+  .body-grid { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; }
+
+  /* ---------- Rail ---------- */
+  .rail {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    padding: 10px;
+    box-shadow: var(--shadow);
+  }
+  .station {
+    position: relative; display: flex; align-items: flex-start; gap: 12px;
+    text-align: left; padding: 9px 12px 9px 4px; border: none; background: transparent;
+    cursor: pointer; color: var(--ink); font-family: var(--sans);
+    transition: background-color 0.12s ease;
+  }
+  .station:hover { background: var(--paper); }
+  .station-num-wrap { position: relative; flex: 0 0 30px; height: 30px; }
+  .station-num-wrap::before {
+    content: ""; position: absolute; left: 50%; top: -6px; bottom: -6px; width: 1.5px;
+    background: var(--line); transform: translateX(-50%); z-index: 0;
+  }
+  .station:first-of-type .station-num-wrap::before { top: 50%; }
+  .station:last-of-type .station-num-wrap::before { bottom: 50%; }
+  .station-num {
+    position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%;
+    border: 1.5px solid var(--line); background: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 700; color: var(--ink-soft);
+    transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  }
+  .station-info { display: flex; align-items: flex-start; gap: 8px; min-width: 0; padding-top: 1px; }
+  .station-icon { font-size: 1rem; flex-shrink: 0; }
+  .station-title { display: block; font-size: 0.84rem; font-weight: 700; line-height: 1.4; color: var(--steel); }
+  .station.active .station-num { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .station.active .station-title { color: var(--accent-deep); }
+  .station:hover .station-title { color: var(--accent-deep); }
+  .station:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  /* ---------- Sheet ---------- */
+  .sheet { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 30px 32px 34px; min-width: 0; }
+  .sheet-head { margin-bottom: 6px; }
+  .sheet-ref { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--accent-deep); text-transform: uppercase; margin-bottom: 7px; font-weight: 700; }
+  .sheet-head h2 { font-family: var(--sans); font-size: 1.42rem; font-weight: 800; margin: 0 0 20px; color: var(--steel); text-wrap: balance; line-height: 1.3; }
+
+  .section-label { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); display: block; margin: 24px 0 10px; }
+  .section-label:first-of-type { margin-top: 0; }
+
+  .field-notes { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--paper); padding: 15px 17px; margin-bottom: 22px; }
+  .field-notes-title { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-deep); margin-bottom: 9px; font-weight: 700; }
+  .field-notes ul { margin: 0; padding-left: 20px; }
+  .field-notes li { font-size: 0.9rem; line-height: 1.65; color: var(--ink); margin-bottom: 6px; }
+  .field-notes li:last-child { margin-bottom: 0; }
+
+  /* ---------- Hero illustration ---------- */
+  .hero-illo { position: relative; width: 100%; height: clamp(150px, 20vw, 210px); border: 1px solid var(--line); overflow: hidden; margin-bottom: 22px; background: var(--paper); }
+  .hero-illo svg { width: 100%; height: 100%; display: block; }
+  .hero-illo-caption { position: absolute; left: 12px; bottom: 8px; font-family: var(--mono); font-size: 0.66rem; color: var(--ink-soft); background: var(--surface); padding: 2px 8px; border: 1px solid var(--line); max-width: calc(100% - 24px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hero-illo.tone-accent { background: var(--accent-soft); }
+  .hero-illo.tone-steel { background: var(--steel-soft); }
+  .hero-illo.tone-warn { background: var(--warn-soft); }
+  .hero-illo.tone-howto { background: var(--howto-soft); }
+  .hero-illo.tone-example { background: var(--example-soft); }
+
+  /* ---------- Video ---------- */
+  .video-frame { aspect-ratio: 16 / 9; width: 100%; border: 1px solid var(--line); background: var(--paper); overflow: hidden; margin-bottom: 12px; }
+  .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video-credit { font-size: 0.78rem; color: var(--ink-soft); margin: 0 0 22px; padding: 9px 12px; background: var(--paper); border: 1px solid var(--line); line-height: 1.65; }
+  .video-credit a { color: var(--accent-deep); text-decoration: none; font-weight: 600; }
+  .video-credit a:hover { text-decoration: underline; }
+
+  /* ---------- Text ---------- */
+  .text-block { font-family: var(--sans); font-size: 0.95rem; line-height: 1.85; color: var(--ink); max-width: 68ch; }
+  .text-block p { margin: 0 0 15px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block strong { color: var(--accent-deep); font-weight: 700; }
+  .text-block code { font-family: var(--mono); background: var(--paper); color: var(--accent-deep); border: 1px solid var(--line); padding: 1px 6px; font-size: 0.86em; }
+
+  /* ---------- Flow strip ---------- */
+  .flow-strip { display: flex; align-items: flex-start; gap: 0; margin: 4px 0 24px; padding: 15px 2px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .flow-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 8px; min-width: 0; }
+  .flow-step-idx { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+  .flow-glyph { font-size: 1.2rem; line-height: 1; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--paper); border: 1.5px solid var(--line); }
+  .flow-text { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.45; }
+  .flow-connector { align-self: center; color: var(--line); font-family: var(--mono); font-size: 1rem; padding-top: 22px; flex: 0 0 auto; }
+
+  /* ---------- Notes (callouts) ---------- */
+  .note { display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; border-left: 3px solid var(--tip); background: var(--tip-soft); margin: 0 0 13px; font-size: 0.92rem; line-height: 1.78; }
+  .note:last-child { margin-bottom: 0; }
+  .note-icon { flex-shrink: 0; }
+  .note-label { font-weight: 700; }
+  .note-tip { border-color: var(--tip); background: var(--tip-soft); } .note-tip .note-label { color: var(--tip); }
+  .note-warn { border-color: var(--warn); background: var(--warn-soft); } .note-warn .note-label { color: var(--warn); }
+  .note-howto { border-color: var(--howto); background: var(--howto-soft); } .note-howto .note-label { color: var(--howto); }
+  .note-example { border-color: var(--example); background: var(--example-soft); } .note-example .note-label { color: var(--example); }
+
+  .sheet-ref-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; padding: 9px 13px; border: 1px solid var(--line); font-size: 0.82rem; font-family: var(--mono); color: var(--accent-deep); text-decoration: none; }
+  .sheet-ref-link:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .sheet-ref-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  @media (max-width: 860px) {
+    .body-grid { grid-template-columns: 1fr; }
+    .rail { flex-direction: row; overflow-x: auto; gap: 4px; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
+    .station { flex: 0 0 auto; padding: 8px 10px; }
+    .station-num-wrap::before { display: none; }
+    .station-title { white-space: nowrap; }
+    .sheet { padding: 22px 18px 26px; }
+    .masthead-stats { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <header class="masthead">
+    <div class="masthead-top">
+      <div>
+        <span class="brand-code">ATTG · DIGITAL SKILLS</span>
+        <span class="brand-doc">DOC. COPILOT-GUIDE · REV. 2026</span>
+      </div>
+      <dl class="masthead-stats">
+        <div><dt>หัวข้อ</dt><dd id="statTopics">12</dd></div>
+        <div><dt>แอปที่ครอบคลุม</dt><dd>4</dd></div>
+      </dl>
+    </div>
+    <h1>🤖 คู่มือการใช้งาน Microsoft Copilot ใน Word, Excel, PowerPoint และ Outlook</h1>
+    <p class="masthead-sub">รวมวิธีใช้ Copilot ช่วยงานประจำวันให้เร็วขึ้น ตั้งแต่ร่างเอกสาร วิเคราะห์ข้อมูล สร้างสไลด์ ไปจนถึงจัดการอีเมล — อ่านตามลำดับสถานีด้านซ้าย หรือข้ามไปหัวข้อที่ตรงกับงานที่ทำอยู่ได้เลย</p>
+    <div class="masthead-note">
+      🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอที่แนบมาคัดเลือกจากช่อง YouTube ที่เผยแพร่ความรู้สาธารณะเป็นภาษาไทยทั้งหมด และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น ลิขสิทธิ์เนื้อหาวิดีโอเป็นของเจ้าของช่องต้นฉบับ มีชื่อช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิป
+    </div>
+  </header>
+
+  <div class="body-grid">
+    <nav class="rail" id="topicList" aria-label="สถานีหัวข้อในคู่มือ"></nav>
+    <main class="sheet" id="content"></main>
+  </div>
+
+</div>
+
+<script>
+const TOPICS = [
+  {
+    key: "overview",
+    title: "ภาพรวม: Microsoft 365 Copilot คืออะไร",
+    icon: "🤖",
+    flow: [
+      { icon: "🏢", label: "ผู้ช่วย AI ที่ฝังอยู่ในแอป Office ที่ใช้ทุกวัน" },
+      { icon: "💬", label: "สั่งงานด้วยภาษาพูดธรรมดา (Prompt)" },
+      { icon: "⚡", label: "ลดเวลาทำงานซ้ำๆ ได้จริง" }
+    ],
+    video: "https://www.youtube.com/embed/VPzXy4880tg",
+    videoTitle: "วิธีใช้ Copilot เป็นใน 15 นาที",
+    videoAuthor: "หมากดิจิทัล - Mark Digital",
+    images: [],
+    text: [
+      "Microsoft 365 Copilot คือผู้ช่วย AI ที่ฝังตัวอยู่ในแอปพลิเคชัน Microsoft 365 ที่ใช้งานกันอยู่แล้ว ไม่ว่าจะเป็น Word, Excel, PowerPoint, Outlook หรือ Teams โดยทำงานผ่านการอ่านและทำความเข้าใจไฟล์/อีเมล/ข้อมูลที่เรากำลังเปิดอยู่ ร่วมกับโมเดลภาษาขนาดใหญ่ (Large Language Model) เพื่อช่วยร่าง แก้ไข สรุป และวิเคราะห์งานต่างๆ แทนที่จะต้องเริ่มทำทุกอย่างจากหน้าว่างเปล่า",
+      "วิธีใช้งาน: Copilot จะปรากฏเป็นไอคอนหรือปุ่มเล็กๆ อยู่ในแถบเครื่องมือของแต่ละแอป (มักอยู่มุมขวาบน) เมื่อกดเปิดจะมีช่องให้พิมพ์คำสั่ง (Prompt) เป็นภาษาพูดธรรมดา เช่น 'สรุปเอกสารนี้เป็น 5 ข้อ' หรือ 'สร้างตารางเปรียบเทียบยอดขายแต่ละเดือน' ระบบจะประมวลผลและแสดงผลลัพธ์ให้ตรวจสอบก่อนนำไปใช้จริงเสมอ",
+      "หมายเหตุ: การใช้งาน Copilot ในองค์กรต้องมีสิทธิ์การใช้งาน (License) ที่บริษัทจัดสรรให้เท่านั้น และจะทำงานเฉพาะกับไฟล์/ข้อมูลที่บัญชีองค์กรของเรามีสิทธิ์เข้าถึงอยู่แล้ว จึงปลอดภัยกว่าการคัดลอกข้อมูลไปวางใน AI สาธารณะภายนอก"
+    ]
+  },
+  {
+    key: "prompt-technique",
+    title: "เทคนิคเขียน Prompt ภาษาไทยให้ Copilot เข้าใจ",
+    icon: "✍️",
+    flow: [
+      { icon: "🎯", label: "บอกเป้าหมายให้ชัดเจน" },
+      { icon: "📋", label: "ใส่บริบท/แหล่งข้อมูลประกอบ" },
+      { icon: "🔁", label: "ปรับคำสั่งซ้ำจนได้ผลลัพธ์ที่ใช่" }
+    ],
+    video: "https://www.youtube.com/embed/EUemkWSIYQc",
+    videoTitle: "EP.168 - ใช้ #Prompt ภาษาไทย Microsoft 365 Copilot สั่ง Word/Excel/PowerPoint/Teams/Outlook",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "คำสั่งหรือ Prompt ที่เขียนดี คือกุญแจสำคัญที่ทำให้ Copilot ให้ผลลัพธ์ตรงใจตั้งแต่ครั้งแรกๆ หลักการเขียน Prompt ที่ดีมีองค์ประกอบหลักคือ เป้าหมาย (อยากได้อะไร) บริบท (ใครคือผู้อ่าน/ใช้งานผลลัพธ์นี้) แหล่งข้อมูล (ให้ Copilot อ้างอิงจากไฟล์ไหน) และรูปแบบผลลัพธ์ที่ต้องการ (สรุปเป็นข้อ, ตาราง, อีเมลทางการ ฯลฯ)",
+      "วิธีใช้งาน: แทนที่จะพิมพ์สั้นๆ ว่า 'เขียนอีเมล' ให้ลองเขียนแบบเจาะจงกว่า เช่น 'ร่างอีเมลแจ้งเลื่อนประชุมทีมขายจากวันพฤหัสเป็นวันศุกร์ โทนสุภาพเป็นทางการ ความยาวไม่เกิน 5 บรรทัด' หรือใช้สัญลักษณ์ / นำหน้าคำสั่งด่วน เช่น /สรุป หรือ /เขียนใหม่ ในบางแอปเพื่อเรียกฟังก์ชันสำเร็จรูปได้เร็วขึ้น",
+      "เคล็ดลับ: หากผลลัพธ์แรกยังไม่ตรงใจ ไม่ต้องเริ่มคำสั่งใหม่ทั้งหมด ให้พิมพ์ปรับแก้ต่อได้เลย เช่น 'สั้นลงอีกครึ่งหนึ่ง' หรือ 'เปลี่ยนโทนให้เป็นกันเองมากขึ้น' Copilot จะปรับจากคำตอบเดิมให้ ซึ่งเร็วกว่าการเขียน Prompt ยาวๆ ใหม่ทุกครั้ง"
+    ]
+  },
+  {
+    key: "word-draft",
+    title: "Copilot ใน Word: ร่างและสรุปเอกสาร",
+    icon: "📄",
+    flow: [
+      { icon: "📝", label: "สั่งร่างเอกสารจากหัวข้อสั้นๆ" },
+      { icon: "📚", label: "อ้างอิงไฟล์อื่นประกอบการเขียน" },
+      { icon: "📑", label: "สรุปเอกสารยาวให้เป็นประเด็นสั้นๆ" }
+    ],
+    video: "https://www.youtube.com/embed/L-BVfuKRzpw",
+    videoTitle: "บทที่ 3 | จัดทำและสรุปเอกสารด้วย Microsoft 365 Copilot ใน Word",
+    videoAuthor: "Microsoft Thailand",
+    images: [],
+    text: [
+      "ใน Word, Copilot ช่วยได้ตั้งแต่การร่างเอกสารใหม่จากศูนย์ ไปจนถึงการสรุปเอกสารที่มีอยู่แล้วให้กระชับขึ้น เมื่อเปิดเอกสารเปล่า จะมีกล่อง Copilot ขึ้นมาให้พิมพ์หัวข้อและรายละเอียดคร่าวๆ เช่น 'ร่างข้อเสนอโครงการปรับปรุงกระบวนการ QC สำหรับสายการผลิต A ความยาว 1 หน้า' ระบบจะสร้างโครงร่างพร้อมเนื้อหาเริ่มต้นให้ทันที",
+      "วิธีใช้งาน: หากต้องการให้ Copilot อ้างอิงเนื้อหาจากไฟล์อื่น ให้พิมพ์ / ตามด้วยชื่อไฟล์ในกล่องคำสั่ง (เช่น /รายงานประจำเดือนมิถุนายน) เพื่อดึงข้อมูลจากไฟล์นั้นมาใช้ประกอบการร่างโดยตรง ส่วนการสรุปเอกสารที่เปิดอยู่ ให้เลือกคำสั่ง 'สรุปเอกสารนี้' จากเมนู Copilot จะได้ประเด็นสำคัญแบบย่อไว้ใช้นำเสนอหรือส่งต่อได้ทันที",
+      "ตัวอย่าง: 'ช่วยสรุปรายงานนี้ให้เหลือ 5 ประเด็นหลัก เน้นตัวเลขที่เปลี่ยนแปลงจากเดือนก่อน' เป็น Prompt ที่ใช้ได้ผลดีเมื่อต้องส่งสรุปให้ผู้บริหารที่ไม่มีเวลาอ่านรายงานฉบับเต็ม"
+    ]
+  },
+  {
+    key: "word-edit",
+    title: "Copilot ใน Word: แก้ไขและปรับปรุงงานเขียน",
+    icon: "✏️",
+    flow: [
+      { icon: "🖊️", label: "เลือกข้อความที่ต้องการแก้" },
+      { icon: "🎨", label: "สั่งปรับโทน/ความยาว/ความชัดเจน" },
+      { icon: "✅", label: "ตรวจทานก่อนยอมรับการเปลี่ยนแปลง" }
+    ],
+    video: "https://www.youtube.com/embed/JvwKfFpWKQk",
+    videoTitle: "วิธีใช้งาน Copilot ใน Microsoft Word ทำอะไรได้บ้าง",
+    videoAuthor: "9Expert",
+    images: [],
+    text: [
+      "นอกจากร่างเอกสารใหม่ Copilot ยังช่วยปรับปรุงข้อความที่เขียนไว้แล้วได้ดีมาก โดยการไฮไลต์ข้อความที่ต้องการแก้ไข แล้วเลือกคำสั่งจากเมนู Copilot ที่ปรากฏขึ้น เช่น เขียนใหม่ (Rewrite), ปรับให้สั้นลง, ปรับให้ยาวขึ้น, หรือเปลี่ยนโทนการเขียน",
+      "วิธีใช้งาน: หลังไฮไลต์ข้อความ จะเห็นไอคอน Copilot ลอยขึ้นมาใกล้ๆ ข้อความนั้น กดแล้วเลือกรูปแบบการปรับที่ต้องการ เช่น 'ทางการมากขึ้น' สำหรับเอกสารส่งลูกค้า หรือ 'กระชับขึ้น' สำหรับสรุปผู้บริหาร ระบบจะแสดงข้อความใหม่ให้เทียบกับต้นฉบับก่อนกดยอมรับ",
+      "ข้อควรระวัง: แม้ Copilot จะช่วยปรับภาษาได้ดี แต่ควรอ่านทวนทุกครั้งก่อนยอมรับการแก้ไข โดยเฉพาะเอกสารที่มีตัวเลข วันที่ หรือชื่อเฉพาะ เพราะ Copilot อาจปรับถ้อยคำจนความหมายบางจุดคลาดเคลื่อนจากที่ตั้งใจไว้โดยไม่ได้ตรวจสอบข้อเท็จจริง"
+    ]
+  },
+  {
+    key: "excel-formula",
+    title: "Copilot ใน Excel: วิเคราะห์และรายงานผลข้อมูล",
+    icon: "📊",
+    flow: [
+      { icon: "📥", label: "เตรียมข้อมูลให้อยู่ในรูปแบบตาราง (Table)" },
+      { icon: "💬", label: "ถามคำถามเกี่ยวกับข้อมูลเป็นภาษาพูด" },
+      { icon: "📈", label: "รับสูตร/บทวิเคราะห์ที่อธิบายได้" }
+    ],
+    video: "https://www.youtube.com/embed/fhqMsjf9BXA",
+    videoTitle: "การใช้ Copilot เพื่อวิเคราะห์และรายงานผลข้อมูลใน Excel",
+    videoAuthor: "FutureSkill",
+    images: [],
+    text: [
+      "Copilot ใน Excel ช่วยวิเคราะห์ข้อมูลได้โดยไม่ต้องจำสูตรซับซ้อน เพียงแปลงช่วงข้อมูลให้เป็น Table ก่อน (Insert > Table) แล้วเปิด Copilot เพื่อถามคำถามเกี่ยวกับข้อมูลนั้นเป็นภาษาพูดธรรมดา เช่น 'เดือนไหนยอดขายสูงสุด' หรือ 'หาค่าเฉลี่ยยอดขายแยกตามภาค'",
+      "วิธีใช้งาน: Copilot จะตอบกลับมาพร้อมคำอธิบายและบางครั้งจะเสนอสูตรหรือสร้างคอลัมน์/กราฟใหม่ให้เลย เช่น พิมพ์ 'ไฮไลต์แถวที่ยอดขายลดลงจากเดือนก่อนด้วยสีแดง' Copilot จะสร้างกฎการจัดรูปแบบตามเงื่อนไข (Conditional Formatting) ให้อัตโนมัติ",
+      "หมายเหตุ: Copilot ใน Excel ทำงานได้ดีที่สุดกับข้อมูลที่มีโครงสร้างชัดเจน (หัวตารางเป็นข้อความ ไม่มีเซลล์รวม/merge cell) หากข้อมูลดิบยังไม่เป็นระเบียบ ควรจัดรูปแบบให้เป็น Table ที่สะอาดก่อนเสมอ เพื่อให้ผลวิเคราะห์แม่นยำ"
+    ]
+  },
+  {
+    key: "excel-insights",
+    title: "Copilot ใน Excel: ตัวอย่างการวิเคราะห์ข้อมูลจริง",
+    icon: "📉",
+    flow: [
+      { icon: "🗂️", label: "เลือกชุดข้อมูลที่ต้องการเจาะลึก" },
+      { icon: "🔍", label: "ให้ Copilot ชี้แนวโน้ม/ความผิดปกติ" },
+      { icon: "📤", label: "สร้างกราฟสรุปพร้อมนำเสนอ" }
+    ],
+    keyPoints: [
+      "Copilot สามารถช่วยสร้าง PivotTable และกราฟสรุปจากข้อมูลดิบได้โดยไม่ต้องตั้งค่าเองทั้งหมด เพียงอธิบายสิ่งที่อยากเห็นเป็นประโยค เช่น 'สรุปจำนวนพนักงานแยกตามแผนกและอายุงาน'",
+      "เหมาะกับงาน HR, การเงิน, หรือฝ่ายผลิตที่ต้องสรุปตัวเลขจำนวนมากให้ผู้บริหารเข้าใจง่ายในเวลาสั้นๆ",
+      "ควรตรวจสอบตัวเลขสำคัญที่ Copilot สรุปมาเทียบกับข้อมูลต้นฉบับอย่างน้อย 1-2 จุดก่อนนำไปใช้รายงานจริงเสมอ"
+    ],
+    images: [],
+    text: [
+      "การวิเคราะห์ข้อมูลบุคลากรหรือข้อมูลธุรกิจจำนวนมาก มักใช้เวลานานหากทำด้วยมือ Copilot ช่วยร่นระยะเวลาส่วนนี้ได้มาก โดยเฉพาะงานที่ต้องสรุปข้อมูลซ้ำๆ ทุกเดือน เช่น รายงานอัตราการลาออก หรือสรุปยอดขายรายภาค",
+      "วิธีใช้งาน: ลองถามคำถามเชิงเปรียบเทียบ เช่น 'แผนกไหนมีอัตราการลาออกสูงที่สุดในไตรมาสนี้เทียบกับไตรมาสก่อน' Copilot จะช่วยคำนวณและอธิบายแนวโน้มเป็นภาษาที่เข้าใจง่าย พร้อมเสนอให้สร้างกราฟประกอบได้ทันที",
+      "แนวทางที่ดี: ใช้ Copilot เป็นจุดเริ่มต้นในการหาแนวโน้ม (Pattern) ที่น่าสนใจก่อน แล้วค่อยตรวจสอบตัวเลขสำคัญด้วยตนเองอีกครั้งก่อนนำเสนอ โดยเฉพาะข้อมูลที่จะใช้ประกอบการตัดสินใจสำคัญ"
+    ],
+    video: "https://www.youtube.com/embed/e7tgJCi1afg",
+    videoTitle: "ตัวอย่าง การใช้ AI วิเคราะห์ Excel ข้อมูลพนักงานสำหรับ HR | Copilot",
+    videoAuthor: "Fusion Solution"
+  },
+  {
+    key: "powerpoint-create",
+    title: "Copilot ใน PowerPoint: สร้างสไลด์นำเสนอจากศูนย์",
+    icon: "🖥️",
+    flow: [
+      { icon: "💡", label: "บอกหัวข้อและกลุ่มผู้ฟัง" },
+      { icon: "🎬", label: "รับร่างสไลด์พร้อมโครงเรื่อง" },
+      { icon: "🖼️", label: "ปรับแต่งเนื้อหาและรูปภาพต่อ" }
+    ],
+    video: "https://www.youtube.com/embed/8CqLXwI_ttA",
+    videoTitle: "พามารู้จัก Copilot ใน PowerPoint AI ช่วยทำสไลด์!",
+    videoAuthor: "PowerPoint Boy",
+    images: [],
+    text: [
+      "Copilot ใน PowerPoint สร้างชุดสไลด์เริ่มต้นให้ได้จากคำอธิบายสั้นๆ เพียงพิมพ์หัวข้อ จุดประสงค์ และกลุ่มผู้ฟัง เช่น 'สร้างสไลด์นำเสนอผลประกอบการไตรมาส 2 ให้ผู้บริหารระดับสูง 8 สไลด์ โทนเป็นทางการ' ระบบจะสร้างโครงเรื่องพร้อมเนื้อหาเริ่มต้นและดีไซน์ที่เหมาะสมให้ทันที",
+      "วิธีใช้งาน: หากมีเอกสาร Word หรือรายงานอยู่แล้ว สามารถสั่ง 'สร้างสไลด์นำเสนอจากไฟล์นี้' แทนการเริ่มจากศูนย์ได้ Copilot จะดึงประเด็นสำคัญจากเอกสารมาจัดเป็นสไลด์ให้อัตโนมัติ ซึ่งเร็วกว่าการคัดลอกเนื้อหาไปวางเองทีละสไลด์มาก",
+      "เคล็ดลับ: สไลด์ที่ได้จาก Copilot เป็นจุดเริ่มต้นที่ดี แต่ควรปรับเนื้อหาให้ตรงกับข้อมูลจริงของบริษัทเสมอ โดยเฉพาะตัวเลขและชื่อเฉพาะ เพราะ Copilot อาจใส่ตัวอย่างข้อมูลสมมติมาให้ในบางจุดที่ไม่มีข้อมูลอ้างอิงชัดเจน"
+    ]
+  },
+  {
+    key: "powerpoint-design",
+    title: "Copilot ใน PowerPoint: ปรับดีไซน์และสรุปเนื้อหา",
+    icon: "🎨",
+    flow: [
+      { icon: "🖌️", label: "ขอไอเดียดีไซน์ใหม่สำหรับสไลด์เดิม" },
+      { icon: "✂️", label: "สรุปสไลด์ที่ยาวให้กระชับ" },
+      { icon: "🗣️", label: "เตรียมสคริปต์พูดประกอบสไลด์" }
+    ],
+    video: "https://www.youtube.com/embed/LFzOw2wogRc",
+    videoTitle: "การใช้ Copilot กับงานนำเสนอใน Microsoft PowerPoint",
+    videoAuthor: "FutureSkill",
+    images: [],
+    text: [
+      "หากมีสไลด์อยู่แล้วแต่ดีไซน์ยังดูธรรมดา Copilot ช่วยเสนอไอเดียการจัดวางใหม่ให้เลือกได้หลายแบบโดยไม่ต้องออกแบบเอง เพียงเลือกสไลด์แล้วสั่ง 'เสนอดีไซน์ใหม่ให้สไลด์นี้' ระบบจะแสดงตัวเลือกเลย์เอาต์ให้เลือกทันที",
+      "วิธีใช้งาน: สำหรับสไลด์ที่มีข้อความแน่นเกินไป ให้สั่ง 'สรุปสไลด์นี้ให้เหลือประเด็นหลัก 3 ข้อ' Copilot จะช่วยตัดทอนให้กระชับอ่านง่ายขึ้น เหมาะกับการนำเสนอสดที่ผู้ฟังต้องอ่านทันในเวลาสั้นๆ นอกจากนี้ยังสามารถสั่งให้ช่วยร่างสคริปต์พูดประกอบแต่ละสไลด์ได้ด้วย",
+      "ตัวอย่าง: 'ช่วยเขียนสคริปต์พูดสำหรับสไลด์นี้ ความยาวประมาณ 30 วินาที น้ำเสียงมั่นใจแต่เป็นกันเอง' เป็นคำสั่งที่ใช้ได้ผลดีเมื่อต้องเตรียมพรีเซนต์แบบกะทันหัน"
+    ]
+  },
+  {
+    key: "outlook-email",
+    title: "Copilot ใน Outlook: สร้าง ตอบ และสรุปอีเมล",
+    icon: "📧",
+    flow: [
+      { icon: "📨", label: "สั่งร่างอีเมลใหม่จากหัวข้อสั้นๆ" },
+      { icon: "💬", label: "ให้ Copilot ช่วยร่างคำตอบอีเมล" },
+      { icon: "📜", label: "สรุปอีเมล/เธรดยาวให้อ่านเร็ว" }
+    ],
+    video: "https://www.youtube.com/embed/yPCEEHSsgQo",
+    videoTitle: "EP.77 - Copilot in Outlook: AI ช่วยสร้าง-ตอบ-สรุปอีเมล!",
+    videoAuthor: "TheCITIZEN",
+    images: [],
+    text: [
+      "ใน Outlook, Copilot ช่วยได้ทั้งตอนร่างอีเมลใหม่ ตอบอีเมลที่ได้รับ และสรุปอีเมลเธรดยาวๆ ที่มีการโต้ตอบไปมาหลายรอบ เมื่อกำลังจะเขียนอีเมลใหม่ จะมีปุ่ม Copilot ให้กดเพื่อพิมพ์สิ่งที่ต้องการสื่อสารแบบคร่าวๆ แล้วระบบจะร่างอีเมลฉบับเต็มให้",
+      "วิธีใช้งาน: เมื่อเปิดอีเมลที่ได้รับ จะมีตัวเลือก 'สรุปอีเมลนี้' ให้กดเพื่อดูใจความสำคัญแบบย่อโดยไม่ต้องอ่านทั้งหมด มีประโยชน์มากกับเธรดอีเมลยาวๆ ที่มีคนตอบไปมาหลายคน ส่วนการตอบกลับ สามารถสั่ง Copilot ให้ 'ร่างคำตอบตกลงเข้าร่วมประชุม แต่ขอเลื่อนเป็นบ่ายแทน' ได้ทันทีโดยไม่ต้องพิมพ์เอง",
+      "ข้อควรระวัง: ก่อนกดส่งอีเมลที่ Copilot ร่างให้ ควรอ่านทวนเนื้อหาทุกครั้ง โดยเฉพาะอีเมลที่ส่งถึงลูกค้าหรือผู้บริหาร เพราะ Copilot อาจตีความเจตนาของเราคลาดเคลื่อน หรือใช้โทนที่ไม่เหมาะสมกับสถานการณ์บางกรณี"
+    ]
+  },
+  {
+    key: "cross-app",
+    title: "ใช้ Copilot เชื่อมโยงข้อมูลข้ามแอป Office",
+    icon: "🔗",
+    flow: [
+      { icon: "📂", label: "มีข้อมูล/ไฟล์กระจายอยู่หลายแอป" },
+      { icon: "🧩", label: "สั่ง Copilot ดึงข้อมูลข้ามไฟล์มารวมกัน" },
+      { icon: "🚀", label: "ได้งานใหม่โดยไม่ต้องคัดลอกเอง" }
+    ],
+    video: "https://www.youtube.com/embed/e09vjS_ngTU",
+    videoTitle: "Microsoft 365 Copilot เอา AI ไปใส่ในออฟฟิศทุกตัว ทั้ง Word, Excel, PowerPoint, Outlook, Teams",
+    videoAuthor: "Peesamac",
+    images: [],
+    text: [
+      "จุดแข็งอีกอย่างของ Microsoft 365 Copilot คือความสามารถในการเชื่อมโยงข้อมูลข้ามแอปพลิเคชัน เพราะทุกแอปใช้ระบบ AI เดียวกันและเข้าถึงไฟล์ในองค์กรชุดเดียวกันผ่าน Microsoft Graph ทำให้สั่งงานข้ามแอปได้โดยไม่ต้องคัดลอกข้อมูลไปมาเอง",
+      "วิธีใช้งาน: ตัวอย่างเช่น เปิด PowerPoint แล้วสั่ง 'สร้างสไลด์นำเสนอจากรายงาน Word ที่ชื่อ [ไฟล์] และข้อมูลยอดขายใน Excel ที่ชื่อ [ไฟล์]' Copilot จะดึงเนื้อหาจากทั้งสองไฟล์มาจัดเป็นสไลด์เดียวกันให้ หรือใน Outlook อาจสั่ง 'ร่างอีเมลสรุปโครงการนี้ โดยอ้างอิงจากเอกสารสรุปโครงการใน Word' ได้เช่นกัน",
+      "หมายเหตุ: ฟีเจอร์นี้จะดึงข้อมูลได้เฉพาะไฟล์ที่บัญชีขององค์กรเรามีสิทธิ์เข้าถึงอยู่แล้วเท่านั้น (ผ่าน OneDrive/SharePoint ขององค์กร) จึงไม่ใช่การเปิดเผยข้อมูลให้บุคคลภายนอก แต่ก็ควรตรวจสอบสิทธิ์การแชร์ไฟล์ให้เหมาะสมอยู่เสมอ"
+    ]
+  },
+  {
+    key: "limitations",
+    title: "ข้อควรระวังและข้อจำกัดของ Copilot",
+    icon: "⚠️",
+    flow: [
+      { icon: "🤔", label: "Copilot อาจตอบผิดพลาดได้เหมือน AI ทั่วไป" },
+      { icon: "🔍", label: "ตรวจทานผลลัพธ์ก่อนใช้งานจริงเสมอ" },
+      { icon: "🛡️", label: "ปฏิบัติตามแนวทาง AI Safety ของบริษัทควบคู่กัน" }
+    ],
+    keyPoints: [
+      "Copilot ใช้เทคโนโลยี Large Language Model เดียวกับ AI แชทบอทอื่นๆ จึงมีโอกาสเกิด Hallucination หรือตอบผิดพลาดอย่างมั่นใจได้เช่นกัน โดยเฉพาะตัวเลข วันที่ หรือข้อมูลที่ไม่มีอยู่ในไฟล์ต้นฉบับจริงๆ",
+      "ผลลัพธ์จาก Copilot ในเอกสาร/สไลด์/อีเมลที่จะส่งออกไปยังลูกค้าหรือผู้บริหาร ต้องผ่านการตรวจทานโดยมนุษย์ก่อนทุกครั้ง ไม่ควรกดส่ง/เผยแพร่ทันทีโดยไม่อ่านทวน",
+      "แนวทางการใช้ AI อย่างปลอดภัยที่ใช้กับ ChatGPT/Claude (เช่น ห้ามป้อนข้อมูลลับเกินความจำเป็น ตรวจสอบคำตอบก่อนใช้จริง) ยังใช้ได้กับ Copilot เช่นกัน แม้จะเป็นเครื่องมือที่บริษัทอนุมัติให้ใช้แล้วก็ตาม"
+    ],
+    images: [],
+    text: [
+      "แม้ Copilot จะเชื่อมกับข้อมูลในองค์กรและมีมาตรการความปลอดภัยที่ดีกว่า AI สาธารณะทั่วไป แต่ยังคงเป็น AI ที่สร้างคำตอบจากรูปแบบภาษาที่เรียนรู้มา ไม่ใช่ระบบที่ 'รู้จริง' ทุกอย่าง 100% จึงมีโอกาสตอบผิดพลาดหรือสรุปข้อมูลคลาดเคลื่อนได้เช่นเดียวกับ AI ตัวอื่น",
+      "ข้อควรระวัง: ห้ามนำผลลัพธ์จาก Copilot ไปใช้ในเอกสารทางการ สัญญา หรือการสื่อสารกับลูกค้าโดยไม่ตรวจทานก่อน โดยเฉพาะตัวเลข สถิติ หรือข้อมูลอ้างอิงที่สำคัญ ควรตรวจสอบย้อนกลับไปยังไฟล์ต้นฉบับเสมอว่า Copilot สรุป/คำนวณมาถูกต้องหรือไม่",
+      "แนวทางที่ดี: ปฏิบัติตามหลักการเดียวกับการใช้ AI สาธารณะอื่นๆ ตามคู่มือ AI Safety ของบริษัท เช่น ตรวจสอบความถูกต้องก่อนใช้จริง และไม่วางใจคำตอบ AI 100% แม้ Copilot จะเป็นเครื่องมือที่บริษัทอนุมัติให้ใช้แล้วก็ตาม"
+    ],
+    link: "ai-safety-guide.html"
+  },
+  {
+    key: "productivity-tips",
+    title: "เคล็ดลับเพิ่ม Productivity ในงานประจำวัน",
+    icon: "💡",
+    flow: [
+      { icon: "⏱️", label: "เริ่มจากงานที่ทำซ้ำทุกวัน/ทุกสัปดาห์" },
+      { icon: "🔂", label: "สร้าง Prompt ที่ใช้ซ้ำได้เก็บไว้" },
+      { icon: "📈", label: "วัดผลเวลาที่ประหยัดได้จริง" }
+    ],
+    video: "https://www.youtube.com/embed/KknWG2_ijqo",
+    videoTitle: "5 วิธีใช้ Microsoft Copilot สำหรับทุกตำแหน่งในออฟฟิศ",
+    videoAuthor: "Fusion Solution",
+    images: [],
+    text: [
+      "การใช้ Copilot ให้เกิดประโยชน์สูงสุด ไม่ใช่การใช้ครั้งเดียวแล้วเลิก แต่คือการหางานประจำที่ทำซ้ำๆ ทุกวันหรือทุกสัปดาห์มาให้ Copilot ช่วย เช่น สรุปอีเมลทุกเช้า, ร่างรายงานประจำสัปดาห์รูปแบบเดิมทุกครั้ง, หรือสร้างสไลด์อัปเดตความคืบหน้าโครงการ",
+      "วิธีใช้งาน: เมื่อเจอ Prompt ที่ใช้ได้ผลดีกับงานประจำ ให้บันทึกเก็บไว้ (เช่น ใน Notepad หรือเอกสารส่วนตัว) เพื่อนำมาปรับใช้ซ้ำได้เร็วขึ้นในครั้งถัดไป แทนที่จะต้องคิด Prompt ใหม่ทุกครั้ง เช่น Prompt ตายตัวสำหรับ 'สรุปยอดขายรายสัปดาห์เป็นตาราง 3 คอลัมน์: สินค้า ยอดขาย เปลี่ยนแปลง%'",
+      "เคล็ดลับ: ลองจับเวลาเปรียบเทียบงานที่เคยทำเองกับที่ใช้ Copilot ช่วย เพื่อดูว่าประหยัดเวลาไปจริงเท่าไร จะช่วยให้เห็นภาพชัดว่าควรใช้ Copilot กับงานประเภทไหนของตัวเองมากที่สุด และช่วยแบ่งปันเทคนิคที่ได้ผลให้เพื่อนร่วมทีมนำไปใช้ต่อได้ด้วย"
+    ]
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+// Custom-drawn figures (no stock photos — self-contained SVG, no licensing/hotlink risk)
+const TOPIC_ILLUSTRATIONS = {
+  overview: { tone: "accent", svg: `
+    <rect x="60" y="40" width="80" height="60" rx="16" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <circle cx="82" cy="65" r="7" style="fill:var(--accent)"/>
+    <circle cx="118" cy="65" r="7" style="fill:var(--steel)"/>
+    <line x1="80" y1="83" x2="120" y2="83" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
+    <line x1="100" y1="40" x2="100" y2="26" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+    <circle cx="100" cy="22" r="6" style="fill:var(--accent)"/>
+    <path d="M40 30 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" style="fill:var(--accent)"/>
+    <path d="M162 100 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z" style="fill:var(--steel)"/>
+  ` },
+  "prompt-technique": { tone: "steel", svg: `
+    <rect x="35" y="30" width="110" height="65" rx="14" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <polygon points="60,95 60,112 80,95" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
+    <line x1="52" y1="52" x2="128" y2="52" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="52" y1="68" x2="100" y2="68" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <rect x="112" y="60" width="8" height="20" rx="2" style="fill:var(--steel)"/>
+    <path d="M160 40 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z" style="fill:var(--steel)"/>
+  ` },
+  "word-draft": { tone: "accent", svg: `
+    <rect x="55" y="20" width="90" height="112" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <line x1="70" y1="45" x2="130" y2="45" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="70" y1="60" x2="130" y2="60" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="70" y1="75" x2="110" y2="75" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <path d="M108 95 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" style="fill:var(--accent)"/>
+    <circle cx="140" cy="102" r="4" style="fill:var(--accent);opacity:0.6"/>
+  ` },
+  "word-edit": { tone: "steel", svg: `
+    <rect x="45" y="25" width="90" height="105" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <line x1="60" y1="50" x2="120" y2="50" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.3"/>
+    <line x1="60" y1="65" x2="120" y2="65" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round"/>
+    <line x1="60" y1="80" x2="100" y2="80" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.3"/>
+    <path d="M130 90 l28 -28 l10 10 l-28 28 l-14 4 z" style="fill:var(--surface);stroke:var(--steel);stroke-width:4;stroke-linejoin:round"/>
+  ` },
+  "excel-formula": { tone: "howto", svg: `
+    <rect x="35" y="25" width="130" height="100" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <line x1="35" y1="50" x2="165" y2="50" style="stroke:var(--ink);stroke-width:2;opacity:0.3"/>
+    <line x1="35" y1="75" x2="165" y2="75" style="stroke:var(--ink);stroke-width:2;opacity:0.3"/>
+    <line x1="35" y1="100" x2="165" y2="100" style="stroke:var(--ink);stroke-width:2;opacity:0.3"/>
+    <line x1="78" y1="25" x2="78" y2="125" style="stroke:var(--ink);stroke-width:2;opacity:0.3"/>
+    <line x1="121" y1="25" x2="121" y2="125" style="stroke:var(--ink);stroke-width:2;opacity:0.3"/>
+    <rect x="78" y="50" width="43" height="25" style="fill:var(--howto-soft);stroke:var(--howto);stroke-width:2.5"/>
+    <text x="99" y="67" text-anchor="middle" style="font-size:12px;font-family:var(--mono);font-weight:700;fill:var(--howto)">fx</text>
+  ` },
+  "excel-insights": { tone: "howto", svg: `
+    <rect x="35" y="25" width="130" height="100" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <rect x="55" y="90" width="18" height="20" style="fill:var(--howto)"/>
+    <rect x="83" y="70" width="18" height="40" style="fill:var(--howto)"/>
+    <rect x="111" y="50" width="18" height="60" style="fill:var(--accent)"/>
+    <rect x="139" y="80" width="18" height="30" style="fill:var(--howto)"/>
+    <line x1="45" y1="110" x2="155" y2="110" style="stroke:var(--ink);stroke-width:2;opacity:0.4"/>
+  ` },
+  "powerpoint-create": { tone: "example", svg: `
+    <rect x="35" y="35" width="130" height="80" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <rect x="48" y="48" width="45" height="30" style="fill:var(--example-soft);stroke:var(--example);stroke-width:2"/>
+    <line x1="100" y1="52" x2="152" y2="52" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="100" y1="65" x2="140" y2="65" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="48" y1="92" x2="152" y2="92" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.3"/>
+    <path d="M100 128 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" style="fill:var(--example)"/>
+  ` },
+  "powerpoint-design": { tone: "example", svg: `
+    <rect x="40" y="30" width="120" height="80" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <circle cx="70" cy="65" r="16" style="fill:var(--example-soft);stroke:var(--example);stroke-width:3"/>
+    <rect x="100" y="52" width="45" height="10" style="fill:var(--example);opacity:0.7"/>
+    <rect x="100" y="68" width="30" height="10" style="fill:var(--ink);opacity:0.2"/>
+    <circle cx="60" cy="122" r="8" style="fill:var(--accent)"/>
+    <circle cx="82" cy="126" r="8" style="fill:var(--steel)"/>
+    <circle cx="104" cy="122" r="8" style="fill:var(--example)"/>
+  ` },
+  "outlook-email": { tone: "steel", svg: `
+    <rect x="35" y="30" width="130" height="70" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
+    <polyline points="35,34 100,72 165,34" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
+    <path d="M150 74 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" style="fill:var(--steel)"/>
+    <path d="M55 120 a18 18 0 1 1 4 12" style="fill:none;stroke:var(--steel);stroke-width:4;stroke-linecap:round"/>
+    <polygon points="53,138 63,132 63,144" style="fill:var(--steel)"/>
+  ` },
+  "cross-app": { tone: "accent", svg: `
+    <rect x="40" y="30" width="34" height="34" rx="7" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:3"/>
+    <rect x="83" y="30" width="34" height="34" rx="7" style="fill:var(--howto-soft);stroke:var(--howto);stroke-width:3"/>
+    <rect x="126" y="30" width="34" height="34" rx="7" style="fill:var(--example-soft);stroke:var(--example);stroke-width:3"/>
+    <rect x="83" y="80" width="34" height="34" rx="7" style="fill:var(--steel-soft);stroke:var(--steel);stroke-width:3"/>
+    <line x1="57" y1="64" x2="100" y2="80" style="stroke:var(--ink);stroke-width:2;opacity:0.35"/>
+    <line x1="100" y1="64" x2="100" y2="80" style="stroke:var(--ink);stroke-width:2;opacity:0.35"/>
+    <line x1="143" y1="64" x2="100" y2="80" style="stroke:var(--ink);stroke-width:2;opacity:0.35"/>
+    <circle cx="100" cy="97" r="9" style="fill:var(--surface);stroke:var(--ink);stroke-width:2.5"/>
+  ` },
+  limitations: { tone: "warn", svg: `
+    <rect x="40" y="30" width="90" height="80" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:3"/>
+    <line x1="55" y1="50" x2="100" y2="50" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <line x1="55" y1="65" x2="110" y2="65" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
+    <circle cx="130" cy="85" r="26" style="fill:var(--surface);stroke:var(--warn);stroke-width:6"/>
+    <line x1="148" y1="103" x2="166" y2="121" style="stroke:var(--warn);stroke-width:7;stroke-linecap:round"/>
+    <line x1="130" y1="73" x2="130" y2="88" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round"/>
+    <circle cx="130" cy="96" r="2.5" style="fill:var(--warn)"/>
+  ` },
+  "productivity-tips": { tone: "accent", svg: `
+    <circle cx="100" cy="65" r="34" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:4"/>
+    <rect x="88" y="95" width="24" height="14" rx="3" style="fill:var(--surface);stroke:var(--ink);stroke-width:3"/>
+    <line x1="92" y1="109" x2="108" y2="109" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
+    <line x1="40" y1="50" x2="58" y2="50" style="stroke:var(--accent);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <line x1="35" y1="65" x2="55" y2="65" style="stroke:var(--accent);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <line x1="142" y1="50" x2="160" y2="50" style="stroke:var(--accent);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+    <line x1="145" y1="65" x2="165" y2="65" style="stroke:var(--accent);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
+  ` }
+};
+
+function renderHeroIllustration(topic, idx) {
+  const illo = TOPIC_ILLUSTRATIONS[topic.key];
+  if (!illo) return "";
+  return '<div class="hero-illo tone-' + illo.tone + '">' +
+    '<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="ภาพประกอบหัวข้อ: ' + topic.title + '">' + illo.svg + '</svg>' +
+    '<span class="hero-illo-caption">FIG. ' + String(idx + 1).padStart(2, "0") + ' — ' + topic.title + '</span>' +
+    '</div>';
+}
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="note note-' + rule.cls + '">' +
+        '<span class="note-icon">' + rule.icon + '</span>' +
+        '<div class="note-body"><span class="note-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach((t, i) => {
+    const btn = document.createElement("button");
+    btn.className = "station" + (t.key === currentKey ? " active" : "");
+    btn.setAttribute("aria-current", t.key === currentKey ? "true" : "false");
+
+    const numWrap = document.createElement("span");
+    numWrap.className = "station-num-wrap";
+    const num = document.createElement("span");
+    num.className = "station-num";
+    num.textContent = String(i + 1).padStart(2, "0");
+    numWrap.appendChild(num);
+
+    const info = document.createElement("span");
+    info.className = "station-info";
+    info.innerHTML = '<span class="station-icon">' + (t.icon || "") + '</span><span class="station-title">' + t.title + '</span>';
+
+    btn.appendChild(numWrap);
+    btn.appendChild(info);
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const idx = TOPICS.findIndex(t => t.key === currentKey);
+  const topic = TOPICS[idx];
+  const el = document.getElementById("content");
+
+  let mediaHtml = "";
+  if (topic.video) {
+    const watchUrl = topic.video.replace("/embed/", "/watch?v=");
+    const creditHtml = (topic.videoTitle || topic.videoAuthor)
+      ? '<div class="video-credit">' +
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
+        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+      : "";
+    mediaHtml = '<span class="section-label">🎥 วิดีโอประกอบ</span><div class="video-frame"><iframe src="' + topic.video + '" allowfullscreen loading="lazy"></iframe></div>' + creditHtml;
+  } else if (topic.keyPoints && topic.keyPoints.length > 0) {
+    mediaHtml = '<div class="field-notes"><div class="field-notes-title">ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k + '</li>').join("") +
+      '</ul></div>';
+  }
+
+  let imagesHtml = "";
+  if (topic.images && topic.images.length > 0) {
+    imagesHtml = '<span class="section-label" style="margin-top:20px">ภาพประกอบเพิ่มเติม</span><div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join("") +
+      "</div>";
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow-strip">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-step-idx">STEP ' + (i + 1) + '</span><span class="flow-glyph">' + step.icon + '</span><span class="flow-text">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-connector">→</span>' : "")
+    ).join("") + "</div>";
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join("") + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="sheet-ref-link" href="' + topic.link + '">อ่านเพิ่มเติม: คู่มือ AI Safety →</a>'
+    : "";
+
+  el.innerHTML =
+    '<div class="sheet-head"><span class="sheet-ref">หัวข้อที่ ' + String(idx + 1).padStart(2, "0") + ' / ' + TOPICS.length + '</span><h2>' + topic.title + '</h2></div>' +
+    renderHeroIllustration(topic, idx) +
+    mediaHtml +
+    '<span class="section-label">คำบรรยายสรุป</span>' + textHtml + linkHtml +
+    imagesHtml;
+}
+
+document.getElementById("statTopics").textContent = TOPICS.length;
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
