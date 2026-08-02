@@ -215,6 +215,85 @@
     border-top: 1px solid var(--border);
   }
 
+  /* --- Section 1 visual upgrade (icon feature cards, roadmap table, Key
+     Message bar) — styled to match the executive deck's own slide language
+     (rounded icon badges, colored accent boxes, yellow highlight callout)
+     per user 2026-08-03: "ช่วยออกแบบให้สวยงาม" referencing a deck slide. --- */
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 18px;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .feature-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.08); }
+  .feature-card .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .feature-card h4 { margin: 0 0 6px; font-size: 15px; font-weight: 800; }
+  .feature-card p { margin: 0; font-size: 13px; color: #4B5563; line-height: 1.55; }
+  .feature-blue .feature-icon { background: rgba(0,120,212,0.12); }
+  .feature-blue { border-top: 3px solid var(--blue); }
+  .feature-green .feature-icon { background: rgba(16,124,16,0.12); }
+  .feature-green { border-top: 3px solid var(--green); }
+  .feature-cyan .feature-icon { background: rgba(0,183,195,0.12); }
+  .feature-cyan { border-top: 3px solid var(--cyan); }
+
+  .pill-legend { display: inline-block; padding: 2px 10px; border-radius: 5px; font-weight: 700; }
+  .legend-cyan { background: #67E8E0; color: #064E48; }
+  .legend-yellow { background: #FDE85C; color: #5C4A00; }
+  .legend-magenta { background: #F472D0; color: #5C0B45; }
+
+  .roadmap-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13px; min-width: 640px; }
+  .roadmap-table thead th {
+    background: #4C4FC4;
+    color: white;
+    text-align: right;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .roadmap-table thead th:first-child { border-top-right-radius: 10px; }
+  .roadmap-table thead th:last-child { border-top-left-radius: 10px; }
+  .roadmap-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    text-align: right;
+  }
+  .roadmap-table tbody tr:last-child td { border-bottom: none; }
+  .roadmap-table .rm-label { font-weight: 700; white-space: nowrap; }
+  .roadmap-table .rm-scope { color: var(--green); font-weight: 600; font-size: 12px; }
+  .roadmap-table tbody tr:hover { background: var(--surface-muted); }
+
+  .key-message {
+    margin-top: 22px;
+    background: #FFF176;
+    border: 1px solid #F2D93A;
+    border-radius: 10px;
+    padding: 14px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #5C4A00;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .feature-card { background: #1E2126; border-color: #2C2F36; }
+    .feature-card p { color: #9CA3AF; }
+    .roadmap-table tbody td { border-color: #2C2F36; }
+    .roadmap-table tbody tr:hover { background: #23262C; }
+    .key-message { background: #4A3D0F; border-color: #6B5A1E; color: #F0DE7A; }
+  }
+
   @media (max-width: 860px) {
     .layout { grid-template-columns: 1fr; }
     .toc { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
@@ -270,7 +349,7 @@
         </ul>
       </li>
       <li><a href="#champions">7. Power Champion</a></li>
-      <li><a href="#section-dashboard">8. Section Dashboard</a></li>
+      <li><a href="#section-dashboard">8. Division Dashboard</a></li>
       <li><a href="#exec-dashboard">9. Executive Dashboard</a></li>
       <li><a href="#admin">10. Administration</a></li>
       <li><a href="#settings">11. Settings</a></li>
@@ -290,21 +369,82 @@
     <section id="intro">
       <h2><span class="badge">1</span>ภาพรวมระบบ</h2>
       <p class="lead">TPS Office Digital Tools คือระบบกลางสำหรับติดตามความคืบหน้าโครงการ Digital Transformation ของกลุ่ม ATTG ตามแผน FY'2026–2028</p>
+
       <div class="grid3">
-        <div class="card accent-blue">
-          <h4>🗂️ Project Registration</h4>
+        <div class="feature-card feature-blue">
+          <div class="feature-icon">🗂️</div>
+          <h4>Project Registration</h4>
           <p>ลงทะเบียนและติดตามโครงการที่ลดเวลาทำงานหรือลดการใช้กระดาษ</p>
         </div>
-        <div class="card accent-green">
-          <h4>🎓 Citizen Developer Training</h4>
+        <div class="feature-card feature-green">
+          <div class="feature-icon">🎓</div>
+          <h4>Citizen Developer Training</h4>
           <p>บันทึกการอบรม Power Platform 3 ระดับ ตามรอบและไตรมาส</p>
         </div>
-        <div class="card accent-cyan">
-          <h4>🏆 Power Champion</h4>
+        <div class="feature-card feature-cyan">
+          <div class="feature-icon">🏆</div>
+          <h4>Power Champion</h4>
           <p>ทะเบียนบุคลากรที่เป็นกำลังสำคัญด้าน Automation ของแต่ละบริษัท</p>
         </div>
       </div>
-      <p style="margin-top:16px">ข้อมูลทั้งหมดเชื่อมกับ <b>Dashboard</b> แบบเรียลไทม์ — ไม่ต้องรอสรุปรายเดือน เห็นความคืบหน้าได้ทันทีที่มีการอัปเดต ระบบมี 2 มุมมองสำหรับติดตามภาพรวม: <b>Section Dashboard</b> (หัวหน้าแผนก) และ <b>Executive Dashboard</b> (ผู้บริหาร)</p>
+
+      <p style="margin-top:16px">ข้อมูลทั้งหมดเชื่อมกับ <b>Dashboard</b> แบบเรียลไทม์ — ไม่ต้องรอสรุปรายเดือน เห็นความคืบหน้าได้ทันทีที่มีการอัปเดต ระบบมี 2 มุมมองสำหรับติดตามภาพรวม: <b>Division Dashboard</b> (หัวหน้าแผนก) และ <b>Executive Dashboard</b> (ผู้บริหาร)</p>
+
+      <h3 style="text-align:center; margin-top:36px;">เป้าหมายและตัวชี้วัดเชิงกลยุทธ์ 3 ปี</h3>
+      <p style="text-align:center; color:var(--ink-light); font-size:13px; margin-top:-4px;">
+        <span class="pill-legend legend-cyan">Paper Reduction</span> ·
+        <span class="pill-legend legend-yellow">Citizen Developer Project</span> ·
+        <span class="pill-legend legend-magenta">Time Reduction</span>
+      </p>
+
+      <div style="overflow-x:auto;">
+        <table class="roadmap-table">
+          <thead>
+            <tr>
+              <th>เป้าหมาย</th>
+              <th>2026 — Foundation</th>
+              <th>2027 — Expansion</th>
+              <th>2028 — Value Realization</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rm-label legend-cyan">📄 Paper Reduction</td>
+              <td><b>Pilot Paperless Process</b><br><span class="rm-scope">AT-A Zero Paper Initiative</span></td>
+              <td><b>50% Paper Reduction</b><br><span class="rm-scope">SNF, NIC, ATFB, SATI, TEP</span></td>
+              <td><b>50% Paper Reduction</b><br><span class="rm-scope">SNF, NIC, ATFB, SATI, TEP</span></td>
+            </tr>
+            <tr>
+              <td class="rm-label legend-yellow">💡 Developer Project</td>
+              <td><b>≥ 30 Projects</b><br><span class="rm-scope">AT-A</span></td>
+              <td><b>Increase ≥ 30 Projects</b><br><span class="rm-scope">ATTG</span></td>
+              <td><b>Increase ≥ 30 Projects</b><br><span class="rm-scope">ATTG</span></td>
+            </tr>
+            <tr>
+              <td class="rm-label legend-magenta">⏱️ Time Reduction</td>
+              <td><b>≥ 5% /Division</b><br><span class="rm-scope">AT-A</span></td>
+              <td><b>≥ 5% /Division</b><br><span class="rm-scope">ATTG</span></td>
+              <td><b>≥ 5% /Division</b><br><span class="rm-scope">ATTG</span></td>
+            </tr>
+            <tr>
+              <td class="rm-label">🏆 Power Champions</td>
+              <td><b>6 Persons</b><br><span class="rm-scope">ATTG</span></td>
+              <td><b>6 Persons</b><br><span class="rm-scope">ATTG</span></td>
+              <td><b>6 Persons</b><br><span class="rm-scope">ATTG</span></td>
+            </tr>
+            <tr>
+              <td class="rm-label">🎓 Training</td>
+              <td><b>(H1-H2) = 50 Users</b><br><span class="rm-scope">ATTG</span></td>
+              <td><b>= 50 Users</b><br><span class="rm-scope">ATTG</span></td>
+              <td><b>= 50 Users</b><br><span class="rm-scope">ATTG</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="key-message">
+        💡 <b>Key Message:</b> ใช้สิ่งที่มีอยู่แล้ว (License O365 / Power Platform) ให้เกิดมูลค่าสูงสุด — TPS Office Digital Tools คือเครื่องมือที่ทำให้เห็นความคืบหน้าของเป้าหมายทั้งหมดนี้แบบเรียลไทม์
+      </div>
     </section>
 
     <section id="login">
@@ -352,7 +492,7 @@
         </div>
         <div class="card">
           <h4>Dashboard</h4>
-          <p>สำหรับหัวหน้าแผนก — ติดตามความคืบหน้าของแผนก/บริษัทตัวเอง (ดูหมวด 8. Section Dashboard)</p>
+          <p>สำหรับหัวหน้าแผนก — ติดตามความคืบหน้าของแผนก/บริษัทตัวเอง (ดูหมวด 8. Division Dashboard)</p>
         </div>
         <div class="card">
           <h4>Overview</h4>
@@ -510,15 +650,15 @@
     </section>
 
     <section id="section-dashboard">
-      <h2><span class="badge">8</span>Section Dashboard</h2>
+      <h2><span class="badge">8</span>Division Dashboard</h2>
       <p class="lead">มุมมองสำหรับหัวหน้าแผนก (Section Manager) — ติดตามความคืบหน้าเทียบเป้าหมาย เลือกดูเฉพาะบริษัท/ฝ่ายของตัวเอง หรือทั้งกลุ่มก็ได้</p>
-      <figure class="shot">
-        <img src="images/22-section-dashboard.jpg" alt="หน้า Section Dashboard พร้อมตัวกรองบริษัท/ฝ่าย และ 5 การ์ดตัวชี้วัด" onerror="this.classList.add('broken')">
-        <div class="fallback"><span>🖼️ ภาพ: Section Dashboard — ตัวกรองบริษัท/ฝ่าย + 5 การ์ดตัวชี้วัดที่ scope ตามบริษัทที่เลือก</span><code>images/22-section-dashboard.jpg</code></div>
-      </figure>
       <figure class="shot">
         <img src="images/23-section-dashboard-division-filter.jpg" alt="ตัวเลือกฝ่ายแบบเต็มรายการ" onerror="this.classList.add('broken')">
         <div class="fallback"><span>🖼️ ภาพ: รายการฝ่ายทั้งหมดในตัวกรอง (ข้อมูลจริงจาก SharePoint)</span><code>images/23-section-dashboard-division-filter.jpg</code></div>
+      </figure>
+      <figure class="shot">
+        <img src="images/22-section-dashboard.jpg" alt="หน้า Division Dashboard พร้อมตัวกรองบริษัท/ฝ่าย และ 5 การ์ดตัวชี้วัด" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: Division Dashboard — ตัวกรองบริษัท/ฝ่าย + 5 การ์ดตัวชี้วัดที่ scope ตามบริษัทที่เลือก</span><code>images/22-section-dashboard.jpg</code></div>
       </figure>
       <div class="grid2">
         <div class="card accent-orange">
