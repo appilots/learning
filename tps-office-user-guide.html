@@ -190,7 +190,7 @@
   }
   figure.shot img { display: block; width: 100%; height: auto; }
   figure.shot .fallback {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -202,7 +202,11 @@
     text-align: center;
   }
   figure.shot .fallback code { background: white; }
-  figure.shot img:not([src]), figure.shot img.broken { display: none; }
+  /* Shown only via JS onerror (see img[onerror] below) — .broken on the img
+     hides the broken image icon, and its onerror handler flips the
+     adjacent .fallback to flex. Default state assumes the image loads. */
+  figure.shot img.broken { display: none; }
+  figure.shot img.broken + .fallback { display: flex; }
   figcaption {
     padding: 8px 14px;
     font-size: 12px;
@@ -272,6 +276,7 @@
       <li><a href="#settings">11. Settings</a></li>
       <li><a href="#permissions">12. สรุปสิทธิ์การใช้งาน</a></li>
       <li><a href="#faq">13. คำถามที่พบบ่อย</a></li>
+      <li><a href="#architecture">14. สถาปัตยกรรมระบบ (IT)</a></li>
     </ul>
   </nav>
 
@@ -430,23 +435,9 @@
       </table>
 
       <figure class="shot">
-        <img src="images/13-training-list.jpg" alt="หน้ารายการ Citizen Developer Training พร้อมสถิติสรุป" onerror="this.classList.add('broken')">
-        <div class="fallback"><span>🖼️ ภาพ: หน้ารายการ Training พร้อมสถิติสรุป (Trained Users / Courses / Divisions Reached)</span><code>images/13-training-list.jpg</code></div>
+        <img src="images/13-training-list.jpg" alt="หน้ารายการ Citizen Developer Training พร้อมสถิติสรุป และกราฟ Learners by Quarter" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้ารายการ Training พร้อมสถิติสรุป (Trained Users / Courses / Divisions Reached) และกราฟ Learners by Quarter</span><code>images/13-training-list.jpg</code></div>
       </figure>
-      <div class="grid3">
-        <figure class="shot">
-          <img src="images/14-training-charts-quarter.jpg" alt="กราฟ Learners by Quarter แยกตามหลักสูตร" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ ภาพ: Learners by Quarter</span><code>images/14-training-charts-quarter.jpg</code></div>
-        </figure>
-        <figure class="shot">
-          <img src="images/15-training-division-chart.jpg" alt="กราฟ Learners by Division" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ ภาพ: Learners by Division</span><code>images/15-training-division-chart.jpg</code></div>
-        </figure>
-        <figure class="shot">
-          <img src="images/16-training-top-courses.jpg" alt="กราฟ Top Courses" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ ภาพ: Top Courses</span><code>images/16-training-top-courses.jpg</code></div>
-        </figure>
-      </div>
 
       <h3 id="training-add">6.1 เพิ่มประวัติการอบรม</h3>
       <ol class="steps">
@@ -459,30 +450,46 @@
       </ol>
       <div class="grid2">
         <figure class="shot">
-          <img src="images/17-training-add-form.jpg" alt="ฟอร์มเพิ่มประวัติการอบรม" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่มประวัติการอบรม (เริ่มต้น)</span><code>images/17-training-add-form.jpg</code></div>
+          <img src="images/14-training-learners-by-division.jpg" alt="Learners by Division ต่อจากหน้ารายการ Training" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: Learners by Division (เลื่อนลงจากหน้ารายการ)</span><code>images/14-training-learners-by-division.jpg</code></div>
         </figure>
         <figure class="shot">
-          <img src="images/18-training-add-form-course-detail.jpg" alt="ฟอร์มเพิ่มประวัติการอบรม พร้อมกล่องรายละเอียดหลักสูตร" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ ภาพ: กล่องรายละเอียดหลักสูตรที่โผล่ขึ้นหลังเลือก Course + รอบ</span><code>images/18-training-add-form-course-detail.jpg</code></div>
+          <img src="images/15-training-table.jpg" alt="ตัวกรองและตารางรายชื่อผู้เรียนทั้งหมด" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: ตัวกรอง + ตารางรายชื่อผู้เรียนทั้งหมด (111 รายการ)</span><code>images/15-training-table.jpg</code></div>
+        </figure>
+      </div>
+      <div class="grid2">
+        <figure class="shot">
+          <img src="images/training-add-form-1.jpg" alt="ฟอร์มเพิ่มประวัติการอบรม ส่วนบน" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่มประวัติการอบรม (ส่วนบน)</span><code>images/training-add-form-1.jpg</code></div>
+        </figure>
+        <figure class="shot">
+          <img src="images/training-add-form-2.jpg" alt="ฟอร์มเพิ่มประวัติการอบรม ส่วนล่าง" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่มประวัติการอบรม (ส่วนล่าง)</span><code>images/training-add-form-2.jpg</code></div>
         </figure>
       </div>
 
       <h3 id="training-import">6.2 นำเข้าจาก Excel</h3>
       <p>สำหรับกรอกทีละหลายรายการ กดปุ่ม <b>"Template"</b> เพื่อดาวน์โหลดไฟล์ตัวอย่างก่อน กรอกข้อมูลตามคอลัมน์ในไฟล์ แล้วกด <b>"อัปโหลดจาก Excel"</b> เพื่อเลือกไฟล์ <code>.xlsx</code>/<code>.xls</code> นำเข้าทีเดียว</p>
       <figure class="shot">
-        <img src="images/19-training-excel-upload-dialog.jpg" alt="หน้าต่างเลือกไฟล์ Excel สำหรับอัปโหลด" onerror="this.classList.add('broken')">
-        <div class="fallback"><span>🖼️ ภาพ: หน้าต่างเลือกไฟล์ Excel ตอนกด "อัปโหลดจาก Excel"</span><code>images/19-training-excel-upload-dialog.jpg</code></div>
+        <img src="images/training-excel-upload-dialog.jpg" alt="หน้าต่างเลือกไฟล์ Excel สำหรับอัปโหลด" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้าต่างเลือกไฟล์ Excel ตอนกด "อัปโหลดจาก Excel"</span><code>images/training-excel-upload-dialog.jpg</code></div>
       </figure>
     </section>
 
     <section id="champions">
       <h2><span class="badge">7</span>Power Champion</h2>
       <p class="lead">ทะเบียนบุคลากรที่ได้รับการแต่งตั้งเป็น Power Champion ของแต่ละบริษัท — เป้าหมาย 6 คน/บริษัท/ปี รวม 18 คนภายใน FY'2028</p>
-      <figure class="shot">
-        <img src="images/20-champions-list.jpg" alt="หน้าทำเนียบ Power Champion พร้อมคุณสมบัติและเงื่อนไข" onerror="this.classList.add('broken')">
-        <div class="fallback"><span>🖼️ ภาพ: หน้าทำเนียบ Power Champion + คุณสมบัติ/เงื่อนไข + กราฟรายบริษัท + ตารางแบบแบ่งหน้า</span><code>images/20-champions-list.jpg</code></div>
-      </figure>
+      <div class="grid2">
+        <figure class="shot">
+          <img src="images/16-champions-list-top.jpg" alt="หน้าทำเนียบ Power Champion พร้อมคุณสมบัติและเงื่อนไข" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: สถิติสรุป + คุณสมบัติ/เงื่อนไข + กราฟรายบริษัท</span><code>images/16-champions-list-top.jpg</code></div>
+        </figure>
+        <figure class="shot">
+          <img src="images/17-champions-list-table.jpg" alt="ตารางทะเบียน Power Champion แบบแบ่งหน้า" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: ตารางทะเบียน Power Champion (แบ่งหน้า)</span><code>images/17-champions-list-table.jpg</code></div>
+        </figure>
+      </div>
       <div class="card">
         <h4>คุณสมบัติและเงื่อนไข</h4>
         <ul>
@@ -497,8 +504,8 @@
         <li>กรอกวันที่ได้รับคัดเลือก และรายละเอียดโดยสังเขป แล้วกดบันทึก</li>
       </ol>
       <figure class="shot">
-        <img src="images/21-champions-add-form.jpg" alt="ฟอร์มเพิ่ม Power Champion" onerror="this.classList.add('broken')">
-        <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่ม Power Champion</span><code>images/21-champions-add-form.jpg</code></div>
+        <img src="images/18-champions-add-form.jpg" alt="ฟอร์มเพิ่ม Power Champion" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่ม Power Champion</span><code>images/18-champions-add-form.jpg</code></div>
       </figure>
     </section>
 
@@ -603,6 +610,33 @@
       <div class="card">
         <h4>อยากเพิ่มประวัติการอบรมทีละหลายสิบคน ต้องกรอกทีละคนไหม?</h4>
         <p>ไม่ต้อง — ใช้ปุ่ม "Template" ดาวน์โหลดไฟล์ตัวอย่าง กรอกใน Excel แล้วอัปโหลดกลับเข้าระบบทีเดียวได้ (ดูหมวด 6.2)</p>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <h2><span class="badge">14</span>สถาปัตยกรรมระบบ (สำหรับทีม IT)</h2>
+      <p class="lead">หมวดนี้สำหรับผู้ดูแลระบบ/ทีม IT เท่านั้น — อธิบายว่าระบบเชื่อมต่อกับ SharePoint และ Azure อย่างไร ผู้ใช้งานทั่วไปข้ามหมวดนี้ได้</p>
+      <figure class="shot">
+        <img src="images/architecture-diagram.jpg" alt="แผนภาพสถาปัตยกรรม Azure Static Web Apps + Power Automate Bridge" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: Azure Static Web Apps + Power Automate Bridge</span><code>images/architecture-diagram.jpg</code></div>
+      </figure>
+      <p>ระบบใช้ <b>Power Automate เป็น "สะพาน"</b> อ่านข้อมูลจาก SharePoint แทนการต่อ Microsoft Graph API ตรงๆ เพราะ Connector ของ Power Automate ได้รับอนุมัติจาก Microsoft ไว้ล่วงหน้าแล้ว จึงไม่ติดปัญหา Admin Consent แบบที่เจอกับ Graph API</p>
+      <div class="card">
+        <h4>ลำดับการไหลของข้อมูล</h4>
+        <ol>
+          <li>พนักงาน ATTG เข้าเว็บผ่าน browser ที่ <code>https://tpsit.attg.co.th</code></li>
+          <li>Azure Static Web App (React front-end + Entra ID Sign-in) เรียก <code>/api/*</code></li>
+          <li>Azure Functions (Backend API) อ่าน Master Data จาก Azure SQL ที่ sync ไว้แล้ว และอ่าน/เขียนข้อมูล Project / Training / Power Champion โดยตรง</li>
+          <li>Power Automate Scheduled Flow (ทำงานทุก 30 นาที) ดึงข้อมูลจาก SharePoint List (Employee / Department / Division / Section) มาเขียนสำเนาล่าสุดลง Azure SQL — Functions ไม่เคยต่อ SharePoint โดยตรง</li>
+        </ol>
+      </div>
+      <div class="note blue">
+        <b>ทำไมต้องออกแบบแบบนี้:</b>
+        <ol style="margin:6px 0 0; padding-right:0; padding-left:20px;">
+          <li>ใช้ทรัพยากร Azure ที่มีอยู่แล้วเป็นแกนหลัก ไม่ต้องสร้างใหม่</li>
+          <li>ใช้ Power Automate เป็นสะพานที่ได้รับอนุมัติแล้ว (Approved Bridge)</li>
+          <li>หลีกเลี่ยงการต่อ Graph API ตรงๆ ซึ่งต้องขอ Admin Consent เพิ่ม — Power Automate connector ไม่ติดปัญหานี้</li>
+        </ol>
       </div>
     </section>
 
