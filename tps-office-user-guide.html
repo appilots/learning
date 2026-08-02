@@ -245,6 +245,17 @@
   .feature-green { border-top: 3px solid var(--green); }
   .feature-cyan .feature-icon { background: rgba(0,183,195,0.12); }
   .feature-cyan { border-top: 3px solid var(--cyan); }
+  .feature-orange .feature-icon { background: rgba(255,170,68,0.18); }
+  .feature-orange { border-top: 3px solid var(--orange); }
+  .feature-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
 
   .pill-legend { display: inline-block; padding: 2px 10px; border-radius: 5px; font-weight: 700; }
   .legend-cyan { background: #67E8E0; color: #064E48; }
@@ -331,7 +342,6 @@
   <nav class="toc">
     <h2>สารบัญ</h2>
     <ul>
-      <li><a href="#imgnote">📌 วิธีใส่รูปภาพประกอบ</a></li>
       <li><a href="#intro">1. ภาพรวมระบบ</a></li>
       <li><a href="#login">2. การเข้าสู่ระบบ</a></li>
       <li><a href="#landing">3. หน้าหลัก (Landing)</a></li>
@@ -361,11 +371,6 @@
 
   <main>
 
-    <div class="note blue" id="imgnote">
-      📌 <b>วิธีใส่รูปภาพประกอบ:</b> ไฟล์นี้อ้างอิงรูปจากโฟลเดอร์ <code>images/</code> ที่วางไว้ข้างๆ ไฟล์ HTML นี้ (โครงสร้าง: <code>tps-office-user-guide.html</code> + <code>images/01-login-landing.jpg</code> ฯลฯ)
-      แค่ตั้งชื่อไฟล์ภาพให้ตรงกับที่ระบุใต้แต่ละกรอบ (ดูกรอบเทาลายทแยงที่มีชื่อไฟล์กำกับไว้) แล้ว save ภาพจากที่คุยกันไว้ลงไป ระบบจะแสดงภาพแทนที่กรอบลายทแยงให้เองทันทีที่เปิดไฟล์ ไม่ต้องแก้โค้ด
-    </div>
-
     <section id="intro">
       <h2><span class="badge">1</span>ภาพรวมระบบ</h2>
       <p class="lead">TPS Office Digital Tools คือระบบกลางสำหรับติดตามความคืบหน้าโครงการ Digital Transformation ของกลุ่ม ATTG ตามแผน FY'2026–2028</p>
@@ -388,7 +393,7 @@
         </div>
       </div>
 
-      <p style="margin-top:16px">ข้อมูลทั้งหมดเชื่อมกับ <b>Dashboard</b> แบบเรียลไทม์ — ไม่ต้องรอสรุปรายเดือน เห็นความคืบหน้าได้ทันทีที่มีการอัปเดต ระบบมี 2 มุมมองสำหรับติดตามภาพรวม: <b>Division Dashboard</b> (หัวหน้าแผนก) และ <b>Executive Dashboard</b> (ผู้บริหาร)</p>
+      <p style="margin-top:16px">ข้อมูลทั้งหมดเชื่อมกับ <b>Dashboard</b> แบบเรียลไทม์ — ไม่ต้องรอสรุปรายเดือน เห็นความคืบหน้าได้ทันทีที่มีการอัปเดต ระบบมี 2 มุมมองสำหรับติดตามภาพรวม: <b>Division Dashboard</b> (GM.) และ <b>Executive Dashboard</b> (ผู้บริหารที่ต้องการดูภาพรวม)</p>
 
       <h3 style="text-align:center; margin-top:36px;">เป้าหมายและตัวชี้วัดเชิงกลยุทธ์ 3 ปี</h3>
       <p style="text-align:center; color:var(--ink-light); font-size:13px; margin-top:-4px;">
@@ -486,17 +491,23 @@
         <figcaption>หน้าหลัก — การ์ดมูลค่าสะสม + 3 ทางเข้าระบบ</figcaption>
       </figure>
       <div class="grid3">
-        <div class="card">
+        <div class="feature-card feature-blue">
+          <div class="feature-icon">🗂️</div>
           <h4>Apps</h4>
           <p>สำหรับเจ้าหน้าที่ผู้ Update ข้อมูล — จัดการ Project, Citizen Developer และงานบริหารระบบ (มีทางลัด "ลงทะเบียนสร้าง Project ใหม่")</p>
+          <a href="#apps-dashboard" class="feature-link">เข้าใช้งาน →</a>
         </div>
-        <div class="card">
+        <div class="feature-card feature-cyan">
+          <div class="feature-icon">👤</div>
           <h4>Dashboard</h4>
-          <p>สำหรับหัวหน้าแผนก — ติดตามความคืบหน้าของแผนก/บริษัทตัวเอง (ดูหมวด 8. Division Dashboard)</p>
+          <p>สำหรับผู้จัดการทั่วไป (GM.) — ติดตามความคืบหน้าของแผนก/บริษัทตัวเอง เทียบกับเป้าหมายของแผน</p>
+          <a href="#section-dashboard" class="feature-link">เข้าใช้งาน →</a>
         </div>
-        <div class="card">
+        <div class="feature-card feature-orange">
+          <div class="feature-icon">👑</div>
           <h4>Overview</h4>
-          <p>สำหรับผู้บริหาร — ภาพรวมทั้งกลุ่ม ATTG พร้อมมูลค่าที่ประหยัดได้ (ดูหมวด 9. Executive Dashboard)</p>
+          <p>สำหรับผู้บริหารที่ต้องการดูภาพรวมทั้งกลุ่ม ATTG พร้อมมูลค่าที่ประหยัดได้</p>
+          <a href="#exec-dashboard" class="feature-link">เข้าใช้งาน →</a>
         </div>
       </div>
     </section>
