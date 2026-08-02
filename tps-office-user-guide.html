@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน TPS Office Digital Tools</title>
+<style>
+  :root {
+    --blue: #0078D4;
+    --blue-dark: #106EBE;
+    --cyan: #00B7C3;
+    --green: #107C10;
+    --orange: #FFAA44;
+    --red: #D13438;
+    --ink: #1F2937;
+    --ink-light: #6B7280;
+    --surface: #FFFFFF;
+    --surface-muted: #F8F9FA;
+    --border: #E5E7EB;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Noto Sans Thai", -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--surface-muted);
+    line-height: 1.65;
+  }
+  a { color: var(--blue); }
+  .header {
+    background: linear-gradient(120deg, #081A38, #0E3E86, #1E7BD6);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .header .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+  .header h1 { font-size: 30px; margin: 0 0 8px; font-weight: 800; }
+  .header p { margin: 0; opacity: 0.85; font-size: 15px; }
+  .layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0,1fr);
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .toc {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 28px 20px;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .toc h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-light); margin: 0 0 12px; }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: 2px; }
+  .toc a {
+    display: block;
+    padding: 7px 10px;
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13.5px;
+  }
+  .toc a:hover { background: var(--surface-muted); }
+  .toc .sub { padding-right: 0; margin-left: 14px; font-size: 12.5px; color: var(--ink-light); }
+  main { padding: 36px 40px 80px; min-width: 0; }
+  section { margin-bottom: 52px; scroll-margin-top: 20px; }
+  section h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section h2 .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 9px;
+    background: var(--blue);
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  section > p.lead { color: var(--ink-light); margin: 0 0 22px; font-size: 14.5px; }
+  h3 { font-size: 16px; font-weight: 700; margin: 26px 0 10px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .card.accent-blue { border-left: 4px solid var(--blue); }
+  .card.accent-green { border-left: 4px solid var(--green); }
+  .card.accent-orange { border-left: 4px solid var(--orange); }
+  .card.accent-cyan { border-left: 4px solid var(--cyan); }
+  .card.accent-red { border-left: 4px solid var(--red); }
+  .card h4 { margin: 0 0 6px; font-size: 14.5px; font-weight: 700; }
+  .card p, .card ul, .card ol { margin: 6px 0 0; font-size: 13.5px; color: #374151; }
+  .card ul, .card ol { padding-right: 0; padding-left: 20px; }
+  .card li { margin-bottom: 5px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 14px 0; }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 4px 0 14px 38px;
+    font-size: 14px;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: 2px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps li::after {
+    content: '';
+    position: absolute;
+    left: 13px; top: 28px; bottom: -2px;
+    width: 2px;
+    background: var(--border);
+  }
+  .steps li:last-child::after { display: none; }
+  .note {
+    background: #FFF8E6;
+    border: 1px solid #F2D98A;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #7A5B00;
+    margin: 14px 0;
+  }
+  .note.blue { background: #EAF3FF; border-color: #B9D8FF; color: #0B4C93; }
+  .note.red { background: #FDECEC; border-color: #F3B9B9; color: #8A1F22; }
+  .note.green { background: #EAF6EA; border-color: #B9DDB9; color: #0F5C0F; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 14px 0; }
+  th, td { text-align: right; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  th { text-align: right; background: var(--surface-muted); font-weight: 700; font-size: 12.5px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.03em; }
+  code {
+    background: #F1F3F5;
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-size: 12.5px;
+    font-family: Consolas, monospace;
+    color: #B34700;
+  }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+  .pill.blue { background: rgba(0,120,212,0.12); color: var(--blue); }
+  .pill.green { background: rgba(16,124,16,0.12); color: var(--green); }
+  .pill.orange { background: rgba(255,170,68,0.18); color: #8A5300; }
+  .pill.red { background: rgba(209,52,56,0.12); color: var(--red); }
+  .pill.gray { background: #EEF0F2; color: #4B5563; }
+  .toplink { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+  footer { text-align: center; padding: 30px; color: var(--ink-light); font-size: 12.5px; border-top: 1px solid var(--border); }
+
+  /* --- Screenshot placeholders --- */
+  figure.shot {
+    margin: 16px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  figure.shot img { display: block; width: 100%; height: auto; }
+  figure.shot .fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 30px 20px;
+    background: repeating-linear-gradient(135deg, #F3F4F6, #F3F4F6 10px, #EAECEF 10px, #EAECEF 20px);
+    color: var(--ink-light);
+    font-size: 12.5px;
+    text-align: center;
+  }
+  figure.shot .fallback code { background: white; }
+  figure.shot img:not([src]), figure.shot img.broken { display: none; }
+  figcaption {
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--ink-light);
+    background: var(--surface-muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    main { padding: 28px 20px 60px; }
+    .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body { background: #16181C; color: #E5E7EB; }
+    .toc, .card, footer, figure.shot { background: #1E2126; border-color: #2C2F36; }
+    .toc a { color: #E5E7EB; }
+    .toc a:hover { background: #262A31; }
+    th { background: #23262C; color: #9CA3AF; }
+    td, th { border-color: #2C2F36; }
+    code { background: #262A31; color: #FFB067; }
+    .note { background: #2C2508; border-color: #4A3D0F; color: #F0DE7A; }
+    .note.blue { background: #10233D; border-color: #1E4B7A; color: #9CCBFF; }
+    .note.red { background: #351314; border-color: #6B2224; color: #F5A6A8; }
+    .note.green { background: #12261A; border-color: #235A34; color: #9FE0B0; }
+    figure.shot .fallback { background: repeating-linear-gradient(135deg, #23262C, #23262C 10px, #1B1D22 10px, #1B1D22 20px); color: #9CA3AF; }
+    figure.shot .fallback code { background: #16181C; }
+    figcaption { background: #23262C; border-color: #2C2F36; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="tag">TPS OFFICE · SMART OFFICE &amp; PAPERLESS TRANSFORMATION</span>
+  <h1>คู่มือการใช้งาน TPS Office Digital Tools</h1>
+  <p>ระบบติดตาม Project, Citizen Developer และ Power Champion สำหรับกลุ่ม ATTG</p>
+</div>
+
+<div class="layout">
+  <nav class="toc">
+    <h2>สารบัญ</h2>
+    <ul>
+      <li><a href="#imgnote">📌 วิธีใส่รูปภาพประกอบ</a></li>
+      <li><a href="#intro">1. ภาพรวมระบบ</a></li>
+      <li><a href="#login">2. การเข้าสู่ระบบ</a></li>
+      <li><a href="#landing">3. หน้าหลัก (Landing)</a></li>
+      <li><a href="#apps-dashboard">4. Dashboard &amp; KPI (ฝั่ง Apps)</a></li>
+      <li><a href="#projects">5. Project Registration</a>
+        <ul>
+          <li class="sub"><a href="#projects-add">5.1 ลงทะเบียน Project ใหม่</a></li>
+          <li class="sub"><a href="#projects-export">5.2 Export ข้อมูลเป็น Excel</a></li>
+        </ul>
+      </li>
+      <li><a href="#training">6. Citizen Developer Training</a>
+        <ul>
+          <li class="sub"><a href="#training-add">6.1 เพิ่มประวัติการอบรม</a></li>
+          <li class="sub"><a href="#training-import">6.2 นำเข้าจาก Excel</a></li>
+        </ul>
+      </li>
+      <li><a href="#champions">7. Power Champion</a></li>
+      <li><a href="#section-dashboard">8. Section Dashboard</a></li>
+      <li><a href="#exec-dashboard">9. Executive Dashboard</a></li>
+      <li><a href="#admin">10. Administration</a></li>
+      <li><a href="#settings">11. Settings</a></li>
+      <li><a href="#permissions">12. สรุปสิทธิ์การใช้งาน</a></li>
+      <li><a href="#faq">13. คำถามที่พบบ่อย</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <div class="note blue" id="imgnote">
+      📌 <b>วิธีใส่รูปภาพประกอบ:</b> ไฟล์นี้อ้างอิงรูปจากโฟลเดอร์ <code>images/</code> ที่วางไว้ข้างๆ ไฟล์ HTML นี้ (โครงสร้าง: <code>tps-office-user-guide.html</code> + <code>images/01-login-landing.png</code> ฯลฯ)
+      แค่ตั้งชื่อไฟล์ภาพให้ตรงกับที่ระบุใต้แต่ละกรอบ (ดูกรอบเทาลายทแยงที่มีชื่อไฟล์กำกับไว้) แล้ว save ภาพจากที่คุยกันไว้ลงไป ระบบจะแสดงภาพแทนที่กรอบลายทแยงให้เองทันทีที่เปิดไฟล์ ไม่ต้องแก้โค้ด
+    </div>
+
+    <section id="intro">
+      <h2><span class="badge">1</span>ภาพรวมระบบ</h2>
+      <p class="lead">TPS Office Digital Tools คือระบบกลางสำหรับติดตามความคืบหน้าโครงการ Digital Transformation ของกลุ่ม ATTG ตามแผน FY'2026–2028</p>
+      <div class="grid3">
+        <div class="card accent-blue">
+          <h4>🗂️ Project Registration</h4>
+          <p>ลงทะเบียนและติดตามโครงการที่ลดเวลาทำงานหรือลดการใช้กระดาษ</p>
+        </div>
+        <div class="card accent-green">
+          <h4>🎓 Citizen Developer Training</h4>
+          <p>บันทึกการอบรม Power Platform 3 ระดับ ตามรอบและไตรมาส</p>
+        </div>
+        <div class="card accent-cyan">
+          <h4>🏆 Power Champion</h4>
+          <p>ทะเบียนบุคลากรที่เป็นกำลังสำคัญด้าน Automation ของแต่ละบริษัท</p>
+        </div>
+      </div>
+      <p style="margin-top:16px">ข้อมูลทั้งหมดเชื่อมกับ <b>Dashboard</b> แบบเรียลไทม์ — ไม่ต้องรอสรุปรายเดือน เห็นความคืบหน้าได้ทันทีที่มีการอัปเดต ระบบมี 2 มุมมองสำหรับติดตามภาพรวม: <b>Section Dashboard</b> (หัวหน้าแผนก) และ <b>Executive Dashboard</b> (ผู้บริหาร)</p>
+    </section>
+
+    <section id="login">
+      <h2><span class="badge">2</span>การเข้าสู่ระบบ</h2>
+      <p class="lead">ระบบใช้บัญชี Microsoft 365 (O365) ของบริษัทในการยืนยันตัวตน ผ่าน Single Sign-On เดียวกับที่ใช้ล็อกอิน Outlook/Teams ทุกวัน ไม่มีรหัสผ่านชุดที่สองให้จำเพิ่ม</p>
+      <ol class="steps">
+        <li>เข้าเว็บไซต์ <code>https://tpsit.attg.co.th</code> จะเห็นหน้าแนะนำระบบพร้อมปุ่ม "ลงชื่อเข้าใช้ด้วย Microsoft 365"</li>
+        <li>กดปุ่มแล้วเลือกบัญชี O365 ของบริษัท (เช่น <code>0158-ATA@ap01.aisingroup.com</code>) จากหน้า "Pick an account"</li>
+        <li>ระบบอาจพาไปหน้า Login ของ AISIN (SSO) ให้กรอก Username/Password บัญชีเดิมที่ใช้ล็อกอินเครื่องทุกวัน</li>
+        <li>เมื่อยืนยันตัวตนสำเร็จ ระบบจะพาเข้าหน้าหลักอัตโนมัติ — สิทธิ์การใช้งานจะถูกกำหนดตามอีเมลที่ login โดยอัตโนมัติ</li>
+      </ol>
+
+      <figure class="shot">
+        <img src="images/01-login-landing.png" alt="หน้า Landing ก่อนล็อกอิน พร้อมปุ่มลงชื่อเข้าใช้ด้วย Microsoft 365" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้าก่อนล็อกอิน (ปุ่ม "ลงชื่อเข้าใช้ด้วย Microsoft 365")</span><code>images/01-login-landing.png</code></div>
+        <figcaption>ขั้นตอน 1 — หน้าแรกก่อนล็อกอิน</figcaption>
+      </figure>
+      <div class="grid2">
+        <figure class="shot">
+          <img src="images/02-login-account-picker.png" alt="หน้าเลือกบัญชี Microsoft" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: Microsoft "Pick an account"</span><code>images/02-login-account-picker.png</code></div>
+          <figcaption>ขั้นตอน 2 — เลือกบัญชี O365</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/03-login-aisin-sso.png" alt="หน้า Login SSO ของ AISIN" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: หน้า Login SSO (AISIN)</span><code>images/03-login-aisin-sso.png</code></div>
+          <figcaption>ขั้นตอน 3 — ยืนยันตัวตนผ่าน SSO บริษัท</figcaption>
+        </figure>
+      </div>
+      <div class="note blue">ไม่ต้องขอ Account แยกต่างหาก ใช้บัญชีที่ล็อกอิน Outlook/Teams ทุกวันได้เลย</div>
+    </section>
+
+    <section id="landing">
+      <h2><span class="badge">3</span>หน้าหลัก (Landing)</h2>
+      <p class="lead">หน้าแรกหลังล็อกอิน แสดงมูลค่าที่ระบบสร้างคืนให้ธุรกิจ (สะสมถึงปัจจุบัน) พร้อมทางเข้าสู่ 3 ส่วนหลัก</p>
+      <figure class="shot">
+        <img src="images/04-landing-home.png" alt="หน้าหลักหลังล็อกอิน แสดงการ์ดมูลค่า Automation/Paperless และ 3 ทางเข้า Apps/Dashboard/Overview" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้าหลัก (Landing) หลังล็อกอิน</span><code>images/04-landing-home.png</code></div>
+        <figcaption>หน้าหลัก — การ์ดมูลค่าสะสม + 3 ทางเข้าระบบ</figcaption>
+      </figure>
+      <div class="grid3">
+        <div class="card">
+          <h4>Apps</h4>
+          <p>สำหรับเจ้าหน้าที่ผู้ Update ข้อมูล — จัดการ Project, Citizen Developer และงานบริหารระบบ (มีทางลัด "ลงทะเบียนสร้าง Project ใหม่")</p>
+        </div>
+        <div class="card">
+          <h4>Dashboard</h4>
+          <p>สำหรับหัวหน้าแผนก — ติดตามความคืบหน้าของแผนก/บริษัทตัวเอง (ดูหมวด 8. Section Dashboard)</p>
+        </div>
+        <div class="card">
+          <h4>Overview</h4>
+          <p>สำหรับผู้บริหาร — ภาพรวมทั้งกลุ่ม ATTG พร้อมมูลค่าที่ประหยัดได้ (ดูหมวด 9. Executive Dashboard)</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="apps-dashboard">
+      <h2><span class="badge">4</span>Dashboard &amp; KPI (ฝั่ง Apps)</h2>
+      <p class="lead">หน้าแรกของฝั่ง "Apps" (เมนูซ้าย) — สรุปภาพรวมและตัวชี้วัดเชิงกลยุทธ์ 3 ปีในที่เดียว ก่อนเข้าไปจัดการข้อมูลรายหน้า</p>
+      <figure class="shot">
+        <img src="images/05-dashboard-kpi.png" alt="หน้า Dashboard และ KPI ฝั่ง Apps แสดง 5 การ์ดตัวชี้วัดหลัก" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: การ์ด 5 ตัวชี้วัดหลัก (Paper Reduction, Citizen Developer Project, Time Reduction, Power Champions, Training)</span><code>images/05-dashboard-kpi.png</code></div>
+        <figcaption>5 การ์ดตัวชี้วัดเทียบเป้าหมาย FY'2026-2028</figcaption>
+      </figure>
+      <div class="grid2">
+        <figure class="shot">
+          <img src="images/06-dashboard-charts.png" alt="กราฟ Citizen Developer Project by Company และ Paper Reduction Trend" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: กราฟ Project by Company + Paper Reduction Trend</span><code>images/06-dashboard-charts.png</code></div>
+        </figure>
+        <figure class="shot">
+          <img src="images/07-dashboard-division-champions.png" alt="Reduce Time by Division และ Power Champions by Company" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: Reduce Time by Division + Power Champions by Company</span><code>images/07-dashboard-division-champions.png</code></div>
+        </figure>
+      </div>
+      <figure class="shot">
+        <img src="images/08-dashboard-training-trend.png" alt="กราฟ Training Progress" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: กราฟ Training Progress</span><code>images/08-dashboard-training-trend.png</code></div>
+      </figure>
+    </section>
+
+    <section id="projects">
+      <h2><span class="badge">5</span>Project Registration</h2>
+      <p class="lead">ใช้ลงทะเบียนโครงการ Automation ที่ลดเวลาทำงานหรือลดการใช้กระดาษ — มีตัวกรองบริษัท/แผนก/สถานะ/หมวดหมู่ และช่องค้นหา</p>
+      <figure class="shot">
+        <img src="images/09-projects-list.png" alt="หน้ารายการ Project Registration พร้อมสถิติสรุปและตัวกรอง" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: รายการ Project ทั้งหมด พร้อมสถิติสรุปด้านบน</span><code>images/09-projects-list.png</code></div>
+        <figcaption>หน้า Project Registration — สลับมุมมอง List/Grid ได้ที่มุมขวาบน</figcaption>
+      </figure>
+
+      <h3 id="projects-add">5.1 ลงทะเบียน Project ใหม่</h3>
+      <ol class="steps">
+        <li>กดปุ่ม <b>"+ เพิ่ม Project"</b> มุมขวาบน</li>
+        <li>กรอกส่วน "ข้อมูลโครงการ": ชื่อ Project, ชื่อย่อ, บริษัท, หมวดหมู่ (ลดเวลา/ลดกระดาษ), แผนก/ส่วน/ฝ่าย, และเลือกว่าต้องการใช้ฐานข้อมูล SharePoint List ส่วนกลางหรือไม่</li>
+        <li>ส่วน "ผู้เกี่ยวข้อง" — ผู้จัดสร้าง (เติมชื่อผู้ล็อกอินอัตโนมัติ) และผู้อนุมัติระดับ Section/Department</li>
+        <li>ส่วน "สถานะและกำหนดการ" — สถานะ, % ความคืบหน้า, วันเริ่มต้น/สิ้นสุดโครงการ</li>
+        <li>ส่วน "ผลลัพธ์และเครื่องมือ" — กรอกเฉพาะฟิลด์ที่ตรงกับหมวดหมู่ที่เลือก (ชั่วโมงที่ลดได้ หรือ % กระดาษที่ลด + จำนวนแผ่น/เดือน) และระบุเครื่องมือ Power Platform/AI ที่ใช้พัฒนา</li>
+        <li>กด <b>"สร้าง Project"</b></li>
+      </ol>
+      <div class="grid2">
+        <figure class="shot">
+          <img src="images/11-projects-add-form-1.png" alt="ฟอร์มเพิ่ม Project ส่วนข้อมูลโครงการและผู้เกี่ยวข้อง" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่ม Project (ส่วนบน)</span><code>images/11-projects-add-form-1.png</code></div>
+        </figure>
+        <figure class="shot">
+          <img src="images/12-projects-add-form-2.png" alt="ฟอร์มเพิ่ม Project ส่วนสถานะ กำหนดการ และผลลัพธ์" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่ม Project (ส่วนล่าง)</span><code>images/12-projects-add-form-2.png</code></div>
+        </figure>
+      </div>
+      <div class="note">ฟิลด์ "ชั่วโมงที่ลดได้" และ "% กระดาษที่ลดได้" จำเป็นเฉพาะหมวดของตัวเองเท่านั้น ระบบไม่บังคับกรอกฟิลด์ที่ไม่เกี่ยวข้อง</div>
+
+      <h3 id="projects-export">5.2 Export ข้อมูลเป็น Excel</h3>
+      <p>กดปุ่ม <b>"Export Data"</b> มุมขวาบนของหน้า — ระบบจะดาวน์โหลดไฟล์ <code>.xlsx</code> ของข้อมูล Project ทั้งหมดตามตัวกรองที่เลือกอยู่ (ตั้งชื่อไฟล์อัตโนมัติตามวันที่ เช่น <code>TPS_Projects_2026-08-02.xlsx</code>)</p>
+      <figure class="shot">
+        <img src="images/10-projects-export-dialog.png" alt="หน้าต่าง Save As ตอนกด Export Data" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้าต่าง Save As ตอนกด Export</span><code>images/10-projects-export-dialog.png</code></div>
+      </figure>
+      <p>ปุ่มนี้ใช้งานได้เฉพาะบางบัญชีเท่านั้น (ดูรายชื่อในหมวด <a href="#permissions">สรุปสิทธิ์การใช้งาน</a>) — ผู้ใช้อื่นจะเห็นปุ่มเป็นสีเทา กดไม่ได้</p>
+    </section>
+
+    <section id="training">
+      <h2><span class="badge">6</span>Citizen Developer Training</h2>
+      <p class="lead">บันทึกประวัติการอบรม Power Platform ของพนักงานทั้ง 6 บริษัทในกลุ่ม</p>
+      <table>
+        <tr><th>ระดับ</th><th>หลักสูตร</th><th>จำนวนรอบ</th></tr>
+        <tr><td>L1 · Beginner</td><td>Smart Paperless Process Builder</td><td>4 รอบ (Q3'26 – Q1-Q2'28)</td></tr>
+        <tr><td>L2 · Intermediate</td><td>Business Automation App Builder</td><td>3 รอบ (Q4'26 – Q1-Q2'28)</td></tr>
+        <tr><td>L3 · Advanced</td><td>AI-Assisted Web Application Development</td><td>2 รอบ (Q1-Q2'27 – Q1-Q2'28)</td></tr>
+      </table>
+
+      <figure class="shot">
+        <img src="images/13-training-list.png" alt="หน้ารายการ Citizen Developer Training พร้อมสถิติสรุป" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้ารายการ Training พร้อมสถิติสรุป (Trained Users / Courses / Divisions Reached)</span><code>images/13-training-list.png</code></div>
+      </figure>
+      <div class="grid3">
+        <figure class="shot">
+          <img src="images/14-training-charts-quarter.png" alt="กราฟ Learners by Quarter แยกตามหลักสูตร" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: Learners by Quarter</span><code>images/14-training-charts-quarter.png</code></div>
+        </figure>
+        <figure class="shot">
+          <img src="images/15-training-division-chart.png" alt="กราฟ Learners by Division" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: Learners by Division</span><code>images/15-training-division-chart.png</code></div>
+        </figure>
+        <figure class="shot">
+          <img src="images/16-training-top-courses.png" alt="กราฟ Top Courses" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: Top Courses</span><code>images/16-training-top-courses.png</code></div>
+        </figure>
+      </div>
+
+      <h3 id="training-add">6.1 เพิ่มประวัติการอบรม</h3>
+      <ol class="steps">
+        <li>กดปุ่ม <b>"+ เพิ่มประวัติการอบรม"</b></li>
+        <li>เลือกบริษัทก่อน — ระบบจะกรองรายชื่อพนักงาน/แผนก/ส่วน/ฝ่าย ให้ตรงกับบริษัทนั้นโดยอัตโนมัติ (ข้อมูลมาจาก SharePoint Employee list จริง)</li>
+        <li>เลือกชื่อ Course แล้วเลือก "รอบที่" — ตัวเลือกรอบจะเปลี่ยนตามหลักสูตรที่เลือก (แต่ละหลักสูตรมีจำนวนรอบไม่เท่ากัน)</li>
+        <li>ระบบจะโชว์กล่องรายละเอียดหลักสูตร (ระดับ, เครื่องมือหลัก, เป้าหมาย, คุณสมบัติผู้เข้าอบรม) ให้ตรวจสอบก่อนกรอกต่อ</li>
+        <li>กรอกวันที่เริ่ม/ถึงวันที่, เวลาเริ่ม/สิ้นสุด, ประเภท+ชื่อวิทยากร, ชื่อสถาบัน, รูปแบบการอบรม/สถานที่, ระยะเวลา</li>
+        <li>กด <b>"บันทึก"</b> — ระบบจะเคลียร์เฉพาะข้อมูลตัวบุคคล (รหัสพนักงาน, ชื่อ) ส่วนข้อมูลรอบ/หลักสูตร/วิทยากรจะคงไว้ ช่วยคีย์คนถัดไปในคอร์สเดียวกันได้เร็วขึ้น</li>
+      </ol>
+      <div class="grid2">
+        <figure class="shot">
+          <img src="images/17-training-add-form.png" alt="ฟอร์มเพิ่มประวัติการอบรม" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่มประวัติการอบรม (เริ่มต้น)</span><code>images/17-training-add-form.png</code></div>
+        </figure>
+        <figure class="shot">
+          <img src="images/18-training-add-form-course-detail.png" alt="ฟอร์มเพิ่มประวัติการอบรม พร้อมกล่องรายละเอียดหลักสูตร" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ ภาพ: กล่องรายละเอียดหลักสูตรที่โผล่ขึ้นหลังเลือก Course + รอบ</span><code>images/18-training-add-form-course-detail.png</code></div>
+        </figure>
+      </div>
+
+      <h3 id="training-import">6.2 นำเข้าจาก Excel</h3>
+      <p>สำหรับกรอกทีละหลายรายการ กดปุ่ม <b>"Template"</b> เพื่อดาวน์โหลดไฟล์ตัวอย่างก่อน กรอกข้อมูลตามคอลัมน์ในไฟล์ แล้วกด <b>"อัปโหลดจาก Excel"</b> เพื่อเลือกไฟล์ <code>.xlsx</code>/<code>.xls</code> นำเข้าทีเดียว</p>
+      <figure class="shot">
+        <img src="images/19-training-excel-upload-dialog.png" alt="หน้าต่างเลือกไฟล์ Excel สำหรับอัปโหลด" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้าต่างเลือกไฟล์ Excel ตอนกด "อัปโหลดจาก Excel"</span><code>images/19-training-excel-upload-dialog.png</code></div>
+      </figure>
+    </section>
+
+    <section id="champions">
+      <h2><span class="badge">7</span>Power Champion</h2>
+      <p class="lead">ทะเบียนบุคลากรที่ได้รับการแต่งตั้งเป็น Power Champion ของแต่ละบริษัท — เป้าหมาย 6 คน/บริษัท/ปี รวม 18 คนภายใน FY'2028</p>
+      <figure class="shot">
+        <img src="images/20-champions-list.png" alt="หน้าทำเนียบ Power Champion พร้อมคุณสมบัติและเงื่อนไข" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: หน้าทำเนียบ Power Champion + คุณสมบัติ/เงื่อนไข + กราฟรายบริษัท + ตารางแบบแบ่งหน้า</span><code>images/20-champions-list.png</code></div>
+      </figure>
+      <div class="card">
+        <h4>คุณสมบัติและเงื่อนไข</h4>
+        <ul>
+          <li><b>Qualifications:</b> สามารถสร้างหรือพัฒนางานโดยใช้เครื่องมือ Power Platform (MS Forms, Power Apps, Power Automate, Power BI, Database SharePoint List หรือ Excel)</li>
+          <li><b>Conditions:</b> นำ Power Platform มาใช้พัฒนางานได้อย่างน้อย 1 Project (ลดเวลางาน, เพิ่มคุณภาพและกระบวนการทำงาน, ลดการใช้กระดาษด้วยระบบ Paperless)</li>
+        </ul>
+      </div>
+      <ol class="steps">
+        <li>กดปุ่ม <b>"+ เพิ่ม Power Champion"</b></li>
+        <li>กรอกบริษัท/รหัสพนักงาน/ชื่อ/แผนก/ส่วน/ฝ่าย (กรองตามบริษัทเหมือนหน้า Training)</li>
+        <li>เลือก Project Value (คุณค่าที่โดดเด่นของโครงการ), ผู้อนุมัติ, ปีที่ได้รับตำแหน่ง (FY)</li>
+        <li>กรอกวันที่ได้รับคัดเลือก และรายละเอียดโดยสังเขป แล้วกดบันทึก</li>
+      </ol>
+      <figure class="shot">
+        <img src="images/21-champions-add-form.png" alt="ฟอร์มเพิ่ม Power Champion" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: ฟอร์มเพิ่ม Power Champion</span><code>images/21-champions-add-form.png</code></div>
+      </figure>
+    </section>
+
+    <section id="section-dashboard">
+      <h2><span class="badge">8</span>Section Dashboard</h2>
+      <p class="lead">มุมมองสำหรับหัวหน้าแผนก (Section Manager) — ติดตามความคืบหน้าเทียบเป้าหมาย เลือกดูเฉพาะบริษัท/ฝ่ายของตัวเอง หรือทั้งกลุ่มก็ได้</p>
+      <figure class="shot">
+        <img src="images/22-section-dashboard.png" alt="หน้า Section Dashboard พร้อมตัวกรองบริษัท/ฝ่าย และ 5 การ์ดตัวชี้วัด" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: Section Dashboard — ตัวกรองบริษัท/ฝ่าย + 5 การ์ดตัวชี้วัดที่ scope ตามบริษัทที่เลือก</span><code>images/22-section-dashboard.png</code></div>
+      </figure>
+      <figure class="shot">
+        <img src="images/23-section-dashboard-division-filter.png" alt="ตัวเลือกฝ่ายแบบเต็มรายการ" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: รายการฝ่ายทั้งหมดในตัวกรอง (ข้อมูลจริงจาก SharePoint)</span><code>images/23-section-dashboard-division-filter.png</code></div>
+      </figure>
+      <div class="grid2">
+        <div class="card accent-orange">
+          <h4>ตัวกรองบริษัท / ฝ่าย</h4>
+          <p>เลือก "ทั้งหมด (All)" เพื่อดูภาพรวมบริษัท หรือเลือกฝ่ายเฉพาะเจาะจง — รายชื่อฝ่ายเป็นข้อมูลจริงจาก SharePoint ของบริษัทนั้นๆ</p>
+        </div>
+        <div class="card accent-orange">
+          <h4>5 ตัวชี้วัดหลัก</h4>
+          <p>Paper Reduction · Citizen Developer Project · Time Reduction · Power Champions · Training — แต่ละการ์ดมีบรรทัดที่มา (footnote) อธิบายวิธีคำนวณกำกับไว้</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="exec-dashboard">
+      <h2><span class="badge">9</span>Executive Dashboard</h2>
+      <p class="lead">ภาพรวมระดับผู้บริหาร ครอบคลุมทั้งกลุ่ม ATTG พร้อมมูลค่าที่ระบบสร้างคืนให้ธุรกิจ</p>
+      <figure class="shot">
+        <img src="images/24-executive-overview-top.png" alt="หน้า Executive Dashboard ส่วนบน แสดงมูลค่า Automation/Paperless และ 5 การ์ดตัวชี้วัด" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: Executive Dashboard ส่วนบน (มูลค่า Automation/Paperless + 5 การ์ดตัวชี้วัด)</span><code>images/24-executive-overview-top.png</code></div>
+      </figure>
+      <figure class="shot">
+        <img src="images/25-executive-overview-charts.png" alt="Executive Dashboard ส่วนกราฟเปรียบเทียบรายบริษัทและ Division" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ ภาพ: กราฟเปรียบเทียบรายบริษัท/ฝ่าย + Training Progress</span><code>images/25-executive-overview-charts.png</code></div>
+      </figure>
+      <ul style="font-size:14px">
+        <li>สถิติ O365 License: จำนวนรวม, ค่าใช้จ่ายต่อปี, สัดส่วนที่ยังใช้งานไม่เต็มศักยภาพ, ROI Gap</li>
+        <li>มูลค่าที่ทำระบบ Automation / Paperless สร้างคืนให้ธุรกิจ (สะสมถึงปัจจุบัน — ไม่ใช่ยอดต่อปี)</li>
+        <li>กราฟเปรียบเทียบแต่ละบริษัท: จำนวน Project, Power Champions</li>
+        <li>Reduce Time by Division — เลือกบริษัทได้ ไล่เฉดสีตามความคืบหน้า (แดง = ยังไม่เริ่ม, ส้ม/เหลือง = กำลังไป, เขียว = ถึงเป้าหมาย)</li>
+        <li>สามารถกด <b>Refresh</b> มุมขวาบนเพื่อดึงข้อมูลล่าสุดได้ตลอดเวลา</li>
+      </ul>
+    </section>
+
+    <section id="admin">
+      <h2><span class="badge">10</span>Administration</h2>
+      <p class="lead">เฉพาะบัญชีที่มีสิทธิ์ Admin เท่านั้นที่เปิดเมนูนี้ได้</p>
+      <div class="grid2">
+        <div class="card"><h4>Manage Data</h4><p>ทางลัดไปหน้าจัดการ Project / Training / Power Champion</p></div>
+        <div class="card"><h4>Access &amp; Permissions</h4><p>รายชื่อบัญชีที่มีสิทธิ์ Admin / Export / เข้าเมนูจำกัด (ข้อมูลจริง อัปเดตอัตโนมัติ)</p></div>
+        <div class="card"><h4>Database</h4><p>สถานะฐานข้อมูลแบบเรียลไทม์ และรายชื่อตารางพร้อมจำนวนแถวจริง</p></div>
+        <div class="card"><h4>Estimated Monthly Cost</h4><p>ประมาณการค่าใช้จ่ายระบบ ณ ปัจจุบัน เทียบกับทางเลือกอื่น</p></div>
+      </div>
+    </section>
+
+    <section id="settings">
+      <h2><span class="badge">11</span>Settings</h2>
+      <div class="grid2">
+        <div class="card"><h4>Theme</h4><p>สลับ Dark Mode และเลือก Accent Color (Blue/Indigo/Teal/Green/Amber/Rose) ที่ใช้ทั่วทั้งระบบทันที</p></div>
+        <div class="card"><h4>Master Data Sync</h4><p>สถานะการซิงก์ข้อมูลจาก SharePoint (Employees, PM-UP, Departments, Sections, Divisions) พร้อมเวลาซิงก์ล่าสุด</p></div>
+      </div>
+    </section>
+
+    <section id="permissions">
+      <h2><span class="badge">12</span>สรุปสิทธิ์การใช้งาน</h2>
+      <table>
+        <tr><th>สิทธิ์</th><th>ทำอะไรได้</th></tr>
+        <tr><td><span class="pill red">Full Admin</span></td><td>แก้ไข/ลบข้อมูลของใครก็ได้ ไม่จำกัดแค่ที่ตัวเองสร้าง</td></tr>
+        <tr><td><span class="pill blue">Restricted Nav Access</span></td><td>เปิดเมนู Citizen Developer Training / Power Champion / Administration ได้</td></tr>
+        <tr><td><span class="pill green">Excel Export</span></td><td>กดปุ่ม Export Data บนหน้า Project Registration ได้</td></tr>
+        <tr><td><span class="pill orange">ผู้ใช้ทั่วไป</span></td><td>แก้ไข/ลบได้เฉพาะรายการที่ตัวเองสร้างเท่านั้น</td></tr>
+      </table>
+      <div class="note red">รายชื่อบัญชีที่มีสิทธิ์แต่ละระดับ ดูได้ที่หน้า Administration → Access &amp; Permissions (เป็นข้อมูลจริง อัปเดตอัตโนมัติ ไม่ใช่ค่าคงที่ในคู่มือนี้)</div>
+    </section>
+
+    <section id="faq">
+      <h2><span class="badge">13</span>คำถามที่พบบ่อย</h2>
+      <div class="card">
+        <h4>ทำไมข้อมูลบางหน้าโหลดช้าตอนเปิดครั้งแรกของวัน?</h4>
+        <p>ฐานข้อมูลเป็นแบบ Serverless จะพักการทำงาน (Pause) อัตโนมัติเมื่อไม่มีคนใช้นาน 60 นาที การเปิดครั้งแรกหลังพักจึงอาจช้ากว่าปกติเล็กน้อย ลอง Refresh อีกครั้งถ้าข้อมูลดูไม่ครบ</p>
+      </div>
+      <div class="card">
+        <h4>ทำไมแก้ไขข้อมูลแล้วดูเหมือนไม่บันทึก?</h4>
+        <p>อาจเกิดจาก session หมดอายุหลังไม่ได้ใช้งานนาน — ลอง Refresh หน้าเว็บแล้วลองแก้ไขอีกครั้ง ระบบจะแจ้งเตือนหากบันทึกไม่สำเร็จ</p>
+      </div>
+      <div class="card">
+        <h4>ข้อมูลบริษัท/แผนก/ฝ่ายผิด แก้ไขที่นี่ได้ไหม?</h4>
+        <p>แก้ไม่ได้โดยตรงในระบบนี้ — ข้อมูลเหล่านี้ซิงก์มาจาก SharePoint Employee list ของบริษัททุกวัน ต้องแก้ที่ต้นทางแล้วรอรอบซิงก์ถัดไป</p>
+      </div>
+      <div class="card">
+        <h4>อยากเพิ่มประวัติการอบรมทีละหลายสิบคน ต้องกรอกทีละคนไหม?</h4>
+        <p>ไม่ต้อง — ใช้ปุ่ม "Template" ดาวน์โหลดไฟล์ตัวอย่าง กรอกใน Excel แล้วอัปโหลดกลับเข้าระบบทีเดียวได้ (ดูหมวด 6.2)</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  TPS Office Digital Tools — ATTG Group · Smart Office &amp; Paperless Transformation FY'2026–2028
+</footer>
+
+</body>
+</html>
