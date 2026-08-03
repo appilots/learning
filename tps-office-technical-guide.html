@@ -147,6 +147,16 @@
   .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
   .pill.blue { background: rgba(0,120,212,0.12); color: var(--blue); }
   .pill.green { background: rgba(16,124,16,0.12); color: var(--green); }
+  .stack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0; }
+  .stack-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .stack-item .role { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-light); font-weight: 700; margin-bottom: 4px; }
+  .stack-item .items { font-size: 13.5px; }
+  @media (max-width: 640px) { .stack-grid { grid-template-columns: 1fr; } }
   footer { text-align: center; padding: 30px; color: var(--ink-light); font-size: 12.5px; border-top: 1px solid var(--border); }
 
   figure.shot {
@@ -188,7 +198,7 @@
 
   @media (prefers-color-scheme: dark) {
     body { background: #16181C; color: #E5E7EB; }
-    .toc, .card, footer, figure.shot { background: #1E2126; border-color: #2C2F36; }
+    .toc, .card, .stack-item, footer, figure.shot { background: #1E2126; border-color: #2C2F36; }
     .toc a { color: #E5E7EB; }
     .toc a:hover { background: #262A31; }
     th { background: #23262C; color: #9CA3AF; }
@@ -218,7 +228,10 @@
     <h2>สารบัญ</h2>
     <ul>
       <li><a href="#architecture">1. สถาปัตยกรรมระบบ</a></li>
-      <li><a href="#database">2. ฐานข้อมูล (Database)</a></li>
+      <li><a href="#stack">2. Tech Stack ที่ใช้สร้างระบบ</a></li>
+      <li><a href="#database">3. ฐานข้อมูล (Database)</a></li>
+      <li><a href="#limits">4. ข้อจำกัดของแพลตฟอร์ม</a></li>
+      <li><a href="#backup">5. การสำรองข้อมูล</a></li>
     </ul>
   </nav>
 
@@ -251,8 +264,64 @@
       </div>
     </section>
 
+    <section id="stack">
+      <h2><span class="badge">2</span>Tech Stack ที่ใช้สร้างระบบ</h2>
+      <p class="lead">เทคโนโลยีหลักที่ใช้สร้างและรันระบบ TPS Office Digital Tools แบ่งตามชั้นการทำงาน</p>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <div class="role">Cloud Service Model</div>
+          <div class="items">PaaS (Platform as a Service) ทั้งหมด — ไม่มีส่วนไหนเป็น IaaS (ไม่ต้องดูแล VM/OS เอง) หรือ SaaS (เขียนโค้ดเองทั้งหมด ไม่ใช่ซอฟต์แวร์สำเร็จรูป)</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Frontend</div>
+          <div class="items">React (SPA) + Vite, Tailwind CSS, Recharts (กราฟ), lucide-react (ไอคอน)</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Backend API</div>
+          <div class="items">Azure Functions (Node.js, v4 programming model) รันแบบ co-located กับ Static Web App</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Database</div>
+          <div class="items">Azure SQL Database (Serverless tier)</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Hosting</div>
+          <div class="items">Azure Static Web Apps (Free tier)</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Authentication</div>
+          <div class="items">Microsoft Entra ID (Azure AD) — ใช้บัญชี O365 ของ ATTG ล็อกอิน</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Master Data Source</div>
+          <div class="items">SharePoint Online (ผ่าน Power Automate Scheduled Flow ดูหมวด 1)</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Version Control</div>
+          <div class="items">Git — เก็บใน private repository</div>
+        </div>
+        <div class="stack-item">
+          <div class="role">Export</div>
+          <div class="items">Excel export/import (ฝั่งไคลเอนต์) สำหรับ Project Registration และ Training</div>
+        </div>
+      </div>
+
+      <h3>เหตุผลที่จัดเป็น PaaS ทั้งหมด</h3>
+      <table>
+        <tbody>
+          <tr><th>Azure Static Web Apps</th><td>PaaS — host เว็บให้เลย ไม่ต้องดูแล server/OS เอง</td></tr>
+          <tr><th>Azure Functions</th><td>PaaS (เจาะจงเรียก Serverless/FaaS) — รันโค้ด backend โดยไม่ต้องมี server ให้ดูแล จ่ายตามการใช้งานจริง</td></tr>
+          <tr><th>Azure SQL Database</th><td>PaaS — ฐานข้อมูลจัดการให้ครบ (patch, backup, scaling) ไม่ต้องตั้ง VM ฐานข้อมูลเอง</td></tr>
+          <tr><th>Entra ID (Azure AD)</th><td>PaaS/IDaaS — บริการ identity/login สำเร็จรูป</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        การเลือกใช้ PaaS ล้วนๆ นี่แหละที่ทำให้ต้นทุนต่ำ (Free tier + Serverless auto-pause, ดูหมวด 3 และ 4) และไม่ต้องมีคนคอย patch/ดูแล server เลย
+      </div>
+    </section>
+
     <section id="database">
-      <h2><span class="badge">2</span>ฐานข้อมูล (Database)</h2>
+      <h2><span class="badge">3</span>ฐานข้อมูล (Database)</h2>
       <p class="lead">รายละเอียดฐานข้อมูลจริงที่ใช้งานอยู่ — ดูรายชื่อ Table และ field แต่ละตัวแบบสดได้ที่หน้า Administration ในแอป (เมนู Database)</p>
       <table>
         <tbody>
@@ -273,6 +342,39 @@
       </div>
       <div class="note">
         <b>หมายเหตุด้านต้นทุน:</b> ค่าใช้จ่ายจริงอิงราคา Retail ของ Azure สำหรับ SKU นี้ (Southeast Asia) อยู่ที่ $0.620892/vCore-hour — ดูตัวเลขประมาณการรายเดือน 3 สถานการณ์ (ไม่มี keep-alive / keep-alive เฉพาะเวลาทำงาน / เปิดตลอด 24/7) ได้ที่หน้า Administration ในแอปเช่นกัน
+      </div>
+    </section>
+
+    <section id="limits">
+      <h2><span class="badge">4</span>ข้อจำกัดของแพลตฟอร์ม</h2>
+      <p class="lead">ข้อจำกัดจริงของ tier ที่ใช้อยู่ (Free / Serverless) ที่ทีม dev ควรรู้ก่อนออกแบบ feature ใหม่ที่ทำงานหนักหรือใช้เวลานาน</p>
+      <table>
+        <tbody>
+          <tr><th>Function Timeout</th><td>Azure Static Web Apps (Free tier) มี hard timeout ที่ระดับแพลตฟอร์ม <b>45 วินาที</b> ต่อ 1 request ไปยัง Azure Functions — ตั้งค่า timeout ในโค้ดให้นานกว่านี้ไม่มีผล เพราะแพลตฟอร์มตัดก่อน</td></tr>
+          <tr><th>Database Auto-pause</th><td>Azure SQL Serverless จะพักการทำงานหลังไม่มีการใช้งาน 60 นาที การ request แรกหลังพักจะช้ากว่าปกติ (cold start) เพราะต้องรอฐานข้อมูลตื่นก่อน</td></tr>
+          <tr><th>SLA</th><td>Static Web Apps ระดับ Free ไม่มี SLA (Service Level Agreement) รับประกัน uptime — หากต้องการ SLA ต้องอัปเกรดเป็นระดับ Standard</td></tr>
+          <tr><th>Custom Domain</th><td>ต้องพึ่ง DNS ภายนอก (เช่น DNS ของโรงงาน) ในการ resolve โดเมนที่กำหนดเอง — หาก DNS นั้นมีปัญหา ผู้ใช้ยังเข้าได้ผ่าน hostname ตรงของ Azure Static Web Apps เสมอ (ดูหมวด "การเข้าใช้งานสำรอง" ด้านล่าง)</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        Administration → Database ในแอปใช้เวลาตอบสนองของ query "list tables" (เกิน ~2.5 วินาที) เป็นตัวบ่งชี้ว่าฐานข้อมูลเพิ่ง resume จากการ pause หรือไม่ — ไม่ใช่การเช็คสถานะผ่าน Azure Resource Manager โดยตรง
+      </div>
+    </section>
+
+    <section id="backup">
+      <h2><span class="badge">5</span>การสำรองข้อมูล</h2>
+      <p class="lead">ระบบสำรองข้อมูลอัตโนมัติของแต่ละส่วน โดยไม่ต้องมี job หรือ script แยกต่างหาก</p>
+      <div class="card">
+        <h4>ฐานข้อมูล (Azure SQL)</h4>
+        <p>Azure SQL Database สำรองข้อมูลให้อัตโนมัติทุกฐานข้อมูล (full + differential + transaction log backup) และรองรับ Point-in-Time Restore ย้อนหลังได้ตามระยะเวลาที่ Azure กำหนดไว้เป็นค่าเริ่มต้น — ไม่ต้องตั้ง backup job เพิ่มเอง</p>
+      </div>
+      <div class="card">
+        <h4>Source Code</h4>
+        <p>เก็บด้วย Git และมี remote backup อยู่ใน private repository บน GitHub แยกจากเครื่อง local — ป้องกันข้อมูล source code สูญหายหากเครื่องที่พัฒนามีปัญหา</p>
+      </div>
+      <div class="card">
+        <h4>Master Data (SharePoint)</h4>
+        <p>ข้อมูลต้นทาง (Employee / Department / Division / Section) อยู่ที่ SharePoint Online ซึ่งอยู่ภายใต้นโยบายสำรองข้อมูลมาตรฐานของ Microsoft 365 อยู่แล้ว</p>
       </div>
     </section>
 
