@@ -369,20 +369,36 @@
     </section>
 
     <section id="stack">
-      <h2><span class="badge">2</span>Tech Stack ที่ใช้สร้างระบบ</h2>
-      <p class="lead">เทคโนโลยีหลักที่ใช้สร้างและรันระบบ TPS Office Digital Tools แบ่งตามชั้นการทำงาน</p>
+      <h2><span class="badge">2</span><span class="lang-th">Tech Stack ที่ใช้สร้างระบบ</span><span class="lang-en">Tech Stack</span><span class="lang-jp">技術スタック</span></h2>
+      <p class="lead">
+        <span class="lang-th">เทคโนโลยีหลักที่ใช้สร้างและรันระบบ TPS Office Digital Tools แบ่งตามชั้นการทำงาน</span>
+        <span class="lang-en">The core technologies used to build and run TPS Office Digital Tools, organized by layer.</span>
+        <span class="lang-jp">TPS Office Digital Toolsの構築・実行に使用する主要技術（レイヤー別）。</span>
+      </p>
       <div class="stack-grid">
         <div class="stack-item">
           <div class="role">Cloud Service Model</div>
-          <div class="items">PaaS (Platform as a Service) ทั้งหมด — ไม่มีส่วนไหนเป็น IaaS (ไม่ต้องดูแล VM/OS เอง) หรือ SaaS (เขียนโค้ดเองทั้งหมด ไม่ใช่ซอฟต์แวร์สำเร็จรูป)</div>
+          <div class="items">
+            <span class="lang-th">PaaS (Platform as a Service) ทั้งหมด — ไม่มีส่วนไหนเป็น IaaS (ไม่ต้องดูแล VM/OS เอง) หรือ SaaS (เขียนโค้ดเองทั้งหมด ไม่ใช่ซอฟต์แวร์สำเร็จรูป)</span>
+            <span class="lang-en">Entirely PaaS (Platform as a Service) — no part is IaaS (no need to manage VMs/OS yourself) or SaaS (fully custom-coded, not off-the-shelf software).</span>
+            <span class="lang-jp">すべてPaaS（Platform as a Service）— IaaS（VM／OSを自分で管理する必要がある）でもSaaS（既製ソフトウェアではなく完全に独自開発）でもありません。</span>
+          </div>
         </div>
         <div class="stack-item">
           <div class="role">Frontend</div>
-          <div class="items">React (SPA) + Vite, Tailwind CSS, Recharts (กราฟ), lucide-react (ไอคอน)</div>
+          <div class="items">
+            <span class="lang-th">React (SPA) + Vite, Tailwind CSS, Recharts (กราฟ), lucide-react (ไอคอน)</span>
+            <span class="lang-en">React (SPA) + Vite, Tailwind CSS, Recharts (charts), lucide-react (icons)</span>
+            <span class="lang-jp">React（SPA）＋ Vite、Tailwind CSS、Recharts（グラフ）、lucide-react（アイコン）</span>
+          </div>
         </div>
         <div class="stack-item">
           <div class="role">Backend API</div>
-          <div class="items">Azure Functions (Node.js, v4 programming model) รันแบบ co-located กับ Static Web App</div>
+          <div class="items">
+            <span class="lang-th">Azure Functions (Node.js, v4 programming model) รันแบบ co-located กับ Static Web App</span>
+            <span class="lang-en">Azure Functions (Node.js, v4 programming model), running co-located with the Static Web App.</span>
+            <span class="lang-jp">Azure Functions（Node.js、v4プログラミングモデル）、Static Web Appと同居（co-located）して実行。</span>
+          </div>
         </div>
         <div class="stack-item">
           <div class="role">Database</div>
@@ -394,39 +410,77 @@
         </div>
         <div class="stack-item">
           <div class="role">Authentication</div>
-          <div class="items">Microsoft Entra ID (Azure AD) — ใช้บัญชี O365 ของ ATTG ล็อกอิน</div>
+          <div class="items">
+            <span class="lang-th">Microsoft Entra ID (Azure AD) — ใช้บัญชี O365 ของ ATTG ล็อกอิน</span>
+            <span class="lang-en">Microsoft Entra ID (Azure AD) — sign in using ATTG's O365 accounts.</span>
+            <span class="lang-jp">Microsoft Entra ID（Azure AD）— ATTGのO365アカウントでサインイン。</span>
+          </div>
         </div>
         <div class="stack-item">
           <div class="role">Master Data Source</div>
-          <div class="items">SharePoint Online (ผ่าน Power Automate Scheduled Flow ดูหมวด 1)</div>
+          <div class="items">
+            <span class="lang-th">SharePoint Online (ผ่าน Power Automate Scheduled Flow ดูหมวด 1)</span>
+            <span class="lang-en">SharePoint Online (via a Power Automate Scheduled Flow — see section 1).</span>
+            <span class="lang-jp">SharePoint Online（Power Automateのスケジュールフロー経由 — セクション1参照）。</span>
+          </div>
         </div>
         <div class="stack-item">
           <div class="role">Version Control</div>
-          <div class="items">Git — เก็บใน private repository</div>
+          <div class="items">
+            <span class="lang-th">Git — เก็บใน private repository</span>
+            <span class="lang-en">Git — stored in a private repository.</span>
+            <span class="lang-jp">Git — プライベートリポジトリに保管。</span>
+          </div>
         </div>
         <div class="stack-item">
           <div class="role">Export</div>
-          <div class="items">Excel export/import (ฝั่งไคลเอนต์) สำหรับ Project Registration และ Training</div>
+          <div class="items">
+            <span class="lang-th">Excel export/import (ฝั่งไคลเอนต์) สำหรับ Project Registration และ Training</span>
+            <span class="lang-en">Excel export/import (client-side) for Project Registration and Training.</span>
+            <span class="lang-jp">Excelエクスポート／インポート（クライアント側）— Project RegistrationおよびTraining用。</span>
+          </div>
         </div>
       </div>
 
-      <h3>เหตุผลที่จัดเป็น PaaS ทั้งหมด</h3>
+      <h3><span class="lang-th">เหตุผลที่จัดเป็น PaaS ทั้งหมด</span><span class="lang-en">Why everything is classified as PaaS</span><span class="lang-jp">すべてPaaSに分類する理由</span></h3>
       <table>
         <tbody>
-          <tr><th>Azure Static Web Apps</th><td>PaaS — host เว็บให้เลย ไม่ต้องดูแล server/OS เอง</td></tr>
-          <tr><th>Azure Functions</th><td>PaaS (เจาะจงเรียก Serverless/FaaS) — รันโค้ด backend โดยไม่ต้องมี server ให้ดูแล จ่ายตามการใช้งานจริง</td></tr>
-          <tr><th>Azure SQL Database</th><td>PaaS — ฐานข้อมูลจัดการให้ครบ (patch, backup, scaling) ไม่ต้องตั้ง VM ฐานข้อมูลเอง</td></tr>
-          <tr><th>Entra ID (Azure AD)</th><td>PaaS/IDaaS — บริการ identity/login สำเร็จรูป</td></tr>
+          <tr><th>Azure Static Web Apps</th><td>
+            <span class="lang-th">PaaS — host เว็บให้เลย ไม่ต้องดูแล server/OS เอง</span>
+            <span class="lang-en">PaaS — hosts the website for you, no need to manage the server/OS yourself.</span>
+            <span class="lang-jp">PaaS — Webサイトをそのままホスティングし、サーバー／OSの管理は不要です。</span>
+          </td></tr>
+          <tr><th>Azure Functions</th><td>
+            <span class="lang-th">PaaS (เจาะจงเรียก Serverless/FaaS) — รันโค้ด backend โดยไม่ต้องมี server ให้ดูแล จ่ายตามการใช้งานจริง</span>
+            <span class="lang-en">PaaS (more specifically Serverless/FaaS) — runs backend code without a server to manage, billed based on actual usage.</span>
+            <span class="lang-jp">PaaS（より正確にはServerless／FaaS）— 管理すべきサーバーなしでバックエンドコードを実行し、実際の使用量に応じて課金されます。</span>
+          </td></tr>
+          <tr><th>Azure SQL Database</th><td>
+            <span class="lang-th">PaaS — ฐานข้อมูลจัดการให้ครบ (patch, backup, scaling) ไม่ต้องตั้ง VM ฐานข้อมูลเอง</span>
+            <span class="lang-en">PaaS — the database is fully managed (patching, backup, scaling); no need to set up a database VM yourself.</span>
+            <span class="lang-jp">PaaS — パッチ適用、バックアップ、スケーリングを含め完全に管理されており、自分でデータベースVMを構築する必要はありません。</span>
+          </td></tr>
+          <tr><th>Entra ID (Azure AD)</th><td>
+            <span class="lang-th">PaaS/IDaaS — บริการ identity/login สำเร็จรูป</span>
+            <span class="lang-en">PaaS/IDaaS — a ready-made identity/login service.</span>
+            <span class="lang-jp">PaaS／IDaaS — 既製のID／ログインサービスです。</span>
+          </td></tr>
         </tbody>
       </table>
       <div class="note">
-        การเลือกใช้ PaaS ล้วนๆ นี่แหละที่ทำให้ต้นทุนต่ำ (Free tier + Serverless auto-pause, ดูหมวด 3 และ 4) และไม่ต้องมีคนคอย patch/ดูแล server เลย
+        <span class="lang-th">การเลือกใช้ PaaS ล้วนๆ นี่แหละที่ทำให้ต้นทุนต่ำ (Free tier + Serverless auto-pause, ดูหมวด 3 และ 4) และไม่ต้องมีคนคอย patch/ดูแล server เลย</span>
+        <span class="lang-en">Choosing an all-PaaS approach is exactly what keeps costs low (Free tier + Serverless auto-pause — see sections 3 and 4) and eliminates the need for anyone to patch/maintain servers at all.</span>
+        <span class="lang-jp">PaaSのみを採用することで、コストを低く抑えられ（Free tier＋Serverlessの自動一時停止 — セクション3・4参照）、サーバーのパッチ適用・保守を行う担当者も不要になります。</span>
       </div>
     </section>
 
     <section id="database">
-      <h2><span class="badge">3</span>ฐานข้อมูล (Database)</h2>
-      <p class="lead">รายละเอียดฐานข้อมูลจริงที่ใช้งานอยู่ — ดูรายชื่อ Table และ field แต่ละตัวแบบสดได้ที่หน้า Administration ในแอป (เมนู Database)</p>
+      <h2><span class="badge">3</span><span class="lang-th">ฐานข้อมูล (Database)</span><span class="lang-en">Database</span><span class="lang-jp">データベース</span></h2>
+      <p class="lead">
+        <span class="lang-th">รายละเอียดฐานข้อมูลจริงที่ใช้งานอยู่ — ดูรายชื่อ Table และ field แต่ละตัวแบบสดได้ที่หน้า Administration ในแอป (เมนู Database)</span>
+        <span class="lang-en">Details of the actual database in use — see a live list of Tables and their fields on the Administration page in the app (Database menu).</span>
+        <span class="lang-jp">実際に使用しているデータベースの詳細 — Table一覧と各フィールドはアプリのAdministrationページ（Databaseメニュー）でリアルタイムに確認できます。</span>
+      </p>
       <table>
         <tbody>
           <tr><th>Type</th><td>Azure SQL Database (Serverless)</td></tr>
@@ -436,49 +490,101 @@
           <tr><th>Min Capacity</th><td>0.5 vCore</td></tr>
           <tr><th>Region</th><td>Southeast Asia</td></tr>
           <tr><th>Resource Group</th><td><code>rg-tps-office</code></td></tr>
-          <tr><th>Auto-pause</th><td>หลังไม่มีการใช้งาน 60 นาที (ปลุกกลับมาเองอัตโนมัติเมื่อมี request เข้ามา)</td></tr>
-          <tr><th>วิธีเชื่อมต่อ</th><td>Connection string เก็บใน App Settings ของ Azure Functions — ยังไม่ใช้ Managed Identity เพราะต้องใช้ Static Web Apps ระดับ Standard (มีค่าใช้จ่ายเพิ่ม), ปัจจุบันใช้ Free tier</td></tr>
+          <tr><th>Auto-pause</th><td>
+            <span class="lang-th">หลังไม่มีการใช้งาน 60 นาที (ปลุกกลับมาเองอัตโนมัติเมื่อมี request เข้ามา)</span>
+            <span class="lang-en">After 60 minutes of inactivity (automatically wakes up when a request comes in).</span>
+            <span class="lang-jp">60分間操作がない場合（リクエストが来ると自動的に再開します）。</span>
+          </td></tr>
+          <tr><th><span class="lang-th">วิธีเชื่อมต่อ</span><span class="lang-en">Connection Method</span><span class="lang-jp">接続方法</span></th><td>
+            <span class="lang-th">Connection string เก็บใน App Settings ของ Azure Functions — ยังไม่ใช้ Managed Identity เพราะต้องใช้ Static Web Apps ระดับ Standard (มีค่าใช้จ่ายเพิ่ม), ปัจจุบันใช้ Free tier</span>
+            <span class="lang-en">The connection string is stored in Azure Functions' App Settings — Managed Identity isn't used yet because it requires the Standard tier of Static Web Apps (an added cost); the Free tier is currently in use.</span>
+            <span class="lang-jp">接続文字列はAzure FunctionsのApp Settingsに保存されています — Managed Identityは、Static Web AppsのStandardプラン（追加費用が発生）が必要なため未使用です。現在はFree tierを使用しています。</span>
+          </td></tr>
         </tbody>
       </table>
       <div class="card accent-blue">
-        <h4>ดูรายชื่อ Table และ Field แบบสด (Live)</h4>
-        <p>หน้า <b>Administration → Database</b> ในแอปจริง จะดึงรายชื่อ Table, จำนวนแถว และ Field ของแต่ละ Table ผ่าน <code>sys.tables</code> / <code>sys.columns</code> โดยตรงจากฐานข้อมูล ทุกครั้งที่เปิดหน้า — ข้อมูลจึงถูกต้องเสมอโดยไม่ต้องมาแก้เอกสารนี้ตามหลัง</p>
+        <h4><span class="lang-th">ดูรายชื่อ Table และ Field แบบสด (Live)</span><span class="lang-en">View live Table and Field lists</span><span class="lang-jp">TableとFieldをリアルタイムで確認</span></h4>
+        <p>
+          <span class="lang-th">หน้า <b>Administration → Database</b> ในแอปจริง จะดึงรายชื่อ Table, จำนวนแถว และ Field ของแต่ละ Table ผ่าน <code>sys.tables</code> / <code>sys.columns</code> โดยตรงจากฐานข้อมูล ทุกครั้งที่เปิดหน้า — ข้อมูลจึงถูกต้องเสมอโดยไม่ต้องมาแก้เอกสารนี้ตามหลัง</span>
+          <span class="lang-en">The <b>Administration → Database</b> page in the real app pulls the list of Tables, row counts, and each Table's Fields directly from the database via <code>sys.tables</code> / <code>sys.columns</code> every time the page is opened — so the data is always accurate without needing to update this document afterward.</span>
+          <span class="lang-jp">実際のアプリの<b>Administration → Database</b>ページでは、ページを開くたびに<code>sys.tables</code>／<code>sys.columns</code>を通じてデータベースから直接Table一覧、行数、各Tableのフィールドを取得します — そのため、このドキュメントを後から更新しなくても常に正確な情報が得られます。</span>
+        </p>
       </div>
       <div class="note">
-        <b>หมายเหตุด้านต้นทุน:</b> ค่าใช้จ่ายจริงอิงราคา Retail ของ Azure สำหรับ SKU นี้ (Southeast Asia) อยู่ที่ $0.620892/vCore-hour — ดูตัวเลขประมาณการรายเดือน 3 สถานการณ์ (ไม่มี keep-alive / keep-alive เฉพาะเวลาทำงาน / เปิดตลอด 24/7) ได้ที่หน้า Administration ในแอปเช่นกัน
+        <span class="lang-th"><b>หมายเหตุด้านต้นทุน:</b> ค่าใช้จ่ายจริงอิงราคา Retail ของ Azure สำหรับ SKU นี้ (Southeast Asia) อยู่ที่ $0.620892/vCore-hour — ดูตัวเลขประมาณการรายเดือน 3 สถานการณ์ (ไม่มี keep-alive / keep-alive เฉพาะเวลาทำงาน / เปิดตลอด 24/7) ได้ที่หน้า Administration ในแอปเช่นกัน</span>
+        <span class="lang-en"><b>Cost note:</b> the actual cost is based on Azure's Retail price for this SKU (Southeast Asia) at $0.620892/vCore-hour — see the 3 monthly cost-estimate scenarios (no keep-alive / business-hours-only keep-alive / always-on 24/7) on the Administration page in the app as well.</span>
+        <span class="lang-jp"><b>コストに関する注記：</b>実際の費用は、このSKU（Southeast Asia）のAzureリテール価格 $0.620892／vCore時間 に基づきます — 月額費用の見積もり3パターン（keep-aliveなし／業務時間帯のみkeep-alive／24時間365日稼働）についても、アプリのAdministrationページで確認できます。</span>
       </div>
     </section>
 
     <section id="limits">
-      <h2><span class="badge">4</span>ข้อจำกัดของแพลตฟอร์ม</h2>
-      <p class="lead">ข้อจำกัดจริงของ tier ที่ใช้อยู่ (Free / Serverless) ที่ทีม dev ควรรู้ก่อนออกแบบ feature ใหม่ที่ทำงานหนักหรือใช้เวลานาน</p>
+      <h2><span class="badge">4</span><span class="lang-th">ข้อจำกัดของแพลตฟอร์ม</span><span class="lang-en">Platform Limitations</span><span class="lang-jp">プラットフォームの制限</span></h2>
+      <p class="lead">
+        <span class="lang-th">ข้อจำกัดจริงของ tier ที่ใช้อยู่ (Free / Serverless) ที่ทีม dev ควรรู้ก่อนออกแบบ feature ใหม่ที่ทำงานหนักหรือใช้เวลานาน</span>
+        <span class="lang-en">The real limitations of the tiers in use (Free / Serverless) that the dev team should know before designing new features that are heavy or long-running.</span>
+        <span class="lang-jp">重い処理や長時間実行される新機能を設計する前に、開発チームが知っておくべき、現在使用中のプラン（Free／Serverless）の実際の制限事項。</span>
+      </p>
       <table>
         <tbody>
-          <tr><th>Function Timeout</th><td>Azure Static Web Apps (Free tier) มี hard timeout ที่ระดับแพลตฟอร์ม <b>45 วินาที</b> ต่อ 1 request ไปยัง Azure Functions — ตั้งค่า timeout ในโค้ดให้นานกว่านี้ไม่มีผล เพราะแพลตฟอร์มตัดก่อน</td></tr>
-          <tr><th>Database Auto-pause</th><td>Azure SQL Serverless จะพักการทำงานหลังไม่มีการใช้งาน 60 นาที การ request แรกหลังพักจะช้ากว่าปกติ (cold start) เพราะต้องรอฐานข้อมูลตื่นก่อน</td></tr>
-          <tr><th>SLA</th><td>Static Web Apps ระดับ Free ไม่มี SLA (Service Level Agreement) รับประกัน uptime — หากต้องการ SLA ต้องอัปเกรดเป็นระดับ Standard</td></tr>
-          <tr><th>Custom Domain</th><td>ต้องพึ่ง DNS ภายนอก (เช่น DNS ของโรงงาน) ในการ resolve โดเมนที่กำหนดเอง — หาก DNS นั้นมีปัญหา ผู้ใช้ยังเข้าได้ผ่าน hostname ตรงของ Azure Static Web Apps เสมอ (ดูหมวด "การเข้าใช้งานสำรอง" ด้านล่าง)</td></tr>
+          <tr><th>Function Timeout</th><td>
+            <span class="lang-th">Azure Static Web Apps (Free tier) มี hard timeout ที่ระดับแพลตฟอร์ม <b>45 วินาที</b> ต่อ 1 request ไปยัง Azure Functions — ตั้งค่า timeout ในโค้ดให้นานกว่านี้ไม่มีผล เพราะแพลตฟอร์มตัดก่อน</span>
+            <span class="lang-en">Azure Static Web Apps (Free tier) has a platform-level hard timeout of <b>45 seconds</b> per request to Azure Functions — setting a longer timeout in code has no effect, because the platform cuts it off first.</span>
+            <span class="lang-jp">Azure Static Web Apps（Free tier）には、Azure Functionsへの1リクエストあたり<b>45秒</b>のプラットフォームレベルのハードタイムアウトがあります — コード側でこれより長いタイムアウトを設定しても、プラットフォームが先に切断するため効果はありません。</span>
+          </td></tr>
+          <tr><th>Database Auto-pause</th><td>
+            <span class="lang-th">Azure SQL Serverless จะพักการทำงานหลังไม่มีการใช้งาน 60 นาที การ request แรกหลังพักจะช้ากว่าปกติ (cold start) เพราะต้องรอฐานข้อมูลตื่นก่อน</span>
+            <span class="lang-en">Azure SQL Serverless pauses after 60 minutes of inactivity. The first request after a pause will be slower than usual (cold start) because it has to wait for the database to wake up first.</span>
+            <span class="lang-jp">Azure SQL Serverlessは60分間操作がないと一時停止します。一時停止後の最初のリクエストは、データベースの起動を待つ必要があるため（コールドスタート）、通常より遅くなります。</span>
+          </td></tr>
+          <tr><th>SLA</th><td>
+            <span class="lang-th">Static Web Apps ระดับ Free ไม่มี SLA (Service Level Agreement) รับประกัน uptime — หากต้องการ SLA ต้องอัปเกรดเป็นระดับ Standard</span>
+            <span class="lang-en">The Free tier of Static Web Apps has no SLA (Service Level Agreement) guaranteeing uptime — an SLA requires upgrading to the Standard tier.</span>
+            <span class="lang-jp">Static Web AppsのFree tierには、稼働率を保証するSLA（Service Level Agreement）がありません — SLAが必要な場合はStandardプランへのアップグレードが必要です。</span>
+          </td></tr>
+          <tr><th>Custom Domain</th><td>
+            <span class="lang-th">ต้องพึ่ง DNS ภายนอก (เช่น DNS ของโรงงาน) ในการ resolve โดเมนที่กำหนดเอง — หาก DNS นั้นมีปัญหา ผู้ใช้ยังเข้าได้ผ่าน hostname ตรงของ Azure Static Web Apps เสมอ (ดูหมวด "การเข้าใช้งานสำรอง" ด้านล่าง)</span>
+            <span class="lang-en">Relies on external DNS (e.g. the factory's DNS) to resolve the custom domain — if that DNS has issues, users can always still access the app via the direct Azure Static Web Apps hostname (see the "Backup Access" section below).</span>
+            <span class="lang-jp">カスタムドメインの解決には外部DNS（例：工場のDNS）に依存します — そのDNSに問題が発生した場合でも、ユーザーは常にAzure Static Web Appsの直接のホスト名からアクセスできます（下記の「代替アクセス方法」セクションを参照）。</span>
+          </td></tr>
         </tbody>
       </table>
       <div class="note">
-        Administration → Database ในแอปใช้เวลาตอบสนองของ query "list tables" (เกิน ~2.5 วินาที) เป็นตัวบ่งชี้ว่าฐานข้อมูลเพิ่ง resume จากการ pause หรือไม่ — ไม่ใช่การเช็คสถานะผ่าน Azure Resource Manager โดยตรง
+        <span class="lang-th">Administration → Database ในแอปใช้เวลาตอบสนองของ query "list tables" (เกิน ~2.5 วินาที) เป็นตัวบ่งชี้ว่าฐานข้อมูลเพิ่ง resume จากการ pause หรือไม่ — ไม่ใช่การเช็คสถานะผ่าน Azure Resource Manager โดยตรง</span>
+        <span class="lang-en">The Administration → Database page in the app uses the response time of the "list tables" query (over ~2.5 seconds) as an indicator of whether the database just resumed from a pause — it is not a direct status check via Azure Resource Manager.</span>
+        <span class="lang-jp">アプリのAdministration → Databaseページでは、「list tables」クエリの応答時間（約2.5秒超）を、データベースが一時停止から復帰したばかりかどうかの指標として使用しています — Azure Resource Managerを介した直接的なステータスチェックではありません。</span>
       </div>
     </section>
 
     <section id="backup">
-      <h2><span class="badge">5</span>การสำรองข้อมูล</h2>
-      <p class="lead">ระบบสำรองข้อมูลอัตโนมัติของแต่ละส่วน โดยไม่ต้องมี job หรือ script แยกต่างหาก</p>
+      <h2><span class="badge">5</span><span class="lang-th">การสำรองข้อมูล</span><span class="lang-en">Backups</span><span class="lang-jp">バックアップ</span></h2>
+      <p class="lead">
+        <span class="lang-th">ระบบสำรองข้อมูลอัตโนมัติของแต่ละส่วน โดยไม่ต้องมี job หรือ script แยกต่างหาก</span>
+        <span class="lang-en">The automatic backup mechanisms for each component, with no separate job or script required.</span>
+        <span class="lang-jp">各コンポーネントの自動バックアップの仕組み — 別途ジョブやスクリプトを用意する必要はありません。</span>
+      </p>
       <div class="card">
-        <h4>ฐานข้อมูล (Azure SQL)</h4>
-        <p>Azure SQL Database สำรองข้อมูลให้อัตโนมัติทุกฐานข้อมูล (full + differential + transaction log backup) และรองรับ Point-in-Time Restore ย้อนหลังได้ตามระยะเวลาที่ Azure กำหนดไว้เป็นค่าเริ่มต้น — ไม่ต้องตั้ง backup job เพิ่มเอง</p>
+        <h4><span class="lang-th">ฐานข้อมูล (Azure SQL)</span><span class="lang-en">Database (Azure SQL)</span><span class="lang-jp">データベース（Azure SQL）</span></h4>
+        <p>
+          <span class="lang-th">Azure SQL Database สำรองข้อมูลให้อัตโนมัติทุกฐานข้อมูล (full + differential + transaction log backup) และรองรับ Point-in-Time Restore ย้อนหลังได้ตามระยะเวลาที่ Azure กำหนดไว้เป็นค่าเริ่มต้น — ไม่ต้องตั้ง backup job เพิ่มเอง</span>
+          <span class="lang-en">Azure SQL Database automatically backs up every database (full + differential + transaction log backups) and supports Point-in-Time Restore going back for the retention period Azure sets by default — no need to set up an additional backup job.</span>
+          <span class="lang-jp">Azure SQL Databaseは、すべてのデータベースを自動的にバックアップします（フルバックアップ＋差分バックアップ＋トランザクションログバックアップ）。Azureのデフォルト保持期間内であればPoint-in-Time Restore（特定時点への復元）にも対応しており、別途バックアップジョブを設定する必要はありません。</span>
+        </p>
       </div>
       <div class="card">
         <h4>Source Code</h4>
-        <p>เก็บด้วย Git และมี remote backup อยู่ใน private repository บน GitHub แยกจากเครื่อง local — ป้องกันข้อมูล source code สูญหายหากเครื่องที่พัฒนามีปัญหา</p>
+        <p>
+          <span class="lang-th">เก็บด้วย Git และมี remote backup อยู่ใน private repository บน GitHub แยกจากเครื่อง local — ป้องกันข้อมูล source code สูญหายหากเครื่องที่พัฒนามีปัญหา</span>
+          <span class="lang-en">Stored with Git, with a remote backup in a private repository on GitHub, separate from the local machine — protects the source code from being lost if the development machine has an issue.</span>
+          <span class="lang-jp">Gitで管理し、開発用マシンとは別に、GitHub上のプライベートリポジトリにリモートバックアップを保持しています — 開発マシンに問題が発生してもソースコードの消失を防ぎます。</span>
+        </p>
       </div>
       <div class="card">
         <h4>Master Data (SharePoint)</h4>
-        <p>ข้อมูลต้นทาง (Employee / Department / Division / Section) อยู่ที่ SharePoint Online ซึ่งอยู่ภายใต้นโยบายสำรองข้อมูลมาตรฐานของ Microsoft 365 อยู่แล้ว</p>
+        <p>
+          <span class="lang-th">ข้อมูลต้นทาง (Employee / Department / Division / Section) อยู่ที่ SharePoint Online ซึ่งอยู่ภายใต้นโยบายสำรองข้อมูลมาตรฐานของ Microsoft 365 อยู่แล้ว</span>
+          <span class="lang-en">The source data (Employee / Department / Division / Section) lives in SharePoint Online, which is already covered by Microsoft 365's standard backup policies.</span>
+          <span class="lang-jp">元データ（Employee／Department／Division／Section）はSharePoint Onlineにあり、Microsoft 365の標準バックアップポリシーの対象に既に含まれています。</span>
+        </p>
       </div>
     </section>
 
