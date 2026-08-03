@@ -654,6 +654,28 @@ const TOPICS = [
     link: "https://global.toyota/en/sustainability/esg/ai/"
   },
   {
+    key: "group-ai-manufacturing",
+    title: "AI ในสายการผลิตทั่วโลก: ตัวอย่างจริงจากกลุ่ม AISIN และ Toyota",
+    icon: "🦾",
+    flow: [
+      { icon: "🔍", label: "AI ตรวจสอบคุณภาพแทนสายตามนุษย์บนไลน์ผลิต" },
+      { icon: "🌐", label: "ขยายผลจากโรงงานเดียวสู่เครือข่ายทั่วโลก" },
+      { icon: "👷", label: "พนักงานหน้างานสร้างโมเดล AI ได้เองโดยไม่ต้องเป็นผู้เชี่ยวชาญ" }
+    ],
+    video: "https://www.youtube.com/embed/aZL13MexXTo",
+    videoTitle: "トヨタ自動車篇 | さあ、新しく。クラウドで。Google Cloud",
+    videoAuthor: "Google Cloud Japan",
+    videoLang: "ja",
+    images: [],
+    text: [
+      "การใช้ AI ในกลุ่ม AISIN และ Toyota ไม่ได้จำกัดอยู่แค่เครื่องมือช่วยเขียนเอกสารหรือแชทบอทในสำนักงานเท่านั้น แต่ยังฝังลึกอยู่ในสายการผลิตจริงทั่วโลกมาหลายปีแล้ว โดยเฉพาะงานตรวจสอบคุณภาพและการบำรุงรักษาเชิงคาดการณ์ (Predictive Maintenance) ซึ่งเป็นหัวใจของแนวคิด Toyota Production System (TPS) ที่ ATTG เองก็ยึดถือ",
+      "ตัวอย่าง: Toyota พัฒนา AI Platform สำหรับตรวจสอบคุณภาพและกระบวนการผลิต ปัจจุบันใช้งานจริงครบทั้ง 10 โรงงานผลิตรถยนต์และชิ้นส่วนทั่วโลก มีพนักงานใช้งานจริงเกือบ 1,200 คน ตัวอย่างที่โรงงาน Takaoka ใช้ตรวจสอบชิ้นส่วนสำเร็จรูป ตรวจจับการทากาวกระจกหลังรถ และตรวจจับความผิดปกติของเครื่องฉีดพลาสติกที่ผลิตกันชนรถยนต์ ช่วยประหยัดเวลาแรงงานรวมกว่า 10,000 ชั่วโมงต่อปี จุดที่น่าสนใจคือพนักงานหน้างานที่ไม่ใช่ผู้เชี่ยวชาญด้าน AI ก็สร้างโมเดลตรวจสอบของตัวเองได้ ทำให้จำนวนโมเดลทั้งหมดเพิ่มจาก 8,000 โมเดลในปี 2023 เป็น 10,000 โมเดลในปี 2024",
+      "ตัวอย่าง: ฝั่ง AISIN Group เองก็มี DX Strategy Center ดูแลภาพรวมการนำ AI มาใช้ทั้งบริษัท ภายใต้แนวคิด 'Cyber-Physical Information Factory' คือเก็บข้อมูลจากสายการผลิตจริงมาจำลองในโลกดิจิทัลเพื่อทดสอบก่อนนำไปปรับใช้จริงหน้างาน นอกจากนี้ยังพัฒนา <strong>Explainable AI</strong> ร่วมกับพันธมิตรต่างประเทศสำหรับระบบตรวจสอบชิ้นงานด้วยสายตา ที่ไม่ได้บอกแค่ว่าชิ้นงานไหน OK/NG แต่ยังแสดงเหตุผลประกอบการตัดสินใจให้พนักงานเข้าใจได้ (แก้ปัญหา AI แบบ 'กล่องดำ' ที่ตรวจสอบไม่ได้ว่าทำไมถึงตัดสินใจแบบนั้น) โดยตั้งเป้าลดต้นทุนการผลิตรวมลง 30% ภายในปี 2030",
+      "แนวทางที่ดี: ตัวอย่างเหล่านี้สะท้อนหลักการเดียวกับที่คู่มือนี้เน้นย้ำในหัวข้ออื่นๆ คือ AI ที่ดีไม่ใช่แค่ 'เร็ว' แต่ต้อง 'ตรวจสอบได้' ด้วย ไม่ว่าจะเป็น AI ในสำนักงานอย่าง Copilot/ChatGPT หรือ AI บนสายการผลิต พนักงานควรเข้าใจว่า AI ช่วยงานได้ดีแค่ไหน แต่การตรวจสอบและตัดสินใจสุดท้ายยังคงเป็นหน้าที่ของคน"
+    ],
+    link: "https://www.aisin.com/en/technology/dx/"
+  },
+  {
     key: "data-classification",
     title: "ข้อมูลที่ห้ามป้อนเข้า AI สาธารณะ",
     titleEN: "Data You Must Never Enter Into Public AI",
@@ -955,6 +977,17 @@ const TOPIC_ILLUSTRATIONS = {
     <circle cx="134" cy="32" r="2.5" style="fill:var(--surface)"/>
     <circle cx="146" cy="32" r="2.5" style="fill:var(--surface)"/>
     <circle cx="158" cy="32" r="2.5" style="fill:var(--surface)"/>
+  ` },
+  "group-ai-manufacturing": { tone: "howto", svg: `
+    <rect x="20" y="95" width="160" height="14" rx="3" style="fill:var(--surface);stroke:var(--ink);stroke-width:3"/>
+    <rect x="35" y="80" width="26" height="15" rx="2" style="fill:var(--howto-soft);stroke:var(--howto);stroke-width:2.5"/>
+    <rect x="85" y="80" width="26" height="15" rx="2" style="fill:var(--howto-soft);stroke:var(--howto);stroke-width:2.5"/>
+    <rect x="135" y="80" width="26" height="15" rx="2" style="fill:var(--howto-soft);stroke:var(--howto);stroke-width:2.5"/>
+    <line x1="98" y1="80" x2="98" y2="40" style="stroke:var(--ink);stroke-width:5;stroke-linecap:round"/>
+    <circle cx="98" cy="35" r="9" style="fill:var(--surface);stroke:var(--howto);stroke-width:4"/>
+    <polyline points="93,35 97,39 104,29" style="fill:none;stroke:var(--howto);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"/>
+    <circle cx="152" cy="42" r="16" style="fill:none;stroke:var(--accent);stroke-width:3;opacity:0.6"/>
+    <line x1="163" y1="53" x2="172" y2="62" style="stroke:var(--accent);stroke-width:4;stroke-linecap:round;opacity:0.6"/>
   ` },
   "data-classification": { tone: "warn", svg: `
     <polygon points="28,55 70,55 80,45 130,45 130,110 28,110" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
