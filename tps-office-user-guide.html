@@ -365,7 +365,7 @@
       <li><a href="#settings">11. Settings</a></li>
       <li><a href="#permissions">12. สรุปสิทธิ์การใช้งาน</a></li>
       <li><a href="#faq">13. คำถามที่พบบ่อย</a></li>
-      <li><a href="#architecture">14. สถาปัตยกรรมระบบ (IT)</a></li>
+      <li><a href="tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer">📘 คู่มือเทคนิค (IT) ↗</a></li>
     </ul>
   </nav>
 
@@ -764,32 +764,13 @@
       </div>
     </section>
 
-    <section id="architecture">
-      <h2><span class="badge">14</span>สถาปัตยกรรมระบบ (สำหรับทีม IT)</h2>
-      <p class="lead">หมวดนี้สำหรับผู้ดูแลระบบ/ทีม IT เท่านั้น — อธิบายว่าระบบเชื่อมต่อกับ SharePoint และ Azure อย่างไร ผู้ใช้งานทั่วไปข้ามหมวดนี้ได้</p>
-      <figure class="shot">
-        <img src="images/architecture-diagram.jpg" alt="แผนภาพสถาปัตยกรรม Azure Static Web Apps + Power Automate Bridge" onerror="this.classList.add('broken')">
-        <div class="fallback"><span>🖼️ ภาพ: Azure Static Web Apps + Power Automate Bridge</span><code>images/architecture-diagram.jpg</code></div>
-      </figure>
-      <p>ระบบใช้ <b>Power Automate เป็น "สะพาน"</b> อ่านข้อมูลจาก SharePoint แทนการต่อ Microsoft Graph API ตรงๆ เพราะ Connector ของ Power Automate ได้รับอนุมัติจาก Microsoft ไว้ล่วงหน้าแล้ว จึงไม่ติดปัญหา Admin Consent แบบที่เจอกับ Graph API</p>
-      <div class="card">
-        <h4>ลำดับการไหลของข้อมูล</h4>
-        <ol>
-          <li>พนักงาน ATTG เข้าเว็บผ่าน browser ที่ <code>https://tpsit.attg.co.th</code></li>
-          <li>Azure Static Web App (React front-end + Entra ID Sign-in) เรียก <code>/api/*</code></li>
-          <li>Azure Functions (Backend API) อ่าน Master Data จาก Azure SQL ที่ sync ไว้แล้ว และอ่าน/เขียนข้อมูล Project / Training / Power Champion โดยตรง</li>
-          <li>Power Automate Scheduled Flow (ทำงานทุก 30 นาที) ดึงข้อมูลจาก SharePoint List (Employee / Department / Division / Section) มาเขียนสำเนาล่าสุดลง Azure SQL — Functions ไม่เคยต่อ SharePoint โดยตรง</li>
-        </ol>
+    <div class="card accent-blue" style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+      <div>
+        <h4 style="margin-bottom:4px;">📘 ต้องการรายละเอียดเชิงเทคนิค?</h4>
+        <p style="margin:0;">สถาปัตยกรรมระบบและรายละเอียดฐานข้อมูล (สำหรับทีม IT) แยกไว้ในคู่มืออีกไฟล์หนึ่ง เพื่อไม่ให้หน้านี้ดูซับซ้อนเกินไป</p>
       </div>
-      <div class="note blue">
-        <b>ทำไมต้องออกแบบแบบนี้:</b>
-        <ol style="margin:6px 0 0; padding-right:0; padding-left:20px;">
-          <li>ใช้ทรัพยากร Azure ที่มีอยู่แล้วเป็นแกนหลัก ไม่ต้องสร้างใหม่</li>
-          <li>ใช้ Power Automate เป็นสะพานที่ได้รับอนุมัติแล้ว (Approved Bridge)</li>
-          <li>หลีกเลี่ยงการต่อ Graph API ตรงๆ ซึ่งต้องขอ Admin Consent เพิ่ม — Power Automate connector ไม่ติดปัญหานี้</li>
-        </ol>
-      </div>
-    </section>
+      <a href="tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer" class="toplink" style="margin-top:0; white-space:nowrap; font-weight:700;">เปิดคู่มือเทคนิค (IT) ↗</a>
+    </div>
 
   </main>
 </div>
