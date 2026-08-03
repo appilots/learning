@@ -4,32 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>คู่มือการใช้งาน TPS Office Digital Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue: #0078D4;
-    --blue-dark: #106EBE;
+    --navy: #1B2A6B;
+    --navy-dark: #0D1A4A;
+    --blue: #2563EB;
+    --blue-dark: #1D4ED8;
     --cyan: #00B7C3;
     --green: #107C10;
     --orange: #FFAA44;
     --red: #D13438;
-    --ink: #1F2937;
-    --ink-light: #6B7280;
+    --ink: #0F172A;
+    --ink-light: #475569;
     --surface: #FFFFFF;
-    --surface-muted: #F8F9FA;
-    --border: #E5E7EB;
+    --surface-muted: #F8FAFC;
+    --border: #E2E8F0;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: "Segoe UI", "Noto Sans Thai", -apple-system, sans-serif;
+    font-family: "Inter", "Noto Sans Thai", "Noto Sans JP", "Segoe UI", -apple-system, sans-serif;
     color: var(--ink);
     background: var(--surface-muted);
     line-height: 1.65;
   }
   a { color: var(--blue); }
   .header {
-    background: linear-gradient(120deg, #081A38, #0E3E86, #1E7BD6);
+    background: linear-gradient(160deg, #0D1729 0%, #1B2A6B 55%, #243680 100%);
     color: white;
     padding: 48px 24px 40px;
     text-align: center;
@@ -84,14 +89,14 @@
     margin-top: 18px;
     padding: 10px 14px;
     border-radius: 10px;
-    background: var(--blue);
+    background: var(--navy);
     color: white !important;
     text-decoration: none;
     font-size: 13px;
     font-weight: 700;
     text-align: center;
   }
-  .toc-tech-btn:hover { background: var(--blue-dark); }
+  .toc-tech-btn:hover { background: var(--navy-dark); }
   main { padding: 36px 40px 80px; min-width: 0; }
   section { margin-bottom: 52px; scroll-margin-top: 20px; }
   section h2 {
@@ -108,7 +113,7 @@
     justify-content: center;
     width: 30px; height: 30px;
     border-radius: 9px;
-    background: var(--blue);
+    background: var(--navy);
     color: white;
     font-size: 14px;
     font-weight: 800;
@@ -148,7 +153,7 @@
     left: 0; top: 2px;
     width: 26px; height: 26px;
     border-radius: 50%;
-    background: var(--blue);
+    background: var(--navy);
     color: white;
     font-size: 12.5px;
     font-weight: 700;
@@ -188,7 +193,7 @@
     color: #B34700;
   }
   .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
-  .pill.blue { background: rgba(0,120,212,0.12); color: var(--blue); }
+  .pill.blue { background: rgba(37,99,235,0.12); color: var(--blue); }
   .pill.green { background: rgba(16,124,16,0.12); color: var(--green); }
   .pill.orange { background: rgba(255,170,68,0.18); color: #8A5300; }
   .pill.red { background: rgba(209,52,56,0.12); color: var(--red); }
@@ -255,7 +260,7 @@
   }
   .feature-card h4 { margin: 0 0 6px; font-size: 15px; font-weight: 800; }
   .feature-card p { margin: 0; font-size: 13px; color: #4B5563; line-height: 1.55; }
-  .feature-blue .feature-icon { background: rgba(0,120,212,0.12); }
+  .feature-blue .feature-icon { background: rgba(37,99,235,0.12); }
   .feature-blue { border-top: 3px solid var(--blue); }
   .feature-green .feature-icon { background: rgba(16,124,16,0.12); }
   .feature-green { border-top: 3px solid var(--green); }
@@ -344,74 +349,153 @@
     figure.shot .fallback code { background: #16181C; }
     figcaption { background: #23262C; border-color: #2C2F36; }
   }
+
+  /* --- Trilingual system (EN/TH/JP), AISIN theme pattern --- */
+  .lang-en, .lang-jp { display: none; }
+  html[data-lang="en"] .lang-th, html[data-lang="en"] .lang-jp { display: none; }
+  html[data-lang="en"] .lang-en { display: inline; }
+  html[data-lang="ja"] .lang-th, html[data-lang="ja"] .lang-en { display: none; }
+  html[data-lang="ja"] .lang-jp { display: inline; }
+
+  .header { position: relative; }
+  .lang-switch {
+    position: absolute;
+    top: 20px; left: 24px;
+    display: inline-flex;
+    gap: 3px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 3px;
+  }
+  .lang-switch button {
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .lang-switch button.active { background: white; color: var(--navy); }
+  @media (max-width: 640px) {
+    .lang-switch { position: static; margin: 0 0 14px; justify-content: center; display: inline-flex; }
+  }
 </style>
 </head>
 <body>
 
 <div class="header">
+  <div class="lang-switch">
+    <button type="button" data-lang="th">ไทย</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="ja">JP</button>
+  </div>
   <span class="tag">TPS OFFICE · SMART OFFICE &amp; PAPERLESS TRANSFORMATION</span>
-  <h1>คู่มือการใช้งาน TPS Office Digital Tools</h1>
-  <p>ระบบติดตาม Project, Citizen Developer และ Power Champion สำหรับกลุ่ม ATTG</p>
+  <h1>
+    <span class="lang-th">คู่มือการใช้งาน TPS Office Digital Tools</span>
+    <span class="lang-en">TPS Office Digital Tools — User Guide</span>
+    <span class="lang-jp">TPS Office Digital Tools ユーザーガイド</span>
+  </h1>
+  <p>
+    <span class="lang-th">ระบบติดตาม Project, Citizen Developer และ Power Champion สำหรับกลุ่ม ATTG</span>
+    <span class="lang-en">A tracking system for Projects, Citizen Developers, and Power Champions across the ATTG Group</span>
+    <span class="lang-jp">ATTGグループ全体のプロジェクト、市民開発者、パワーチャンピオンを追跡するシステム</span>
+  </p>
 </div>
 
 <div class="layout">
   <nav class="toc">
-    <h2>สารบัญ</h2>
+    <h2>
+      <span class="lang-th">สารบัญ</span>
+      <span class="lang-en">Contents</span>
+      <span class="lang-jp">目次</span>
+    </h2>
     <ul>
-      <li><a href="#intro">1. ภาพรวมระบบ</a></li>
-      <li><a href="#login">2. การเข้าสู่ระบบ</a></li>
-      <li><a href="#landing">3. หน้าหลัก (Landing)</a></li>
-      <li><a href="#apps-dashboard">4. Dashboard &amp; KPI (ฝั่ง Apps)</a></li>
-      <li><a href="#projects">5. Project Registration</a>
+      <li><a href="#intro"><span class="lang-th">1. ภาพรวมระบบ</span><span class="lang-en">1. Overview</span><span class="lang-jp">1. 概要</span></a></li>
+      <li><a href="#login"><span class="lang-th">2. การเข้าสู่ระบบ</span><span class="lang-en">2. Sign In</span><span class="lang-jp">2. サインイン</span></a></li>
+      <li><a href="#landing"><span class="lang-th">3. หน้าหลัก (Landing)</span><span class="lang-en">3. Home (Landing)</span><span class="lang-jp">3. ホーム（ランディング）</span></a></li>
+      <li><a href="#apps-dashboard"><span class="lang-th">4. Dashboard &amp; KPI (ฝั่ง Apps)</span><span class="lang-en">4. Dashboard &amp; KPI (Apps side)</span><span class="lang-jp">4. ダッシュボード＆KPI（Apps側）</span></a></li>
+      <li><a href="#projects"><span class="lang-th">5. Project Registration</span><span class="lang-en">5. Project Registration</span><span class="lang-jp">5. プロジェクト登録</span></a>
         <ul>
-          <li class="sub"><a href="#projects-add">5.1 ลงทะเบียน Project ใหม่</a></li>
-          <li class="sub"><a href="#projects-export">5.2 Export ข้อมูลเป็น Excel</a></li>
+          <li class="sub"><a href="#projects-add"><span class="lang-th">5.1 ลงทะเบียน Project ใหม่</span><span class="lang-en">5.1 Register a New Project</span><span class="lang-jp">5.1 新規プロジェクトの登録</span></a></li>
+          <li class="sub"><a href="#projects-export"><span class="lang-th">5.2 Export ข้อมูลเป็น Excel</span><span class="lang-en">5.2 Export Data to Excel</span><span class="lang-jp">5.2 Excelへのデータエクスポート</span></a></li>
         </ul>
       </li>
-      <li><a href="#training">6. Citizen Developer Training</a>
+      <li><a href="#training"><span class="lang-th">6. Citizen Developer Training</span><span class="lang-en">6. Citizen Developer Training</span><span class="lang-jp">6. 市民開発者トレーニング</span></a>
         <ul>
-          <li class="sub"><a href="#training-add">6.1 เพิ่มประวัติการอบรม</a></li>
-          <li class="sub"><a href="#training-import">6.2 นำเข้าจาก Excel</a></li>
+          <li class="sub"><a href="#training-add"><span class="lang-th">6.1 เพิ่มประวัติการอบรม</span><span class="lang-en">6.1 Add Training Records</span><span class="lang-jp">6.1 研修履歴の追加</span></a></li>
+          <li class="sub"><a href="#training-import"><span class="lang-th">6.2 นำเข้าจาก Excel</span><span class="lang-en">6.2 Import from Excel</span><span class="lang-jp">6.2 Excelからのインポート</span></a></li>
         </ul>
       </li>
-      <li><a href="#champions">7. Power Champion</a></li>
-      <li><a href="#section-dashboard">8. Division Dashboard</a></li>
-      <li><a href="#exec-dashboard">9. Executive Dashboard</a></li>
-      <li><a href="#admin">10. Administration</a></li>
-      <li><a href="#settings">11. Settings</a></li>
-      <li><a href="#permissions">12. สรุปสิทธิ์การใช้งาน</a></li>
-      <li><a href="#faq">13. คำถามที่พบบ่อย</a></li>
+      <li><a href="#champions"><span class="lang-th">7. Power Champion</span><span class="lang-en">7. Power Champion</span><span class="lang-jp">7. パワーチャンピオン</span></a></li>
+      <li><a href="#section-dashboard"><span class="lang-th">8. Division Dashboard</span><span class="lang-en">8. Division Dashboard</span><span class="lang-jp">8. 部門ダッシュボード</span></a></li>
+      <li><a href="#exec-dashboard"><span class="lang-th">9. Executive Dashboard</span><span class="lang-en">9. Executive Dashboard</span><span class="lang-jp">9. 経営層ダッシュボード</span></a></li>
+      <li><a href="#admin"><span class="lang-th">10. Administration</span><span class="lang-en">10. Administration</span><span class="lang-jp">10. 管理</span></a></li>
+      <li><a href="#settings"><span class="lang-th">11. Settings</span><span class="lang-en">11. Settings</span><span class="lang-jp">11. 設定</span></a></li>
+      <li><a href="#permissions"><span class="lang-th">12. สรุปสิทธิ์การใช้งาน</span><span class="lang-en">12. Access Rights Summary</span><span class="lang-jp">12. アクセス権限の概要</span></a></li>
+      <li><a href="#faq"><span class="lang-th">13. คำถามที่พบบ่อย</span><span class="lang-en">13. FAQ</span><span class="lang-jp">13. よくある質問</span></a></li>
     </ul>
-    <a class="toc-tech-btn" href="https://appilots.github.io/learning/tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer">📘 คู่มือเทคนิค (IT) ↗</a>
+    <a class="toc-tech-btn" href="https://appilots.github.io/learning/tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer">
+      <span class="lang-th">📘 คู่มือเทคนิค (IT) ↗</span>
+      <span class="lang-en">📘 Technical Guide (IT) ↗</span>
+      <span class="lang-jp">📘 技術ガイド（IT）↗</span>
+    </a>
   </nav>
 
   <main>
 
     <section id="intro">
-      <h2><span class="badge">1</span>ภาพรวมระบบ</h2>
-      <p class="lead">TPS Office Digital Tools คือระบบกลางสำหรับติดตามความคืบหน้าโครงการ Digital Transformation ของกลุ่ม ATTG ตามแผน FY'2026–2028</p>
+      <h2><span class="badge">1</span><span class="lang-th">ภาพรวมระบบ</span><span class="lang-en">Overview</span><span class="lang-jp">概要</span></h2>
+      <p class="lead">
+        <span class="lang-th">TPS Office Digital Tools คือระบบกลางสำหรับติดตามความคืบหน้าโครงการ Digital Transformation ของกลุ่ม ATTG ตามแผน FY'2026–2028</span>
+        <span class="lang-en">TPS Office Digital Tools is the central system for tracking the progress of ATTG Group's Digital Transformation projects under the FY'2026–2028 plan.</span>
+        <span class="lang-jp">TPS Office Digital Toolsは、FY2026〜2028計画に基づくATTGグループのデジタルトランスフォーメーションプロジェクトの進捗を一元管理するシステムです。</span>
+      </p>
 
       <div class="grid3">
         <div class="feature-card feature-blue">
           <div class="feature-icon">🗂️</div>
           <h4>Project Registration</h4>
-          <p>ลงทะเบียนและติดตามโครงการที่ลดเวลาทำงานหรือลดการใช้กระดาษ</p>
+          <p>
+            <span class="lang-th">ลงทะเบียนและติดตามโครงการที่ลดเวลาทำงานหรือลดการใช้กระดาษ</span>
+            <span class="lang-en">Register and track projects that reduce work time or paper usage.</span>
+            <span class="lang-jp">作業時間や紙の使用量を削減するプロジェクトを登録・追跡します。</span>
+          </p>
         </div>
         <div class="feature-card feature-green">
           <div class="feature-icon">🎓</div>
           <h4>Citizen Developer Training</h4>
-          <p>บันทึกการอบรม Power Platform 3 ระดับ ตามรอบและไตรมาส</p>
+          <p>
+            <span class="lang-th">บันทึกการอบรม Power Platform 3 ระดับ ตามรอบและไตรมาส</span>
+            <span class="lang-en">Log Power Platform training across 3 levels, by cycle and quarter.</span>
+            <span class="lang-jp">Power Platformの研修（3レベル）を、サイクルおよび四半期ごとに記録します。</span>
+          </p>
         </div>
         <div class="feature-card feature-cyan">
           <div class="feature-icon">🏆</div>
           <h4>Power Champion</h4>
-          <p>ทะเบียนบุคลากรที่เป็นกำลังสำคัญด้าน Automation ของแต่ละบริษัท</p>
+          <p>
+            <span class="lang-th">ทะเบียนบุคลากรที่เป็นกำลังสำคัญด้าน Automation ของแต่ละบริษัท</span>
+            <span class="lang-en">A registry of key Automation personnel for each company.</span>
+            <span class="lang-jp">各社のオートメーション推進の中核人材の登録簿です。</span>
+          </p>
         </div>
       </div>
 
-      <p style="margin-top:16px">ข้อมูลทั้งหมดเชื่อมกับ <b>Dashboard</b> แบบเรียลไทม์ — ไม่ต้องรอสรุปรายเดือน เห็นความคืบหน้าได้ทันทีที่มีการอัปเดต ระบบมี 2 มุมมองสำหรับติดตามภาพรวม: <b>Division Dashboard</b> (GM.) และ <b>Executive Dashboard</b> (ผู้บริหารที่ต้องการดูภาพรวม)</p>
+      <p style="margin-top:16px">
+        <span class="lang-th">ข้อมูลทั้งหมดเชื่อมกับ <b>Dashboard</b> แบบเรียลไทม์ — ไม่ต้องรอสรุปรายเดือน เห็นความคืบหน้าได้ทันทีที่มีการอัปเดต ระบบมี 2 มุมมองสำหรับติดตามภาพรวม: <b>Division Dashboard</b> (GM.) และ <b>Executive Dashboard</b> (ผู้บริหารที่ต้องการดูภาพรวม)</span>
+        <span class="lang-en">All data connects to the <b>Dashboard</b> in real time — no waiting for a monthly summary; progress is visible the moment it's updated. The system offers 2 overview views: <b>Division Dashboard</b> (for GMs) and <b>Executive Dashboard</b> (for executives who want the big picture).</span>
+        <span class="lang-jp">すべてのデータは<b>ダッシュボード</b>にリアルタイムで連携されます — 月次集計を待つ必要はなく、更新と同時に進捗を確認できます。全体像を把握するための2つのビューがあります：<b>Division Dashboard</b>（GM.向け）と<b>Executive Dashboard</b>（全体像を見たい経営層向け）。</span>
+      </p>
 
-      <h3 style="text-align:center; margin-top:36px;">เป้าหมายและตัวชี้วัดเชิงกลยุทธ์ 3 ปี</h3>
+      <h3 style="text-align:center; margin-top:36px;">
+        <span class="lang-th">เป้าหมายและตัวชี้วัดเชิงกลยุทธ์ 3 ปี</span>
+        <span class="lang-en">3-Year Strategic Goals &amp; KPIs</span>
+        <span class="lang-jp">3ヵ年戦略目標とKPI</span>
+      </h3>
       <p style="text-align:center; color:var(--ink-light); font-size:13px; margin-top:-4px;">
         <span class="pill-legend legend-cyan">Paper Reduction</span> ·
         <span class="pill-legend legend-yellow">Citizen Developer Project</span> ·
@@ -422,7 +506,7 @@
         <table class="roadmap-table">
           <thead>
             <tr>
-              <th>เป้าหมาย</th>
+              <th><span class="lang-th">เป้าหมาย</span><span class="lang-en">Goal</span><span class="lang-jp">目標</span></th>
               <th>2026 — Foundation</th>
               <th>2027 — Expansion</th>
               <th>2028 — Value Realization</th>
@@ -464,7 +548,9 @@
       </div>
 
       <div class="key-message">
-        💡 <b>Key Message:</b> ใช้สิ่งที่มีอยู่แล้ว (License O365 / Power Platform) ให้เกิดมูลค่าสูงสุด — TPS Office Digital Tools คือเครื่องมือที่ทำให้เห็นความคืบหน้าของเป้าหมายทั้งหมดนี้แบบเรียลไทม์
+        <span class="lang-th">💡 <b>Key Message:</b> ใช้สิ่งที่มีอยู่แล้ว (License O365 / Power Platform) ให้เกิดมูลค่าสูงสุด — TPS Office Digital Tools คือเครื่องมือที่ทำให้เห็นความคืบหน้าของเป้าหมายทั้งหมดนี้แบบเรียลไทม์</span>
+        <span class="lang-en">💡 <b>Key Message:</b> Get maximum value out of what you already have (O365 licenses / Power Platform) — TPS Office Digital Tools is the tool that shows the progress of all these goals in real time.</span>
+        <span class="lang-jp">💡 <b>キーメッセージ：</b>すでに保有しているもの（O365ライセンス／Power Platform）を最大限活用する — TPS Office Digital Toolsは、これらすべての目標の進捗をリアルタイムで可視化するツールです。</span>
       </div>
     </section>
 
@@ -782,18 +868,56 @@
 
     <div class="card accent-blue" style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
       <div>
-        <h4 style="margin-bottom:4px;">📘 ต้องการรายละเอียดเชิงเทคนิค?</h4>
-        <p style="margin:0;">สถาปัตยกรรมระบบและรายละเอียดฐานข้อมูล (สำหรับทีม IT) แยกไว้ในคู่มืออีกไฟล์หนึ่ง เพื่อไม่ให้หน้านี้ดูซับซ้อนเกินไป</p>
+        <h4 style="margin-bottom:4px;">
+          <span class="lang-th">📘 ต้องการรายละเอียดเชิงเทคนิค?</span>
+          <span class="lang-en">📘 Need technical details?</span>
+          <span class="lang-jp">📘 技術的な詳細が必要ですか？</span>
+        </h4>
+        <p style="margin:0;">
+          <span class="lang-th">สถาปัตยกรรมระบบและรายละเอียดฐานข้อมูล (สำหรับทีม IT) แยกไว้ในคู่มืออีกไฟล์หนึ่ง เพื่อไม่ให้หน้านี้ดูซับซ้อนเกินไป</span>
+          <span class="lang-en">System architecture and database details (for the IT team) live in a separate guide, so this page doesn't get too dense.</span>
+          <span class="lang-jp">システムアーキテクチャとデータベースの詳細（IT担当者向け）は別のガイドにまとめてあります。このページを複雑にしすぎないためです。</span>
+        </p>
       </div>
-      <a href="https://appilots.github.io/learning/tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer" class="toplink" style="margin-top:0; white-space:nowrap; font-weight:700;">เปิดคู่มือเทคนิค (IT) ↗</a>
+      <a href="https://appilots.github.io/learning/tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer" class="toplink" style="margin-top:0; white-space:nowrap; font-weight:700;">
+        <span class="lang-th">เปิดคู่มือเทคนิค (IT) ↗</span>
+        <span class="lang-en">Open the Technical Guide (IT) ↗</span>
+        <span class="lang-jp">技術ガイド（IT）を開く ↗</span>
+      </a>
     </div>
 
   </main>
 </div>
 
 <footer>
-  TPS Office Digital Tools — ATTG Group · Smart Office &amp; Paperless Transformation FY'2026–2028
+  <span class="lang-th">TPS Office Digital Tools — ATTG Group · Smart Office &amp; Paperless Transformation FY'2026–2028</span>
+  <span class="lang-en">TPS Office Digital Tools — ATTG Group · Smart Office &amp; Paperless Transformation FY'2026–2028</span>
+  <span class="lang-jp">TPS Office Digital Tools — ATTG Group · Smart Office &amp; Paperless Transformation FY'2026–2028</span>
 </footer>
+
+<script>
+  // Trilingual switcher — sets [data-lang] on <html>, which the .lang-th/
+  // .lang-en/.lang-jp CSS rules key off of; no per-element JS toggling
+  // needed. Choice persists to localStorage (mirrors the AISIN theme's own
+  // lang-block pattern, adapted to a single root attribute for simplicity).
+  (function () {
+    var STORAGE_KEY = 'tps.docLang'
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang)
+      document.documentElement.lang = lang
+      localStorage.setItem(STORAGE_KEY, lang)
+      document.querySelectorAll('.lang-switch button').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.lang === lang)
+      })
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.lang-switch button').forEach(function (b) {
+        b.addEventListener('click', function () { setLang(b.dataset.lang) })
+      })
+      setLang(localStorage.getItem(STORAGE_KEY) || 'th')
+    })
+  })()
+</script>
 
 </body>
 </html>
