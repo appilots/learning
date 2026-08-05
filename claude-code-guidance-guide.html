@@ -120,6 +120,20 @@
   .masthead-note { border: 1px solid var(--line); background: var(--surface); padding: 11px 14px; font-size: 0.78rem; line-height: 1.65; color: var(--ink-soft); }
   .masthead-note strong { color: var(--ink); }
 
+  .cta-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    background: linear-gradient(120deg, var(--accent-deep), var(--accent));
+    color: #fff; padding: 16px 20px; margin-top: 14px; box-shadow: var(--shadow);
+  }
+  .cta-banner-text { font-size: 0.9rem; line-height: 1.6; }
+  .cta-banner-text strong { display: block; font-size: 1rem; margin-bottom: 3px; color: #fff; }
+  .cta-btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; color: var(--accent-deep); font-weight: 700; font-size: 0.85rem;
+    padding: 10px 16px; text-decoration: none; white-space: nowrap;
+  }
+  .cta-btn:hover { background: var(--paper); }
+
   .body-grid { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; }
 
   /* ---------- Rail ---------- */
@@ -242,10 +256,17 @@
         <div><dt>ระดับควบคุม</dt><dd>5 ด้าน</dd></div>
       </dl>
     </div>
-    <h1>🧭 แนวทางใช้ Claude Code สำหรับทีม DX/IT</h1>
+    <h1>🧭 แนวทางใช้ Claude Code</h1>
     <p class="masthead-sub">สรุปแนวทางที่ HQ ส่งมอบให้ทีม DX ใช้อ้างอิงในการทดลองและพัฒนาระบบภายในบริษัทด้วย Claude Code — ใช้งานได้จริง แต่ต้องควบคุมเสมือน "Developer" คนหนึ่ง ไม่ใช่มองเป็นเพียง Chatbot</p>
     <div class="masthead-note">
       📋 <strong>เกี่ยวกับคู่มือนี้:</strong> เนื้อหาทั้งหมดสรุปมาจากเอกสาร "HQ Guidance for DX Team" ที่ส่งมอบให้ทีม DX โดยตรง ไม่ได้ดัดแปลงเนื้อหาเชิงนโยบาย มีเพียงการจัดรูปแบบใหม่เพื่อให้อ่านง่ายขึ้น สถานะที่ปรากฏในตาราง (<span class="status-pill allow" style="padding:1px 7px;">ALLOW</span> <span class="status-pill control" style="padding:1px 7px;">CONTROL</span> <span class="status-pill review" style="padding:1px 7px;">REVIEW</span> <span class="status-pill block" style="padding:1px 7px;">BLOCK</span>) เป็นสถานะที่ HQ กำหนดไว้ในเอกสารต้นฉบับ หากมีข้อสงสัยให้ยึดเอกสารต้นฉบับหรือสอบถาม IT/Security เป็นหลัก
+    </div>
+    <div class="cta-banner">
+      <div class="cta-banner-text">
+        <strong>🚀 อ่านแนวทางนี้ครบแล้ว? เริ่มใช้งานจริงได้เลย</strong>
+        ดูวิธีติดตั้งและใช้งาน Claude Code จริงร่วมกับ VS Code แบบทีละขั้นตอน
+      </div>
+      <a class="cta-btn" href="claude-code-vscode-guide.html" target="_blank" rel="noopener">เปิดคู่มือเริ่มใช้งาน →</a>
     </div>
   </header>
 
@@ -271,7 +292,9 @@ const TOPICS = [
     images: [],
     text: [
       "Claude Code มีสิทธิ์อ่าน/แก้ไขไฟล์ รันคำสั่ง และเชื่อมต่อเครื่องมือภายนอกได้เหมือนนักพัฒนาคนหนึ่ง ทีม DX/IT จึงต้องควบคุมการใช้งาน 5 ด้าน คือ Account, Data, Permission, Secret และ Production ตามรายละเอียดในสไลด์"
-    ]
+    ],
+    link: "claude-code-vscode-guide.html",
+    linkLabel: "วิธีเริ่มใช้งาน Claude Code จริงกับ VS Code →"
   },
   {
     key: "account-data",
@@ -442,7 +465,7 @@ function renderContent() {
     : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
 
   const linkHtml = topic.link
-    ? '<a class="sheet-ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติม →</a>'
+    ? '<a class="sheet-ref-link" href="' + topic.link + '" target="_blank" rel="noopener">' + (topic.linkLabel || "อ่านเพิ่มเติม →") + '</a>'
     : "";
 
   el.innerHTML =
