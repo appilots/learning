@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือแนวทางใช้ Claude Code สำหรับทีม DX/IT</title>
+<style>
+  :root {
+    --ink: #1b1420;
+    --ink-soft: #7a7186;
+    --paper: #fdf3e4;
+    --surface: #ffffff;
+    --line: #ecdcc4;
+    --accent: #e2841f;
+    --accent-deep: #a85e12;
+    --accent-soft: #ffe0ad;
+    --steel: #1f7fc4;
+    --steel-soft: #cdecfb;
+    --tip: var(--steel);
+    --tip-soft: var(--steel-soft);
+    --warn: #e0473a;
+    --warn-soft: #ffdcd6;
+    --howto: #12a389;
+    --howto-soft: #cdf5ea;
+    --example: #9a4fd1;
+    --example-soft: #f0ddfc;
+    --ok: #1c9d5c;
+    --ok-soft: #d1f5e0;
+    --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
+    --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, monospace;
+    --sans: "Noto Sans Thai", "Sarabun", -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f3ecf7;
+      --ink-soft: #b7a9c4;
+      --paper: #1e1726;
+      --surface: #241c30;
+      --line: #3a2e46;
+      --accent: #f2a63f;
+      --accent-deep: #ffc06b;
+      --accent-soft: #3a2a12;
+      --steel: #5cb2f0;
+      --steel-soft: #16324a;
+      --warn: #f0796a;
+      --warn-soft: #3c1c1a;
+      --howto: #4fd6bb;
+      --howto-soft: #0f342c;
+      --example: #c795f0;
+      --example-soft: #33224a;
+      --ok: #5ce09a;
+      --ok-soft: #103a26;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
+      --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
+    --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
+    --steel: #5cb2f0; --steel-soft: #16324a;
+    --warn: #f0796a; --warn-soft: #3c1c1a;
+    --howto: #4fd6bb; --howto-soft: #0f342c;
+    --example: #c795f0; --example-soft: #33224a;
+    --ok: #5ce09a; --ok-soft: #103a26;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
+    --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
+  }
+  :root[data-theme="light"] {
+    --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
+    --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
+    --steel: #1f7fc4; --steel-soft: #cdecfb;
+    --warn: #e0473a; --warn-soft: #ffdcd6;
+    --howto: #12a389; --howto-soft: #cdf5ea;
+    --example: #9a4fd1; --example-soft: #f0ddfc;
+    --ok: #1c9d5c; --ok-soft: #d1f5e0;
+    --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
+    --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  ::selection { background: var(--accent-soft); color: var(--accent-deep); }
+
+  .frame { max-width: 1680px; margin: 0 auto; padding: 32px clamp(20px, 3.5vw, 64px) 64px; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    border-bottom: 2px solid var(--ink);
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 22px 24px 22px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+  }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .brand-code { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--accent-deep); font-weight: 700; text-transform: uppercase; }
+  .brand-doc { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--ink-soft); margin-top: 2px; }
+  .masthead-stats { display: flex; gap: 18px; margin: 0; }
+  .masthead-stats > div { text-align: right; }
+  .masthead-stats dt { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin: 0; }
+  .masthead-stats dd { font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin: 0; font-variant-numeric: tabular-nums; }
+  .masthead h1 { font-family: var(--sans); font-size: clamp(1.5rem, 2.6vw, 1.9rem); font-weight: 800; margin: 0 0 6px; text-wrap: balance; color: var(--steel); letter-spacing: -0.01em; }
+  .masthead-sub { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 16px; max-width: 66ch; line-height: 1.6; }
+  .masthead-note { border: 1px solid var(--line); background: var(--surface); padding: 11px 14px; font-size: 0.78rem; line-height: 1.65; color: var(--ink-soft); }
+  .masthead-note strong { color: var(--ink); }
+
+  .body-grid { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; }
+
+  /* ---------- Rail ---------- */
+  .rail {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    padding: 10px;
+    box-shadow: var(--shadow);
+  }
+  .station {
+    position: relative; display: flex; align-items: flex-start; gap: 12px;
+    text-align: left; padding: 9px 12px 9px 4px; border: none; background: transparent;
+    cursor: pointer; color: var(--ink); font-family: var(--sans);
+    transition: background-color 0.12s ease;
+  }
+  .station:hover { background: var(--paper); }
+  .station-num-wrap { position: relative; flex: 0 0 30px; height: 30px; }
+  .station-num-wrap::before {
+    content: ""; position: absolute; left: 50%; top: -6px; bottom: -6px; width: 1.5px;
+    background: var(--line); transform: translateX(-50%); z-index: 0;
+  }
+  .station:first-of-type .station-num-wrap::before { top: 50%; }
+  .station:last-of-type .station-num-wrap::before { bottom: 50%; }
+  .station-num {
+    position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%;
+    border: 1.5px solid var(--line); background: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 700; color: var(--ink-soft);
+    transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  }
+  .station-info { display: flex; align-items: flex-start; gap: 8px; min-width: 0; padding-top: 1px; }
+  .station-icon { font-size: 1rem; flex-shrink: 0; }
+  .station-title { display: block; font-size: 0.84rem; font-weight: 700; line-height: 1.4; color: var(--steel); }
+  .station.active .station-num { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .station.active .station-title { color: var(--accent-deep); }
+  .station:hover .station-title { color: var(--accent-deep); }
+  .station:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  /* ---------- Sheet ---------- */
+  .sheet { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 30px 32px 34px; min-width: 0; }
+  .sheet-head { margin-bottom: 6px; }
+  .sheet-ref { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--accent-deep); text-transform: uppercase; margin-bottom: 7px; font-weight: 700; }
+  .sheet-head h2 { font-family: var(--sans); font-size: 1.42rem; font-weight: 800; margin: 0 0 20px; color: var(--steel); text-wrap: balance; line-height: 1.3; }
+
+  .section-label { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); display: block; margin: 24px 0 10px; }
+  .section-label:first-of-type { margin-top: 0; }
+
+  /* ---------- Source slide reference ---------- */
+  .slide-ref { border: 1px solid var(--line); background: var(--paper); padding: 8px; margin-bottom: 22px; box-shadow: var(--shadow); }
+  .slide-ref img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+  .slide-ref-caption { display: block; margin-top: 8px; font-family: var(--mono); font-size: 0.68rem; color: var(--ink-soft); text-align: right; }
+
+  .status-pill {
+    display: inline-block; padding: 3px 11px; font-family: var(--mono); font-size: 0.7rem;
+    font-weight: 700; letter-spacing: 0.03em; border: 1px solid;
+  }
+  .status-pill.allow { color: var(--ok); background: var(--ok-soft); border-color: var(--ok); }
+  .status-pill.control { color: var(--steel); background: var(--steel-soft); border-color: var(--steel); }
+  .status-pill.review { color: var(--accent-deep); background: var(--accent-soft); border-color: var(--accent); }
+  .status-pill.block { color: var(--warn); background: var(--warn-soft); border-color: var(--warn); }
+
+  /* ---------- Text ---------- */
+  .text-block { font-family: var(--sans); font-size: 0.95rem; line-height: 1.85; color: var(--ink); max-width: 68ch; }
+  .text-block p { margin: 0 0 15px; }
+  .text-block p:last-child { margin-bottom: 0; }
+  .text-block strong { color: var(--accent-deep); font-weight: 700; }
+  .text-block code { font-family: var(--mono); background: var(--paper); color: var(--accent-deep); border: 1px solid var(--line); padding: 1px 6px; font-size: 0.86em; }
+
+  /* ---------- Flow strip ---------- */
+  .flow-strip { display: flex; align-items: flex-start; gap: 0; margin: 4px 0 24px; padding: 15px 2px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); flex-wrap: wrap; row-gap: 16px; }
+  .flow-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 6px; min-width: 90px; }
+  .flow-step-idx { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em; color: var(--accent); font-weight: 700; }
+  .flow-glyph { font-size: 1.15rem; line-height: 1; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--paper); border: 1.5px solid var(--line); }
+  .flow-text { font-size: 0.76rem; color: var(--ink-soft); line-height: 1.4; }
+  .flow-connector { align-self: center; color: var(--line); font-family: var(--mono); font-size: 0.95rem; padding-top: 20px; flex: 0 0 auto; }
+
+  /* ---------- Notes (callouts) ---------- */
+  .note { display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; border-left: 3px solid var(--tip); background: var(--tip-soft); margin: 0 0 13px; font-size: 0.92rem; line-height: 1.78; }
+  .note:last-child { margin-bottom: 0; }
+  .note-icon { flex-shrink: 0; }
+  .note-label { font-weight: 700; }
+  .note-tip { border-color: var(--tip); background: var(--tip-soft); } .note-tip .note-label { color: var(--tip); }
+  .note-warn { border-color: var(--warn); background: var(--warn-soft); } .note-warn .note-label { color: var(--warn); }
+  .note-howto { border-color: var(--howto); background: var(--howto-soft); } .note-howto .note-label { color: var(--howto); }
+  .note-example { border-color: var(--example); background: var(--example-soft); } .note-example .note-label { color: var(--example); }
+
+  .sheet-ref-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; padding: 9px 13px; border: 1px solid var(--line); font-size: 0.82rem; font-family: var(--mono); color: var(--accent-deep); text-decoration: none; }
+  .sheet-ref-link:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .sheet-ref-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  @media (max-width: 860px) {
+    .body-grid { grid-template-columns: 1fr; }
+    .rail { flex-direction: row; overflow-x: auto; gap: 4px; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
+    .station { flex: 0 0 auto; padding: 8px 10px; }
+    .station-num-wrap::before { display: none; }
+    .station-title { white-space: nowrap; }
+    .sheet { padding: 22px 18px 26px; }
+    .masthead-stats { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <header class="masthead">
+    <div class="masthead-top">
+      <div>
+        <span class="brand-code">ATTG · DX/IT GOVERNANCE</span>
+        <span class="brand-doc">DOC. CLAUDE-CODE-GUIDANCE · REV. 2026</span>
+      </div>
+      <dl class="masthead-stats">
+        <div><dt>หัวข้อ</dt><dd id="statTopics">6</dd></div>
+        <div><dt>ระดับควบคุม</dt><dd>5 ด้าน</dd></div>
+      </dl>
+    </div>
+    <h1>🧭 แนวทางใช้ Claude Code สำหรับทีม DX/IT</h1>
+    <p class="masthead-sub">สรุปแนวทางที่ HQ ส่งมอบให้ทีม DX ใช้อ้างอิงในการทดลองและพัฒนาระบบภายในบริษัทด้วย Claude Code — ใช้งานได้จริง แต่ต้องควบคุมเสมือน "Developer" คนหนึ่ง ไม่ใช่มองเป็นเพียง Chatbot</p>
+    <div class="masthead-note">
+      📋 <strong>เกี่ยวกับคู่มือนี้:</strong> เนื้อหาทั้งหมดสรุปมาจากเอกสาร "HQ Guidance for DX Team" ที่ส่งมอบให้ทีม DX โดยตรง ไม่ได้ดัดแปลงเนื้อหาเชิงนโยบาย มีเพียงการจัดรูปแบบใหม่เพื่อให้อ่านง่ายขึ้น สถานะที่ปรากฏในตาราง (<span class="status-pill allow" style="padding:1px 7px;">ALLOW</span> <span class="status-pill control" style="padding:1px 7px;">CONTROL</span> <span class="status-pill review" style="padding:1px 7px;">REVIEW</span> <span class="status-pill block" style="padding:1px 7px;">BLOCK</span>) เป็นสถานะที่ HQ กำหนดไว้ในเอกสารต้นฉบับ หากมีข้อสงสัยให้ยึดเอกสารต้นฉบับหรือสอบถาม IT/Security เป็นหลัก
+    </div>
+  </header>
+
+  <div class="body-grid">
+    <nav class="rail" id="topicList" aria-label="สถานีหัวข้อในคู่มือ"></nav>
+    <main class="sheet" id="content"></main>
+  </div>
+
+</div>
+
+<script>
+const TOPICS = [
+  {
+    key: "overview",
+    title: "ภาพรวม: แนวทางใช้ Claude Code สำหรับทีม DX/IT",
+    icon: "🧭",
+    flow: [
+      { icon: "🧑‍💻", label: "ใช้ทดลองและพัฒนาระบบภายในได้" },
+      { icon: "🎛️", label: "ต้องควบคุมเสมือน 'Developer' คนหนึ่ง" },
+      { icon: "🚫", label: "ไม่ใช่แค่ Chatbot ธรรมดา" }
+    ],
+    slideImage: "images/P1/Slide1.JPG",
+    images: [],
+    text: [
+      "Claude Code มีสิทธิ์อ่าน/แก้ไขไฟล์ รันคำสั่ง และเชื่อมต่อเครื่องมือภายนอกได้เหมือนนักพัฒนาคนหนึ่ง ทีม DX/IT จึงต้องควบคุมการใช้งาน 5 ด้าน คือ Account, Data, Permission, Secret และ Production ตามรายละเอียดในสไลด์"
+    ]
+  },
+  {
+    key: "account-data",
+    title: "บัญชีบริษัทและระดับข้อมูล: ด่านแรกที่ต้องควบคุม",
+    icon: "🪪",
+    flow: [
+      { icon: "🔑", label: "ใช้บัญชีองค์กรเท่านั้น ห้ามใช้บัญชีส่วนตัว" },
+      { icon: "📊", label: "จำแนกระดับข้อมูลก่อนป้อนเข้า Claude Code ทุกครั้ง" },
+      { icon: "🚦", label: "ปฏิบัติตามสถานะ ALLOW / CONTROL / REVIEW / BLOCK" }
+    ],
+    slideImage: "images/P1/Slide2.JPG",
+    images: [],
+    text: [
+      "ห้ามใช้บัญชีส่วนตัวกับงานบริษัทโดยเด็ดขาด ใช้ได้เฉพาะบัญชีองค์กรเท่านั้น และต้องจำแนกระดับข้อมูลก่อนป้อนเข้า Claude Code ทุกครั้งตามตารางในสไลด์"
+    ]
+  },
+  {
+    key: "sandbox-secrets",
+    title: "จำกัดสิทธิ์บนเครื่อง และแยก Secret ออกจาก Claude Code",
+    icon: "🔐",
+    flow: [
+      { icon: "📦", label: "เปิดใช้ Sandbox และจำกัดขอบเขตเฉพาะ Project" },
+      { icon: "🌐", label: "จำกัด Network เป็น Allowlist" },
+      { icon: "🗝️", label: "แยก Secret/Credential ออกจากระบบให้เด็ดขาด" }
+    ],
+    slideImage: "images/P1/Slide3.JPG",
+    images: [],
+    text: [
+      "เปิดใช้ Sandbox จำกัดสิทธิ์เฉพาะ Project และแยก Secret/Credential ออกจาก Claude Code อย่างเด็ดขาดตามรายละเอียดในสไลด์"
+    ]
+  },
+  {
+    key: "production-pipeline",
+    title: "ไม่ให้ Claude เข้าถึง Production และไม่ Merge Code ทันที",
+    icon: "🚦",
+    flow: [
+      { icon: "💻", label: "Local Development" },
+      { icon: "🧪", label: "Development Environment" },
+      { icon: "✅", label: "UAT Testing" },
+      { icon: "🧑‍⚖️", label: "Human Approval" },
+      { icon: "🚀", label: "Production Deployment" }
+    ],
+    slideImage: "images/P1/Slide4.JPG",
+    images: [],
+    text: [
+      "Claude ช่วยเสนอ Code ได้ แต่ห้ามเข้าถึง Production โดยตรง ทุก Code ต้องผ่าน Pipeline 5 ขั้นตอนและการอนุมัติจากคนก่อนเสมอ"
+    ]
+  },
+  {
+    key: "prompt-injection",
+    title: "ระวังคำสั่งที่ซ่อนอยู่ และเลือกวิธีประมวลผลให้เหมาะกับข้อมูล",
+    icon: "🕵️",
+    flow: [
+      { icon: "📄", label: "คำสั่งแปลกปลอมอาจซ่อนใน Repository/README/เอกสาร" },
+      { icon: "🚫", label: "อย่าเปิด Internet + Credential + ไฟล์สำคัญพร้อมกัน" },
+      { icon: "🔍", label: "ตรวจคำสั่งก่อนอนุญาตให้รันทุกครั้ง" }
+    ],
+    slideImage: "images/P1/Slide5.JPG",
+    images: [],
+    text: [
+      "ระวังคำสั่งแปลกปลอมที่ซ่อนอยู่ในไฟล์/เอกสารที่ Claude Code อ่าน และเลือกวิธีประมวลผล (Claude Code หรือ Local ML) ให้เหมาะกับความอ่อนไหวของข้อมูลตามตารางในสไลด์"
+    ]
+  },
+  {
+    key: "hybrid-pilot",
+    title: "ข้อเสนอสำหรับ DX: Hybrid Approach พร้อม Pilot Policy",
+    icon: "🧩",
+    flow: [
+      { icon: "⚖️", label: "แบ่งงานตามความอ่อนไหวของข้อมูล" },
+      { icon: "🧪", label: "เริ่มจาก Pilot Policy ที่มีขอบเขตชัดเจน" },
+      { icon: "📋", label: "ขออนุมัติก่อนเริ่มใช้งานจริง" }
+    ],
+    slideImage: "images/P1/Slide6.JPG",
+    images: [],
+    text: [
+      "ข้อเสนอ Hybrid Approach: ใช้ Claude Code กับงานทั่วไป ใช้ Local ML กับข้อมูลลับสูง พร้อม Pilot Policy ที่ต้องขออนุมัติก่อนเริ่มใช้งานจริง"
+    ]
+  }
+];
+
+const CALLOUT_RULES = [
+  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
+  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
+  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
+  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" }
+];
+
+function renderSlideImage(topic, idx) {
+  if (!topic.slideImage) return "";
+  return '<div class="slide-ref">' +
+    '<img src="' + topic.slideImage + '" alt="สไลด์ต้นฉบับ: ' + topic.title + '" loading="lazy">' +
+    '<span class="slide-ref-caption">SLIDE ' + String(idx + 1).padStart(2, "0") + ' — ต้นฉบับจากเอกสาร HQ Guidance</span>' +
+    '</div>';
+}
+
+function renderParagraph(text) {
+  for (const rule of CALLOUT_RULES) {
+    const m = text.match(rule.re);
+    if (m) {
+      const label = m[0].replace(/:\s*$/, "");
+      const rest = text.slice(m[0].length);
+      return '<div class="note note-' + rule.cls + '">' +
+        '<span class="note-icon">' + rule.icon + '</span>' +
+        '<div class="note-body"><span class="note-label">' + label + ':</span> ' + rest + '</div>' +
+        '</div>';
+    }
+  }
+  return '<p>' + text + '</p>';
+}
+
+let currentKey = TOPICS[0].key;
+
+function renderTopicList() {
+  const el = document.getElementById("topicList");
+  el.innerHTML = "";
+  TOPICS.forEach((t, i) => {
+    const btn = document.createElement("button");
+    btn.className = "station" + (t.key === currentKey ? " active" : "");
+    btn.setAttribute("aria-current", t.key === currentKey ? "true" : "false");
+
+    const numWrap = document.createElement("span");
+    numWrap.className = "station-num-wrap";
+    const num = document.createElement("span");
+    num.className = "station-num";
+    num.textContent = String(i + 1).padStart(2, "0");
+    numWrap.appendChild(num);
+
+    const info = document.createElement("span");
+    info.className = "station-info";
+    info.innerHTML = '<span class="station-icon">' + (t.icon || "") + '</span><span class="station-title">' + t.title + '</span>';
+
+    btn.appendChild(numWrap);
+    btn.appendChild(info);
+    btn.onclick = () => {
+      currentKey = t.key;
+      renderTopicList();
+      renderContent();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const idx = TOPICS.findIndex(t => t.key === currentKey);
+  const topic = TOPICS[idx];
+  const el = document.getElementById("content");
+
+  let imagesHtml = "";
+  if (topic.images && topic.images.length > 0) {
+    imagesHtml = '<span class="section-label" style="margin-top:20px">ภาพประกอบเพิ่มเติม</span><div class="image-grid">' +
+      topic.images.map(src => '<img src="' + src + '" alt="">').join("") +
+      "</div>";
+  }
+
+  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paraHtml = paragraphs.map(renderParagraph);
+  if (topic.flow && topic.flow.length > 0) {
+    const flowHtml = '<div class="flow-strip">' + topic.flow.map((step, i) =>
+      '<div class="flow-step"><span class="flow-step-idx">STEP ' + (i + 1) + '</span><span class="flow-glyph">' + step.icon + '</span><span class="flow-text">' + step.label + '</span></div>' +
+      (i < topic.flow.length - 1 ? '<span class="flow-connector">→</span>' : "")
+    ).join("") + "</div>";
+    paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
+  }
+  const textHtml = paraHtml.length > 0
+    ? '<div class="text-block">' + paraHtml.join("") + '</div>'
+    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+
+  const linkHtml = topic.link
+    ? '<a class="sheet-ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติม →</a>'
+    : "";
+
+  el.innerHTML =
+    '<div class="sheet-head"><span class="sheet-ref">หัวข้อที่ ' + String(idx + 1).padStart(2, "0") + ' / ' + TOPICS.length + '</span><h2>' + topic.title + '</h2></div>' +
+    renderSlideImage(topic, idx) +
+    textHtml + linkHtml +
+    imagesHtml;
+}
+
+document.getElementById("statTopics").textContent = TOPICS.length;
+renderTopicList();
+renderContent();
+</script>
+</body>
+</html>
