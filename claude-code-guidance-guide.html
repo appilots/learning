@@ -116,10 +116,26 @@
   .masthead-stats dt { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin: 0; }
   .masthead-stats dd { font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin: 0; font-variant-numeric: tabular-nums; }
   .masthead h1 { font-family: var(--sans); font-size: clamp(1.5rem, 2.6vw, 1.9rem); font-weight: 800; margin: 0 0 6px; text-wrap: balance; color: var(--steel); letter-spacing: -0.01em; }
-  .masthead-sub { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 16px; max-width: 66ch; line-height: 1.6; }
-  .masthead-note { border: 1px solid var(--line); background: var(--surface); padding: 11px 14px; font-size: 0.78rem; line-height: 1.65; color: var(--ink-soft); }
-  .masthead-note strong { color: var(--ink); }
 
+  .warn-banner {
+    background: linear-gradient(120deg, var(--warn), #a5291d);
+    color: #fff; padding: 15px 20px; margin: 0 0 16px; box-shadow: var(--shadow);
+    font-size: 0.92rem; line-height: 1.7;
+  }
+  .warn-banner strong { display: block; font-size: 1.1rem; line-height: 1.4; margin-bottom: 5px; }
+
+  .liability-banner {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    background: var(--ink); color: #fff; border: 2px solid var(--warn);
+    padding: 13px 20px; margin: 0 0 16px; font-size: 0.88rem; line-height: 1.6;
+  }
+  .liability-tag {
+    flex-shrink: 0; font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--warn);
+    border: 1px solid var(--warn); padding: 4px 10px; white-space: nowrap;
+  }
+
+  .masthead-sub { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 16px; max-width: 66ch; line-height: 1.6; }
   .cta-banner {
     display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     background: linear-gradient(120deg, var(--accent-deep), var(--accent));
@@ -256,14 +272,19 @@
         <div><dt>ระดับควบคุม</dt><dd>5 ด้าน</dd></div>
       </dl>
     </div>
-    <h1>🧭 แนวทางใช้ Claude Code</h1>
-    <p class="masthead-sub">สรุปแนวทางที่ HQ ส่งมอบให้ทีม DX ใช้อ้างอิงในการทดลองและพัฒนาระบบภายในบริษัทด้วย Claude Code — ใช้งานได้จริง แต่ต้องควบคุมเสมือน "Developer" คนหนึ่ง ไม่ใช่มองเป็นเพียง Chatbot</p>
-    <div class="masthead-note">
-      📋 <strong>เกี่ยวกับคู่มือนี้:</strong> เนื้อหาทั้งหมดสรุปมาจากเอกสาร "HQ Guidance for DX Team" ที่ส่งมอบให้ทีม DX โดยตรง ไม่ได้ดัดแปลงเนื้อหาเชิงนโยบาย มีเพียงการจัดรูปแบบใหม่เพื่อให้อ่านง่ายขึ้น สถานะที่ปรากฏในตาราง (<span class="status-pill allow" style="padding:1px 7px;">ALLOW</span> <span class="status-pill control" style="padding:1px 7px;">CONTROL</span> <span class="status-pill review" style="padding:1px 7px;">REVIEW</span> <span class="status-pill block" style="padding:1px 7px;">BLOCK</span>) เป็นสถานะที่ HQ กำหนดไว้ในเอกสารต้นฉบับ หากมีข้อสงสัยให้ยึดเอกสารต้นฉบับหรือสอบถาม IT/Security เป็นหลัก
+    <h1>🧭 แนวทางการใช้ Claude Code ร่วมกับ VSCode</h1>
+    <div class="warn-banner">
+      <strong>⚠️ สำคัญมาก: มีความเสี่ยงข้อมูลบริษัทรั่วไหลในระดับสูง</strong>
+      การใช้งาน Claude Code หากใช้งานไม่ถูกต้องอาจทำให้ข้อมูลบริษัทรั่วไหลได้ในระดับสูง ท่านใดที่ไม่มั่นใจหรือไม่เชี่ยวชาญเพียงพอ โปรดหลีกเลี่ยงการใช้งาน หากจำเป็นต้องใช้ ควรศึกษาวิธีการใช้งานและผลกระทบให้เข้าใจอย่างถ่องแท้เป็นสำคัญก่อนเริ่มใช้งานจริงทุกครั้ง
     </div>
+    <div class="liability-banner">
+      <span class="liability-tag">ข้อรับผิดชอบ</span>
+      <span>IT ให้ความรู้ไว้ครบถ้วนในคู่มือนี้แล้ว หากฝ่าฝืนคำแนะนำจนข้อมูลบริษัทรั่วไหลหรือเกิดความเสียหาย ผู้ใช้งานต้องรับผิดชอบแต่เพียงผู้เดียว</span>
+    </div>
+    <p class="masthead-sub">สรุปแนวทางที่ HQ ส่งมอบให้ทีม DX ใช้อ้างอิงในการทดลองและพัฒนาระบบภายในบริษัทด้วย Claude Code — ใช้งานได้จริง แต่ต้องควบคุมเสมือน "Developer" คนหนึ่ง ไม่ใช่มองเป็นเพียง Chatbot</p>
     <div class="cta-banner">
       <div class="cta-banner-text">
-        <strong>🚀 อ่านแนวทางนี้ครบแล้ว? เริ่มใช้งานจริงได้เลย</strong>
+        <strong>🚀 เมื่ออ่านข้อกำหนดและคำแนะนำด้านล่างครบแล้ว สามารถดูคู่มือการใช้งานต่อได้เลย</strong>
         ดูวิธีติดตั้งและใช้งาน Claude Code จริงร่วมกับ VS Code แบบทีละขั้นตอน
       </div>
       <a class="cta-btn" href="claude-code-vscode-guide.html" target="_blank" rel="noopener">เปิดคู่มือเริ่มใช้งาน →</a>
