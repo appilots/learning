@@ -76,7 +76,8 @@
   .choice.selected .choice-letter { border-color: var(--accent); background: var(--accent); color: #fff; }
 
   .quiz-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .btn { font-family: var(--sans); font-weight: 800; font-size: 0.9rem; padding: 12px 22px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .btn { font-family: var(--sans); font-weight: 800; font-size: 0.9rem; padding: 12px 22px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+  .notify-row .btn, #btnRetry { min-width: 260px; }
   .btn-primary { background: var(--accent-deep); color: #fff; box-shadow: var(--shadow); }
   .btn-primary:hover { background: var(--ink); }
   .btn-primary:disabled { background: var(--line); color: var(--ink-soft); cursor: not-allowed; box-shadow: none; }
@@ -128,7 +129,7 @@
     </div>
     <h1 id="mastheadH1"></h1>
     <p class="masthead-sub" id="mastheadSub"></p>
-    <a class="back-link" id="backLink" href="https://claude.ai/code/artifact/1470a905-edc0-4f2e-a70f-0351d1ad59d0"></a>
+    <a class="back-link" id="backLink" href="https://appilots.github.io/learning/ai-safety-guide.html"></a>
     <div class="progress-wrap" id="progressWrap">
       <div class="progress-meta">
         <span id="progQLabel"></span>
@@ -141,7 +142,7 @@
 </div>
 
 <script>
-const GUIDE_URL = "https://claude.ai/code/artifact/1470a905-edc0-4f2e-a70f-0351d1ad59d0";
+const GUIDE_URL = "https://appilots.github.io/learning/ai-safety-guide.html";
 const LANG_KEY = "attg-ai-safety-lang";
 let LANG = localStorage.getItem(LANG_KEY) || "th";
 

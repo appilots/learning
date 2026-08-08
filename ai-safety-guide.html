@@ -535,27 +535,6 @@ const TOPICS = [
     ]
   },
   {
-    key: "account-security", icon: "🔐",
-    title: { th: "รหัสผ่านและการยืนยันตัวตน", ja: "パスワードと本人確認", en: "Passwords and Authentication" },
-    flow: [
-      { icon: "🔑", label: { th: "ตั้งรหัสผ่านที่คาดเดายาก", ja: "推測されにくいパスワードを設定", en: "Set a password that's hard to guess" } },
-      { icon: "📱", label: { th: "เปิดใช้ 2FA", ja: "2段階認証(2FA)を有効化", en: "Turn on 2FA" } },
-      { icon: "🔐", label: { th: "บัญชี AI ปลอดภัยจากการถูกแฮก", ja: "AIアカウントを乗っ取りから守る", en: "Your AI account stays safe from hacking" } }
-    ],
-    images: [],
-    text: [
-      { type: "plain", th: "บัญชี AI ที่เชื่อมกับอีเมลบริษัทหรือมีประวัติการสนทนาที่เกี่ยวข้องกับงาน หากถูกแฮกจะทำให้ผู้ไม่หวังดีเข้าถึงข้อมูลและประวัติการใช้งานทั้งหมดได้ทันที การป้องกันบัญชีจึงสำคัญไม่แพ้การระวังข้อมูลที่ป้อนเข้า AI",
-        ja: "会社のメールに紐づいたAIアカウントや業務関連の会話履歴を含むアカウントが乗っ取られると、攻撃者はすべてのデータと履歴に即座にアクセスできる。入力データへの注意と同じくらいアカウント保護も重要である。",
-        en: "If an AI account linked to a company email or containing work conversation history gets hacked, an attacker gets immediate access to all of it. Protecting the account matters as much as being careful what you enter." },
-      { type: "howto", th: "ตั้งรหัสผ่านที่คาดเดายาก ไม่ซ้ำกับบัญชีอื่น และเปิดใช้การยืนยันตัวตนสองชั้น (2FA) ในทุกบัญชี AI ที่ใช้งาน โดยเฉพาะบัญชีที่เชื่อมต่อกับ Connectors ต่างๆ เช่น Google Drive หรือ Slack เพราะหากบัญชี AI ถูกแฮก ผู้ไม่หวังดีอาจเข้าถึงไฟล์ในบริการที่เชื่อมต่อไว้ได้ด้วย",
-        ja: "推測されにくく他で使い回していないパスワードを設定し、利用するすべてのAIアカウントで2FAを有効にすること。特にGoogle DriveやSlackと連携するアカウントは要注意で、乗っ取られると連携先のファイルにもアクセスされ得る。",
-        en: "Set a hard-to-guess, non-reused password, and enable 2FA on every AI account — especially ones connected to Google Drive or Slack, since a hacked account could expose files in those connected services too." },
-      { type: "tip", th: "ใช้แอปยืนยันตัวตน (Authenticator App) แทนการรับรหัส OTP ทาง SMS เพราะปลอดภัยกว่า และหมั่นตรวจสอบรายการอุปกรณ์ที่เคยล็อกอินเข้าบัญชี AI เป็นระยะ หากพบอุปกรณ์ที่ไม่รู้จักให้ Sign out ทันทีและเปลี่ยนรหัสผ่าน",
-        ja: "SMSでOTPを受け取るより認証アプリの方が安全である。AIアカウントにログイン中のデバイス一覧を定期的に確認し、見覚えのないデバイスがあれば直ちにサインアウトしパスワードを変更すること。",
-        en: "Use an authenticator app instead of SMS OTP codes for better security, and periodically check devices signed in to your AI accounts — sign out and change your password immediately if you spot an unfamiliar one." }
-    ]
-  },
-  {
     key: "phishing-email", icon: "📧",
     title: { th: "อีเมลหลอกลวง (Phishing Mail) และการรายงาน", ja: "フィッシングメールとその報告方法", en: "Phishing Emails and How to Report Them" },
     flow: [
@@ -629,27 +608,6 @@ const TOPICS = [
         en: "Never act on financial instructions or reveal sensitive information based solely on a video call or voice message, no matter how familiar it looks or sounds. Always verify via a second channel — a saved number, or a question only the real person could answer." }
     ],
     link: "https://www.thaicert.or.th/"
-  },
-  {
-    key: "sharing-prompts", icon: "🔗",
-    title: { th: "แชร์ Prompt/Custom GPT อย่างปลอดภัย", ja: "プロンプト・カスタムGPTを安全に共有する", en: "Sharing Prompts/Custom GPTs Safely" },
-    flow: [
-      { icon: "✍️", label: { th: "เขียน Prompt/สร้าง Custom GPT", ja: "プロンプトを作成/カスタムGPTを構築", en: "Write a prompt / build a Custom GPT" } },
-      { icon: "🔍", label: { th: "ตรวจสอบเนื้อหาก่อนแชร์", ja: "共有前に内容を確認する", en: "Check the content before sharing" } },
-      { icon: "🔗", label: { th: "แชร์ได้อย่างปลอดภัย", ja: "安全に共有できる", en: "Share it safely" } }
-    ],
-    images: [],
-    text: [
-      { type: "plain", th: "การแชร์บทสนทนา Prompt หรือ Custom GPT ที่สร้างไว้ให้เพื่อนร่วมงานหรือเผยแพร่สาธารณะ (เช่นใน GPT Store) อาจมีข้อมูลภายในหลุดไปโดยไม่ตั้งใจ หากไม่ตรวจสอบเนื้อหาให้ดีก่อนแชร์",
-        ja: "作成した会話・プロンプト・カスタムGPTを同僚に共有したりGPT Storeなどで公開したりする際、共有前に内容を十分確認しないと意図せず社内情報が漏れることがある。",
-        en: "Sharing a conversation, prompt, or Custom GPT — with colleagues or publicly (e.g., the GPT Store) — can unintentionally leak internal information if you don't carefully check the content first." },
-      { type: "caution", th: "ก่อนสร้างลิงก์แชร์บทสนทนาหรือเผยแพร่ Custom GPT ให้ตรวจสอบว่าไม่มีข้อมูลลับของบริษัท ข้อมูลลูกค้า หรือความรู้ภายใน (Knowledge files ที่อัปโหลดไว้ใน Custom GPT) ปะปนอยู่ เพราะลิงก์ที่แชร์แล้วมักเป็นสาธารณะ ใครมีลิงก์ก็เข้าดูหรือใช้งานได้ทันที",
-        ja: "共有リンクの作成やカスタムGPTの公開前に、会社の機密情報・顧客情報・社内ナレッジ(アップロードしたKnowledge files)が含まれていないか確認すること。共有リンクは通常公開されており、誰でもすぐに閲覧・利用できてしまう。",
-        en: "Before creating a share link or publishing a Custom GPT, check it contains no confidential company data, customer data, or internal knowledge files — a shared link is usually public, so anyone with it can view or use it instantly." },
-      { type: "howto", th: "หากต้องการสร้าง Custom GPT หรือ Prompt Template สำหรับใช้ภายในทีม ให้ตั้งค่าการเข้าถึงเป็น 'เฉพาะทีม/องค์กร' แทนการเผยแพร่สู่สาธารณะ และตรวจสอบไฟล์ความรู้ที่อัปโหลดเข้าไปว่าไม่มีข้อมูลที่ไม่ควรเปิดเผยก่อนบันทึกทุกครั้ง",
-        ja: "チーム内で使うカスタムGPTやプロンプトテンプレートは、公開ではなく「チーム/組織限定」に設定すること。アップロードするナレッジファイルに公開すべきでない情報がないか、保存の都度確認すること。",
-        en: "For internal team use, set Custom GPTs or prompt templates to 'team/organization only' rather than public, and check uploaded knowledge files for anything that shouldn't be disclosed, every time you save." }
-    ]
   },
   {
     key: "incident-report", icon: "🚨",
