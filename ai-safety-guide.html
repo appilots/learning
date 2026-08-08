@@ -1,558 +1,178 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>คู่มือการใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</title>
 <style>
   :root {
-    --ink: #1b1420;
-    --ink-soft: #7a7186;
-    --paper: #fdf3e4;
-    --surface: #ffffff;
-    --line: #ecdcc4;
-    --accent: #e2841f;
-    --accent-deep: #a85e12;
-    --accent-soft: #ffe0ad;
-    --steel: #1f7fc4;
-    --steel-soft: #cdecfb;
-    --tip: var(--steel);
-    --tip-soft: var(--steel-soft);
-    --warn: #e0473a;
-    --warn-soft: #ffdcd6;
-    --howto: #12a389;
-    --howto-soft: #cdf5ea;
-    --example: #9a4fd1;
-    --example-soft: #f0ddfc;
-    --ok: #1c9d5c;
-    --ok-soft: #d1f5e0;
+    --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
+    --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
+    --steel: #1f7fc4; --steel-soft: #cdecfb; --tip: var(--steel); --tip-soft: var(--steel-soft);
+    --warn: #e0473a; --warn-soft: #ffdcd6; --howto: #12a389; --howto-soft: #cdf5ea;
+    --example: #9a4fd1; --example-soft: #f0ddfc; --ok: #1c9d5c; --ok-soft: #d1f5e0;
     --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
     --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
     --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, monospace;
-    --sans: "Noto Sans Thai", "Sarabun", -apple-system, "Segoe UI", sans-serif;
+    --sans: "Noto Sans Thai", "Noto Sans JP", "Sarabun", -apple-system, "Segoe UI", sans-serif;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --ink: #f3ecf7;
-      --ink-soft: #b7a9c4;
-      --paper: #1e1726;
-      --surface: #241c30;
-      --line: #3a2e46;
-      --accent: #f2a63f;
-      --accent-deep: #ffc06b;
-      --accent-soft: #3a2a12;
-      --steel: #5cb2f0;
-      --steel-soft: #16324a;
-      --warn: #f0796a;
-      --warn-soft: #3c1c1a;
-      --howto: #4fd6bb;
-      --howto-soft: #0f342c;
-      --example: #c795f0;
-      --example-soft: #33224a;
-      --ok: #5ce09a;
-      --ok-soft: #103a26;
+    :root:not([data-theme="light"]) {
+      --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
+      --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
+      --steel: #5cb2f0; --steel-soft: #16324a; --warn: #f0796a; --warn-soft: #3c1c1a;
+      --howto: #4fd6bb; --howto-soft: #0f342c; --example: #c795f0; --example-soft: #33224a;
+      --ok: #5ce09a; --ok-soft: #103a26;
       --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
       --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
     }
   }
   :root[data-theme="dark"] {
-    --ink: #f3ecf7;
-    --ink-soft: #b7a9c4;
-    --paper: #1e1726;
-    --surface: #241c30;
-    --line: #3a2e46;
-    --accent: #f2a63f;
-    --accent-deep: #ffc06b;
-    --accent-soft: #3a2a12;
-    --steel: #5cb2f0;
-    --steel-soft: #16324a;
-    --warn: #f0796a;
-    --warn-soft: #3c1c1a;
-    --howto: #4fd6bb;
-    --howto-soft: #0f342c;
-    --example: #c795f0;
-    --example-soft: #33224a;
-    --ok: #5ce09a;
-    --ok-soft: #103a26;
+    --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
+    --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
+    --steel: #5cb2f0; --steel-soft: #16324a; --warn: #f0796a; --warn-soft: #3c1c1a;
+    --howto: #4fd6bb; --howto-soft: #0f342c; --example: #c795f0; --example-soft: #33224a;
+    --ok: #5ce09a; --ok-soft: #103a26;
     --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
     --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
   }
   :root[data-theme="light"] {
-    --ink: #1b1420;
-    --ink-soft: #7a7186;
-    --paper: #fdf3e4;
-    --surface: #ffffff;
-    --line: #ecdcc4;
-    --accent: #e2841f;
-    --accent-deep: #a85e12;
-    --accent-soft: #ffe0ad;
-    --steel: #1f7fc4;
-    --steel-soft: #cdecfb;
-    --warn: #e0473a;
-    --warn-soft: #ffdcd6;
-    --howto: #12a389;
-    --howto-soft: #cdf5ea;
-    --example: #9a4fd1;
-    --example-soft: #f0ddfc;
-    --ok: #1c9d5c;
-    --ok-soft: #d1f5e0;
+    --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
+    --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
+    --steel: #1f7fc4; --steel-soft: #cdecfb; --warn: #e0473a; --warn-soft: #ffdcd6;
+    --howto: #12a389; --howto-soft: #cdf5ea; --example: #9a4fd1; --example-soft: #f0ddfc;
+    --ok: #1c9d5c; --ok-soft: #d1f5e0;
     --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
     --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
   }
-
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: var(--sans);
-    background: var(--bg-gradient);
-    background-attachment: fixed;
-    color: var(--ink);
-    min-height: 100vh;
-  }
+  body { margin: 0; font-family: var(--sans); background: var(--bg-gradient); background-attachment: fixed; color: var(--ink); min-height: 100vh; }
   ::selection { background: var(--accent-soft); color: var(--accent-deep); }
-
   .frame { max-width: 1680px; margin: 0 auto; padding: 32px clamp(20px, 3.5vw, 64px) 64px; }
 
-  /* ---------- Masthead (document control block) ---------- */
-  .masthead {
-    border-bottom: 2px solid var(--ink);
-    background: color-mix(in srgb, var(--surface) 85%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 22px 24px 22px;
-    margin-bottom: 30px;
-    box-shadow: var(--shadow);
-  }
-  .masthead-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-  }
-  .brand-code {
-    display: block;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--accent-deep);
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  .brand-doc {
-    display: block;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    color: var(--ink-soft);
-    margin-top: 3px;
-    letter-spacing: 0.03em;
-  }
+  .masthead { border-bottom: 2px solid var(--ink); background: color-mix(in srgb, var(--surface) 85%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 22px 24px 22px; margin-bottom: 30px; box-shadow: var(--shadow); }
+  .masthead-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+  .brand-code { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--accent-deep); font-weight: 700; text-transform: uppercase; }
+  .brand-doc { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--ink-soft); margin-top: 3px; letter-spacing: 0.03em; }
+
+  .masthead-top-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+  .lang-switch { display: flex; gap: 4px; }
+  .lang-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 700; padding: 5px 9px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft); cursor: pointer; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--ink); }
+  .lang-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .lang-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .quiz-pill { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(120deg, var(--accent-deep), var(--accent)); color: #fff; text-decoration: none; padding: 9px 16px 9px 12px; box-shadow: var(--shadow); border-radius: 999px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .quiz-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 18px -6px rgba(0,0,0,0.4); }
+  .quiz-pill:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .quiz-pill-icon { font-size: 1.3rem; line-height: 1; }
+  .quiz-pill-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .quiz-pill-text strong { font-size: 0.86rem; font-weight: 800; }
+  .quiz-pill-text small { font-size: 0.66rem; font-weight: 600; opacity: 0.92; font-family: var(--mono); }
+
   .masthead-stats { display: flex; gap: 22px; margin: 0; }
   .masthead-stats > div { text-align: right; }
-  .masthead-stats dt {
-    font-family: var(--mono);
-    font-size: 0.64rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-  .masthead-stats dd {
-    font-family: var(--mono);
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin: 2px 0 0;
-    font-variant-numeric: tabular-nums;
-  }
-  .masthead h1 {
-    font-family: var(--sans);
-    font-size: clamp(1.5rem, 2.6vw, 1.95rem);
-    font-weight: 800;
-    margin: 0 0 8px;
-    text-wrap: balance;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-  }
-  .masthead-sub {
-    color: var(--ink-soft);
-    font-size: 0.94rem;
-    margin: 0 0 16px;
-    max-width: 66ch;
-    line-height: 1.65;
-  }
-  .masthead-note {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    padding: 12px 15px;
-    font-size: 0.79rem;
-    line-height: 1.7;
-    color: var(--ink-soft);
-  }
+  .masthead-stats dt { font-family: var(--mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin: 0; }
+  .masthead-stats dd { font-family: var(--mono); font-size: 1.15rem; font-weight: 700; color: var(--ink); margin: 2px 0 0; font-variant-numeric: tabular-nums; }
+  .masthead h1 { font-family: var(--sans); font-size: clamp(1.5rem, 2.6vw, 1.95rem); font-weight: 800; margin: 0 0 8px; text-wrap: balance; color: var(--ink); letter-spacing: -0.01em; line-height: 1.25; }
+  .masthead-sub { color: var(--ink-soft); font-size: 0.94rem; margin: 0 0 16px; max-width: 66ch; line-height: 1.65; }
+  .masthead-note { border: 1px solid var(--line); background: var(--surface); padding: 12px 15px; font-size: 0.79rem; line-height: 1.7; color: var(--ink-soft); }
   .masthead-note strong { color: var(--ink); }
 
-  .top-cta {
-    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-    background: linear-gradient(120deg, var(--accent-deep), var(--accent));
-    color: #fff; padding: 16px 20px; margin-top: 14px; box-shadow: var(--shadow);
-  }
+  .top-cta { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: linear-gradient(120deg, var(--accent-deep), var(--accent)); color: #fff; padding: 16px 20px; margin-top: 14px; box-shadow: var(--shadow); }
   .top-cta-text { font-size: 0.9rem; line-height: 1.6; }
   .top-cta-text strong { display: block; font-size: 1.05rem; margin-bottom: 3px; color: #fff; }
-  .top-cta-btn {
-    flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
-    background: #fff; color: var(--accent-deep); font-weight: 800; font-size: 0.88rem;
-    padding: 11px 18px; text-decoration: none; white-space: nowrap;
-  }
+  .top-cta-btn { flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; background: #fff; color: var(--accent-deep); font-weight: 800; font-size: 0.88rem; padding: 11px 18px; text-decoration: none; white-space: nowrap; }
   .top-cta-btn:hover { background: var(--paper); }
   .top-cta-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
-  /* ---------- Layout ---------- */
-  .body-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 32px;
-    align-items: start;
-  }
+  .body-grid { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; }
 
-  /* ---------- Rail (routing card nav) ---------- */
-  .rail {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    background: color-mix(in srgb, var(--surface) 85%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid var(--line);
-    padding: 10px;
-    box-shadow: var(--shadow);
-  }
-  .station {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-align: left;
-    width: 100%;
-    padding: 8px 10px 8px 4px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: var(--ink);
-    font-family: var(--sans);
-    transition: background-color 0.12s ease;
-  }
+  .rail { display: flex; flex-direction: column; gap: 0; background: color-mix(in srgb, var(--surface) 85%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--line); padding: 10px; box-shadow: var(--shadow); }
+  .station { position: relative; display: flex; align-items: center; gap: 12px; text-align: left; width: 100%; padding: 8px 10px 8px 4px; border: none; background: transparent; cursor: pointer; color: var(--ink); font-family: var(--sans); transition: background-color 0.12s ease; }
   .station:hover { background: var(--surface); }
   .station-num-wrap { position: relative; flex: 0 0 30px; height: 30px; }
-  .station-num-wrap::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -6px;
-    bottom: -6px;
-    width: 1.5px;
-    background: var(--line);
-    transform: translateX(-50%);
-    z-index: 0;
-  }
+  .station-num-wrap::before { content: ""; position: absolute; left: 50%; top: -6px; bottom: -6px; width: 1.5px; background: var(--line); transform: translateX(-50%); z-index: 0; }
   .station:first-of-type .station-num-wrap::before { top: 50%; }
   .station:last-of-type .station-num-wrap::before { bottom: 50%; }
-  .station-num {
-    position: relative;
-    z-index: 1;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1.5px solid var(--line);
-    background: var(--paper);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--ink-soft);
-    transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
-  }
+  .station-num { position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--paper); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.7rem; font-weight: 700; color: var(--ink-soft); transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease; }
   .station-info { display: flex; align-items: flex-start; gap: 8px; min-width: 0; padding-top: 1px; }
   .station-icon { font-size: 1rem; flex-shrink: 0; }
   .station-text { display: flex; flex-direction: column; min-width: 0; }
-  .station-title {
-    display: block;
-    font-size: 0.84rem;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--steel);
-    transition: color 0.12s ease;
-  }
-  .station-title-en {
-    display: block;
-    font-style: italic;
-    font-weight: 400;
-    font-family: var(--mono);
-    font-size: 0.66rem;
-    line-height: 1.4;
-    color: var(--ink-soft);
-    opacity: 0.85;
-    margin-top: 1px;
-    transition: color 0.12s ease, opacity 0.12s ease;
-  }
+  .station-title { display: block; font-size: 0.84rem; font-weight: 700; line-height: 1.4; color: var(--steel); transition: color 0.12s ease; }
   .station.active .station-num { background: var(--accent); border-color: var(--accent); color: #fff; }
   .station.active .station-title { color: var(--accent-deep); }
   .station:hover .station-title { color: var(--accent-deep); }
   .station:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
-  .rail-cta {
-    margin-top: 14px;
-    padding: 16px 16px;
-    border: 2px solid var(--accent);
-    background: linear-gradient(150deg, var(--accent-soft), var(--surface));
-    box-shadow: var(--shadow);
-  }
-  .rail-cta-label {
-    margin: 0 0 5px;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--accent-deep);
-    font-weight: 800;
-  }
+  .rail-cta { margin-top: 14px; padding: 16px 16px; border: 2px solid var(--accent); background: linear-gradient(150deg, var(--accent-soft), var(--surface)); box-shadow: var(--shadow); }
+  .rail-cta-label { margin: 0 0 5px; font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent-deep); font-weight: 800; }
   .rail-cta p:not(.rail-cta-label) { margin: 0 0 12px; font-size: 0.84rem; font-weight: 600; color: var(--ink); line-height: 1.55; }
-  .rail-cta a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 100%;
-    color: #fff;
-    background: var(--accent-deep);
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.86rem;
-    padding: 11px 13px;
-    box-shadow: var(--shadow);
-  }
+  .rail-cta a { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; color: #fff; background: var(--accent-deep); text-decoration: none; font-weight: 800; font-size: 0.86rem; padding: 11px 13px; box-shadow: var(--shadow); }
   .rail-cta a:hover { background: var(--ink); }
   .rail-cta a:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 2px; }
 
-  /* ---------- Sheet (bulletin content panel) ---------- */
-  .sheet {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
-    padding: 30px 32px 34px;
-    min-width: 0;
-  }
+  .sheet { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 30px 32px 34px; min-width: 0; }
   .sheet-head { margin-bottom: 6px; }
-  .sheet-ref {
-    display: block;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.07em;
-    color: var(--accent-deep);
-    text-transform: uppercase;
-    margin-bottom: 7px;
-    font-weight: 700;
-  }
-  .sheet-head h2 {
-    font-family: var(--sans);
-    font-size: 1.42rem;
-    font-weight: 800;
-    margin: 0 0 4px;
-    color: var(--steel);
-    text-wrap: balance;
-    line-height: 1.3;
-  }
-  .sheet-head-en {
-    display: block;
-    font-style: italic;
-    font-weight: 400;
-    font-family: var(--mono);
-    font-size: 0.84rem;
-    color: var(--ink-soft);
-    margin: 0 0 20px;
-    letter-spacing: 0.01em;
-  }
+  .sheet-ref { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.07em; color: var(--accent-deep); text-transform: uppercase; margin-bottom: 7px; font-weight: 700; }
+  .sheet-head h2 { font-family: var(--sans); font-size: 1.42rem; font-weight: 800; margin: 0 0 20px; color: var(--steel); text-wrap: balance; line-height: 1.3; }
 
-  /* ---------- Hero illustration (per-topic figure) ---------- */
-  .hero-illo {
-    position: relative;
-    width: 100%;
-    height: clamp(150px, 20vw, 210px);
-    border: 1px solid var(--line);
-    overflow: hidden;
-    margin-bottom: 22px;
-    background: var(--paper);
-  }
+  .hero-illo { position: relative; width: 100%; height: clamp(150px, 20vw, 210px); border: 1px solid var(--line); overflow: hidden; margin-bottom: 22px; background: var(--paper); }
   .hero-illo svg { width: 100%; height: 100%; display: block; }
-  .hero-illo-caption {
-    position: absolute;
-    left: 12px;
-    bottom: 8px;
-    font-family: var(--mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.02em;
-    color: var(--ink-soft);
-    background: var(--surface);
-    padding: 2px 8px;
-    border: 1px solid var(--line);
-    max-width: calc(100% - 24px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  .hero-illo-caption { position: absolute; left: 12px; bottom: 8px; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.02em; color: var(--ink-soft); background: var(--surface); padding: 2px 8px; border: 1px solid var(--line); max-width: calc(100% - 24px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .hero-illo.tone-accent { background: var(--accent-soft); }
   .hero-illo.tone-steel { background: var(--steel-soft); }
   .hero-illo.tone-warn { background: var(--warn-soft); }
   .hero-illo.tone-howto { background: var(--howto-soft); }
   .hero-illo.tone-example { background: var(--example-soft); }
 
-  .section-label {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--ink-soft);
-    display: block;
-    margin: 24px 0 10px;
-  }
+  .robot-bob { transform-box: fill-box; animation: robotBob 3s ease-in-out infinite; }
+  .robot-wave { transform-box: fill-box; transform-origin: 10% 90%; animation: robotWave 1.8s ease-in-out infinite; }
+  .robot-pulse { transform-box: fill-box; transform-origin: center; animation: robotPulse 2.4s ease-in-out infinite; }
+  @keyframes robotBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  @keyframes robotWave { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(-20deg); } 60% { transform: rotate(6deg); } }
+  @keyframes robotPulse { 0%, 100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.25); } }
+
+  .section-label { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); display: block; margin: 24px 0 10px; }
   .section-label:first-of-type { margin-top: 0; }
 
-  /* field notes = keyPoints fallback box */
-  .field-notes {
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    background: var(--paper);
-    padding: 15px 17px;
-    margin-bottom: 22px;
-  }
-  .field-notes-title {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent-deep);
-    margin-bottom: 9px;
-    font-weight: 700;
-  }
+  .field-notes { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--paper); padding: 15px 17px; margin-bottom: 22px; }
+  .field-notes-title { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-deep); margin-bottom: 9px; font-weight: 700; }
   .field-notes ul { margin: 0; padding-left: 20px; }
   .field-notes li { font-size: 0.9rem; line-height: 1.65; color: var(--ink); margin-bottom: 6px; }
   .field-notes li:last-child { margin-bottom: 0; }
 
-  /* video */
-  .video-frame {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    overflow: hidden;
-    margin-bottom: 12px;
-  }
+  .video-frame { aspect-ratio: 16 / 9; width: 100%; border: 1px solid var(--line); background: var(--paper); overflow: hidden; margin-bottom: 12px; }
   .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .video-credit {
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    margin: 0 0 22px;
-    padding: 9px 12px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    line-height: 1.65;
-  }
+  .video-credit { font-size: 0.78rem; color: var(--ink-soft); margin: 0 0 22px; padding: 9px 12px; background: var(--paper); border: 1px solid var(--line); line-height: 1.65; }
   .video-credit a { color: var(--accent-deep); text-decoration: none; font-weight: 600; }
   .video-credit a:hover { text-decoration: underline; }
-  .lang-badge {
-    display: inline-block;
-    background: var(--accent-soft);
-    color: var(--accent-deep);
-    border: 1px solid var(--accent);
-    padding: 1px 7px;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    font-weight: 700;
-    margin-right: 7px;
-  }
+  .lang-badge { display: inline-block; background: var(--accent-soft); color: var(--accent-deep); border: 1px solid var(--accent); padding: 1px 7px; font-family: var(--mono); font-size: 0.68rem; font-weight: 700; margin-right: 7px; }
 
-  .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
-  .image-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); }
-
-  /* body text */
   .text-block { font-family: var(--sans); font-size: 0.95rem; line-height: 1.85; color: var(--ink); max-width: 68ch; }
   .text-block p { margin: 0 0 15px; }
   .text-block p:last-child { margin-bottom: 0; }
-  .text-block.placeholder { color: var(--ink-soft); font-style: italic; }
   .text-block strong { color: var(--accent-deep); font-weight: 700; }
-  .text-block code, .note-body code {
-    font-family: var(--mono);
-    background: var(--paper);
-    color: var(--accent-deep);
-    border: 1px solid var(--line);
-    padding: 1px 6px;
-    font-size: 0.86em;
-  }
+  .text-block code, .note-body code { font-family: var(--mono); background: var(--paper); color: var(--accent-deep); border: 1px solid var(--line); padding: 1px 6px; font-size: 0.86em; }
 
-  /* flow strip */
-  .flow-strip {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    margin: 4px 0 24px;
-    padding: 15px 2px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
+  .flow-strip { display: flex; align-items: flex-start; gap: 0; margin: 4px 0 24px; padding: 15px 2px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .flow-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 8px; min-width: 0; }
   .flow-step-idx { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
-  .flow-glyph {
-    font-size: 1.2rem;
-    line-height: 1;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--paper);
-    border: 1.5px solid var(--line);
-  }
+  .flow-glyph { font-size: 1.2rem; line-height: 1; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--paper); border: 1.5px solid var(--line); }
   .flow-text { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.45; }
   .flow-connector { align-self: center; color: var(--line); font-family: var(--mono); font-size: 1rem; padding-top: 22px; flex: 0 0 auto; }
 
-  /* notes (callouts) */
   .note { display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; border-left: 3px solid var(--tip); background: var(--tip-soft); margin: 0 0 13px; font-size: 0.92rem; line-height: 1.78; }
   .note:last-child { margin-bottom: 0; }
   .note-icon { flex-shrink: 0; }
   .note-label { font-weight: 700; }
+  .note-tip { border-color: var(--tip); background: var(--tip-soft); } .note-tip .note-label { color: var(--tip); }
+  .note-warn { border-color: var(--warn); background: var(--warn-soft); } .note-warn .note-label { color: var(--warn); }
+  .note-howto { border-color: var(--howto); background: var(--howto-soft); } .note-howto .note-label { color: var(--howto); }
+  .note-example { border-color: var(--example); background: var(--example-soft); } .note-example .note-label { color: var(--example); }
 
-  .note-tip { border-color: var(--tip); background: var(--tip-soft); }
-  .note-tip .note-label { color: var(--tip); }
-  .note-warn { border-color: var(--warn); background: var(--warn-soft); }
-  .note-warn .note-label { color: var(--warn); }
-  .note-howto { border-color: var(--howto); background: var(--howto-soft); }
-  .note-howto .note-label { color: var(--howto); }
-  .note-example { border-color: var(--example); background: var(--example-soft); }
-  .note-example .note-label { color: var(--example); }
-
-  .sheet-ref-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 20px;
-    padding: 9px 13px;
-    border: 1px solid var(--line);
-    font-size: 0.82rem;
-    font-family: var(--mono);
-    color: var(--accent-deep);
-    text-decoration: none;
-  }
+  .sheet-ref-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; padding: 9px 13px; border: 1px solid var(--line); font-size: 0.82rem; font-family: var(--mono); color: var(--accent-deep); text-decoration: none; }
   .sheet-ref-link:hover { border-color: var(--accent); background: var(--accent-soft); }
   .sheet-ref-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-  }
-
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
   @media (max-width: 860px) {
     .body-grid { grid-template-columns: 1fr; }
     .rail { flex-direction: row; overflow-x: auto; gap: 4px; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
@@ -562,83 +182,149 @@
     .rail-cta { flex: 0 0 auto; white-space: nowrap; }
     .sheet { padding: 22px 18px 26px; }
     .masthead-stats { gap: 16px; }
+    .masthead-top-right { align-items: flex-start; width: 100%; }
   }
 </style>
-</head>
-<body>
 <div class="frame">
-
   <header class="masthead">
     <div class="masthead-top">
       <div>
         <span class="brand-code">AISIN GROUP · ATTG</span>
         <span class="brand-doc">DOC. AI-SAFETY-GUIDE · REV. 2026</span>
       </div>
-      <dl class="masthead-stats">
-        <div><dt>หัวข้อ</dt><dd id="statTopics">15</dd></div>
-        <div><dt>เกณฑ์ผ่าน</dt><dd>90%</dd></div>
-      </dl>
-    </div>
-    <h1>🛡️ คู่มือการใช้งาน AI อย่างปลอดภัย</h1>
-    <p class="masthead-sub">สำหรับพนักงานกลุ่มบริษัท ATTG — อ่านให้ครบทุกสถานีด้านซ้าย แล้วทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ (ต้องได้คะแนนอย่างน้อย 90%)</p>
-    <div class="masthead-note">
-      🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอที่แนบมาคัดเลือกจากช่อง YouTube ของสื่อ/ผู้เชี่ยวชาญที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น ลิขสิทธิ์เนื้อหาวิดีโอเป็นของเจ้าของช่องต้นฉบับ มีชื่อช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิป ค้นหาคลิปภาษาไทยเป็นอันดับแรกเสมอ หัวข้อไหนไม่มีคลิปไทยจะใช้คลิปภาษาญี่ปุ่น 🇯🇵 หรือภาษาอังกฤษ 🇬🇧 แทน (มีป้ายกำกับภาษาไว้ใต้วิดีโอให้สังเกตง่าย) หัวข้อที่เป็นนโยบายเฉพาะของ ATTG ยังคงไม่มีวิดีโอประกอบ เนื่องจากเป็นแนวปฏิบัติภายในที่ไม่มีคลิปสาธารณะให้อ้างอิงตรงๆ
-    </div>
-    <div class="top-cta">
-      <div class="top-cta-text">
-        <strong>📝 อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ</strong>
-        ต้องได้คะแนนอย่างน้อย 90% จึงจะถือว่าผ่านเกณฑ์
+      <div class="masthead-top-right">
+        <div class="lang-switch" role="group" id="langSwitch"></div>
+        <a class="quiz-pill" id="quizPill" href="https://claude.ai/code/artifact/ed4ace69-1c8f-4956-adde-3f1d6e12f000" target="_blank" rel="noopener">
+          <span class="quiz-pill-icon">📝</span>
+          <span class="quiz-pill-text" id="quizPillText"></span>
+        </a>
+        <dl class="masthead-stats">
+          <div><dt id="statTopicsLabel"></dt><dd id="statTopics">16</dd></div>
+          <div><dt id="statPassLabel"></dt><dd>90%</dd></div>
+        </dl>
       </div>
-      <a class="top-cta-btn" href="ai-safety-quiz.html" target="_blank" rel="noopener">ไปทำแบบทดสอบ →</a>
+    </div>
+    <h1 id="mastheadH1"></h1>
+    <p class="masthead-sub" id="mastheadSub"></p>
+    <div class="masthead-note" id="mastheadNote"></div>
+    <div class="top-cta">
+      <div class="top-cta-text" id="topCtaText"></div>
+      <a class="top-cta-btn" href="https://claude.ai/code/artifact/ed4ace69-1c8f-4956-adde-3f1d6e12f000" target="_blank" rel="noopener" id="topCtaBtn"></a>
     </div>
   </header>
 
   <div class="body-grid">
-    <nav class="rail" id="topicList" aria-label="สถานีหัวข้อในคู่มือ"></nav>
+    <nav class="rail" id="topicList" aria-label="Topic stations"></nav>
     <main class="sheet" id="content"></main>
   </div>
-
 </div>
 
 <script>
-// เพิ่ม/แก้ไขหัวข้อได้ที่นี่ — video ใส่ลิงก์ YouTube embed (ถ้าไม่มีให้ใส่ keyPoints แทน), text ใส่คำอธิบาย (รองรับ <strong>/<code> และ label นำหน้าเช่น "เคล็ดลับ:" เพื่อขึ้นเป็นกล่องไฮไลต์อัตโนมัติ)
+const QUIZ_URL = "https://claude.ai/code/artifact/ed4ace69-1c8f-4956-adde-3f1d6e12f000";
+const LANG_KEY = "attg-ai-safety-lang";
+let LANG = localStorage.getItem(LANG_KEY) || "th";
+
+const UI = {
+  th: {
+    langName: "ไทย", topics: "หัวข้อ", passScore: "เกณฑ์ผ่าน",
+    h1: "🛡️ คู่มือการใช้งาน AI อย่างปลอดภัย",
+    sub: "สำหรับพนักงานกลุ่มบริษัท ATTG — อ่านให้ครบทุกสถานีด้านซ้าย แล้วทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ (ต้องได้คะแนนอย่างน้อย 90%)",
+    note: "🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอที่แนบมาคัดเลือกจากช่อง YouTube ของสื่อ/ผู้เชี่ยวชาญที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น ลิขสิทธิ์เนื้อหาวิดีโอเป็นของเจ้าของช่องต้นฉบับ มีชื่อช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิป ค้นหาคลิปภาษาไทยเป็นอันดับแรกเสมอ หัวข้อไหนไม่มีคลิปไทยจะใช้คลิปภาษาญี่ปุ่น 🇯🇵 หรือภาษาอังกฤษ 🇬🇧 แทน หัวข้อที่เป็นนโยบายเฉพาะของ ATTG ยังคงไม่มีวิดีโอประกอบ เนื่องจากเป็นแนวปฏิบัติภายในที่ไม่มีคลิปสาธารณะให้อ้างอิงตรงๆ",
+    topCtaStrong: "📝 อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ",
+    topCtaSub: "ต้องได้คะแนนอย่างน้อย 90% จึงจะถือว่าผ่านเกณฑ์",
+    topCtaBtn: "ไปทำแบบทดสอบ →",
+    quizPillStrong: "ไปทำแบบทดสอบ", quizPillSmall: "ต้องได้ ≥ 90%",
+    railCtaLabel: "ขั้นตอนสุดท้าย", railCtaText: "อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ", railCtaBtn: "ไปทำแบบทดสอบ →",
+    secVideo: "🎥 วิดีโอประกอบ", secKeyPoints: "ประเด็นสำคัญของหัวข้อนี้", secSummary: "คำบรรยายสรุป",
+    byChannel: "โดยช่อง", watchOriginal: "ดูต้นฉบับบน YouTube →", thisVideo: "วิดีโอนี้",
+    topicOf: (i, n) => "หัวข้อที่ " + i + " / " + n,
+    readMore: "อ่านเพิ่มเติมจากหน่วยงานทางการ →", illoAria: "ภาพประกอบหัวข้อ: "
+  },
+  ja: {
+    langName: "日本語", topics: "トピック数", passScore: "合格基準",
+    h1: "🛡️ AI安全利用ガイド",
+    sub: "ATTGグループの従業員向け — 左側のすべてのステーションを読み終えたら、末尾のクイズで理解度を確認してください(合格には90%以上のスコアが必要です)。",
+    note: "🎥 <strong>本ガイド内の動画について:</strong> 埋め込まれている動画は、公共の知識を発信するメディア・専門家のYouTubeチャンネルから選定し、YouTube公式のEmbed機能のみを使用して埋め込んでいます。動画の著作権は元のチャンネル所有者に帰属し、各動画の下にチャンネル名と元動画へのリンクを明記しています。タイ語の動画を常に優先して検索し、タイ語の動画がない項目には日本語🇯🇵または英語🇬🇧の動画を代わりに使用しています。ATTG独自の社内方針に関する項目には、直接参照できる公開動画がないため、引き続き動画を掲載していません。",
+    topCtaStrong: "📝 すべてのステーションを読み終えましたか?クイズで理解度を確認しましょう",
+    topCtaSub: "合格には90%以上のスコアが必要です。",
+    topCtaBtn: "クイズに進む →",
+    quizPillStrong: "クイズに進む", quizPillSmall: "合格には90%以上",
+    railCtaLabel: "最後のステップ", railCtaText: "すべてのステーションを読み終えましたか?クイズで理解度を確認しましょう", railCtaBtn: "クイズに進む →",
+    secVideo: "🎥 関連動画", secKeyPoints: "このトピックの要点", secSummary: "要約",
+    byChannel: "チャンネル:", watchOriginal: "YouTubeで元動画を見る →", thisVideo: "この動画",
+    topicOf: (i, n) => "トピック " + i + " / " + n,
+    readMore: "公式情報源で詳しく見る →", illoAria: "トピックの図: "
+  },
+  en: {
+    langName: "English", topics: "Topics", passScore: "Pass Score",
+    h1: "🛡️ AI Safety Usage Guide",
+    sub: "For ATTG group employees — read through every station on the left, then take the quiz at the end to confirm your understanding (a minimum score of 90% is required).",
+    note: "🎥 <strong>About the videos in this guide:</strong> Embedded videos are selected from YouTube channels of media outlets/experts who publish public knowledge, and are embedded only through YouTube's official Embed system. Copyright belongs to the original channel owner; the channel name and a link to the original video are noted below every clip. We always search for Thai-language clips first — where none exists, a Japanese 🇯🇵 or English 🇬🇧 clip is used instead. Topics that are ATTG-specific policy still have no accompanying video, since these are internal practices with no directly relevant public clip to reference.",
+    topCtaStrong: "📝 Read through every station? Take the quiz to confirm your understanding",
+    topCtaSub: "A minimum score of 90% is required to pass.",
+    topCtaBtn: "Go to the Quiz →",
+    quizPillStrong: "Take the Quiz", quizPillSmall: "Need ≥ 90% to pass",
+    railCtaLabel: "Final Step", railCtaText: "Read through every station? Take the quiz to confirm your understanding", railCtaBtn: "Go to the Quiz →",
+    secVideo: "🎥 Accompanying Video", secKeyPoints: "Key Points for This Topic", secSummary: "Summary",
+    byChannel: "by channel", watchOriginal: "Watch the original on YouTube →", thisVideo: "This video",
+    topicOf: (i, n) => "Topic " + i + " of " + n,
+    readMore: "Read more from the official source →", illoAria: "Topic illustration: "
+  }
+};
+
+const LABEL_META = {
+  tip: { cls: "tip", icon: "💡" }, caution: { cls: "warn", icon: "⚠️" }, note: { cls: "warn", icon: "⚠️" },
+  howto: { cls: "howto", icon: "🧩" }, bestpractice: { cls: "howto", icon: "🧩" }, example: { cls: "example", icon: "📌" }
+};
+const LABEL_TEXT = {
+  tip: { th: "เคล็ดลับ", ja: "ヒント", en: "Tip" },
+  caution: { th: "ข้อควรระวัง", ja: "注意", en: "Caution" },
+  note: { th: "หมายเหตุ", ja: "備考", en: "Note" },
+  howto: { th: "วิธีใช้งาน", ja: "使い方", en: "How it works" },
+  bestpractice: { th: "แนวทางที่ดี", ja: "ベストプラクティス", en: "Best practice" },
+  example: { th: "ตัวอย่าง", ja: "例", en: "Example" }
+};
+const LANG_BADGES = { ja: "🇯🇵 日本語", en: "🇬🇧 English" };
+
 const TOPICS = [
   {
-    key: "overview",
-    title: "ภาพรวม: ทำไมต้องใช้ AI อย่างปลอดภัย",
-    titleEN: "Overview: Why AI Must Be Used Safely",
-    icon: "🛡️",
+    key: "overview", icon: "🛡️",
+    title: { th: "ภาพรวม: ทำไมต้องใช้ AI อย่างปลอดภัย", ja: "概要:なぜAIを安全に使う必要があるのか", en: "Overview: Why AI Must Be Used Safely" },
     flow: [
-      { icon: "🤖", label: "AI ช่วยงานได้เร็วขึ้นมาก" },
-      { icon: "⚠️", label: "แต่มีความเสี่ยงถ้าใช้ไม่ระวัง" },
-      { icon: "🛡️", label: "ใช้อย่างมีสติ = ปลอดภัยและได้ประโยชน์เต็มที่" }
+      { icon: "🤖", label: { th: "AI ช่วยงานได้เร็วขึ้นมาก", ja: "AIは仕事を大幅にスピードアップさせる", en: "AI makes work much faster" } },
+      { icon: "⚠️", label: { th: "แต่มีความเสี่ยงถ้าใช้ไม่ระวัง", ja: "しかし注意を怠るとリスクがある", en: "But it carries risk if used carelessly" } },
+      { icon: "🛡️", label: { th: "ใช้อย่างมีสติ = ปลอดภัยและได้ประโยชน์เต็มที่", ja: "意識して使えば安全かつ最大限に活用できる", en: "Mindful use = safe and fully beneficial" } }
     ],
     keyPoints: [
-      "AI ช่วยเพิ่มประสิทธิภาพงานได้มาก แต่มาพร้อมความเสี่ยงใหม่ๆ ที่พนักงานทุกคนควรรู้จัก",
-      "ความเสี่ยงหลัก 3 กลุ่ม: (1) ข้อมูลรั่วไหล (2) เชื่อคำตอบ AI ที่ผิดพลาดโดยไม่ตรวจสอบ (3) ตกเป็นเหยื่อมิจฉาชีพที่ใช้ AI หลอกลวง",
-      "อ่านคู่มือนี้ครบแล้วต้องทำแบบทดสอบท้ายคู่มือ ต้องได้อย่างน้อย 90% จึงจะผ่านเกณฑ์"
+      { th: "AI ช่วยเพิ่มประสิทธิภาพงานได้มาก แต่มาพร้อมความเสี่ยงใหม่ๆ ที่พนักงานทุกคนควรรู้จัก", ja: "AIは業務効率を大きく高めるが、全従業員が知っておくべき新たなリスクも伴う", en: "AI greatly boosts productivity, but comes with new risks every employee should know." },
+      { th: "ความเสี่ยงหลัก 3 กลุ่ม: (1) ข้อมูลรั่วไหล (2) เชื่อคำตอบ AI ที่ผิดพลาดโดยไม่ตรวจสอบ (3) ตกเป็นเหยื่อมิจฉาชีพที่ใช้ AI หลอกลวง", ja: "主なリスクは3つ:(1)情報漏えい (2)検証せずに誤ったAIの回答を信じること (3)AIを悪用した詐欺の被害に遭うこと", en: "3 main risk categories: (1) data leakage, (2) trusting incorrect AI answers without verification, (3) falling victim to AI-driven scams." },
+      { th: "อ่านคู่มือนี้ครบแล้วต้องทำแบบทดสอบท้ายคู่มือ ต้องได้อย่างน้อย 90% จึงจะผ่านเกณฑ์", ja: "本ガイドを読み終えたら末尾のクイズに回答する必要があり、合格には90%以上が必要", en: "After finishing this guide, you must take the quiz and score at least 90% to pass." }
     ],
     images: [],
     text: [
-      "AI อย่าง ChatGPT, Claude หรือ Microsoft Copilot ช่วยให้พนักงานทำงานได้เร็วและมีประสิทธิภาพขึ้นมาก แต่การนำ AI มาใช้ในงานประจำวันก็มาพร้อมความเสี่ยงใหม่ๆ ที่ไม่เคยมีมาก่อน หากใช้งานโดยไม่เข้าใจข้อจำกัดและแนวปฏิบัติที่ถูกต้อง อาจนำไปสู่ข้อมูลรั่วไหล การตัดสินใจผิดพลาด หรือแม้แต่ตกเป็นเหยื่อของมิจฉาชีพที่ใช้ AI เป็นเครื่องมือ",
-      "วิธีใช้งาน: ความเสี่ยงหลักที่คู่มือนี้ครอบคลุมแบ่งเป็น 3 กลุ่มใหญ่ ได้แก่ (1) <strong>ข้อมูลรั่วไหล</strong> จากการป้อนข้อมูลลับของบริษัทหรือลูกค้าเข้า AI สาธารณะ (2) <strong>ความน่าเชื่อถือของคำตอบ</strong> เพราะ AI อาจตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัว (Hallucination) และ (3) <strong>ภัยคุกคามจากมิจฉาชีพ</strong> ที่ใช้ AI สร้างเสียง ภาพ หรือข้อความปลอมเพื่อหลอกลวง",
-      "หมายเหตุ: หลังอ่านคู่มือนี้ครบทุกหัวข้อแล้ว พนักงานทุกคนต้องทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ โดยต้องได้คะแนนอย่างน้อย 90% จึงจะถือว่าผ่าน หากได้คะแนนต่ำกว่านี้ให้กลับไปทบทวนเนื้อหาแล้วทำแบบทดสอบใหม่อีกครั้ง"
+      { type: "plain", th: "AI อย่าง ChatGPT, Claude หรือ Microsoft Copilot ช่วยให้พนักงานทำงานได้เร็วและมีประสิทธิภาพขึ้นมาก แต่การนำ AI มาใช้ในงานประจำวันก็มาพร้อมความเสี่ยงใหม่ๆ ที่ไม่เคยมีมาก่อน หากใช้งานโดยไม่เข้าใจข้อจำกัดและแนวปฏิบัติที่ถูกต้อง อาจนำไปสู่ข้อมูลรั่วไหล การตัดสินใจผิดพลาด หรือแม้แต่ตกเป็นเหยื่อของมิจฉาชีพที่ใช้ AI เป็นเครื่องมือ",
+        ja: "ChatGPT、Claude、Microsoft Copilotなどのアイは、従業員の仕事を大幅に速く効率的にしてくれる。しかし日々の業務にAIを取り入れることは、これまでになかった新たなリスクも伴う。制約や適切な運用方法を理解せずに使用すると、情報漏えい、誤った判断、さらにはAIを悪用した詐欺の被害につながる可能性がある。",
+        en: "AI tools like ChatGPT, Claude, or Microsoft Copilot help employees work much faster and more efficiently. But bringing AI into daily work also introduces risks that never existed before. Used without understanding its limitations and proper practices, it can lead to data leakage, flawed decisions, or even falling victim to scammers who use AI as a tool." },
+      { type: "howto", th: "ความเสี่ยงหลักที่คู่มือนี้ครอบคลุมแบ่งเป็น 3 กลุ่มใหญ่ ได้แก่ (1) <strong>ข้อมูลรั่วไหล</strong> จากการป้อนข้อมูลลับของบริษัทหรือลูกค้าเข้า AI สาธารณะ (2) <strong>ความน่าเชื่อถือของคำตอบ</strong> เพราะ AI อาจตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัว (Hallucination) และ (3) <strong>ภัยคุกคามจากมิจฉาชีพ</strong> ที่ใช้ AI สร้างเสียง ภาพ หรือข้อความปลอมเพื่อหลอกลวง",
+        ja: "本ガイドが扱う主なリスクは3つに分かれる。(1)会社や顧客の機密情報を公開AIに入力することによる<strong>情報漏えい</strong> (2)AIが自覚のないまま自信満々に誤った回答をする(ハルシネーション)ことによる<strong>回答の信頼性の問題</strong> (3)AIで音声・画像・文章を偽造して欺く<strong>詐欺の脅威</strong>である。",
+        en: "The main risks this guide covers fall into 3 categories: (1) <strong>data leakage</strong> from entering confidential company or customer data into public AI, (2) <strong>answer reliability</strong>, since AI can confidently give wrong answers without realizing it (hallucination), and (3) <strong>scammer threats</strong> that use AI to fabricate fake voices, images, or text to deceive." },
+      { type: "note", th: "หลังอ่านคู่มือนี้ครบทุกหัวข้อแล้ว พนักงานทุกคนต้องทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ โดยต้องได้คะแนนอย่างน้อย 90% จึงจะถือว่าผ่าน หากได้คะแนนต่ำกว่านี้ให้กลับไปทบทวนเนื้อหาแล้วทำแบบทดสอบใหม่อีกครั้ง",
+        ja: "本ガイドの全項目を読み終えたら、全従業員は理解度確認のため末尾のクイズを受験する必要がある。合格には90%以上のスコアが必要で、それを下回った場合は内容を復習した上で再度クイズに挑戦すること。",
+        en: "After reading every topic in this guide, all employees must take the quiz at the end to confirm their understanding. A score of at least 90% is required to pass; if you score lower, review the content and retake the quiz." }
     ]
   },
   {
-    key: "group-standards",
-    title: "มาตรฐานความปลอดภัยไซเบอร์กลุ่ม AISIN/Toyota",
-    titleEN: "AISIN/Toyota Group Cybersecurity Standards",
-    icon: "🏭",
+    key: "group-standards", icon: "🏭",
+    title: { th: "มาตรฐานความปลอดภัยไซเบอร์กลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ サイバーセキュリティ基準", en: "AISIN/Toyota Group Cybersecurity Standards" },
     flow: [
-      { icon: "🏢", label: "ATTG เป็นส่วนหนึ่งของ AISIN Group" },
-      { icon: "🔗", label: "Toyota ถือหุ้น = อยู่ใน Supply Chain ยานยนต์ระดับโลก" },
-      { icon: "🛡️", label: "ต้องปฏิบัติตามมาตรฐานความปลอดภัยระดับกลุ่มด้วย" }
+      { icon: "🏢", label: { th: "ATTG เป็นส่วนหนึ่งของ AISIN Group", ja: "ATTGはAISINグループの一員", en: "ATTG is part of AISIN Group" } },
+      { icon: "🔗", label: { th: "Toyota ถือหุ้น = อยู่ใน Supply Chain ยานยนต์ระดับโลก", ja: "トヨタが出資=グローバル自動車サプライチェーンの一員", en: "Toyota holds shares = part of a global automotive supply chain" } },
+      { icon: "🛡️", label: { th: "ต้องปฏิบัติตามมาตรฐานความปลอดภัยระดับกลุ่มด้วย", ja: "グループ全体のセキュリティ基準にも従う必要がある", en: "Must also follow group-wide security standards" } }
     ],
     keyPoints: [
-      "AISIN Group มีนโยบายความปลอดภัยไซเบอร์อย่างเป็นทางการ (AISIN Group Information Security Basic Policy) ครอบคลุมทั้งเครือรวมถึง ATTG โดยมี Risk Management Committee เป็นผู้เสนอนโยบายและ Information Security Promotion Department เป็นหน่วยงานเฉพาะทางที่ดูแล",
-      "ยึดมาตรฐานสากล ISO 27001, TISAX, JAMA/JAPIA Cybersecurity Guidelines และ ISO 21434 (มาตรฐานความปลอดภัยไซเบอร์เฉพาะยานยนต์) พร้อมมีทีมเฝ้าระวังภัยคุกคามตลอด 24 ชั่วโมงทุกวันทั่วทั้งกลุ่ม",
-      "กลุ่ม AISIN จัดอบรมและซ้อมรับมืออีเมลหลอกลวง (Phishing) ให้พนักงานปีละ 3 ครั้ง พร้อมเดือนรณรงค์ความปลอดภัยไซเบอร์ประจำปีทุกปี — ATTG ในฐานะบริษัทในเครือควรเข้าร่วมกิจกรรมเหล่านี้อย่างจริงจัง"
+      { th: "AISIN Group มีนโยบายความปลอดภัยไซเบอร์อย่างเป็นทางการ (AISIN Group Information Security Basic Policy) ครอบคลุมทั้งเครือรวมถึง ATTG โดยมี Risk Management Committee เป็นผู้เสนอนโยบายและ Information Security Promotion Department เป็นหน่วยงานเฉพาะทางที่ดูแล", ja: "AISINグループには正式なサイバーセキュリティ方針(AISINグループ情報セキュリティ基本方針)があり、ATTGを含むグループ全体に適用される。Risk Management Committeeが方針を提案し、Information Security Promotion Departmentが専門部署として管理する。", en: "AISIN Group has a formal cybersecurity policy (the AISIN Group Information Security Basic Policy) covering the entire group, including ATTG, proposed by the Risk Management Committee and overseen by the Information Security Promotion Department." },
+      { th: "ยึดมาตรฐานสากล ISO 27001, TISAX, JAMA/JAPIA Cybersecurity Guidelines และ ISO 21434 (มาตรฐานความปลอดภัยไซเบอร์เฉพาะยานยนต์) พร้อมมีทีมเฝ้าระวังภัยคุกคามตลอด 24 ชั่วโมงทุกวันทั่วทั้งกลุ่ม", ja: "ISO 27001、TISAX、JAMA/JAPIA サイバーセキュリティガイドライン、自動車専用のISO 21434など国際基準に準拠し、グループ全体で24時間365日体制の脅威監視チームも設置している。", en: "Follows ISO 27001, TISAX, the JAMA/JAPIA Cybersecurity Guidelines, and ISO 21434 (automotive-specific), backed by a group-wide 24/7 threat monitoring team." },
+      { th: "กลุ่ม AISIN จัดอบรมและซ้อมรับมืออีเมลหลอกลวง (Phishing) ให้พนักงานปีละ 3 ครั้ง พร้อมเดือนรณรงค์ความปลอดภัยไซเบอร์ประจำปีทุกปี — ATTG ในฐานะบริษัทในเครือควรเข้าร่วมกิจกรรมเหล่านี้อย่างจริงจัง", ja: "AISINグループは年3回フィッシング対応訓練を実施し、毎年「情報セキュリティ啓発月間」も設けている。グループ会社のATTGもこれらに真剣に参加すべきである。", en: "AISIN Group runs phishing drills 3 times a year plus an annual Cybersecurity Awareness Month — ATTG should take part seriously." }
     ],
     video: "https://www.youtube.com/embed/1mp29oseeFE",
     videoTitle: "華麗なる情報セキュリティ対策 統合版",
@@ -646,26 +332,30 @@ const TOPICS = [
     videoLang: "ja",
     images: [],
     text: [
-      "ATTG เป็นบริษัทในเครือ <strong>AISIN Group</strong> ซึ่งมี <strong>Toyota</strong> เป็นผู้ถือหุ้นใหญ่ (ถือสิทธิ์ออกเสียงราว 22.4% ของ AISIN Corporation) และมียอดขายส่วนใหญ่เกี่ยวข้องกับกลุ่ม Toyota โดยตรง AISIN Group จึงมีนโยบายความปลอดภัยไซเบอร์อย่างเป็นทางการที่เผยแพร่สู่สาธารณะคือ <strong>AISIN Group Information Security Basic Policy</strong> ซึ่งดูแลโดย Information Security Promotion Department ภายใต้ความรับผิดชอบของ DX Strategy Center และมี Risk Management Committee เป็นผู้เสนอนโยบายให้ทั้งเครือปฏิบัติตามร่วมกัน ความเสี่ยงไซเบอร์ของบริษัทในเครือเพียงจุดเดียวจึงส่งผลกระทบต่อทั้ง Supply Chain ได้จริง — เช่นกรณีต้นปี 2022 ที่ Toyota ต้องหยุดสายการผลิตในญี่ปุ่นทั้งหมดชั่วคราว เพราะซัพพลายเออร์รายหนึ่งถูกโจมตีด้วย Ransomware",
-      "วิธีใช้งาน: AISIN Group อ้างอิงมาตรฐานสากลหลายฉบับพร้อมกัน ได้แก่ <strong>ISO/IEC 27001</strong> (ระบบบริหารความปลอดภัยข้อมูล), <strong>TISAX</strong> (มาตรฐานประเมินความปลอดภัยข้อมูลของอุตสาหกรรมยานยนต์เยอรมนีที่ใช้ทั่วโลก), <strong>JAMA/JAPIA Cybersecurity Guidelines</strong> (แนวปฏิบัติของสมาคมผู้ผลิตรถยนต์และชิ้นส่วนญี่ปุ่น) และ <strong>ISO 21434</strong> (มาตรฐานความปลอดภัยไซเบอร์เฉพาะสำหรับยานยนต์) รวมเป็น 'AISIN Group Security Guidelines' ที่ใช้ควบคุมทั้งเครือ พร้อมทีมเฝ้าระวังภัยคุกคามตลอด 24 ชั่วโมงทุกวัน (24/7/365) หากฝ่าย IT/Security ของ ATTG หรือ AISIN Japan แจ้งข้อกำหนดหรือแบบประเมินตามมาตรฐานเหล่านี้มา พนักงานที่เกี่ยวข้องต้องให้ความร่วมมือและปฏิบัติตามอย่างเคร่งครัด",
-      "หมายเหตุ: AISIN Group จัดอบรมความปลอดภัยไซเบอร์แบบแบ่งระดับให้พนักงานทุกคนปีละ 2 ครั้ง (ตอนเริ่มงาน/เลื่อนตำแหน่ง) และจัด <strong>ซ้อมรับมืออีเมลหลอกลวงปีละ 3 ครั้ง</strong> ทั่วทั้งกลุ่ม รวมถึงมี 'เดือนรณรงค์ความปลอดภัยไซเบอร์' (Information Security Awareness Month) เป็นประจำทุกปี พนักงาน ATTG ควรให้ความสำคัญกับการอบรม/ซ้อมเหล่านี้อย่างจริงจังเมื่อได้รับแจ้ง คู่มือฉบับนี้เป็นแนวทางภาพรวมเท่านั้น หากมีข้อกำหนดเฉพาะเจาะจงกว่านี้จากฝ่าย IT/Security ของ ATTG หรือ AISIN Japan ให้ยึดเอกสารฉบับทางการนั้นเป็นหลักเสมอ"
+      { type: "plain", th: "ATTG เป็นบริษัทในเครือ <strong>AISIN Group</strong> ซึ่งมี <strong>Toyota</strong> เป็นผู้ถือหุ้นใหญ่ (ถือสิทธิ์ออกเสียงราว 22.4% ของ AISIN Corporation) และมียอดขายส่วนใหญ่เกี่ยวข้องกับกลุ่ม Toyota โดยตรง AISIN Group จึงมีนโยบายความปลอดภัยไซเบอร์อย่างเป็นทางการที่เผยแพร่สู่สาธารณะคือ <strong>AISIN Group Information Security Basic Policy</strong> ซึ่งดูแลโดย Information Security Promotion Department ภายใต้ความรับผิดชอบของ DX Strategy Center และมี Risk Management Committee เป็นผู้เสนอนโยบายให้ทั้งเครือปฏิบัติตามร่วมกัน ความเสี่ยงไซเบอร์ของบริษัทในเครือเพียงจุดเดียวจึงส่งผลกระทบต่อทั้ง Supply Chain ได้จริง — เช่นกรณีต้นปี 2022 ที่ Toyota ต้องหยุดสายการผลิตในญี่ปุ่นทั้งหมดชั่วคราว เพราะซัพพลายเออร์รายหนึ่งถูกโจมตีด้วย Ransomware",
+        ja: "ATTGは<strong>AISINグループ</strong>のグループ会社であり、<strong>トヨタ自動車</strong>が筆頭株主(AISIN Corporationの議決権の約22.4%を保有)で、売上の大半もトヨタグループと直接関わっている。そのためAISINグループは<strong>AISINグループ情報セキュリティ基本方針</strong>という公開されている正式な方針を定めており、DX Strategy Center傘下のInformation Security Promotion Departmentが管理し、Risk Management Committeeがグループ全体に方針を提案している。グループ会社1社のサイバーリスクがサプライチェーン全体に影響することもある — 2022年初頭、あるサプライヤーがランサムウェア攻撃を受け、トヨタが国内全工場の生産を一時停止した事例がその一例である。",
+        en: "ATTG is a group company of <strong>AISIN Group</strong>, whose largest shareholder is <strong>Toyota</strong> (holding roughly 22.4% of AISIN Corporation's voting rights), with most sales tied directly to the Toyota group. AISIN Group therefore maintains a formal, publicly disclosed cybersecurity policy — the <strong>AISIN Group Information Security Basic Policy</strong> — overseen by the Information Security Promotion Department under the DX Strategy Center, proposed by the Risk Management Committee for the whole group. A cyber risk at even one group company can genuinely impact the entire supply chain — as in early 2022, when Toyota had to temporarily halt all domestic production after a supplier was hit by ransomware." },
+      { type: "howto", th: "AISIN Group อ้างอิงมาตรฐานสากลหลายฉบับพร้อมกัน ได้แก่ <strong>ISO/IEC 27001</strong> (ระบบบริหารความปลอดภัยข้อมูล), <strong>TISAX</strong> (มาตรฐานประเมินความปลอดภัยข้อมูลของอุตสาหกรรมยานยนต์เยอรมนีที่ใช้ทั่วโลก), <strong>JAMA/JAPIA Cybersecurity Guidelines</strong> และ <strong>ISO 21434</strong> รวมเป็น 'AISIN Group Security Guidelines' ที่ใช้ควบคุมทั้งเครือ พร้อมทีมเฝ้าระวังภัยคุกคามตลอด 24 ชั่วโมงทุกวัน หากฝ่าย IT/Security ของ ATTG หรือ AISIN Japan แจ้งข้อกำหนดหรือแบบประเมินตามมาตรฐานเหล่านี้มา พนักงานที่เกี่ยวข้องต้องให้ความร่วมมือและปฏิบัติตามอย่างเคร่งครัด",
+        ja: "AISINグループは<strong>ISO/IEC 27001</strong>(情報セキュリティマネジメントシステム)、<strong>TISAX</strong>(世界的に使われるドイツ自動車業界の情報セキュリティ評価基準)、<strong>JAMA/JAPIA サイバーセキュリティガイドライン</strong>、そして<strong>ISO 21434</strong>を統合し、「AISINグループセキュリティガイドライン」としてグループ全体を管理している。24時間365日体制の監視チームも備える。ATTGやAISINジャパンのIT/セキュリティ部門から要求事項があった場合、関係者は厳格に遵守すること。",
+        en: "AISIN Group draws on <strong>ISO/IEC 27001</strong> (information security management), <strong>TISAX</strong> (the German automotive industry's data security standard), the <strong>JAMA/JAPIA Cybersecurity Guidelines</strong>, and <strong>ISO 21434</strong>, combined into the 'AISIN Group Security Guidelines' governing the whole group, backed by 24/7 threat monitoring. If ATTG's or AISIN Japan's IT/Security team issues requirements based on these, employees involved must comply strictly." },
+      { type: "note", th: "AISIN Group จัดอบรมความปลอดภัยไซเบอร์แบบแบ่งระดับให้พนักงานทุกคนปีละ 2 ครั้ง และจัด <strong>ซ้อมรับมืออีเมลหลอกลวงปีละ 3 ครั้ง</strong> ทั่วทั้งกลุ่ม รวมถึงมี 'เดือนรณรงค์ความปลอดภัยไซเบอร์' เป็นประจำทุกปี พนักงาน ATTG ควรให้ความสำคัญกับการอบรม/ซ้อมเหล่านี้อย่างจริงจังเมื่อได้รับแจ้ง คู่มือฉบับนี้เป็นแนวทางภาพรวมเท่านั้น หากมีข้อกำหนดเฉพาะเจาะจงกว่านี้จากฝ่าย IT/Security ของ ATTG หรือ AISIN Japan ให้ยึดเอกสารฉบับทางการนั้นเป็นหลักเสมอ",
+        ja: "AISINグループは全従業員に階層別研修を年2回実施し、グループ全体で<strong>年3回のフィッシング対応訓練</strong>を行い、毎年「情報セキュリティ啓発月間」も設けている。ATTGの従業員は通知を受けた際は真剣に取り組むこと。本ガイドはあくまで概要であり、より具体的な規定が示された場合は常にその公式文書を優先すること。",
+        en: "AISIN Group provides tiered training twice a year and <strong>phishing drills three times a year</strong> group-wide, plus an annual Awareness Month. ATTG employees should take these seriously when notified. This guide is only a general overview — always defer to official documentation where more specific requirements exist." }
     ],
     link: "https://www.aisin.com/en/sustainability/governance/security/"
   },
   {
-    key: "toyota-genai",
-    title: "แนวทางของกลุ่ม Toyota ต่อ Generative AI",
-    titleEN: "Toyota Group's Approach to Generative AI",
-    icon: "🚗",
+    key: "toyota-genai", icon: "🚗",
+    title: { th: "แนวทางของกลุ่ม Toyota ต่อ Generative AI", ja: "トヨタグループの生成AIへの取り組み", en: "Toyota Group's Approach to Generative AI" },
     flow: [
-      { icon: "⚠️", label: "ChatGPT สาธารณะส่งข้อมูลออกไปยัง Server ภายนอก" },
-      { icon: "🔒", label: "Toyota แก้ด้วยเครื่องมือ AI ภายในของตัวเอง (ToyoGPT)" },
-      { icon: "✅", label: "ใช้ AI ได้เต็มที่ โดยข้อมูลไม่หลุดออกนอกองค์กร" }
+      { icon: "⚠️", label: { th: "ChatGPT สาธารณะส่งข้อมูลออกไปยัง Server ภายนอก", ja: "一般公開のChatGPTは外部サーバーにデータを送信", en: "Public ChatGPT sends data to external servers" } },
+      { icon: "🔒", label: { th: "Toyota แก้ด้วยเครื่องมือ AI ภายในของตัวเอง (ToyoGPT)", ja: "トヨタは独自の社内AIツール「ToyoGPT」で対応", en: "Toyota solved this with its own internal AI tool (ToyoGPT)" } },
+      { icon: "✅", label: { th: "ใช้ AI ได้เต็มที่ โดยข้อมูลไม่หลุดออกนอกองค์กร", ja: "データを社外に出さずにAIをフル活用できる", en: "Full AI use, with data never leaving the organization" } }
     ],
     keyPoints: [
-      "Toyota พัฒนาเครื่องมือ AI ภายในของตัวเองชื่อ ToyoGPT (ต่อยอดจากแพลตฟอร์ม U-GPT) เปิดตัวตั้งแต่กุมภาพันธ์ 2023 ให้พนักงานใช้ฟังก์ชันคล้าย ChatGPT ได้ครบ โดยข้อมูลไม่ออกนอกโครงสร้างพื้นฐานของบริษัท",
-      "Toyota จัดตั้ง Responsible AI Organization และ Responsible AI Review Board ตรวจสอบโครงการ AI ทุกโครงการแบบข้ามฝ่าย (Data, Compliance, Privacy, Legal, Cybersecurity) ก่อนนำไปใช้จริง",
-      "หลักการของ Toyota คือ AI ควร 'เสริมความสามารถของคน ไม่ใช่มาแทนที่คน' — เป็นข้อมูลที่ Toyota เปิดเผยต่อสาธารณะ ไม่ใช่นโยบายบังคับ ATTG โดยตรง แต่เป็นแนวทางที่ดีควรพิจารณานำมาปรับใช้"
+      { th: "Toyota พัฒนาเครื่องมือ AI ภายในของตัวเองชื่อ ToyoGPT (ต่อยอดจากแพลตฟอร์ม U-GPT) เปิดตัวตั้งแต่กุมภาพันธ์ 2023 ให้พนักงานใช้ฟังก์ชันคล้าย ChatGPT ได้ครบ โดยข้อมูลไม่ออกนอกโครงสร้างพื้นฐานของบริษัท", ja: "トヨタは独自の社内AIツール「ToyoGPT」(U-GPTを発展させたもの)を2023年2月から展開し、従業員はChatGPT同様の機能をフルに利用できる。データは自社インフラの外に出ない。", en: "Toyota built its own internal AI tool, ToyoGPT (on the U-GPT platform), launched Feb 2023, giving employees full ChatGPT-like functionality while data stays inside company infrastructure." },
+      { th: "Toyota จัดตั้ง Responsible AI Organization และ Responsible AI Review Board ตรวจสอบโครงการ AI ทุกโครงการแบบข้ามฝ่าย (Data, Compliance, Privacy, Legal, Cybersecurity) ก่อนนำไปใช้จริง", ja: "トヨタはResponsible AI OrganizationとResponsible AI Review Boardを設置し、データ・コンプライアンス・プライバシー・法務・セキュリティの各部門横断でAIプロジェクトを実運用前にレビューする。", en: "Toyota established a Responsible AI Organization and Review Board that cross-functionally review every AI project (Data, Compliance, Privacy, Legal, Cybersecurity) before launch." },
+      { th: "หลักการของ Toyota คือ AI ควร 'เสริมความสามารถของคน ไม่ใช่มาแทนที่คน' — เป็นข้อมูลที่ Toyota เปิดเผยต่อสาธารณะ ไม่ใช่นโยบายบังคับ ATTG โดยตรง แต่เป็นแนวทางที่ดีควรพิจารณานำมาปรับใช้", ja: "トヨタの方針は「AIは人を置き換えず、能力を補うもの」というもの — 公開情報でありATTGへの直接的な規定ではないが、参考にすべき指針である。", en: "Toyota's principle: AI should 'augment people, not replace them' — public information, not binding on ATTG directly, but worth considering." }
     ],
     video: "https://www.youtube.com/embed/EOS3OLCtuWo",
     videoTitle: "生成AIで急成長トミーくんが『おしゃべり』に｜トヨタイムズニュース",
@@ -673,20 +363,25 @@ const TOPICS = [
     videoLang: "ja",
     images: [],
     text: [
-      "Toyota ในฐานะผู้ถือหุ้นใหญ่ของ AISIN Group ได้วางแนวทางการใช้ Generative AI ของตัวเองอย่างเป็นระบบ โดยตระหนักว่า ChatGPT สาธารณะมีความเสี่ยงสำคัญคือ ข้อมูลที่พนักงานพิมพ์เข้าไปจะถูกส่งไปเก็บไว้ที่เซิร์ฟเวอร์ของผู้ให้บริการภายนอก (เช่น OpenAI) ซึ่งอาจหลุดออกจากการควบคุมของบริษัทได้",
-      "วิธีใช้งาน: Toyota แก้ปัญหานี้ด้วยการพัฒนาเครื่องมือ AI ภายในของตัวเองชื่อ <strong>ToyoGPT</strong> (ต่อยอดจากแพลตฟอร์ม U-GPT) เปิดตัวตั้งแต่กุมภาพันธ์ 2023 ให้พนักงานใช้ฟังก์ชันเหมือน ChatGPT ได้ครบถ้วน แต่ข้อมูลทั้งหมดอยู่ภายในโครงสร้างพื้นฐานของ Toyota เอง ไม่ถูกส่งออกไปยังผู้ให้บริการภายนอก ใช้งานจริงในหลายด้าน เช่น แชทบอทช่วยงานทั่วไป ผู้ช่วยตอบคำถามคู่มือรถผ่านระบบเสียงในรถยนต์ และระบบฝึกพนักงานขายจำลองสถานการณ์ลูกค้า แนวคิดนี้ตรงกับหลักที่คู่มือนี้แนะนำไว้ในหัวข้อ 'เครื่องมือ AI ที่บริษัทอนุมัติ' คือควรใช้เครื่องมือ AI ภายในที่ควบคุมข้อมูลได้ แทนการใช้ AI สาธารณะกับข้อมูลบริษัท",
-      "หมายเหตุ: Toyota ยังจัดตั้ง <strong>Responsible AI Organization</strong> และ <strong>Responsible AI Review Board</strong> ที่รวมผู้เชี่ยวชาญจากหลายฝ่าย (Data, Compliance, Privacy, Legal, Cybersecurity) มาร่วมตรวจสอบโครงการ AI ทุกโครงการก่อนนำไปใช้จริง ยึดหลักว่า AI ควร 'เสริมความสามารถของคน ไม่ใช่มาแทนที่คน' — แนวทางเหล่านี้เป็นข้อมูลที่ Toyota เปิดเผยต่อสาธารณะ ไม่ใช่นโยบายที่บังคับใช้โดยตรงกับ ATTG แต่สะท้อนทิศทางที่กลุ่มบริษัทแม่ให้ความสำคัญ และเป็นแนวทางที่ดีที่ ATTG ควรพิจารณานำมาปรับใช้เมื่อเลือกหรือพัฒนาเครื่องมือ AI ของตัวเอง"
+      { type: "plain", th: "Toyota ในฐานะผู้ถือหุ้นใหญ่ของ AISIN Group ได้วางแนวทางการใช้ Generative AI ของตัวเองอย่างเป็นระบบ โดยตระหนักว่า ChatGPT สาธารณะมีความเสี่ยงสำคัญคือ ข้อมูลที่พนักงานพิมพ์เข้าไปจะถูกส่งไปเก็บไว้ที่เซิร์ฟเวอร์ของผู้ให้บริการภายนอก (เช่น OpenAI) ซึ่งอาจหลุดออกจากการควบคุมของบริษัทได้",
+        ja: "AISINグループの筆頭株主であるトヨタは、生成AIの利用について体系的な方針を打ち出している。一般公開のChatGPTには重要なリスクがある——従業員が入力した内容は外部事業者(OpenAIなど)のサーバーに送信・保存され、会社の管理下から外れる可能性があるという認識に基づく。",
+        en: "As AISIN Group's largest shareholder, Toyota has laid out a systematic approach to generative AI, recognizing that public ChatGPT carries a key risk: whatever employees type gets sent to and stored on an external provider's servers (e.g., OpenAI), which can slip outside company control." },
+      { type: "howto", th: "Toyota แก้ปัญหานี้ด้วยการพัฒนาเครื่องมือ AI ภายในของตัวเองชื่อ <strong>ToyoGPT</strong> เปิดตัวตั้งแต่กุมภาพันธ์ 2023 ให้พนักงานใช้ฟังก์ชันเหมือน ChatGPT ได้ครบถ้วน แต่ข้อมูลทั้งหมดอยู่ภายในโครงสร้างพื้นฐานของ Toyota เอง ใช้งานจริงในหลายด้าน เช่น แชทบอทช่วยงานทั่วไป ผู้ช่วยตอบคำถามคู่มือรถผ่านระบบเสียงในรถยนต์ และระบบฝึกพนักงานขายจำลองสถานการณ์ลูกค้า แนวคิดนี้ตรงกับหลักที่คู่มือนี้แนะนำไว้ในหัวข้อ 'เครื่องมือ AI ที่บริษัทอนุมัติ' คือควรใช้เครื่องมือ AI ภายในที่ควบคุมข้อมูลได้ แทนการใช้ AI สาธารณะกับข้อมูลบริษัท",
+        ja: "トヨタは独自の社内AIツール<strong>ToyoGPT</strong>を2023年2月から展開し、ChatGPT同様の機能をフルに利用できるようにした。データはすべてトヨタ自社インフラ内に留まる。汎用業務チャットボット、車載音声での取扱説明書対応、営業向け模擬顧客トレーニングなど幅広く活用されている。この考え方は本ガイドの「会社承認済みAIツール」の項の原則と一致する。",
+        en: "Toyota addressed this by building its own internal tool, <strong>ToyoGPT</strong>, launched Feb 2023, giving employees full ChatGPT-like functions while all data stays within Toyota's own infrastructure. Used for a general work chatbot, an in-car voice assistant for manual questions, and simulated-customer sales training. This matches this guide's 'Company-Approved AI Tools' principle: use internal tools where you control the data." },
+      { type: "note", th: "Toyota ยังจัดตั้ง <strong>Responsible AI Organization</strong> และ <strong>Responsible AI Review Board</strong> ที่รวมผู้เชี่ยวชาญจากหลายฝ่ายมาร่วมตรวจสอบโครงการ AI ทุกโครงการก่อนนำไปใช้จริง ยึดหลักว่า AI ควร 'เสริมความสามารถของคน ไม่ใช่มาแทนที่คน' — แนวทางเหล่านี้เป็นข้อมูลที่ Toyota เปิดเผยต่อสาธารณะ ไม่ใช่นโยบายที่บังคับใช้โดยตรงกับ ATTG แต่สะท้อนทิศทางที่กลุ่มบริษัทแม่ให้ความสำคัญ และเป็นแนวทางที่ดีที่ ATTG ควรพิจารณานำมาปรับใช้",
+        ja: "トヨタは<strong>Responsible AI Organization</strong>と<strong>Responsible AI Review Board</strong>を設置し、各分野の専門家がすべてのAIプロジェクトを実運用前にレビューしている。これらはトヨタが公開する情報でありATTGへの直接的な規定ではないが、親グループが重視する方向性を反映しており、参考にすべき指針である。",
+        en: "Toyota also established a Responsible AI Organization and Review Board reviewing every project before launch under the 'augment, not replace' principle. This is public information, not binding on ATTG, but reflects the parent group's direction and is worth considering." }
     ],
     link: "https://global.toyota/en/sustainability/esg/ai/"
   },
   {
-    key: "group-ai-manufacturing",
-    title: "AI ในสายการผลิตทั่วโลก: ตัวอย่างจริงจากกลุ่ม AISIN และ Toyota",
-    icon: "🦾",
+    key: "group-ai-manufacturing", icon: "🦾",
+    title: { th: "AI ในสายการผลิตทั่วโลก: ตัวอย่างจริงจากกลุ่ม AISIN และ Toyota", ja: "世界の生産ラインにおけるAI活用:AISIN・トヨタグループの実例", en: "AI on Global Production Lines: Real Examples from AISIN and Toyota" },
     flow: [
-      { icon: "🔍", label: "AI ตรวจสอบคุณภาพแทนสายตามนุษย์บนไลน์ผลิต" },
-      { icon: "🌐", label: "ขยายผลจากโรงงานเดียวสู่เครือข่ายทั่วโลก" },
-      { icon: "👷", label: "พนักงานหน้างานสร้างโมเดล AI ได้เองโดยไม่ต้องเป็นผู้เชี่ยวชาญ" }
+      { icon: "🔍", label: { th: "AI ตรวจสอบคุณภาพแทนสายตามนุษย์บนไลน์ผลิต", ja: "AIが生産ラインで人の目に代わって品質検査", en: "AI performs quality inspection in place of the human eye" } },
+      { icon: "🌐", label: { th: "ขยายผลจากโรงงานเดียวสู่เครือข่ายทั่วโลก", ja: "1つの工場から世界規模のネットワークへ展開", en: "Scaled from a single plant to a global network" } },
+      { icon: "👷", label: { th: "พนักงานหน้างานสร้างโมเดล AI ได้เองโดยไม่ต้องเป็นผู้เชี่ยวชาญ", ja: "現場の従業員が専門家でなくても自分でAIモデルを作成できる", en: "Frontline workers can build AI models without being experts" } }
     ],
     video: "https://www.youtube.com/embed/v6jEnjmxqy0",
     videoTitle: "Machines that talk: How Toyota drives innovation in manufacturing with Kordel France",
@@ -694,22 +389,28 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "การใช้ AI ในกลุ่ม AISIN และ Toyota ไม่ได้จำกัดอยู่แค่เครื่องมือช่วยเขียนเอกสารหรือแชทบอทในสำนักงานเท่านั้น แต่ยังฝังลึกอยู่ในสายการผลิตจริงทั่วโลกมาหลายปีแล้ว โดยเฉพาะงานตรวจสอบคุณภาพและการบำรุงรักษาเชิงคาดการณ์ (Predictive Maintenance) ซึ่งเป็นหัวใจของแนวคิด Toyota Production System (TPS) ที่ ATTG เองก็ยึดถือ",
-      "ตัวอย่าง: Toyota พัฒนา AI Platform สำหรับตรวจสอบคุณภาพและกระบวนการผลิต ปัจจุบันใช้งานจริงครบทั้ง 10 โรงงานผลิตรถยนต์และชิ้นส่วนทั่วโลก มีพนักงานใช้งานจริงเกือบ 1,200 คน ตัวอย่างที่โรงงาน Takaoka ใช้ตรวจสอบชิ้นส่วนสำเร็จรูป ตรวจจับการทากาวกระจกหลังรถ และตรวจจับความผิดปกติของเครื่องฉีดพลาสติกที่ผลิตกันชนรถยนต์ ช่วยประหยัดเวลาแรงงานรวมกว่า 10,000 ชั่วโมงต่อปี จุดที่น่าสนใจคือพนักงานหน้างานที่ไม่ใช่ผู้เชี่ยวชาญด้าน AI ก็สร้างโมเดลตรวจสอบของตัวเองได้ ทำให้จำนวนโมเดลทั้งหมดเพิ่มจาก 8,000 โมเดลในปี 2023 เป็น 10,000 โมเดลในปี 2024",
-      "ตัวอย่าง: ฝั่ง AISIN Group เองก็มี DX Strategy Center ดูแลภาพรวมการนำ AI มาใช้ทั้งบริษัท ภายใต้แนวคิด 'Cyber-Physical Information Factory' คือเก็บข้อมูลจากสายการผลิตจริงมาจำลองในโลกดิจิทัลเพื่อทดสอบก่อนนำไปปรับใช้จริงหน้างาน นอกจากนี้ยังพัฒนา <strong>Explainable AI</strong> ร่วมกับพันธมิตรต่างประเทศสำหรับระบบตรวจสอบชิ้นงานด้วยสายตา ที่ไม่ได้บอกแค่ว่าชิ้นงานไหน OK/NG แต่ยังแสดงเหตุผลประกอบการตัดสินใจให้พนักงานเข้าใจได้ (แก้ปัญหา AI แบบ 'กล่องดำ' ที่ตรวจสอบไม่ได้ว่าทำไมถึงตัดสินใจแบบนั้น) โดยตั้งเป้าลดต้นทุนการผลิตรวมลง 30% ภายในปี 2030",
-      "แนวทางที่ดี: ตัวอย่างเหล่านี้สะท้อนหลักการเดียวกับที่คู่มือนี้เน้นย้ำในหัวข้ออื่นๆ คือ AI ที่ดีไม่ใช่แค่ 'เร็ว' แต่ต้อง 'ตรวจสอบได้' ด้วย ไม่ว่าจะเป็น AI ในสำนักงานอย่าง Copilot/ChatGPT หรือ AI บนสายการผลิต พนักงานควรเข้าใจว่า AI ช่วยงานได้ดีแค่ไหน แต่การตรวจสอบและตัดสินใจสุดท้ายยังคงเป็นหน้าที่ของคน"
+      { type: "plain", th: "การใช้ AI ในกลุ่ม AISIN และ Toyota ไม่ได้จำกัดอยู่แค่เครื่องมือช่วยเขียนเอกสารหรือแชทบอทในสำนักงานเท่านั้น แต่ยังฝังลึกอยู่ในสายการผลิตจริงทั่วโลกมาหลายปีแล้ว โดยเฉพาะงานตรวจสอบคุณภาพและการบำรุงรักษาเชิงคาดการณ์ (Predictive Maintenance) ซึ่งเป็นหัวใจของแนวคิด Toyota Production System (TPS) ที่ ATTG เองก็ยึดถือ",
+        ja: "AISIN・トヨタグループにおけるAI活用は、オフィスでの文書作成支援やチャットボットにとどまらない。世界各地の実際の生産ラインにも長年深く組み込まれており、特に品質検査と予知保全は、ATTGも拠り所とするトヨタ生産方式(TPS)の核心をなす。",
+        en: "AI use across AISIN and Toyota isn't limited to office tools or chatbots — it has been deeply embedded in real production lines worldwide for years, especially quality inspection and predictive maintenance, at the heart of the Toyota Production System (TPS) that ATTG follows." },
+      { type: "example", th: "Toyota พัฒนา AI Platform สำหรับตรวจสอบคุณภาพและกระบวนการผลิต ปัจจุบันใช้งานจริงครบทั้ง 10 โรงงานผลิตรถยนต์และชิ้นส่วนทั่วโลก มีพนักงานใช้งานจริงเกือบ 1,200 คน ตัวอย่างที่โรงงาน Takaoka ใช้ตรวจสอบชิ้นส่วนสำเร็จรูป ตรวจจับการทากาวกระจกหลังรถ และตรวจจับความผิดปกติของเครื่องฉีดพลาสติกที่ผลิตกันชนรถยนต์ ช่วยประหยัดเวลาแรงงานรวมกว่า 10,000 ชั่วโมงต่อปี จุดที่น่าสนใจคือพนักงานหน้างานที่ไม่ใช่ผู้เชี่ยวชาญด้าน AI ก็สร้างโมเดลตรวจสอบของตัวเองได้ ทำให้จำนวนโมเดลทั้งหมดเพิ่มจาก 8,000 โมเดลในปี 2023 เป็น 10,000 โมเดลในปี 2024",
+        ja: "トヨタは品質検査・工程管理用のAIプラットフォームを開発し、世界の完成車・部品工場10拠点すべてで実運用、約1,200名が利用している。高岡工場では完成部品検査、リアガラス接着の検知、バンパー用射出成形機の異常検知に活用し、年間10,000時間以上の労働削減につながっている。AI専門知識のない現場従業員でも検査モデルを作成でき、モデル総数は2023年の8,000件から2024年には10,000件に増加した。",
+        en: "Toyota built an AI platform for quality inspection and process control, now running across all 10 vehicle/parts plants worldwide, used by ~1,200 employees. At Takaoka, it inspects finished parts, detects rear-window glass bonding defects, and catches injection-molding anomalies for bumpers — saving 10,000+ labor-hours a year. Notably, non-expert frontline workers build their own inspection models, growing the model count from 8,000 (2023) to 10,000 (2024)." },
+      { type: "example", th: "ฝั่ง AISIN Group เองก็มี DX Strategy Center ดูแลภาพรวมการนำ AI มาใช้ทั้งบริษัท ภายใต้แนวคิด 'Cyber-Physical Information Factory' คือเก็บข้อมูลจากสายการผลิตจริงมาจำลองในโลกดิจิทัลเพื่อทดสอบก่อนนำไปปรับใช้จริงหน้างาน นอกจากนี้ยังพัฒนา <strong>Explainable AI</strong> ร่วมกับพันธมิตรต่างประเทศสำหรับระบบตรวจสอบชิ้นงานด้วยสายตา ที่แสดงเหตุผลประกอบการตัดสินใจให้พนักงานเข้าใจได้ โดยตั้งเป้าลดต้นทุนการผลิตรวมลง 30% ภายในปี 2030",
+        ja: "AISINグループ側ではDX Strategy Centerが全社的なAI導入を統括し、「サイバーフィジカル・インフォメーション・ファクトリー」の考えのもと、実データをデジタル空間で再現しテストしてから現場に反映している。海外パートナーと<strong>説明可能なAI</strong>も開発し、外観検査の判断根拠を従業員に示せるようにしている。2030年までに製造コストを全体で30%削減する目標を掲げる。",
+        en: "AISIN's DX Strategy Center oversees company-wide AI adoption under a 'Cyber-Physical Information Factory' concept — simulating real production data digitally before rollout. AISIN also developed <strong>Explainable AI</strong> with overseas partners for visual inspection that shows its reasoning to workers, targeting a 30% cut in overall production costs by 2030." },
+      { type: "bestpractice", th: "ตัวอย่างเหล่านี้สะท้อนหลักการเดียวกับที่คู่มือนี้เน้นย้ำในหัวข้ออื่นๆ คือ AI ที่ดีไม่ใช่แค่ 'เร็ว' แต่ต้อง 'ตรวจสอบได้' ด้วย ไม่ว่าจะเป็น AI ในสำนักงานอย่าง Copilot/ChatGPT หรือ AI บนสายการผลิต พนักงานควรเข้าใจว่า AI ช่วยงานได้ดีแค่ไหน แต่การตรวจสอบและตัดสินใจสุดท้ายยังคงเป็นหน้าที่ของคน",
+        ja: "これらの例は、本ガイドの他項目と同じ原則を示す——優れたAIは「速い」だけでなく「検証可能」であることも重要だ。オフィスAIであれ生産ラインAIであれ、最終的な検証と判断は人の責務である。",
+        en: "These examples reflect the same principle emphasized elsewhere in this guide — good AI isn't just fast, it must be verifiable. Whether office AI or production-line AI, final verification and decisions remain a human responsibility." }
     ],
     link: "https://www.aisin.com/en/technology/dx/"
   },
   {
-    key: "data-classification",
-    title: "ข้อมูลที่ห้ามป้อนเข้า AI สาธารณะ",
-    titleEN: "Data You Must Never Enter Into Public AI",
-    icon: "🔒",
+    key: "data-classification", icon: "🔒",
+    title: { th: "ข้อมูลที่ห้ามป้อนเข้า AI สาธารณะ", ja: "公開AIに入力してはいけないデータ", en: "Data You Must Never Enter Into Public AI" },
     flow: [
-      { icon: "📄", label: "มีข้อมูลที่ต้องประมวลผล" },
-      { icon: "🚦", label: "ตรวจสอบระดับความลับก่อนป้อนเข้า AI" },
-      { icon: "✅", label: "ป้อนเฉพาะข้อมูลที่อนุญาตเท่านั้น" }
+      { icon: "📄", label: { th: "มีข้อมูลที่ต้องประมวลผล", ja: "処理が必要なデータがある", en: "You have data that needs processing" } },
+      { icon: "🚦", label: { th: "ตรวจสอบระดับความลับก่อนป้อนเข้า AI", ja: "AIに入力する前に機密レベルを確認", en: "Check its confidentiality level before entering it" } },
+      { icon: "✅", label: { th: "ป้อนเฉพาะข้อมูลที่อนุญาตเท่านั้น", ja: "許可されたデータのみ入力する", en: "Only enter data that is permitted" } }
     ],
     video: "https://www.youtube.com/embed/02t0QddFY_E",
     videoTitle: "Company Data on ChatGPT: Why What You Share Could Stay Forever | Security Confidential",
@@ -717,20 +418,24 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "เมื่อพิมพ์ข้อความหรืออัปโหลดไฟล์เข้า AI สาธารณะ (เช่น ChatGPT, Claude เวอร์ชันฟรีหรือ Plus ส่วนบุคคล) ข้อมูลนั้นอาจถูกส่งออกไปประมวลผลนอกระบบขององค์กร และในบางกรณีอาจถูกนำไปใช้ฝึกโมเดลต่อได้หากไม่ได้ปิดการตั้งค่าไว้ จึงต้องระมัดระวังเป็นพิเศษว่าข้อมูลใดป้อนได้และข้อมูลใดห้ามป้อนเด็ดขาด",
-      "ข้อควรระวัง: <strong>ห้ามป้อนข้อมูลต่อไปนี้เข้า AI สาธารณะโดยเด็ดขาด</strong> — ข้อมูลลูกค้า (ชื่อ เบอร์โทร ที่อยู่ เลขบัตรประชาชน), ข้อมูลทางการเงินของบริษัทที่ยังไม่เปิดเผยต่อสาธารณะ, รหัสผ่านหรือ API key, ข้อมูลสัญญา/ข้อตกลงที่มีข้อผูกมัดไม่เปิดเผย (NDA) และข้อมูลพนักงานที่เป็นความลับ เช่น เงินเดือนหรือผลประเมิน",
-      "แนวทางที่ดี: หากจำเป็นต้องให้ AI ช่วยวิเคราะห์ข้อมูลที่มีความอ่อนไหว ให้ใช้เฉพาะเครื่องมือที่บริษัทอนุมัติและเชื่อมกับบัญชีองค์กรที่ปิดการใช้ข้อมูลฝึกโมเดลแล้วเท่านั้น (ดูหัวข้อ 'เครื่องมือ AI ที่บริษัทอนุมัติ') หรือแปลงข้อมูลให้ไม่ระบุตัวตน (Anonymize) ก่อนป้อนเข้า AI เสมอ เช่น แทนชื่อจริงด้วย 'ลูกค้า A'"
+      { type: "plain", th: "เมื่อพิมพ์ข้อความหรืออัปโหลดไฟล์เข้า AI สาธารณะ (เช่น ChatGPT, Claude เวอร์ชันฟรีหรือ Plus ส่วนบุคคล) ข้อมูลนั้นอาจถูกส่งออกไปประมวลผลนอกระบบขององค์กร และในบางกรณีอาจถูกนำไปใช้ฝึกโมเดลต่อได้หากไม่ได้ปิดการตั้งค่าไว้ จึงต้องระมัดระวังเป็นพิเศษว่าข้อมูลใดป้อนได้และข้อมูลใดห้ามป้อนเด็ดขาด",
+        ja: "公開AI(ChatGPT、個人利用のClaude Free/Plusなど)にテキストを入力したりファイルをアップロードしたりすると、そのデータは組織外で処理される可能性があり、設定をオフにしていない場合はモデルの追加学習に使われることもある。何を入力してよく、何を入力してはいけないかに特に注意が必要である。",
+        en: "When you type text or upload a file into public AI (e.g., ChatGPT, or personal Free/Plus Claude), that data may be processed outside your organization, and in some cases used to train the model further if that setting isn't off. Extra care is needed over what is and isn't okay to enter." },
+      { type: "caution", th: "<strong>ห้ามป้อนข้อมูลต่อไปนี้เข้า AI สาธารณะโดยเด็ดขาด</strong> — ข้อมูลลูกค้า (ชื่อ เบอร์โทร ที่อยู่ เลขบัตรประชาชน), ข้อมูลทางการเงินของบริษัทที่ยังไม่เปิดเผยต่อสาธารณะ, รหัสผ่านหรือ API key, ข้อมูลสัญญา/ข้อตกลงที่มีข้อผูกมัดไม่เปิดเผย (NDA) และข้อมูลพนักงานที่เป็นความลับ เช่น เงินเดือนหรือผลประเมิน",
+        ja: "<strong>以下のデータは、いかなる場合も公開AIに入力してはならない</strong> — 顧客情報(氏名・電話番号・住所・身分証番号)、未公開の会社の財務情報、パスワードやAPIキー、NDA対象の契約関連情報、給与や人事評価など機密性の高い従業員情報。",
+        en: "<strong>Never enter the following into public AI under any circumstances</strong> — customer data (name, phone, address, ID number), non-public company financial information, passwords or API keys, NDA-covered contract data, and confidential employee data such as salary or reviews." },
+      { type: "bestpractice", th: "หากจำเป็นต้องให้ AI ช่วยวิเคราะห์ข้อมูลที่มีความอ่อนไหว ให้ใช้เฉพาะเครื่องมือที่บริษัทอนุมัติและเชื่อมกับบัญชีองค์กรที่ปิดการใช้ข้อมูลฝึกโมเดลแล้วเท่านั้น (ดูหัวข้อ 'เครื่องมือ AI ที่บริษัทอนุมัติ') หรือแปลงข้อมูลให้ไม่ระบุตัวตน (Anonymize) ก่อนป้อนเข้า AI เสมอ เช่น แทนชื่อจริงด้วย 'ลูกค้า A'",
+        ja: "機密データの分析にAIの支援が本当に必要な場合は、会社承認済みでモデル学習をオフにした組織アカウントのみを使用すること(「会社承認済みAIツール」参照)。または入力前に必ずデータを匿名化すること——実名を「顧客A」に置き換えるなど。",
+        en: "If AI assistance with sensitive data is genuinely needed, use only company-approved tools on an enterprise account with model-training turned off (see 'Company-Approved AI Tools'), or always anonymize data first — e.g., replacing a real name with 'Customer A'." }
     ]
   },
   {
-    key: "verify-output",
-    title: "ตรวจสอบความถูกต้องของคำตอบ AI",
-    titleEN: "Verifying AI Output Accuracy",
-    icon: "🔍",
+    key: "verify-output", icon: "🔍",
+    title: { th: "ตรวจสอบความถูกต้องของคำตอบ AI", ja: "AIの回答の正確性を確認する", en: "Verifying AI Output Accuracy" },
     flow: [
-      { icon: "❓", label: "AI ให้คำตอบมา" },
-      { icon: "🔍", label: "ตรวจสอบกับแหล่งข้อมูลจริง" },
-      { icon: "✅", label: "นำไปใช้ได้อย่างมั่นใจ" }
+      { icon: "❓", label: { th: "AI ให้คำตอบมา", ja: "AIが回答を出す", en: "AI gives you an answer" } },
+      { icon: "🔍", label: { th: "ตรวจสอบกับแหล่งข้อมูลจริง", ja: "実際の情報源と照合する", en: "Verify it against real sources" } },
+      { icon: "✅", label: { th: "นำไปใช้ได้อย่างมั่นใจ", ja: "安心して活用できる", en: "Use it with confidence" } }
     ],
     video: "https://www.youtube.com/embed/Jw_BdvyvSUg",
     videoTitle: "AI Hallucination: Why does AI just make stuff up? | ChatGPT | Is Artificial Intelligence reliable?",
@@ -738,41 +443,49 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "AI สร้างคำตอบจากรูปแบบภาษาที่เรียนรู้มา ไม่ได้ 'รู้จริง' เหมือนฐานข้อมูล บางครั้งจึงตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัว เรียกว่า <strong>Hallucination</strong> เช่น อ้างอิงกฎหมายที่ไม่มีจริง สร้างตัวเลขสถิติที่ไม่ถูกต้อง หรือสรุปเนื้อหาผิดจากต้นฉบับ",
-      "ข้อควรระวัง: ห้ามคัดลอกคำตอบจาก AI ไปใช้ในเอกสารทางการ รายงานต่อผู้บริหาร หรือสื่อสารกับลูกค้าโดยไม่ตรวจสอบก่อน โดยเฉพาะข้อมูลที่เป็นตัวเลข วันที่ ชื่อกฎหมาย/ระเบียบ หรือข้อเท็จจริงเฉพาะทางที่ผิดพลาดแล้วจะส่งผลกระทบต่อชื่อเสียงหรือการตัดสินใจของบริษัท",
-      "แนวทางที่ดี: ใช้ AI เป็นผู้ช่วยร่างหรือหาไอเดียเบื้องต้น แล้วตรวจทานเทียบกับแหล่งข้อมูลที่เชื่อถือได้เสมอก่อนนำไปใช้จริง หากไม่แน่ใจว่า AI ตอบถูกหรือไม่ ให้ถามกลับตรงๆ ว่า 'มั่นใจแค่ไหนกับคำตอบนี้ และมีแหล่งอ้างอิงหรือไม่' หรือเปิดใช้ฟีเจอร์ Web Search เพื่อให้ AI อ้างอิงแหล่งที่มาจริงประกอบคำตอบ"
+      { type: "plain", th: "AI สร้างคำตอบจากรูปแบบภาษาที่เรียนรู้มา ไม่ได้ 'รู้จริง' เหมือนฐานข้อมูล บางครั้งจึงตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัว เรียกว่า <strong>Hallucination</strong> เช่น อ้างอิงกฎหมายที่ไม่มีจริง สร้างตัวเลขสถิติที่ไม่ถูกต้อง หรือสรุปเนื้อหาผิดจากต้นฉบับ",
+        ja: "AIは学習した言語パターンから回答を生成しており、データベースのように「事実を知っている」わけではない。そのため自覚のないまま自信満々に誤った回答をすることがあり、これを<strong>ハルシネーション</strong>と呼ぶ。存在しない法律の引用、誤った統計、原文と異なる要約などの例がある。",
+        en: "AI generates answers from learned language patterns — it doesn't 'know' things like a database. It can confidently answer incorrectly with no awareness of the error, called <strong>hallucination</strong> — e.g., citing a nonexistent law, fabricating statistics, or misrepresenting a source." },
+      { type: "caution", th: "ห้ามคัดลอกคำตอบจาก AI ไปใช้ในเอกสารทางการ รายงานต่อผู้บริหาร หรือสื่อสารกับลูกค้าโดยไม่ตรวจสอบก่อน โดยเฉพาะข้อมูลที่เป็นตัวเลข วันที่ ชื่อกฎหมาย/ระเบียบ หรือข้อเท็จจริงเฉพาะทางที่ผิดพลาดแล้วจะส่งผลกระทบต่อชื่อเสียงหรือการตัดสินใจของบริษัท",
+        ja: "AIの回答を確認せずに、公式文書、経営層への報告、顧客対応にそのまま使ってはならない。特に数値、日付、法令名、専門的事実は誤りがあると会社の信用や意思決定に影響する。",
+        en: "Never copy an AI answer straight into an official document, executive report, or customer communication without checking — especially numbers, dates, law names, or specialized facts where errors could damage reputation or decisions." },
+      { type: "bestpractice", th: "ใช้ AI เป็นผู้ช่วยร่างหรือหาไอเดียเบื้องต้น แล้วตรวจทานเทียบกับแหล่งข้อมูลที่เชื่อถือได้เสมอก่อนนำไปใช้จริง หากไม่แน่ใจว่า AI ตอบถูกหรือไม่ ให้ถามกลับตรงๆ ว่า 'มั่นใจแค่ไหนกับคำตอบนี้ และมีแหล่งอ้างอิงหรือไม่' หรือเปิดใช้ฟีเจอร์ Web Search เพื่อให้ AI อ้างอิงแหล่งที่มาจริงประกอบคำตอบ",
+        ja: "AIは下書きやアイデア出しの補助として使い、実際に使う前は必ず信頼できる情報源と照合すること。不安な場合は「この回答にどのくらい自信があり、根拠はあるか」と直接尋ねるか、Web検索機能を有効にするとよい。",
+        en: "Use AI as a drafting/brainstorming assistant, then always cross-check against reliable sources before real use. If unsure, ask directly: 'How confident are you, and do you have a source?' — or enable web search so AI cites real sources." }
     ]
   },
   {
-    key: "privacy-pdpa",
-    title: "ความเป็นส่วนตัวและ PDPA",
-    titleEN: "Privacy and PDPA",
-    icon: "📜",
+    key: "privacy-pdpa", icon: "📜",
+    title: { th: "ความเป็นส่วนตัวและ PDPA", ja: "プライバシーとPDPA(タイ個人情報保護法)", en: "Privacy and PDPA" },
     flow: [
-      { icon: "👤", label: "ข้อมูลส่วนบุคคลของลูกค้า/พนักงาน" },
-      { icon: "⚖️", label: "อยู่ภายใต้ พ.ร.บ. PDPA" },
-      { icon: "🛡️", label: "ต้องขอความยินยอมและป้องกันการรั่วไหล" }
+      { icon: "👤", label: { th: "ข้อมูลส่วนบุคคลของลูกค้า/พนักงาน", ja: "顧客・従業員の個人情報", en: "Personal data of customers/employees" } },
+      { icon: "⚖️", label: { th: "อยู่ภายใต้ พ.ร.บ. PDPA", ja: "PDPA法の対象となる", en: "Falls under the PDPA Act" } },
+      { icon: "🛡️", label: { th: "ต้องขอความยินยอมและป้องกันการรั่วไหล", ja: "同意取得と漏えい防止が必要", en: "Requires consent and protection against leaks" } }
     ],
     video: "https://www.youtube.com/embed/0VMVaDzLUp0",
     videoTitle: "PDPA คืออะไร? พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล คือกฎหมายที่บังคับใช้ 1 มิ.ย.65 สรุปต้องทำยังไง?",
     videoAuthor: "iT24Hrs",
     images: [],
     text: [
-      "<strong>PDPA</strong> (พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล) คือกฎหมายไทยที่คุ้มครองข้อมูลส่วนบุคคล เช่น ชื่อ ที่อยู่ เบอร์โทร อีเมล หรือข้อมูลที่ระบุตัวตนได้ การนำข้อมูลเหล่านี้ไปประมวลผลผ่าน AI โดยไม่ระมัดระวังอาจถือเป็นการละเมิดกฎหมายและมีบทลงโทษทั้งทางแพ่งและอาญา",
-      "วิธีใช้งาน: ก่อนป้อนข้อมูลที่มีข้อมูลส่วนบุคคลเข้า AI ใดๆ ให้ถามตัวเองก่อนว่า (1) ข้อมูลนี้จำเป็นต้องใช้ AI ประมวลผลจริงหรือไม่ (2) เจ้าของข้อมูลยินยอมให้นำไปประมวลผลด้วย AI หรือไม่ (3) เครื่องมือ AI ที่ใช้อยู่ในรายการที่บริษัทอนุมัติหรือไม่ หากไม่แน่ใจข้อใดข้อหนึ่ง ให้ปรึกษาฝ่ายกฎหมายหรือผู้ดูแลข้อมูลส่วนบุคคล (DPO) ของบริษัทก่อนเสมอ",
-      "ข้อควรระวัง: แม้จะเป็นข้อมูลที่ดูเหมือนไม่สำคัญ เช่น รายชื่อผู้เข้าร่วมประชุมหรือเบอร์โทรลูกค้าเพียงไม่กี่รายการ ก็ถือเป็นข้อมูลส่วนบุคคลภายใต้ PDPA เช่นกัน การป้อนข้อมูลเหล่านี้เข้า AI สาธารณะโดยไม่มีมาตรการป้องกันที่เหมาะสมมีความเสี่ยงทางกฎหมายต่อทั้งพนักงานและบริษัท"
+      { type: "plain", th: "<strong>PDPA</strong> (พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล) คือกฎหมายไทยที่คุ้มครองข้อมูลส่วนบุคคล เช่น ชื่อ ที่อยู่ เบอร์โทร อีเมล หรือข้อมูลที่ระบุตัวตนได้ การนำข้อมูลเหล่านี้ไปประมวลผลผ่าน AI โดยไม่ระมัดระวังอาจถือเป็นการละเมิดกฎหมายและมีบทลงโทษทั้งทางแพ่งและอาญา",
+        ja: "<strong>PDPA</strong>(個人情報保護法)は、氏名・住所・電話番号・メールなど個人を特定できる情報を保護するタイの法律である。こうしたデータを不用意にAIで処理すると法令違反となり、民事・刑事双方の罰則が科される場合がある。",
+        en: "The <strong>PDPA</strong> (Personal Data Protection Act) is Thailand's law protecting personal data — names, addresses, phone numbers, emails, or anything that identifies someone. Careless AI processing of this data can be a legal violation with civil and criminal penalties." },
+      { type: "howto", th: "ก่อนป้อนข้อมูลที่มีข้อมูลส่วนบุคคลเข้า AI ใดๆ ให้ถามตัวเองก่อนว่า (1) ข้อมูลนี้จำเป็นต้องใช้ AI ประมวลผลจริงหรือไม่ (2) เจ้าของข้อมูลยินยอมให้นำไปประมวลผลด้วย AI หรือไม่ (3) เครื่องมือ AI ที่ใช้อยู่ในรายการที่บริษัทอนุมัติหรือไม่ หากไม่แน่ใจข้อใดข้อหนึ่ง ให้ปรึกษาฝ่ายกฎหมายหรือผู้ดูแลข้อมูลส่วนบุคคล (DPO) ของบริษัทก่อนเสมอ",
+        ja: "個人情報をAIに入力する前に、(1)本当にAI処理が必要か (2)本人はAI処理に同意しているか (3)そのAIツールは会社の承認リストにあるか、を自問すること。確信が持てない場合は必ず事前に法務部門またはDPOに相談すること。",
+        en: "Before entering personal data into AI, ask: (1) Does this genuinely need AI processing? (2) Has the data owner consented? (3) Is the tool on the company's approved list? If unsure, always consult Legal or the company's DPO first." },
+      { type: "caution", th: "แม้จะเป็นข้อมูลที่ดูเหมือนไม่สำคัญ เช่น รายชื่อผู้เข้าร่วมประชุมหรือเบอร์โทรลูกค้าเพียงไม่กี่รายการ ก็ถือเป็นข้อมูลส่วนบุคคลภายใต้ PDPA เช่นกัน การป้อนข้อมูลเหล่านี้เข้า AI สาธารณะโดยไม่มีมาตรการป้องกันที่เหมาะสมมีความเสี่ยงทางกฎหมายต่อทั้งพนักงานและบริษัท",
+        ja: "会議出席者リストや顧客の電話番号数件など、一見重要でなさそうなデータもPDPA上は個人情報に該当する。適切な保護措置なしに公開AIに入力すると、従業員本人と会社双方に法的リスクが生じる。",
+        en: "Even seemingly minor data — a meeting attendee list, a few customer phone numbers — still counts as personal data under the PDPA. Entering it into public AI without safeguards creates legal risk for both employee and company." }
     ],
     link: "https://www.pdpc.or.th/"
   },
   {
-    key: "privacy-settings",
-    title: "ปิดการใช้ข้อมูลสนทนาไปฝึกโมเดล",
-    titleEN: "Opting Out of Model Training on Your Data",
-    icon: "⚙️",
+    key: "privacy-settings", icon: "⚙️",
+    title: { th: "ปิดการใช้ข้อมูลสนทนาไปฝึกโมเดล", ja: "会話データのモデル学習利用をオフにする", en: "Opting Out of Model Training on Your Data" },
     flow: [
-      { icon: "⚙️", label: "เข้า Settings > Privacy" },
-      { icon: "🚫", label: "ปิดการใช้ข้อมูลฝึกโมเดล" },
-      { icon: "✅", label: "บทสนทนาไม่ถูกนำไปใช้ต่อ" }
+      { icon: "⚙️", label: { th: "เข้า Settings > Privacy", ja: "設定 > プライバシー を開く", en: "Go to Settings > Privacy" } },
+      { icon: "🚫", label: { th: "ปิดการใช้ข้อมูลฝึกโมเดล", ja: "モデル学習へのデータ利用をオフにする", en: "Turn off model-training data use" } },
+      { icon: "✅", label: { th: "บทสนทนาไม่ถูกนำไปใช้ต่อ", ja: "会話データが利用されなくなる", en: "Your conversations are no longer used" } }
     ],
     video: "https://www.youtube.com/embed/ay6JlbNvccc",
     videoTitle: "How to Stop ChatGPT from Using Your Content for Training - ChatGPT Privacy Setting",
@@ -780,20 +493,24 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "เครื่องมือ AI ส่วนใหญ่มีการตั้งค่าที่ควบคุมว่าจะนำบทสนทนาของเราไปใช้ฝึกโมเดล AI รุ่นถัดไปหรือไม่ หากไม่ปิดการตั้งค่านี้ ข้อมูลที่พิมพ์เข้าไปอาจถูกเก็บและนำไปใช้พัฒนาโมเดลต่อ ซึ่งเพิ่มความเสี่ยงข้อมูลรั่วไหลโดยไม่ตั้งใจ",
-      "วิธีใช้งาน: ตรวจสอบและปิดการตั้งค่านี้ในทุกเครื่องมือ AI ที่ใช้งาน เช่น ChatGPT ไปที่ <code>Settings &gt; Data Controls</code>, Claude ไปที่ <code>Settings &gt; Privacy</code> โดยทั่วไปบัญชีระดับองค์กร (Business/Team/Enterprise) มักปิดการใช้ข้อมูลฝึกโมเดลไว้เป็นค่าเริ่มต้นอยู่แล้ว แต่บัญชีส่วนตัว (Free/Plus ส่วนบุคคล) มักไม่ได้ปิดไว้ให้อัตโนมัติ",
-      "แนวทางที่ดี: ควรใช้บัญชี AI ที่บริษัทจัดสรรให้ (บัญชีองค์กร) สำหรับงานที่เกี่ยวข้องกับข้อมูลบริษัท แทนการใช้บัญชีส่วนตัว เพราะบัญชีองค์กรมักมีการตั้งค่าความเป็นส่วนตัวและมาตรฐานความปลอดภัยที่เหมาะสมกับการใช้งานเชิงธุรกิจมากกว่า"
+      { type: "plain", th: "เครื่องมือ AI ส่วนใหญ่มีการตั้งค่าที่ควบคุมว่าจะนำบทสนทนาของเราไปใช้ฝึกโมเดล AI รุ่นถัดไปหรือไม่ หากไม่ปิดการตั้งค่านี้ ข้อมูลที่พิมพ์เข้าไปอาจถูกเก็บและนำไปใช้พัฒนาโมเดลต่อ ซึ่งเพิ่มความเสี่ยงข้อมูลรั่วไหลโดยไม่ตั้งใจ",
+        ja: "多くのAIツールには、会話データを次世代モデルの学習に利用するかどうかを制御する設定がある。オフにしないと入力内容が保存され学習に使われる可能性があり、意図しない情報漏えいのリスクが高まる。",
+        en: "Most AI tools have a setting controlling whether conversations get used to train the next model version. If you don't turn this off, what you type may be stored and used for training, increasing unintended leakage risk." },
+      { type: "howto", th: "ตรวจสอบและปิดการตั้งค่านี้ในทุกเครื่องมือ AI ที่ใช้งาน เช่น ChatGPT ไปที่ <code>Settings &gt; Data Controls</code>, Claude ไปที่ <code>Settings &gt; Privacy</code> โดยทั่วไปบัญชีระดับองค์กร (Business/Team/Enterprise) มักปิดการใช้ข้อมูลฝึกโมเดลไว้เป็นค่าเริ่มต้นอยู่แล้ว แต่บัญชีส่วนตัว (Free/Plus ส่วนบุคคล) มักไม่ได้ปิดไว้ให้อัตโนมัติ",
+        ja: "利用するすべてのAIツールでこの設定を確認しオフにすること。ChatGPTでは<code>設定 &gt; データ管理</code>、Claudeでは<code>設定 &gt; プライバシー</code>から変更できる。法人アカウントはデフォルトでオフのことが多いが、個人アカウントは自動的にはオフになっていないことが多い。",
+        en: "Check and disable this in every AI tool you use — e.g., ChatGPT: <code>Settings &gt; Data Controls</code>; Claude: <code>Settings &gt; Privacy</code>. Enterprise accounts usually have this off by default; personal accounts (Free/Plus) usually don't." },
+      { type: "bestpractice", th: "ควรใช้บัญชี AI ที่บริษัทจัดสรรให้ (บัญชีองค์กร) สำหรับงานที่เกี่ยวข้องกับข้อมูลบริษัท แทนการใช้บัญชีส่วนตัว เพราะบัญชีองค์กรมักมีการตั้งค่าความเป็นส่วนตัวและมาตรฐานความปลอดภัยที่เหมาะสมกับการใช้งานเชิงธุรกิจมากกว่า",
+        ja: "会社のデータに関わる業務では、個人アカウントではなく会社が用意した組織アカウントを使用すること。組織アカウントは業務利用に適したプライバシー設定とセキュリティ基準を備えていることが多い。",
+        en: "Use the company-provided enterprise account for work involving company data, not a personal account — enterprise accounts generally have privacy settings and security standards better suited to business use." }
     ]
   },
   {
-    key: "copyright-ip",
-    title: "ลิขสิทธิ์และทรัพย์สินทางปัญญา",
-    titleEN: "Copyright and Intellectual Property",
-    icon: "©️",
+    key: "copyright-ip", icon: "©️",
+    title: { th: "ลิขสิทธิ์และทรัพย์สินทางปัญญา", ja: "著作権と知的財産", en: "Copyright and Intellectual Property" },
     flow: [
-      { icon: "🎨", label: "ใช้ AI สร้างเนื้อหา/ภาพ/โค้ด" },
-      { icon: "©️", label: "ตรวจสอบสิทธิ์การใช้งาน" },
-      { icon: "✅", label: "ใช้เผยแพร่ได้อย่างถูกต้อง" }
+      { icon: "🎨", label: { th: "ใช้ AI สร้างเนื้อหา/ภาพ/โค้ด", ja: "AIでコンテンツ・画像・コードを生成", en: "Use AI to generate content/images/code" } },
+      { icon: "©️", label: { th: "ตรวจสอบสิทธิ์การใช้งาน", ja: "利用権を確認する", en: "Check the usage rights" } },
+      { icon: "✅", label: { th: "ใช้เผยแพร่ได้อย่างถูกต้อง", ja: "適切に公開・利用できる", en: "Publish it correctly and safely" } }
     ],
     video: "https://www.youtube.com/embed/JSKEaeYloYk",
     videoTitle: "Who Owns AI-Generated Content? Copyright Law Explained (2026)",
@@ -801,20 +518,24 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "เนื้อหาที่ AI สร้างขึ้น เช่น ข้อความ ภาพ หรือโค้ด อาจมีประเด็นด้านลิขสิทธิ์ที่ซับซ้อน เพราะ AI เรียนรู้จากข้อมูลจำนวนมหาศาลที่รวมงานที่มีลิขสิทธิ์อยู่ด้วย ผลลัพธ์ที่ได้จึงอาจคล้ายคลึงกับงานที่มีอยู่แล้วโดยไม่ตั้งใจ",
-      "ข้อควรระวัง: ก่อนนำเนื้อหาที่ AI สร้างไปใช้เผยแพร่ต่อสาธารณะ เช่น โพสต์โซเชียล โฆษณา หรือเอกสารทางการของบริษัท ควรตรวจสอบว่าไม่ซ้ำหรือคล้ายคลึงกับงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป โดยเฉพาะภาพที่มีสไตล์เฉพาะตัวหรือโค้ดที่คัดลอกมาทั้งฟังก์ชัน",
-      "แนวทางที่ดี: ใช้ AI เป็นจุดเริ่มต้นในการสร้างไอเดียหรือร่างเนื้อหา แล้วนำมาปรับแต่งให้เป็นเอกลักษณ์ของบริษัทก่อนเผยแพร่จริง หากมีข้อสงสัยเรื่องลิขสิทธิ์ของเนื้อหาสำคัญ (เช่น โลโก้ หรือสื่อโฆษณาหลัก) ควรปรึกษาฝ่ายกฎหมายหรือฝ่ายการตลาดก่อนเผยแพร่"
+      { type: "plain", th: "เนื้อหาที่ AI สร้างขึ้น เช่น ข้อความ ภาพ หรือโค้ด อาจมีประเด็นด้านลิขสิทธิ์ที่ซับซ้อน เพราะ AI เรียนรู้จากข้อมูลจำนวนมหาศาลที่รวมงานที่มีลิขสิทธิ์อยู่ด้วย ผลลัพธ์ที่ได้จึงอาจคล้ายคลึงกับงานที่มีอยู่แล้วโดยไม่ตั้งใจ",
+        ja: "AIが生成するテキスト・画像・コードなどには、複雑な著作権上の論点が伴うことがある。AIは著作物を含む膨大なデータから学習しているため、生成結果が意図せず既存作品と類似してしまう可能性がある。",
+        en: "AI-generated content — text, images, code — can raise complex copyright issues, because AI learns from huge datasets that include copyrighted work. Output can end up unintentionally similar to existing work." },
+      { type: "caution", th: "ก่อนนำเนื้อหาที่ AI สร้างไปใช้เผยแพร่ต่อสาธารณะ เช่น โพสต์โซเชียล โฆษณา หรือเอกสารทางการของบริษัท ควรตรวจสอบว่าไม่ซ้ำหรือคล้ายคลึงกับงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป โดยเฉพาะภาพที่มีสไตล์เฉพาะตัวหรือโค้ดที่คัดลอกมาทั้งฟังก์ชัน",
+        ja: "AI生成コンテンツをSNS投稿、広告、会社の公式文書などで公開する前に、他者の著作物と重複・過度に類似していないか確認すること。特に独特なスタイルの画像や関数ごとコピーされたコードには注意。",
+        en: "Before publishing AI-generated content publicly — social posts, ads, official documents — check it isn't duplicating or overly similar to someone else's copyrighted work, especially distinctive-style images or wholesale-copied code." },
+      { type: "howto", th: "ใช้ AI เป็นจุดเริ่มต้นในการสร้างไอเดียหรือร่างเนื้อหา แล้วนำมาปรับแต่งให้เป็นเอกลักษณ์ของบริษัทก่อนเผยแพร่จริง หากมีข้อสงสัยเรื่องลิขสิทธิ์ของเนื้อหาสำคัญ (เช่น โลโก้ หรือสื่อโฆษณาหลัก) ควรปรึกษาฝ่ายกฎหมายหรือฝ่ายการตลาดก่อนเผยแพร่",
+        ja: "AIはアイデア出しや下書きの出発点として使い、公開前に会社独自の表現に磨き上げること。ロゴや主要広告素材など著作権上の懸念がある重要コンテンツは、公開前に法務またはマーケティングに相談すること。",
+        en: "Use AI as a starting point for ideas or drafts, then refine into something distinctly the company's own before publishing. For important content with copyright concerns (logo, key ads), consult Legal or Marketing first." }
     ]
   },
   {
-    key: "approved-tools",
-    title: "ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ",
-    titleEN: "Use Only Company-Approved AI Tools",
-    icon: "✅",
+    key: "approved-tools", icon: "✅",
+    title: { th: "ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みのAIツールのみを使用する", en: "Use Only Company-Approved AI Tools" },
     flow: [
-      { icon: "🔍", label: "อยากลองใช้ AI ตัวใหม่" },
-      { icon: "📋", label: "ตรวจสอบรายการที่บริษัทอนุมัติก่อน" },
-      { icon: "✅", label: "ใช้เฉพาะเครื่องมือที่ผ่านการตรวจสอบแล้ว" }
+      { icon: "🔍", label: { th: "อยากลองใช้ AI ตัวใหม่", ja: "新しいAIツールを試したい", en: "You want to try a new AI tool" } },
+      { icon: "📋", label: { th: "ตรวจสอบรายการที่บริษัทอนุมัติก่อน", ja: "まず会社の承認リストを確認する", en: "Check the company's approved list first" } },
+      { icon: "✅", label: { th: "ใช้เฉพาะเครื่องมือที่ผ่านการตรวจสอบแล้ว", ja: "審査済みのツールのみを利用する", en: "Only use tools that have been vetted" } }
     ],
     video: "https://www.youtube.com/embed/FTbeJJi6C2c",
     videoTitle: "Shadow AI Explained: The Cybersecurity Risk Companies Can't Ignore",
@@ -822,103 +543,123 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "<strong>Shadow AI</strong> คือการที่พนักงานนำเครื่องมือ AI ที่ไม่ผ่านการตรวจสอบจากบริษัทมาใช้ในงานโดยไม่ได้รับอนุญาต เช่น สมัครบัญชี AI ใหม่ด้วยอีเมลบริษัทเพื่อทดลองใช้ฟีเจอร์บางอย่าง โดยไม่รู้ว่าเครื่องมือนั้นมีนโยบายด้านข้อมูลอย่างไร ซึ่งเป็นความเสี่ยงด้านความปลอดภัยข้อมูลที่มองไม่เห็นและควบคุมได้ยาก",
-      "วิธีใช้งาน: ก่อนเริ่มใช้เครื่องมือ AI ใหม่ในการทำงาน ให้ตรวจสอบรายการเครื่องมือที่บริษัทอนุมัติแล้วกับทีม IT ก่อนเสมอ หากต้องการทดลองใช้เครื่องมือที่ไม่อยู่ในรายการ ให้แจ้งขออนุมัติจากทีม IT หรือผู้ดูแลความปลอดภัยข้อมูลก่อนเริ่มใช้งานจริงกับข้อมูลของบริษัท",
-      "ข้อควรระวัง: แม้เครื่องมือ AI ตัวใหม่จะดูน่าสนใจหรือมีรีวิวดีแค่ไหน ก็ไม่ควรนำข้อมูลบริษัทไปทดลองใช้ก่อนได้รับการอนุมัติ เพราะไม่มีทางรู้แน่ชัดว่าผู้ให้บริการมีมาตรฐานความปลอดภัยข้อมูลอย่างไร ข้อมูลอาจรั่วไหลไปโดยที่บริษัทไม่มีทางทราบหรือแก้ไขได้ทัน"
+      { type: "plain", th: "<strong>Shadow AI</strong> คือการที่พนักงานนำเครื่องมือ AI ที่ไม่ผ่านการตรวจสอบจากบริษัทมาใช้ในงานโดยไม่ได้รับอนุญาต เช่น สมัครบัญชี AI ใหม่ด้วยอีเมลบริษัทเพื่อทดลองใช้ฟีเจอร์บางอย่าง โดยไม่รู้ว่าเครื่องมือนั้นมีนโยบายด้านข้อมูลอย่างไร ซึ่งเป็นความเสี่ยงด้านความปลอดภัยข้อมูลที่มองไม่เห็นและควบคุมได้ยาก",
+        ja: "<strong>シャドーAI</strong>とは、従業員が会社の審査を経ていないAIツールを許可なく業務で使用することを指す。ある機能を試すために会社のメールで新規登録するが、そのデータポリシーを把握していない、といったケースである。目に見えにくく管理が難しいリスクとなる。",
+        en: "<strong>Shadow AI</strong> is when employees use unvetted AI tools without authorization — e.g., signing up for a new AI account with a company email to try a feature, without knowing that tool's data policy. An invisible, hard-to-control data security risk." },
+      { type: "howto", th: "ก่อนเริ่มใช้เครื่องมือ AI ใหม่ในการทำงาน ให้ตรวจสอบรายการเครื่องมือที่บริษัทอนุมัติแล้วกับทีม IT ก่อนเสมอ หากต้องการทดลองใช้เครื่องมือที่ไม่อยู่ในรายการ ให้แจ้งขออนุมัติจากทีม IT หรือผู้ดูแลความปลอดภัยข้อมูลก่อนเริ่มใช้งานจริงกับข้อมูลของบริษัท",
+        ja: "新しいAIツールを業務で使い始める前に、必ずIT部門で会社承認済みリストを確認すること。リストにないツールを試したい場合は、実データで使用する前にIT部門または情報セキュリティ担当者に承認を申請すること。",
+        en: "Before using a new AI tool for work, always check the company-approved list with IT first. To try a tool not on the list, request approval from IT or data security before using it with real company data." },
+      { type: "caution", th: "แม้เครื่องมือ AI ตัวใหม่จะดูน่าสนใจหรือมีรีวิวดีแค่ไหน ก็ไม่ควรนำข้อมูลบริษัทไปทดลองใช้ก่อนได้รับการอนุมัติ เพราะไม่มีทางรู้แน่ชัดว่าผู้ให้บริการมีมาตรฐานความปลอดภัยข้อมูลอย่างไร ข้อมูลอาจรั่วไหลไปโดยที่บริษัทไม่มีทางทราบหรือแก้ไขได้ทัน",
+        ja: "どれほど魅力的でレビューが良いツールでも、承認前に会社データで試してはならない。提供事業者のセキュリティ基準は確実には分からず、気づかないうちにデータが漏えいする可能性がある。",
+        en: "No matter how appealing or well-reviewed, don't try a new tool with company data before approval — you can't be sure of the provider's security standards, and data could leak before the company even knows." }
     ]
   },
   {
-    key: "account-security",
-    title: "รหัสผ่านและการยืนยันตัวตน",
-    titleEN: "Passwords and Authentication",
-    icon: "🔐",
+    key: "account-security", icon: "🔐",
+    title: { th: "รหัสผ่านและการยืนยันตัวตน", ja: "パスワードと本人確認", en: "Passwords and Authentication" },
     flow: [
-      { icon: "🔑", label: "ตั้งรหัสผ่านที่คาดเดายาก" },
-      { icon: "📱", label: "เปิดใช้ 2FA" },
-      { icon: "🔐", label: "บัญชี AI ปลอดภัยจากการถูกแฮก" }
+      { icon: "🔑", label: { th: "ตั้งรหัสผ่านที่คาดเดายาก", ja: "推測されにくいパスワードを設定", en: "Set a password that's hard to guess" } },
+      { icon: "📱", label: { th: "เปิดใช้ 2FA", ja: "2段階認証(2FA)を有効化", en: "Turn on 2FA" } },
+      { icon: "🔐", label: { th: "บัญชี AI ปลอดภัยจากการถูกแฮก", ja: "AIアカウントを乗っ取りから守る", en: "Your AI account stays safe from hacking" } }
     ],
     video: "https://www.youtube.com/embed/HqGqendJ5Es",
     videoTitle: "วิธีติดตั้งและเริ่มต้นใช้งาน Microsoft Authenticator กับ Office 365",
     videoAuthor: "SWU Computer Center",
     images: [],
     text: [
-      "บัญชี AI ที่เชื่อมกับอีเมลบริษัทหรือมีประวัติการสนทนาที่เกี่ยวข้องกับงาน หากถูกแฮกจะทำให้ผู้ไม่หวังดีเข้าถึงข้อมูลและประวัติการใช้งานทั้งหมดได้ทันที การป้องกันบัญชีจึงสำคัญไม่แพ้การระวังข้อมูลที่ป้อนเข้า AI",
-      "วิธีใช้งาน: ตั้งรหัสผ่านที่คาดเดายาก ไม่ซ้ำกับบัญชีอื่น และเปิดใช้การยืนยันตัวตนสองชั้น (2FA) ในทุกบัญชี AI ที่ใช้งาน โดยเฉพาะบัญชีที่เชื่อมต่อกับ Connectors ต่างๆ เช่น Google Drive หรือ Slack เพราะหากบัญชี AI ถูกแฮก ผู้ไม่หวังดีอาจเข้าถึงไฟล์ในบริการที่เชื่อมต่อไว้ได้ด้วย",
-      "เคล็ดลับ: ใช้แอปยืนยันตัวตน (Authenticator App) แทนการรับรหัส OTP ทาง SMS เพราะปลอดภัยกว่า และหมั่นตรวจสอบรายการอุปกรณ์ที่เคยล็อกอินเข้าบัญชี AI เป็นระยะ หากพบอุปกรณ์ที่ไม่รู้จักให้ Sign out ทันทีและเปลี่ยนรหัสผ่าน"
+      { type: "plain", th: "บัญชี AI ที่เชื่อมกับอีเมลบริษัทหรือมีประวัติการสนทนาที่เกี่ยวข้องกับงาน หากถูกแฮกจะทำให้ผู้ไม่หวังดีเข้าถึงข้อมูลและประวัติการใช้งานทั้งหมดได้ทันที การป้องกันบัญชีจึงสำคัญไม่แพ้การระวังข้อมูลที่ป้อนเข้า AI",
+        ja: "会社のメールに紐づいたAIアカウントや業務関連の会話履歴を含むアカウントが乗っ取られると、攻撃者はすべてのデータと履歴に即座にアクセスできる。入力データへの注意と同じくらいアカウント保護も重要である。",
+        en: "If an AI account linked to a company email or containing work conversation history gets hacked, an attacker gets immediate access to all of it. Protecting the account matters as much as being careful what you enter." },
+      { type: "howto", th: "ตั้งรหัสผ่านที่คาดเดายาก ไม่ซ้ำกับบัญชีอื่น และเปิดใช้การยืนยันตัวตนสองชั้น (2FA) ในทุกบัญชี AI ที่ใช้งาน โดยเฉพาะบัญชีที่เชื่อมต่อกับ Connectors ต่างๆ เช่น Google Drive หรือ Slack เพราะหากบัญชี AI ถูกแฮก ผู้ไม่หวังดีอาจเข้าถึงไฟล์ในบริการที่เชื่อมต่อไว้ได้ด้วย",
+        ja: "推測されにくく他で使い回していないパスワードを設定し、利用するすべてのAIアカウントで2FAを有効にすること。特にGoogle DriveやSlackと連携するアカウントは要注意で、乗っ取られると連携先のファイルにもアクセスされ得る。",
+        en: "Set a hard-to-guess, non-reused password, and enable 2FA on every AI account — especially ones connected to Google Drive or Slack, since a hacked account could expose files in those connected services too." },
+      { type: "tip", th: "ใช้แอปยืนยันตัวตน (Authenticator App) แทนการรับรหัส OTP ทาง SMS เพราะปลอดภัยกว่า และหมั่นตรวจสอบรายการอุปกรณ์ที่เคยล็อกอินเข้าบัญชี AI เป็นระยะ หากพบอุปกรณ์ที่ไม่รู้จักให้ Sign out ทันทีและเปลี่ยนรหัสผ่าน",
+        ja: "SMSでOTPを受け取るより認証アプリの方が安全である。AIアカウントにログイン中のデバイス一覧を定期的に確認し、見覚えのないデバイスがあれば直ちにサインアウトしパスワードを変更すること。",
+        en: "Use an authenticator app instead of SMS OTP codes for better security, and periodically check devices signed in to your AI accounts — sign out and change your password immediately if you spot an unfamiliar one." }
     ]
   },
   {
-    key: "phishing-email",
-    title: "อีเมลหลอกลวง (Phishing Mail) และการรายงาน",
-    titleEN: "Phishing Emails and How to Report Them",
-    icon: "📧",
+    key: "phishing-email", icon: "📧",
+    title: { th: "อีเมลหลอกลวง (Phishing Mail) และการรายงาน", ja: "フィッシングメールとその報告方法", en: "Phishing Emails and How to Report Them" },
     flow: [
-      { icon: "📧", label: "อีเมลน่าสงสัยเข้ากล่องจดหมาย" },
-      { icon: "🔍", label: "ตรวจสอบสัญญาณเตือน" },
-      { icon: "🚨", label: "รายงาน IT/Security ทันที ไม่คลิกลิงก์" }
+      { icon: "📧", label: { th: "อีเมลน่าสงสัยเข้ากล่องจดหมาย", ja: "不審なメールが届く", en: "A suspicious email arrives" } },
+      { icon: "🔍", label: { th: "ตรวจสอบสัญญาณเตือน", ja: "警戒すべき兆候を確認する", en: "Check the warning signs" } },
+      { icon: "🚨", label: { th: "รายงาน IT/Security ทันที ไม่คลิกลิงก์", ja: "リンクをクリックせず、直ちにIT/セキュリティ部門へ報告", en: "Report to IT/Security immediately — don't click the link" } }
     ],
     video: "https://www.youtube.com/embed/BzhGK6M33RU",
     videoTitle: "7 สัญญาณอีเมล Phishing มิจฉาชีพออนไลน์ ระวังอย่าเปิด",
     videoAuthor: "iT24Hrs",
     images: [],
     text: [
-      "อีเมลหลอกลวง (<strong>Phishing Mail</strong>) เป็นช่องทางโจมตีที่พบบ่อยที่สุดในองค์กรทั่วโลก AISIN Group เองก็จัดให้พนักงานทั้งเครือ (รวม ATTG) ต้องผ่านการซ้อมรับมืออีเมลหลอกลวง (Phishing Simulation) ปีละ 3 ครั้ง เพราะอีเมลเพียงฉบับเดียวที่พนักงานคนหนึ่งคลิกพลาด อาจเปิดช่องให้มิจฉาชีพเข้าถึงระบบทั้งองค์กรได้ หากได้รับอีเมลซ้อมจากทีม IT/Security ให้ปฏิบัติตามขั้นตอนอย่างจริงจังเหมือนเป็นเหตุการณ์จริง เพื่อให้การซ้อมมีประโยชน์สูงสุด",
-      "วิธีใช้งาน: สังเกตสัญญาณเตือนของอีเมลหลอกลวง เช่น (1) ที่อยู่อีเมลผู้ส่งสะกดคล้ายของจริงแต่ผิดเล็กน้อย (2) เร่งรัดให้รีบดำเนินการด่วนผิดปกติ (3) มีลิงก์หรือไฟล์แนบที่ไม่คาดคิด (4) ขอข้อมูลบัญชี/รหัสผ่านโดยตรง (5) ใช้ภาษาหรือรูปแบบการเขียนที่ไม่เหมือนที่บริษัทใช้ปกติ หากพบสัญญาณเหล่านี้ ห้ามคลิกลิงก์หรือเปิดไฟล์แนบเด็ดขาด",
-      "ข้อควรระวัง: หากไม่แน่ใจว่าอีเมลที่ได้รับจริงหรือปลอม ห้ามตอบกลับหรือคลิกลิงก์ใดๆ ในอีเมลนั้นเพื่อ 'ตรวจสอบ' ให้รายงานต่อทีม IT/Security ของบริษัททันทีผ่านช่องทางที่กำหนด (เช่น ปุ่ม Report Phishing ใน Outlook หรือแจ้ง IT โดยตรง) การรายงานอีเมลต้องสงสัยเร็ว แม้จะเป็นการแจ้งเตือนที่ไม่ใช่ภัยจริงก็ตาม ดีกว่าปล่อยผ่านแล้วเกิดความเสียหายจริง"
+      { type: "plain", th: "อีเมลหลอกลวง (<strong>Phishing Mail</strong>) เป็นช่องทางโจมตีที่พบบ่อยที่สุดในองค์กรทั่วโลก AISIN Group เองก็จัดให้พนักงานทั้งเครือ (รวม ATTG) ต้องผ่านการซ้อมรับมืออีเมลหลอกลวง (Phishing Simulation) ปีละ 3 ครั้ง เพราะอีเมลเพียงฉบับเดียวที่พนักงานคนหนึ่งคลิกพลาด อาจเปิดช่องให้มิจฉาชีพเข้าถึงระบบทั้งองค์กรได้ หากได้รับอีเมลซ้อมจากทีม IT/Security ให้ปฏิบัติตามขั้นตอนอย่างจริงจังเหมือนเป็นเหตุการณ์จริง เพื่อให้การซ้อมมีประโยชน์สูงสุด",
+        ja: "<strong>フィッシングメール</strong>は世界中の組織で最も多い攻撃手口である。AISINグループはATTGを含む全従業員に年3回のフィッシング対応訓練を実施している。従業員1名のクリックミスが組織全体への侵入経路になり得るためである。訓練メールを受け取った場合は実際のインシデントと同様に真剣に対応すること。",
+        en: "<strong>Phishing emails</strong> are the most common attack vector worldwide. AISIN Group runs phishing drills 3 times a year for all group employees (including ATTG), since one wrong click can open the door to the entire organization. Treat simulation emails from IT/Security as seriously as a real incident." },
+      { type: "howto", th: "สังเกตสัญญาณเตือนของอีเมลหลอกลวง เช่น (1) ที่อยู่อีเมลผู้ส่งสะกดคล้ายของจริงแต่ผิดเล็กน้อย (2) เร่งรัดให้รีบดำเนินการด่วนผิดปกติ (3) มีลิงก์หรือไฟล์แนบที่ไม่คาดคิด (4) ขอข้อมูลบัญชี/รหัสผ่านโดยตรง (5) ใช้ภาษาหรือรูปแบบการเขียนที่ไม่เหมือนที่บริษัทใช้ปกติ หากพบสัญญาณเหล่านี้ ห้ามคลิกลิงก์หรือเปิดไฟล์แนบเด็ดขาด",
+        ja: "フィッシングの兆候に注意すること:(1)本物に似ているがわずかに違う送信元アドレス (2)不自然に緊急な対応要求 (3)予期しないリンクや添付ファイル (4)アカウント情報の直接要求 (5)普段と異なる文体。これらが見られたら絶対にリンクや添付を開かないこと。",
+        en: "Watch for: (1) a sender address spelled almost right but slightly off, (2) unusual urgency, (3) unexpected links/attachments, (4) a direct request for credentials, (5) language that doesn't match the company's usual style. If you spot these, never click the link or open the attachment." },
+      { type: "caution", th: "หากไม่แน่ใจว่าอีเมลที่ได้รับจริงหรือปลอม ห้ามตอบกลับหรือคลิกลิงก์ใดๆ ในอีเมลนั้นเพื่อ 'ตรวจสอบ' ให้รายงานต่อทีม IT/Security ของบริษัททันทีผ่านช่องทางที่กำหนด (เช่น ปุ่ม Report Phishing ใน Outlook หรือแจ้ง IT โดยตรง) การรายงานอีเมลต้องสงสัยเร็ว แม้จะเป็นการแจ้งเตือนที่ไม่ใช่ภัยจริงก็ตาม ดีกว่าปล่อยผ่านแล้วเกิดความเสียหายจริง",
+        ja: "受信メールが本物か偽物か確信が持てない場合、「確認のため」に返信やリンクのクリックをしてはならない。Outlookの「フィッシングを報告」ボタンなど指定チャネルで速やかにIT/セキュリティ部門に報告すること。誤報であっても早期報告は実害発生後の対応より常に望ましい。",
+        en: "If unsure whether an email is genuine, never reply or click any link to 'check' — report it to IT/Security immediately via the designated channel (e.g., Report Phishing in Outlook). Reporting early, even a false alarm, always beats letting real damage happen." }
     ],
     link: "https://www.aisin.com/en/sustainability/governance/security/"
   },
   {
-    key: "ai-phishing",
-    title: "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง",
-    titleEN: "Beware of AI-Generated Phishing",
-    icon: "🎣",
+    key: "ai-phishing", icon: "🎣",
+    title: { th: "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง", ja: "AIを悪用したフィッシングに注意", en: "Beware of AI-Generated Phishing" },
     flow: [
-      { icon: "📧", label: "ได้รับอีเมล/ข้อความน่าสงสัย" },
-      { icon: "🤔", label: "ตั้งสติ ตรวจสอบก่อนเชื่อ" },
-      { icon: "🛡️", label: "ไม่ตกเป็นเหยื่อมิจฉาชีพ" }
+      { icon: "📧", label: { th: "ได้รับอีเมล/ข้อความน่าสงสัย", ja: "不審なメール・メッセージを受け取る", en: "You receive a suspicious email/message" } },
+      { icon: "🤔", label: { th: "ตั้งสติ ตรวจสอบก่อนเชื่อ", ja: "落ち着いて、信じる前に確認する", en: "Stay calm — verify before you trust it" } },
+      { icon: "🛡️", label: { th: "ไม่ตกเป็นเหยื่อมิจฉาชีพ", ja: "詐欺の被害に遭わない", en: "Don't fall victim to scammers" } }
     ],
     video: "https://www.youtube.com/embed/shWWkrG6U1M",
     videoTitle: "วิธีจับผิด AI ไม่ให้โดนหลอก! อันไหนของจริง อันไหน AI ดูยังไง? รู้ทันมิจฉาชีพยุคเอไอ",
     videoAuthor: "iT24Hrs",
     images: [],
     text: [
-      "มิจฉาชีพใช้ AI สร้างอีเมลหลอกลวง (Phishing) ที่เขียนได้เนียนขึ้นมาก ไม่มีคำผิดหรือสำนวนแปลกๆ เหมือนก่อน รวมถึงใช้ AI ปลอมเสียงหรือวิดีโอคอลเป็นผู้บริหารหรือคนรู้จัก เพื่อหลอกให้โอนเงินหรือเปิดเผยข้อมูลสำคัญ",
-      "ข้อควรระวัง: หากได้รับอีเมลหรือข้อความที่เร่งรัดให้ทำธุรกรรมด่วน โอนเงิน หรือเปิดเผยข้อมูลสำคัญ แม้จะดูเหมือนมาจากผู้บริหารหรือเพื่อนร่วมงานที่รู้จัก ให้ตั้งสติและตรวจสอบผ่านช่องทางอื่นก่อนเสมอ เช่น โทรกลับด้วยเบอร์ที่บันทึกไว้เดิม ไม่ใช่เบอร์ที่แนบมาในข้อความนั้น",
-      "แนวทางที่ดี: กำหนด 'รหัสลับ' หรือขั้นตอนยืนยันตัวตนภายในทีมสำหรับธุรกรรมสำคัญ เช่น การโอนเงินจำนวนมาก เพื่อให้ตรวจสอบได้ว่าเป็นคำสั่งจากคนจริงไม่ใช่เสียง/วิดีโอปลอมที่สร้างจาก AI หากไม่แน่ใจ ให้สงสัยไว้ก่อนเสมอและแจ้งทีม IT หรือหัวหน้างานทันที"
+      { type: "plain", th: "มิจฉาชีพใช้ AI สร้างอีเมลหลอกลวง (Phishing) ที่เขียนได้เนียนขึ้นมาก ไม่มีคำผิดหรือสำนวนแปลกๆ เหมือนก่อน รวมถึงใช้ AI ปลอมเสียงหรือวิดีโอคอลเป็นผู้บริหารหรือคนรู้จัก เพื่อหลอกให้โอนเงินหรือเปิดเผยข้อมูลสำคัญ",
+        ja: "詐欺師はAIを使い、誤字や不自然な言い回しのない巧妙なフィッシングメールを作成するようになっている。AIで音声を合成し、経営層や知人になりすましたビデオ通話で送金や重要情報の開示をだまし取ろうとするケースもある。",
+        en: "Scammers now use AI to write far more convincing phishing emails, without the typos that used to give them away. They also fake voices or video calls impersonating executives or people you know, to trick you into transfers or disclosing sensitive information." },
+      { type: "caution", th: "หากได้รับอีเมลหรือข้อความที่เร่งรัดให้ทำธุรกรรมด่วน โอนเงิน หรือเปิดเผยข้อมูลสำคัญ แม้จะดูเหมือนมาจากผู้บริหารหรือเพื่อนร่วมงานที่รู้จัก ให้ตั้งสติและตรวจสอบผ่านช่องทางอื่นก่อนเสมอ เช่น โทรกลับด้วยเบอร์ที่บันทึกไว้เดิม ไม่ใช่เบอร์ที่แนบมาในข้อความนั้น",
+        ja: "至急の取引・送金・重要情報の開示を求めるメッセージを受け取った場合、経営層や同僚からのものに見えても、落ち着いて必ず別の手段で確認すること。メッセージ内の番号ではなく、事前に保存した番号にかけ直すなど。",
+        en: "If a message urgently pressures you for a transaction, transfer, or disclosure — even from an apparent executive or colleague — stay calm and verify through a separate channel first, like calling a number you already have saved, not one in the message." },
+      { type: "howto", th: "กำหนด 'รหัสลับ' หรือขั้นตอนยืนยันตัวตนภายในทีมสำหรับธุรกรรมสำคัญ เช่น การโอนเงินจำนวนมาก เพื่อให้ตรวจสอบได้ว่าเป็นคำสั่งจากคนจริงไม่ใช่เสียง/วิดีโอปลอมที่สร้างจาก AI หากไม่แน่ใจ ให้สงสัยไว้ก่อนเสมอและแจ้งทีม IT หรือหัวหน้างานทันที",
+        ja: "高額送金など重要取引は、チーム内で「合言葉」や本人確認手順を決めておくとよい。指示がAI生成の偽音声・映像でなく本物の人物からのものと確認できる。確信が持てない場合は常に疑い、直ちにIT部門または上長へ報告すること。",
+        en: "Set up a team 'safe word' or verification step for important transactions like large transfers, to confirm instructions genuinely come from a real person, not an AI fake. When in doubt, assume it's suspicious and notify IT or your manager immediately." }
     ],
     link: "https://www.thaicert.or.th/"
   },
   {
-    key: "deepfake",
-    title: "Deepfake: ปลอมแปลงเสียง/วิดีโอ",
-    titleEN: "Deepfake: Fabricated Audio/Video",
-    icon: "🎭",
+    key: "deepfake", icon: "🎭",
+    title: { th: "Deepfake: ปลอมแปลงเสียง/วิดีโอ", ja: "ディープフェイク:偽装された音声・映像", en: "Deepfake: Fabricated Audio/Video" },
     flow: [
-      { icon: "📹", label: "เห็นคลิปวิดีโอ/เสียงที่น่าสงสัย" },
-      { icon: "🔍", label: "สังเกตจุดผิดปกติ" },
-      { icon: "⚠️", label: "ตรวจสอบก่อนเชื่อหรือแชร์ต่อ" }
+      { icon: "📹", label: { th: "เห็นคลิปวิดีโอ/เสียงที่น่าสงสัย", ja: "不審な動画・音声を見かける", en: "You see a suspicious video/audio clip" } },
+      { icon: "🔍", label: { th: "สังเกตจุดผิดปกติ", ja: "不自然な点を確認する", en: "Look for tell-tale signs" } },
+      { icon: "⚠️", label: { th: "ตรวจสอบก่อนเชื่อหรือแชร์ต่อ", ja: "信じたり共有したりする前に確認する", en: "Verify before believing or sharing it" } }
     ],
     video: "https://www.youtube.com/embed/Eix3btX_HCc",
     videoTitle: "ถอดรหัส \"Deepfake\" เมื่อ AI หลอก ซึม ลึก! | ชัวร์ก่อนแชร์ in FOCUS",
     videoAuthor: "ชัวร์ก่อนแชร์ Sure And Share",
     images: [],
     text: [
-      "<strong>Deepfake</strong> คือเทคโนโลยี AI ที่สร้างภาพ เสียง หรือวิดีโอปลอมเลียนแบบบุคคลจริงได้สมจริงมาก ปัจจุบันถูกนำไปใช้ในการหลอกลวง เช่น ปลอมเป็นผู้บริหารสั่งโอนเงินผ่านวิดีโอคอล หรือปลอมเป็นคนดังเชิญชวนลงทุนที่ไม่มีอยู่จริง",
-      "วิธีใช้งาน: สังเกตจุดผิดปกติที่มักพบใน Deepfake เช่น การกระพริบตาที่ผิดธรรมชาติ แสงเงาบนใบหน้าไม่สอดคล้องกับสภาพแวดล้อม เสียงกับปากขยับไม่ตรงกัน หรือน้ำเสียงที่ราบเรียบผิดปกติ หากพบวิดีโอคอลหรือคลิปเสียงที่น่าสงสัยเกี่ยวกับธุรกรรมสำคัญ ให้ยืนยันตัวตนผ่านช่องทางอื่นก่อนดำเนินการใดๆ เสมอ",
-      "ข้อควรระวัง: ห้ามดำเนินการทางการเงินหรือเปิดเผยข้อมูลสำคัญตามคำสั่งที่ได้รับผ่านวิดีโอคอลหรือข้อความเสียงเพียงอย่างเดียว แม้จะดูและฟังเหมือนคนที่รู้จักมากแค่ไหนก็ตาม ควรยืนยันผ่านช่องทางที่สองเสมอ เช่น โทรกลับเบอร์เดิมที่บันทึกไว้ หรือถามคำถามที่มีแต่ตัวจริงเท่านั้นที่ตอบได้"
+      { type: "plain", th: "<strong>Deepfake</strong> คือเทคโนโลยี AI ที่สร้างภาพ เสียง หรือวิดีโอปลอมเลียนแบบบุคคลจริงได้สมจริงมาก ปัจจุบันถูกนำไปใช้ในการหลอกลวง เช่น ปลอมเป็นผู้บริหารสั่งโอนเงินผ่านวิดีโอคอล หรือปลอมเป็นคนดังเชิญชวนลงทุนที่ไม่มีอยู่จริง",
+        ja: "<strong>ディープフェイク</strong>とは、実在の人物を非常にリアルに模倣した偽の画像・音声・動画を作り出すAI技術である。ビデオ通話で経営者になりすまし送金を指示したり、有名人になりすまし架空の投資へ勧誘したりする詐欺に悪用されている。",
+        en: "<strong>Deepfake</strong> is AI technology producing highly realistic fake images, audio, or video of a real person — now used in scams like impersonating an executive on a video call to order a transfer, or a celebrity promoting a fake investment." },
+      { type: "howto", th: "สังเกตจุดผิดปกติที่มักพบใน Deepfake เช่น การกระพริบตาที่ผิดธรรมชาติ แสงเงาบนใบหน้าไม่สอดคล้องกับสภาพแวดล้อม เสียงกับปากขยับไม่ตรงกัน หรือน้ำเสียงที่ราบเรียบผิดปกติ หากพบวิดีโอคอลหรือคลิปเสียงที่น่าสงสัยเกี่ยวกับธุรกรรมสำคัญ ให้ยืนยันตัวตนผ่านช่องทางอื่นก่อนดำเนินการใดๆ เสมอ",
+        ja: "ディープフェイクによくある不自然な点に注意すること:不自然なまばたき、周囲と合わない顔の陰影、音声と口の動きのずれ、平坦すぎる声のトーンなど。重要な取引に関わる不審な通話は、行動前に必ず別の手段で本人確認すること。",
+        en: "Watch for tell-tale signs: unnatural blinking, lighting/shadows that don't match the surroundings, audio out of sync with lips, an oddly flat tone. For suspicious calls involving important transactions, always verify through a second channel before acting." },
+      { type: "caution", th: "ห้ามดำเนินการทางการเงินหรือเปิดเผยข้อมูลสำคัญตามคำสั่งที่ได้รับผ่านวิดีโอคอลหรือข้อความเสียงเพียงอย่างเดียว แม้จะดูและฟังเหมือนคนที่รู้จักมากแค่ไหนก็ตาม ควรยืนยันผ่านช่องทางที่สองเสมอ เช่น โทรกลับเบอร์เดิมที่บันทึกไว้ หรือถามคำถามที่มีแต่ตัวจริงเท่านั้นที่ตอบได้",
+        ja: "ビデオ通話や音声メッセージだけを根拠に、送金や重要情報の開示をしてはならない。どれほど見知った人物に見えてもである。保存済み番号への電話や本人しか答えられない質問など、必ず第二の手段で確認すること。",
+        en: "Never act on financial instructions or reveal sensitive information based solely on a video call or voice message, no matter how familiar it looks or sounds. Always verify via a second channel — a saved number, or a question only the real person could answer." }
     ],
     link: "https://www.thaicert.or.th/"
   },
   {
-    key: "sharing-prompts",
-    title: "แชร์ Prompt/Custom GPT อย่างปลอดภัย",
-    titleEN: "Sharing Prompts/Custom GPTs Safely",
-    icon: "🔗",
+    key: "sharing-prompts", icon: "🔗",
+    title: { th: "แชร์ Prompt/Custom GPT อย่างปลอดภัย", ja: "プロンプト・カスタムGPTを安全に共有する", en: "Sharing Prompts/Custom GPTs Safely" },
     flow: [
-      { icon: "✍️", label: "เขียน Prompt/สร้าง Custom GPT" },
-      { icon: "🔍", label: "ตรวจสอบเนื้อหาก่อนแชร์" },
-      { icon: "🔗", label: "แชร์ได้อย่างปลอดภัย" }
+      { icon: "✍️", label: { th: "เขียน Prompt/สร้าง Custom GPT", ja: "プロンプトを作成/カスタムGPTを構築", en: "Write a prompt / build a Custom GPT" } },
+      { icon: "🔍", label: { th: "ตรวจสอบเนื้อหาก่อนแชร์", ja: "共有前に内容を確認する", en: "Check the content before sharing" } },
+      { icon: "🔗", label: { th: "แชร์ได้อย่างปลอดภัย", ja: "安全に共有できる", en: "Share it safely" } }
     ],
     video: "https://www.youtube.com/embed/M1Cw1hXlZ5k",
     videoTitle: "Is ChatGPT Sharing Your Data? 6 Settings To Protect Your Privacy",
@@ -926,20 +667,24 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "การแชร์บทสนทนา Prompt หรือ Custom GPT ที่สร้างไว้ให้เพื่อนร่วมงานหรือเผยแพร่สาธารณะ (เช่นใน GPT Store) อาจมีข้อมูลภายในหลุดไปโดยไม่ตั้งใจ หากไม่ตรวจสอบเนื้อหาให้ดีก่อนแชร์",
-      "ข้อควรระวัง: ก่อนสร้างลิงก์แชร์บทสนทนาหรือเผยแพร่ Custom GPT ให้ตรวจสอบว่าไม่มีข้อมูลลับของบริษัท ข้อมูลลูกค้า หรือความรู้ภายใน (Knowledge files ที่อัปโหลดไว้ใน Custom GPT) ปะปนอยู่ เพราะลิงก์ที่แชร์แล้วมักเป็นสาธารณะ ใครมีลิงก์ก็เข้าดูหรือใช้งานได้ทันที",
-      "แนวทางที่ดี: หากต้องการสร้าง Custom GPT หรือ Prompt Template สำหรับใช้ภายในทีม ให้ตั้งค่าการเข้าถึงเป็น 'เฉพาะทีม/องค์กร' แทนการเผยแพร่สู่สาธารณะ และตรวจสอบไฟล์ความรู้ที่อัปโหลดเข้าไปว่าไม่มีข้อมูลที่ไม่ควรเปิดเผยก่อนบันทึกทุกครั้ง"
+      { type: "plain", th: "การแชร์บทสนทนา Prompt หรือ Custom GPT ที่สร้างไว้ให้เพื่อนร่วมงานหรือเผยแพร่สาธารณะ (เช่นใน GPT Store) อาจมีข้อมูลภายในหลุดไปโดยไม่ตั้งใจ หากไม่ตรวจสอบเนื้อหาให้ดีก่อนแชร์",
+        ja: "作成した会話・プロンプト・カスタムGPTを同僚に共有したりGPT Storeなどで公開したりする際、共有前に内容を十分確認しないと意図せず社内情報が漏れることがある。",
+        en: "Sharing a conversation, prompt, or Custom GPT — with colleagues or publicly (e.g., the GPT Store) — can unintentionally leak internal information if you don't carefully check the content first." },
+      { type: "caution", th: "ก่อนสร้างลิงก์แชร์บทสนทนาหรือเผยแพร่ Custom GPT ให้ตรวจสอบว่าไม่มีข้อมูลลับของบริษัท ข้อมูลลูกค้า หรือความรู้ภายใน (Knowledge files ที่อัปโหลดไว้ใน Custom GPT) ปะปนอยู่ เพราะลิงก์ที่แชร์แล้วมักเป็นสาธารณะ ใครมีลิงก์ก็เข้าดูหรือใช้งานได้ทันที",
+        ja: "共有リンクの作成やカスタムGPTの公開前に、会社の機密情報・顧客情報・社内ナレッジ(アップロードしたKnowledge files)が含まれていないか確認すること。共有リンクは通常公開されており、誰でもすぐに閲覧・利用できてしまう。",
+        en: "Before creating a share link or publishing a Custom GPT, check it contains no confidential company data, customer data, or internal knowledge files — a shared link is usually public, so anyone with it can view or use it instantly." },
+      { type: "howto", th: "หากต้องการสร้าง Custom GPT หรือ Prompt Template สำหรับใช้ภายในทีม ให้ตั้งค่าการเข้าถึงเป็น 'เฉพาะทีม/องค์กร' แทนการเผยแพร่สู่สาธารณะ และตรวจสอบไฟล์ความรู้ที่อัปโหลดเข้าไปว่าไม่มีข้อมูลที่ไม่ควรเปิดเผยก่อนบันทึกทุกครั้ง",
+        ja: "チーム内で使うカスタムGPTやプロンプトテンプレートは、公開ではなく「チーム/組織限定」に設定すること。アップロードするナレッジファイルに公開すべきでない情報がないか、保存の都度確認すること。",
+        en: "For internal team use, set Custom GPTs or prompt templates to 'team/organization only' rather than public, and check uploaded knowledge files for anything that shouldn't be disclosed, every time you save." }
     ]
   },
   {
-    key: "incident-report",
-    title: "พบสิ่งผิดปกติ แจ้งใคร ทำอย่างไร (สรุป Do/Don't)",
-    titleEN: "Reporting Incidents (Do/Don't Summary)",
-    icon: "🚨",
+    key: "incident-report", icon: "🚨",
+    title: { th: "พบสิ่งผิดปกติ แจ้งใคร ทำอย่างไร (สรุป Do/Don't)", ja: "異常を発見したら:誰に、どう報告するか(Do/Don'tまとめ)", en: "Reporting Incidents (Do/Don't Summary)" },
     flow: [
-      { icon: "🚨", label: "พบเหตุการณ์ผิดปกติ/สงสัยข้อมูลรั่วไหล" },
-      { icon: "📞", label: "แจ้งทีม IT/ผู้ดูแลระบบทันที" },
-      { icon: "🛡️", label: "ลดความเสียหายได้ทันเวลา" }
+      { icon: "🚨", label: { th: "พบเหตุการณ์ผิดปกติ/สงสัยข้อมูลรั่วไหล", ja: "異常事態を発見/情報漏えいが疑われる", en: "You notice something abnormal / suspect a leak" } },
+      { icon: "📞", label: { th: "แจ้งทีม IT/ผู้ดูแลระบบทันที", ja: "直ちにIT部門・システム管理者へ連絡", en: "Notify IT/the system administrator immediately" } },
+      { icon: "🛡️", label: { th: "ลดความเสียหายได้ทันเวลา", ja: "被害を最小限に抑えられる", en: "Limit the damage in time" } }
     ],
     video: "https://www.youtube.com/embed/TUKpxjAftnk",
     videoTitle: "The Toyota Production System as Taught by Toyota - Episode 01 (Jidoka: Stopping Production, a Call Button and an Andon Electric Board)",
@@ -947,45 +692,54 @@ const TOPICS = [
     videoLang: "en",
     images: [],
     text: [
-      "หากสงสัยว่าข้อมูลบริษัทหลุดเข้าไปใน AI สาธารณะโดยไม่ตั้งใจ ได้รับอีเมล/ข้อความหลอกลวงที่ใช้ AI สร้าง หรือพบพฤติกรรมผิดปกติในบัญชี AI ที่ใช้งาน ให้แจ้งทีม IT หรือผู้ดูแลระบบของบริษัททันที ยิ่งแจ้งเร็วเท่าไร ก็ยิ่งจำกัดความเสียหายได้มากเท่านั้น ไม่ต้องกังวลว่าจะถูกตำหนิ เพราะการแจ้งเร็วสำคัญกว่าการปิดบังความผิดพลาด",
-      "ตัวอย่าง: หลักการ 'Andon' ใน Toyota Production System ที่ให้พนักงานหน้างานมีสิทธิ์หยุดสายการผลิตทันทีเมื่อพบปัญหา สามารถนำมาปรับใช้กับความปลอดภัยไซเบอร์ได้เช่นกัน — หากสงสัยว่ามีสิ่งผิดปกติเกี่ยวกับ AI หรือความปลอดภัยข้อมูล ให้ 'หยุดและแจ้ง' ทันทีโดยไม่ต้องรอให้แน่ใจ 100% ก่อน เช่นเดียวกับพนักงานสายการผลิตที่มีสิทธิ์ดึง Andon Cord ทันทีเมื่อสงสัยว่ามีปัญหาเกิดขึ้น",
-      "แนวทางที่ดี: สรุปแนวปฏิบัติที่ควรทำ (Do) — ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ, ตรวจสอบคำตอบ AI ก่อนนำไปใช้จริงเสมอ, เปิดใช้ 2FA ทุกบัญชี, ปิดการใช้ข้อมูลฝึกโมเดลในบัญชีองค์กร, ตั้งสติและตรวจสอบก่อนเชื่อสิ่งที่เห็น/ได้ยินผ่านสื่อดิจิทัล และแจ้งทีม IT ทันทีเมื่อพบสิ่งผิดปกติ",
-      "ข้อควรระวัง: สรุปสิ่งที่ห้ามทำ (Don't) — ห้ามป้อนข้อมูลลับ/ข้อมูลส่วนบุคคลเข้า AI สาธารณะ, ห้ามใช้เครื่องมือ AI ที่ไม่ได้รับอนุมัติกับข้อมูลบริษัท, ห้ามเชื่อหรือดำเนินการตามคำสั่งทางการเงินที่ได้รับผ่านเสียง/วิดีโอคอลโดยไม่ยืนยันซ้ำ, ห้ามแชร์บทสนทนา/Custom GPT ที่มีข้อมูลภายในสู่สาธารณะ และห้ามใช้รหัสผ่านซ้ำกันข้ามบัญชี"
+      { type: "plain", th: "หากสงสัยว่าข้อมูลบริษัทหลุดเข้าไปใน AI สาธารณะโดยไม่ตั้งใจ ได้รับอีเมล/ข้อความหลอกลวงที่ใช้ AI สร้าง หรือพบพฤติกรรมผิดปกติในบัญชี AI ที่ใช้งาน ให้แจ้งทีม IT หรือผู้ดูแลระบบของบริษัททันที ยิ่งแจ้งเร็วเท่าไร ก็ยิ่งจำกัดความเสียหายได้มากเท่านั้น ไม่ต้องกังวลว่าจะถูกตำหนิ เพราะการแจ้งเร็วสำคัญกว่าการปิดบังความผิดพลาด",
+        ja: "会社データが意図せず公開AIに流出した疑い、AI生成と思われるフィッシング、AIアカウントの異常な挙動に気づいた場合は、直ちにIT部門またはシステム管理者に報告すること。報告が早いほど被害を抑えられる。叱責を恐れる必要はない——隠すことより速やかな報告の方がはるかに重要である。",
+        en: "If you suspect company data leaked into public AI, received AI-generated phishing, or noticed unusual AI account activity, notify IT or the system administrator immediately. The faster you report, the more damage is limited — don't worry about blame; reporting quickly matters far more than hiding a mistake." },
+      { type: "example", th: "หลักการ 'Andon' ใน Toyota Production System ที่ให้พนักงานหน้างานมีสิทธิ์หยุดสายการผลิตทันทีเมื่อพบปัญหา สามารถนำมาปรับใช้กับความปลอดภัยไซเบอร์ได้เช่นกัน — หากสงสัยว่ามีสิ่งผิดปกติเกี่ยวกับ AI หรือความปลอดภัยข้อมูล ให้ 'หยุดและแจ้ง' ทันทีโดยไม่ต้องรอให้แน่ใจ 100% ก่อน เช่นเดียวกับพนักงานสายการผลิตที่มีสิทธิ์ดึง Andon Cord ทันทีเมื่อสงสัยว่ามีปัญหาเกิดขึ้น",
+        ja: "トヨタ生産方式の「アンドン」——現場が問題発見時に直ちにラインを止める権限を持つ——はサイバーセキュリティにも応用できる。AIやデータセキュリティに異常を感じたら、100%の確信を待たず直ちに「止めて報告する」こと。アンドンコードを引く作業員と同じ考え方である。",
+        en: "The 'Andon' principle from the Toyota Production System — giving frontline workers authority to stop the line immediately when they spot a problem — applies to cybersecurity too. If you suspect something's wrong with AI or data security, 'stop and report' right away without waiting for 100% certainty, just like pulling the Andon cord." },
+      { type: "howto", th: "สรุปแนวปฏิบัติที่ควรทำ (Do) — ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ, ตรวจสอบคำตอบ AI ก่อนนำไปใช้จริงเสมอ, เปิดใช้ 2FA ทุกบัญชี, ปิดการใช้ข้อมูลฝึกโมเดลในบัญชีองค์กร, ตั้งสติและตรวจสอบก่อนเชื่อสิ่งที่เห็น/ได้ยินผ่านสื่อดิจิทัล และแจ้งทีม IT ทันทีเมื่อพบสิ่งผิดปกติ",
+        ja: "実施すべきこと(Do)——会社承認済みAIツールのみ使用、AIの回答は使用前に必ず検証、全アカウントで2FA有効化、組織アカウントでモデル学習利用をオフ、デジタルメディアで見聞きした情報は信じる前に確認、異常に気づいたら直ちにIT部門へ報告。",
+        en: "Do — use only company-approved AI tools; always verify AI answers before real use; enable 2FA everywhere; disable model-training use on enterprise accounts; stay calm and verify digital media before trusting it; notify IT immediately when something's off." },
+      { type: "caution", th: "สรุปสิ่งที่ห้ามทำ (Don't) — ห้ามป้อนข้อมูลลับ/ข้อมูลส่วนบุคคลเข้า AI สาธารณะ, ห้ามใช้เครื่องมือ AI ที่ไม่ได้รับอนุมัติกับข้อมูลบริษัท, ห้ามเชื่อหรือดำเนินการตามคำสั่งทางการเงินที่ได้รับผ่านเสียง/วิดีโอคอลโดยไม่ยืนยันซ้ำ, ห้ามแชร์บทสนทนา/Custom GPT ที่มีข้อมูลภายในสู่สาธารณะ และห้ามใช้รหัสผ่านซ้ำกันข้ามบัญชี",
+        ja: "してはいけないこと(Don't)——機密・個人情報を公開AIに入力しない、未承認AIツールを会社データに使わない、音声・映像通話の金銭指示を再確認せず実行しない、社内情報を含む会話・カスタムGPTを公開しない、パスワードを使い回さない。",
+        en: "Don't — never enter confidential/personal data into public AI; never use unapproved tools with company data; never act on voice/video financial instructions without re-verifying; never publicly share conversations/Custom GPTs with internal data; never reuse passwords." }
     ]
   }
 ];
 
-const CALLOUT_RULES = [
-  { re: /^เคล็ดลับ[^:]*:\s*/, cls: "tip", icon: "💡" },
-  { re: /^ข้อควรระวัง[^:]*:\s*/, cls: "warn", icon: "⚠️" },
-  { re: /^หมายเหตุ[^:]*:\s*/, cls: "warn", icon: "⚠️" },
-  { re: /^วิธี(?:ใช้งาน|สร้าง)[^:]*:\s*/, cls: "howto", icon: "🧩" },
-  { re: /^แนวทางที่ดี[^:]*:\s*/, cls: "howto", icon: "🧩" },
-  { re: /^ตัวอย่าง[^:]*:\s*/, cls: "example", icon: "📌" }
-];
-
-const LANG_BADGES = { ja: "🇯🇵 日本語", en: "🇬🇧 English" };
-
-// Custom-drawn figures (no stock photos — self-contained SVG, no licensing/hotlink risk)
-// keyed by topic.key. Each entry is the inner markup for a 0 0 200 150 viewBox.
 const TOPIC_ILLUSTRATIONS = {
   overview: { tone: "accent", svg: `
-    <line x1="100" y1="35" x2="100" y2="22" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
-    <circle cx="100" cy="18" r="6" style="fill:var(--accent)"/>
-    <rect x="62" y="35" width="76" height="58" rx="16" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <circle cx="84" cy="62" r="7" style="fill:var(--accent)"/>
-    <circle cx="116" cy="62" r="7" style="fill:var(--steel)"/>
-    <line x1="80" y1="80" x2="120" y2="80" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
-    <rect x="72" y="98" width="56" height="34" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <circle cx="100" cy="115" r="8" style="fill:none;stroke:var(--accent);stroke-width:3"/>
-    <line x1="40" y1="60" x2="58" y2="60" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="40" y1="60" x2="40" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="40" y1="76" x2="54" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <circle cx="40" cy="60" r="3.5" style="fill:var(--steel)"/>
-    <line x1="160" y1="60" x2="142" y2="60" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="160" y1="60" x2="160" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="160" y1="76" x2="146" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <circle cx="160" cy="60" r="3.5" style="fill:var(--steel)"/>
+    <defs>
+      <linearGradient id="botHeadGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--surface)"/>
+        <stop offset="100%" stop-color="var(--paper)"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="100" cy="134" rx="46" ry="7" style="fill:var(--ink);opacity:0.08"/>
+    <g class="robot-bob">
+      <line x1="100" y1="35" x2="100" y2="22" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+      <circle cx="100" cy="18" r="6" class="robot-pulse" style="fill:var(--accent)"/>
+      <rect x="62" y="35" width="76" height="58" rx="20" style="fill:url(#botHeadGrad);stroke:var(--ink);stroke-width:4"/>
+      <circle cx="84" cy="62" r="7" style="fill:var(--accent)"/>
+      <circle cx="87" cy="59" r="2" style="fill:#fff;opacity:0.9"/>
+      <circle cx="116" cy="62" r="7" style="fill:var(--steel)"/>
+      <circle cx="119" cy="59" r="2" style="fill:#fff;opacity:0.9"/>
+      <path d="M78 80 Q100 93 122 80" style="fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round"/>
+      <rect x="72" y="98" width="56" height="34" rx="14" style="fill:url(#botHeadGrad);stroke:var(--ink);stroke-width:4"/>
+      <circle cx="100" cy="115" r="8" style="fill:none;stroke:var(--accent);stroke-width:3"/>
+      <circle cx="100" cy="115" r="3" style="fill:var(--accent)"/>
+      <line x1="62" y1="108" x2="45" y2="122" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+      <circle cx="43" cy="125" r="6.5" style="fill:var(--steel)"/>
+      <g class="robot-wave">
+        <line x1="138" y1="100" x2="159" y2="70" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+        <circle cx="161" cy="64" r="7.5" style="fill:var(--accent)"/>
+      </g>
+    </g>
+    <path d="M172 44 Q180 54 172 64" style="fill:none;stroke:var(--steel);stroke-width:2.5;stroke-linecap:round;opacity:0.55"/>
+    <path d="M181 40 Q192 54 181 68" style="fill:none;stroke:var(--steel);stroke-width:2.5;stroke-linecap:round;opacity:0.35"/>
+    <circle cx="34" cy="48" r="3" style="fill:var(--accent);opacity:0.5"/>
+    <circle cx="26" cy="66" r="2" style="fill:var(--steel);opacity:0.5"/>
   ` },
   "group-standards": { tone: "steel", svg: `
     <polygon points="100,20 148,38 148,76 100,136 52,76 52,38" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
@@ -1139,35 +893,68 @@ function renderHeroIllustration(topic, idx) {
   const illo = TOPIC_ILLUSTRATIONS[topic.key];
   if (!illo) return "";
   return '<div class="hero-illo tone-' + illo.tone + '">' +
-    '<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="ภาพประกอบหัวข้อ: ' + topic.title + '">' + illo.svg + '</svg>' +
-    '<span class="hero-illo-caption">FIG. ' + String(idx + 1).padStart(2, "0") + ' — ' + topic.title + '</span>' +
+    '<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="' + UI[LANG].illoAria + topic.title[LANG] + '">' + illo.svg + '</svg>' +
+    '<span class="hero-illo-caption">FIG. ' + String(idx + 1).padStart(2, "0") + ' — ' + topic.title[LANG] + '</span>' +
     '</div>';
 }
 
-function renderParagraph(text) {
-  for (const rule of CALLOUT_RULES) {
-    const m = text.match(rule.re);
-    if (m) {
-      const label = m[0].replace(/:\s*$/, "");
-      const rest = text.slice(m[0].length);
-      return '<div class="note note-' + rule.cls + '">' +
-        '<span class="note-icon">' + rule.icon + '</span>' +
-        '<div class="note-body"><span class="note-label">' + label + ':</span> ' + rest + '</div>' +
-        '</div>';
-    }
-  }
-  return '<p>' + text + '</p>';
+function renderParagraph(block) {
+  if (block.type === "plain") return "<p>" + block[LANG] + "</p>";
+  const meta = LABEL_META[block.type];
+  const label = LABEL_TEXT[block.type][LANG];
+  return '<div class="note note-' + meta.cls + '">' +
+    '<span class="note-icon">' + meta.icon + '</span>' +
+    '<div class="note-body"><span class="note-label">' + label + ':</span> ' + block[LANG] + '</div>' +
+    '</div>';
 }
 
 let currentKey = TOPICS[0].key;
 
-function renderTopicList() {
-  const el = document.getElementById("topicList");
+function setLang(lang) {
+  LANG = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  renderChrome();
+  renderTopicList();
+  renderContent();
+}
+
+function renderLangSwitch() {
+  const el = document.getElementById("langSwitch");
   el.innerHTML = "";
-  TOPICS.forEach((t, i) => {
+  ["th", "ja", "en"].forEach(l => {
     const btn = document.createElement("button");
-    btn.className = "station" + (t.key === currentKey ? " active" : "");
-    btn.setAttribute("aria-current", t.key === currentKey ? "true" : "false");
+    btn.className = "lang-btn" + (l === LANG ? " active" : "");
+    btn.textContent = (l === "th" ? "🇹🇭 " : l === "ja" ? "🇯🇵 " : "🇬🇧 ") + UI[l].langName;
+    btn.setAttribute("aria-pressed", l === LANG ? "true" : "false");
+    btn.onclick = () => setLang(l);
+    el.appendChild(btn);
+  });
+}
+
+function renderChrome() {
+  const t = UI[LANG];
+  renderLangSwitch();
+  document.getElementById("statTopicsLabel").textContent = t.topics;
+  document.getElementById("statPassLabel").textContent = t.passScore;
+  document.getElementById("statTopics").textContent = TOPICS.length;
+  document.getElementById("mastheadH1").textContent = t.h1;
+  document.getElementById("mastheadSub").textContent = t.sub;
+  document.getElementById("mastheadNote").innerHTML = t.note;
+  document.getElementById("topCtaText").innerHTML = "<strong>" + t.topCtaStrong + "</strong>" + t.topCtaSub;
+  document.getElementById("topCtaBtn").textContent = t.topCtaBtn;
+  document.getElementById("quizPillText").innerHTML = "<strong>" + t.quizPillStrong + "</strong><small>" + t.quizPillSmall + "</small>";
+  document.title = t.h1.replace(/^\S+\s/, "") + " — ATTG";
+}
+
+function renderTopicList() {
+  const t = UI[LANG];
+  const el = document.getElementById("topicList");
+  el.setAttribute("aria-label", t.topics);
+  el.innerHTML = "";
+  TOPICS.forEach((topic, i) => {
+    const btn = document.createElement("button");
+    btn.className = "station" + (topic.key === currentKey ? " active" : "");
+    btn.setAttribute("aria-current", topic.key === currentKey ? "true" : "false");
 
     const numWrap = document.createElement("span");
     numWrap.className = "station-num-wrap";
@@ -1178,13 +965,12 @@ function renderTopicList() {
 
     const info = document.createElement("span");
     info.className = "station-info";
-    info.innerHTML = '<span class="station-icon">' + (t.icon || "") + '</span><span class="station-text"><span class="station-title">' + t.title + '</span>' +
-      (t.titleEN ? '<span class="station-title-en">' + t.titleEN + '</span>' : '') + '</span>';
+    info.innerHTML = '<span class="station-icon">' + (topic.icon || "") + '</span><span class="station-text"><span class="station-title">' + topic.title[LANG] + '</span></span>';
 
     btn.appendChild(numWrap);
     btn.appendChild(info);
     btn.onclick = () => {
-      currentKey = t.key;
+      currentKey = topic.key;
       renderTopicList();
       renderContent();
     };
@@ -1194,14 +980,15 @@ function renderTopicList() {
   const cta = document.createElement("div");
   cta.className = "rail-cta";
   cta.innerHTML =
-    '<p class="rail-cta-label">ขั้นตอนสุดท้าย</p>' +
-    '<p>อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ</p>' +
-    '<a href="ai-safety-quiz.html" target="_blank" rel="noopener">ไปทำแบบทดสอบ →</a>';
+    '<p class="rail-cta-label">' + t.railCtaLabel + '</p>' +
+    '<p>' + t.railCtaText + '</p>' +
+    '<a href="' + QUIZ_URL + '" target="_blank" rel="noopener">' + t.railCtaBtn + '</a>';
   el.appendChild(cta);
 }
 
 function renderContent() {
-  const idx = TOPICS.findIndex(t => t.key === currentKey);
+  const t = UI[LANG];
+  const idx = TOPICS.findIndex(x => x.key === currentKey);
   const topic = TOPICS[idx];
   const el = document.getElementById("content");
 
@@ -1213,55 +1000,40 @@ function renderContent() {
       : '';
     const creditHtml = (topic.videoTitle || topic.videoAuthor)
       ? '<div class="video-credit">' + langBadge +
-        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : 'วิดีโอนี้') +
-        (topic.videoAuthor ? ' — โดยช่อง ' + topic.videoAuthor : '') +
-        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">ดูต้นฉบับบน YouTube →</a></div>'
+        (topic.videoTitle ? '<strong>' + topic.videoTitle + '</strong>' : t.thisVideo) +
+        (topic.videoAuthor ? ' — ' + t.byChannel + ' ' + topic.videoAuthor : '') +
+        ' · <a href="' + watchUrl + '" target="_blank" rel="noopener">' + t.watchOriginal + '</a></div>'
       : '';
-    mediaHtml = '<span class="section-label">🎥 วิดีโอประกอบ</span><div class="video-frame"><iframe src="' + topic.video + '" allowfullscreen loading="lazy"></iframe></div>' + creditHtml;
+    mediaHtml = '<span class="section-label">' + t.secVideo + '</span><div class="video-frame"><iframe src="' + topic.video + '" allowfullscreen loading="lazy"></iframe></div>' + creditHtml;
   } else if (topic.keyPoints && topic.keyPoints.length > 0) {
-    mediaHtml = '<div class="field-notes"><div class="field-notes-title">ประเด็นสำคัญของหัวข้อนี้</div><ul>' +
-      topic.keyPoints.map(k => '<li>' + k + '</li>').join('') +
+    mediaHtml = '<div class="field-notes"><div class="field-notes-title">' + t.secKeyPoints + '</div><ul>' +
+      topic.keyPoints.map(k => '<li>' + k[LANG] + '</li>').join('') +
       '</ul></div>';
   }
 
-  let imagesHtml = '';
-  if (topic.images && topic.images.length > 0) {
-    imagesHtml = '<span class="section-label" style="margin-top:20px">ภาพประกอบเพิ่มเติม</span><div class="image-grid">' +
-      topic.images.map(src => '<img src="' + src + '" alt="">').join('') +
-      '</div>';
-  }
-
-  const paragraphs = Array.isArray(topic.text) ? topic.text : (topic.text ? [topic.text] : []);
+  const paragraphs = topic.text || [];
   const paraHtml = paragraphs.map(renderParagraph);
   if (topic.flow && topic.flow.length > 0) {
     const flowHtml = '<div class="flow-strip">' + topic.flow.map((step, i) =>
-      '<div class="flow-step"><span class="flow-step-idx">STEP ' + (i + 1) + '</span><span class="flow-glyph">' + step.icon + '</span><span class="flow-text">' + step.label + '</span></div>' +
+      '<div class="flow-step"><span class="flow-step-idx">STEP ' + (i + 1) + '</span><span class="flow-glyph">' + step.icon + '</span><span class="flow-text">' + step.label[LANG] + '</span></div>' +
       (i < topic.flow.length - 1 ? '<span class="flow-connector">→</span>' : '')
     ).join('') + '</div>';
     paraHtml.splice(Math.min(1, paraHtml.length), 0, flowHtml);
   }
-  const textHtml = paraHtml.length > 0
-    ? '<div class="text-block">' + paraHtml.join('') + '</div>'
-    : '<div class="text-block placeholder">ยังไม่มีคำอธิบายสำหรับหัวข้อนี้</div>';
+  const textHtml = '<div class="text-block">' + paraHtml.join('') + '</div>';
 
   const linkHtml = topic.link
-    ? '<a class="sheet-ref-link" href="' + topic.link + '" target="_blank" rel="noopener">อ่านเพิ่มเติมจากหน่วยงานทางการ →</a>'
+    ? '<a class="sheet-ref-link" href="' + topic.link + '" target="_blank" rel="noopener">' + t.readMore + '</a>'
     : '';
 
   el.innerHTML =
-    '<div class="sheet-head"><span class="sheet-ref">หัวข้อที่ ' + String(idx + 1).padStart(2, '0') + ' / ' + TOPICS.length + '</span><h2>' + topic.title + '</h2>' +
-    (topic.titleEN ? '<span class="sheet-head-en">' + topic.titleEN + '</span>' : '') + '</div>' +
+    '<div class="sheet-head"><span class="sheet-ref">' + t.topicOf(idx + 1, TOPICS.length) + '</span><h2>' + topic.title[LANG] + '</h2></div>' +
     renderHeroIllustration(topic, idx) +
     mediaHtml +
-    '<span class="section-label">คำบรรยายสรุป</span>' + textHtml + linkHtml +
-    imagesHtml;
-
-  el.scrollIntoView === undefined || window.innerWidth < 861 ? null : null;
+    '<span class="section-label">' + t.secSummary + '</span>' + textHtml + linkHtml;
 }
 
-document.getElementById("statTopics").textContent = TOPICS.length;
+renderChrome();
 renderTopicList();
 renderContent();
 </script>
-</body>
-</html>

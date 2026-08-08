@@ -1,54 +1,23 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย — กลุ่มบริษัท ATTG</title>
+<title>แบบทดสอบ: คู่มือการใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</title>
 <style>
   :root {
-    --ink: #1b1420;
-    --ink-soft: #7a7186;
-    --paper: #fdf3e4;
-    --surface: #ffffff;
-    --line: #ecdcc4;
-    --accent: #e2841f;
-    --accent-deep: #a85e12;
-    --accent-soft: #ffe0ad;
-    --steel: #1f7fc4;
-    --steel-soft: #cdecfb;
-    --warn: #e0473a;
-    --warn-soft: #ffdcd6;
-    --howto: #12a389;
-    --howto-soft: #cdf5ea;
-    --example: #9a4fd1;
-    --example-soft: #f0ddfc;
-    --ok: #1c9d5c;
-    --ok-soft: #d1f5e0;
+    --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
+    --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
+    --steel: #1f7fc4; --steel-soft: #cdecfb; --warn: #e0473a; --warn-soft: #ffdcd6;
+    --ok: #1c9d5c; --ok-soft: #d1f5e0;
     --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
     --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
     --mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, monospace;
-    --sans: "Noto Sans Thai", "Sarabun", -apple-system, "Segoe UI", sans-serif;
+    --sans: "Noto Sans Thai", "Noto Sans JP", "Sarabun", -apple-system, "Segoe UI", sans-serif;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --ink: #f3ecf7;
-      --ink-soft: #b7a9c4;
-      --paper: #1e1726;
-      --surface: #241c30;
-      --line: #3a2e46;
-      --accent: #f2a63f;
-      --accent-deep: #ffc06b;
-      --accent-soft: #3a2a12;
-      --steel: #5cb2f0;
-      --steel-soft: #16324a;
-      --warn: #f0796a;
-      --warn-soft: #3c1c1a;
-      --howto: #4fd6bb;
-      --howto-soft: #0f342c;
-      --example: #c795f0;
-      --example-soft: #33224a;
-      --ok: #5ce09a;
-      --ok-soft: #103a26;
+    :root:not([data-theme="light"]) {
+      --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
+      --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
+      --steel: #5cb2f0; --steel-soft: #16324a; --warn: #f0796a; --warn-soft: #3c1c1a;
+      --ok: #5ce09a; --ok-soft: #103a26;
       --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
       --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
     }
@@ -56,10 +25,7 @@
   :root[data-theme="dark"] {
     --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
     --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
-    --steel: #5cb2f0; --steel-soft: #16324a;
-    --warn: #f0796a; --warn-soft: #3c1c1a;
-    --howto: #4fd6bb; --howto-soft: #0f342c;
-    --example: #c795f0; --example-soft: #33224a;
+    --steel: #5cb2f0; --steel-soft: #16324a; --warn: #f0796a; --warn-soft: #3c1c1a;
     --ok: #5ce09a; --ok-soft: #103a26;
     --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
     --bg-gradient: linear-gradient(135deg, #1c3e5a 0%, #0d2338 50%, #050f18 100%);
@@ -67,1324 +33,465 @@
   :root[data-theme="light"] {
     --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
     --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
-    --steel: #1f7fc4; --steel-soft: #cdecfb;
-    --warn: #e0473a; --warn-soft: #ffdcd6;
-    --howto: #12a389; --howto-soft: #cdf5ea;
-    --example: #9a4fd1; --example-soft: #f0ddfc;
+    --steel: #1f7fc4; --steel-soft: #cdecfb; --warn: #e0473a; --warn-soft: #ffdcd6;
     --ok: #1c9d5c; --ok-soft: #d1f5e0;
     --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
     --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
   }
-
   * { box-sizing: border-box; }
   body { margin: 0; font-family: var(--sans); background: var(--bg-gradient); background-attachment: fixed; color: var(--ink); min-height: 100vh; }
   ::selection { background: var(--accent-soft); color: var(--accent-deep); }
-  .inline-en { font-style: italic; font-weight: 400; color: var(--ink-soft); }
+  .frame { max-width: 860px; margin: 0 auto; padding: 32px clamp(16px, 3.5vw, 32px) 64px; }
 
-  .frame { max-width: 1100px; margin: 0 auto; padding: 28px clamp(20px, 3.5vw, 56px) 64px; }
-  .prose-cap { max-width: 74ch; }
-
-  .back-tag {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft);
-    text-decoration: none; margin-bottom: 16px;
-  }
-  .back-tag:hover { color: var(--accent-deep); }
-
-  /* ---------- Masthead ---------- */
-  .masthead {
-    border-bottom: 2px solid var(--ink);
-    background: color-mix(in srgb, var(--surface) 85%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 20px 22px 20px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-  }
-  .masthead-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+  .masthead { border-bottom: 2px solid var(--ink); background: color-mix(in srgb, var(--surface) 85%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 20px 22px; margin-bottom: 24px; box-shadow: var(--shadow); }
+  .masthead-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
   .brand-code { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--accent-deep); font-weight: 700; text-transform: uppercase; }
-  .brand-doc { display: block; font-family: var(--mono); font-size: 0.66rem; color: var(--ink-soft); margin-top: 3px; }
-  .masthead-stats { display: flex; gap: 20px; margin: 0; }
-  .masthead-stats > div { text-align: right; }
-  .masthead-stats dt { font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin: 0; }
-  .masthead-stats dd { font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin: 2px 0 0; font-variant-numeric: tabular-nums; }
-  .masthead h1 { font-family: var(--sans); font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 800; margin: 0 0 3px; text-wrap: balance; color: var(--steel); line-height: 1.3; }
-  .masthead-h1-en { display: block; font-style: italic; font-weight: 400; font-family: var(--mono); font-size: 0.82rem; color: var(--ink-soft); margin: 0 0 14px; }
-  .masthead-sub { color: var(--steel); font-weight: 700; font-size: 0.9rem; margin: 0 0 6px; line-height: 1.65; }
-  .masthead-sub-en { color: var(--ink-soft); font-weight: 400; font-size: 0.82rem; margin: 0 0 16px; line-height: 1.6; font-style: italic; }
-  .masthead-note {
-    border: 1px solid var(--line); background: var(--surface); padding: 12px 14px;
-    font-size: 0.82rem; line-height: 1.7; color: var(--ink-soft);
-  }
-  .masthead-note strong { color: var(--ink); }
-  .masthead-note-en {
-    margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line);
-    font-size: 0.78rem; line-height: 1.65; color: var(--ink-soft); font-style: italic;
-  }
+  .lang-switch { display: flex; gap: 4px; }
+  .lang-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 700; padding: 5px 9px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft); cursor: pointer; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--ink); }
+  .lang-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .lang-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .masthead h1 { font-family: var(--sans); font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 800; margin: 0 0 8px; color: var(--ink); line-height: 1.3; }
+  .masthead-sub { color: var(--ink-soft); font-size: 0.9rem; margin: 0 0 14px; line-height: 1.6; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.78rem; color: var(--steel); text-decoration: none; border: 1px solid var(--line); padding: 6px 11px; }
+  .back-link:hover { border-color: var(--steel); background: var(--steel-soft); }
 
-  /* ---------- Progress rail ---------- */
-  .progress-rail { height: 6px; background: var(--line); overflow: hidden; margin-top: 22px; }
-  .progress-rail-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.35s ease, background-color 0.2s ease; }
-  .progress-rail-fill.pass { background: var(--ok); }
-  .progress-rail-label { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-soft); margin: 6px 0 26px; letter-spacing: 0.02em; }
+  .progress-wrap { margin-top: 16px; }
+  .progress-meta { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-soft); margin-bottom: 6px; }
+  .progress-meta strong { color: var(--ink); }
+  .progress-track { height: 8px; background: var(--paper); border: 1px solid var(--line); overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); transition: width 0.2s ease; }
 
-  /* ---------- Sheet ---------- */
-  .sheet { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 26px 26px 30px; margin-bottom: 20px; }
+  .sheet { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 30px 30px 32px; }
+  .q-num { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.07em; color: var(--accent-deep); text-transform: uppercase; font-weight: 700; margin-bottom: 10px; display: block; }
+  .q-text { font-size: 1.12rem; font-weight: 700; line-height: 1.6; margin: 0 0 22px; color: var(--ink); }
+  .choices { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+  .choice { display: flex; align-items: flex-start; gap: 12px; border: 1.5px solid var(--line); background: var(--paper); padding: 13px 16px; cursor: pointer; text-align: left; font-family: var(--sans); font-size: 0.95rem; line-height: 1.55; color: var(--ink); transition: border-color 0.12s ease, background-color 0.12s ease; }
+  .choice:hover { border-color: var(--accent); }
+  .choice:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .choice-letter { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.78rem; font-weight: 700; color: var(--ink-soft); }
+  .choice.selected { border-color: var(--accent); background: var(--accent-soft); }
+  .choice.selected .choice-letter { border-color: var(--accent); background: var(--accent); color: #fff; }
 
-  .name-field { margin-bottom: 22px; }
-  .name-field label { display: block; font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--accent-deep); margin-bottom: 7px; }
-  .name-field input {
-    width: 100%; padding: 11px 13px; border: 1px solid var(--line); background: var(--paper);
-    color: var(--ink); font-size: 0.92rem; font-family: inherit;
-  }
-  .name-field input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .quiz-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .btn { font-family: var(--sans); font-weight: 800; font-size: 0.9rem; padding: 12px 22px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary { background: var(--accent-deep); color: #fff; box-shadow: var(--shadow); }
+  .btn-primary:hover { background: var(--ink); }
+  .btn-primary:disabled { background: var(--line); color: var(--ink-soft); cursor: not-allowed; box-shadow: none; }
+  .btn-ghost { background: transparent; color: var(--ink-soft); border: 1px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .progress-summary {
-    border: 1px solid var(--line); border-left: 3px solid var(--line);
-    padding: 14px 16px; margin-bottom: 22px; font-size: 0.9rem; line-height: 1.7; display: none;
-  }
-  .progress-summary.pass { border-left-color: var(--ok); background: var(--ok-soft); }
-  .progress-summary.fail { border-left-color: var(--accent); background: var(--accent-soft); }
-  .progress-summary p { margin: 0; }
-  .progress-summary p.en { margin-top: 6px; font-size: 0.82rem; font-style: italic; opacity: 0.9; }
-  .restart-link {
-    display: inline-block; margin-top: 10px; background: none; border: none; padding: 0;
-    color: inherit; font-size: 0.8rem; text-decoration: underline; cursor: pointer; font-family: inherit;
-  }
+  .result-banner { text-align: center; padding: 30px 20px; margin-bottom: 24px; border: 2px solid var(--ok); background: var(--ok-soft); }
+  .result-banner.fail { border-color: var(--warn); background: var(--warn-soft); }
+  .result-score { font-family: var(--mono); font-size: 3rem; font-weight: 800; line-height: 1; color: var(--ok); margin-bottom: 8px; }
+  .result-banner.fail .result-score { color: var(--warn); }
+  .result-verdict { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; color: var(--ink); }
+  .result-note { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.6; }
 
-  .topic-banner {
-    position: relative; width: 100%; height: 108px;
-    border: 1px solid var(--line); overflow: hidden;
-    margin: 26px 0 18px; background: var(--paper);
-  }
-  .q-block:first-of-type .topic-banner, form > .topic-banner:first-child { margin-top: 0; }
-  .topic-banner svg { width: 100%; height: 100%; display: block; }
-  .topic-banner-label {
-    position: absolute; left: 12px; bottom: 9px;
-    font-family: var(--mono); font-size: 0.68rem; font-weight: 700; color: var(--steel);
-    background: var(--surface); padding: 3px 10px; border: 1px solid var(--line);
-    max-width: calc(100% - 24px); line-height: 1.5;
-  }
-  .topic-banner-label .en { display: block; font-size: 0.6rem; font-weight: 400; font-style: italic; color: var(--ink-soft); margin-top: 1px; }
-  .topic-banner.tone-accent { background: var(--accent-soft); }
-  .topic-banner.tone-steel { background: var(--steel-soft); }
-  .topic-banner.tone-warn { background: var(--warn-soft); }
-  .topic-banner.tone-howto { background: var(--howto-soft); }
-  .topic-banner.tone-example { background: var(--example-soft); }
+  .review-item { border: 1px solid var(--line); border-left: 3px solid var(--line); padding: 15px 17px; margin-bottom: 12px; }
+  .review-item.wrong { border-left-color: var(--warn); background: var(--warn-soft); }
+  .review-item.right { border-left-color: var(--ok); background: var(--ok-soft); }
+  .review-q { font-weight: 700; font-size: 0.92rem; margin: 0 0 8px; line-height: 1.5; }
+  .review-line { font-size: 0.85rem; line-height: 1.6; margin: 3px 0; }
+  .review-line .tag { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; margin-right: 6px; }
+  .review-line.correct .tag { color: var(--ok); }
+  .review-line.picked .tag { color: var(--warn); }
 
-  .q-block { padding: 22px 0; border-bottom: 1px solid var(--line); }
-  .q-block:first-of-type { padding-top: 0; }
-  .q-block:last-of-type { border-bottom: none; padding-bottom: 0; }
-  .q-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-  .q-num {
-    flex: 0 0 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--paper);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 0.72rem; font-weight: 700; color: var(--ink-soft);
-    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-  }
-  .q-meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-  .q-topic { font-family: var(--mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-deep); font-weight: 700; }
-  .q-topic-en { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-soft); opacity: 0.75; font-style: italic; }
-  .q-count { font-size: 0.7rem; color: var(--ink-soft); }
-  .q-block.locked .q-num { background: var(--ok); border-color: var(--ok); color: #fff; }
-  .q-text { font-size: 1rem; font-weight: 700; margin: 0 0 3px; line-height: 1.6; color: var(--steel); max-width: 74ch; }
-  .q-text-en { display: block; font-size: 0.85rem; font-weight: 400; font-style: italic; margin: 0 0 14px; line-height: 1.55; color: var(--ink-soft); max-width: 74ch; }
+  .result-actions { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
 
-  .q-retry-hint {
-    font-size: 0.82rem; font-weight: 600; color: var(--warn);
-    background: var(--warn-soft); border-left: 3px solid var(--warn);
-    padding: 9px 12px; margin: 0 0 12px;
-  }
+  .notify-box { border: 1px dashed var(--ok); background: var(--ok-soft); padding: 16px 18px; margin-top: 22px; }
+  .notify-label { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ok); font-weight: 800; margin: 0 0 10px; }
+  .notify-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .notify-input { flex: 1; min-width: 180px; font-family: var(--sans); font-size: 0.9rem; padding: 10px 12px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
+  .notify-input:focus-visible { outline: 2px solid var(--ok); outline-offset: 1px; }
+  .notify-hint { font-size: 0.78rem; color: var(--ink-soft); margin: 8px 0 0; line-height: 1.5; }
 
-  .q-options { display: flex; flex-direction: column; gap: 8px; }
-  .q-option {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 11px 13px; border: 1px solid var(--line); border-left: 3px solid var(--line);
-    background: var(--surface); cursor: pointer; font-size: 0.9rem; line-height: 1.55;
-    transition: border-color 0.12s ease, background-color 0.12s ease;
-  }
-  .q-option:hover { border-left-color: var(--accent); }
-  .q-option input { margin-top: 3px; accent-color: var(--accent); flex-shrink: 0; }
-  .q-option-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-  .q-option-th { color: var(--steel); font-weight: 700; }
-  .q-option-en { font-size: 0.79rem; font-weight: 400; font-style: italic; color: var(--ink-soft); line-height: 1.45; }
-  .q-option.selected { border-left-color: var(--accent); background: var(--accent-soft); }
-  .q-option.result-correct { border-left-color: var(--ok); background: var(--ok-soft); }
-  .q-option.result-wrong { border-left-color: var(--warn); background: var(--warn-soft); }
-  .q-mark { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; margin-left: auto; flex-shrink: 0; white-space: nowrap; padding-top: 2px; }
-  .q-mark.ok { color: var(--ok); }
-  .q-mark.bad { color: var(--warn); }
-
-  .submit-btn, .retry-btn, .print-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 12px 22px; border: none; background: var(--accent-deep); color: #fff;
-    font-size: 0.92rem; font-weight: 700; cursor: pointer; font-family: var(--sans);
-  }
-  .submit-btn:hover, .retry-btn:hover { background: var(--ink); }
-  .submit-btn:disabled { background: var(--ink-soft); cursor: not-allowed; opacity: 0.6; }
-  .print-btn { background: var(--surface); color: var(--accent-deep); border: 1px solid var(--accent-deep); }
-  .print-btn:hover { background: var(--accent-soft); }
-  .submit-btn:focus-visible, .retry-btn:focus-visible, .print-btn:focus-visible, .back-tag:focus-visible {
-    outline: 2px solid var(--accent); outline-offset: 2px;
-  }
-
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
-
-  .unanswered-warning {
-    font-size: 0.85rem; font-weight: 600; color: var(--warn);
-    background: var(--warn-soft); border-left: 3px solid var(--warn);
-    padding: 10px 13px; margin-top: 16px; display: none;
-  }
-
-  /* ---------- Result sheet ---------- */
-  .result-sheet {
-    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
-    padding: 38px 24px 30px; text-align: center; display: none;
-  }
-  .result-stamp {
-    width: 132px; height: 132px; margin: 0 auto 18px; border-radius: 50%;
-    border: 3px dashed var(--ok); background: var(--ok-soft);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
-  .result-stamp-pct { font-family: var(--mono); font-size: 2.1rem; font-weight: 800; color: var(--ok); font-variant-numeric: tabular-nums; line-height: 1; }
-  .result-stamp-label { font-family: var(--mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ok); margin-top: 5px; }
-  .result-label { font-size: 1.1rem; font-weight: 700; color: var(--steel); margin-bottom: 2px; }
-  .result-label-en { font-size: 0.82rem; font-weight: 400; font-style: italic; color: var(--ink-soft); margin-bottom: 10px; }
-  .result-detail { font-size: 0.88rem; font-weight: 700; color: var(--steel); margin-bottom: 2px; }
-  .result-detail-en { font-size: 0.8rem; font-weight: 400; color: var(--ink-soft); font-style: italic; margin-bottom: 4px; }
-  .result-badge {
-    display: inline-block; margin-top: 14px; padding: 9px 16px;
-    background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok);
-    font-size: 0.85rem; font-weight: 700; text-align: center; line-height: 1.5;
-  }
-  .result-badge .en { display: block; font-size: 0.76rem; font-weight: 500; font-style: italic; opacity: 0.9; }
-  .attempt-note { text-align: center; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin-top: 10px; }
-
-  .save-status { text-align: center; font-size: 0.82rem; font-weight: 600; margin-top: 14px; padding: 9px 12px; border: 1px solid var(--line); line-height: 1.6; }
-  .save-status .en { display: block; font-size: 0.74rem; font-weight: 500; font-style: italic; opacity: 0.9; }
-  .save-status.ok { color: var(--ok); background: var(--ok-soft); border-color: var(--ok); }
-  .save-status.warn { color: var(--warn); background: var(--warn-soft); border-color: var(--warn); }
-  .save-status.pending { color: var(--ink-soft); background: var(--paper); }
-
-  #resultsSection { display: none; }
-
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-
-  @media (max-width: 560px) {
-    .sheet { padding: 20px 16px 24px; }
-    .masthead-stats { gap: 14px; }
-  }
-
-  @media print {
-    .back-tag, #quizForm .submit-btn, .btn-row, .masthead-note, .progress-rail, .progress-rail-label { display: none !important; }
-    body { background: #fff; color: #000; }
-    .sheet, .result-sheet { box-shadow: none; border: 1px solid #ccc; }
+  @media (max-width: 600px) {
+    .sheet { padding: 22px 18px 26px; }
+    .quiz-nav { flex-wrap: wrap; }
   }
 </style>
-</head>
-<body>
 <div class="frame">
-  <a class="back-tag" href="ai-safety-guide.html">← กลับไปที่คู่มือการใช้งาน AI อย่างปลอดภัย <span class="inline-en">· Back to the guide</span></a>
-
   <header class="masthead">
     <div class="masthead-top">
-      <div>
-        <span class="brand-code">AISIN GROUP · ATTG</span>
-        <span class="brand-doc">DOC. AI-SAFETY-QUIZ · REV. 2026</span>
-      </div>
-      <dl class="masthead-stats">
-        <div><dt>ข้อสอบ · Questions</dt><dd>27</dd></div>
-        <div><dt>เกณฑ์ผ่าน · Pass</dt><dd>90%</dd></div>
-      </dl>
+      <span class="brand-code">AISIN GROUP · ATTG · DOC. AI-SAFETY-QUIZ</span>
+      <div class="lang-switch" id="langSwitch"></div>
     </div>
-    <h1>📝 แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย</h1>
-    <span class="masthead-h1-en">AI Safety Usage Assessment</span>
-    <p class="masthead-sub prose-cap">กลุ่มบริษัท ATTG — แบบทดสอบนี้มี 27 ข้อ ครอบคลุมเนื้อหาทั้งหมดในคู่มือ 15 หัวข้อ (รวมมาตรฐานกลุ่ม AISIN/Toyota, แนวทาง Generative AI ของ Toyota และ Phishing Mail) ต้องตอบถูกอย่างน้อย <strong>90%</strong> (25 จาก 27 ข้อ) จึงจะถือว่าผ่านเกณฑ์</p>
-    <p class="masthead-sub-en prose-cap">ATTG Group — this assessment has 27 questions covering all 15 topics in the guide (including AISIN/Toyota Group standards, Toyota's Generative AI approach, and phishing email). You must score at least 90% (25 out of 27) to pass.</p>
-    <div class="masthead-note prose-cap">
-      📋 <strong>คำชี้แจง:</strong> อ่านคู่มือ "การใช้งาน AI อย่างปลอดภัย" ให้ครบทุกหัวข้อก่อนทำแบบทดสอบนี้ เลือกคำตอบที่ถูกต้องที่สุดในแต่ละข้อ แล้วกดปุ่ม "ตรวจคำตอบ" — <strong>ข้อที่ตอบถูกจะถูกล็อกไว้ว่าถูกต้องทันที</strong> ส่วนข้อที่ตอบผิดจะมีเครื่องหมาย ✗ กำกับให้แก้ไขและกด "ตรวจคำตอบ" ใหม่ได้เรื่อยๆ จนกว่าจะผ่านเกณฑ์ 90% โดยไม่ต้องเริ่มทำใหม่ทั้งหมด
-      <div class="masthead-note-en">
-        📋 <strong>Instructions:</strong> Read every topic in the "Using AI Safely" guide before taking this assessment. Choose the best answer for each question, then click "Check Answers" — <strong>correct answers are locked in immediately</strong>, while incorrect ones are marked ✗ so you can fix them and click "Check Answers" again as many times as needed until you reach the 90% pass threshold, without starting over.
+    <h1 id="mastheadH1"></h1>
+    <p class="masthead-sub" id="mastheadSub"></p>
+    <a class="back-link" id="backLink" href="https://claude.ai/code/artifact/1470a905-edc0-4f2e-a70f-0351d1ad59d0"></a>
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-meta">
+        <span id="progQLabel"></span>
+        <span id="progALabel"></span>
       </div>
+      <div class="progress-track"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
     </div>
   </header>
-
-  <div class="progress-rail"><div class="progress-rail-fill" id="progressRailFill" style="width:0%"></div></div>
-  <p class="progress-rail-label" id="progressRailLabel">ยังไม่ได้ตรวจคำตอบข้อใดเลย · 0 / 27 ข้อ <span class="inline-en">· No answers checked yet</span></p>
-
-  <main class="sheet">
-    <div class="name-field">
-      <label for="quizName">ชื่อ-นามสกุล (สำหรับบันทึกผล — ไม่บังคับ) · Full name (for the results record — optional)</label>
-      <input type="text" id="quizName" placeholder="กรอกชื่อของคุณ · Enter your name">
-    </div>
-
-    <div class="progress-summary" id="progressSummary">
-      <p id="progressText"></p>
-      <p class="en" id="progressTextEn"></p>
-      <button type="button" class="restart-link" id="restartMidwayBtn">เริ่มทำใหม่ทั้งหมด (ล้างคำตอบที่ถูกไว้ด้วย) <span class="inline-en">· Restart entirely (also clears correct answers)</span></button>
-    </div>
-
-    <form id="quizForm"></form>
-
-    <p class="unanswered-warning" id="unansweredWarning">⚠️ กรุณาตอบให้ครบทุกข้อที่เหลือก่อนตรวจคำตอบ (เหลืออีก <span id="unansweredCount">0</span> ข้อ) <span class="inline-en">· Please answer all remaining questions before checking.</span></p>
-
-    <div class="btn-row">
-      <button type="button" class="submit-btn" id="submitBtn">ตรวจคำตอบ · Check Answers</button>
-    </div>
-  </main>
-
-  <section class="result-sheet" id="resultsSection">
-    <div class="result-stamp">
-      <span class="result-stamp-pct" id="resultScore"></span>
-      <span class="result-stamp-label">ผ่านเกณฑ์ · PASS</span>
-    </div>
-    <div class="result-label" id="resultLabel"></div>
-    <div class="result-label-en" id="resultLabelEn"></div>
-    <div class="result-detail" id="resultDetail"></div>
-    <div class="result-detail-en" id="resultDetailEn"></div>
-    <div class="result-badge" id="resultBadge"></div>
-    <p class="save-status" id="saveStatus"></p>
-    <div class="btn-row" style="justify-content:center">
-      <button type="button" class="retry-btn" id="retryBtn">🔄 ทำแบบทดสอบใหม่ · Retake Assessment</button>
-      <button type="button" class="print-btn" id="printBtn">🖨️ พิมพ์/บันทึกผลลัพธ์ · Print/Save Result</button>
-    </div>
-    <p class="attempt-note" id="attemptNote"></p>
-  </section>
+  <main class="sheet" id="content"></main>
 </div>
 
 <script>
-// =============================================================================
-// การบันทึกผลลง SharePoint List (ทำครั้งเดียวโดยทีม IT/Power Platform)
-// =============================================================================
-// หน้านี้เป็นไฟล์ HTML แบบ static ไม่มีระบบ login จึงเรียก SharePoint REST/Graph API
-// ตรงๆ จากเบราว์เซอร์ไม่ได้ (ไม่มีทางยืนยันตัวตนอย่างปลอดภัยโดยไม่ฝังรหัสลับไว้ในหน้าเว็บ)
-// วิธีที่ปลอดภัยและเข้ากับชุดเครื่องมือที่ ATTG ใช้อยู่แล้วคือให้ Power Automate เป็นตัวกลาง:
-//
-// ขั้นตอนตั้งค่า (ทำครั้งเดียว):
-// 1. สร้าง SharePoint List ชื่อ เช่น "AI Safety Quiz Results" ในไซต์ของ ATTG
-//    พร้อมคอลัมน์: Title (Single line text, ใช้เก็บชื่อผู้ทำ), Score (Number, %),
-//    CorrectCount (Number), TotalQuestions (Number), Passed (Yes/No),
-//    SubmittedAt (Date and Time)
-// 2. เปิด Power Automate > Create > Instant cloud flow > เลือก Trigger
-//    "When an HTTP request is received"
-// 3. ใน Trigger วาง Request Body JSON Schema แบบ Generate จาก Sample payload นี้:
-//    { "name": "สมชาย ใจดี", "score": 93, "correctCount": 25,
-//      "totalQuestions": 27, "passed": true, "submittedAt": "2026-01-01T09:00:00.000Z" }
-// 4. เพิ่ม Action "Create item" (SharePoint) เชื่อมกับ List ที่สร้างไว้ในข้อ 1
-//    แมปแต่ละฟิลด์จาก Dynamic content ของ Trigger เข้าคอลัมน์ที่ตรงกัน
-// 5. Save Flow แล้วคัดลอก HTTP POST URL ที่ได้ (เปิด Trigger กลับมาดูอีกครั้งจะเห็น URL)
-//    นำมาใส่แทนค่าว่างในตัวแปร RESULT_SUBMIT_URL ด้านล่างนี้
-//
-// ก่อนตั้งค่า URL นี้ แบบทดสอบยังใช้งานและให้คะแนนได้ตามปกติทุกอย่าง เพียงแต่ผลจะไม่ถูก
-// บันทึกส่วนกลาง (จะขึ้นข้อความแจ้งเตือนสีเหลืองให้ผู้ทำแบบทดสอบทราบ)
-const RESULT_SUBMIT_URL = ""; // <-- นำ HTTP POST URL จาก Power Automate มาใส่ตรงนี้
+const GUIDE_URL = "https://claude.ai/code/artifact/1470a905-edc0-4f2e-a70f-0351d1ad59d0";
+const LANG_KEY = "attg-ai-safety-lang";
+let LANG = localStorage.getItem(LANG_KEY) || "th";
 
-// เพิ่ม/แก้ไขคำถามได้ที่นี่ — correct คือ index (0-based) ของตัวเลือกที่ถูกต้องใน options
-// topicEN / qEN / optionsEN คือคำแปลภาษาอังกฤษที่แสดงคู่กับภาษาไทยเสมอ
-const QUESTIONS = [
-  {
-    topic: "ตรวจสอบความถูกต้องของคำตอบ AI",
-    topicEN: "Verifying AI Output Accuracy",
-    q: "AI อย่าง ChatGPT หรือ Claude สร้างคำตอบขึ้นมาอย่างไร?",
-    qEN: "How do AI tools like ChatGPT or Claude generate their answers?",
-    options: [
-      "ค้นหาคำตอบจากฐานข้อมูลที่ถูกต้อง 100% เสมอ",
-      "โทรศัพท์ถามผู้เชี่ยวชาญจริงก่อนตอบทุกครั้ง",
-      "สร้างคำตอบขึ้นใหม่จากรูปแบบภาษาที่เรียนรู้มา ซึ่งอาจผิดพลาดได้",
-      "คัดลอกคำตอบจากวิกิพีเดียเสมอ"
-    ],
-    optionsEN: [
-      "By looking up answers from a database that is always 100% accurate",
-      "By calling a real human expert before answering every time",
-      "By generating new answers from language patterns it learned, which can sometimes be wrong",
-      "By always copying answers from Wikipedia"
-    ],
-    correct: 2
+const UI = {
+  th: {
+    langName: "ไทย",
+    h1: "📝 แบบทดสอบ: คู่มือการใช้งาน AI อย่างปลอดภัย",
+    sub: "ทำแบบทดสอบทั้ง 20 ข้อให้ครบ ต้องได้คะแนนอย่างน้อย 90% (18 ข้อขึ้นไป) จึงจะถือว่าผ่านเกณฑ์ หากไม่ผ่าน สามารถกลับไปทบทวนคู่มือแล้วทำใหม่ได้ทันที",
+    backLink: "← กลับไปที่คู่มือ",
+    qOf: (i, n) => "คำถามที่ " + i + " / " + n, answered: (n) => "ตอบแล้ว " + n + " ข้อ",
+    prev: "← ก่อนหน้า", next: "ถัดไป →", submit: "ส่งคำตอบ",
+    passVerdict: (p) => "✅ ผ่านเกณฑ์ (" + p + "%)", failVerdict: (p) => "⚠️ ยังไม่ผ่านเกณฑ์ (" + p + "%)",
+    passNote: "ยินดีด้วย คุณได้คะแนนถึงเกณฑ์ 90% ที่กำหนด ถือว่าผ่านการยืนยันความเข้าใจคู่มือการใช้งาน AI อย่างปลอดภัยแล้ว",
+    failNote: "ต้องได้อย่างน้อย 90% (18/20 ข้อ) จึงจะผ่านเกณฑ์ กรุณากลับไปทบทวนคู่มือในหัวข้อที่ตอบผิด แล้วทำแบบทดสอบใหม่อีกครั้ง",
+    perQuestion: "สรุปผลรายข้อ", yourAnswer: "คำตอบของคุณ", correctAnswer: "คำตอบที่ถูกต้อง", notAnswered: "(ไม่ได้ตอบ)",
+    retry: "🔄 ทำแบบทดสอบใหม่", backReview: "← กลับไปทบทวนคู่มือ",
+    nameLabel: "ชื่อ-นามสกุล", namePlaceholder: "กรอกชื่อ-นามสกุลของคุณ",
+    emailBtn: "📧 แจ้งผลผ่านเกณฑ์ทางอีเมล",
+    emailHint: "ระบบจะเปิดโปรแกรมอีเมลของคุณพร้อมข้อความที่กรอกไว้ให้แล้ว กดส่งได้ทันที",
+    emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " ผ่านเกณฑ์ " + pct + "%",
+    emailBody: (name, score, total, pct, date) => "เรียน ทีมผู้ดูแลคู่มือ AI Safety,\n\nพนักงานต่อไปนี้ทำแบบทดสอบผ่านเกณฑ์แล้ว:\n\nชื่อ-นามสกุล: " + name + "\nคะแนน: " + score + "/" + total + " (" + pct + "%)\nภาษาที่ใช้ทำแบบทดสอบ: ไทย\nวันที่: " + date + "\n\n(อีเมลนี้สร้างโดยอัตโนมัติจากหน้าแบบทดสอบ AI Safety — กรุณากดส่งเพื่อยืนยัน)"
   },
-  {
-    topic: "ข้อมูลที่ห้ามป้อนเข้า AI",
-    topicEN: "Data You Must Never Enter Into AI",
-    q: "ข้อมูลใดต่อไปนี้ห้ามป้อนเข้า AI สาธารณะโดยเด็ดขาด?",
-    qEN: "Which of the following must never be entered into public AI tools?",
-    options: [
-      "เลขบัตรประชาชนและข้อมูลส่วนตัวของลูกค้า",
-      "หัวข้อบทความทั่วไปที่ไม่เกี่ยวกับบริษัท",
-      "สูตรอาหารที่หาได้ทั่วไป",
-      "ชื่อวันหยุดนักขัตฤกษ์"
-    ],
-    optionsEN: [
-      "Customers' national ID numbers and personal information",
-      "A general article topic unrelated to the company",
-      "A common, publicly available recipe",
-      "The name of a public holiday"
-    ],
-    correct: 0
+  ja: {
+    langName: "日本語",
+    h1: "📝 クイズ:AI安全利用ガイド",
+    sub: "全20問に回答してください。合格には90%以上(18問以上の正解)が必要です。不合格の場合は、ガイドを復習してすぐに再挑戦できます。",
+    backLink: "← ガイドに戻る",
+    qOf: (i, n) => "問題 " + i + " / " + n, answered: (n) => "回答済み " + n + "問",
+    prev: "← 前へ", next: "次へ →", submit: "回答を送信",
+    passVerdict: (p) => "✅ 合格 (" + p + "%)", failVerdict: (p) => "⚠️ 不合格 (" + p + "%)",
+    passNote: "おめでとうございます。基準の90%以上のスコアを達成し、AI安全利用ガイドの理解度確認に合格しました。",
+    failNote: "合格には90%以上(20問中18問以上)の正解が必要です。誤答したトピックについてガイドを復習し、再度クイズに挑戦してください。",
+    perQuestion: "設問ごとの結果", yourAnswer: "あなたの回答", correctAnswer: "正解", notAnswered: "(未回答)",
+    retry: "🔄 クイズをやり直す", backReview: "← ガイドを復習する",
+    nameLabel: "氏名", namePlaceholder: "氏名を入力してください",
+    emailBtn: "📧 合格をメールで通知する",
+    emailHint: "お使いのメールソフトが開き、内容が入力された状態になります。そのまま送信してください。",
+    emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " が合格(" + pct + "%)",
+    emailBody: (name, score, total, pct, date) => "AI安全利用ガイド 管理ご担当者様\n\n以下の従業員がクイズに合格しました:\n\n氏名: " + name + "\nスコア: " + score + "/" + total + " (" + pct + "%)\n受験言語: 日本語\n日付: " + date + "\n\n(本メールはAI Safetyクイズページから自動生成されています。内容をご確認の上、送信してください。)"
   },
-  {
-    topic: "ข้อมูลที่ห้ามป้อนเข้า AI",
-    topicEN: "Data You Must Never Enter Into AI",
-    q: "หากจำเป็นต้องให้ AI วิเคราะห์ข้อมูลที่มีความอ่อนไหว ควรทำอย่างไร?",
-    qEN: "If AI must be used to analyze sensitive data, what should you do?",
-    options: [
-      "ป้อนข้อมูลจริงทั้งหมดเพื่อความแม่นยำ",
-      "ส่งข้อมูลให้เพื่อนช่วยตรวจสอบแทน",
-      "ไม่ต้องกังวลเพราะ AI ทุกตัวปลอดภัยเหมือนกันหมด",
-      "ใช้เครื่องมือที่บริษัทอนุมัติและปิดการใช้ข้อมูลฝึกโมเดล หรือทำข้อมูลให้ไม่ระบุตัวตนก่อน"
-    ],
-    optionsEN: [
-      "Enter all the real data for accuracy",
-      "Send the data to a colleague to check instead",
-      "Don't worry — all AI tools are equally safe",
-      "Use a company-approved tool with model-training data use turned off, or anonymize the data first"
-    ],
-    correct: 3
-  },
-  {
-    topic: "ตรวจสอบความถูกต้องของคำตอบ AI",
-    topicEN: "Verifying AI Output Accuracy",
-    q: "\"Hallucination\" ในบริบทของ AI หมายถึงอะไร?",
-    qEN: "What does \"hallucination\" mean in the context of AI?",
-    options: [
-      "AI ปฏิเสธที่จะตอบคำถาม",
-      "AI ทำงานช้าผิดปกติ",
-      "AI ตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัวว่าผิด",
-      "AI ขอข้อมูลเพิ่มเติมก่อนตอบ"
-    ],
-    optionsEN: [
-      "AI refuses to answer a question",
-      "AI runs unusually slowly",
-      "AI confidently gives a wrong answer without realizing it's wrong",
-      "AI asks for more information before answering"
-    ],
-    correct: 2
-  },
-  {
-    topic: "ตรวจสอบความถูกต้องของคำตอบ AI",
-    topicEN: "Verifying AI Output Accuracy",
-    q: "ก่อนนำคำตอบจาก AI ไปใช้ในรายงานทางการ ควรทำอย่างไร?",
-    qEN: "Before using an AI answer in an official report, what should you do?",
-    options: [
-      "ตรวจสอบความถูกต้องกับแหล่งข้อมูลที่เชื่อถือได้ก่อนเสมอ",
-      "คัดลอกไปใช้ได้ทันทีเพราะ AI ฉลาดกว่ามนุษย์",
-      "ส่งให้ AI ตัวอื่นตรวจสอบซ้ำก็เพียงพอโดยไม่ต้องตรวจเอง",
-      "ใช้เฉพาะตัวเลขที่ AI ให้มา ไม่ต้องสนใจข้อความอื่น"
-    ],
-    optionsEN: [
-      "Always verify it against a reliable source first",
-      "Copy it in immediately, since AI is smarter than humans",
-      "Just have another AI double-check it, without checking it yourself",
-      "Use only the numbers AI provides and ignore everything else"
-    ],
-    correct: 0
-  },
-  {
-    topic: "ความเป็นส่วนตัวและ PDPA",
-    topicEN: "Privacy and PDPA",
-    q: "PDPA คุ้มครองข้อมูลประเภทใด?",
-    qEN: "What type of data does PDPA protect?",
-    options: [
-      "ข้อมูลของบริษัทคู่แข่งเท่านั้น",
-      "ข้อมูลสภาพอากาศ",
-      "ข้อมูลราคาน้ำมันรายวัน",
-      "ข้อมูลส่วนบุคคลที่ระบุตัวตนได้ เช่น ชื่อ เบอร์โทร อีเมล"
-    ],
-    optionsEN: [
-      "Only competitors' company data",
-      "Weather data",
-      "Daily oil price data",
-      "Personally identifiable data, such as names, phone numbers, and emails"
-    ],
-    correct: 3
-  },
-  {
-    topic: "ความเป็นส่วนตัวและ PDPA",
-    topicEN: "Privacy and PDPA",
-    q: "ก่อนป้อนข้อมูลที่มีข้อมูลส่วนบุคคลเข้า AI ควรทำอย่างไรตามหลัก PDPA?",
-    qEN: "Under PDPA principles, what should you do before entering personal data into AI?",
-    options: [
-      "ป้อนได้เลยเพราะ AI เป็นความลับอยู่แล้ว",
-      "ตรวจสอบความจำเป็น ความยินยอม และเครื่องมือที่ใช้ว่าได้รับอนุมัติหรือไม่",
-      "แจ้งลูกค้าหลังป้อนข้อมูลไปแล้ว",
-      "ไม่ต้องทำอะไรเพิ่มเติม"
-    ],
-    optionsEN: [
-      "Enter it right away, since AI is already confidential",
-      "Check whether it's necessary, whether consent was given, and whether the tool is approved",
-      "Notify the customer after the data has already been entered",
-      "No additional action is needed"
-    ],
-    correct: 1
-  },
-  {
-    topic: "ปิดการใช้ข้อมูลฝึกโมเดล",
-    topicEN: "Opting Out of Model Training",
-    q: "เหตุใดควรปิดการตั้งค่า \"ใช้ข้อมูลสนทนาไปฝึกโมเดล\" ในบัญชี AI ที่ใช้ทำงาน?",
-    qEN: "Why should you turn off the \"use my conversations to train the model\" setting on a work AI account?",
-    options: [
-      "เพื่อให้ AI ตอบเร็วขึ้น",
-      "เพื่อประหยัดพื้นที่เก็บข้อมูล",
-      "เพื่อป้องกันไม่ให้ข้อมูลที่พิมพ์เข้าไปถูกเก็บไปใช้พัฒนาโมเดลต่อโดยไม่ตั้งใจ",
-      "เป็นการตั้งค่าที่ไม่มีผลกระทบใดๆ"
-    ],
-    optionsEN: [
-      "To make AI respond faster",
-      "To save storage space",
-      "To prevent what you type from being unintentionally kept and used to further develop the model",
-      "It's a setting that has no real effect"
-    ],
-    correct: 2
-  },
-  {
-    topic: "ลิขสิทธิ์และทรัพย์สินทางปัญญา",
-    topicEN: "Copyright and Intellectual Property",
-    q: "ก่อนนำเนื้อหาที่ AI สร้างไปเผยแพร่สู่สาธารณะ ควรทำอย่างไร?",
-    qEN: "Before publishing AI-generated content publicly, what should you do?",
-    options: [
-      "ตรวจสอบว่าไม่ซ้ำหรือคล้ายกับงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป",
-      "เผยแพร่ได้ทันทีเพราะ AI สร้างเนื้อหาใหม่เสมอ",
-      "ไม่ต้องตรวจสอบถ้าเป็นแค่ข้อความสั้นๆ",
-      "เปลี่ยนแค่สีตัวอักษรก็เพียงพอ"
-    ],
-    optionsEN: [
-      "Check that it doesn't duplicate or too closely resemble someone else's copyrighted work",
-      "Publish it right away, since AI always creates new content",
-      "No need to check if it's just a short piece of text",
-      "Just changing the text color is enough"
-    ],
-    correct: 0
-  },
-  {
-    topic: "เครื่องมือ AI ที่บริษัทอนุมัติ",
-    topicEN: "Company-Approved AI Tools",
-    q: "\"Shadow AI\" หมายถึงอะไร?",
-    qEN: "What does \"Shadow AI\" mean?",
-    options: [
-      "AI ที่ทำงานเฉพาะตอนกลางคืน",
-      "ฟีเจอร์ Dark Mode ของแอป AI",
-      "AI ที่ใช้ตรวจจับการทุจริต",
-      "การใช้เครื่องมือ AI ที่ไม่ผ่านการอนุมัติจากบริษัทมาทำงานกับข้อมูลบริษัท"
-    ],
-    optionsEN: [
-      "AI that only works at night",
-      "The dark-mode feature of an AI app",
-      "AI used to detect fraud",
-      "Using AI tools that haven't been approved by the company to work with company data"
-    ],
-    correct: 3
-  },
-  {
-    topic: "เครื่องมือ AI ที่บริษัทอนุมัติ",
-    topicEN: "Company-Approved AI Tools",
-    q: "หากอยากลองใช้เครื่องมือ AI ตัวใหม่ที่ยังไม่อยู่ในรายการที่บริษัทอนุมัติ ควรทำอย่างไร?",
-    qEN: "If you want to try a new AI tool that isn't yet on the company's approved list, what should you do?",
-    options: [
-      "ใช้ทดลองกับข้อมูลบริษัทได้เลยถ้าดูน่าเชื่อถือ",
-      "แจ้งขออนุมัติจากทีม IT ก่อนเริ่มใช้งานกับข้อมูลบริษัท",
-      "ใช้ได้ถ้าเพื่อนร่วมงานแนะนำมา",
-      "ใช้ได้โดยไม่ต้องแจ้งใคร เพราะเป็นเรื่องส่วนตัว"
-    ],
-    optionsEN: [
-      "Go ahead and try it with company data if it looks trustworthy",
-      "Request approval from the IT team before using it with company data",
-      "It's fine to use if a colleague recommended it",
-      "Use it without telling anyone, since it's a personal matter"
-    ],
-    correct: 1
-  },
-  {
-    topic: "รหัสผ่านและการยืนยันตัวตน",
-    topicEN: "Passwords and Authentication",
-    q: "วิธีเพิ่มความปลอดภัยให้บัญชี AI ที่ดีที่สุดคือข้อใด?",
-    qEN: "What is the best way to increase the security of an AI account?",
-    options: [
-      "ใช้รหัสผ่านเดียวกับทุกบัญชีเพื่อจำง่าย",
-      "เปิดเผยรหัสผ่านให้เพื่อนร่วมทีมทุกคน",
-      "ตั้งรหัสผ่านคาดเดายากและเปิดใช้การยืนยันตัวตนสองชั้น (2FA)",
-      "ปิดฟีเจอร์เตือนความปลอดภัยเพื่อความสะดวก"
-    ],
-    optionsEN: [
-      "Use the same password for every account so it's easy to remember",
-      "Share the password with every teammate",
-      "Set a hard-to-guess password and enable two-factor authentication (2FA)",
-      "Turn off security alerts for convenience"
-    ],
-    correct: 2
-  },
-  {
-    topic: "รหัสผ่านและการยืนยันตัวตน",
-    topicEN: "Passwords and Authentication",
-    q: "ควรใช้วิธีใดรับรหัสยืนยันตัวตนแทน SMS เพื่อความปลอดภัยที่สูงกว่า?",
-    qEN: "Which method should you use instead of SMS to receive verification codes, for stronger security?",
-    options: [
-      "แอป Authenticator",
-      "อีเมลสำรอง",
-      "บอกรหัสทางโทรศัพท์",
-      "เขียนรหัสไว้บนกระดาษติดหน้าจอ"
-    ],
-    optionsEN: [
-      "An authenticator app",
-      "A backup email",
-      "Reading the code aloud over a phone call",
-      "Writing the code on paper stuck to the screen"
-    ],
-    correct: 0
-  },
-  {
-    topic: "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง",
-    topicEN: "Beware of AI-Generated Phishing",
-    q: "หากได้รับข้อความเร่งรัดให้โอนเงินด่วนจากผู้บริหาร ควรทำอย่างไรก่อน?",
-    qEN: "If you receive a message urging an urgent money transfer, supposedly from an executive, what should you do first?",
-    options: [
-      "โอนเงินทันทีเพราะเป็นคำสั่งเร่งด่วน",
-      "ตอบกลับข้อความยืนยันว่าจะโอนให้",
-      "ส่งต่อข้อความให้เพื่อนร่วมงานแล้วรอดูว่าใครจะทำก่อน",
-      "ตั้งสติและตรวจสอบผ่านช่องทางอื่น เช่น โทรกลับเบอร์เดิมที่บันทึกไว้"
-    ],
-    optionsEN: [
-      "Transfer the money immediately since it's urgent",
-      "Reply to the message confirming you'll transfer it",
-      "Forward the message to a colleague and wait to see who acts first",
-      "Stay calm and verify through another channel, such as calling back a previously saved number"
-    ],
-    correct: 3
-  },
-  {
-    topic: "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง",
-    topicEN: "Beware of AI-Generated Phishing",
-    q: "เหตุใดอีเมล Phishing ในปัจจุบันจึงตรวจจับได้ยากขึ้น?",
-    qEN: "Why has phishing email become harder to detect nowadays?",
-    options: [
-      "เพราะมิจฉาชีพเลิกใช้อีเมลแล้ว",
-      "เพราะ AI ช่วยให้เขียนข้อความหลอกลวงได้เนียนขึ้น ไม่มีคำผิดเหมือนก่อน",
-      "เพราะอีเมลทุกฉบับถูกเข้ารหัสอัตโนมัติ",
-      "เพราะบริษัทอีเมลหยุดกรองสแปมแล้ว"
-    ],
-    optionsEN: [
-      "Because scammers have stopped using email",
-      "Because AI helps write more convincing scam messages without the typos of before",
-      "Because every email is now automatically encrypted",
-      "Because email providers have stopped filtering spam"
-    ],
-    correct: 1
-  },
-  {
-    topic: "Deepfake",
-    topicEN: "Deepfake",
-    q: "Deepfake คือเทคโนโลยีที่ใช้ทำอะไร?",
-    qEN: "What is deepfake technology used to do?",
-    options: [
-      "เพิ่มความเร็วอินเทอร์เน็ต",
-      "ตรวจจับไวรัสคอมพิวเตอร์",
-      "สร้างภาพ เสียง หรือวิดีโอปลอมเลียนแบบบุคคลจริงได้สมจริง",
-      "แปลภาษาแบบเรียลไทม์"
-    ],
-    optionsEN: [
-      "Speed up internet connections",
-      "Detect computer viruses",
-      "Create realistic fake images, audio, or video that imitate a real person",
-      "Translate languages in real time"
-    ],
-    correct: 2
-  },
-  {
-    topic: "Deepfake",
-    topicEN: "Deepfake",
-    q: "หากได้รับวิดีโอคอลที่อ้างว่าเป็นผู้บริหารสั่งให้โอนเงินด่วน ควรทำอย่างไร?",
-    qEN: "If you receive a video call claiming to be from an executive ordering an urgent money transfer, what should you do?",
-    options: [
-      "ยืนยันตัวตนผ่านช่องทางที่สองก่อนดำเนินการใดๆ เสมอ",
-      "โอนทันทีเพราะเห็นหน้าและได้ยินเสียงชัดเจน",
-      "ถามคำถามในวิดีโอคอลนั้นต่อไปเรื่อยๆ จนมั่นใจ",
-      "ไม่ต้องทำอะไร เพราะ Deepfake ตรวจจับไม่ได้อยู่แล้ว"
-    ],
-    optionsEN: [
-      "Always verify identity through a second channel before taking any action",
-      "Transfer immediately since you can clearly see and hear them",
-      "Keep asking questions in that same video call until you feel sure",
-      "Do nothing, since deepfakes can't be detected anyway"
-    ],
-    correct: 0
-  },
-  {
-    topic: "แชร์ Prompt/Custom GPT อย่างปลอดภัย",
-    topicEN: "Sharing Prompts/Custom GPTs Safely",
-    q: "ก่อนสร้างลิงก์แชร์บทสนทนา AI หรือเผยแพร่ Custom GPT ควรทำอย่างไร?",
-    qEN: "Before creating a shareable link to an AI conversation or publishing a Custom GPT, what should you do?",
-    options: [
-      "แชร์ได้ทันทีโดยไม่ต้องตรวจสอบ",
-      "ลบชื่อบริษัทออกจากลิงก์เท่านั้นก็เพียงพอ",
-      "แชร์เฉพาะตอนกลางคืนเพื่อความปลอดภัย",
-      "ตรวจสอบว่าไม่มีข้อมูลลับของบริษัทหรือลูกค้าปะปนอยู่ในเนื้อหา"
-    ],
-    optionsEN: [
-      "Share it right away without checking",
-      "Just removing the company name from the link is enough",
-      "Only share it at night for safety",
-      "Check that no confidential company or customer data is mixed into the content"
-    ],
-    correct: 3
-  },
-  {
-    topic: "พบสิ่งผิดปกติ แจ้งใคร",
-    topicEN: "Reporting Incidents",
-    q: "หากสงสัยว่าข้อมูลบริษัทหลุดเข้าไปใน AI สาธารณะโดยไม่ตั้งใจ ควรทำอย่างไร?",
-    qEN: "If you suspect company data was accidentally leaked into a public AI tool, what should you do?",
-    options: [
-      "เก็บเงียบไว้คนเดียวเพราะกลัวถูกตำหนิ",
-      "แจ้งทีม IT หรือผู้ดูแลระบบทันที ยิ่งเร็วยิ่งจำกัดความเสียหายได้ดี",
-      "รอดูสถานการณ์ก่อนสัก 1 เดือน",
-      "ลบประวัติการสนทนาแล้วไม่บอกใคร"
-    ],
-    optionsEN: [
-      "Keep it to yourself out of fear of being blamed",
-      "Report it to the IT team or system administrator immediately — the sooner, the more the damage can be limited",
-      "Wait and observe the situation for about a month first",
-      "Delete the conversation history and tell no one"
-    ],
-    correct: 1
-  },
-  {
-    topic: "สรุป Do/Don't",
-    topicEN: "Do/Don't Summary",
-    q: "ข้อใดคือแนวปฏิบัติที่ถูกต้องเมื่อใช้ AI ทำงาน?",
-    qEN: "Which of these is correct practice when using AI for work?",
-    options: [
-      "ใช้เครื่องมือ AI ที่บริษัทอนุมัติ ตรวจสอบคำตอบก่อนใช้จริง และเปิด 2FA ทุกบัญชี",
-      "ป้อนข้อมูลลูกค้าทั้งหมดเข้า AI ฟรีเพื่อความรวดเร็ว",
-      "เชื่อคำตอบ AI ทุกอย่างโดยไม่ต้องตรวจสอบ",
-      "ใช้รหัสผ่านเดียวกันกับทุกเครื่องมือ AI เพื่อความสะดวก"
-    ],
-    optionsEN: [
-      "Use company-approved AI tools, verify answers before relying on them, and enable 2FA on every account",
-      "Enter all customer data into free AI tools for speed",
-      "Trust every AI answer without verifying it",
-      "Use the same password across every AI tool for convenience"
-    ],
-    correct: 0
-  },
-  {
-    topic: "มาตรฐานความปลอดภัยไซเบอร์กลุ่ม AISIN/Toyota",
-    topicEN: "AISIN/Toyota Group Cybersecurity Standards",
-    q: "เหตุใด ATTG จึงต้องปฏิบัติตามมาตรฐานความปลอดภัยไซเบอร์ระดับกลุ่ม AISIN/Toyota ด้วย ไม่ใช่แค่นโยบายของ ATTG เอง?",
-    qEN: "Why must ATTG also follow AISIN/Toyota Group-level cybersecurity standards, not just ATTG's own policy?",
-    options: [
-      "เพราะกฎหมายไทยบังคับให้ทำเช่นนั้น",
-      "เพราะความเสี่ยงไซเบอร์ของบริษัทในเครือเพียงจุดเดียว อาจกระทบทั้ง Supply Chain ของกลุ่ม",
-      "เพราะจะได้ลดค่าใช้จ่ายด้าน IT",
-      "เพราะเป็นข้อกำหนดที่ไม่มีผลบังคับจริง"
-    ],
-    optionsEN: [
-      "Because Thai law requires it",
-      "Because a cyber risk at just one group company can impact the entire group's supply chain",
-      "Because it reduces IT costs",
-      "Because it's a requirement with no real enforcement"
-    ],
-    correct: 1
-  },
-  {
-    topic: "มาตรฐานความปลอดภัยไซเบอร์กลุ่ม AISIN/Toyota",
-    topicEN: "AISIN/Toyota Group Cybersecurity Standards",
-    q: "หากมีเอกสารนโยบายความปลอดภัยไซเบอร์ฉบับทางการจาก AISIN Japan หรือ Toyota Group ที่ระบุข้อกำหนดเฉพาะ ควรทำอย่างไร?",
-    qEN: "If there is an official cybersecurity policy document from AISIN Japan or the Toyota Group specifying particular requirements, what should you do?",
-    options: [
-      "เพิกเฉยเพราะเป็นนโยบายบริษัทแม่ ไม่เกี่ยวกับ ATTG",
-      "ยึดถือแนวทางส่วนตัวของตนเองเป็นหลัก",
-      "ยึดเอกสารฉบับทางการนั้นเป็นหลัก และสอบถามฝ่าย IT/Security ของ ATTG หากไม่แน่ใจ",
-      "รอให้มีปัญหาเกิดขึ้นก่อนแล้วค่อยศึกษา"
-    ],
-    optionsEN: [
-      "Ignore it, since it's the parent company's policy and unrelated to ATTG",
-      "Follow your own personal judgment instead",
-      "Follow that official document, and ask ATTG's IT/Security team if unsure",
-      "Wait until a problem occurs before looking into it"
-    ],
-    correct: 2
-  },
-  {
-    topic: "อีเมลหลอกลวง (Phishing Mail)",
-    topicEN: "Phishing Email",
-    q: "ข้อใดคือสัญญาณเตือนของอีเมลหลอกลวง (Phishing Email)?",
-    qEN: "Which of these is a warning sign of a phishing email?",
-    options: [
-      "ที่อยู่อีเมลผู้ส่งสะกดคล้ายของจริงแต่ผิดเล็กน้อย และเร่งรัดให้รีบดำเนินการ",
-      "อีเมลจากเพื่อนร่วมงานที่ใช้ลงชื่อปกติ",
-      "อีเมลที่ไม่มีลิงก์หรือไฟล์แนบใดๆ",
-      "อีเมลที่ส่งในเวลาทำการปกติ"
-    ],
-    optionsEN: [
-      "The sender's address looks similar to a real one but is slightly misspelled, and it pressures you to act urgently",
-      "An email from a colleague using their normal signature",
-      "An email with no links or attachments at all",
-      "An email sent during normal business hours"
-    ],
-    correct: 0
-  },
-  {
-    topic: "อีเมลหลอกลวง (Phishing Mail)",
-    topicEN: "Phishing Email",
-    q: "หากสงสัยว่าอีเมลที่ได้รับเป็น Phishing ควรทำอย่างไร?",
-    qEN: "If you suspect an email you received is phishing, what should you do?",
-    options: [
-      "คลิกลิงก์ในอีเมลเพื่อตรวจสอบดูก่อนว่าจริงหรือปลอม",
-      "ตอบกลับอีเมลถามผู้ส่งโดยตรง",
-      "ลบทิ้งเงียบๆ โดยไม่ต้องแจ้งใคร",
-      "ห้ามคลิกลิงก์หรือเปิดไฟล์แนบ และรายงานต่อทีม IT/Security ทันที"
-    ],
-    optionsEN: [
-      "Click the link in the email first to check if it's real or fake",
-      "Reply to the email and ask the sender directly",
-      "Quietly delete it without telling anyone",
-      "Don't click any link or open any attachment, and report it to the IT/Security team immediately"
-    ],
-    correct: 3
-  },
-  {
-    topic: "มาตรฐานความปลอดภัยไซเบอร์กลุ่ม AISIN/Toyota",
-    topicEN: "AISIN/Toyota Group Cybersecurity Standards",
-    q: "AISIN Group จัดให้พนักงานทั้งเครือ (รวม ATTG) ซ้อมรับมืออีเมลหลอกลวง (Phishing) บ่อยแค่ไหน?",
-    qEN: "How often does AISIN Group run phishing-response drills for all employees group-wide (including ATTG)?",
-    options: [
-      "ปีละครั้ง",
-      "ปีละ 3 ครั้ง",
-      "ทุก 5 ปี",
-      "ไม่เคยจัดซ้อม"
-    ],
-    optionsEN: [
-      "Once a year",
-      "3 times a year",
-      "Every 5 years",
-      "They have never run a drill"
-    ],
-    correct: 1
-  },
-  {
-    topic: "แนวทางของกลุ่ม Toyota ต่อ Generative AI",
-    topicEN: "Toyota Group's Approach to Generative AI",
-    q: "Toyota แก้ปัญหาความเสี่ยงข้อมูลรั่วไหลจากการใช้ ChatGPT สาธารณะอย่างไร?",
-    qEN: "How did Toyota address the data-leak risk from using public ChatGPT?",
-    options: [
-      "ห้ามพนักงานใช้ AI ทุกชนิดโดยเด็ดขาด",
-      "พัฒนาเครื่องมือ AI ภายในของตัวเอง (ToyoGPT) ให้ใช้ฟังก์ชันคล้าย ChatGPT โดยข้อมูลไม่ออกนอกองค์กร",
-      "จ้างพนักงานตรวจสอบทุกข้อความที่พิมพ์เข้า AI ด้วยตนเอง",
-      "อนุญาตให้ใช้ ChatGPT สาธารณะได้ตามปกติโดยไม่มีข้อจำกัด"
-    ],
-    optionsEN: [
-      "By strictly banning employees from using any AI at all",
-      "By building its own internal AI tool (ToyoGPT) with ChatGPT-like functions, keeping data inside the organization",
-      "By hiring staff to manually review every message typed into AI",
-      "By allowing public ChatGPT to be used normally with no restrictions"
-    ],
-    correct: 1
-  },
-  {
-    topic: "แนวทางของกลุ่ม Toyota ต่อ Generative AI",
-    topicEN: "Toyota Group's Approach to Generative AI",
-    q: "Responsible AI Review Board ของ Toyota มีหน้าที่อะไร?",
-    qEN: "What is the role of Toyota's Responsible AI Review Board?",
-    options: [
-      "ออกแบบโลโก้ผลิตภัณฑ์ AI ใหม่",
-      "ขายรถยนต์ที่ติดตั้งระบบ AI",
-      "ตรวจสอบโครงการ AI ทุกโครงการแบบข้ามฝ่าย (Data, Compliance, Privacy, Legal, Cybersecurity) ก่อนนำไปใช้จริง",
-      "ดูแลเฉพาะเรื่องการตลาดออนไลน์"
-    ],
-    optionsEN: [
-      "Designing logos for new AI products",
-      "Selling cars equipped with AI systems",
-      "Cross-functionally reviewing every AI project (Data, Compliance, Privacy, Legal, Cybersecurity) before it goes live",
-      "Handling only online marketing matters"
-    ],
-    correct: 2
+  en: {
+    langName: "English",
+    h1: "📝 Quiz: AI Safety Usage Guide",
+    sub: "Complete all 20 questions. You need a score of at least 90% (18 or more correct) to pass. If you don't pass, you can go back to review the guide and retake the quiz right away.",
+    backLink: "← Back to the guide",
+    qOf: (i, n) => "Question " + i + " of " + n, answered: (n) => n + " answered",
+    prev: "← Previous", next: "Next →", submit: "Submit",
+    passVerdict: (p) => "✅ Passed (" + p + "%)", failVerdict: (p) => "⚠️ Not yet passed (" + p + "%)",
+    passNote: "Congratulations — you've reached the required 90% score, confirming your understanding of the AI Safety Usage Guide.",
+    failNote: "You need at least 90% (18/20) to pass. Please go back and review the guide topics you got wrong, then retake the quiz.",
+    perQuestion: "Per-Question Results", yourAnswer: "Your answer", correctAnswer: "Correct answer", notAnswered: "(not answered)",
+    retry: "🔄 Retake the Quiz", backReview: "← Back to review the guide",
+    nameLabel: "Full name", namePlaceholder: "Enter your full name",
+    emailBtn: "📧 Notify by Email",
+    emailHint: "This opens your email app with the message pre-filled — just hit send.",
+    emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " passed (" + pct + "%)",
+    emailBody: (name, score, total, pct, date) => "Dear AI Safety Guide administrator,\n\nThe following employee has passed the quiz:\n\nName: " + name + "\nScore: " + score + "/" + total + " (" + pct + "%)\nQuiz language: English\nDate: " + date + "\n\n(This email was auto-generated from the AI Safety quiz page — please review and send.)"
   }
+};
+
+const NOTIFY_EMAIL = "santi.s@attg.co.th";
+
+const QUESTIONS = [
+  { topic: { th: "ภาพรวม", ja: "概要", en: "Overview" },
+    q: { th: "ความเสี่ยงหลักจากการใช้ AI ที่คู่มือนี้กล่าวถึงมีกี่กลุ่ม อะไรบ้าง?", ja: "本ガイドが取り上げるAI利用の主なリスクは何グループで、それぞれ何ですか?", en: "How many main risk categories from using AI does this guide cover, and what are they?" },
+    choices: [
+      { th: "2 กลุ่ม: ข้อมูลรั่วไหล และลิขสิทธิ์", ja: "2グループ:情報漏えいと著作権", en: "2 categories: data leakage and copyright" },
+      { th: "3 กลุ่ม: ข้อมูลรั่วไหล, เชื่อคำตอบ AI ที่ผิดพลาดโดยไม่ตรวจสอบ, ตกเป็นเหยื่อมิจฉาชีพ", ja: "3グループ:情報漏えい、検証せずに誤ったAIの回答を信じること、詐欺の被害に遭うこと", en: "3 categories: data leakage, trusting incorrect AI answers without verification, and falling victim to scammers" },
+      { th: "4 กลุ่ม รวมเรื่องลิขสิทธิ์ด้วย", ja: "著作権を含む4グループ", en: "4 categories, including copyright" },
+      { th: "1 กลุ่มคือความปลอดภัยไซเบอร์เท่านั้น", ja: "サイバーセキュリティのみの1グループ", en: "Just 1 category: cybersecurity" }
+    ], correct: 1 },
+  { topic: { th: "ภาพรวม", ja: "概要", en: "Overview" },
+    q: { th: "ต้องได้คะแนนแบบทดสอบท้ายคู่มืออย่างน้อยเท่าไหร่จึงจะผ่านเกณฑ์?", ja: "ガイド末尾のクイズに合格するために必要な最低スコアはいくつですか?", en: "What is the minimum score required to pass the quiz at the end of the guide?" },
+    choices: [ { th: "60%", ja: "60%", en: "60%" }, { th: "75%", ja: "75%", en: "75%" }, { th: "90%", ja: "90%", en: "90%" }, { th: "100%", ja: "100%", en: "100%" } ], correct: 2 },
+  { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
+    q: { th: "AISIN Group อ้างอิงมาตรฐานสากลใดที่เฉพาะสำหรับความปลอดภัยไซเบอร์ยานยนต์โดยตรง?", ja: "AISINグループが参照している、自動車専用のサイバーセキュリティに関する国際規格はどれですか?", en: "Which international standard does AISIN Group reference that is specifically for automotive cybersecurity?" },
+    choices: [ { th: "ISO 9001", ja: "ISO 9001", en: "ISO 9001" }, { th: "ISO 21434", ja: "ISO 21434", en: "ISO 21434" }, { th: "ISO 14001", ja: "ISO 14001", en: "ISO 14001" }, { th: "PCI DSS", ja: "PCI DSS", en: "PCI DSS" } ], correct: 1 },
+  { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
+    q: { th: "AISIN Group จัดซ้อมรับมืออีเมลหลอกลวง (Phishing Simulation) ให้พนักงานบ่อยแค่ไหน?", ja: "AISINグループは従業員向けにフィッシングメール対応訓練(Phishing Simulation)をどのくらいの頻度で実施していますか?", en: "How often does AISIN Group run phishing-simulation drills for employees?" },
+    choices: [
+      { th: "ปีละ 1 ครั้ง", ja: "年1回", en: "Once a year" },
+      { th: "ปีละ 3 ครั้ง", ja: "年3回", en: "Three times a year" },
+      { th: "เดือนละ 1 ครั้ง", ja: "月1回", en: "Once a month" },
+      { th: "ไม่มีการซ้อมเป็นประจำ", ja: "定期的な訓練はない", en: "There are no regular drills" }
+    ], correct: 1 },
+  { topic: { th: "แนวทาง Generative AI ของ Toyota", ja: "トヨタの生成AIへの取り組み", en: "Toyota's Approach to Generative AI" },
+    q: { th: "Toyota แก้ปัญหาความเสี่ยงข้อมูลหลุดจาก ChatGPT สาธารณะด้วยวิธีใด?", ja: "トヨタは、公開ChatGPTからの情報漏えいリスクにどのように対処しましたか?", en: "How did Toyota address the risk of data leakage from public ChatGPT?" },
+    choices: [
+      { th: "ห้ามพนักงานใช้ AI ทุกชนิดเด็ดขาด", ja: "従業員によるAIの利用を一切禁止した", en: "By banning employees from using any AI whatsoever" },
+      { th: "พัฒนาเครื่องมือ AI ภายในของตัวเองชื่อ ToyoGPT", ja: "独自の社内AIツール「ToyoGPT」を開発した", en: "By building its own internal AI tool called ToyoGPT" },
+      { th: "บังคับให้ใช้ ChatGPT เวอร์ชันฟรีเท่านั้น", ja: "無料版のChatGPTのみ使用を義務付けた", en: "By requiring employees to use only the free version of ChatGPT" },
+      { th: "ให้พนักงานลบประวัติแชททุกวัน", ja: "従業員に毎日チャット履歴を削除させた", en: "By having employees delete their chat history every day" }
+    ], correct: 1 },
+  { topic: { th: "AI ในสายการผลิต", ja: "生産ラインにおけるAI", en: "AI on the Production Line" },
+    q: { th: "หลักการใดของ Toyota Production System นำมาปรับใช้กับการรายงานเหตุการณ์ผิดปกติด้าน AI/ความปลอดภัยได้?", ja: "トヨタ生産方式(TPS)のどの原則を、AI・セキュリティに関する異常事態の報告に応用できますか?", en: "Which Toyota Production System principle can be applied to reporting abnormal AI/security incidents?" },
+    choices: [
+      { th: "Kaizen", ja: "カイゼン(Kaizen)", en: "Kaizen" },
+      { th: "Andon — หยุดและแจ้งทันทีเมื่อสงสัยว่ามีปัญหา", ja: "アンドン(Andon)——問題が疑われたら直ちに止めて報告する", en: "Andon — stop and report immediately when a problem is suspected" },
+      { th: "Just-in-Time", ja: "ジャストインタイム(Just-in-Time)", en: "Just-in-Time" },
+      { th: "Kanban", ja: "かんばん(Kanban)", en: "Kanban" }
+    ], correct: 1 },
+  { topic: { th: "ข้อมูลห้ามป้อนเข้า AI", ja: "AIに入力してはいけないデータ", en: "Data Never to Enter Into AI" },
+    q: { th: "ข้อมูลใดต่อไปนี้ ห้ามป้อนเข้า AI สาธารณะโดยเด็ดขาด?", ja: "次のうち、公開AIに絶対に入力してはいけないものはどれですか?", en: "Which of the following must never be entered into public AI?" },
+    choices: [
+      { th: "หัวข้อประชุมทั่วไปที่ไม่มีชื่อคน", ja: "個人名を含まない一般的な会議アジェンダ", en: "A general meeting agenda with no names in it" },
+      { th: "รหัสผ่านหรือ API key ของบริษัท", ja: "会社のパスワードやAPIキー", en: "Company passwords or API keys" },
+      { th: "บทความข่าวสาธารณะที่ต้องการสรุป", ja: "要約したい公開ニュース記事", en: "A public news article you want summarized" },
+      { th: "คำถามทั่วไปเกี่ยวกับการใช้ Excel", ja: "Excelの使い方に関する一般的な質問", en: "A general question about how to use Excel" }
+    ], correct: 1 },
+  { topic: { th: "ข้อมูลห้ามป้อนเข้า AI", ja: "AIに入力してはいけないデータ", en: "Data Never to Enter Into AI" },
+    q: { th: "หากจำเป็นต้องให้ AI วิเคราะห์ข้อมูลอ่อนไหวของบริษัท ควรทำอย่างไร?", ja: "会社の機密データをAIに分析させる必要が本当にある場合、どうすべきですか?", en: "If AI genuinely needs to analyze sensitive company data, what should you do?" },
+    choices: [
+      { th: "ใช้ AI สาธารณะได้ตามปกติ ไม่ต้องกังวล", ja: "公開AIを通常通り使用してよく、心配は不要", en: "Use public AI normally — there's nothing to worry about" },
+      { th: "ใช้เครื่องมือที่บริษัทอนุมัติ หรือแปลงข้อมูลให้ไม่ระบุตัวตนก่อน", ja: "会社承認済みのツールを使うか、事前にデータを匿名化する", en: "Use a company-approved tool, or anonymize the data first" },
+      { th: "ใช้แต่บัญชีส่วนตัวเท่านั้น", ja: "個人アカウントのみを使用する", en: "Only use a personal account" },
+      { th: "ส่งข้อมูลผ่านอีเมลให้ AI ประมวลผลแทน", ja: "データをメールで送ってAIに処理させる", en: "Email the data so AI can process it instead" }
+    ], correct: 1 },
+  { topic: { th: "ตรวจสอบคำตอบ AI", ja: "AIの回答を検証する", en: "Verifying AI Answers" },
+    q: { th: "อาการที่ AI ตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัวเรียกว่าอะไร?", ja: "AIが誤りに気づかないまま自信満々に間違った回答をする現象を何と呼びますか?", en: "What is it called when AI confidently gives an incorrect answer without realizing it?" },
+    choices: [ { th: "Bias", ja: "バイアス(Bias)", en: "Bias" }, { th: "Hallucination", ja: "ハルシネーション(Hallucination)", en: "Hallucination" }, { th: "Overfitting", ja: "過学習(Overfitting)", en: "Overfitting" }, { th: "Latency", ja: "遅延(Latency)", en: "Latency" } ], correct: 1 },
+  { topic: { th: "ตรวจสอบคำตอบ AI", ja: "AIの回答を検証する", en: "Verifying AI Answers" },
+    q: { th: "ก่อนนำคำตอบจาก AI ไปใช้ในรายงานทางการหรือสื่อสารกับลูกค้า ควรทำอะไร?", ja: "AIの回答を公式報告書や顧客とのやり取りに使う前に、何をすべきですか?", en: "Before using an AI answer in an official report or customer communication, what should you do?" },
+    choices: [
+      { th: "คัดลอกไปใช้ได้ทันทีเพราะ AI แม่นยำเสมอ", ja: "AIは常に正確なので、そのままコピーして使う", en: "Copy it directly since AI is always accurate" },
+      { th: "ตรวจทานเทียบกับแหล่งข้อมูลที่เชื่อถือได้เสมอ", ja: "常に信頼できる情報源と照合する", en: "Always cross-check it against reliable sources" },
+      { th: "ใช้เฉพาะคำตอบที่ยาวที่สุด", ja: "最も長い回答だけを使用する", en: "Only use the longest answer given" },
+      { th: "ถามคำถามเดิมซ้ำ 2 ครั้งแล้วเชื่อคำตอบที่มาก่อน", ja: "同じ質問を2回聞いて、先に出てきた回答を信じる", en: "Ask the same question twice and trust whichever answer comes first" }
+    ], correct: 1 },
+  { topic: { th: "ความเป็นส่วนตัวและ PDPA", ja: "プライバシーとPDPA", en: "Privacy and PDPA" },
+    q: { th: "PDPA คุ้มครองข้อมูลประเภทใด?", ja: "PDPAはどのような種類のデータを保護していますか?", en: "What kind of data does the PDPA protect?" },
+    choices: [
+      { th: "ข้อมูลทางบัญชีของบริษัทเท่านั้น", ja: "会社の会計データのみ", en: "Only the company's accounting data" },
+      { th: "ข้อมูลส่วนบุคคลที่ระบุตัวตนได้ เช่น ชื่อ ที่อยู่ เบอร์โทร", ja: "氏名・住所・電話番号など、個人を特定できる情報", en: "Identifiable personal data, such as names, addresses, phone numbers" },
+      { th: "ข้อมูลลิขสิทธิ์ซอฟต์แวร์", ja: "ソフトウェアの著作権データ", en: "Software copyright data" },
+      { th: "ข้อมูลสภาพอากาศ", ja: "気象データ", en: "Weather data" }
+    ], correct: 1 },
+  { topic: { th: "ปิดการใช้ข้อมูลฝึกโมเดล", ja: "モデル学習利用のオプトアウト", en: "Opting Out of Model Training" },
+    q: { th: "บัญชี AI ประเภทใดที่มักปิดการใช้ข้อมูลสนทนาไปฝึกโมเดลไว้เป็นค่าเริ่มต้นอยู่แล้ว?", ja: "どのタイプのAIアカウントが、通常デフォルトでモデル学習へのデータ利用がオフになっていますか?", en: "Which type of AI account usually has model-training data use turned off by default?" },
+    choices: [
+      { th: "บัญชีส่วนตัว (Free)", ja: "個人アカウント(Free)", en: "A personal account (Free)" },
+      { th: "บัญชีองค์กร (Business/Team/Enterprise)", ja: "組織アカウント(Business/Team/Enterprise)", en: "An enterprise account (Business/Team/Enterprise)" },
+      { th: "บัญชีทดลองใช้ฟรี 7 วัน", ja: "7日間の無料トライアルアカウント", en: "A 7-day free trial account" },
+      { th: "ทุกบัญชีปิดให้อัตโนมัติเหมือนกันหมด", ja: "すべてのアカウントで自動的にオフになっており違いはない", en: "All accounts have it off automatically, with no difference" }
+    ], correct: 1 },
+  { topic: { th: "ลิขสิทธิ์และทรัพย์สินทางปัญญา", ja: "著作権と知的財産", en: "Copyright and IP" },
+    q: { th: "ก่อนนำเนื้อหาที่ AI สร้างไปเผยแพร่สู่สาธารณะ ควรทำอย่างไร?", ja: "AIが生成したコンテンツを公開する前に、何をすべきですか?", en: "Before publishing AI-generated content publicly, what should you do?" },
+    choices: [
+      { th: "เผยแพร่ได้ทันทีเพราะ AI สร้างเนื้อหาใหม่เสมอ ไม่มีปัญหาลิขสิทธิ์", ja: "AIは常に新しいコンテンツを生成し著作権上の問題はないので、すぐに公開してよい", en: "Publish it immediately, since AI always creates new content with no copyright issues" },
+      { th: "ตรวจสอบว่าไม่ซ้ำหรือคล้ายงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป", ja: "他者の著作物と重複または過度に類似していないか確認する", en: "Check that it isn't duplicating or overly similar to someone else's copyrighted work" },
+      { th: "เปลี่ยนแค่สีตัวอักษรก็เพียงพอแล้ว", ja: "文字の色を変えるだけで十分である", en: "Just changing the text color is enough" },
+      { th: "ไม่ต้องตรวจสอบถ้าเป็นแค่โพสต์โซเชียล", ja: "SNS投稿程度であれば確認は不要である", en: "No need to check if it's just a social media post" }
+    ], correct: 1 },
+  { topic: { th: "เครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みAIツール", en: "Company-Approved AI Tools" },
+    q: { th: "\"Shadow AI\" หมายถึงอะไร?", ja: "「シャドーAI(Shadow AI)」とは何を意味しますか?", en: "What does \"Shadow AI\" mean?" },
+    choices: [
+      { th: "AI ที่ทำงานเฉพาะเวลากลางคืน", ja: "夜間のみ稼働するAI", en: "AI that only operates at night" },
+      { th: "การใช้เครื่องมือ AI ที่ไม่ผ่านการอนุมัติจากบริษัทมาทำงาน", ja: "会社が承認していないAIツールを業務で使用すること", en: "Using AI tools not approved by the company for work" },
+      { th: "โหมดมืดของแอป AI", ja: "AIアプリのダークモード", en: "The dark mode of an AI app" },
+      { th: "AI ที่บริษัทพัฒนาขึ้นใช้ภายในเท่านั้น", ja: "会社が社内利用のためだけに開発したAI", en: "AI the company developed for internal use only" }
+    ], correct: 1 },
+  { topic: { th: "รหัสผ่านและการยืนยันตัวตน", ja: "パスワードと本人確認", en: "Passwords and Authentication" },
+    q: { th: "วิธีใดปลอดภัยกว่าในการยืนยันตัวตนสองชั้น (2FA)?", ja: "2段階認証(2FA)において、より安全な方法はどれですか?", en: "Which method is more secure for two-factor authentication (2FA)?" },
+    choices: [
+      { th: "รับรหัส OTP ทาง SMS", ja: "SMSでOTPコードを受け取る", en: "Receiving an OTP code via SMS" },
+      { th: "ใช้แอปยืนยันตัวตน (Authenticator App)", ja: "認証アプリ(Authenticator App)を使用する", en: "Using an authenticator app" },
+      { th: "ใช้รหัสผ่านเดียวกันทุกบัญชี", ja: "すべてのアカウントで同じパスワードを使う", en: "Using the same password for every account" },
+      { th: "ไม่ต้องใช้ 2FA ถ้าจำรหัสผ่านได้ดี", ja: "パスワードをよく覚えていれば2FAは不要", en: "Skipping 2FA if you remember your password well" }
+    ], correct: 1 },
+  { topic: { th: "อีเมลหลอกลวง (Phishing)", ja: "フィッシングメール", en: "Phishing Emails" },
+    q: { th: "ข้อใดต่อไปนี้ไม่ใช่สัญญาณเตือนของอีเมลหลอกลวง?", ja: "次のうち、フィッシングメールの警戒兆候ではないものはどれですか?", en: "Which of the following is NOT a warning sign of a phishing email?" },
+    choices: [
+      { th: "เร่งรัดให้รีบดำเนินการด่วนผิดปกติ", ja: "不自然なほど緊急の対応を迫る", en: "Unusually urgent pressure to act fast" },
+      { th: "ที่อยู่อีเมลสะกดคล้ายของจริงแต่ผิดเล็กน้อย", ja: "本物に似ているがわずかに異なる送信元アドレス", en: "A sender address spelled almost like the real one but slightly off" },
+      { th: "ส่งจากอีเมลภายในบริษัทที่ตรงกับรายชื่อพนักงานจริงและเนื้อหาปกติทุกอย่าง", ja: "実在の従業員リストと一致する社内メールアドレスから送られ、内容もすべて通常通り", en: "Sent from an internal company email matching a real employee list, with entirely normal content" },
+      { th: "ขอข้อมูลบัญชี/รหัสผ่านโดยตรง", ja: "アカウント情報・パスワードを直接要求する", en: "Directly asking for account credentials/passwords" }
+    ], correct: 2 },
+  { topic: { th: "Phishing ที่ใช้ AI ช่วยสร้าง", ja: "AIを悪用したフィッシング", en: "AI-Generated Phishing" },
+    q: { th: "หากได้รับวิดีโอคอลจากผู้บริหารสั่งโอนเงินด่วนผิดปกติ ควรทำอย่างไร?", ja: "経営層からのビデオ通話で、不自然に急な送金を指示された場合、どうすべきですか?", en: "If you receive a video call from an executive urgently ordering an unusual money transfer, what should you do?" },
+    choices: [
+      { th: "โอนทันทีเพราะเห็นหน้าและได้ยินเสียงชัดเจนแล้ว", ja: "顔も声もはっきり確認できたので直ちに送金する", en: "Transfer immediately, since you can clearly see and hear them" },
+      { th: "ตั้งสติ ยืนยันผ่านช่องทางอื่นก่อน เช่น โทรกลับเบอร์เดิมที่บันทึกไว้", ja: "落ち着いて、まず保存済みの電話番号にかけ直すなど別の手段で確認する", en: "Stay calm and verify through another channel first, such as calling back a saved number" },
+      { th: "ถามชื่อผู้บริหารในวิดีโอคอลเพื่อยืนยันตัวตน", ja: "本人確認のためビデオ通話中に経営者の氏名を尋ねる", en: "Ask for the executive's name during the video call to confirm identity" },
+      { th: "รอ 24 ชั่วโมงแล้วโอนตามปกติ", ja: "24時間待ってから通常通り送金する", en: "Wait 24 hours, then transfer as usual" }
+    ], correct: 1 },
+  { topic: { th: "Deepfake", ja: "ディープフェイク", en: "Deepfake" },
+    q: { th: "ข้อใดเป็นจุดสังเกตที่อาจพบได้ใน Deepfake?", ja: "ディープフェイクに見られる可能性のある特徴はどれですか?", en: "Which of the following is a tell-tale sign that might appear in a deepfake?" },
+    choices: [
+      { th: "เสียงกับปากขยับไม่ตรงกัน", ja: "音声と口の動きが一致しない", en: "Audio that doesn't match the lip movement" },
+      { th: "คุณภาพวิดีโอคมชัดผิดปกติ", ja: "不自然に高い映像の鮮明さ", en: "Unusually sharp video quality" },
+      { th: "มีลายน้ำของบริษัทชัดเจน", ja: "会社の透かしが明確に入っている", en: "A clear company watermark" },
+      { th: "ไฟล์วิดีโอมีความยาวสั้นกว่า 10 วินาที", ja: "動画ファイルの長さが10秒未満", en: "A video file shorter than 10 seconds" }
+    ], correct: 0 },
+  { topic: { th: "แชร์ Prompt/Custom GPT", ja: "プロンプト・カスタムGPTの共有", en: "Sharing Prompts/Custom GPTs" },
+    q: { th: "ก่อนแชร์ Custom GPT ให้เพื่อนร่วมงานหรือเผยแพร่สู่สาธารณะ ควรตรวจสอบอะไร?", ja: "カスタムGPTを同僚と共有したり公開したりする前に、何を確認すべきですか?", en: "Before sharing a Custom GPT with colleagues or publishing it publicly, what should you check?" },
+    choices: [
+      { th: "ตรวจสอบว่าไม่มีข้อมูลลับหรือ Knowledge files ที่มีข้อมูลบริษัทปะปนอยู่", ja: "機密情報や会社のデータを含むナレッジファイルが含まれていないか確認する", en: "Check that no confidential data or knowledge files containing company data are included" },
+      { th: "ตรวจสอบแค่ว่าชื่อ GPT น่าสนใจหรือไม่", ja: "GPTの名前が魅力的かどうかだけを確認する", en: "Just check whether the GPT's name sounds interesting" },
+      { th: "ไม่ต้องตรวจสอบถ้าตั้งชื่อเป็นภาษาอังกฤษ", ja: "英語の名前が付いていれば確認は不要", en: "No need to check if it's named in English" },
+      { th: "เผยแพร่ได้เลยถ้าเคยแชร์แบบนี้มาก่อน", ja: "以前に同様の共有をしたことがあれば、そのまま公開してよい", en: "It's fine to publish if you've shared something similar before" }
+    ], correct: 0 },
+  { topic: { th: "แจ้งเหตุผิดปกติ", ja: "異常事態の報告", en: "Reporting Incidents" },
+    q: { th: "หากสงสัยว่าข้อมูลบริษัทหลุดเข้า AI สาธารณะโดยไม่ตั้งใจ ควรทำอย่างไรเป็นอันดับแรก?", ja: "会社のデータが意図せず公開AIに流出した疑いがある場合、まず何をすべきですか?", en: "If you suspect company data was unintentionally leaked into public AI, what should you do first?" },
+    choices: [
+      { th: "เก็บเป็นความลับไว้คนเดียวเพื่อไม่ให้ถูกตำหนิ", ja: "叱責を避けるため、一人で黙っておく", en: "Keep it to yourself so you don't get blamed" },
+      { th: "แจ้งทีม IT หรือผู้ดูแลระบบของบริษัททันที", ja: "直ちにIT部門または会社のシステム管理者に報告する", en: "Notify IT or the company's system administrator immediately" },
+      { th: "รอดูสถานการณ์ก่อนสัก 1 สัปดาห์", ja: "1週間ほど様子を見る", en: "Wait about a week to see how things develop" },
+      { th: "ลบบทสนทนาทิ้งแล้วไม่บอกใคร", ja: "会話を削除して誰にも伝えない", en: "Delete the conversation and tell no one" }
+    ], correct: 1 }
 ];
 
-// ภาพประกอบต่อหัวข้อ (วาดด้วย SVG เอง ไม่ใช้ภาพถ่าย จึงไม่มีปัญหาลิขสิทธิ์ และใช้ชุดเดียวกับ ai-safety-guide.html)
-// key ของแต่ละภาพต้องตรงกับ TOPIC_TO_ILLO ด้านล่าง
-const TOPIC_ILLUSTRATIONS = {
-  overview: { tone: "accent", svg: `
-    <line x1="100" y1="35" x2="100" y2="22" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
-    <circle cx="100" cy="18" r="6" style="fill:var(--accent)"/>
-    <rect x="62" y="35" width="76" height="58" rx="16" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <circle cx="84" cy="62" r="7" style="fill:var(--accent)"/>
-    <circle cx="116" cy="62" r="7" style="fill:var(--steel)"/>
-    <line x1="80" y1="80" x2="120" y2="80" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
-    <rect x="72" y="98" width="56" height="34" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <circle cx="100" cy="115" r="8" style="fill:none;stroke:var(--accent);stroke-width:3"/>
-    <line x1="40" y1="60" x2="58" y2="60" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="40" y1="60" x2="40" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="40" y1="76" x2="54" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <circle cx="40" cy="60" r="3.5" style="fill:var(--steel)"/>
-    <line x1="160" y1="60" x2="142" y2="60" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="160" y1="60" x2="160" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <line x1="160" y1="76" x2="146" y2="76" style="stroke:var(--steel);stroke-width:3;stroke-linecap:round;opacity:0.6"/>
-    <circle cx="160" cy="60" r="3.5" style="fill:var(--steel)"/>
-  ` },
-  "group-standards": { tone: "steel", svg: `
-    <polygon points="100,20 148,38 148,76 100,136 52,76 52,38" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
-    <rect x="76" y="82" width="48" height="26" rx="3" style="fill:var(--steel)"/>
-    <rect x="82" y="62" width="8" height="22" style="fill:var(--steel)"/>
-    <rect x="110" y="54" width="8" height="30" style="fill:var(--steel)"/>
-    <circle cx="86" cy="58" r="4" style="fill:var(--accent)"/>
-    <circle cx="114" cy="50" r="4" style="fill:var(--accent)"/>
-  ` },
-  "toyota-genai": { tone: "accent", svg: `
-    <rect x="40" y="95" width="120" height="26" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <rect x="66" y="72" width="68" height="26" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <circle cx="66" cy="121" r="11" style="fill:var(--ink)"/>
-    <circle cx="134" cy="121" r="11" style="fill:var(--ink)"/>
-    <circle cx="66" cy="121" r="4" style="fill:var(--surface)"/>
-    <circle cx="134" cy="121" r="4" style="fill:var(--surface)"/>
-    <rect x="118" y="16" width="58" height="32" rx="10" style="fill:var(--accent)"/>
-    <polygon points="130,48 130,58 142,48" style="fill:var(--accent)"/>
-    <circle cx="134" cy="32" r="2.5" style="fill:var(--surface)"/>
-    <circle cx="146" cy="32" r="2.5" style="fill:var(--surface)"/>
-    <circle cx="158" cy="32" r="2.5" style="fill:var(--surface)"/>
-  ` },
-  "data-classification": { tone: "warn", svg: `
-    <polygon points="28,55 70,55 80,45 130,45 130,110 28,110" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
-    <rect x="120" y="70" width="50" height="42" rx="8" style="fill:var(--warn)"/>
-    <path d="M132 70 v-14 a13 13 0 0 1 26 0 v14" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
-    <circle cx="145" cy="90" r="6" style="fill:var(--surface)"/>
-    <rect x="142" y="90" width="6" height="12" style="fill:var(--surface)"/>
-  ` },
-  "verify-output": { tone: "howto", svg: `
-    <rect x="35" y="35" width="90" height="80" rx="8" style="fill:var(--surface);stroke:var(--ink);stroke-width:3"/>
-    <line x1="50" y1="55" x2="95" y2="55" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <line x1="50" y1="72" x2="95" y2="72" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <line x1="50" y1="89" x2="80" y2="89" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <circle cx="128" cy="88" r="28" style="fill:var(--surface);stroke:var(--howto);stroke-width:6"/>
-    <line x1="148" y1="108" x2="168" y2="128" style="stroke:var(--howto);stroke-width:7;stroke-linecap:round"/>
-    <polyline points="115,88 124,97 141,78" style="fill:none;stroke:var(--howto);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
-  ` },
-  "privacy-pdpa": { tone: "accent", svg: `
-    <rect x="45" y="25" width="80" height="100" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:3"/>
-    <polygon points="105,25 125,25 125,45" style="fill:var(--paper);stroke:var(--ink);stroke-width:2;stroke-linejoin:round"/>
-    <line x1="58" y1="50" x2="98" y2="50" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <line x1="58" y1="65" x2="112" y2="65" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <line x1="58" y1="80" x2="105" y2="80" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <circle cx="140" cy="100" r="24" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:3;stroke-dasharray:3 3"/>
-    <polyline points="130,100 137,107 152,90" style="fill:none;stroke:var(--accent-deep);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
-  ` },
-  "privacy-settings": { tone: "steel", svg: `
-    <circle cx="80" cy="74" r="30" style="fill:var(--surface);stroke:var(--steel);stroke-width:5"/>
-    <circle cx="80" cy="74" r="10" style="fill:none;stroke:var(--steel);stroke-width:4"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(0 80 74)"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(45 80 74)"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(90 80 74)"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(135 80 74)"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(180 80 74)"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(225 80 74)"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(270 80 74)"/>
-    <rect x="76" y="30" width="8" height="16" rx="2" style="fill:var(--steel)" transform="rotate(315 80 74)"/>
-    <rect x="120" y="80" width="46" height="36" rx="7" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <path d="M131 80 v-12 a12 12 0 0 1 24 0 v12" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
-    <circle cx="143" cy="96" r="5" style="fill:var(--ink)"/>
-  ` },
-  "copyright-ip": { tone: "example", svg: `
-    <polygon points="100,20 148,38 148,76 100,136 52,76 52,38" style="fill:var(--example-soft);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
-    <text x="100" y="92" text-anchor="middle" style="font-size:56px;font-weight:700;fill:var(--example);font-family:var(--sans)">&#169;</text>
-  ` },
-  "approved-tools": { tone: "accent", svg: `
-    <rect x="50" y="30" width="100" height="110" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <rect x="80" y="20" width="40" height="16" rx="6" style="fill:var(--accent)"/>
-    <circle cx="70" cy="58" r="7" style="fill:var(--accent)"/>
-    <polyline points="66,58 69,61 75,54" style="fill:none;stroke:var(--surface);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"/>
-    <line x1="85" y1="58" x2="132" y2="58" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.55"/>
-    <circle cx="70" cy="82" r="7" style="fill:var(--accent)"/>
-    <polyline points="66,82 69,85 75,78" style="fill:none;stroke:var(--surface);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"/>
-    <line x1="85" y1="82" x2="125" y2="82" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.55"/>
-    <circle cx="70" cy="106" r="7" style="fill:none;stroke:var(--ink);stroke-width:3;opacity:0.4"/>
-    <line x1="85" y1="106" x2="118" y2="106" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.3"/>
-  ` },
-  "account-security": { tone: "steel", svg: `
-    <rect x="45" y="60" width="60" height="50" rx="10" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <path d="M58 60 v-16 a17 17 0 0 1 34 0 v16" style="fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round"/>
-    <circle cx="75" cy="82" r="7" style="fill:var(--steel)"/>
-    <rect x="72" y="82" width="6" height="12" style="fill:var(--steel)"/>
-    <rect x="128" y="45" width="34" height="60" rx="8" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <line x1="134" y1="92" x2="156" y2="92" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.4"/>
-    <circle cx="145" cy="63" r="10" style="fill:none;stroke:var(--accent);stroke-width:3"/>
-    <text x="145" y="67" text-anchor="middle" style="font-size:11px;font-family:var(--mono);font-weight:700;fill:var(--accent-deep)">2FA</text>
-  ` },
-  "phishing-email": { tone: "warn", svg: `
-    <rect x="35" y="45" width="110" height="72" rx="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <polyline points="35,49 90,90 145,49" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
-    <path d="M150 60 v40 a14 14 0 0 1 -28 0" style="fill:none;stroke:var(--warn);stroke-width:6;stroke-linecap:round"/>
-    <circle cx="150" cy="58" r="5" style="fill:var(--warn)"/>
-  ` },
-  "ai-phishing": { tone: "warn", svg: `
-    <circle cx="100" cy="75" r="45" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <rect x="65" y="65" width="70" height="20" rx="8" style="fill:var(--ink)"/>
-    <circle cx="82" cy="75" r="5" style="fill:var(--warn)"/>
-    <circle cx="118" cy="75" r="5" style="fill:var(--warn)"/>
-    <line x1="90" y1="100" x2="110" y2="100" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
-    <line x1="100" y1="20" x2="100" y2="30" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
-    <circle cx="100" cy="16" r="5" style="fill:var(--warn)"/>
-  ` },
-  deepfake: { tone: "warn", svg: `
-    <circle cx="100" cy="75" r="45" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <line x1="100" y1="30" x2="100" y2="120" style="stroke:var(--ink);stroke-width:2;stroke-dasharray:3 3;opacity:0.5"/>
-    <circle cx="86" cy="68" r="5" style="fill:var(--ink)"/>
-    <line x1="80" y1="95" x2="94" y2="95" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/>
-    <rect x="106" y="52" width="9" height="9" style="fill:var(--warn);opacity:0.7"/>
-    <rect x="117" y="52" width="9" height="9" style="fill:var(--warn);opacity:0.4"/>
-    <rect x="106" y="63" width="9" height="9" style="fill:var(--warn);opacity:0.5"/>
-    <rect x="117" y="63" width="9" height="9" style="fill:var(--warn);opacity:0.8"/>
-    <rect x="106" y="74" width="9" height="9" style="fill:var(--warn);opacity:0.3"/>
-    <rect x="117" y="74" width="9" height="9" style="fill:var(--warn);opacity:0.6"/>
-    <rect x="106" y="85" width="9" height="9" style="fill:var(--warn);opacity:0.5"/>
-    <rect x="117" y="85" width="9" height="9" style="fill:var(--warn);opacity:0.4"/>
-  ` },
-  "sharing-prompts": { tone: "example", svg: `
-    <rect x="35" y="35" width="90" height="55" rx="14" style="fill:var(--surface);stroke:var(--ink);stroke-width:4"/>
-    <polygon points="55,90 55,105 72,90" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
-    <line x1="52" y1="55" x2="108" y2="55" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <line x1="52" y1="70" x2="90" y2="70" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round;opacity:0.5"/>
-    <circle cx="150" cy="45" r="9" style="fill:var(--example)"/>
-    <circle cx="150" cy="105" r="9" style="fill:var(--example)"/>
-    <circle cx="122" cy="75" r="9" style="fill:var(--example)"/>
-    <line x1="130" y1="70" x2="143" y2="50" style="stroke:var(--example);stroke-width:3"/>
-    <line x1="130" y1="80" x2="143" y2="100" style="stroke:var(--example);stroke-width:3"/>
-  ` },
-  "incident-report": { tone: "warn", svg: `
-    <path d="M100 30 a30 30 0 0 1 30 30 v20 l10 14 h-80 l10 -14 v-20 a30 30 0 0 1 30 -30 z" style="fill:var(--surface);stroke:var(--ink);stroke-width:4;stroke-linejoin:round"/>
-    <circle cx="100" cy="104" r="9" style="fill:var(--warn)"/>
-    <line x1="65" y1="45" x2="50" y2="30" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.7"/>
-    <line x1="135" y1="45" x2="150" y2="30" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.7"/>
-    <line x1="55" y1="65" x2="38" y2="65" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.5"/>
-    <line x1="145" y1="65" x2="162" y2="65" style="stroke:var(--warn);stroke-width:4;stroke-linecap:round;opacity:0.5"/>
-  ` }
-};
+const PASS_RATIO = 0.9;
+let current = 0;
+const answers = new Array(QUESTIONS.length).fill(null);
+let finished = false;
 
-// จับคู่ topic (ข้อความไทยที่ใช้ใน QUESTIONS) กับ key ของภาพใน TOPIC_ILLUSTRATIONS ด้านบน
-const TOPIC_TO_ILLO = {
-  "ตรวจสอบความถูกต้องของคำตอบ AI": "verify-output",
-  "ข้อมูลที่ห้ามป้อนเข้า AI": "data-classification",
-  "ความเป็นส่วนตัวและ PDPA": "privacy-pdpa",
-  "ปิดการใช้ข้อมูลฝึกโมเดล": "privacy-settings",
-  "ลิขสิทธิ์และทรัพย์สินทางปัญญา": "copyright-ip",
-  "เครื่องมือ AI ที่บริษัทอนุมัติ": "approved-tools",
-  "รหัสผ่านและการยืนยันตัวตน": "account-security",
-  "ระวัง Phishing ที่ใช้ AI ช่วยสร้าง": "ai-phishing",
-  "Deepfake": "deepfake",
-  "แชร์ Prompt/Custom GPT อย่างปลอดภัย": "sharing-prompts",
-  "พบสิ่งผิดปกติ แจ้งใคร": "incident-report",
-  "สรุป Do/Don't": "incident-report",
-  "มาตรฐานความปลอดภัยไซเบอร์กลุ่ม AISIN/Toyota": "group-standards",
-  "อีเมลหลอกลวง (Phishing Mail)": "phishing-email",
-  "แนวทางของกลุ่ม Toyota ต่อ Generative AI": "toyota-genai"
-};
+function letterFor(i) { return String.fromCharCode(65 + i); }
 
-function renderTopicBanner(item) {
-  const illoKey = TOPIC_TO_ILLO[item.topic];
-  const illo = illoKey ? TOPIC_ILLUSTRATIONS[illoKey] : null;
-  if (!illo) return "";
-  const banner = document.createElement("div");
-  banner.className = "topic-banner tone-" + illo.tone;
-  banner.innerHTML = '<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="' + item.topic + '"></svg>' +
-    '<span class="topic-banner-label">' + item.topic + (item.topicEN ? '<span class="en">' + item.topicEN + '</span>' : '') + '</span>';
-  banner.querySelector("svg").innerHTML = illo.svg;
-  return banner;
+function setLang(lang) {
+  LANG = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  renderChrome();
+  finished ? renderResults() : renderQuestion();
 }
 
-const PASS_THRESHOLD = 90; // เปอร์เซ็นต์ขั้นต่ำที่ต้องได้เพื่อผ่าน
-let attemptCount = 0;
-// สถานะต่อข้อ: locked=true คือตอบถูกแล้ว ล็อกไว้ไม่ต้องตอบซ้ำ, attempted=true คือเคยตอบผิดมาก่อน (ยังต้องแก้)
-let questionState = QUESTIONS.map(() => ({ locked: false, attempted: false }));
-
-// ส่งผลไปบันทึกที่ SharePoint List ผ่าน Power Automate flow (ดูคำแนะนำตั้งค่าด้านบน)
-async function submitResultToSharePoint(payload) {
-  if (!RESULT_SUBMIT_URL) {
-    return { ok: false, reason: "not-configured" };
-  }
-  try {
-    const res = await fetch(RESULT_SUBMIT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    return { ok: res.ok, reason: res.ok ? null : "http-" + res.status };
-  } catch (e) {
-    return { ok: false, reason: "network" };
-  }
-}
-
-function updateProgressRail() {
-  const correctCount = questionState.filter(s => s.locked).length;
-  const percent = Math.round((correctCount / QUESTIONS.length) * 100);
-  const fill = document.getElementById("progressRailFill");
-  const label = document.getElementById("progressRailLabel");
-  fill.style.width = percent + "%";
-  fill.classList.toggle("pass", percent >= PASS_THRESHOLD);
-  if (correctCount === 0) {
-    label.innerHTML = "ยังไม่ได้ตรวจคำตอบข้อใดเลย · 0 / " + QUESTIONS.length + " ข้อ <span class=\"inline-en\">· No answers checked yet</span>";
-  } else {
-    label.innerHTML = "ตอบถูกแล้ว " + correctCount + " / " + QUESTIONS.length + " ข้อ (" + percent + "%) <span class=\"inline-en\">· " + correctCount + "/" + QUESTIONS.length + " correct (" + percent + "%)</span>";
-  }
-}
-
-function renderQuestions() {
-  const form = document.getElementById("quizForm");
-  form.innerHTML = "";
-  QUESTIONS.forEach((item, qi) => {
-    if (qi === 0 || item.topic !== QUESTIONS[qi - 1].topic) {
-      const banner = renderTopicBanner(item);
-      if (banner) form.appendChild(banner);
-    }
-
-    const block = document.createElement("div");
-    block.className = "q-block";
-    block.dataset.qi = qi;
-
-    const head = document.createElement("div");
-    head.className = "q-head";
-    const numEl = document.createElement("span");
-    numEl.className = "q-num";
-    numEl.textContent = String(qi + 1).padStart(2, "0");
-    const metaEl = document.createElement("span");
-    metaEl.className = "q-meta";
-    metaEl.innerHTML = '<span class="q-topic">' + item.topic + '</span>' +
-      (item.topicEN ? '<span class="q-topic-en">' + item.topicEN + '</span>' : '') +
-      '<span class="q-count">ข้อ ' + (qi + 1) + ' จาก ' + QUESTIONS.length + ' · Question ' + (qi + 1) + ' of ' + QUESTIONS.length + '</span>';
-    head.appendChild(numEl);
-    head.appendChild(metaEl);
-    block.appendChild(head);
-
-    const qText = document.createElement("p");
-    qText.className = "q-text";
-    qText.textContent = item.q;
-    block.appendChild(qText);
-
-    if (item.qEN) {
-      const qTextEn = document.createElement("p");
-      qTextEn.className = "q-text-en";
-      qTextEn.textContent = item.qEN;
-      block.appendChild(qTextEn);
-    }
-
-    const optsWrap = document.createElement("div");
-    optsWrap.className = "q-options";
-    item.options.forEach((opt, oi) => {
-      const label = document.createElement("label");
-      label.className = "q-option";
-      label.dataset.oi = oi;
-      const input = document.createElement("input");
-      input.type = "radio";
-      input.name = "q" + qi;
-      input.value = oi;
-      input.addEventListener("change", () => {
-        optsWrap.querySelectorAll(".q-option").forEach(o => {
-          o.classList.remove("selected", "result-wrong");
-          const m = o.querySelector(".q-mark");
-          if (m) m.remove();
-        });
-        label.classList.add("selected");
-        updateUnansweredWarning();
-      });
-      const textWrap = document.createElement("span");
-      textWrap.className = "q-option-text";
-      const thSpan = document.createElement("span");
-      thSpan.className = "q-option-th";
-      thSpan.textContent = opt;
-      textWrap.appendChild(thSpan);
-      if (item.optionsEN && item.optionsEN[oi]) {
-        const enSpan = document.createElement("span");
-        enSpan.className = "q-option-en";
-        enSpan.textContent = item.optionsEN[oi];
-        textWrap.appendChild(enSpan);
-      }
-      label.appendChild(input);
-      label.appendChild(textWrap);
-      optsWrap.appendChild(label);
-    });
-    block.appendChild(optsWrap);
-    form.appendChild(block);
+function renderLangSwitch() {
+  const el = document.getElementById("langSwitch");
+  el.innerHTML = "";
+  ["th", "ja", "en"].forEach(l => {
+    const btn = document.createElement("button");
+    btn.className = "lang-btn" + (l === LANG ? " active" : "");
+    btn.textContent = (l === "th" ? "🇹🇭 " : l === "ja" ? "🇯🇵 " : "🇬🇧 ") + UI[l].langName;
+    btn.setAttribute("aria-pressed", l === LANG ? "true" : "false");
+    btn.onclick = () => setLang(l);
+    el.appendChild(btn);
   });
-  updateProgressRail();
 }
 
-function countUnanswered() {
-  let count = 0;
-  QUESTIONS.forEach((item, qi) => {
-    if (questionState[qi].locked) return;
-    const checked = document.querySelector('input[name="q' + qi + '"]:checked');
-    if (!checked) count++;
+function renderChrome() {
+  const t = UI[LANG];
+  renderLangSwitch();
+  document.getElementById("mastheadH1").textContent = t.h1;
+  document.getElementById("mastheadSub").textContent = t.sub;
+  document.getElementById("backLink").textContent = t.backLink;
+  document.title = t.h1.replace(/^\S+\s/, "") + " — ATTG";
+}
+
+function updateProgress() {
+  const t = UI[LANG];
+  const answeredCount = answers.filter(a => a !== null).length;
+  document.getElementById("progQLabel").textContent = t.qOf(finished ? QUESTIONS.length : current + 1, QUESTIONS.length);
+  document.getElementById("progALabel").textContent = t.answered(answeredCount);
+  const pct = finished ? 100 : Math.round((current / QUESTIONS.length) * 100);
+  document.getElementById("progFill").style.width = pct + "%";
+}
+
+function renderQuestion() {
+  finished = false;
+  const t = UI[LANG];
+  const el = document.getElementById("content");
+  const item = QUESTIONS[current];
+  const picked = answers[current];
+
+  const choicesHtml = item.choices.map((c, i) => {
+    const sel = picked === i ? " selected" : "";
+    return '<button class="choice' + sel + '" data-idx="' + i + '" aria-pressed="' + (picked === i) + '">' +
+      '<span class="choice-letter">' + letterFor(i) + '</span><span>' + c[LANG] + '</span></button>';
+  }).join('');
+
+  el.innerHTML =
+    '<span class="q-num">' + item.topic[LANG] + ' · ' + t.qOf(current + 1, QUESTIONS.length) + '</span>' +
+    '<p class="q-text">' + item.q[LANG] + '</p>' +
+    '<div class="choices">' + choicesHtml + '</div>' +
+    '<div class="quiz-nav">' +
+    '<button class="btn btn-ghost" id="btnPrev"' + (current === 0 ? ' disabled' : '') + '>' + t.prev + '</button>' +
+    '<button class="btn btn-primary" id="btnNext"' + (picked === null ? ' disabled' : '') + '>' +
+    (current === QUESTIONS.length - 1 ? t.submit : t.next) + '</button>' +
+    '</div>';
+
+  el.querySelectorAll(".choice").forEach(btn => {
+    btn.onclick = () => {
+      answers[current] = parseInt(btn.dataset.idx, 10);
+      renderQuestion();
+      updateProgress();
+    };
   });
-  return count;
-}
-
-function updateUnansweredWarning() {
-  const remaining = countUnanswered();
-  const warn = document.getElementById("unansweredWarning");
-  if (remaining > 0) {
-    document.getElementById("unansweredCount").textContent = remaining;
-    warn.style.display = "block";
-  } else {
-    warn.style.display = "none";
-  }
-}
-
-function gradeQuiz() {
-  const remaining = countUnanswered();
-  if (remaining > 0) {
-    updateUnansweredWarning();
-    document.getElementById("unansweredWarning").scrollIntoView({ behavior: "smooth", block: "center" });
-    return;
-  }
-  document.getElementById("unansweredWarning").style.display = "none";
-
-  let firstWrongBlock = null;
-
-  QUESTIONS.forEach((item, qi) => {
-    if (questionState[qi].locked) return; // ตอบถูกไปแล้วในรอบก่อน ไม่ต้องตรวจซ้ำ
-
-    const block = document.querySelector('.q-block[data-qi="' + qi + '"]');
-    const checked = document.querySelector('input[name="q' + qi + '"]:checked');
-    const selectedIndex = parseInt(checked.value, 10);
-    const isCorrect = selectedIndex === item.correct;
-
-    block.querySelectorAll(".q-option").forEach(optEl => {
-      optEl.classList.remove("result-wrong", "result-correct");
-      const m = optEl.querySelector(".q-mark");
-      if (m) m.remove();
-    });
-
-    const selectedLabel = block.querySelector('.q-option[data-oi="' + selectedIndex + '"]');
-
-    if (isCorrect) {
-      questionState[qi].locked = true;
-      block.classList.add("locked");
-      block.querySelectorAll("input").forEach(inp => inp.disabled = true);
-      selectedLabel.classList.add("result-correct");
-      const mark = document.createElement("span");
-      mark.className = "q-mark ok";
-      mark.textContent = "✓ ถูกต้อง · Correct";
-      selectedLabel.appendChild(mark);
-      const hint = block.querySelector(".q-retry-hint");
-      if (hint) hint.remove();
-    } else {
-      questionState[qi].attempted = true;
-      selectedLabel.classList.add("result-wrong");
-      const mark = document.createElement("span");
-      mark.className = "q-mark bad";
-      mark.textContent = "✗ ไม่ถูกต้อง · Incorrect";
-      selectedLabel.appendChild(mark);
-      let hint = block.querySelector(".q-retry-hint");
-      if (!hint) {
-        hint = document.createElement("p");
-        hint.className = "q-retry-hint";
-        block.insertBefore(hint, block.querySelector(".q-options"));
-      }
-      hint.innerHTML = "✗ คำตอบนี้ยังไม่ถูกต้อง กรุณากลับไปทบทวนคู่มือแล้วเลือกใหม่ <span class=\"inline-en\">· This answer is not yet correct — please review the guide and choose again</span>";
-      if (!firstWrongBlock) firstWrongBlock = block;
-    }
-  });
-
-  const correctCount = questionState.filter(s => s.locked).length;
-  const percent = Math.round((correctCount / QUESTIONS.length) * 100);
-  const passed = percent >= PASS_THRESHOLD;
-  attemptCount++;
-
-  updateProgressRail();
-  updateProgressSummary(correctCount, percent, passed);
-
-  if (passed) {
-    finalizePass(correctCount, percent);
-  } else if (firstWrongBlock) {
-    firstWrongBlock.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-}
-
-function updateProgressSummary(correctCount, percent, passed) {
-  const el = document.getElementById("progressSummary");
-  const text = document.getElementById("progressText");
-  const textEn = document.getElementById("progressTextEn");
-  el.style.display = "block";
-  if (passed) {
-    text.innerHTML = "✅ <strong>ผ่านเกณฑ์แล้ว!</strong> ตอบถูก " + correctCount + " / " + QUESTIONS.length + " ข้อ (" + percent + "%)";
-    textEn.innerHTML = "✅ <strong>Passed!</strong> " + correctCount + " / " + QUESTIONS.length + " correct (" + percent + "%)";
-    el.className = "progress-summary pass";
-  } else {
-    const remaining = QUESTIONS.length - correctCount;
-    text.innerHTML = "ตอบถูกแล้ว <strong>" + correctCount + " / " + QUESTIONS.length + " ข้อ (" + percent + "%)</strong> — ยังไม่ผ่านเกณฑ์ 90% เหลืออีก " + remaining + " ข้อที่มีเครื่องหมาย ✗ กำกับไว้ กรุณาแก้ไขแล้วกด \"ตรวจคำตอบ\" อีกครั้ง (ไม่ต้องทำข้อที่ล็อกไว้ว่าถูกแล้วซ้ำ)";
-    textEn.innerHTML = "<strong>" + correctCount + " / " + QUESTIONS.length + " correct (" + percent + "%)</strong> — not yet at the 90% pass threshold. " + remaining + " question(s) marked ✗ remain — fix them and click \"Check Answers\" again (no need to redo questions already locked in as correct).";
-    el.className = "progress-summary fail";
-  }
-}
-
-function finalizePass(correctCount, percent) {
-  document.getElementById("submitBtn").style.display = "none";
-  document.getElementById("unansweredWarning").style.display = "none";
-  document.querySelectorAll('#quizForm input[type="radio"]').forEach(inp => inp.disabled = true);
-
-  const resultsSection = document.getElementById("resultsSection");
-  const resultLabel = document.getElementById("resultLabel");
-  const resultLabelEn = document.getElementById("resultLabelEn");
-  const resultScore = document.getElementById("resultScore");
-  const resultDetail = document.getElementById("resultDetail");
-  const resultDetailEn = document.getElementById("resultDetailEn");
-  const resultBadge = document.getElementById("resultBadge");
-  const attemptNote = document.getElementById("attemptNote");
-
-  const nameVal = document.getElementById("quizName").value.trim();
-
-  resultLabel.textContent = (nameVal ? nameVal + " — " : "") + "ผลการทำแบบทดสอบ";
-  resultLabelEn.textContent = (nameVal ? nameVal + " — " : "") + "Assessment Result";
-  resultScore.textContent = percent + "%";
-  resultDetail.textContent = "ตอบถูก " + correctCount + " จาก " + QUESTIONS.length + " ข้อ (เกณฑ์ผ่าน: 90%)";
-  resultDetailEn.textContent = correctCount + " / " + QUESTIONS.length + " correct (pass threshold: 90%)";
-  resultBadge.innerHTML = "✅ ผ่านเกณฑ์ — เข้าใจแนวปฏิบัติการใช้ AI อย่างปลอดภัยแล้ว<span class=\"en\">Passed — you understand safe AI usage practices</span>";
-  attemptNote.textContent = "จำนวนครั้งที่กดตรวจคำตอบในเซสชันนี้: " + attemptCount + " · Check-answer attempts this session: " + attemptCount;
-
-  resultsSection.style.display = "block";
-  resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-
-  const saveStatus = document.getElementById("saveStatus");
-  saveStatus.innerHTML = "⏳ กำลังบันทึกผลลง SharePoint...<span class=\"en\">Saving result to SharePoint...</span>";
-  saveStatus.className = "save-status pending";
-
-  const payload = {
-    name: nameVal || "(ไม่ระบุชื่อ)",
-    score: percent,
-    correctCount,
-    totalQuestions: QUESTIONS.length,
-    passed: true,
-    submittedAt: new Date().toISOString()
+  document.getElementById("btnPrev").onclick = () => { current--; renderQuestion(); updateProgress(); };
+  document.getElementById("btnNext").onclick = () => {
+    if (current === QUESTIONS.length - 1) { renderResults(); }
+    else { current++; renderQuestion(); updateProgress(); }
   };
-
-  submitResultToSharePoint(payload).then((result) => {
-    if (result.ok) {
-      saveStatus.innerHTML = "✅ บันทึกผลลง SharePoint เรียบร้อยแล้ว<span class=\"en\">Result saved to SharePoint successfully</span>";
-      saveStatus.className = "save-status ok";
-    } else if (result.reason === "not-configured") {
-      saveStatus.innerHTML = "⚠️ ยังไม่ได้เชื่อมต่อระบบบันทึกผลส่วนกลาง (แจ้งทีม IT ให้ตั้งค่า) — กรุณากดพิมพ์/บันทึกผลลัพธ์ไว้เป็นหลักฐานแทน<span class=\"en\">Central result storage isn't configured yet (ask IT to set it up) — please print/save this result as your proof instead</span>";
-      saveStatus.className = "save-status warn";
-    } else {
-      saveStatus.innerHTML = "⚠️ บันทึกผลไปยัง SharePoint ไม่สำเร็จ — กรุณากดพิมพ์/บันทึกผลลัพธ์ไว้เป็นหลักฐาน แล้วแจ้งทีม IT<span class=\"en\">Saving to SharePoint failed — please print/save this result as proof and notify IT</span>";
-      saveStatus.className = "save-status warn";
-    }
-  });
+  updateProgress();
 }
 
-function resetQuiz() {
-  questionState = QUESTIONS.map(() => ({ locked: false, attempted: false }));
-  attemptCount = 0;
-  document.getElementById("resultsSection").style.display = "none";
-  document.getElementById("progressSummary").style.display = "none";
-  document.getElementById("submitBtn").style.display = "inline-block";
-  document.getElementById("unansweredWarning").style.display = "none";
-  const saveStatus = document.getElementById("saveStatus");
-  saveStatus.textContent = "";
-  saveStatus.className = "save-status";
-  renderQuestions();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+function renderResults() {
+  finished = true;
+  const t = UI[LANG];
+  const total = QUESTIONS.length;
+  const correctCount = QUESTIONS.reduce((sum, item, i) => sum + (answers[i] === item.correct ? 1 : 0), 0);
+  const pct = Math.round((correctCount / total) * 100);
+  const passed = correctCount / total >= PASS_RATIO;
+
+  const reviewHtml = QUESTIONS.map((item, i) => {
+    const isRight = answers[i] === item.correct;
+    return '<div class="review-item ' + (isRight ? 'right' : 'wrong') + '">' +
+      '<p class="review-q">' + (i + 1) + '. ' + item.q[LANG] + '</p>' +
+      (isRight
+        ? '<p class="review-line correct"><span class="tag">' + t.yourAnswer + '</span>' + item.choices[answers[i]][LANG] + ' ✓</p>'
+        : '<p class="review-line picked"><span class="tag">' + t.yourAnswer + '</span>' + (answers[i] === null ? t.notAnswered : item.choices[answers[i]][LANG]) + ' ✗</p>' +
+          '<p class="review-line correct"><span class="tag">' + t.correctAnswer + '</span>' + item.choices[item.correct][LANG] + '</p>') +
+      '</div>';
+  }).join('');
+
+  const el = document.getElementById("content");
+  el.innerHTML =
+    '<div class="result-banner' + (passed ? '' : ' fail') + '">' +
+    '<div class="result-score">' + correctCount + '/' + total + '</div>' +
+    '<p class="result-verdict">' + (passed ? t.passVerdict(pct) : t.failVerdict(pct)) + '</p>' +
+    '<p class="result-note">' + (passed ? t.passNote : t.failNote) + '</p></div>' +
+    '<span class="q-num">' + t.perQuestion + '</span>' +
+    reviewHtml +
+    '<div class="result-actions">' +
+    '<button class="btn btn-primary" id="btnRetry">' + t.retry + '</button>' +
+    '<a class="btn btn-ghost" href="' + GUIDE_URL + '">' + t.backReview + '</a>' +
+    '</div>' +
+    (passed ?
+      '<div class="notify-box">' +
+      '<p class="notify-label">' + t.emailBtn.replace(/^\S+\s/, "") + '</p>' +
+      '<div class="notify-row">' +
+      '<input type="text" class="notify-input" id="notifyName" placeholder="' + t.namePlaceholder + '" aria-label="' + t.nameLabel + '">' +
+      '<button class="btn btn-primary" id="btnNotify" disabled>' + t.emailBtn + '</button>' +
+      '</div>' +
+      '<p class="notify-hint">' + t.emailHint + '</p>' +
+      '</div>'
+      : '');
+
+  if (passed) {
+    const nameInput = document.getElementById("notifyName");
+    const notifyBtn = document.getElementById("btnNotify");
+    nameInput.oninput = () => { notifyBtn.disabled = nameInput.value.trim().length === 0; };
+    notifyBtn.onclick = () => {
+      const name = nameInput.value.trim();
+      if (!name) return;
+      const date = new Date().toLocaleDateString(LANG === "th" ? "th-TH" : LANG === "ja" ? "ja-JP" : "en-US");
+      const subject = t.emailSubject(name, pct);
+      const body = t.emailBody(name, correctCount, total, pct, date);
+      window.location.href = "mailto:" + NOTIFY_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    };
+  }
+
+  document.getElementById("btnRetry").onclick = () => {
+    current = 0;
+    answers.fill(null);
+    finished = false;
+    renderQuestion();
+  };
+  updateProgress();
 }
 
-document.getElementById("submitBtn").addEventListener("click", gradeQuiz);
-document.getElementById("retryBtn").addEventListener("click", resetQuiz);
-document.getElementById("restartMidwayBtn").addEventListener("click", resetQuiz);
-document.getElementById("printBtn").addEventListener("click", () => window.print());
-
-renderQuestions();
+renderChrome();
+renderQuestion();
 </script>
-</body>
-</html>
