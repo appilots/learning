@@ -279,14 +279,14 @@ const QUESTIONS = [
       { th: "เดือนละ 1 ครั้ง", ja: "月1回", en: "Once a month" },
       { th: "ไม่มีการซ้อมเป็นประจำ", ja: "定期的な訓練はない", en: "There are no regular drills" }
     ], correct: 1 },
-  { topic: { th: "แนวทาง Generative AI ของ Toyota", ja: "トヨタの生成AIへの取り組み", en: "Toyota's Approach to Generative AI" },
-    q: { th: "การพิมพ์ข้อมูลบริษัทเข้า ChatGPT สาธารณะเสี่ยงให้ข้อมูลหลุดออกไปอยู่ในมือผู้ให้บริการภายนอกอย่างถาวร บทเรียนสำคัญด้านการจัดการข้อมูลองค์กรที่ ATTG ควรนำมาปรับใช้จากตัวอย่าง ToyoGPT ของ Toyota คืออะไร?", ja: "会社のデータを公開ChatGPTに入力すると、そのデータが外部事業者の手に渡ったまま永久に戻らなくなるリスクがあります。トヨタのToyoGPTの事例から、ATTGが組織データの管理について学ぶべき重要な教訓は何ですか?", en: "Typing company data into public ChatGPT risks that data ending up permanently in an external provider's hands. What's the key organizational-data lesson ATTG should take from Toyota's ToyoGPT example?" },
+  { topic: { th: "ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みのAIツールのみを使用する", en: "Use Only Company-Approved AI Tools" },
+    q: { th: "เว็บไซต์ IT Learning Center ที่ทีม IT ของ ATTG จัดทำขึ้นเอง มีส่วน \"AI Resources\" รวมคู่มือการใช้งาน AI ที่บริษัทอนุมัติไว้ให้พนักงานศึกษาก่อนเริ่มใช้งานจริง คู่มือเหล่านี้ครอบคลุม AI กี่ค่าย?", ja: "ATTGのIT部門自身が構築したIT Learning Centerのウェブサイトには、実際に使用する前に従業員が確認すべき会社承認済みのAI利用ガイドをまとめた「AI Resources」セクションがあります。このガイドは何社分のAIをカバーしていますか?", en: "The IT Learning Center website — built by ATTG's own IT team — has an \"AI Resources\" section with company-approved usage guides employees should check before using AI for real. How many AI vendors do these guides cover?" },
     choices: [
-      { th: "ควรใช้เครื่องมือ AI ภายในที่ควบคุมข้อมูลได้ แทนการป้อนข้อมูลบริษัทเข้า AI สาธารณะ", ja: "公開AIに会社のデータを入力するのではなく、データを自社で管理できる社内ツールを使うべきである", en: "Use internal AI tools where you control the data, instead of feeding company data into public AI" },
-      { th: "ควรพัฒนาเครื่องมือ AI ของตัวเองให้เหมือน ToyoGPT ทุกประการ", ja: "ToyoGPTと全く同じツールを自社開発すべきである", en: "Build an in-house tool identical to ToyoGPT" },
-      { th: "ควรเลิกใช้ AI สาธารณะทุกชนิดโดยสิ้นเชิง แม้กับข้อมูลที่ไม่ลับ", ja: "機密でないデータであっても、公開AIの利用をすべて完全にやめるべきである", en: "Stop using all public AI entirely, even for non-confidential data" },
-      { th: "ควรให้พนักงานทุกคนเข้าถึงระบบ AI ภายในของ Toyota ได้โดยตรง", ja: "全従業員がトヨタの社内AIシステムに直接アクセスできるようにすべきである", en: "Give every employee direct access to Toyota's own internal AI system" }
-    ], correct: 0 },
+      { th: "2 ค่าย", ja: "2社", en: "2 vendors" },
+      { th: "3 ค่าย", ja: "3社", en: "3 vendors" },
+      { th: "4 ค่าย", ja: "4社", en: "4 vendors" },
+      { th: "5 ค่าย", ja: "5社", en: "5 vendors" }
+    ], correct: 1 },
   { topic: { th: "AI ในสายการผลิต", ja: "生産ラインにおけるAI", en: "AI on the Production Line" },
     q: { th: "ระบบ AI ตรวจสอบคุณภาพของ AISIN และ Toyota ต้องอาศัยข้อมูลจริงจากสายการผลิตจำนวนมหาศาลในการทำงาน หากข้อมูลการผลิตเหล่านี้ถูกจัดการอย่างไม่รัดกุม อาจส่งผลกระทบต่อองค์กรอย่างไร?", ja: "AISINとトヨタのAI品質検査システムは、生産ラインから得られる膨大な実データに依存しています。この生産データが適切に管理されない場合、組織にどのような影響が考えられますか?", en: "AISIN and Toyota's AI quality-inspection systems depend on huge volumes of real production-line data. If that production data isn't handled carefully, what impact could it have on the organization?" },
     choices: [
@@ -330,14 +330,14 @@ const QUESTIONS = [
       { th: "ข้อมูลลิขสิทธิ์ซอฟต์แวร์", ja: "ソフトウェアの著作権データ", en: "Software copyright data" },
       { th: "ข้อมูลสภาพอากาศ", ja: "気象データ", en: "Weather data" }
     ], correct: 1 },
-  { topic: { th: "ปิดการใช้ข้อมูลฝึกโมเดล", ja: "モデル学習利用のオプトアウト", en: "Opting Out of Model Training" },
-    q: { th: "บัญชี AI ประเภทใดที่มักปิดการใช้ข้อมูลสนทนาไปฝึกโมเดลไว้เป็นค่าเริ่มต้นอยู่แล้ว?", ja: "どのタイプのAIアカウントが、通常デフォルトでモデル学習へのデータ利用がオフになっていますか?", en: "Which type of AI account usually has model-training data use turned off by default?" },
+  { topic: { th: "เครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みAIツール", en: "Company-Approved AI Tools" },
+    q: { th: "บริษัทในกลุ่ม ATTG เรามี Generative AI ภายในที่สร้างโดยทีม Innovation ปัจจุบันพนักงานทุกท่านสามารถเข้าใช้งานได้จาก Link ใด?", ja: "ATTGグループには、Innovationチームが構築した独自の生成AIがあります。現在、全従業員はどのリンクからアクセスできますか?", en: "ATTG Group has its own Generative AI built by the Innovation team. Which link can all employees currently use to access it?" },
     choices: [
-      { th: "บัญชีส่วนตัว (Free)", ja: "個人アカウント(Free)", en: "A personal account (Free)" },
-      { th: "บัญชีองค์กร (Business/Team/Enterprise)", ja: "組織アカウント(Business/Team/Enterprise)", en: "An enterprise account (Business/Team/Enterprise)" },
-      { th: "บัญชีทดลองใช้ฟรี 7 วัน", ja: "7日間の無料トライアルアカウント", en: "A 7-day free trial account" },
-      { th: "ทุกบัญชีปิดให้อัตโนมัติเหมือนกันหมด", ja: "すべてのアカウントで自動的にオフになっており違いはない", en: "All accounts have it off automatically, with no difference" }
-    ], correct: 1 },
+      { th: "AI Chat: https://10.123.41.43:3000/ และ AI Vibe Code: https://10.123.41.43:8080/", ja: "AI Chat: https://10.123.41.43:3000/ および AI Vibe Code: https://10.123.41.43:8080/", en: "AI Chat: https://10.123.41.43:3000/ and AI Vibe Code: https://10.123.41.43:8080/" },
+      { th: "AI Chat: http://10.123.41.43:8080/ และ AI Vibe Code: http://10.123.41.43:3000/", ja: "AI Chat: http://10.123.41.43:8080/ および AI Vibe Code: http://10.123.41.43:3000/", en: "AI Chat: http://10.123.41.43:8080/ and AI Vibe Code: http://10.123.41.43:3000/" },
+      { th: "AI Chat: http://10.123.41.43:3000/ และ AI Vibe Code: http://10.123.41.43:8080/", ja: "AI Chat: http://10.123.41.43:3000/ および AI Vibe Code: http://10.123.41.43:8080/", en: "AI Chat: http://10.123.41.43:3000/ and AI Vibe Code: http://10.123.41.43:8080/" },
+      { th: "AI Chat: http://10.123.41.34:3000/ และ AI Vibe Code: http://10.123.41.34:8080/", ja: "AI Chat: http://10.123.41.34:3000/ および AI Vibe Code: http://10.123.41.34:8080/", en: "AI Chat: http://10.123.41.34:3000/ and AI Vibe Code: http://10.123.41.34:8080/" }
+    ], correct: 2 },
   { topic: { th: "ลิขสิทธิ์และทรัพย์สินทางปัญญา", ja: "著作権と知的財産", en: "Copyright and IP" },
     q: { th: "ก่อนนำเนื้อหาที่ AI สร้างไปเผยแพร่สู่สาธารณะ ควรทำอย่างไร?", ja: "AIが生成したコンテンツを公開する前に、何をすべきですか?", en: "Before publishing AI-generated content publicly, what should you do?" },
     choices: [
