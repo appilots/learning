@@ -193,6 +193,21 @@
   }
   .masthead-note strong { color: var(--ink); }
 
+  .top-cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    background: linear-gradient(120deg, var(--accent-deep), var(--accent));
+    color: #fff; padding: 16px 20px; margin-top: 14px; box-shadow: var(--shadow);
+  }
+  .top-cta-text { font-size: 0.9rem; line-height: 1.6; }
+  .top-cta-text strong { display: block; font-size: 1.05rem; margin-bottom: 3px; color: #fff; }
+  .top-cta-btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; color: var(--accent-deep); font-weight: 800; font-size: 0.88rem;
+    padding: 11px 18px; text-decoration: none; white-space: nowrap;
+  }
+  .top-cta-btn:hover { background: var(--paper); }
+  .top-cta-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
   /* ---------- Layout ---------- */
   .body-grid {
     display: grid;
@@ -290,30 +305,34 @@
 
   .rail-cta {
     margin-top: 14px;
-    padding: 14px 15px;
-    border: 1px solid var(--accent);
-    background: var(--accent-soft);
+    padding: 16px 16px;
+    border: 2px solid var(--accent);
+    background: linear-gradient(150deg, var(--accent-soft), var(--surface));
+    box-shadow: var(--shadow);
   }
   .rail-cta-label {
-    margin: 0 0 4px;
+    margin: 0 0 5px;
     font-family: var(--mono);
-    font-size: 0.66rem;
+    font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.07em;
     color: var(--accent-deep);
-    font-weight: 700;
+    font-weight: 800;
   }
-  .rail-cta p:not(.rail-cta-label) { margin: 0 0 10px; font-size: 0.82rem; color: var(--ink); line-height: 1.55; }
+  .rail-cta p:not(.rail-cta-label) { margin: 0 0 12px; font-size: 0.84rem; font-weight: 600; color: var(--ink); line-height: 1.55; }
   .rail-cta a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
+    width: 100%;
     color: #fff;
     background: var(--accent-deep);
     text-decoration: none;
-    font-weight: 700;
-    font-size: 0.82rem;
-    padding: 9px 13px;
+    font-weight: 800;
+    font-size: 0.86rem;
+    padding: 11px 13px;
+    box-shadow: var(--shadow);
   }
   .rail-cta a:hover { background: var(--ink); }
   .rail-cta a:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 2px; }
@@ -564,6 +583,13 @@
     <p class="masthead-sub">สำหรับพนักงานกลุ่มบริษัท ATTG — อ่านให้ครบทุกสถานีด้านซ้าย แล้วทำแบบทดสอบท้ายคู่มือเพื่อยืนยันความเข้าใจ (ต้องได้คะแนนอย่างน้อย 90%)</p>
     <div class="masthead-note">
       🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอที่แนบมาคัดเลือกจากช่อง YouTube ของสื่อ/ผู้เชี่ยวชาญที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น ลิขสิทธิ์เนื้อหาวิดีโอเป็นของเจ้าของช่องต้นฉบับ มีชื่อช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิป ค้นหาคลิปภาษาไทยเป็นอันดับแรกเสมอ หัวข้อไหนไม่มีคลิปไทยจะใช้คลิปภาษาญี่ปุ่น 🇯🇵 หรือภาษาอังกฤษ 🇬🇧 แทน (มีป้ายกำกับภาษาไว้ใต้วิดีโอให้สังเกตง่าย) หัวข้อที่เป็นนโยบายเฉพาะของ ATTG ยังคงไม่มีวิดีโอประกอบ เนื่องจากเป็นแนวปฏิบัติภายในที่ไม่มีคลิปสาธารณะให้อ้างอิงตรงๆ
+    </div>
+    <div class="top-cta">
+      <div class="top-cta-text">
+        <strong>📝 อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ</strong>
+        ต้องได้คะแนนอย่างน้อย 90% จึงจะถือว่าผ่านเกณฑ์
+      </div>
+      <a class="top-cta-btn" href="ai-safety-quiz.html" target="_blank" rel="noopener">ไปทำแบบทดสอบ →</a>
     </div>
   </header>
 
