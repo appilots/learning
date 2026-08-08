@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบทดสอบ: คู่มือการใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</title>
+<title>แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย สำหรับกลุ่มบริษัท ATTG</title>
 <style>
   :root {
     --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
@@ -146,7 +146,7 @@ let LANG = localStorage.getItem(LANG_KEY) || "th";
 const UI = {
   th: {
     langName: "ไทย",
-    h1: "📝 แบบทดสอบ: คู่มือการใช้งาน AI อย่างปลอดภัย",
+    h1: "📝 แบบทดสอบ: การใช้งาน AI อย่างปลอดภัย",
     sub: "ทำแบบทดสอบทั้ง 20 ข้อให้ครบ ต้องได้คะแนนอย่างน้อย 90% (18 ข้อขึ้นไป) จึงจะถือว่าผ่านเกณฑ์ หากไม่ผ่าน สามารถกลับไปทบทวนคู่มือแล้วทำใหม่ได้ทันที",
     backLink: "← กลับไปที่คู่มือ",
     qOf: (i, n) => "คำถามที่ " + i + " / " + n, answered: (n) => "ตอบแล้ว " + n + " ข้อ",
@@ -159,14 +159,14 @@ const UI = {
     nameLabel: "ชื่อ-นามสกุล", namePlaceholder: "กรอกชื่อ-นามสกุลของคุณ",
     startTitle: "กรอกชื่อ-นามสกุลก่อนเริ่มทำแบบทดสอบ", startHint: "ต้องกรอกชื่อ-นามสกุลจริงและอีเมลบริษัทก่อนเริ่ม เพื่อใช้อ้างอิงในอีเมลแจ้งผลกรณีทำผ่านเกณฑ์", startBtn: "เริ่มทำแบบทดสอบ →",
     emailFieldLabel: "อีเมลบริษัท", emailFieldPlaceholder: "xxxxx.x@attg.co.th", emailFieldInvalid: "กรุณากรอกอีเมลบริษัทให้ถูกต้อง (ต้องลงท้ายด้วย @attg.co.th)",
-    emailBtn: "📧 แจ้งผลผ่านเกณฑ์ทางอีเมล", emailAutoNote: "ระบบได้เปิดโปรแกรมอีเมลของคุณโดยอัตโนมัติแล้ว พร้อมกรอกข้อความให้เรียบร้อย — กรุณากด \"ส่ง\" ในโปรแกรมอีเมลของคุณอีกครั้งเพื่อยืนยัน (หน้าเว็บไม่สามารถส่งอีเมลแทนคุณได้โดยตรง)",
-    emailHint: "หากโปรแกรมอีเมลไม่เปิดขึ้นอัตโนมัติ กดปุ่มด้านล่างเพื่อเปิดอีกครั้ง",
+    emailBtn: "📧 แจ้งผลผ่านเกณฑ์ทางอีเมล",
+    emailHint: "กดปุ่มด้านล่างเพื่อเปิดโปรแกรมอีเมลของคุณ พร้อมกรอกข้อความให้เรียบร้อยแล้ว จากนั้นกด \"ส่ง\" ในโปรแกรมอีเมลอีกครั้งเพื่อยืนยัน (หน้าเว็บไม่สามารถส่งอีเมลแทนคุณได้โดยตรง)",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " ผ่านเกณฑ์ " + pct + "%",
     emailBody: (name, email, score, total, pct, date) => "เรียน ทีมผู้ดูแลคู่มือ AI Safety,\n\nพนักงานต่อไปนี้ทำแบบทดสอบผ่านเกณฑ์แล้ว:\n\nชื่อ-นามสกุล: " + name + "\nอีเมลบริษัท: " + email + "\nคะแนน: " + score + "/" + total + " (" + pct + "%)\nภาษาที่ใช้ทำแบบทดสอบ: ไทย\nวันที่: " + date + "\n\n(อีเมลนี้สร้างโดยอัตโนมัติจากหน้าแบบทดสอบ AI Safety — กรุณากดส่งเพื่อยืนยัน)" + DATA_BLOCK(name, email, score, total, pct, date, "TH")
   },
   ja: {
     langName: "日本語",
-    h1: "📝 クイズ:AI安全利用ガイド",
+    h1: "📝 クイズ:AIを安全に使う",
     sub: "全20問に回答してください。合格には90%以上(18問以上の正解)が必要です。不合格の場合は、ガイドを復習してすぐに再挑戦できます。",
     backLink: "← ガイドに戻る",
     qOf: (i, n) => "問題 " + i + " / " + n, answered: (n) => "回答済み " + n + "問",
@@ -186,7 +186,7 @@ const UI = {
   },
   en: {
     langName: "English",
-    h1: "📝 Quiz: AI Safety Usage Guide",
+    h1: "📝 Quiz: Using AI Safely",
     sub: "Complete all 20 questions. You need a score of at least 90% (18 or more correct) to pass. If you don't pass, you can go back to review the guide and retake the quiz right away.",
     backLink: "← Back to the guide",
     qOf: (i, n) => "Question " + i + " of " + n, answered: (n) => n + " answered",
@@ -531,34 +531,23 @@ function renderResults() {
     '<a class="btn btn-ghost" href="' + GUIDE_URL + '">' + t.backReview + '</a>' +
     '</div>' +
     (passed ?
-      '<div class="notify-box">' +
-      '<p class="notify-label">' + t.emailBtn.replace(/^\S+\s/, "") + '</p>' +
-      '<p class="notify-auto-note">' + t.emailAutoNote + '</p>' +
-      '<div class="notify-row"><button class="btn btn-primary" id="btnNotify">' + t.emailBtn + '</button></div>' +
-      '<p class="notify-hint">' + t.emailHint + '</p>' +
-      '</div>'
+      (() => {
+        const date = new Date().toLocaleDateString(LANG === "th" ? "th-TH" : LANG === "ja" ? "ja-JP" : "en-US");
+        const subject = t.emailSubject(TAKER_NAME, pct);
+        const body = t.emailBody(TAKER_NAME, TAKER_EMAIL, correctCount, total, pct, date);
+        const mailtoUrl = "mailto:" + NOTIFY_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        return '<div class="notify-box">' +
+          '<p class="notify-label">' + t.emailBtn.replace(/^\S+\s/, "") + '</p>' +
+          '<p class="notify-auto-note">' + t.emailHint + '</p>' +
+          '<div class="notify-row"><a class="btn btn-primary" href="' + mailtoUrl + '">' + t.emailBtn + '</a></div>' +
+          '</div>';
+      })()
       : '');
-
-  function fireNotifyEmail() {
-    const date = new Date().toLocaleDateString(LANG === "th" ? "th-TH" : LANG === "ja" ? "ja-JP" : "en-US");
-    const subject = t.emailSubject(TAKER_NAME, pct);
-    const body = t.emailBody(TAKER_NAME, TAKER_EMAIL, correctCount, total, pct, date);
-    window.location.href = "mailto:" + NOTIFY_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-  }
-
-  if (passed) {
-    document.getElementById("btnNotify").onclick = fireNotifyEmail;
-    if (!emailAutoFired) {
-      emailAutoFired = true;
-      fireNotifyEmail();
-    }
-  }
 
   document.getElementById("btnRetry").onclick = () => {
     current = 0;
     answers.fill(null);
     finished = false;
-    emailAutoFired = false;
     renderQuestion();
   };
   updateProgress();
