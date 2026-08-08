@@ -59,13 +59,6 @@
   .lang-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
   .lang-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
-  .quiz-pill { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(120deg, var(--accent-deep), var(--accent)); color: #fff; text-decoration: none; padding: 9px 16px 9px 12px; box-shadow: var(--shadow); border-radius: 999px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .quiz-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 18px -6px rgba(0,0,0,0.4); }
-  .quiz-pill:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-  .quiz-pill-icon { font-size: 1.3rem; line-height: 1; }
-  .quiz-pill-text { display: flex; flex-direction: column; line-height: 1.25; }
-  .quiz-pill-text strong { font-size: 0.86rem; font-weight: 800; }
-  .quiz-pill-text small { font-size: 0.66rem; font-weight: 600; opacity: 0.92; font-family: var(--mono); }
 
   .masthead-stats { display: flex; gap: 22px; margin: 0; }
   .masthead-stats > div { text-align: right; }
@@ -194,10 +187,6 @@
       </div>
       <div class="masthead-top-right">
         <div class="lang-switch" role="group" id="langSwitch"></div>
-        <a class="quiz-pill" id="quizPill" href="https://claude.ai/code/artifact/ed4ace69-1c8f-4956-adde-3f1d6e12f000" target="_blank" rel="noopener">
-          <span class="quiz-pill-icon">📝</span>
-          <span class="quiz-pill-text" id="quizPillText"></span>
-        </a>
         <dl class="masthead-stats">
           <div><dt id="statTopicsLabel"></dt><dd id="statTopics">16</dd></div>
           <div><dt id="statPassLabel"></dt><dd>90%</dd></div>
@@ -233,7 +222,6 @@ const UI = {
     topCtaStrong: "📝 อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ",
     topCtaSub: "ต้องได้คะแนนอย่างน้อย 90% จึงจะถือว่าผ่านเกณฑ์",
     topCtaBtn: "ไปทำแบบทดสอบ →",
-    quizPillStrong: "ไปทำแบบทดสอบ", quizPillSmall: "ต้องได้ ≥ 90%",
     railCtaLabel: "ขั้นตอนสุดท้าย", railCtaText: "อ่านครบทุกสถานีแล้ว? ทำแบบทดสอบเพื่อยืนยันความเข้าใจ", railCtaBtn: "ไปทำแบบทดสอบ →",
     secVideo: "🎥 วิดีโอประกอบ", secKeyPoints: "ประเด็นสำคัญของหัวข้อนี้", secSummary: "คำบรรยายสรุป",
     byChannel: "โดยช่อง", watchOriginal: "ดูต้นฉบับบน YouTube →", thisVideo: "วิดีโอนี้",
@@ -248,7 +236,6 @@ const UI = {
     topCtaStrong: "📝 すべてのステーションを読み終えましたか?クイズで理解度を確認しましょう",
     topCtaSub: "合格には90%以上のスコアが必要です。",
     topCtaBtn: "クイズに進む →",
-    quizPillStrong: "クイズに進む", quizPillSmall: "合格には90%以上",
     railCtaLabel: "最後のステップ", railCtaText: "すべてのステーションを読み終えましたか?クイズで理解度を確認しましょう", railCtaBtn: "クイズに進む →",
     secVideo: "🎥 関連動画", secKeyPoints: "このトピックの要点", secSummary: "要約",
     byChannel: "チャンネル:", watchOriginal: "YouTubeで元動画を見る →", thisVideo: "この動画",
@@ -263,7 +250,6 @@ const UI = {
     topCtaStrong: "📝 Read through every station? Take the quiz to confirm your understanding",
     topCtaSub: "A minimum score of 90% is required to pass.",
     topCtaBtn: "Go to the Quiz →",
-    quizPillStrong: "Take the Quiz", quizPillSmall: "Need ≥ 90% to pass",
     railCtaLabel: "Final Step", railCtaText: "Read through every station? Take the quiz to confirm your understanding", railCtaBtn: "Go to the Quiz →",
     secVideo: "🎥 Accompanying Video", secKeyPoints: "Key Points for This Topic", secSummary: "Summary",
     byChannel: "by channel", watchOriginal: "Watch the original on YouTube →", thisVideo: "This video",
@@ -942,7 +928,6 @@ function renderChrome() {
   document.getElementById("mastheadNote").innerHTML = t.note;
   document.getElementById("topCtaText").innerHTML = "<strong>" + t.topCtaStrong + "</strong>" + t.topCtaSub;
   document.getElementById("topCtaBtn").textContent = t.topCtaBtn;
-  document.getElementById("quizPillText").innerHTML = "<strong>" + t.quizPillStrong + "</strong><small>" + t.quizPillSmall + "</small>";
   document.title = t.h1.replace(/^\S+\s/, "") + " — ATTG";
 }
 
