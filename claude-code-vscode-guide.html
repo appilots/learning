@@ -290,6 +290,37 @@
     margin: 14px 0 22px;
   }
 
+  .hq-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: linear-gradient(120deg, #7a1f1f, #a52c2c);
+    color: #fff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 0 0 18px;
+    box-shadow: 0 4px 14px -6px rgba(122,31,31,0.5);
+  }
+  .hq-alert-text { font-size: 0.9rem; line-height: 1.6; }
+  .hq-alert-text strong { display: block; font-size: 1.15rem; line-height: 1.4; margin-bottom: 5px; }
+  .hq-alert-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    color: #7a1f1f;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .hq-alert-btn:hover { background: #ffe8e8; }
+
   @media (max-width: 640px) {
     .topic-list { flex: 1 1 100%; flex-direction: row; overflow-x: auto; }
     .topic-btn { flex: 0 0 auto; white-space: nowrap; }
@@ -299,6 +330,13 @@
 <body>
 <div class="wrap">
   <h1>🤖 คู่มือเรียนรู้ Claude Code ร่วมกับ VS Code สำหรับผู้ใช้งานกลุ่มบริษัท ATTG</h1>
+  <div class="hq-alert">
+    <div class="hq-alert-text">
+      <strong>⚠️ หากท่านใดมีความประสงค์ใช้งาน ต้องแจ้ง IT ก่อน — มีความเสี่ยง Data Risk ระดับสูง</strong>
+      ทีม IT จะช่วยตรวจสอบด้าน Security และแจ้งไปยัง HQ (AIAP ส่วนกลาง) ก่อนอนุมัติให้เริ่มใช้งานจริง — พร้อมทั้งอ่านและปฏิบัติตามแนวทางควบคุมการใช้งาน (Account, Data, Permission, Secret, Production) จาก HQ ให้ครบก่อนเริ่มใช้ Claude Code กับงานจริงเสมอ
+    </div>
+    <a class="hq-alert-btn" href="claude-code-guidance-guide.html" target="_blank" rel="noopener">เปิดแนวทาง HQ →</a>
+  </div>
   <p class="subtitle">คลิกหัวข้อด้านซ้ายเพื่อดูเนื้อหา — บางหัวข้อขั้นสูงยังไม่มีคลิปสอนภาษาไทยโดยตรง จึงสรุปเป็นคำอธิบายละเอียดแทน</p>
   <div class="copyright-banner">
     🎥 <strong>เกี่ยวกับ VDO ในคู่มือนี้:</strong> วิดีโอทุกคลิปคัดเลือกจากช่อง YouTube ของผู้สอน/ครีเอเตอร์ที่เผยแพร่ความรู้สาธารณะ และฝังแสดงผลผ่านระบบ Embed อย่างเป็นทางการของ YouTube เท่านั้น (ไม่มีการดาวน์โหลดหรือคัดลอกไฟล์วิดีโอมาเผยแพร่ซ้ำ) ลิขสิทธิ์เนื้อหาวิดีโอทั้งหมดเป็นของเจ้าของช่องต้นฉบับ มีชื่อผู้สอน/ช่องและลิงก์ไปยังวิดีโอต้นฉบับกำกับไว้ใต้วิดีโอทุกคลิปเพื่อการอ้างอิงที่ถูกต้อง
@@ -322,9 +360,9 @@ const TOPICS = [
       { icon: "🤖", label: "Claude อ่านโค้ด/วางแผน/ลงมือทำ" },
       { icon: "✅", label: "งานเขียนโค้ดเสร็จเร็วขึ้น" }
     ],
-    video: "https://www.youtube.com/embed/o77vCJg2Fp8",
-    videoTitle: "Claude Code พื้นฐานสำหรับมือใหม่ เริ่มยังไงให้ใช้เป็นเร็วที่สุด",
-    videoAuthor: "BoomBigNose",
+    video: "https://www.youtube.com/embed/mby89M6W-OM",
+    videoTitle: "Claude code จะเป็นครูของคุณเอง (คอร์สฟรี) - การเรียน AI จะไม่เหมือนเดิม",
+    videoAuthor: "ลงทุน Diary",
     images: [],
     text: [
       "<strong>Claude Code</strong> คือ Coding Agent จาก Anthropic ที่ทำงานร่วมกับโปรเจกต์จริงในเครื่องของเรา ต่างจาก Chatbot ทั่วไปตรงที่ Claude Code อ่านไฟล์ในโปรเจกต์ได้เอง เขียน/แก้โค้ดให้จริง รันคำสั่งเทอร์มินัลได้ และทำงานต่อเนื่องหลายขั้นตอนโดยไม่ต้องคัดลอกโค้ดไปมาระหว่างหน้าต่างแชทกับโปรแกรมแก้ไขโค้ด",

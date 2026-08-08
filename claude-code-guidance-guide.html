@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คู่มือแนวทางใช้ Claude Code สำหรับทีม DX/IT</title>
+<title>คู่มือแนวทางใช้ Claude Code สำหรับผู้ที่ต้องการใช้งาน</title>
 <style>
   :root {
     --ink: #1b1420;
@@ -123,6 +123,11 @@
     font-size: 0.92rem; line-height: 1.7;
   }
   .warn-banner strong { display: block; font-size: 1.1rem; line-height: 1.4; margin-bottom: 5px; }
+  .warn-banner.critical {
+    background: #2a0a08; border: 2px solid var(--warn);
+    box-shadow: 0 0 0 1px var(--warn), var(--shadow);
+  }
+  .warn-banner.critical strong { font-size: 1.2rem; color: var(--warn); }
 
   .liability-banner {
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
@@ -277,6 +282,10 @@
       <strong>⚠️ สำคัญมาก: มีความเสี่ยงข้อมูลบริษัทรั่วไหลในระดับสูง</strong>
       การใช้งาน Claude Code หากใช้งานไม่ถูกต้องอาจทำให้ข้อมูลบริษัทรั่วไหลได้ในระดับสูง ท่านใดที่ไม่มั่นใจหรือไม่เชี่ยวชาญเพียงพอ โปรดหลีกเลี่ยงการใช้งาน หากจำเป็นต้องใช้ ควรศึกษาวิธีการใช้งานและผลกระทบให้เข้าใจอย่างถ่องแท้เป็นสำคัญก่อนเริ่มใช้งานจริงทุกครั้ง
     </div>
+    <div class="warn-banner critical">
+      <strong>🚫 ระบบที่ห้ามเชื่อมต่อกับ Claude Code โดยตรงโดยเด็ดขาด</strong>
+      Production DB / Server · ERP Production · Cloud Production Subscription · HR / Payroll · Financial / Banking · OT / Machinery
+    </div>
     <div class="liability-banner">
       <span class="liability-tag">ข้อรับผิดชอบ</span>
       <span>IT ให้ความรู้ไว้ครบถ้วนในคู่มือนี้แล้ว หากฝ่าฝืนคำแนะนำจนข้อมูลบริษัทรั่วไหลหรือเกิดความเสียหาย ผู้ใช้งานต้องรับผิดชอบแต่เพียงผู้เดียว</span>
@@ -302,7 +311,7 @@
 const TOPICS = [
   {
     key: "overview",
-    title: "ภาพรวม: แนวทางใช้ Claude Code สำหรับทีม DX/IT",
+    title: "ภาพรวม: แนวทางใช้ Claude Code สำหรับผู้ที่ต้องการใช้งาน",
     icon: "🧭",
     flow: [
       { icon: "🧑‍💻", label: "ใช้ทดลองและพัฒนาระบบภายในได้" },
