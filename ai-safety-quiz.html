@@ -280,21 +280,21 @@ const QUESTIONS = [
       { th: "ไม่มีการซ้อมเป็นประจำ", ja: "定期的な訓練はない", en: "There are no regular drills" }
     ], correct: 1 },
   { topic: { th: "แนวทาง Generative AI ของ Toyota", ja: "トヨタの生成AIへの取り組み", en: "Toyota's Approach to Generative AI" },
-    q: { th: "การใช้ ChatGPT สาธารณะโดยไม่ระวังอาจทำให้ข้อมูลบริษัทหลุดออกไปอย่างถาวรและควบคุมคืนไม่ได้ Toyota จึงลงทุนแก้ปัญหานี้อย่างจริงจังด้วยวิธีใด?", ja: "公開ChatGPTを不用意に使用すると、会社のデータが外部に永久に流出し、二度と管理下に戻せなくなる恐れがあります。トヨタはこのリスクに本気で対処するため、どのような方法を取りましたか?", en: "Careless use of public ChatGPT risks company data leaking out permanently, beyond the company's control. To seriously address this risk, what did Toyota do?" },
+    q: { th: "การพิมพ์ข้อมูลบริษัทเข้า ChatGPT สาธารณะเสี่ยงให้ข้อมูลหลุดออกไปอยู่ในมือผู้ให้บริการภายนอกอย่างถาวร บทเรียนสำคัญด้านการจัดการข้อมูลองค์กรที่ ATTG ควรนำมาปรับใช้จากตัวอย่าง ToyoGPT ของ Toyota คืออะไร?", ja: "会社のデータを公開ChatGPTに入力すると、そのデータが外部事業者の手に渡ったまま永久に戻らなくなるリスクがあります。トヨタのToyoGPTの事例から、ATTGが組織データの管理について学ぶべき重要な教訓は何ですか?", en: "Typing company data into public ChatGPT risks that data ending up permanently in an external provider's hands. What's the key organizational-data lesson ATTG should take from Toyota's ToyoGPT example?" },
     choices: [
-      { th: "ห้ามพนักงานใช้ AI ทุกชนิดเด็ดขาด", ja: "従業員によるAIの利用を一切禁止した", en: "By banning employees from using any AI whatsoever" },
-      { th: "พัฒนาเครื่องมือ AI ภายในของตัวเองชื่อ ToyoGPT", ja: "独自の社内AIツール「ToyoGPT」を開発した", en: "By building its own internal AI tool called ToyoGPT" },
-      { th: "บังคับให้ใช้ ChatGPT เวอร์ชันฟรีเท่านั้น", ja: "無料版のChatGPTのみ使用を義務付けた", en: "By requiring employees to use only the free version of ChatGPT" },
-      { th: "ให้พนักงานลบประวัติแชททุกวัน", ja: "従業員に毎日チャット履歴を削除させた", en: "By having employees delete their chat history every day" }
-    ], correct: 1 },
+      { th: "ควรใช้เครื่องมือ AI ภายในที่ควบคุมข้อมูลได้ แทนการป้อนข้อมูลบริษัทเข้า AI สาธารณะ", ja: "公開AIに会社のデータを入力するのではなく、データを自社で管理できる社内ツールを使うべきである", en: "Use internal AI tools where you control the data, instead of feeding company data into public AI" },
+      { th: "ควรพัฒนาเครื่องมือ AI ของตัวเองให้เหมือน ToyoGPT ทุกประการ", ja: "ToyoGPTと全く同じツールを自社開発すべきである", en: "Build an in-house tool identical to ToyoGPT" },
+      { th: "ควรเลิกใช้ AI สาธารณะทุกชนิดโดยสิ้นเชิง แม้กับข้อมูลที่ไม่ลับ", ja: "機密でないデータであっても、公開AIの利用をすべて完全にやめるべきである", en: "Stop using all public AI entirely, even for non-confidential data" },
+      { th: "ควรให้พนักงานทุกคนเข้าถึงระบบ AI ภายในของ Toyota ได้โดยตรง", ja: "全従業員がトヨタの社内AIシステムに直接アクセスできるようにすべきである", en: "Give every employee direct access to Toyota's own internal AI system" }
+    ], correct: 0 },
   { topic: { th: "AI ในสายการผลิต", ja: "生産ラインにおけるAI", en: "AI on the Production Line" },
-    q: { th: "การเพิกเฉยต่อสัญญาณเตือนเล็กๆ น้อยๆ ด้าน AI หรือความปลอดภัยข้อมูล อาจลุกลามเป็นความเสียหายใหญ่ที่แก้ไขไม่ทันได้ หลักการใดของ Toyota Production System ที่สอนให้ 'หยุดและแจ้งทันทีเมื่อสงสัย' แทนที่จะรอให้แน่ใจ 100% ก่อน?", ja: "AIやデータセキュリティに関する小さな警告サインを見過ごすと、取り返しのつかない大きな被害に発展しかねません。「100%の確信を待つのではなく、疑わしければ直ちに止めて報告する」ことを教えるトヨタ生産方式の原則はどれですか?", en: "Ignoring small warning signs about AI or data security can escalate into major damage that's too late to undo. Which Toyota Production System principle teaches 'stop and report immediately when in doubt,' rather than waiting for 100% certainty?" },
+    q: { th: "ระบบ AI ตรวจสอบคุณภาพของ AISIN และ Toyota ต้องอาศัยข้อมูลจริงจากสายการผลิตจำนวนมหาศาลในการทำงาน หากข้อมูลการผลิตเหล่านี้ถูกจัดการอย่างไม่รัดกุม อาจส่งผลกระทบต่อองค์กรอย่างไร?", ja: "AISINとトヨタのAI品質検査システムは、生産ラインから得られる膨大な実データに依存しています。この生産データが適切に管理されない場合、組織にどのような影響が考えられますか?", en: "AISIN and Toyota's AI quality-inspection systems depend on huge volumes of real production-line data. If that production data isn't handled carefully, what impact could it have on the organization?" },
     choices: [
-      { th: "Kaizen", ja: "カイゼン(Kaizen)", en: "Kaizen" },
-      { th: "Andon — หยุดและแจ้งทันทีเมื่อสงสัยว่ามีปัญหา", ja: "アンドン(Andon)——問題が疑われたら直ちに止めて報告する", en: "Andon — stop and report immediately when a problem is suspected" },
-      { th: "Just-in-Time", ja: "ジャストインタイム(Just-in-Time)", en: "Just-in-Time" },
-      { th: "Kanban", ja: "かんばん(Kanban)", en: "Kanban" }
-    ], correct: 1 },
+      { th: "ข้อมูลการผลิตที่ละเอียดอ่อนอาจรั่วไหลหรือถูกนำไปใช้ผิดวัตถุประสงค์ กระทบทั้งคุณภาพสินค้าและความลับทางการแข่งขัน", ja: "機密性の高い生産データが漏えいまたは悪用され、製品品質と競争上の機密性の両方に悪影響を及ぼす可能性がある", en: "Sensitive production data could leak or be misused, harming both product quality and competitive confidentiality" },
+      { th: "ไม่มีผลกระทบใดๆ เพราะข้อมูลสายการผลิตไม่ถือเป็นข้อมูลสำคัญขององค์กร", ja: "生産ラインのデータは組織の重要なデータとみなされないため、影響はない", en: "No impact at all — production-line data isn't considered important organizational data" },
+      { th: "กระทบเฉพาะความเร็วของสายการผลิตเท่านั้น ไม่เกี่ยวกับความปลอดภัยข้อมูล", ja: "生産速度にのみ影響し、データセキュリティとは無関係である", en: "It would only affect production speed, unrelated to data security" },
+      { th: "AI จะแก้ไขปัญหาข้อมูลรั่วไหลได้เองโดยอัตโนมัติเสมอ", ja: "AIが常に自動的にデータ漏えい問題を解決してくれる", en: "AI would always automatically fix any data leakage problem" }
+    ], correct: 0 },
   { topic: { th: "ข้อมูลห้ามป้อนเข้า AI", ja: "AIに入力してはいけないデータ", en: "Data Never to Enter Into AI" },
     q: { th: "ข้อมูลใดต่อไปนี้ ห้ามป้อนเข้า AI สาธารณะโดยเด็ดขาด?", ja: "次のうち、公開AIに絶対に入力してはいけないものはどれですか?", en: "Which of the following must never be entered into public AI?" },
     choices: [
