@@ -162,7 +162,19 @@ const UI = {
     emailBtn: "📧 แจ้งผลผ่านเกณฑ์ทางอีเมล",
     emailHint: "กดปุ่มด้านล่างเพื่อเปิดโปรแกรมอีเมลของคุณ พร้อมกรอกข้อความให้เรียบร้อยแล้ว จากนั้นกด \"ส่ง\" ในโปรแกรมอีเมลอีกครั้งเพื่อยืนยัน (หน้าเว็บไม่สามารถส่งอีเมลแทนคุณได้โดยตรง)",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " ผ่านเกณฑ์ " + pct + "%",
-    emailBody: (name, email, score, total, pct, date) => "เรียน ทีมผู้ดูแลคู่มือ AI Safety,\n\nพนักงานต่อไปนี้ทำแบบทดสอบผ่านเกณฑ์แล้ว:\n\nชื่อ-นามสกุล: " + name + "\nอีเมลบริษัท: " + email + "\nคะแนน: " + score + "/" + total + " (" + pct + "%)\nภาษาที่ใช้ทำแบบทดสอบ: ไทย\nวันที่: " + date + "\n\n(อีเมลนี้สร้างโดยอัตโนมัติจากหน้าแบบทดสอบ AI Safety — กรุณากดส่งเพื่อยืนยัน)" + DATA_BLOCK(name, email, score, total, pct, date, "TH")
+    emailBody: (name, email, score, total, pct, date) => "เรียน ทีมผู้ดูแลคู่มือ AI Safety\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+      "พนักงานต่อไปนี้ทำแบบทดสอบผ่านเกณฑ์แล้ว\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+      "👤  ชื่อ-นามสกุล   : " + name + "\n" +
+      "✉️  อีเมลบริษัท    : " + email + "\n" +
+      "🎯  คะแนน         : " + score + "/" + total + " (" + pct + "%)\n" +
+      "🌐  ภาษาที่ใช้สอบ  : ไทย\n" +
+      "📅  วันที่          : " + date + "\n\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+      "อีเมลนี้สร้างโดยอัตโนมัติจากหน้าแบบทดสอบ AI Safety\n" +
+      "กรุณากด \"ส่ง\" เพื่อยืนยัน\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + DATA_BLOCK(name, email, score, total, pct, date, "TH")
   },
   ja: {
     langName: "日本語",
@@ -182,7 +194,19 @@ const UI = {
     emailBtn: "📧 合格をメールで通知する", emailAutoNote: "お使いのメールソフトが自動的に開き、内容も入力済みです — 内容をご確認のうえ、メールソフト側で「送信」を押して確定してください(Webページから直接メールを送信することはできません)。",
     emailHint: "メールソフトが自動的に開かなかった場合は、下のボタンをクリックしてもう一度開いてください。",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " が合格(" + pct + "%)",
-    emailBody: (name, email, score, total, pct, date) => "AI安全利用ガイド 管理ご担当者様\n\n以下の従業員がクイズに合格しました:\n\n氏名: " + name + "\n会社のメールアドレス: " + email + "\nスコア: " + score + "/" + total + " (" + pct + "%)\n受験言語: 日本語\n日付: " + date + "\n\n(本メールはAI Safetyクイズページから自動生成されています。内容をご確認の上、送信してください。)" + DATA_BLOCK(name, email, score, total, pct, date, "JA")
+    emailBody: (name, email, score, total, pct, date) => "AI安全利用ガイド 管理ご担当者様\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+      "以下の従業員がクイズに合格しました\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+      "👤  氏名        : " + name + "\n" +
+      "✉️  会社メール  : " + email + "\n" +
+      "🎯  スコア      : " + score + "/" + total + " (" + pct + "%)\n" +
+      "🌐  受験言語    : 日本語\n" +
+      "📅  日付        : " + date + "\n\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+      "本メールはAI Safetyクイズページから自動生成されています。\n" +
+      "内容をご確認のうえ「送信」を押してください。\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + DATA_BLOCK(name, email, score, total, pct, date, "JA")
   },
   en: {
     langName: "English",
@@ -202,7 +226,19 @@ const UI = {
     emailBtn: "📧 Notify by Email", emailAutoNote: "Your email app has been opened automatically with the message pre-filled — please click \"Send\" in your email app to confirm (a web page cannot send email directly on your behalf).",
     emailHint: "If your email app didn't open automatically, click the button below to open it again.",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " passed (" + pct + "%)",
-    emailBody: (name, email, score, total, pct, date) => "Dear AI Safety Guide administrator,\n\nThe following employee has passed the quiz:\n\nName: " + name + "\nCompany email: " + email + "\nScore: " + score + "/" + total + " (" + pct + "%)\nQuiz language: English\nDate: " + date + "\n\n(This email was auto-generated from the AI Safety quiz page — please review and send.)" + DATA_BLOCK(name, email, score, total, pct, date, "EN")
+    emailBody: (name, email, score, total, pct, date) => "Dear AI Safety Guide administrator,\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+      "The following employee has passed the quiz\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+      "👤  Name          : " + name + "\n" +
+      "✉️  Company email : " + email + "\n" +
+      "🎯  Score         : " + score + "/" + total + " (" + pct + "%)\n" +
+      "🌐  Quiz language : English\n" +
+      "📅  Date          : " + date + "\n\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+      "This email was auto-generated from the AI Safety quiz page.\n" +
+      "Please review and press Send to confirm.\n" +
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + DATA_BLOCK(name, email, score, total, pct, date, "EN")
   }
 };
 
@@ -233,7 +269,7 @@ const QUESTIONS = [
     q: { th: "ต้องได้คะแนนแบบทดสอบท้ายคู่มืออย่างน้อยเท่าไหร่จึงจะผ่านเกณฑ์?", ja: "ガイド末尾のクイズに合格するために必要な最低スコアはいくつですか?", en: "What is the minimum score required to pass the quiz at the end of the guide?" },
     choices: [ { th: "60%", ja: "60%", en: "60%" }, { th: "75%", ja: "75%", en: "75%" }, { th: "90%", ja: "90%", en: "90%" }, { th: "100%", ja: "100%", en: "100%" } ], correct: 2 },
   { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
-    q: { th: "AISIN Group อ้างอิงมาตรฐานสากลใดที่เฉพาะสำหรับความปลอดภัยไซเบอร์ยานยนต์โดยตรง?", ja: "AISINグループが参照している、自動車専用のサイバーセキュリティに関する国際規格はどれですか?", en: "Which international standard does AISIN Group reference that is specifically for automotive cybersecurity?" },
+    q: { th: "หากซัพพลายเออร์เพียงรายเดียวในเครือ AISIN ไม่ปฏิบัติตามมาตรฐานความปลอดภัยไซเบอร์เฉพาะยานยนต์ อาจส่งผลกระทบร้ายแรงต่อ Supply Chain ทั้งกลุ่มได้ มาตรฐานสากลฉบับนี้คือข้อใด?", ja: "AISINグループ内のサプライヤーが1社でも自動車専用のサイバーセキュリティ規格を遵守しない場合、サプライチェーン全体に深刻な影響を及ぼしかねません。この国際規格はどれですか?", en: "If even a single supplier within the AISIN Group fails to comply with the automotive-specific cybersecurity standard, it can seriously impact the entire supply chain. Which international standard is this?" },
     choices: [ { th: "ISO 9001", ja: "ISO 9001", en: "ISO 9001" }, { th: "ISO 21434", ja: "ISO 21434", en: "ISO 21434" }, { th: "ISO 14001", ja: "ISO 14001", en: "ISO 14001" }, { th: "PCI DSS", ja: "PCI DSS", en: "PCI DSS" } ], correct: 1 },
   { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
     q: { th: "AISIN Group จัดซ้อมรับมืออีเมลหลอกลวง (Phishing Simulation) ให้พนักงานบ่อยแค่ไหน?", ja: "AISINグループは従業員向けにフィッシングメール対応訓練(Phishing Simulation)をどのくらいの頻度で実施していますか?", en: "How often does AISIN Group run phishing-simulation drills for employees?" },
@@ -244,7 +280,7 @@ const QUESTIONS = [
       { th: "ไม่มีการซ้อมเป็นประจำ", ja: "定期的な訓練はない", en: "There are no regular drills" }
     ], correct: 1 },
   { topic: { th: "แนวทาง Generative AI ของ Toyota", ja: "トヨタの生成AIへの取り組み", en: "Toyota's Approach to Generative AI" },
-    q: { th: "Toyota แก้ปัญหาความเสี่ยงข้อมูลหลุดจาก ChatGPT สาธารณะด้วยวิธีใด?", ja: "トヨタは、公開ChatGPTからの情報漏えいリスクにどのように対処しましたか?", en: "How did Toyota address the risk of data leakage from public ChatGPT?" },
+    q: { th: "การใช้ ChatGPT สาธารณะโดยไม่ระวังอาจทำให้ข้อมูลบริษัทหลุดออกไปอย่างถาวรและควบคุมคืนไม่ได้ Toyota จึงลงทุนแก้ปัญหานี้อย่างจริงจังด้วยวิธีใด?", ja: "公開ChatGPTを不用意に使用すると、会社のデータが外部に永久に流出し、二度と管理下に戻せなくなる恐れがあります。トヨタはこのリスクに本気で対処するため、どのような方法を取りましたか?", en: "Careless use of public ChatGPT risks company data leaking out permanently, beyond the company's control. To seriously address this risk, what did Toyota do?" },
     choices: [
       { th: "ห้ามพนักงานใช้ AI ทุกชนิดเด็ดขาด", ja: "従業員によるAIの利用を一切禁止した", en: "By banning employees from using any AI whatsoever" },
       { th: "พัฒนาเครื่องมือ AI ภายในของตัวเองชื่อ ToyoGPT", ja: "独自の社内AIツール「ToyoGPT」を開発した", en: "By building its own internal AI tool called ToyoGPT" },
@@ -252,7 +288,7 @@ const QUESTIONS = [
       { th: "ให้พนักงานลบประวัติแชททุกวัน", ja: "従業員に毎日チャット履歴を削除させた", en: "By having employees delete their chat history every day" }
     ], correct: 1 },
   { topic: { th: "AI ในสายการผลิต", ja: "生産ラインにおけるAI", en: "AI on the Production Line" },
-    q: { th: "หลักการใดของ Toyota Production System นำมาปรับใช้กับการรายงานเหตุการณ์ผิดปกติด้าน AI/ความปลอดภัยได้?", ja: "トヨタ生産方式(TPS)のどの原則を、AI・セキュリティに関する異常事態の報告に応用できますか?", en: "Which Toyota Production System principle can be applied to reporting abnormal AI/security incidents?" },
+    q: { th: "การเพิกเฉยต่อสัญญาณเตือนเล็กๆ น้อยๆ ด้าน AI หรือความปลอดภัยข้อมูล อาจลุกลามเป็นความเสียหายใหญ่ที่แก้ไขไม่ทันได้ หลักการใดของ Toyota Production System ที่สอนให้ 'หยุดและแจ้งทันทีเมื่อสงสัย' แทนที่จะรอให้แน่ใจ 100% ก่อน?", ja: "AIやデータセキュリティに関する小さな警告サインを見過ごすと、取り返しのつかない大きな被害に発展しかねません。「100%の確信を待つのではなく、疑わしければ直ちに止めて報告する」ことを教えるトヨタ生産方式の原則はどれですか?", en: "Ignoring small warning signs about AI or data security can escalate into major damage that's too late to undo. Which Toyota Production System principle teaches 'stop and report immediately when in doubt,' rather than waiting for 100% certainty?" },
     choices: [
       { th: "Kaizen", ja: "カイゼン(Kaizen)", en: "Kaizen" },
       { th: "Andon — หยุดและแจ้งทันทีเมื่อสงสัยว่ามีปัญหา", ja: "アンドン(Andon)——問題が疑われたら直ちに止めて報告する", en: "Andon — stop and report immediately when a problem is suspected" },
@@ -518,20 +554,8 @@ function renderResults() {
       '</div>';
   }).join('');
 
-  const el = document.getElementById("content");
-  el.innerHTML =
-    '<div class="result-banner' + (passed ? '' : ' fail') + '">' +
-    '<div class="result-score">' + correctCount + '/' + total + '</div>' +
-    '<p class="result-verdict">' + (passed ? t.passVerdict(pct) : t.failVerdict(pct)) + '</p>' +
-    '<p class="result-note">' + (passed ? t.passNote : t.failNote) + '</p></div>' +
-    '<span class="q-num">' + t.perQuestion + '</span>' +
-    reviewHtml +
-    '<div class="result-actions">' +
-    '<button class="btn btn-primary" id="btnRetry">' + t.retry + '</button>' +
-    '<a class="btn btn-ghost" href="' + GUIDE_URL + '">' + t.backReview + '</a>' +
-    '</div>' +
-    (passed ?
-      (() => {
+  const notifyBoxHtml = passed
+    ? (() => {
         const date = new Date().toLocaleDateString(LANG === "th" ? "th-TH" : LANG === "ja" ? "ja-JP" : "en-US");
         const subject = t.emailSubject(TAKER_NAME, pct);
         const body = t.emailBody(TAKER_NAME, TAKER_EMAIL, correctCount, total, pct, date);
@@ -542,7 +566,21 @@ function renderResults() {
           '<div class="notify-row"><a class="btn btn-primary" href="' + mailtoUrl + '">' + t.emailBtn + '</a></div>' +
           '</div>';
       })()
-      : '');
+    : '';
+
+  const el = document.getElementById("content");
+  el.innerHTML =
+    '<div class="result-banner' + (passed ? '' : ' fail') + '">' +
+    '<div class="result-score">' + correctCount + '/' + total + '</div>' +
+    '<p class="result-verdict">' + (passed ? t.passVerdict(pct) : t.failVerdict(pct)) + '</p>' +
+    '<p class="result-note">' + (passed ? t.passNote : t.failNote) + '</p></div>' +
+    notifyBoxHtml +
+    '<div class="result-actions">' +
+    '<button class="btn btn-primary" id="btnRetry">' + t.retry + '</button>' +
+    '<a class="btn btn-ghost" href="' + GUIDE_URL + '">' + t.backReview + '</a>' +
+    '</div>' +
+    '<span class="q-num">' + t.perQuestion + '</span>' +
+    reviewHtml;
 
   document.getElementById("btnRetry").onclick = () => {
     current = 0;
