@@ -174,19 +174,17 @@ const UI = {
     emailBtn: "📧 แจ้งผลผ่านเกณฑ์ทางอีเมล",
     emailHint: "กดปุ่มด้านล่างเพื่อเปิดโปรแกรมอีเมลของคุณ พร้อมกรอกข้อความให้เรียบร้อยแล้ว จากนั้นกด \"ส่ง\" ในโปรแกรมอีเมลอีกครั้งเพื่อยืนยัน (หน้าเว็บไม่สามารถส่งอีเมลแทนคุณได้โดยตรง)",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " ผ่านเกณฑ์ " + pct + "%",
-    emailBody: (name, email, score, total, pct, date) => "เรียน ทีมผู้ดูแล AI Safety\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-      "พนักงานต่อไปนี้ทำแบบทดสอบผ่านเกณฑ์แล้ว\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
-      "👤  ชื่อ-นามสกุล   : " + name + "\n" +
-      "✉️  อีเมลบริษัท    : " + email + "\n" +
-      "🎯  คะแนน         : " + score + "/" + total + " (" + pct + "%)\n" +
-      "🌐  ภาษาที่ใช้สอบ  : ไทย\n" +
-      "📅  วันที่          : " + date + "\n\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-      "อีเมลนี้สร้างโดยอัตโนมัติจากหน้าแบบทดสอบ AI Safety\n" +
-      "กรุณากด \"ส่ง\" เพื่อยืนยัน\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + DATA_BLOCK(name, email, score, total, pct, date, "TH")
+    emailBody: (name, email, score, total, pct, date) => emailBodyHtml(
+      "พนักงานต่อไปนี้ทำแบบทดสอบผ่านเกณฑ์แล้ว",
+      [
+        ["ชื่อ-นามสกุล", name],
+        ["อีเมลบริษัท", email],
+        ["คะแนน", score + "/" + total + " (" + pct + "%)"],
+        ["ภาษาที่ใช้สอบ", "ไทย"],
+        ["วันที่", date]
+      ],
+      "อีเมลนี้สร้างโดยอัตโนมัติจากหน้าแบบทดสอบ AI Safety"
+    )
   },
   ja: {
     langName: "日本語",
@@ -206,19 +204,17 @@ const UI = {
     emailBtn: "📧 合格をメールで通知する", emailAutoNote: "お使いのメールソフトが自動的に開き、内容も入力済みです — 内容をご確認のうえ、メールソフト側で「送信」を押して確定してください(Webページから直接メールを送信することはできません)。",
     emailHint: "メールソフトが自動的に開かなかった場合は、下のボタンをクリックしてもう一度開いてください。",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " が合格(" + pct + "%)",
-    emailBody: (name, email, score, total, pct, date) => "AI Safety 管理ご担当者様\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-      "以下の従業員がクイズに合格しました\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
-      "👤  氏名        : " + name + "\n" +
-      "✉️  会社メール  : " + email + "\n" +
-      "🎯  スコア      : " + score + "/" + total + " (" + pct + "%)\n" +
-      "🌐  受験言語    : 日本語\n" +
-      "📅  日付        : " + date + "\n\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-      "本メールはAI Safetyクイズページから自動生成されています。\n" +
-      "内容をご確認のうえ「送信」を押してください。\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + DATA_BLOCK(name, email, score, total, pct, date, "JA")
+    emailBody: (name, email, score, total, pct, date) => emailBodyHtml(
+      "以下の従業員がクイズに合格しました",
+      [
+        ["氏名", name],
+        ["会社メール", email],
+        ["スコア", score + "/" + total + " (" + pct + "%)"],
+        ["受験言語", "日本語"],
+        ["日付", date]
+      ],
+      "本メールはAI Safetyクイズページから自動生成されています。"
+    )
   },
   en: {
     langName: "English",
@@ -238,19 +234,17 @@ const UI = {
     emailBtn: "📧 Notify by Email", emailAutoNote: "Your email app has been opened automatically with the message pre-filled — please click \"Send\" in your email app to confirm (a web page cannot send email directly on your behalf).",
     emailHint: "If your email app didn't open automatically, click the button below to open it again.",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " passed (" + pct + "%)",
-    emailBody: (name, email, score, total, pct, date) => "Dear AI Safety administrator,\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-      "The following employee has passed the quiz\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
-      "👤  Name          : " + name + "\n" +
-      "✉️  Company email : " + email + "\n" +
-      "🎯  Score         : " + score + "/" + total + " (" + pct + "%)\n" +
-      "🌐  Quiz language : English\n" +
-      "📅  Date          : " + date + "\n\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-      "This email was auto-generated from the AI Safety quiz page.\n" +
-      "Please review and press Send to confirm.\n" +
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━" + DATA_BLOCK(name, email, score, total, pct, date, "EN")
+    emailBody: (name, email, score, total, pct, date) => emailBodyHtml(
+      "The following employee has passed the quiz",
+      [
+        ["Name", name],
+        ["Company email", email],
+        ["Score", score + "/" + total + " (" + pct + "%)"],
+        ["Quiz language", "English"],
+        ["Date", date]
+      ],
+      "This email was auto-generated from the AI Safety quiz page."
+    )
   }
 };
 
@@ -260,16 +254,34 @@ const NOTIFY_EMAIL = "santi.s@attg.co.th";
 const AUTOSEND_URL = "https://defaultb233e9955a36495e8c9354d4c749e0.e0.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/0d15c79dab504c3ca8755ad57e4384af/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bMQrQiY4HRbS9Hi2hpRSxBJ2aBu4liBRFry_o1IUPsQ";
 let autoSendFired = false;
 
-function DATA_BLOCK(name, email, score, total, pct, date, lang) {
-  return "\n\n----- DATA (do not edit, used by Power Automate) -----\n" +
-    "NAME: " + name + "\n" +
-    "EMAIL: " + email + "\n" +
-    "SCORE: " + score + "\n" +
-    "TOTAL: " + total + "\n" +
-    "PERCENT: " + pct + "\n" +
-    "LANG: " + lang + "\n" +
-    "DATE: " + date + "\n" +
-    "-----------------------------------------------------";
+// Styled HTML email body — matches the ai-request-app's own notification
+// template (blue header banner + field table, see that repo's
+// emailService.js/aiRequestEmailHtml) so this quiz-pass notice looks
+// consistent with the rest of the AI & Digital Tools Registration mail.
+// Replaces the old plain-text DATA_BLOCK footer (2026-08-09) — that block
+// was leftover from before Power Automate read fields directly off the JSON
+// payload; the flow's Insert-row/email steps use triggerBody()?['field'],
+// never text-parsed from the body, so it was dead weight once automation
+// existed.
+const LH = "line-height:1.3;mso-line-height-rule:exactly;";
+function emailRowHtml(label, value, isLast) {
+  return '<tr><td style="padding:7px 0;border-bottom:' + (isLast ? "none" : "1px solid #EEF0F2") +
+    ';color:#6B7280;font-size:12px;' + LH + 'white-space:nowrap;vertical-align:top;">' + label + '</td>' +
+    '<td style="padding:7px 0 7px 14px;border-bottom:' + (isLast ? "none" : "1px solid #EEF0F2") +
+    ';color:#1F2937;font-size:13px;font-weight:600;' + LH + '">' + value + '</td></tr>';
+}
+function emailBodyHtml(headline, rows, footerNote) {
+  var rowsHtml = rows.map(function (r, i) { return emailRowHtml(r[0], r[1], i === rows.length - 1); }).join("");
+  return '<div style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:520px;margin:0 auto;background:#ffffff;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background:#0F6FC5;border-radius:10px 10px 0 0;">' +
+    '<tr><td style="padding:16px 22px;' + LH + '">' +
+    '<span style="color:#fff;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;opacity:.85;">AI SAFETY QUIZ</span><br/>' +
+    '<span style="color:#fff;font-size:15px;font-weight:700;">' + headline + '</span>' +
+    '</td></tr></table>' +
+    '<div style="border:1px solid #E5E7EB;border-top:none;border-radius:0 0 10px 10px;padding:20px 22px;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;">' + rowsHtml + '</table>' +
+    '<p style="margin:18px 0 0;font-size:11px;color:#9CA3AF;' + LH + '">' + footerNote + '</p>' +
+    '</div></div>';
 }
 
 function urlChoice(oct3, oct4, chatPort, vibePort) {
@@ -318,7 +330,7 @@ const QUESTIONS = [
     q: { th: "หากจำเป็นต้องให้ AI วิเคราะห์ข้อมูลอ่อนไหวของบริษัท ควรทำอย่างไร?", ja: "会社の機密データをAIに分析させる必要が本当にある場合、どうすべきですか?", en: "If AI genuinely needs to analyze sensitive company data, what should you do?" },
     choices: [
       { th: "ใช้ AI สาธารณะได้ตามปกติ ไม่ต้องกังวล", ja: "公開AIを通常通り使用してよく、心配は不要", en: "Use public AI normally — there's nothing to worry about" },
-      { th: "ใช้เครื่องมือที่บริษัทอนุมัติ หรือแปลงข้อมูลให้ไม่ระบุตัวตนก่อน", ja: "会社承認済みのツールを使うか、事前にデータを匿名化する", en: "Use a company-approved tool, or anonymize the data first" },
+      { th: "ใช้เครื่องมือที่บริษัทอนุมัติ (ชื่อว่า: Paitoon-AI) หรือแปลงข้อมูลให้ไม่ระบุตัวตนก่อน", ja: "会社承認済みのツール(名称:Paitoon-AI)を使うか、事前にデータを匿名化する", en: "Use a company-approved tool (named Paitoon-AI), or anonymize the data first" },
       { th: "ใช้แต่บัญชีส่วนตัวเท่านั้น", ja: "個人アカウントのみを使用する", en: "Only use a personal account" },
       { th: "ส่งข้อมูลผ่านอีเมลให้ AI ประมวลผลแทน", ja: "データをメールで送ってAIに処理させる", en: "Email the data so AI can process it instead" }
     ], correct: 1 },
@@ -595,32 +607,23 @@ function renderResults() {
       '</div>';
   }).join('');
 
-  const notifyBoxHtml = passed
-    ? (() => {
-        const date = new Date().toLocaleDateString(LANG === "th" ? "th-TH" : LANG === "ja" ? "ja-JP" : "en-US");
-        const subject = t.emailSubject(TAKER_NAME, pct);
-        const body = t.emailBody(TAKER_NAME, TAKER_EMAIL, correctCount, total, pct, date);
-        const mailtoUrl = "mailto:" + NOTIFY_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-        if (AUTOSEND_URL && !autoSendFired) {
-          autoSendFired = true;
-          fetch(AUTOSEND_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: TAKER_NAME, email: TAKER_EMAIL, score: correctCount, total,
-              percent: pct, lang: LANG, date, notifyEmail: NOTIFY_EMAIL, subject, body
-            })
-          }).catch(() => {}); // best-effort — manual button below still works if this fails
-        }
-
-        return '<div class="notify-box">' +
-          '<p class="notify-label">' + t.emailBtn.replace(/^\S+\s/, "") + '</p>' +
-          '<p class="notify-auto-note">' + t.emailHint + '</p>' +
-          '<div class="notify-row"><a class="btn btn-primary" href="' + mailtoUrl + '">' + t.emailBtn + '</a></div>' +
-          '</div>';
-      })()
-    : '';
+  // Auto-send to IT via Power Automate on every pass — no visible box/button
+  // here anymore. The manual mailto fallback (self-declaration era) is gone
+  // now that AUTOSEND_URL reliably delivers the email + DB row on its own.
+  if (passed && AUTOSEND_URL && !autoSendFired) {
+    autoSendFired = true;
+    const date = new Date().toLocaleDateString(LANG === "th" ? "th-TH" : LANG === "ja" ? "ja-JP" : "en-US");
+    const subject = t.emailSubject(TAKER_NAME, pct);
+    const body = t.emailBody(TAKER_NAME, TAKER_EMAIL, correctCount, total, pct, date);
+    fetch(AUTOSEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: TAKER_NAME, email: TAKER_EMAIL, score: correctCount, total,
+        percent: pct, lang: LANG, date, notifyEmail: NOTIFY_EMAIL, subject, body
+      })
+    }).catch(() => {});
+  }
 
   const el = document.getElementById("content");
   el.innerHTML =
@@ -628,7 +631,6 @@ function renderResults() {
     '<div class="result-score">' + correctCount + '/' + total + '</div>' +
     '<p class="result-verdict">' + (passed ? t.passVerdict(pct) : t.failVerdict(pct)) + '</p>' +
     '<p class="result-note">' + (passed ? t.passNote : t.failNote) + '</p></div>' +
-    notifyBoxHtml +
     '<div class="result-actions">' +
     '<button class="btn btn-primary" id="btnRetry">' + t.retry + '</button>' +
     '<a class="btn btn-ghost" href="' + GUIDE_URL + '">' + t.backReview + '</a>' +
