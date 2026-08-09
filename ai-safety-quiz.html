@@ -248,7 +248,7 @@ const UI = {
 const NOTIFY_EMAIL = "santi.s@attg.co.th";
 // Power Automate "When an HTTP request is received" trigger URL.
 // Leave blank to disable auto-send (the manual email button still works either way).
-const AUTOSEND_URL = "";
+const AUTOSEND_URL = "https://defaultb233e9955a36495e8c9354d4c749e0.e0.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/0d15c79dab504c3ca8755ad57e4384af/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bMQrQiY4HRbS9Hi2hpRSxBJ2aBu4liBRFry_o1IUPsQ";
 let autoSendFired = false;
 
 function DATA_BLOCK(name, email, score, total, pct, date, lang) {
@@ -275,9 +275,14 @@ const QUESTIONS = [
   { topic: { th: "ภาพรวม", ja: "概要", en: "Overview" },
     q: { th: "ต้องได้คะแนนแบบทดสอบท้ายคู่มืออย่างน้อยเท่าไหร่จึงจะผ่านเกณฑ์?", ja: "ガイド末尾のクイズに合格するために必要な最低スコアはいくつですか?", en: "What is the minimum score required to pass the quiz at the end of the guide?" },
     choices: [ { th: "60%", ja: "60%", en: "60%" }, { th: "75%", ja: "75%", en: "75%" }, { th: "90%", ja: "90%", en: "90%" }, { th: "100%", ja: "100%", en: "100%" } ], correct: 2 },
-  { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
-    q: { th: "หากซัพพลายเออร์เพียงรายเดียวในเครือ AISIN ไม่ปฏิบัติตามมาตรฐานความปลอดภัยไซเบอร์เฉพาะยานยนต์ อาจส่งผลกระทบร้ายแรงต่อ Supply Chain ทั้งกลุ่มได้ มาตรฐานสากลฉบับนี้คือข้อใด?", ja: "AISINグループ内のサプライヤーが1社でも自動車専用のサイバーセキュリティ規格を遵守しない場合、サプライチェーン全体に深刻な影響を及ぼしかねません。この国際規格はどれですか?", en: "If even a single supplier within the AISIN Group fails to comply with the automotive-specific cybersecurity standard, it can seriously impact the entire supply chain. Which international standard is this?" },
-    choices: [ { th: "ISO 9001", ja: "ISO 9001", en: "ISO 9001" }, { th: "ISO 21434", ja: "ISO 21434", en: "ISO 21434" }, { th: "ISO 14001", ja: "ISO 14001", en: "ISO 14001" }, { th: "PCI DSS", ja: "PCI DSS", en: "PCI DSS" } ], correct: 1 },
+  { topic: { th: "ระบบที่ห้ามเชื่อมต่อกับเครื่องมือ AI Coding", ja: "AIコーディングツールへの接続禁止システム", en: "Systems Forbidden to Connect to AI Coding Tools" },
+    q: { th: "กรณีใช้ Claude Code หรือ AI จากค่ายอื่นเพื่อเขียนโค้ดและพัฒนาโปรแกรม มีระบบใดบ้างที่ห้ามเชื่อมต่อกับเครื่องมือเหล่านี้โดยตรงโดยเด็ดขาด?", ja: "Claude Codeや他社のAIを使ってコードを書いたりソフトウェアを開発したりする場合、これらのツールに直接接続してはならないシステムはどれですか?", en: "When using Claude Code or AI from other vendors to write code and develop software, which systems must absolutely never be connected to these tools directly?" },
+    choices: [
+      { th: "Dev/Test Environment, Internal Wiki, เว็บไซต์การตลาด, เอกสารสาธารณะ", ja: "開発/テスト環境、社内Wiki、マーケティングサイト、公開ドキュメント", en: "Dev/Test environment, internal wiki, marketing website, public documentation" },
+      { th: "Production DB / Server, SAP Production, Accounting, Cloud Direct Public Access to Azure SQL, HR SAP (SuccessFactor), Financial / Banking", ja: "Production DB/Server、SAP Production、Accounting、Cloud Direct Public Access to Azure SQL、HR SAP(SuccessFactor)、Financial/Banking", en: "Production DB/Server, SAP Production, Accounting, Cloud Direct Public Access to Azure SQL, HR SAP (SuccessFactor), Financial/Banking" },
+      { th: "Production DB / Server, SAP Production, Accounting, Cloud Backup Storage (Read-only), อีเมล/ปฏิทินพนักงาน", ja: "Production DB/Server、SAP Production、Accounting、クラウドバックアップストレージ(読み取り専用)、従業員のメール/カレンダー", en: "Production DB/Server, SAP Production, Accounting, Cloud Backup Storage (read-only), employee email/calendar" },
+      { th: "SAP Production และ Accounting เท่านั้น ระบบอื่นเชื่อมต่อได้หากได้รับอนุมัติจากหัวหน้างาน", ja: "SAP ProductionとAccountingのみ。他のシステムは上長の承認があれば接続可能", en: "Only SAP Production and Accounting — other systems can be connected with manager approval" }
+    ], correct: 1 },
   { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
     q: { th: "AISIN Group จัดซ้อมรับมืออีเมลหลอกลวง (Phishing Simulation) ให้พนักงานบ่อยแค่ไหน?", ja: "AISINグループは従業員向けにフィッシングメール対応訓練(Phishing Simulation)をどのくらいの頻度で実施していますか?", en: "How often does AISIN Group run phishing-simulation drills for employees?" },
     choices: [
