@@ -76,6 +76,13 @@
   .choice.selected .choice-letter { border-color: var(--accent); background: var(--accent); color: #fff; }
   .choice-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .choice-tag { font-family: var(--mono); font-size: 0.78rem; background: var(--surface); border: 1px solid var(--line); padding: 3px 9px; white-space: nowrap; }
+  .url-row { display: block; }
+  .url-row + .url-row { margin-top: 4px; }
+  .url-row b { font-weight: 700; }
+  .url-code { font-family: var(--mono); font-size: 0.83rem; }
+  .ip-part, .port-part { font-weight: 800; padding: 1px 4px; border-radius: 3px; }
+  .ip-part { color: var(--steel); background: var(--steel-soft); }
+  .port-part { color: var(--accent-deep); background: var(--accent-soft); }
 
   .quiz-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .btn { font-family: var(--sans); font-weight: 800; font-size: 0.9rem; padding: 12px 22px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
@@ -265,6 +272,14 @@ function DATA_BLOCK(name, email, score, total, pct, date, lang) {
     "-----------------------------------------------------";
 }
 
+function urlChoice(oct3, oct4, chatPort, vibePort) {
+  const row = (label, port) =>
+    '<span class="url-row"><b>' + label + ':</b> <code class="url-code">http://10.123.' +
+    '<span class="ip-part">' + oct3 + '.' + oct4 + '</span>:' +
+    '<span class="port-part">' + port + '</span>/</code></span>';
+  return row('AI Chat', chatPort) + row('AI Vibe Code', vibePort);
+}
+
 const QUESTIONS = [
   { topic: { th: "ภาพรวม", ja: "概要", en: "Overview" },
     q: { th: "ความเสี่ยงหลักจากการใช้ AI ที่คู่มือนี้กล่าวถึงมีกี่กลุ่ม อะไรบ้าง?", ja: "本ガイドが取り上げるAI利用の主なリスクは何グループで、それぞれ何ですか?", en: "How many main risk categories from using AI does this guide cover, and what are they?" },
@@ -351,13 +366,19 @@ const QUESTIONS = [
       { th: "AI จะแก้ไขปัญหาข้อมูลรั่วไหลได้เองโดยอัตโนมัติเสมอ", ja: "AIが常に自動的にデータ漏えい問題を解決してくれる", en: "AI would always automatically fix any data leakage problem" }
     ], correct: 0 },
   { topic: { th: "เครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みAIツール", en: "Company-Approved AI Tools" },
-    q: { th: "บริษัทในกลุ่ม ATTG เรามี Generative AI ภายในที่สร้างโดยทีม Innovation ปัจจุบันพนักงานทุกท่านสามารถเข้าใช้งานได้จาก Link ใด?", ja: "ATTGグループには、Innovationチームが構築した独自の生成AIがあります。現在、全従業員はどのリンクからアクセスできますか?", en: "ATTG Group has its own Generative AI built by the Innovation team. Which link can all employees currently use to access it?" },
-    choices: [
-      { th: "AI Chat: http://10.123.41.43:8080/ และ AI Vibe Code: http://10.123.41.43:3000/", ja: "AI Chat: http://10.123.41.43:8080/ および AI Vibe Code: http://10.123.41.43:3000/", en: "AI Chat: http://10.123.41.43:8080/ and AI Vibe Code: http://10.123.41.43:3000/" },
-      { th: "AI Chat: http://10.123.41.43:3000/ และ AI Vibe Code: http://10.123.41.43:8080/", ja: "AI Chat: http://10.123.41.43:3000/ および AI Vibe Code: http://10.123.41.43:8080/", en: "AI Chat: http://10.123.41.43:3000/ and AI Vibe Code: http://10.123.41.43:8080/" },
-      { th: "AI Chat: http://10.123.41.34:3000/ และ AI Vibe Code: http://10.123.41.34:8080/", ja: "AI Chat: http://10.123.41.34:3000/ および AI Vibe Code: http://10.123.41.34:8080/", en: "AI Chat: http://10.123.41.34:3000/ and AI Vibe Code: http://10.123.41.34:8080/" },
-      { th: "AI Chat: http://10.123.14.43:3000/ และ AI Vibe Code: http://10.123.14.43:8080/", ja: "AI Chat: http://10.123.14.43:3000/ および AI Vibe Code: http://10.123.14.43:8080/", en: "AI Chat: http://10.123.14.43:3000/ and AI Vibe Code: http://10.123.14.43:8080/" }
-    ], correct: 1 },
+    q: { th: "บริษัทในกลุ่ม ATTG เรามี Generative AI ภายใน (ชื่อว่า: Paitoon-AI) ที่สร้างโดยทีม Innovation ปัจจุบันพนักงานทุกท่านสามารถเข้าใช้งานได้จาก Link ใด?", ja: "ATTGグループには、Innovationチームが構築した独自の生成AI(名称:Paitoon-AI)があります。現在、全従業員はどのリンクからアクセスできますか?", en: "ATTG Group has its own internal Generative AI (named Paitoon-AI) built by the Innovation team. Which link can all employees currently use to access it?" },
+    choices: (() => {
+      const c0 = urlChoice("41", "43", "8080", "3000");
+      const c1 = urlChoice("41", "43", "3000", "8080");
+      const c2 = urlChoice("41", "34", "3000", "8080");
+      const c3 = urlChoice("14", "43", "3000", "8080");
+      return [
+        { th: c0, ja: c0, en: c0 },
+        { th: c1, ja: c1, en: c1 },
+        { th: c2, ja: c2, en: c2 },
+        { th: c3, ja: c3, en: c3 }
+      ];
+    })(), correct: 1 },
   { topic: { th: "ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みのAIツールのみを使用する", en: "Use Only Company-Approved AI Tools" },
     q: { th: "เว็บไซต์ IT Learning Center ที่ทีม IT ของ ATTG จัดทำขึ้นเอง มีส่วน \"AI Resources\" รวมคู่มือการใช้งาน AI ที่บริษัทอนุมัติไว้ให้พนักงานศึกษาก่อนเริ่มใช้งานจริง คู่มือเหล่านี้ครอบคลุม AI กี่ค่าย? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>", ja: "ATTGのIT部門自身が構築したIT Learning Centerのウェブサイトには、実際に使用する前に従業員が確認すべき会社承認済みのAI利用ガイドをまとめた「AI Resources」セクションがあります。このガイドは何社分のAIをカバーしていますか? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>", en: "The IT Learning Center website — built by ATTG's own IT team — has an \"AI Resources\" section with company-approved usage guides employees should check before using AI for real. How many AI vendors do these guides cover? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>" },
     choices: [
