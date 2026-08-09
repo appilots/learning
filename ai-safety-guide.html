@@ -43,7 +43,8 @@
     --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
   }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: var(--sans); background: var(--bg-gradient); background-attachment: fixed; color: var(--ink); min-height: 100vh; }
+  body { margin: 0; font-family: var(--sans); background: var(--accent-soft); color: var(--ink); min-height: 100vh; }
+  .frame-inner { background: var(--surface); border: 3px solid var(--accent); box-shadow: var(--shadow); }
   ::selection { background: var(--accent-soft); color: var(--accent-deep); }
   .frame { max-width: 1680px; margin: 0 auto; padding: 32px clamp(20px, 3.5vw, 64px) 64px; }
 
@@ -179,6 +180,7 @@
   }
 </style>
 <div class="frame">
+ <div class="frame-inner">
   <header class="masthead">
     <div class="masthead-top">
       <div>
@@ -206,6 +208,7 @@
     <nav class="rail" id="topicList" aria-label="Topic stations"></nav>
     <main class="sheet" id="content"></main>
   </div>
+ </div>
 </div>
 
 <script>

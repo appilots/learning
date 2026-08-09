@@ -39,9 +39,10 @@
     --bg-gradient: linear-gradient(135deg, #d9edfa 0%, #a7cbe8 50%, #4a7fb5 100%);
   }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: var(--sans); background: var(--bg-gradient); background-attachment: fixed; color: var(--ink); min-height: 100vh; }
+  body { margin: 0; font-family: var(--sans); background: var(--accent-soft); color: var(--ink); min-height: 100vh; }
   ::selection { background: var(--accent-soft); color: var(--accent-deep); }
   .frame { max-width: 860px; margin: 0 auto; padding: 32px clamp(16px, 3.5vw, 32px) 64px; }
+  .frame-inner { background: var(--surface); border: 3px solid var(--accent); box-shadow: var(--shadow); }
 
   .masthead { border-bottom: 2px solid var(--ink); background: color-mix(in srgb, var(--surface) 85%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 20px 22px; margin-bottom: 24px; box-shadow: var(--shadow); }
   .masthead-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
@@ -131,6 +132,7 @@
   }
 </style>
 <div class="frame">
+ <div class="frame-inner">
   <header class="masthead">
     <div class="masthead-top">
       <span class="brand-code">AISIN GROUP · ATTG · DOC. AI-SAFETY-QUIZ</span>
@@ -148,6 +150,7 @@
     </div>
   </header>
   <main class="sheet" id="content"></main>
+ </div>
 </div>
 
 <script>
