@@ -74,6 +74,8 @@
   .choice-letter { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.78rem; font-weight: 700; color: var(--ink-soft); }
   .choice.selected { border-color: var(--accent); background: var(--accent-soft); }
   .choice.selected .choice-letter { border-color: var(--accent); background: var(--accent); color: #fff; }
+  .choice-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .choice-tag { font-family: var(--mono); font-size: 0.78rem; background: var(--surface); border: 1px solid var(--line); padding: 3px 9px; white-space: nowrap; }
 
   .quiz-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .btn { font-family: var(--sans); font-weight: 800; font-size: 0.9rem; padding: 12px 22px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
@@ -278,35 +280,17 @@ const QUESTIONS = [
   { topic: { th: "ระบบที่ห้ามเชื่อมต่อกับเครื่องมือ AI Coding", ja: "AIコーディングツールへの接続禁止システム", en: "Systems Forbidden to Connect to AI Coding Tools" },
     q: { th: "กรณีใช้ Claude Code หรือ AI จากค่ายอื่นเพื่อเขียนโค้ดและพัฒนาโปรแกรม มีระบบใดบ้างที่ห้ามเชื่อมต่อกับเครื่องมือเหล่านี้โดยตรงโดยเด็ดขาด?", ja: "Claude Codeや他社のAIを使ってコードを書いたりソフトウェアを開発したりする場合、これらのツールに直接接続してはならないシステムはどれですか?", en: "When using Claude Code or AI from other vendors to write code and develop software, which systems must absolutely never be connected to these tools directly?" },
     choices: [
-      { th: "Dev/Test Environment, Internal Wiki, เว็บไซต์การตลาด, เอกสารสาธารณะ", ja: "開発/テスト環境、社内Wiki、マーケティングサイト、公開ドキュメント", en: "Dev/Test environment, internal wiki, marketing website, public documentation" },
-      { th: "Production DB / Server, SAP Production, Accounting, Cloud Direct Public Access to Azure SQL, HR SAP (SuccessFactor), Financial / Banking", ja: "Production DB/Server、SAP Production、Accounting、Cloud Direct Public Access to Azure SQL、HR SAP(SuccessFactor)、Financial/Banking", en: "Production DB/Server, SAP Production, Accounting, Cloud Direct Public Access to Azure SQL, HR SAP (SuccessFactor), Financial/Banking" },
-      { th: "Production DB / Server, SAP Production, Accounting, Cloud Backup Storage (Read-only), อีเมล/ปฏิทินพนักงาน", ja: "Production DB/Server、SAP Production、Accounting、クラウドバックアップストレージ(読み取り専用)、従業員のメール/カレンダー", en: "Production DB/Server, SAP Production, Accounting, Cloud Backup Storage (read-only), employee email/calendar" },
+      { th: "<span class=\"choice-tags\"><span class=\"choice-tag\">Dev/Test Environment</span><span class=\"choice-tag\">Internal Wiki</span><span class=\"choice-tag\">เว็บไซต์การตลาด</span><span class=\"choice-tag\">เอกสารสาธารณะ</span></span>",
+        ja: "<span class=\"choice-tags\"><span class=\"choice-tag\">開発/テスト環境</span><span class=\"choice-tag\">社内Wiki</span><span class=\"choice-tag\">マーケティングサイト</span><span class=\"choice-tag\">公開ドキュメント</span></span>",
+        en: "<span class=\"choice-tags\"><span class=\"choice-tag\">Dev/Test Environment</span><span class=\"choice-tag\">Internal Wiki</span><span class=\"choice-tag\">Marketing Website</span><span class=\"choice-tag\">Public Documentation</span></span>" },
+      { th: "<span class=\"choice-tags\"><span class=\"choice-tag\">Production DB / Server</span><span class=\"choice-tag\">SAP Production</span><span class=\"choice-tag\">Accounting</span><span class=\"choice-tag\">Cloud Direct Public Access to Azure SQL</span><span class=\"choice-tag\">HR SAP (SuccessFactor)</span><span class=\"choice-tag\">Financial / Banking</span></span>",
+        ja: "<span class=\"choice-tags\"><span class=\"choice-tag\">Production DB / Server</span><span class=\"choice-tag\">SAP Production</span><span class=\"choice-tag\">Accounting</span><span class=\"choice-tag\">Cloud Direct Public Access to Azure SQL</span><span class=\"choice-tag\">HR SAP (SuccessFactor)</span><span class=\"choice-tag\">Financial / Banking</span></span>",
+        en: "<span class=\"choice-tags\"><span class=\"choice-tag\">Production DB / Server</span><span class=\"choice-tag\">SAP Production</span><span class=\"choice-tag\">Accounting</span><span class=\"choice-tag\">Cloud Direct Public Access to Azure SQL</span><span class=\"choice-tag\">HR SAP (SuccessFactor)</span><span class=\"choice-tag\">Financial / Banking</span></span>" },
+      { th: "<span class=\"choice-tags\"><span class=\"choice-tag\">Production DB / Server</span><span class=\"choice-tag\">SAP Production</span><span class=\"choice-tag\">Accounting</span><span class=\"choice-tag\">Cloud Backup Storage (Read-only)</span><span class=\"choice-tag\">อีเมล/ปฏิทินพนักงาน</span></span>",
+        ja: "<span class=\"choice-tags\"><span class=\"choice-tag\">Production DB / Server</span><span class=\"choice-tag\">SAP Production</span><span class=\"choice-tag\">Accounting</span><span class=\"choice-tag\">クラウドバックアップストレージ(読み取り専用)</span><span class=\"choice-tag\">従業員のメール/カレンダー</span></span>",
+        en: "<span class=\"choice-tags\"><span class=\"choice-tag\">Production DB / Server</span><span class=\"choice-tag\">SAP Production</span><span class=\"choice-tag\">Accounting</span><span class=\"choice-tag\">Cloud Backup Storage (Read-only)</span><span class=\"choice-tag\">Employee Email/Calendar</span></span>" },
       { th: "SAP Production และ Accounting เท่านั้น ระบบอื่นเชื่อมต่อได้หากได้รับอนุมัติจากหัวหน้างาน", ja: "SAP ProductionとAccountingのみ。他のシステムは上長の承認があれば接続可能", en: "Only SAP Production and Accounting — other systems can be connected with manager approval" }
     ], correct: 1 },
-  { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
-    q: { th: "AISIN Group จัดซ้อมรับมืออีเมลหลอกลวง (Phishing Simulation) ให้พนักงานบ่อยแค่ไหน?", ja: "AISINグループは従業員向けにフィッシングメール対応訓練(Phishing Simulation)をどのくらいの頻度で実施していますか?", en: "How often does AISIN Group run phishing-simulation drills for employees?" },
-    choices: [
-      { th: "ปีละ 1 ครั้ง", ja: "年1回", en: "Once a year" },
-      { th: "ปีละ 3 ครั้ง", ja: "年3回", en: "Three times a year" },
-      { th: "เดือนละ 1 ครั้ง", ja: "月1回", en: "Once a month" },
-      { th: "ไม่มีการซ้อมเป็นประจำ", ja: "定期的な訓練はない", en: "There are no regular drills" }
-    ], correct: 1 },
-  { topic: { th: "ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みのAIツールのみを使用する", en: "Use Only Company-Approved AI Tools" },
-    q: { th: "เว็บไซต์ IT Learning Center ที่ทีม IT ของ ATTG จัดทำขึ้นเอง มีส่วน \"AI Resources\" รวมคู่มือการใช้งาน AI ที่บริษัทอนุมัติไว้ให้พนักงานศึกษาก่อนเริ่มใช้งานจริง คู่มือเหล่านี้ครอบคลุม AI กี่ค่าย? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>", ja: "ATTGのIT部門自身が構築したIT Learning Centerのウェブサイトには、実際に使用する前に従業員が確認すべき会社承認済みのAI利用ガイドをまとめた「AI Resources」セクションがあります。このガイドは何社分のAIをカバーしていますか? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>", en: "The IT Learning Center website — built by ATTG's own IT team — has an \"AI Resources\" section with company-approved usage guides employees should check before using AI for real. How many AI vendors do these guides cover? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>" },
-    choices: [
-      { th: "2 ค่าย — Claude, Copilot", ja: "2社 — Claude, Copilot", en: "2 vendors — Claude, Copilot" },
-      { th: "3 ค่าย — Claude, Copilot, ChatGPT", ja: "3社 — Claude, Copilot, ChatGPT", en: "3 vendors — Claude, Copilot, ChatGPT" },
-      { th: "4 ค่าย — Claude, Copilot, ChatGPT, Gemini", ja: "4社 — Claude, Copilot, ChatGPT, Gemini", en: "4 vendors — Claude, Copilot, ChatGPT, Gemini" },
-      { th: "5 ค่าย — Claude, Copilot, ChatGPT, Gemini, Grok", ja: "5社 — Claude, Copilot, ChatGPT, Gemini, Grok", en: "5 vendors — Claude, Copilot, ChatGPT, Gemini, Grok" }
-    ], correct: 1 },
-  { topic: { th: "AI ในสายการผลิต", ja: "生産ラインにおけるAI", en: "AI on the Production Line" },
-    q: { th: "ระบบ AI ตรวจสอบคุณภาพของ AISIN และ Toyota ต้องอาศัยข้อมูลจริงจากสายการผลิตจำนวนมหาศาลในการทำงาน หากข้อมูลการผลิตเหล่านี้ถูกจัดการอย่างไม่รัดกุม อาจส่งผลกระทบต่อองค์กรอย่างไร?", ja: "AISINとトヨタのAI品質検査システムは、生産ラインから得られる膨大な実データに依存しています。この生産データが適切に管理されない場合、組織にどのような影響が考えられますか?", en: "AISIN and Toyota's AI quality-inspection systems depend on huge volumes of real production-line data. If that production data isn't handled carefully, what impact could it have on the organization?" },
-    choices: [
-      { th: "ข้อมูลการผลิตที่ละเอียดอ่อนอาจรั่วไหลหรือถูกนำไปใช้ผิดวัตถุประสงค์ กระทบทั้งคุณภาพสินค้าและความลับทางการแข่งขัน", ja: "機密性の高い生産データが漏えいまたは悪用され、製品品質と競争上の機密性の両方に悪影響を及ぼす可能性がある", en: "Sensitive production data could leak or be misused, harming both product quality and competitive confidentiality" },
-      { th: "ไม่มีผลกระทบใดๆ เพราะข้อมูลสายการผลิตไม่ถือเป็นข้อมูลสำคัญขององค์กร", ja: "生産ラインのデータは組織の重要なデータとみなされないため、影響はない", en: "No impact at all — production-line data isn't considered important organizational data" },
-      { th: "กระทบเฉพาะความเร็วของสายการผลิตเท่านั้น ไม่เกี่ยวกับความปลอดภัยข้อมูล", ja: "生産速度にのみ影響し、データセキュリティとは無関係である", en: "It would only affect production speed, unrelated to data security" },
-      { th: "AI จะแก้ไขปัญหาข้อมูลรั่วไหลได้เองโดยอัตโนมัติเสมอ", ja: "AIが常に自動的にデータ漏えい問題を解決してくれる", en: "AI would always automatically fix any data leakage problem" }
-    ], correct: 0 },
   { topic: { th: "ข้อมูลห้ามป้อนเข้า AI", ja: "AIに入力してはいけないデータ", en: "Data Never to Enter Into AI" },
     q: { th: "ข้อมูลใดต่อไปนี้ ห้ามป้อนเข้า AI สาธารณะโดยเด็ดขาด?", ja: "次のうち、公開AIに絶対に入力してはいけないものはどれですか?", en: "Which of the following must never be entered into public AI?" },
     choices: [
@@ -323,6 +307,30 @@ const QUESTIONS = [
       { th: "ใช้แต่บัญชีส่วนตัวเท่านั้น", ja: "個人アカウントのみを使用する", en: "Only use a personal account" },
       { th: "ส่งข้อมูลผ่านอีเมลให้ AI ประมวลผลแทน", ja: "データをメールで送ってAIに処理させる", en: "Email the data so AI can process it instead" }
     ], correct: 1 },
+  { topic: { th: "ข้อมูลห้ามป้อนเข้า AI", ja: "AIに入力してはいけないデータ", en: "Data Never to Enter Into AI" },
+    q: { th: "หัวหน้าทีมอยากให้ AI ช่วยสรุปรายงานผลประกอบการรายไตรมาสที่ยังไม่เปิดเผยต่อสาธารณะ เพื่อความรวดเร็วจึงอัปโหลดไฟล์ทั้งฉบับเข้า AI สาธารณะ ความเสี่ยงที่ใหญ่ที่สุดคืออะไร และควรทำอย่างไรแทน?", ja: "マネージャーが、まだ非公開の四半期決算報告書をAIに要約させたいと考え、時間短縮のためファイル全体を公開AIにアップロードした。最大のリスクは何であり、代わりにどうすべきか?", en: "A manager wants AI to summarize a not-yet-public quarterly earnings report, and uploads the whole file to public AI to save time. What's the biggest risk, and what should be done instead?" },
+    choices: [
+      { th: "ไม่มีความเสี่ยง เพราะ AI ประมวลผลเสร็จแล้วจะลบข้อมูลทิ้งทันที", ja: "AIは処理後すぐにデータを削除するため、リスクはない", en: "No risk — AI deletes the data immediately after processing" },
+      { th: "ข้อมูลการเงินที่ยังไม่เปิดเผยอาจหลุดออกนอกบริษัท กระทบตลาดหุ้นหรือให้คู่แข่งได้เปรียบ ควรใช้เครื่องมือ AI ภายในที่บริษัทอนุมัติแทน", ja: "未公開の財務情報が社外に流出し、株式市場や競合他社への優位性に影響する恐れがある。代わりに会社承認済みの社内AIツールを使うべきである", en: "Undisclosed financial data could leak outside the company, affecting the stock market or giving competitors an advantage — use an internal, company-approved AI tool instead" },
+      { th: "ความเสี่ยงมีแค่เรื่องไฟล์ขนาดใหญ่ทำให้ AI ประมวลผลช้า", ja: "リスクは大きなファイルによってAIの処理が遅くなることだけである", en: "The only risk is a large file making AI processing slower" },
+      { th: "เสี่ยงเฉพาะเมื่อใช้ AI เวอร์ชันฟรีเท่านั้น บัญชีแบบเสียเงินปลอดภัย 100%", ja: "無料版のAIを使う場合にのみリスクがあり、有料アカウントなら100%安全である", en: "It's only risky on the free version of AI — a paid account is 100% safe" }
+    ], correct: 1 },
+  { topic: { th: "ความเป็นส่วนตัวและ PDPA", ja: "プライバシーとPDPA", en: "Privacy and PDPA" },
+    q: { th: "PDPA คุ้มครองข้อมูลประเภทใด?", ja: "PDPAはどのような種類のデータを保護していますか?", en: "What kind of data does the PDPA protect?" },
+    choices: [
+      { th: "ข้อมูลทางบัญชีของบริษัทเท่านั้น", ja: "会社の会計データのみ", en: "Only the company's accounting data" },
+      { th: "ข้อมูลส่วนบุคคลที่ระบุตัวตนได้ เช่น ชื่อ ที่อยู่ เบอร์โทร", ja: "氏名・住所・電話番号など、個人を特定できる情報", en: "Identifiable personal data, such as names, addresses, phone numbers" },
+      { th: "ข้อมูลลิขสิทธิ์ซอฟต์แวร์", ja: "ソフトウェアの著作権データ", en: "Software copyright data" },
+      { th: "ข้อมูลสภาพอากาศ", ja: "気象データ", en: "Weather data" }
+    ], correct: 1 },
+  { topic: { th: "ความเป็นส่วนตัวและ PDPA", ja: "プライバシーとPDPA", en: "Privacy and PDPA" },
+    q: { th: "พนักงานฝ่ายขายอยากให้ AI ช่วยร่างอีเมลติดตามลูกค้าให้ดูเป็นธรรมชาติ จึงคัดลอกชื่อ-เบอร์โทร-ประวัติการซื้อของลูกค้าจริงวางลงในแชท AI สาธารณะ การกระทำนี้เสี่ยงผิดกฎหมายใดโดยตรง และควรทำอย่างไรแทน?", ja: "営業担当者が、より自然な文面にするため、実在の顧客の氏名・電話番号・購入履歴を公開AIのチャットに貼り付けてフォローアップメールの下書きを依頼した。これは直接どの法律に抵触するリスクがあり、代わりにどうすべきか?", en: "A salesperson wants AI to draft a natural-sounding follow-up email, so they paste a real customer's name, phone number, and purchase history into public AI chat. Which law does this directly risk violating, and what should be done instead?" },
+    choices: [
+      { th: "ไม่ผิดกฎหมายใดๆ เพราะเป็นข้อมูลลูกค้าของบริษัทเอง", ja: "自社の顧客データなので、いかなる法律にも違反しない", en: "No law is violated — it's the company's own customer data" },
+      { th: "เสี่ยงผิด พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล (PDPA) ควรแทนที่ข้อมูลจริงด้วยข้อมูลสมมติก่อนป้อนเข้า AI", ja: "個人情報保護法(PDPA)違反のリスクがある。AIに入力する前に実データを仮のデータに置き換えるべきである", en: "It risks violating the Personal Data Protection Act (PDPA) — replace the real data with placeholder data before entering it into AI" },
+      { th: "เสี่ยงผิดกฎหมายเฉพาะกรณีลูกค้าเป็นชาวต่างชาติเท่านั้น", ja: "顧客が外国人の場合にのみ法律違反のリスクがある", en: "It's only a legal risk if the customer is a foreign national" },
+      { th: "ผิดกฎหมายเฉพาะเมื่อแชร์บทสนทนานั้นต่อให้คนอื่นดูเท่านั้น", ja: "その会話を他人と共有した場合にのみ違反となる", en: "It's only a violation if that conversation is later shared with someone else" }
+    ], correct: 1 },
   { topic: { th: "ตรวจสอบคำตอบ AI", ja: "AIの回答を検証する", en: "Verifying AI Answers" },
     q: { th: "อาการที่ AI ตอบผิดพลาดอย่างมั่นใจโดยไม่รู้ตัวเรียกว่าอะไร?", ja: "AIが誤りに気づかないまま自信満々に間違った回答をする現象を何と呼びますか?", en: "What is it called when AI confidently gives an incorrect answer without realizing it?" },
     choices: [ { th: "Bias", ja: "バイアス(Bias)", en: "Bias" }, { th: "Hallucination", ja: "ハルシネーション(Hallucination)", en: "Hallucination" }, { th: "Overfitting", ja: "過学習(Overfitting)", en: "Overfitting" }, { th: "Latency", ja: "遅延(Latency)", en: "Latency" } ], correct: 1 },
@@ -334,14 +342,14 @@ const QUESTIONS = [
       { th: "ใช้เฉพาะคำตอบที่ยาวที่สุด", ja: "最も長い回答だけを使用する", en: "Only use the longest answer given" },
       { th: "ถามคำถามเดิมซ้ำ 2 ครั้งแล้วเชื่อคำตอบที่มาก่อน", ja: "同じ質問を2回聞いて、先に出てきた回答を信じる", en: "Ask the same question twice and trust whichever answer comes first" }
     ], correct: 1 },
-  { topic: { th: "ความเป็นส่วนตัวและ PDPA", ja: "プライバシーとPDPA", en: "Privacy and PDPA" },
-    q: { th: "PDPA คุ้มครองข้อมูลประเภทใด?", ja: "PDPAはどのような種類のデータを保護していますか?", en: "What kind of data does the PDPA protect?" },
+  { topic: { th: "AI ในสายการผลิต", ja: "生産ラインにおけるAI", en: "AI on the Production Line" },
+    q: { th: "ระบบ AI ตรวจสอบคุณภาพของ AISIN และ Toyota ต้องอาศัยข้อมูลจริงจากสายการผลิตจำนวนมหาศาลในการทำงาน หากข้อมูลการผลิตเหล่านี้ถูกจัดการอย่างไม่รัดกุม อาจส่งผลกระทบต่อองค์กรอย่างไร?", ja: "AISINとトヨタのAI品質検査システムは、生産ラインから得られる膨大な実データに依存しています。この生産データが適切に管理されない場合、組織にどのような影響が考えられますか?", en: "AISIN and Toyota's AI quality-inspection systems depend on huge volumes of real production-line data. If that production data isn't handled carefully, what impact could it have on the organization?" },
     choices: [
-      { th: "ข้อมูลทางบัญชีของบริษัทเท่านั้น", ja: "会社の会計データのみ", en: "Only the company's accounting data" },
-      { th: "ข้อมูลส่วนบุคคลที่ระบุตัวตนได้ เช่น ชื่อ ที่อยู่ เบอร์โทร", ja: "氏名・住所・電話番号など、個人を特定できる情報", en: "Identifiable personal data, such as names, addresses, phone numbers" },
-      { th: "ข้อมูลลิขสิทธิ์ซอฟต์แวร์", ja: "ソフトウェアの著作権データ", en: "Software copyright data" },
-      { th: "ข้อมูลสภาพอากาศ", ja: "気象データ", en: "Weather data" }
-    ], correct: 1 },
+      { th: "ข้อมูลการผลิตที่ละเอียดอ่อนอาจรั่วไหลหรือถูกนำไปใช้ผิดวัตถุประสงค์ กระทบทั้งคุณภาพสินค้าและความลับทางการแข่งขัน", ja: "機密性の高い生産データが漏えいまたは悪用され、製品品質と競争上の機密性の両方に悪影響を及ぼす可能性がある", en: "Sensitive production data could leak or be misused, harming both product quality and competitive confidentiality" },
+      { th: "ไม่มีผลกระทบใดๆ เพราะข้อมูลสายการผลิตไม่ถือเป็นข้อมูลสำคัญขององค์กร", ja: "生産ラインのデータは組織の重要なデータとみなされないため、影響はない", en: "No impact at all — production-line data isn't considered important organizational data" },
+      { th: "กระทบเฉพาะความเร็วของสายการผลิตเท่านั้น ไม่เกี่ยวกับความปลอดภัยข้อมูล", ja: "生産速度にのみ影響し、データセキュリティとは無関係である", en: "It would only affect production speed, unrelated to data security" },
+      { th: "AI จะแก้ไขปัญหาข้อมูลรั่วไหลได้เองโดยอัตโนมัติเสมอ", ja: "AIが常に自動的にデータ漏えい問題を解決してくれる", en: "AI would always automatically fix any data leakage problem" }
+    ], correct: 0 },
   { topic: { th: "เครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みAIツール", en: "Company-Approved AI Tools" },
     q: { th: "บริษัทในกลุ่ม ATTG เรามี Generative AI ภายในที่สร้างโดยทีม Innovation ปัจจุบันพนักงานทุกท่านสามารถเข้าใช้งานได้จาก Link ใด?", ja: "ATTGグループには、Innovationチームが構築した独自の生成AIがあります。現在、全従業員はどのリンクからアクセスできますか?", en: "ATTG Group has its own Generative AI built by the Innovation team. Which link can all employees currently use to access it?" },
     choices: [
@@ -350,13 +358,13 @@ const QUESTIONS = [
       { th: "AI Chat: http://10.123.41.34:3000/ และ AI Vibe Code: http://10.123.41.34:8080/", ja: "AI Chat: http://10.123.41.34:3000/ および AI Vibe Code: http://10.123.41.34:8080/", en: "AI Chat: http://10.123.41.34:3000/ and AI Vibe Code: http://10.123.41.34:8080/" },
       { th: "AI Chat: http://10.123.14.43:3000/ และ AI Vibe Code: http://10.123.14.43:8080/", ja: "AI Chat: http://10.123.14.43:3000/ および AI Vibe Code: http://10.123.14.43:8080/", en: "AI Chat: http://10.123.14.43:3000/ and AI Vibe Code: http://10.123.14.43:8080/" }
     ], correct: 1 },
-  { topic: { th: "ลิขสิทธิ์และทรัพย์สินทางปัญญา", ja: "著作権と知的財産", en: "Copyright and IP" },
-    q: { th: "ก่อนนำเนื้อหาที่ AI สร้างไปเผยแพร่สู่สาธารณะ ควรทำอย่างไร?", ja: "AIが生成したコンテンツを公開する前に、何をすべきですか?", en: "Before publishing AI-generated content publicly, what should you do?" },
+  { topic: { th: "ใช้เฉพาะเครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みのAIツールのみを使用する", en: "Use Only Company-Approved AI Tools" },
+    q: { th: "เว็บไซต์ IT Learning Center ที่ทีม IT ของ ATTG จัดทำขึ้นเอง มีส่วน \"AI Resources\" รวมคู่มือการใช้งาน AI ที่บริษัทอนุมัติไว้ให้พนักงานศึกษาก่อนเริ่มใช้งานจริง คู่มือเหล่านี้ครอบคลุม AI กี่ค่าย? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>", ja: "ATTGのIT部門自身が構築したIT Learning Centerのウェブサイトには、実際に使用する前に従業員が確認すべき会社承認済みのAI利用ガイドをまとめた「AI Resources」セクションがあります。このガイドは何社分のAIをカバーしていますか? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>", en: "The IT Learning Center website — built by ATTG's own IT team — has an \"AI Resources\" section with company-approved usage guides employees should check before using AI for real. How many AI vendors do these guides cover? <a class=\"q-link\" href=\"https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx\" target=\"_blank\" rel=\"noopener\">Link Web : https://aisingroupap01.sharepoint.com/sites/ATTG-IT_Training/SitePages/Mainpage.aspx</a>" },
     choices: [
-      { th: "เผยแพร่ได้ทันทีเพราะ AI สร้างเนื้อหาใหม่เสมอ ไม่มีปัญหาลิขสิทธิ์", ja: "AIは常に新しいコンテンツを生成し著作権上の問題はないので、すぐに公開してよい", en: "Publish it immediately, since AI always creates new content with no copyright issues" },
-      { th: "ตรวจสอบว่าไม่ซ้ำหรือคล้ายงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป", ja: "他者の著作物と重複または過度に類似していないか確認する", en: "Check that it isn't duplicating or overly similar to someone else's copyrighted work" },
-      { th: "เปลี่ยนแค่สีตัวอักษรก็เพียงพอแล้ว", ja: "文字の色を変えるだけで十分である", en: "Just changing the text color is enough" },
-      { th: "ไม่ต้องตรวจสอบถ้าเป็นแค่โพสต์โซเชียล", ja: "SNS投稿程度であれば確認は不要である", en: "No need to check if it's just a social media post" }
+      { th: "2 ค่าย — Claude, Copilot", ja: "2社 — Claude, Copilot", en: "2 vendors — Claude, Copilot" },
+      { th: "3 ค่าย — Claude, Copilot, ChatGPT", ja: "3社 — Claude, Copilot, ChatGPT", en: "3 vendors — Claude, Copilot, ChatGPT" },
+      { th: "4 ค่าย — Claude, Copilot, ChatGPT, Gemini", ja: "4社 — Claude, Copilot, ChatGPT, Gemini", en: "4 vendors — Claude, Copilot, ChatGPT, Gemini" },
+      { th: "5 ค่าย — Claude, Copilot, ChatGPT, Gemini, Grok", ja: "5社 — Claude, Copilot, ChatGPT, Gemini, Grok", en: "5 vendors — Claude, Copilot, ChatGPT, Gemini, Grok" }
     ], correct: 1 },
   { topic: { th: "เครื่องมือ AI ที่บริษัทอนุมัติ", ja: "会社承認済みAIツール", en: "Company-Approved AI Tools" },
     q: { th: "\"Shadow AI\" หมายถึงอะไร?", ja: "「シャドーAI(Shadow AI)」とは何を意味しますか?", en: "What does \"Shadow AI\" mean?" },
@@ -366,13 +374,21 @@ const QUESTIONS = [
       { th: "โหมดมืดของแอป AI", ja: "AIアプリのダークモード", en: "The dark mode of an AI app" },
       { th: "AI ที่บริษัทพัฒนาขึ้นใช้ภายในเท่านั้น", ja: "会社が社内利用のためだけに開発したAI", en: "AI the company developed for internal use only" }
     ], correct: 1 },
-  { topic: { th: "ความเป็นส่วนตัวและ PDPA", ja: "プライバシーとPDPA", en: "Privacy and PDPA" },
-    q: { th: "พนักงานฝ่ายขายอยากให้ AI ช่วยร่างอีเมลติดตามลูกค้าให้ดูเป็นธรรมชาติ จึงคัดลอกชื่อ-เบอร์โทร-ประวัติการซื้อของลูกค้าจริงวางลงในแชท AI สาธารณะ การกระทำนี้เสี่ยงผิดกฎหมายใดโดยตรง และควรทำอย่างไรแทน?", ja: "営業担当者が、より自然な文面にするため、実在の顧客の氏名・電話番号・購入履歴を公開AIのチャットに貼り付けてフォローアップメールの下書きを依頼した。これは直接どの法律に抵触するリスクがあり、代わりにどうすべきか?", en: "A salesperson wants AI to draft a natural-sounding follow-up email, so they paste a real customer's name, phone number, and purchase history into public AI chat. Which law does this directly risk violating, and what should be done instead?" },
+  { topic: { th: "ลิขสิทธิ์และทรัพย์สินทางปัญญา", ja: "著作権と知的財産", en: "Copyright and IP" },
+    q: { th: "ก่อนนำเนื้อหาที่ AI สร้างไปเผยแพร่สู่สาธารณะ ควรทำอย่างไร?", ja: "AIが生成したコンテンツを公開する前に、何をすべきですか?", en: "Before publishing AI-generated content publicly, what should you do?" },
     choices: [
-      { th: "ไม่ผิดกฎหมายใดๆ เพราะเป็นข้อมูลลูกค้าของบริษัทเอง", ja: "自社の顧客データなので、いかなる法律にも違反しない", en: "No law is violated — it's the company's own customer data" },
-      { th: "เสี่ยงผิด พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล (PDPA) ควรแทนที่ข้อมูลจริงด้วยข้อมูลสมมติก่อนป้อนเข้า AI", ja: "個人情報保護法(PDPA)違反のリスクがある。AIに入力する前に実データを仮のデータに置き換えるべきである", en: "It risks violating the Personal Data Protection Act (PDPA) — replace the real data with placeholder data before entering it into AI" },
-      { th: "เสี่ยงผิดกฎหมายเฉพาะกรณีลูกค้าเป็นชาวต่างชาติเท่านั้น", ja: "顧客が外国人の場合にのみ法律違反のリスクがある", en: "It's only a legal risk if the customer is a foreign national" },
-      { th: "ผิดกฎหมายเฉพาะเมื่อแชร์บทสนทนานั้นต่อให้คนอื่นดูเท่านั้น", ja: "その会話を他人と共有した場合にのみ違反となる", en: "It's only a violation if that conversation is later shared with someone else" }
+      { th: "เผยแพร่ได้ทันทีเพราะ AI สร้างเนื้อหาใหม่เสมอ ไม่มีปัญหาลิขสิทธิ์", ja: "AIは常に新しいコンテンツを生成し著作権上の問題はないので、すぐに公開してよい", en: "Publish it immediately, since AI always creates new content with no copyright issues" },
+      { th: "ตรวจสอบว่าไม่ซ้ำหรือคล้ายงานที่มีลิขสิทธิ์ของผู้อื่นมากเกินไป", ja: "他者の著作物と重複または過度に類似していないか確認する", en: "Check that it isn't duplicating or overly similar to someone else's copyrighted work" },
+      { th: "เปลี่ยนแค่สีตัวอักษรก็เพียงพอแล้ว", ja: "文字の色を変えるだけで十分である", en: "Just changing the text color is enough" },
+      { th: "ไม่ต้องตรวจสอบถ้าเป็นแค่โพสต์โซเชียล", ja: "SNS投稿程度であれば確認は不要である", en: "No need to check if it's just a social media post" }
+    ], correct: 1 },
+  { topic: { th: "มาตรฐานกลุ่ม AISIN/Toyota", ja: "AISIN/トヨタグループ基準", en: "AISIN/Toyota Group Standards" },
+    q: { th: "AISIN Group จัดซ้อมรับมืออีเมลหลอกลวง (Phishing Simulation) ให้พนักงานบ่อยแค่ไหน?", ja: "AISINグループは従業員向けにフィッシングメール対応訓練(Phishing Simulation)をどのくらいの頻度で実施していますか?", en: "How often does AISIN Group run phishing-simulation drills for employees?" },
+    choices: [
+      { th: "ปีละ 1 ครั้ง", ja: "年1回", en: "Once a year" },
+      { th: "ปีละ 3 ครั้ง", ja: "年3回", en: "Three times a year" },
+      { th: "เดือนละ 1 ครั้ง", ja: "月1回", en: "Once a month" },
+      { th: "ไม่มีการซ้อมเป็นประจำ", ja: "定期的な訓練はない", en: "There are no regular drills" }
     ], correct: 1 },
   { topic: { th: "อีเมลหลอกลวง (Phishing)", ja: "フィッシングメール", en: "Phishing Emails" },
     q: { th: "ข้อใดต่อไปนี้ไม่ใช่สัญญาณเตือนของอีเมลหลอกลวง?", ja: "次のうち、フィッシングメールの警戒兆候ではないものはどれですか?", en: "Which of the following is NOT a warning sign of a phishing email?" },
@@ -389,14 +405,6 @@ const QUESTIONS = [
       { th: "ตั้งสติ ยืนยันผ่านช่องทางอื่นก่อน เช่น โทรกลับเบอร์เดิมที่บันทึกไว้", ja: "落ち着いて、まず保存済みの電話番号にかけ直すなど別の手段で確認する", en: "Stay calm and verify through another channel first, such as calling back a saved number" },
       { th: "ถามชื่อผู้บริหารในวิดีโอคอลเพื่อยืนยันตัวตน", ja: "本人確認のためビデオ通話中に経営者の氏名を尋ねる", en: "Ask for the executive's name during the video call to confirm identity" },
       { th: "รอ 24 ชั่วโมงแล้วโอนตามปกติ", ja: "24時間待ってから通常通り送金する", en: "Wait 24 hours, then transfer as usual" }
-    ], correct: 1 },
-  { topic: { th: "ข้อมูลห้ามป้อนเข้า AI", ja: "AIに入力してはいけないデータ", en: "Data Never to Enter Into AI" },
-    q: { th: "หัวหน้าทีมอยากให้ AI ช่วยสรุปรายงานผลประกอบการรายไตรมาสที่ยังไม่เปิดเผยต่อสาธารณะ เพื่อความรวดเร็วจึงอัปโหลดไฟล์ทั้งฉบับเข้า AI สาธารณะ ความเสี่ยงที่ใหญ่ที่สุดคืออะไร และควรทำอย่างไรแทน?", ja: "マネージャーが、まだ非公開の四半期決算報告書をAIに要約させたいと考え、時間短縮のためファイル全体を公開AIにアップロードした。最大のリスクは何であり、代わりにどうすべきか?", en: "A manager wants AI to summarize a not-yet-public quarterly earnings report, and uploads the whole file to public AI to save time. What's the biggest risk, and what should be done instead?" },
-    choices: [
-      { th: "ไม่มีความเสี่ยง เพราะ AI ประมวลผลเสร็จแล้วจะลบข้อมูลทิ้งทันที", ja: "AIは処理後すぐにデータを削除するため、リスクはない", en: "No risk — AI deletes the data immediately after processing" },
-      { th: "ข้อมูลการเงินที่ยังไม่เปิดเผยอาจหลุดออกนอกบริษัท กระทบตลาดหุ้นหรือให้คู่แข่งได้เปรียบ ควรใช้เครื่องมือ AI ภายในที่บริษัทอนุมัติแทน", ja: "未公開の財務情報が社外に流出し、株式市場や競合他社への優位性に影響する恐れがある。代わりに会社承認済みの社内AIツールを使うべきである", en: "Undisclosed financial data could leak outside the company, affecting the stock market or giving competitors an advantage — use an internal, company-approved AI tool instead" },
-      { th: "ความเสี่ยงมีแค่เรื่องไฟล์ขนาดใหญ่ทำให้ AI ประมวลผลช้า", ja: "リスクは大きなファイルによってAIの処理が遅くなることだけである", en: "The only risk is a large file making AI processing slower" },
-      { th: "เสี่ยงเฉพาะเมื่อใช้ AI เวอร์ชันฟรีเท่านั้น บัญชีแบบเสียเงินปลอดภัย 100%", ja: "無料版のAIを使う場合にのみリスクがあり、有料アカウントなら100%安全である", en: "It's only risky on the free version of AI — a paid account is 100% safe" }
     ], correct: 1 },
   { topic: { th: "แชร์ Prompt/Custom GPT", ja: "プロンプト・カスタムGPTの共有", en: "Sharing Prompts/Custom GPTs" },
     q: { th: "ก่อนแชร์ Custom GPT ให้เพื่อนร่วมงานหรือเผยแพร่สู่สาธารณะ ควรตรวจสอบอะไร?", ja: "カスタムGPTを同僚と共有したり公開したりする前に、何を確認すべきですか?", en: "Before sharing a Custom GPT with colleagues or publishing it publicly, what should you check?" },
