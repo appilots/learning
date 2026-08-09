@@ -4,7 +4,7 @@
 <style>
   :root {
     --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
-    --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
+    --accent: #1e3a70; --accent-deep: #12234a; --accent-soft: #dce6f5;
     --steel: #1f7fc4; --steel-soft: #cdecfb; --warn: #e0473a; --warn-soft: #ffdcd6;
     --ok: #1c9d5c; --ok-soft: #d1f5e0;
     --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
@@ -15,7 +15,7 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
-      --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
+      --accent: #6f93d6; --accent-deep: #a9c2ee; --accent-soft: #1b2740;
       --steel: #5cb2f0; --steel-soft: #16324a; --warn: #f0796a; --warn-soft: #3c1c1a;
       --ok: #5ce09a; --ok-soft: #103a26;
       --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
@@ -24,7 +24,7 @@
   }
   :root[data-theme="dark"] {
     --ink: #f3ecf7; --ink-soft: #b7a9c4; --paper: #1e1726; --surface: #241c30; --line: #3a2e46;
-    --accent: #f2a63f; --accent-deep: #ffc06b; --accent-soft: #3a2a12;
+    --accent: #6f93d6; --accent-deep: #a9c2ee; --accent-soft: #1b2740;
     --steel: #5cb2f0; --steel-soft: #16324a; --warn: #f0796a; --warn-soft: #3c1c1a;
     --ok: #5ce09a; --ok-soft: #103a26;
     --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 30px -16px rgba(0,0,0,0.6);
@@ -32,7 +32,7 @@
   }
   :root[data-theme="light"] {
     --ink: #1b1420; --ink-soft: #7a7186; --paper: #fdf3e4; --surface: #ffffff; --line: #ecdcc4;
-    --accent: #e2841f; --accent-deep: #a85e12; --accent-soft: #ffe0ad;
+    --accent: #1e3a70; --accent-deep: #12234a; --accent-soft: #dce6f5;
     --steel: #1f7fc4; --steel-soft: #cdecfb; --warn: #e0473a; --warn-soft: #ffdcd6;
     --ok: #1c9d5c; --ok-soft: #d1f5e0;
     --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 12px 30px -16px rgba(90,50,10,0.22);
@@ -273,7 +273,7 @@ function emailRowHtml(label, value, isLast) {
 function emailBodyHtml(headline, rows, footerNote) {
   var rowsHtml = rows.map(function (r, i) { return emailRowHtml(r[0], r[1], i === rows.length - 1); }).join("");
   return '<div style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:520px;margin:0 auto;background:#ffffff;">' +
-    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background:#0F6FC5;border-radius:10px 10px 0 0;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;background:#1B2A6B;border-radius:10px 10px 0 0;">' +
     '<tr><td style="padding:16px 22px;' + LH + '">' +
     '<span style="color:#fff;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;opacity:.85;">AI SAFETY QUIZ</span><br/>' +
     '<span style="color:#fff;font-size:15px;font-weight:700;">' + headline + '</span>' +
