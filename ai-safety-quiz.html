@@ -173,7 +173,7 @@ const UI = {
     retry: "🔄 ทำแบบทดสอบใหม่", backReview: "← กลับไปทบทวนคู่มือ",
     nameLabel: "ชื่อ-นามสกุล", namePlaceholder: "กรอกชื่อ-นามสกุลของคุณ",
     startTitle: "กรอกชื่อ-นามสกุลก่อนเริ่มทำแบบทดสอบ", startHint: "ต้องกรอกชื่อ-นามสกุลจริงและอีเมลบริษัทก่อนเริ่ม เพื่อใช้อ้างอิงในอีเมลแจ้งผลกรณีทำผ่านเกณฑ์", startBtn: "เริ่มทำแบบทดสอบ →",
-    emailFieldLabel: "อีเมลบริษัท", emailFieldPlaceholder: "xxxxx.x@attg.co.th", emailFieldInvalid: "กรุณากรอกอีเมลบริษัทให้ถูกต้อง (ต้องลงท้ายด้วย @attg.co.th)",
+    emailFieldLabel: "อีเมลบริษัท", emailFieldPlaceholder: "xxxxx.x@attg.co.th", emailFieldInvalid: "กรุณากรอกอีเมลบริษัทให้ถูกต้อง (ต้องลงท้ายด้วย @attg.co.th, @aisin-ap.com หรือ @ap01.aisingroup.com)",
     emailBtn: "📧 แจ้งผลผ่านเกณฑ์ทางอีเมล",
     emailHint: "กดปุ่มด้านล่างเพื่อเปิดโปรแกรมอีเมลของคุณ พร้อมกรอกข้อความให้เรียบร้อยแล้ว จากนั้นกด \"ส่ง\" ในโปรแกรมอีเมลอีกครั้งเพื่อยืนยัน (หน้าเว็บไม่สามารถส่งอีเมลแทนคุณได้โดยตรง)",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " ผ่านเกณฑ์ " + pct + "%",
@@ -203,7 +203,7 @@ const UI = {
     retry: "🔄 クイズをやり直す", backReview: "← ガイドを復習する",
     nameLabel: "氏名", namePlaceholder: "氏名を入力してください",
     startTitle: "クイズを始める前に氏名を入力してください", startHint: "合格時のメール通知に使用するため、開始前に本名と会社のメールアドレスの入力が必要です。", startBtn: "クイズを始める →",
-    emailFieldLabel: "会社のメールアドレス", emailFieldPlaceholder: "xxxxx.x@attg.co.th", emailFieldInvalid: "正しい会社のメールアドレスを入力してください(@attg.co.th で終わる必要があります)",
+    emailFieldLabel: "会社のメールアドレス", emailFieldPlaceholder: "xxxxx.x@attg.co.th", emailFieldInvalid: "正しい会社のメールアドレスを入力してください(@attg.co.th、@aisin-ap.com、または @ap01.aisingroup.com で終わる必要があります)",
     emailBtn: "📧 合格をメールで通知する", emailAutoNote: "お使いのメールソフトが自動的に開き、内容も入力済みです — 内容をご確認のうえ、メールソフト側で「送信」を押して確定してください(Webページから直接メールを送信することはできません)。",
     emailHint: "メールソフトが自動的に開かなかった場合は、下のボタンをクリックしてもう一度開いてください。",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " が合格(" + pct + "%)",
@@ -233,7 +233,7 @@ const UI = {
     retry: "🔄 Retake the Quiz", backReview: "← Back to review the guide",
     nameLabel: "Full name", namePlaceholder: "Enter your full name",
     startTitle: "Enter your full name before starting the quiz", startHint: "Your real name and company email are required before starting, so they can be included in the pass-notification email.", startBtn: "Start the Quiz →",
-    emailFieldLabel: "Company email", emailFieldPlaceholder: "xxxxx.x@attg.co.th", emailFieldInvalid: "Please enter a valid company email (must end with @attg.co.th)",
+    emailFieldLabel: "Company email", emailFieldPlaceholder: "xxxxx.x@attg.co.th", emailFieldInvalid: "Please enter a valid company email (must end with @attg.co.th, @aisin-ap.com, or @ap01.aisingroup.com)",
     emailBtn: "📧 Notify by Email", emailAutoNote: "Your email app has been opened automatically with the message pre-filled — please click \"Send\" in your email app to confirm (a web page cannot send email directly on your behalf).",
     emailHint: "If your email app didn't open automatically, click the button below to open it again.",
     emailSubject: (name, pct) => "[AI Safety Quiz] " + name + " passed (" + pct + "%)",
@@ -500,7 +500,13 @@ function renderStartGate() {
   const emailInput = document.getElementById("takerEmail");
   const startBtn = document.getElementById("btnStart");
   const errEl = document.getElementById("startEmailError");
-  const emailValid = () => /^[^\s@]+@attg\.co\.th$/i.test(emailInput.value.trim());
+  // Accepts every real AISIN Group domain, not just @attg.co.th — matches
+  // ALLOWED_EMAIL_DOMAINS in both apps' api/src/shared/auth.js. Originally
+  // attg.co.th-only, which silently blocked AIAP staff (real domain
+  // ap01.aisingroup.com / aisin-ap.com) from ever entering their real email
+  // here — confirmed 2026-08-11 as the reason several AIAP people's real
+  // quiz passes never matched what ai-request-app/tps-office see via SSO.
+  const emailValid = () => /^[^\s@]+@(attg\.co\.th|aisin-ap\.com|ap01\.aisingroup\.com)$/i.test(emailInput.value.trim());
   const sync = () => {
     const ok = nameInput.value.trim().length > 0 && emailValid();
     startBtn.disabled = !ok;
