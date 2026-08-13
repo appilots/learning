@@ -284,15 +284,14 @@
       <span class="lang-jp">目次</span>
     </h2>
     <ul>
-      <li><a href="#terminology"><span class="lang-th">1. คำศัพท์ที่ต้องระวัง</span><span class="lang-en">1. Terminology to Watch For</span><span class="lang-jp">1. 注意すべき用語</span></a></li>
-      <li><a href="#worktype"><span class="lang-th">2. TPS Standard Work vs IT Digital Tools</span><span class="lang-en">2. TPS Standard Work vs IT Digital Tools</span><span class="lang-jp">2. TPS Standard Work と IT Digital Tools</span></a></li>
-      <li><a href="#position"><span class="lang-th">3. ใครสร้าง Project ได้บ้าง</span><span class="lang-en">3. Who Can Create a Project</span><span class="lang-jp">3. プロジェクトを作成できる人</span></a></li>
-      <li><a href="#approval"><span class="lang-th">4. สายการอนุมัติ</span><span class="lang-en">4. Approval Chain</span><span class="lang-jp">4. 承認フロー</span></a></li>
-      <li><a href="#cancelled"><span class="lang-th">5. โครงการที่ยกเลิก</span><span class="lang-en">5. Cancelled Projects</span><span class="lang-jp">5. キャンセルされたプロジェクト</span></a></li>
-      <li><a href="#validation"><span class="lang-th">6. เงื่อนไขการกรอกข้อมูล</span><span class="lang-en">6. Data-Entry Rules</span><span class="lang-jp">6. データ入力ルール</span></a></li>
-      <li><a href="#kpi"><span class="lang-th">7. ตรรกะเบื้องหลังตัวเลข KPI</span><span class="lang-en">7. Logic Behind the KPI Numbers</span><span class="lang-jp">7. KPI数値の裏側にあるロジック</span></a></li>
-      <li><a href="#access"><span class="lang-th">8. สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">8. Access &amp; Admin Rights</span><span class="lang-jp">8. アクセス権限と管理者</span></a></li>
-      <li><a href="#dashboard-structure"><span class="lang-th">9. โครงสร้างหน้า Dashboard</span><span class="lang-en">9. Dashboard Page Structure</span><span class="lang-jp">9. Dashboardページの構成</span></a></li>
+      <li><a href="#worktype"><span class="lang-th">1. TPS Standard Work vs IT Digital Tools</span><span class="lang-en">1. TPS Standard Work vs IT Digital Tools</span><span class="lang-jp">1. TPS Standard Work と IT Digital Tools</span></a></li>
+      <li><a href="#position"><span class="lang-th">2. ใครสร้าง Project ได้บ้าง</span><span class="lang-en">2. Who Can Create a Project</span><span class="lang-jp">2. プロジェクトを作成できる人</span></a></li>
+      <li><a href="#approval"><span class="lang-th">3. สายการอนุมัติ</span><span class="lang-en">3. Approval Chain</span><span class="lang-jp">3. 承認フロー</span></a></li>
+      <li><a href="#cancelled"><span class="lang-th">4. โครงการที่ยกเลิก</span><span class="lang-en">4. Cancelled Projects</span><span class="lang-jp">4. キャンセルされたプロジェクト</span></a></li>
+      <li><a href="#validation"><span class="lang-th">5. เงื่อนไขการกรอกข้อมูล</span><span class="lang-en">5. Data-Entry Rules</span><span class="lang-jp">5. データ入力ルール</span></a></li>
+      <li><a href="#kpi"><span class="lang-th">6. ตรรกะเบื้องหลังตัวเลข KPI</span><span class="lang-en">6. Logic Behind the KPI Numbers</span><span class="lang-jp">6. KPI数値の裏側にあるロジック</span></a></li>
+      <li><a href="#access"><span class="lang-th">7. สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">7. Access &amp; Admin Rights</span><span class="lang-jp">7. アクセス権限と管理者</span></a></li>
+      <li><a href="#dashboard-structure"><span class="lang-th">8. โครงสร้างหน้า Dashboard</span><span class="lang-en">8. Dashboard Page Structure</span><span class="lang-jp">8. Dashboardページの構成</span></a></li>
     </ul>
     <a class="toc-tech-btn" href="https://appilots.github.io/learning/tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer">
       <span class="lang-th">📘 คู่มือเทคนิค (IT) ↗</span>
@@ -303,32 +302,8 @@
 
   <main>
 
-    <section id="terminology">
-      <h2><span class="badge">1</span><span class="lang-th">คำศัพท์ที่ต้องระวัง</span><span class="lang-en">Terminology to Watch For</span><span class="lang-jp">注意すべき用語</span></h2>
-      <p class="lead">
-        <span class="lang-th">ชื่อ field ในระบบกับป้ายที่แสดงบนหน้าจอบางตัว "สลับกัน" โดยตั้งใจ ตามธรรมเนียมการเรียกจริงของโรงงาน — ไม่ใช่บั๊กการแปล</span>
-        <span class="lang-en">Some field names in the system and what's shown on screen are deliberately "swapped," matching the factory's real naming convention — not a translation bug.</span>
-        <span class="lang-jp">一部のフィールド名と画面表示は、工場での実際の呼称に合わせて意図的に「入れ替え」られています — 翻訳のバグではありません。</span>
-      </p>
-      <div class="card accent-orange">
-        <h4><span class="lang-th">แผนก / ส่วนงาน สลับกัน</span><span class="lang-en">"แผนก" / "ส่วนงาน" are swapped</span><span class="lang-jp">「แผนก」／「ส่วนงาน」が入れ替わっている</span></h4>
-        <table>
-          <tbody>
-            <tr><th><span class="lang-th">ชื่อ Field ในระบบ</span><span class="lang-en">Field name in system</span><span class="lang-jp">システム上のフィールド名</span></th><th><span class="lang-th">ป้ายที่เห็นบนหน้าจอ</span><span class="lang-en">Label shown on screen</span><span class="lang-jp">画面上のラベル</span></th></tr>
-            <tr><td><code>department</code></td><td>ส่วนงาน</td></tr>
-            <tr><td><code>section</code></td><td>แผนก</td></tr>
-          </tbody>
-        </table>
-        <p>
-          <span class="lang-th">คือ <b>สลับกับความหมายที่คนทั่วไปคุ้นเคย</b> (ปกติแผนก = department, ส่วน = section) — ยืนยันโดยผู้ใช้ว่าระบบโรงงานจริงเรียกกลับกัน จึงแก้ป้ายทั้งแอปให้ตรงกับที่หน้างานเรียกจริง ไม่ใช่ตรงตามชื่อ field ในโค้ด</span>
-          <span class="lang-en">This is the <b>opposite</b> of the common assumption (normally แผนก = department, ส่วน = section) — confirmed by the user that the real factory system calls it the other way around, so every label across the app was corrected to match what's actually said on the floor, not what the code's field name literally says.</span>
-          <span class="lang-jp">これは一般的な理解（通常はแผนก＝department、ส่วน＝section）とは<b>逆</b>です — 実際の工場のシステムでは逆の呼び方をしていることをユーザーが確認したため、コード上のフィールド名ではなく、現場で実際に使われている呼称に合わせてアプリ全体のラベルを修正しました。</span>
-        </p>
-      </div>
-    </section>
-
     <section id="worktype">
-      <h2><span class="badge">2</span>TPS Standard Work <span class="lang-th">กับ</span><span class="lang-en">vs</span><span class="lang-jp">と</span> IT Digital Tools</h2>
+      <h2><span class="badge">1</span>TPS Standard Work <span class="lang-th">กับ</span><span class="lang-en">vs</span><span class="lang-jp">と</span> IT Digital Tools</h2>
       <p class="lead">
         <span class="lang-th">ทุก Project ต้องเลือก "หัวข้อการปรับปรุงระบบงาน" ก่อนเป็นอันดับแรก ซึ่งจะกำหนดว่าฟอร์มที่เหลือหน้าตาเป็นอย่างไร</span>
         <span class="lang-en">Every Project must first select an "Improvement Topic" work type — this decides what the rest of the form looks like.</span>
@@ -365,7 +340,7 @@
     </section>
 
     <section id="position">
-      <h2><span class="badge">3</span><span class="lang-th">ใครสร้าง Project ได้บ้าง</span><span class="lang-en">Who Can Create a Project</span><span class="lang-jp">プロジェクトを作成できる人</span></h2>
+      <h2><span class="badge">2</span><span class="lang-th">ใครสร้าง Project ได้บ้าง</span><span class="lang-en">Who Can Create a Project</span><span class="lang-jp">プロジェクトを作成できる人</span></h2>
       <p class="lead">
         <span class="lang-th">เฉพาะพนักงานตำแหน่งระดับ <b>Section Head ขึ้นไป</b> เท่านั้นที่สร้าง Project ใหม่ได้</span>
         <span class="lang-en">Only employees at <b>Section Head level or above</b> may create a new Project.</span>
@@ -398,7 +373,7 @@
     </section>
 
     <section id="approval">
-      <h2><span class="badge">4</span><span class="lang-th">สายการอนุมัติ</span><span class="lang-en">Approval Chain</span><span class="lang-jp">承認フロー</span></h2>
+      <h2><span class="badge">3</span><span class="lang-th">สายการอนุมัติ</span><span class="lang-en">Approval Chain</span><span class="lang-jp">承認フロー</span></h2>
       <p class="lead">
         <span class="lang-th">ฟอร์ม Project มีช่องผู้อนุมัติ 2 ระดับ ดึงรายชื่อจาก Master Data จริง (PM-UP list) ไม่ใช่รายชื่อพนักงานทั่วไป</span>
         <span class="lang-en">The Project form has two approver fields, populated from real Master Data (the PM-UP list) — not the general Employee list.</span>
@@ -435,7 +410,7 @@
     </section>
 
     <section id="cancelled">
-      <h2><span class="badge">5</span><span class="lang-th">โครงการที่ยกเลิก (Cancelled)</span><span class="lang-en">Cancelled Projects</span><span class="lang-jp">キャンセルされたプロジェクト</span></h2>
+      <h2><span class="badge">4</span><span class="lang-th">โครงการที่ยกเลิก (Cancelled)</span><span class="lang-en">Cancelled Projects</span><span class="lang-jp">キャンセルされたプロジェクト</span></h2>
       <p class="lead">
         <span class="lang-th">โครงการที่เปลี่ยนสถานะเป็น "ยกเลิกโครงการ" จะถูกตัดออกจากยอดรวมความสำเร็จทุกจุดในระบบ</span>
         <span class="lang-en">A Project whose status is changed to "Cancelled" is excluded from every achievement total in the system.</span>
@@ -466,7 +441,7 @@
     </section>
 
     <section id="validation">
-      <h2><span class="badge">6</span><span class="lang-th">เงื่อนไขการกรอกข้อมูล</span><span class="lang-en">Data-Entry Rules</span><span class="lang-jp">データ入力ルール</span></h2>
+      <h2><span class="badge">5</span><span class="lang-th">เงื่อนไขการกรอกข้อมูล</span><span class="lang-en">Data-Entry Rules</span><span class="lang-jp">データ入力ルール</span></h2>
       <p class="lead">
         <span class="lang-th">ช่องที่มี <span class="pill red">*</span> สีแดงคือช่องบังคับ — เงื่อนไขบังคับต่างกันตามหัวข้อการปรับปรุงระบบงานที่เลือก</span>
         <span class="lang-en">Fields marked with a red <span class="pill red">*</span> are required — which fields are required depends on the selected work type.</span>
@@ -509,7 +484,7 @@
     </section>
 
     <section id="kpi">
-      <h2><span class="badge">7</span><span class="lang-th">ตรรกะเบื้องหลังตัวเลข KPI</span><span class="lang-en">Logic Behind the KPI Numbers</span><span class="lang-jp">KPI数値の裏側にあるロジック</span></h2>
+      <h2><span class="badge">6</span><span class="lang-th">ตรรกะเบื้องหลังตัวเลข KPI</span><span class="lang-en">Logic Behind the KPI Numbers</span><span class="lang-jp">KPI数値の裏側にあるロジック</span></h2>
       <p class="lead">
         <span class="lang-th">เพื่อให้อ่านตัวเลขในแอปได้ถูกต้อง ไม่เข้าใจผิดว่าระบบคำนวณผิด</span>
         <span class="lang-en">So the numbers in the app are read correctly, instead of assuming the system calculated something wrong.</span>
@@ -542,7 +517,7 @@
     </section>
 
     <section id="access">
-      <h2><span class="badge">8</span><span class="lang-th">สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">Access &amp; Admin Rights</span><span class="lang-jp">アクセス権限と管理者</span></h2>
+      <h2><span class="badge">7</span><span class="lang-th">สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">Access &amp; Admin Rights</span><span class="lang-jp">アクセス権限と管理者</span></h2>
       <p class="lead">
         <span class="lang-th">ใครเห็นเมนู/ปุ่มอะไรได้บ้าง และเงื่อนไขเบื้องหลัง</span>
         <span class="lang-en">Who sees which menus/buttons, and the conditions behind them.</span>
@@ -575,7 +550,7 @@
     </section>
 
     <section id="dashboard-structure">
-      <h2><span class="badge">9</span><span class="lang-th">โครงสร้างหน้า Dashboard</span><span class="lang-en">Dashboard Page Structure</span><span class="lang-jp">Dashboardページの構成</span></h2>
+      <h2><span class="badge">8</span><span class="lang-th">โครงสร้างหน้า Dashboard</span><span class="lang-en">Dashboard Page Structure</span><span class="lang-jp">Dashboardページの構成</span></h2>
       <p class="lead">
         <span class="lang-th">ลำดับการ์ด/กราฟ และเงื่อนไขการแสดงผลของหน้า Executive Dashboard และ Section Dashboard</span>
         <span class="lang-en">The card/chart order and display conditions on the Executive Dashboard and Section Dashboard pages.</span>
