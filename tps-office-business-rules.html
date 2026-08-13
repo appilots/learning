@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เงื่อนไขการใช้งาน (Business Rules) — TPS Office Digital Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B2A6B;
+    --navy-dark: #0D1A4A;
+    --blue: #2563EB;
+    --blue-dark: #1D4ED8;
+    --cyan: #00B7C3;
+    --green: #107C10;
+    --orange: #FFAA44;
+    --red: #D13438;
+    --ink: #0F172A;
+    --ink-light: #475569;
+    --surface: #FFFFFF;
+    --surface-muted: #F8FAFC;
+    --border: #E2E8F0;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Inter", "Noto Sans Thai", "Noto Sans JP", "Segoe UI", -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--surface-muted);
+    line-height: 1.65;
+  }
+  a { color: var(--blue); }
+  .header {
+    background: linear-gradient(160deg, #0D1729 0%, #1B2A6B 55%, #243680 100%);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+  }
+  .header .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+  .header h1 { font-size: 30px; margin: 0 0 8px; font-weight: 800; }
+  .header p { margin: 0; opacity: 0.85; font-size: 15px; }
+  .header .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 8px 0;
+    font-size: 13px;
+    color: white;
+    opacity: 0.85;
+    text-decoration: none;
+  }
+  .header .back:hover { opacity: 1; text-decoration: underline; }
+  .layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0,1fr);
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .toc {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 28px 20px;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .toc h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-light); margin: 0 0 12px; }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: 2px; }
+  .toc a {
+    display: block;
+    padding: 7px 10px;
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13.5px;
+  }
+  .toc a:hover { background: var(--surface-muted); }
+  .toc-tech-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 18px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--navy);
+    color: white !important;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .toc-tech-btn:hover { background: var(--navy-dark); }
+  main { padding: 36px 40px 80px; min-width: 0; }
+  section { margin-bottom: 52px; scroll-margin-top: 20px; }
+  section h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section h2 .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 9px;
+    background: var(--navy);
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  section > p.lead { color: var(--ink-light); margin: 0 0 22px; font-size: 14.5px; }
+  h3 { font-size: 16px; font-weight: 700; margin: 26px 0 10px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .card.accent-blue { border-left: 4px solid var(--blue); }
+  .card.accent-green { border-left: 4px solid var(--green); }
+  .card.accent-orange { border-left: 4px solid var(--orange); }
+  .card.accent-red { border-left: 4px solid var(--red); }
+  .card h4 { margin: 0 0 6px; font-size: 14.5px; font-weight: 700; }
+  .card p, .card ul, .card ol { margin: 6px 0 0; font-size: 13.5px; color: #374151; }
+  .card ul, .card ol { padding-right: 0; padding-left: 20px; }
+  .card li { margin-bottom: 5px; }
+  .note {
+    background: #FFF8E6;
+    border: 1px solid #F2D98A;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #7A5B00;
+    margin: 14px 0;
+  }
+  .note.blue { background: #EAF3FF; border-color: #B9D8FF; color: #0B4C93; }
+  .note.red { background: #FDECEC; border-color: #F3B9B9; color: #8A1F22; }
+  .note.green { background: #EAF6EA; border-color: #B9DDB9; color: #0F5C0F; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 14px 0; }
+  th, td { text-align: right; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { text-align: right; background: var(--surface-muted); font-weight: 700; font-size: 12.5px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.03em; }
+  td:first-child, th:first-child { text-align: right; font-weight: 600; color: var(--ink-light); width: 200px; }
+  code {
+    background: #F1F3F5;
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-size: 12.5px;
+    font-family: Consolas, monospace;
+    color: #B34700;
+  }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; margin: 0 0 0 6px; }
+  .pill.blue { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .pill.green { background: rgba(16,124,16,0.12); color: var(--green); }
+  .pill.orange { background: rgba(255,170,68,0.18); color: #8A5300; }
+  .pill.red { background: rgba(209,52,56,0.12); color: var(--red); }
+  .pill.gray { background: #EEF0F2; color: #4B5563; }
+  footer { text-align: center; padding: 30px; color: var(--ink-light); font-size: 12.5px; border-top: 1px solid var(--border); }
+
+  .flow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 14px 0; }
+  .flow-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .flow-item .who { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-light); font-weight: 700; margin-bottom: 4px; }
+  @media (max-width: 640px) { .flow-grid { grid-template-columns: 1fr; } }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    main { padding: 28px 20px 60px; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body { background: #16181C; color: #E5E7EB; }
+    .toc, .card, .flow-item, footer { background: #1E2126; border-color: #2C2F36; }
+    .toc a { color: #E5E7EB; }
+    .toc a:hover { background: #262A31; }
+    th { background: #23262C; color: #9CA3AF; }
+    td:first-child, th:first-child { color: #9CA3AF; }
+    td, th { border-color: #2C2F36; }
+    code { background: #262A31; color: #FFB067; }
+    .note { background: #2C2508; border-color: #4A3D0F; color: #F0DE7A; }
+    .note.blue { background: #10233D; border-color: #1E4B7A; color: #9CCBFF; }
+    .note.red { background: #3A1414; border-color: #6B2323; color: #FCA5A5; }
+    .note.green { background: #10240F; border-color: #1E4B1E; color: #A7E3A7; }
+  }
+
+  /* --- Trilingual system (EN/TH/JP), AISIN theme pattern --- */
+  .lang-en, .lang-jp { display: none; }
+  html[data-lang="en"] .lang-th, html[data-lang="en"] .lang-jp { display: none; }
+  html[data-lang="en"] .lang-en { display: inline; }
+  html[data-lang="ja"] .lang-th, html[data-lang="ja"] .lang-en { display: none; }
+  html[data-lang="ja"] .lang-jp { display: inline; }
+
+  .lang-switch {
+    position: absolute;
+    top: 20px; left: 24px;
+    display: inline-flex;
+    gap: 3px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 3px;
+  }
+  .lang-switch button {
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .lang-switch button.active { background: white; color: var(--navy); }
+  @media (max-width: 640px) {
+    .lang-switch { position: static; margin: 0 0 14px; justify-content: center; display: inline-flex; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="lang-switch">
+    <button type="button" data-lang="th">ไทย</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="ja">JP</button>
+  </div>
+  <span class="tag">TIPS · TPS &amp; IT PROJECT SYSTEM — BUSINESS RULES</span>
+  <h1>
+    <span class="lang-th">เงื่อนไขการใช้งานและกฎเชิงธุรกิจ</span>
+    <span class="lang-en">Usage Conditions &amp; Business Rules</span>
+    <span class="lang-jp">利用条件・業務ルール</span>
+  </h1>
+  <p>
+    <span class="lang-th">รวมเงื่อนไข กติกา และตรรกะการทำงานทั้งหมดที่ระบบ TIPS ใช้จริง ตั้งแต่เริ่มโครงการจนถึงปัจจุบัน — สำหรับผู้ดูแลระบบและผู้ใช้งานระดับหัวหน้างานขึ้นไป</span>
+    <span class="lang-en">Every real condition, rule, and piece of business logic built into TIPS from project start through today — for administrators and supervisor-level users and above.</span>
+    <span class="lang-jp">プロジェクト開始から現在まで、TIPSに実装されているすべての条件・ルール・業務ロジックをまとめたもの — 管理者および監督職以上のユーザー向け。</span>
+  </p>
+  <br>
+  <a class="back" href="https://appilots.github.io/learning/tps-office-user-guide.html">
+    <span class="lang-th">← คู่มือการใช้งานหลัก</span>
+    <span class="lang-en">← Main User Guide</span>
+    <span class="lang-jp">← メインユーザーガイド</span>
+  </a>
+  <a class="back" href="https://appilots.github.io/learning/tps-office-technical-guide.html">
+    <span class="lang-th">คู่มือเทคนิค (IT) →</span>
+    <span class="lang-en">Technical Guide (IT) →</span>
+    <span class="lang-jp">技術ガイド（IT）→</span>
+  </a>
+</div>
+
+<div class="layout">
+  <nav class="toc">
+    <h2>
+      <span class="lang-th">สารบัญ</span>
+      <span class="lang-en">Contents</span>
+      <span class="lang-jp">目次</span>
+    </h2>
+    <ul>
+      <li><a href="#terminology"><span class="lang-th">1. คำศัพท์ที่ต้องระวัง</span><span class="lang-en">1. Terminology to Watch For</span><span class="lang-jp">1. 注意すべき用語</span></a></li>
+      <li><a href="#worktype"><span class="lang-th">2. TPS Standard Work vs IT Digital Tools</span><span class="lang-en">2. TPS Standard Work vs IT Digital Tools</span><span class="lang-jp">2. TPS Standard Work と IT Digital Tools</span></a></li>
+      <li><a href="#position"><span class="lang-th">3. ใครสร้าง Project ได้บ้าง</span><span class="lang-en">3. Who Can Create a Project</span><span class="lang-jp">3. プロジェクトを作成できる人</span></a></li>
+      <li><a href="#approval"><span class="lang-th">4. สายการอนุมัติ</span><span class="lang-en">4. Approval Chain</span><span class="lang-jp">4. 承認フロー</span></a></li>
+      <li><a href="#cancelled"><span class="lang-th">5. โครงการที่ยกเลิก</span><span class="lang-en">5. Cancelled Projects</span><span class="lang-jp">5. キャンセルされたプロジェクト</span></a></li>
+      <li><a href="#validation"><span class="lang-th">6. เงื่อนไขการกรอกข้อมูล</span><span class="lang-en">6. Data-Entry Rules</span><span class="lang-jp">6. データ入力ルール</span></a></li>
+      <li><a href="#kpi"><span class="lang-th">7. ตรรกะเบื้องหลังตัวเลข KPI</span><span class="lang-en">7. Logic Behind the KPI Numbers</span><span class="lang-jp">7. KPI数値の裏側にあるロジック</span></a></li>
+      <li><a href="#access"><span class="lang-th">8. สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">8. Access &amp; Admin Rights</span><span class="lang-jp">8. アクセス権限と管理者</span></a></li>
+    </ul>
+    <a class="toc-tech-btn" href="https://appilots.github.io/learning/tps-office-technical-guide.html" target="_blank" rel="noopener noreferrer">
+      <span class="lang-th">📘 คู่มือเทคนิค (IT) ↗</span>
+      <span class="lang-en">📘 Technical Guide (IT) ↗</span>
+      <span class="lang-jp">📘 技術ガイド（IT）↗</span>
+    </a>
+  </nav>
+
+  <main>
+
+    <section id="terminology">
+      <h2><span class="badge">1</span><span class="lang-th">คำศัพท์ที่ต้องระวัง</span><span class="lang-en">Terminology to Watch For</span><span class="lang-jp">注意すべき用語</span></h2>
+      <p class="lead">
+        <span class="lang-th">ชื่อ field ในระบบกับป้ายที่แสดงบนหน้าจอบางตัว "สลับกัน" โดยตั้งใจ ตามธรรมเนียมการเรียกจริงของโรงงาน — ไม่ใช่บั๊กการแปล</span>
+        <span class="lang-en">Some field names in the system and what's shown on screen are deliberately "swapped," matching the factory's real naming convention — not a translation bug.</span>
+        <span class="lang-jp">一部のフィールド名と画面表示は、工場での実際の呼称に合わせて意図的に「入れ替え」られています — 翻訳のバグではありません。</span>
+      </p>
+      <div class="card accent-orange">
+        <h4><span class="lang-th">แผนก / ส่วนงาน สลับกัน</span><span class="lang-en">"แผนก" / "ส่วนงาน" are swapped</span><span class="lang-jp">「แผนก」／「ส่วนงาน」が入れ替わっている</span></h4>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">ชื่อ Field ในระบบ</span><span class="lang-en">Field name in system</span><span class="lang-jp">システム上のフィールド名</span></th><th><span class="lang-th">ป้ายที่เห็นบนหน้าจอ</span><span class="lang-en">Label shown on screen</span><span class="lang-jp">画面上のラベル</span></th></tr>
+            <tr><td><code>department</code></td><td>ส่วนงาน</td></tr>
+            <tr><td><code>section</code></td><td>แผนก</td></tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="lang-th">คือ <b>สลับกับความหมายที่คนทั่วไปคุ้นเคย</b> (ปกติแผนก = department, ส่วน = section) — ยืนยันโดยผู้ใช้ว่าระบบโรงงานจริงเรียกกลับกัน จึงแก้ป้ายทั้งแอปให้ตรงกับที่หน้างานเรียกจริง ไม่ใช่ตรงตามชื่อ field ในโค้ด</span>
+          <span class="lang-en">This is the <b>opposite</b> of the common assumption (normally แผนก = department, ส่วน = section) — confirmed by the user that the real factory system calls it the other way around, so every label across the app was corrected to match what's actually said on the floor, not what the code's field name literally says.</span>
+          <span class="lang-jp">これは一般的な理解（通常はแผนก＝department、ส่วน＝section）とは<b>逆</b>です — 実際の工場のシステムでは逆の呼び方をしていることをユーザーが確認したため、コード上のフィールド名ではなく、現場で実際に使われている呼称に合わせてアプリ全体のラベルを修正しました。</span>
+        </p>
+      </div>
+      <div class="note blue">
+        <span class="lang-th">พบจุดเดียวกันในหน้า Section Dashboard ด้วย (Division เคยถูกติดป้ายผิดเป็น "แผนก" ทั้งที่อ่านค่าจากฟิลด์ Division จริง) — แก้เป็น "ฝ่าย" แล้ว</span>
+        <span class="lang-en">The same kind of mislabel was also found on the Section Dashboard (Division was once labeled "แผนก" even though it reads from the real Division field) — corrected to "ฝ่าย".</span>
+        <span class="lang-jp">Section Dashboardページでも同様の誤表記がありました（実際にはDivisionフィールドを参照しているにもかかわらず「แผนก」と表示） — 「ฝ่าย」に修正済みです。</span>
+      </div>
+    </section>
+
+    <section id="worktype">
+      <h2><span class="badge">2</span>TPS Standard Work <span class="lang-th">กับ</span><span class="lang-en">vs</span><span class="lang-jp">と</span> IT Digital Tools</h2>
+      <p class="lead">
+        <span class="lang-th">ทุก Project ต้องเลือก "หัวข้อการปรับปรุงระบบงาน" ก่อนเป็นอันดับแรก ซึ่งจะกำหนดว่าฟอร์มที่เหลือหน้าตาเป็นอย่างไร</span>
+        <span class="lang-en">Every Project must first select an "Improvement Topic" work type — this decides what the rest of the form looks like.</span>
+        <span class="lang-jp">すべてのプロジェクトは最初に「改善テーマ」を選択する必要があり、これによりフォームの残りの部分の内容が決まります。</span>
+      </p>
+      <div class="flow-grid">
+        <div class="flow-item">
+          <div class="who">TPS Standard Work and Kaizen</div>
+          <p style="margin:0;font-size:13.5px;">
+            <span class="lang-th">งาน Kaizen หน้างานจริง ไม่ใช่ระบบที่ IT ต้องจัดเตรียมฐานข้อมูลให้ — ฟอร์มจะขอ <b>ผู้รับผิดชอบหลัก (PIC)</b> และ <b>หัวข้อการปรับปรุง</b> (Process Step Reduction / Waiting &amp; Approval Time Reduction / Rework &amp; Error Reduction / Information Search &amp; Handover Time Reduction / Other) แทนชื่อ Project</span>
+            <span class="lang-en">Real floor-level kaizen work, not something IT needs to provision a database for — the form asks for a <b>Person in Charge (PIC)</b> and an <b>Improvement Topic</b> (Process Step Reduction / Waiting &amp; Approval Time Reduction / Rework &amp; Error Reduction / Information Search &amp; Handover Time Reduction / Other) instead of a Project Name.</span>
+            <span class="lang-jp">現場レベルの実際のカイゼン活動であり、ITがデータベースを用意する必要はありません — フォームではプロジェクト名の代わりに<b>担当者（PIC）</b>と<b>改善テーマ</b>（工程削減／待ち時間・承認時間削減／手直し・エラー削減／情報検索・引継ぎ時間削減／その他）を入力します。</span>
+          </p>
+        </div>
+        <div class="flow-item">
+          <div class="who">IT Digital Tools</div>
+          <p style="margin:0;font-size:13.5px;">
+            <span class="lang-th">งานพัฒนาระบบ/แอป — ฟอร์มขอ <b>ชื่อ Project, ชื่อย่อ, หมวดหมู่</b> (ยกเลิกการใช้กระดาษ / ลดเวลาหรือขั้นตอนการทำงาน) และ <b>ฐานข้อมูล</b> (SharePoint List หรือ Excel Business) พร้อมเครื่องมือที่ใช้พัฒนา</span>
+            <span class="lang-en">Software/app development work — the form asks for a <b>Project Name, Short Name, Category</b> (eliminate paper / reduce time or steps) and a <b>Database</b> choice (SharePoint List or Excel Business), plus the tools used to build it.</span>
+            <span class="lang-jp">ソフトウェア／アプリ開発業務 — フォームでは<b>プロジェクト名、略称、カテゴリ</b>（紙の使用廃止／時間・工程の削減）、および<b>データベース</b>（SharePoint ListまたはExcel Business）の選択、開発に使用したツールを入力します。</span>
+          </p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="lang-th"><b>Default อัตโนมัติ:</b> ถ้าเลือกหมวดหมู่ "ยกเลิกการใช้กระดาษ" ระบบจะเลือกฐานข้อมูล "Excel Business" ให้อัตโนมัติ ถ้าเลือก "ลดเวลาหรือขั้นตอนการทำงาน" จะเลือก "SharePoint List" ให้ — ยังแก้ไขเองได้ตลอด</span>
+        <span class="lang-en"><b>Auto-default:</b> picking "eliminate paper" auto-selects "Excel Business" as the database; picking "reduce time/steps" auto-selects "SharePoint List" — still fully editable afterward.</span>
+        <span class="lang-jp"><b>自動デフォルト：</b>「紙の使用廃止」を選択するとデータベースとして「Excel Business」が自動選択され、「時間・工程の削減」を選択すると「SharePoint List」が自動選択されます — 後から自由に変更可能です。</span>
+      </div>
+      <div class="note blue">
+        <span class="lang-th">โครงการ TPS Standard Work ไม่มีชื่อ Project ให้กรอก ระบบจึงใช้ <b>หัวข้อการปรับปรุง</b> ที่เลือกไว้เป็นชื่อที่แสดงในตาราง/หน้ารายละเอียดแทน (ไม่รวมชื่อฝ่าย เพราะยาวและรก) ทำให้แต่ละโครงการยังแยกแยะกันได้แม้ไม่มีชื่อ</span>
+        <span class="lang-en">TPS Standard Work projects have no Project Name to fill in, so the table/detail display falls back to showing the selected <b>Improvement Topic</b> instead (Division name is left out — too long and cluttered), so each project is still distinguishable even without a name.</span>
+        <span class="lang-jp">TPS Standard Workのプロジェクトには入力するプロジェクト名がないため、テーブル／詳細画面では代わりに選択された<b>改善テーマ</b>が表示されます（事業部名は長く煩雑になるため含まれません）— これにより、名前がなくても各プロジェクトを区別できます。</span>
+      </div>
+    </section>
+
+    <section id="position">
+      <h2><span class="badge">3</span><span class="lang-th">ใครสร้าง Project ได้บ้าง</span><span class="lang-en">Who Can Create a Project</span><span class="lang-jp">プロジェクトを作成できる人</span></h2>
+      <p class="lead">
+        <span class="lang-th">เฉพาะพนักงานตำแหน่งระดับ <b>Section Head ขึ้นไป</b> เท่านั้นที่สร้าง Project ใหม่ได้</span>
+        <span class="lang-en">Only employees at <b>Section Head level or above</b> may create a new Project.</span>
+        <span class="lang-jp"><b>Section Head以上</b>の役職の従業員のみが新規プロジェクトを作成できます。</span>
+      </p>
+      <div class="flow-grid">
+        <div class="flow-item" style="border-left:4px solid var(--red);">
+          <div class="who"><span class="lang-th">ตำแหน่งที่ถูกบล็อค</span><span class="lang-en">Blocked positions</span><span class="lang-jp">ブロックされる役職</span></div>
+          <p style="margin:0;font-size:13.5px;">Operator, Leader, Staff, Officer, Engineer, Foreman, Senior Foreman</p>
+        </div>
+        <div class="flow-item" style="border-left:4px solid var(--green);">
+          <div class="who"><span class="lang-th">ตำแหน่งที่อนุญาต</span><span class="lang-en">Allowed positions</span><span class="lang-jp">許可される役職</span></div>
+          <p style="margin:0;font-size:13.5px;">Section Head, Manager, General Manager, Advisor, Plant Manager, President, Executive General Manager, Vice President, Executive Vice President</p>
+        </div>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">รายละเอียดการทำงาน</span><span class="lang-en">How it behaves</span><span class="lang-jp">動作の詳細</span></h4>
+        <ul>
+          <li><span class="lang-th">ตรวจจากตำแหน่งจริงใน Master Data พนักงาน (ไม่ใช่จากบทบาท Admin ในแอป)</span><span class="lang-en">Checked against the employee's real position on file in Master Data (not the app's Admin role).</span><span class="lang-jp">アプリのAdmin権限ではなく、マスターデータ上の実際の役職に基づいて判定されます。</span></li>
+          <li><span class="lang-th">บัญชี IT Support ไม่ถูกบล็อค (นับเป็นบัญชีเครื่องมือกลาง ไม่ใช่ตำแหน่งจริง)</span><span class="lang-en">The IT Support account is exempt (treated as a shared utility login, not a real position).</span><span class="lang-jp">IT Supportアカウントは対象外です（実際の役職ではなく共通の運用アカウントとして扱われます）。</span></li>
+          <li><span class="lang-th">ถ้ายังหาข้อมูลตำแหน่งของผู้ใช้ไม่เจอ (Master Data ยังโหลดไม่เสร็จ หรือไม่มีข้อมูล) ระบบจะ "อนุญาตไว้ก่อน" ไม่บล็อค เพื่อไม่ให้คนที่ควรจะสร้างได้ถูกล็อกออกจากปัญหาข้อมูลที่ไม่ใช่ความผิดเขา</span><span class="lang-en">If the user's position can't be resolved yet (Master Data still loading, or genuinely missing), the system allows by default rather than blocking — so nobody who should be able to create a Project gets locked out by a data issue that isn't their fault.</span><span class="lang-jp">ユーザーの役職がまだ判定できない場合（マスターデータ読み込み中、または情報が存在しない場合）、システムはブロックせずデフォルトで許可します — 本来作成できるはずの人が、自分の責任ではないデータの問題でロックアウトされないようにするためです。</span></li>
+          <li><span class="lang-th">บล็อคเฉพาะการ "สร้าง" Project ใหม่เท่านั้น ไม่กระทบการแก้ไข Project ที่มีอยู่แล้ว</span><span class="lang-en">Only blocks <b>creating</b> a new Project — does not affect editing an existing one.</span><span class="lang-jp">新規プロジェクトの「作成」のみをブロックし、既存プロジェクトの編集には影響しません。</span></li>
+        </ul>
+      </div>
+      <div class="note red">
+        <span class="lang-th"><b>ข้อจำกัด:</b> เป็นการตรวจสอบฝั่ง Client (หน้าเว็บ) เพื่อกันการใช้งานตามปกติเท่านั้น ยังไม่ใช่การป้องกันระดับ Server/API — หากต้องการบังคับระดับ API ด้วย ต้องพัฒนาเพิ่ม</span>
+        <span class="lang-en"><b>Limitation:</b> this is a client-side (browser) check that stops normal usage only — it is not yet a server/API-level barrier. Enforcing it at the API too would require additional development.</span>
+        <span class="lang-jp"><b>制限事項：</b>これはクライアント側（ブラウザ）のチェックであり、通常の利用を防ぐものにすぎません。サーバー／API側での制御にはまだ対応していません。API側でも強制するには追加開発が必要です。</span>
+      </div>
+    </section>
+
+    <section id="approval">
+      <h2><span class="badge">4</span><span class="lang-th">สายการอนุมัติ</span><span class="lang-en">Approval Chain</span><span class="lang-jp">承認フロー</span></h2>
+      <p class="lead">
+        <span class="lang-th">ฟอร์ม Project มีช่องผู้อนุมัติ 2 ระดับ ดึงรายชื่อจาก Master Data จริง (PM-UP list) ไม่ใช่รายชื่อพนักงานทั่วไป</span>
+        <span class="lang-en">The Project form has two approver fields, populated from real Master Data (the PM-UP list) — not the general Employee list.</span>
+        <span class="lang-jp">プロジェクトフォームには2段階の承認者欄があり、一般の従業員リストではなく実際のマスターデータ（PM-UPリスト）から取得されます。</span>
+      </p>
+      <div class="card accent-orange">
+        <h4><span class="lang-th">ชื่อ Field ในระบบไม่ตรงกับความหมายที่แสดงจริง</span><span class="lang-en">Field name in the system doesn't match what it actually displays</span><span class="lang-jp">システム上のフィールド名は実際の表示内容と一致しません</span></h4>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">ชื่อ Field</span><span class="lang-en">Field name</span><span class="lang-jp">フィールド名</span></th><th><span class="lang-th">ป้ายที่เห็น / เก็บผู้อนุมัติระดับ</span><span class="lang-en">Label shown / actually stores approver level</span><span class="lang-jp">表示ラベル／実際に格納される承認者レベル</span></th></tr>
+            <tr><td><code>sectionApprover</code></td><td><span class="lang-th">ผู้อนุมัติและผู้ควบคุมโครงการ (Department)</span><span class="lang-en">Project Approver (Department)</span><span class="lang-jp">プロジェクト承認者（部門）</span></td></tr>
+            <tr><td><code>departmentApprover</code></td><td><span class="lang-th">ผู้อนุมัติและผู้ควบคุมโครงการ (Division)</span><span class="lang-en">Project Approver (Division)</span><span class="lang-jp">プロジェクト承認者（事業部）</span></td></tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="lang-th">ชื่อ field ในฐานข้อมูลถูกคงไว้ตามเดิมเพื่อไม่ต้อง Migrate ข้อมูล — เปลี่ยนแค่ที่มาของข้อมูลและป้ายที่แสดงบนจอเท่านั้น</span>
+          <span class="lang-en">The database field names were kept as-is to avoid a migration — only where the data comes from and what's shown on screen changed.</span>
+          <span class="lang-jp">データベースのフィールド名はマイグレーションを避けるためそのまま維持されています — 変更されたのはデータの取得元と画面表示のみです。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">การกรอกอัตโนมัติ</span><span class="lang-en">Auto-fill</span><span class="lang-jp">自動入力</span></h4>
+        <p>
+          <span class="lang-th">เมื่อกด "+ เพิ่ม Project" ระบบจะกรอกบริษัท/ส่วนงาน/แผนก/ฝ่าย และผู้อนุมัติทั้ง 2 ระดับให้อัตโนมัติจากข้อมูลพนักงานของผู้ล็อกอิน (และหัวหน้าหน่วยงานเดียวกัน) — ช่องที่ถูกกรอกให้อัตโนมัติจะมีพื้นหลังสีเทา เพื่อบอกว่า "กรอกให้แล้ว" แต่ยังแก้ไขเองได้</span>
+          <span class="lang-en">Clicking "+ Add Project" auto-fills Company/Department/Section/Division and both approver fields from the signed-in user's own Employee record (and whoever heads that same unit) — auto-filled fields get a grey background as a hint that "this was already filled in," while staying fully editable.</span>
+          <span class="lang-jp">「＋ Project追加」をクリックすると、サインイン中のユーザーの従業員データ（および同じ部署の責任者）から会社／ส่วนงาน／แผนก／事業部と両方の承認者欄が自動入力されます — 自動入力されたフィールドはグレー背景になり「入力済み」であることを示しますが、引き続き自由に編集できます。</span>
+        </p>
+      </div>
+      <div class="note blue">
+        <span class="lang-th">เมื่อสร้าง Project สำเร็จ ระบบส่งอีเมล "แจ้งเพื่อทราบ" (ไม่ใช่ขออนุมัติ) ไปยัง 3 ฝ่าย: ผู้สร้างเอง + ผู้อนุมัติ Department + ผู้อนุมัติ Division (ที่มีข้อมูลอยู่) — ส่งจากกล่องเมลของผู้สร้างเอง ถ้าส่งไม่สำเร็จจะไม่กระทบ Project ที่บันทึกไปแล้ว</span>
+        <span class="lang-en">When a Project is successfully created, an "FYI" email (not a request for approval) goes to 3 parties: the creator, plus the Department and Division approvers (whichever are set) — sent from the creator's own mailbox; a failed send never affects the already-saved Project.</span>
+        <span class="lang-jp">プロジェクトが正常に作成されると、「通知」メール（承認依頼ではない）が3者に送信されます：作成者本人、部門承認者、事業部承認者（設定されている場合）— 作成者自身のメールボックスから送信され、送信に失敗しても既に保存されたプロジェクトには影響しません。</span>
+      </div>
+    </section>
+
+    <section id="cancelled">
+      <h2><span class="badge">5</span><span class="lang-th">โครงการที่ยกเลิก (Cancelled)</span><span class="lang-en">Cancelled Projects</span><span class="lang-jp">キャンセルされたプロジェクト</span></h2>
+      <p class="lead">
+        <span class="lang-th">โครงการที่เปลี่ยนสถานะเป็น "ยกเลิกโครงการ" จะถูกตัดออกจากยอดรวมความสำเร็จทุกจุดในระบบ</span>
+        <span class="lang-en">A Project whose status is changed to "Cancelled" is excluded from every achievement total in the system.</span>
+        <span class="lang-jp">ステータスが「キャンセル」に変更されたプロジェクトは、システム内のすべての実績集計から除外されます。</span>
+      </p>
+      <div class="card accent-red">
+        <h4><span class="lang-th">เหตุผล</span><span class="lang-en">Reasoning</span><span class="lang-jp">理由</span></h4>
+        <p>
+          <span class="lang-th">โครงการที่ยกเลิกไม่เคยส่งมอบผลลัพธ์ตามที่วางแผนไว้จริง จึงไม่ควรทำให้ตัวเลข "ประหยัดได้เท่าไหร่" สูงเกินจริง</span>
+          <span class="lang-en">A cancelled project never delivered what it originally projected, so it shouldn't inflate any "how much have we actually saved" number.</span>
+          <span class="lang-jp">キャンセルされたプロジェクトは当初予定していた成果を達成していないため、「実際にどれだけ削減できたか」という数値を過大に見せるべきではありません。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">ตัวเลขที่ถูกตัดออก</span><span class="lang-en">What gets excluded</span><span class="lang-jp">除外される項目</span></h4>
+        <ul>
+          <li><span class="lang-th">การ์ด KPI ในหน้า Projects (ชั่วโมงที่ลดได้ / ลดกระดาษเฉลี่ย)</span><span class="lang-en">The KPI cards on the Projects page (hours saved / average paper reduction)</span><span class="lang-jp">Projectsページ内のKPIカード（削減時間／平均紙削減率）</span></li>
+          <li><span class="lang-th">การ์ดมูลค่าบน Executive Dashboard (Automation Value, Paperless Value)</span><span class="lang-en">The Executive Dashboard value cards (Automation Value, Paperless Value)</span><span class="lang-jp">Executive Dashboardの価値カード（Automation Value、Paperless Value）</span></li>
+          <li><span class="lang-th">Strategic Goals Pillar cards, กราฟ Reduce Time by Division/Section, กราฟ Paper Reduction Trend</span><span class="lang-en">Strategic Goals Pillar cards, the Reduce Time by Division/Section charts, the Paper Reduction Trend chart</span><span class="lang-jp">Strategic Goals Pillarカード、Reduce Time by Division/Sectionグラフ、Paper Reduction Trendグラフ</span></li>
+          <li><span class="lang-th">Section Dashboard (ManagerDashboardPage) ทุกตัวเลข</span><span class="lang-en">Every number on the Section Dashboard (ManagerDashboardPage)</span><span class="lang-jp">Section Dashboard（ManagerDashboardPage）のすべての数値</span></li>
+        </ul>
+      </div>
+      <div class="note">
+        <span class="lang-th"><b>ยังคงมองเห็น:</b> Project ที่ถูกยกเลิกยังแสดงในตาราง/รายการ Projects ตามปกติ (แค่ไม่ถูกนับในยอดรวม) — และ "ความคืบหน้าเฉลี่ย" ยังนับ Project ที่ยกเลิกรวมอยู่ด้วย เพราะไม่ใช่ตัวเลขที่อ้างว่า "ประหยัดได้"</span>
+        <span class="lang-en"><b>Still visible:</b> a Cancelled Project still shows normally in the Projects table/list (just not counted in totals) — and "average progress" still includes Cancelled projects, since progress isn't a claim about savings.</span>
+        <span class="lang-jp"><b>引き続き表示される：</b>キャンセルされたプロジェクトはProjectsのテーブル／一覧に通常どおり表示されます（集計に含まれないだけです）— また「平均進捗率」にはキャンセルされたプロジェクトも含まれます。進捗率は削減実績を示すものではないためです。</span>
+      </div>
+    </section>
+
+    <section id="validation">
+      <h2><span class="badge">6</span><span class="lang-th">เงื่อนไขการกรอกข้อมูล</span><span class="lang-en">Data-Entry Rules</span><span class="lang-jp">データ入力ルール</span></h2>
+      <p class="lead">
+        <span class="lang-th">ช่องที่มี <span class="pill red">*</span> สีแดงคือช่องบังคับ — เงื่อนไขบังคับต่างกันตามหัวข้อการปรับปรุงระบบงานที่เลือก</span>
+        <span class="lang-en">Fields marked with a red <span class="pill red">*</span> are required — which fields are required depends on the selected work type.</span>
+        <span class="lang-jp">赤い<span class="pill red">*</span>が付いた項目は必須です — 必須項目は選択した改善テーマの種類によって異なります。</span>
+      </p>
+      <table>
+        <tbody>
+          <tr><th><span class="lang-th">เสมอ (ทั้ง 2 ประเภท)</span><span class="lang-en">Always (both types)</span><span class="lang-jp">常に（両タイプ共通）</span></th><td>
+            <span class="lang-th">หัวข้อการปรับปรุงระบบงาน, วันเริ่มต้นโครงการ, วันสิ้นสุดโครงการ</span>
+            <span class="lang-en">Work type, Project Start Date, Project End Date</span>
+            <span class="lang-jp">改善テーマ、プロジェクト開始日、プロジェクト終了日</span>
+          </td></tr>
+          <tr><th>IT Digital Tools</th><td>
+            <span class="lang-th">ชื่อ Project, หมวดหมู่, ฐานข้อมูลที่ต้องการใช้งาน, เครื่องมือ Power Platform/AI ที่ใช้ในการพัฒนา</span>
+            <span class="lang-en">Project Name, Category, Database, Power Platform/AI Tools Used</span>
+            <span class="lang-jp">プロジェクト名、カテゴリ、使用するデータベース、開発に使用したPower Platform／AIツール</span>
+          </td></tr>
+          <tr><th>TPS Standard Work</th><td>
+            <span class="lang-th">ไม่มีช่องเพิ่มเติมที่บังคับ (PIC และหัวข้อการปรับปรุงเป็นทางเลือก)</span>
+            <span class="lang-en">No additional required fields (PIC and Improvement Topic are optional)</span>
+            <span class="lang-jp">追加の必須項目はありません（PICと改善テーマは任意）</span>
+          </td></tr>
+          <tr><th><span class="lang-th">ลดกระดาษ (%)</span><span class="lang-en">Paper Reduction (%)</span><span class="lang-jp">紙削減率（%）</span></th><td>
+            <span class="lang-th">บังคับกรอกมากกว่า 0 เฉพาะเมื่อเลือกหมวดหมู่ "ยกเลิกการใช้กระดาษ" เท่านั้น</span>
+            <span class="lang-en">Required to be greater than 0 only when Category = "eliminate paper"</span>
+            <span class="lang-jp">カテゴリが「紙の使用廃止」の場合のみ、0より大きい値の入力が必須</span>
+          </td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <span class="lang-th">"ชั่วโมงที่ลดได้" ไม่บังคับกรอกแม้เลือกหมวดหมู่ลดเวลา เพราะบางโครงการยังอยู่ระหว่างวางแผน ยังไม่รู้ตัวเลขจริง — กรอกทีหลังได้เมื่อทราบ</span>
+        <span class="lang-en">"Hours Saved" is never required, even for the time-reduction category — some projects are registered while still in planning, before the real number is known, and can be filled in later.</span>
+        <span class="lang-jp">「削減時間」は時間削減カテゴリであっても必須ではありません — 計画段階でまだ実際の数値が分からないまま登録されるプロジェクトもあるため、後から判明した時点で入力できます。</span>
+      </div>
+      <div class="note blue">
+        <span class="lang-th">ชื่อย่อ Project (Short Name) จะแปลงเป็นตัวพิมพ์ใหญ่และจำกัดไม่เกิน 5 ตัวอักษรโดยอัตโนมัติขณะพิมพ์</span>
+        <span class="lang-en">Project Short Name is auto-uppercased and capped at 5 characters as you type.</span>
+        <span class="lang-jp">プロジェクトの略称は入力中に自動的に大文字に変換され、5文字までに制限されます。</span>
+      </div>
+    </section>
+
+    <section id="kpi">
+      <h2><span class="badge">7</span><span class="lang-th">ตรรกะเบื้องหลังตัวเลข KPI</span><span class="lang-en">Logic Behind the KPI Numbers</span><span class="lang-jp">KPI数値の裏側にあるロジック</span></h2>
+      <p class="lead">
+        <span class="lang-th">เพื่อให้อ่านตัวเลขในแอปได้ถูกต้อง ไม่เข้าใจผิดว่าระบบคำนวณผิด</span>
+        <span class="lang-en">So the numbers in the app are read correctly, instead of assuming the system calculated something wrong.</span>
+        <span class="lang-jp">アプリ内の数値を正しく理解し、システムの計算が間違っていると誤解しないために。</span>
+      </p>
+      <div class="card">
+        <h4><span class="lang-th">Time Reduction % คำนวณจากอะไร</span><span class="lang-en">What Time Reduction % is calculated from</span><span class="lang-jp">Time Reduction %の計算方法</span></h4>
+        <p>
+          <span class="lang-th">= (รวมชั่วโมงที่ลดได้ ทุก Project ที่ยังไม่ยกเลิก) ÷ (จำนวนผู้ถือ License O365 x 2,080 ชม./ปี) — ใช้ฐาน License (1,166 คน) แทนจำนวนพนักงานทั้งหมด (4,000+ คน) เพราะมีแค่คนถือ License เท่านั้นที่ใช้เครื่องมือ Power Platform ได้จริง การหารด้วยฐานพนักงานทั้งหมดจะทำให้ % ปัดเป็น 0 เสมอ</span>
+          <span class="lang-en">= (total hours saved across every non-cancelled Project) ÷ (O365 license holders × 2,080 hrs/year) — uses the license count (1,166) instead of total headcount (4,000+), since only license holders can actually use these Power Platform tools; dividing by total headcount would always round to 0%.</span>
+          <span class="lang-jp">＝（キャンセルされていないすべてのプロジェクトの削減時間合計）÷（O365ライセンス保有者数 × 年間2,080時間）— 全従業員数（4,000人以上）ではなくライセンス保有者数（1,166人）を使用します。実際にPower Platformツールを利用できるのはライセンス保有者のみであり、全従業員数で割ると常に0%に丸められてしまうためです。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">ทำไม % แสดงทศนิยม 2 ตำแหน่ง</span><span class="lang-en">Why percentages show 2 decimal places</span><span class="lang-jp">パーセンテージが小数点2桁で表示される理由</span></h4>
+        <p>
+          <span class="lang-th">ที่ฐาน License 1,166 คน ตัวเลขจริงมักต่ำกว่า 0.1% — ถ้าปัดแค่ 1 ตำแหน่งจะเห็นเป็น 0% เสมอในช่วงเริ่มโครงการ ทั้งที่มีความคืบหน้าจริงอยู่</span>
+          <span class="lang-en">Against the 1,166-license baseline, real values are often under 0.1% — rounding to just 1 decimal made all early-stage progress invisible, showing a flat 0% even when real progress existed.</span>
+          <span class="lang-jp">1,166人のライセンス保有者を基準とすると、実際の数値は0.1%未満になることが多く — 小数点1桁までの丸めでは初期段階の進捗がすべて見えなくなり、実際には進捗があっても常に0%と表示されてしまいます。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">ทำไม Division/Section ที่ชื่อซ้ำกันไม่ถูกรวมยอดผิดบริษัท</span><span class="lang-en">Why same-named Divisions/Sections across companies don't get merged</span><span class="lang-jp">複数の会社で同名のDivision／Sectionが誤って合算されない理由</span></h4>
+        <p>
+          <span class="lang-th">หลายบริษัทมีชื่อฝ่ายซ้ำกัน (เช่น "Production", "Administration") — ระบบจึงจัดกลุ่มโดยรวม บริษัท+ฝ่าย เข้าด้วยกันเสมอ ไม่ใช่ชื่อฝ่ายเพียงอย่างเดียว เพื่อไม่ให้ % ของฝ่ายหนึ่งถูกเจือจางด้วยยอดของอีกบริษัท</span>
+          <span class="lang-en">Several companies share generic division names ("Production", "Administration") — the system always groups by company+division together, never division name alone, so one division's % isn't diluted by another company's numbers.</span>
+          <span class="lang-jp">複数の会社が「Production」「Administration」のような一般的な事業部名を共有しています — システムは常に会社＋事業部の組み合わせでグループ化し、事業部名のみでは決してグループ化しません。これにより、ある事業部の割合が他社の数値によって希薄化されることを防ぎます。</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="access">
+      <h2><span class="badge">8</span><span class="lang-th">สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">Access &amp; Admin Rights</span><span class="lang-jp">アクセス権限と管理者</span></h2>
+      <p class="lead">
+        <span class="lang-th">ใครเห็นเมนู/ปุ่มอะไรได้บ้าง และเงื่อนไขเบื้องหลัง</span>
+        <span class="lang-en">Who sees which menus/buttons, and the conditions behind them.</span>
+        <span class="lang-jp">誰がどのメニュー／ボタンを利用できるか、その条件。</span>
+      </p>
+      <div class="card">
+        <h4><span class="lang-th">Export เป็น Excel</span><span class="lang-en">Export to Excel</span><span class="lang-jp">Excelへのエクスポート</span></h4>
+        <p>
+          <span class="lang-th">จำกัดเฉพาะรายชื่อ Admin/ผู้มีสิทธิ์เมนูพิเศษเท่านั้น — ผู้ใช้ทั่วไปยังเห็นปุ่มอยู่ แต่จะถูกปิดใช้งาน (สีจาง) พร้อมคำอธิบายเมื่อชี้เมาส์ แทนที่จะซ่อนปุ่มไปเลย</span>
+          <span class="lang-en">Restricted to the Admin/special-nav-access list — regular users still see the button, just greyed out with an explanatory tooltip, rather than it being hidden entirely.</span>
+          <span class="lang-jp">Admin／特別なナビゲーションアクセス権を持つリストに限定されています — 一般ユーザーにもボタンは表示されますが、無効化（グレーアウト）され、ホバー時に説明が表示されます。完全に非表示にはなりません。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">หน้า Administration</span><span class="lang-en">Administration page</span><span class="lang-jp">Administrationページ</span></h4>
+        <p>
+          <span class="lang-th">จำกัดเฉพาะ Admin เข้าเมนูได้ และซ่อนตัวเลขจำนวนพนักงาน/ผู้อนุมัติดิบจากพนักงานทั่วไปด้วย (ต่างจากหน้า Settings ที่ไม่มีข้อจำกัดนี้ เพราะเป็นข้อมูลระบบ ไม่ใช่ค่าตั้งค่าส่วนตัว)</span>
+          <span class="lang-en">Admin-only navigation, and additionally hides raw headcount/approver row counts from regular employees (unlike Settings, which has no such restriction, since this is system diagnostic info, not a personal setting).</span>
+          <span class="lang-jp">Adminのみがアクセス可能なメニューであり、一般従業員には従業員数／承認者数の生データも非表示になります（Settingsにはこの制限がありません。これはシステムの診断情報であり、個人設定ではないためです）。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">Login Log (ประวัติการเข้าใช้งาน)</span><span class="lang-en">Login Log</span><span class="lang-jp">ログイン履歴</span></h4>
+        <p>
+          <span class="lang-th">แสดง 10 รายการต่อหน้า เรียงจากล่าสุดไปเก่าสุด เปิดมาที่หน้า 1 เสมอ — 1 แถวต่อ 1 คนต่อ 1 วัน (ถ้าเข้าหลายครั้งในวันเดียวกัน เวลา/IP/อุปกรณ์จะอัปเดตเป็นครั้งล่าสุดของวันนั้น)</span>
+          <span class="lang-en">10 rows per page, newest first, always opens on page 1 — one row per person per day (multiple logins on the same day just refresh that day's time/IP/device to the latest visit).</span>
+          <span class="lang-jp">1ページ10件、新しい順に表示され、常にページ1から開きます — 1人につき1日1行（同日に複数回ログインした場合、その日の時刻／IP／端末情報は最新のアクセスに更新されます）。</span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span class="lang-th">TIPS · TPS &amp; IT Project System — ATTG Group · Usage Conditions &amp; Business Rules</span>
+  <span class="lang-en">TIPS · TPS &amp; IT Project System — ATTG Group · Usage Conditions &amp; Business Rules</span>
+  <span class="lang-jp">TIPS · TPS &amp; IT Project System — ATTG Group · Usage Conditions &amp; Business Rules</span>
+</footer>
+
+<script>
+  (function () {
+    var STORAGE_KEY = 'tps.docLang'
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang)
+      document.documentElement.lang = lang
+      localStorage.setItem(STORAGE_KEY, lang)
+      document.querySelectorAll('.lang-switch button').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.lang === lang)
+      })
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.lang-switch button').forEach(function (b) {
+        b.addEventListener('click', function () { setLang(b.dataset.lang) })
+      })
+      setLang(localStorage.getItem(STORAGE_KEY) || 'th')
+    })
+  })()
+</script>
+
+</body>
+</html>

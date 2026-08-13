@@ -277,6 +277,11 @@
     <span class="lang-en">← Back to the main User Guide</span>
     <span class="lang-jp">← メインのユーザーガイドに戻る</span>
   </a>
+  <a class="back" href="https://appilots.github.io/learning/tps-office-business-rules.html">
+    <span class="lang-th">เงื่อนไขการใช้งาน (Business Rules) →</span>
+    <span class="lang-en">Usage Conditions (Business Rules) →</span>
+    <span class="lang-jp">利用条件（Business Rules）→</span>
+  </a>
 </div>
 
 <div class="layout">
@@ -292,6 +297,10 @@
       <li><a href="#database"><span class="lang-th">3. ฐานข้อมูล (Database)</span><span class="lang-en">3. Database</span><span class="lang-jp">3. データベース</span></a></li>
       <li><a href="#limits"><span class="lang-th">4. ข้อจำกัดของแพลตฟอร์ม</span><span class="lang-en">4. Platform Limitations</span><span class="lang-jp">4. プラットフォームの制限</span></a></li>
       <li><a href="#backup"><span class="lang-th">5. การสำรองข้อมูล</span><span class="lang-en">5. Backups</span><span class="lang-jp">5. バックアップ</span></a></li>
+      <li><a href="#auth"><span class="lang-th">6. Authentication &amp; Identity</span><span class="lang-en">6. Authentication &amp; Identity</span><span class="lang-jp">6. 認証とID管理</span></a></li>
+      <li><a href="#sync"><span class="lang-th">7. Master Data Sync</span><span class="lang-en">7. Master Data Sync</span><span class="lang-jp">7. マスターデータ同期</span></a></li>
+      <li><a href="#datamodel"><span class="lang-th">8. วิวัฒนาการโครงสร้างข้อมูล</span><span class="lang-en">8. Data Model Evolution</span><span class="lang-jp">8. データモデルの変遷</span></a></li>
+      <li><a href="#bugfixes"><span class="lang-th">9. บั๊กสำคัญที่แก้ไปแล้ว</span><span class="lang-en">9. Notable Bug Fixes</span><span class="lang-jp">9. 修正済みの主要バグ</span></a></li>
     </ul>
   </nav>
 
@@ -584,6 +593,201 @@
           <span class="lang-th">ข้อมูลต้นทาง (Employee / Department / Division / Section) อยู่ที่ SharePoint Online ซึ่งอยู่ภายใต้นโยบายสำรองข้อมูลมาตรฐานของ Microsoft 365 อยู่แล้ว</span>
           <span class="lang-en">The source data (Employee / Department / Division / Section) lives in SharePoint Online, which is already covered by Microsoft 365's standard backup policies.</span>
           <span class="lang-jp">元データ（Employee／Department／Division／Section）はSharePoint Onlineにあり、Microsoft 365の標準バックアップポリシーの対象に既に含まれています。</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="auth">
+      <h2><span class="badge">6</span>Authentication &amp; Identity</h2>
+      <p class="lead">
+        <span class="lang-th">รายละเอียดการยืนยันตัวตนที่ไม่เป็นมาตรฐานทั่วไป ซึ่งทีม IT ควรรู้ก่อนแก้ไข/ตรวจสอบปัญหาการล็อกอิน</span>
+        <span class="lang-en">Non-standard auth details the IT team should know before debugging login issues.</span>
+        <span class="lang-jp">ログイン関連の問題を調査・修正する前にIT担当者が知っておくべき、標準的ではない認証の詳細。</span>
+      </p>
+      <div class="card accent-blue">
+        <h4><span class="lang-th">Header <code>X-Auth-Token</code> แทน <code>Authorization</code> มาตรฐาน</span><span class="lang-en">Custom <code>X-Auth-Token</code> header instead of the standard <code>Authorization</code> header</span><span class="lang-jp">標準の<code>Authorization</code>ヘッダーではなく独自の<code>X-Auth-Token</code>ヘッダーを使用</span></h4>
+        <p>
+          <span class="lang-th">ยืนยันด้วยการทดสอบจริง 2026-08-01: Managed Functions proxy ของ Azure Static Web Apps จะเขียนทับ header <code>Authorization</code> ที่ hop ภายใน SWA→Functions ด้วย token ของตัวเอง — ทุก request ที่ Function ได้รับจึงมี <code>Authorization</code> ที่ aud/iss ชี้ไปที่ backend <code>*.azurewebsites.net</code> ไม่ใช่ Entra ID เลย แม้ frontend จะตั้งค่า Bearer token ถูกต้องแล้วก็ตาม จึงต้องส่ง token ผ่าน header ชื่อกำหนดเอง (<code>X-Auth-Token</code>) ที่ proxy ไม่แตะ แทน</span>
+          <span class="lang-en">Confirmed by live testing 2026-08-01: Azure Static Web Apps' co-located "Managed Functions" proxy overwrites the <code>Authorization</code> header on the internal SWA→Functions hop with its own service token — every request the Function receives has an <code>Authorization</code> header whose aud/iss point at the hidden <code>*.azurewebsites.net</code> backend, not Entra ID, even though the frontend set the real Bearer token correctly. A custom header name the proxy doesn't touch (<code>X-Auth-Token</code>) is used instead.</span>
+          <span class="lang-jp">2026-08-01の実機検証で確認：Azure Static Web Appsの内蔵「Managed Functions」プロキシは、SWA→Functions間の内部通信で<code>Authorization</code>ヘッダーを独自のサービストークンで上書きします — フロントエンドが正しいBearerトークンを設定していても、Functionが受け取る<code>Authorization</code>ヘッダーのaud/issは隠れたバックエンド<code>*.azurewebsites.net</code>を指しており、Entra IDではありません。そのためプロキシが変更しない独自ヘッダー名（<code>X-Auth-Token</code>）を代わりに使用しています。</span>
+        </p>
+        <p>
+          <span class="lang-th">ฝั่ง client ตั้งค่าใน <code>apiClient.js</code>; ฝั่ง server อ่านใน <code>api/src/shared/auth.js</code>'s <code>requireAuth()</code> — ต้องใช้ชื่อ header ตรงกันทั้ง 2 ฝั่ง</span>
+          <span class="lang-en">Set client-side in <code>apiClient.js</code>; read server-side in <code>api/src/shared/auth.js</code>'s <code>requireAuth()</code> — the header name must match on both sides.</span>
+          <span class="lang-jp">クライアント側は<code>apiClient.js</code>で設定し、サーバー側は<code>api/src/shared/auth.js</code>の<code>requireAuth()</code>で読み取ります — ヘッダー名は両側で一致させる必要があります。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">การตรวจสอบ Token ฝั่ง Server</span><span class="lang-en">Server-side token validation</span><span class="lang-jp">サーバー側でのトークン検証</span></h4>
+        <ul>
+          <li><span class="lang-th">ตรวจลายเซ็นกับ JWKS endpoint ของ tenant, ตรวจ issuer เป็น <code>https://login.microsoftonline.com/&lt;tenant&gt;/v2.0</code></span><span class="lang-en">Verifies the signature against the tenant's JWKS endpoint, checks issuer = <code>https://login.microsoftonline.com/&lt;tenant&gt;/v2.0</code>.</span><span class="lang-jp">テナントのJWKSエンドポイントに対して署名を検証し、issuerが<code>https://login.microsoftonline.com/&lt;tenant&gt;/v2.0</code>であることを確認します。</span></li>
+          <li><span class="lang-th">รับ audience ได้ทั้ง 2 แบบ: <code>api://&lt;clientId&gt;</code> หรือ client-ID GUID เปล่าๆ (ยืนยัน 2026-08-01 ว่า token v2.0 ของ custom API แบบ first-party ออกมาได้ทั้ง 2 รูปแบบ)</span><span class="lang-en">Accepts either <code>api://&lt;clientId&gt;</code> or the bare client-ID GUID as audience (confirmed 2026-08-01 that v2.0 tokens for a first-party custom API can carry either form).</span><span class="lang-jp">audienceとして<code>api://&lt;clientId&gt;</code>またはクライアントIDのGUIDそのもの、どちらも受け付けます（2026-08-01に確認：ファーストパーティのカスタムAPI向けv2.0トークンはどちらの形式でも発行され得ます）。</span></li>
+          <li><span class="lang-th">อ่านอีเมลจาก <code>preferred_username</code> ก่อน (fallback ไป <code>upn</code> แล้ว <code>email</code>)</span><span class="lang-en">Reads email from <code>preferred_username</code> first (falling back to <code>upn</code>, then <code>email</code>).</span><span class="lang-jp">メールアドレスはまず<code>preferred_username</code>から取得し、なければ<code>upn</code>、次に<code>email</code>にフォールバックします。</span></li>
+          <li><span class="lang-th"><b>Domain allowlist:</b> รับเฉพาะอีเมลโดเมน <code>attg.co.th</code>, <code>aisin-ap.com</code>, <code>ap01.aisingroup.com</code> แม้ token จะเซ็นถูกต้องก็ตาม — เพราะ tenant Entra ID นี้ใช้ร่วมกับบริษัทอื่นในเครือ AISIN ที่ไม่ควรเข้าแอปนี้ได้</span><span class="lang-en"><b>Domain allowlist:</b> only emails at <code>attg.co.th</code>, <code>aisin-ap.com</code>, or <code>ap01.aisingroup.com</code> are accepted, even with a validly signed token — the Entra ID tenant is shared with other AISIN Group companies that shouldn't have access to this app.</span><span class="lang-jp"><b>ドメイン許可リスト：</b>署名が正しいトークンであっても、<code>attg.co.th</code>、<code>aisin-ap.com</code>、<code>ap01.aisingroup.com</code>のメールアドレスのみを受け付けます — このEntra IDテナントは、本アプリへのアクセスを許可すべきでない他のAISINグループ各社と共有されているためです。</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">MSAL: Redirect Flow ไม่ใช่ Popup</span><span class="lang-en">MSAL: Redirect flow, not popup</span><span class="lang-jp">MSAL：ポップアップではなくリダイレクトフロー</span></h4>
+        <p>
+          <span class="lang-th">ล็อกอินใช้ <code>loginRedirect</code> (เปลี่ยนหน้าเต็ม) แทน popup เพราะ popup จะโหลดหน้า redirect target ซ้ำในหน้าต่าง popup เอง ทำให้ SPA/router mount ซ้ำเป็นครั้งที่ 2 และชนกับ popup-monitor ของ MSAL เอง — Redirect flow มีแค่หน้าต่างเดียวจึงไม่มีปัญหานี้ นอกจากนี้ยังบังคับ Microsoft แสดงหน้าเลือกบัญชี (<code>prompt: 'select_account'</code>) เสมอ แทนที่จะ silent-SSO เข้าบัญชีเดิมอัตโนมัติ เพื่อให้ผู้ทดสอบสลับบัญชีได้หลัง sign out</span>
+          <span class="lang-en">Login uses <code>loginRedirect</code> (full-page redirect) instead of a popup — a popup briefly loads the redirect target inside the popup window itself, re-mounting the SPA/router a second time and fighting MSAL's own popup-monitor/close logic. Redirect flow avoids this since there's only one window. Login also always forces Microsoft's account chooser (<code>prompt: 'select_account'</code>) instead of silently reusing SSO, so a tester can switch accounts after signing out.</span>
+          <span class="lang-jp">ログインにはポップアップではなく<code>loginRedirect</code>（フルページリダイレクト）を使用しています — ポップアップの場合、リダイレクト先がポップアップウィンドウ内で一時的に読み込まれ、SPA／ルーターが2回目のマウントを行い、MSAL自体のポップアップ監視・クローズ処理と競合してしまいます。リダイレクトフローはウィンドウが1つだけなのでこの問題を回避できます。また、ログイン時は常にMicrosoftのアカウント選択画面を強制表示し（<code>prompt: 'select_account'</code>）、サイレントSSOで自動的に同じアカウントに入ることはありません。これによりテスターはサインアウト後にアカウントを切り替えられます。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">Alias Identity: คนเดียวกัน อีเมลคนละแบบ</span><span class="lang-en">Alias identity: same person, different email</span><span class="lang-jp">エイリアスID：同一人物でも異なるメールアドレス</span></h4>
+        <p>
+          <span class="lang-th">คนคนเดียวกันอาจมี email 2 แบบไม่ตรงกัน: Graph <code>mail</code> claim (ที่ <code>user.email</code> มักตั้งค่าจาก) กับ UPN ใน access token (<code>preferred_username</code>) — ยืนยันจริงกับพนักงาน 2 คนเมื่อ 2026-08-09/10 ระบบจึงมี registry <code>PEOPLE</code> เก็บ <code>aliases</code> ของแต่ละคน ให้ <code>isAdminUser</code>/<code>canManageRecord</code> ตรวจถูกต้องไม่ว่า session จะ resolve เป็นอีเมลไหนก็ตาม</span>
+          <span class="lang-en">The same real person can have two mismatched email identities: the Graph <code>mail</code> claim (usually what <code>user.email</code> is set from) vs. the access token's UPN (<code>preferred_username</code>) — confirmed live for two named individuals on 2026-08-09/10. The <code>PEOPLE</code> registry carries an <code>aliases</code> array per person so <code>isAdminUser</code>/<code>canManageRecord</code> resolve correctly regardless of which identity a given session used.</span>
+          <span class="lang-jp">同一人物であってもGraphの<code>mail</code>クレーム（通常<code>user.email</code>の設定元）とアクセストークンのUPN（<code>preferred_username</code>）で異なるメールアドレスになる場合があります — 2026-08-09/10に実在の2名で確認済み。<code>PEOPLE</code>レジストリには各人物の<code>aliases</code>配列があり、セッションがどちらのIDで解決されても<code>isAdminUser</code>／<code>canManageRecord</code>が正しく判定されるようにしています。</span>
+        </p>
+        <p>
+          <span class="lang-th"><b>ข้อจำกัดที่ยังเหลืออยู่:</b> Client (<code>src/config/permissions.js</code>) และ Server (<code>api/src/shared/auth.js</code>) ต่างเก็บ <code>PEOPLE</code> ของตัวเองแยกกัน — ยังไม่มีแหล่งข้อมูลกลางร่วมกันระหว่าง 2 ฝั่ง (ปรับปรุงจากเดิมที่มี 3 รายการแยกกันต่อฝั่ง เหลือฝั่งละ 1 รายการ)</span>
+          <span class="lang-en"><b>Known remaining limitation:</b> Client (<code>src/config/permissions.js</code>) and Server (<code>api/src/shared/auth.js</code>) each keep their own separate copy of <code>PEOPLE</code> — there's still no single shared source across the client/server boundary (improved from three separate lists per side down to one).</span>
+          <span class="lang-jp"><b>既知の残存制限：</b>クライアント（<code>src/config/permissions.js</code>）とサーバー（<code>api/src/shared/auth.js</code>）はそれぞれ独自に<code>PEOPLE</code>のコピーを保持しています — クライアント／サーバー間で共有される単一の情報源はまだ存在しません（各側3つの別リストから1つのリストへ改善済み）。</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="sync">
+      <h2><span class="badge">7</span>Master Data Sync</h2>
+      <p class="lead">
+        <span class="lang-th">วิธีที่ข้อมูลพนักงาน/หน่วยงานไหลจาก SharePoint เข้า Azure SQL — สำหรับดูแล/แก้ไข Power Automate Flow</span>
+        <span class="lang-en">How employee/org master data flows from SharePoint into Azure SQL — for maintaining/troubleshooting the Power Automate flows.</span>
+        <span class="lang-jp">従業員／組織のマスターデータがSharePointからAzure SQLへ流れる仕組み — Power Automateフローの保守・トラブルシューティング向け。</span>
+      </p>
+      <div class="card">
+        <h4><span class="lang-th">แหล่งข้อมูลต้นทาง</span><span class="lang-en">Source</span><span class="lang-jp">データソース</span></h4>
+        <p>
+          <span class="lang-th">SharePoint site: <code>https://aisingroupap01.sharepoint.com/sites/ATTG_PowerPlatform/Master-DB</code> — List หลักคือ <b>Employee</b> และ <b>PM-UP</b> (ผู้อนุมัติ) รวมถึง Department/Division/Section</span>
+          <span class="lang-en">SharePoint site: <code>https://aisingroupap01.sharepoint.com/sites/ATTG_PowerPlatform/Master-DB</code> — the main lists are <b>Employee</b> and <b>PM-UP</b> (approvers), plus Department/Division/Section.</span>
+          <span class="lang-jp">SharePointサイト：<code>https://aisingroupap01.sharepoint.com/sites/ATTG_PowerPlatform/Master-DB</code> — 主なリストは<b>Employee</b>と<b>PM-UP</b>（承認者）、およびDepartment／Division／Sectionです。</span>
+        </p>
+        <p>
+          <span class="lang-th"><b>PM-UP List ยืนยันแล้วว่าเป็นแหล่งข้อมูลของช่อง "ผู้อนุมัติ" ทุกจุดในแอป</b> ไม่ใช่ List Employee ทั่วไป</span>
+          <span class="lang-en"><b>The PM-UP list is confirmed as the source for every "Approver" field</b> across the app — not the general Employee list.</span>
+          <span class="lang-jp"><b>PM-UPリストが、アプリ内のすべての「承認者」項目のデータソースであることが確認されています</b> — 一般的なEmployeeリストではありません。</span>
+        </p>
+      </div>
+      <div class="card accent-blue">
+        <h4><span class="lang-th">รูปแบบการ Sync: Wipe-and-Reload</span><span class="lang-en">Sync pattern: Wipe-and-Reload</span><span class="lang-jp">同期方式：全削除して再読み込み</span></h4>
+        <p>
+          <span class="lang-th">Power Automate Scheduled Flow แยกต่างหากสำหรับแต่ละตาราง (Employee, PM-UP, Department, Section, Division, VP-EVP) — แต่ละ flow จะ <code>DELETE FROM &lt;table&gt;</code> ทั้งหมดแล้ว insert แถวใหม่ทั้งหมดจาก SharePoint ทุกครั้งที่รัน (ข้อมูลหลักไม่เปลี่ยนบ่อยจึงไม่จำเป็นต้อง sync แบบ incremental)</span>
+          <span class="lang-en">A separate Power Automate Scheduled Flow per table (Employee, PM-UP, Department, Section, Division, VP-EVP) — each flow <code>DELETE</code>s the entire table then re-inserts every row fresh from SharePoint on each run (master data doesn't change often enough to need incremental sync).</span>
+          <span class="lang-jp">テーブルごとに個別のPower Automateスケジュールフロー（Employee、PM-UP、Department、Section、Division、VP-EVP）— 各フローは実行のたびにテーブル全体を<code>DELETE</code>してからSharePointの全行を再挿入します（マスターデータの変更頻度は高くないため差分同期は不要）。</span>
+        </p>
+        <p>
+          <span class="lang-th">API อ่านค่าจากตารางเหล่านี้อย่างเดียว ไม่เคยเขียนกลับ</span>
+          <span class="lang-en">The API only ever reads from these tables — it never writes to them.</span>
+          <span class="lang-jp">APIはこれらのテーブルを読み取り専用で使用し、書き込むことはありません。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">Least-Privilege SQL Login ต่อ Flow</span><span class="lang-en">Dedicated least-privilege SQL login per flow</span><span class="lang-jp">フローごとの最小権限SQLログイン</span></h4>
+        <p>
+          <span class="lang-th">แต่ละ Sync Flow ใช้ SQL login ของตัวเอง จำกัดสิทธิ์ให้ทำได้แค่กับตารางเดียว (เช่น <code>pa_vpevp_sync</code> เข้าถึงได้แค่ <code>MasterVPEVP</code>) แทนที่จะใช้ login กลางร่วมกัน — สร้างผ่าน <code>api/scripts/create-scoped-login.js</code></span>
+          <span class="lang-en">Each Sync Flow uses its own SQL login, scoped to exactly one table (e.g. <code>pa_vpevp_sync</code> can only touch <code>MasterVPEVP</code>) rather than sharing one central login — created via <code>api/scripts/create-scoped-login.js</code>.</span>
+          <span class="lang-jp">各同期フローは、共有の中央ログインではなく、1つのテーブルのみに範囲を限定した専用のSQLログインを使用します（例：<code>pa_vpevp_sync</code>は<code>MasterVPEVP</code>のみアクセス可能）— <code>api/scripts/create-scoped-login.js</code>で作成されます。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">Fallback เมื่อ Sync ล้มเหลว</span><span class="lang-en">Fallback when sync is unavailable</span><span class="lang-jp">同期が利用できない場合のフォールバック</span></h4>
+        <p>
+          <span class="lang-th"><code>masterDataService.js</code> เป็นจุดเดียวที่ทุกฟอร์ม/หน้าเรียกใช้ — ถ้า fetch ล้มเหลวหรือได้ 0 แถว จะ fallback ไปใช้ mock array ขนาดเล็กในเครื่องแทนโดยอัตโนมัติ ไม่ต้องแก้โค้ดหน้าไหนเป็นรายหน้า</span>
+          <span class="lang-en"><code>masterDataService.js</code> is the single seam every form/page goes through — if a fetch fails or returns 0 rows, it automatically falls back to small local mock arrays, with no page-by-page code changes needed.</span>
+          <span class="lang-jp"><code>masterDataService.js</code>は、すべてのフォーム／ページが利用する唯一の窓口です — 取得に失敗するか0件だった場合、自動的に小規模なローカルモック配列にフォールバックし、ページごとにコードを変更する必要はありません。</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="datamodel">
+      <h2><span class="badge">8</span><span class="lang-th">วิวัฒนาการโครงสร้างข้อมูล Projects</span><span class="lang-en">Projects Data Model Evolution</span><span class="lang-jp">Projectsデータモデルの変遷</span></h2>
+      <p class="lead">
+        <span class="lang-th">คอลัมน์ในตาราง <code>Projects</code> ที่เพิ่มเข้ามาล่าสุด และเหตุผล — ดูรายละเอียดกฎการใช้งานจริงได้ที่คู่มือเงื่อนไขการใช้งาน</span>
+        <span class="lang-en">Recently-added columns on the <code>Projects</code> table and why — see the Business Rules guide for the real usage-side logic.</span>
+        <span class="lang-jp"><code>Projects</code>テーブルに最近追加されたカラムとその理由 — 実際の利用ルールについてはBusiness Rulesガイドを参照してください。</span>
+      </p>
+      <table>
+        <tbody>
+          <tr><th><code>workType</code></th><td>
+            <span class="lang-th">NVARCHAR(50), NULL — เพิ่ม 2026-08-13 เป็นตัวแบ่งหลัก 'TPS Standard Work and Kaizen' / 'IT Digital Tools' แถวเก่าเป็น NULL และแอปตีความ NULL เป็น 'IT Digital Tools' เสมอ (เพราะแถวเก่าทุกแถวมีชื่อ/หมวดหมู่/ฐานข้อมูลอยู่แล้ว ลักษณะตรงกับ IT project)</span>
+            <span class="lang-en">NVARCHAR(50), NULL — added 2026-08-13 as the top-level split. Existing rows are NULL, and the app always treats NULL as 'IT Digital Tools' (every pre-existing row already had a Name/Category/Database, i.e. it already "looks like" an IT project).</span>
+            <span class="lang-jp">NVARCHAR(50)、NULL許容 — 2026-08-13に最上位の分類として追加。既存行はNULLであり、アプリは常にNULLを「IT Digital Tools」として扱います（既存の全行にはすでに名前／カテゴリ／データベースが設定されており、ITプロジェクトの特徴と一致するため）。</span>
+          </td></tr>
+          <tr><th><code>category</code></th><td>
+            <span class="lang-th">คงเดิม — แต่หลังเพิ่ม workType แล้ว ใช้เฉพาะ IT Digital Tools เท่านั้น</span>
+            <span class="lang-en">Unchanged column — but after <code>workType</code> was added, only used by IT Digital Tools now.</span>
+            <span class="lang-jp">カラム自体は変更なし — ただし<code>workType</code>追加後はIT Digital Toolsでのみ使用されます。</span>
+          </td></tr>
+          <tr><th><code>improvementTopic</code> / <code>improvementTopicOther</code></th><td>
+            <span class="lang-th">เพิ่ม 2026-08-13 — enum 5 ค่าของฝั่ง TPS (Process Step Reduction / Waiting &amp; Approval Time Reduction / Rework &amp; Error Reduction / Information Search &amp; Handover Time Reduction / Other) แยกจาก <code>category</code> เดิมโดยสิ้นเชิง; <code>improvementTopicOther</code> เก็บข้อความอิสระเมื่อเลือก "Other" (ค่า "Other" เดี่ยวๆ ไม่บอกอะไรเลยว่าปรับปรุงอะไรจริง)</span>
+            <span class="lang-en">Added 2026-08-13 — the TPS side's own 5-value enum (Process Step Reduction / Waiting &amp; Approval Time Reduction / Rework &amp; Error Reduction / Information Search &amp; Handover Time Reduction / Other), fully separate from <code>category</code>; <code>improvementTopicOther</code> holds free text when "Other" is picked (a bare "Other" value alone said nothing about what was actually improved).</span>
+            <span class="lang-jp">2026-08-13追加 — TPS側独自の5値enum（工程削減／待ち時間・承認時間削減／手直し・エラー削減／情報検索・引継ぎ時間削減／その他）で、<code>category</code>とは完全に独立しています。「その他」選択時は<code>improvementTopicOther</code>に自由記述テキストを保持します（単なる「その他」だけでは何が改善されたのか分からないため）。</span>
+          </td></tr>
+          <tr><th><code>picName</code></th><td>
+            <span class="lang-th">เพิ่ม 2026-08-13 — "ผู้รับผิดชอบหลัก (PIC)" ฝั่ง TPS เทียบเท่ากับ <code>developerName</code> ฝั่ง IT</span>
+            <span class="lang-en">Added 2026-08-13 — TPS-side "Person in Charge," the TPS equivalent of the IT side's <code>developerName</code>.</span>
+            <span class="lang-jp">2026-08-13追加 — TPS側の「担当者（PIC）」で、IT側の<code>developerName</code>に相当します。</span>
+          </td></tr>
+          <tr><th><code>needsSharePointList</code></th><td>
+            <span class="lang-th">เดิมเป็น toggle Yes/No — เปลี่ยนความหมาย 2026-08-04 เป็นตัวเลือกฐานข้อมูล ("SharePoint List" / "Excel Business") ขยายคอลัมน์จาก NVARCHAR(10) เป็น NVARCHAR(30) เพื่อไม่ให้ข้อความถูกตัด ชื่อคอลัมน์คงเดิมเพื่อไม่ต้อง migrate</span>
+            <span class="lang-en">Originally a Yes/No toggle — repurposed 2026-08-04 into a database-type picker ("SharePoint List" / "Excel Business"), widened from NVARCHAR(10) to NVARCHAR(30) so the new text isn't truncated; column name kept as-is to avoid a migration.</span>
+            <span class="lang-jp">元はYes/Noのトグルでしたが、2026-08-04にデータベース種別の選択項目（「SharePoint List」／「Excel Business」）へ用途変更 — 新しいテキストが切り詰められないようNVARCHAR(10)からNVARCHAR(30)へ拡張。マイグレーションを避けるためカラム名はそのまま維持。</span>
+          </td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <span class="lang-th">ทุก migration ใน <code>schema.sql</code> ห่อด้วย <code>IF NOT EXISTS (SELECT * FROM sys.columns ...)</code> ทำให้รัน script ซ้ำกับฐานข้อมูลเดิมได้อย่างปลอดภัยเสมอ</span>
+        <span class="lang-en">Every migration in <code>schema.sql</code> is wrapped in <code>IF NOT EXISTS (SELECT * FROM sys.columns ...)</code>, so the whole script is always safe to re-run against an existing database.</span>
+        <span class="lang-jp"><code>schema.sql</code>内のすべてのマイグレーションは<code>IF NOT EXISTS (SELECT * FROM sys.columns ...)</code>でラップされており、既存のデータベースに対して何度実行しても常に安全です。</span>
+      </div>
+    </section>
+
+    <section id="bugfixes">
+      <h2><span class="badge">9</span><span class="lang-th">บั๊กสำคัญที่แก้ไปแล้ว</span><span class="lang-en">Notable Bug Fixes</span><span class="lang-jp">修正済みの主要バグ</span></h2>
+      <p class="lead">
+        <span class="lang-th">บั๊กที่เจอจริงและวิธีแก้ — เก็บไว้กันเจอซ้ำ</span>
+        <span class="lang-en">Real bugs found and how they were fixed — kept here to avoid repeating them.</span>
+        <span class="lang-jp">実際に発生したバグとその修正方法 — 再発防止のために記録しています。</span>
+      </p>
+      <div class="card">
+        <h4><span class="lang-th">String concatenation แทนการบวกเลขจริง</span><span class="lang-en">String concatenation instead of numeric addition</span><span class="lang-jp">数値加算の代わりに文字列結合が発生</span></h4>
+        <p>
+          <span class="lang-th"><code>sum + p.paperReduction</code> กลายเป็นการต่อ string แทนการบวกเมื่อค่าจาก API เป็น string (เช่น <code>0 + "80"</code> ได้ <code>"080"</code>) สะสมไปเรื่อยๆ จนได้ตัวเลขมหาศาลไร้ความหมาย (เห็นจริง: ค่าเฉลี่ยลดกระดาษแสดง 471,764,824,124,706,400) แก้ด้วยการครอบทุกค่าด้วย <code>Number(...)</code> ก่อนบวก</span>
+          <span class="lang-en"><code>sum + p.paperReduction</code> did string concatenation instead of addition whenever a value came back as a string from the API (e.g. <code>0 + "80" → "080"</code>), compounding into a meaningless huge number (observed: avgPaperReduction displaying 471,764,824,124,706,400). Fixed by wrapping every aggregated value in <code>Number(...)</code> first.</span>
+          <span class="lang-jp">APIから文字列として値が返ってきた場合、<code>sum + p.paperReduction</code>が加算ではなく文字列結合になっていました（例：<code>0 + "80" → "080"</code>）。これが積み重なり意味のない巨大な数値になっていました（実例：平均紙削減率が471,764,824,124,706,400と表示）。すべての集計値を先に<code>Number(...)</code>でラップして修正しました。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4>Tailwind <code>!important</code> modifier <span class="lang-th">กับ CSS cascade</span><span class="lang-en">and CSS cascade order</span><span class="lang-jp">とCSSカスケード順序</span></h4>
+        <p>
+          <span class="lang-th">Class <code>.tps-input</code> ของตัวเองมี <code>w-full</code> ที่ประกาศ "หลัง" utilities layer ของ Tailwind ใน <code>index.css</code> (เพราะเขียนไว้ท้ายไฟล์ หลัง <code>@tailwind</code> directives) — utility class ที่ specificity เท่ากัน เช่น <code>w-auto</code> ที่ใส่ inline จึงแพ้ cascade แบบเงียบๆ เห็นผลจริงคือ filter dropdown ทุกตัวถูกบังคับเต็มความกว้างและเรียงลงมาทีละแถว ต้องแก้ด้วย <code>!</code>-modifier ของ Tailwind (<code>!w-auto</code>) เพื่อบังคับ override</span>
+          <span class="lang-en">The <code>.tps-input</code> class's own <code>w-full</code> is declared "after" Tailwind's utilities layer in <code>index.css</code> (it's written at the end of the file, after the <code>@tailwind</code> directives) — a same-specificity inline utility like <code>w-auto</code> silently lost the cascade. Real symptom: every filter dropdown was forced full-width and stacked one per row. Fixed with Tailwind's <code>!</code>-modifier (<code>!w-auto</code>) to force the override.</span>
+          <span class="lang-jp"><code>.tps-input</code>クラス自体の<code>w-full</code>は、<code>index.css</code>内でTailwindのutilitiesレイヤーより「後」に宣言されています（<code>@tailwind</code>ディレクティブの後、ファイル末尾に記述されているため）— インラインで指定した<code>w-auto</code>のような同一詳細度のユーティリティクラスは、気づかないうちにカスケードで負けてしまいます。実際の症状：すべてのフィルタードロップダウンが強制的に全幅になり、1行ずつ縦に並んでいました。Tailwindの<code>!</code>修飾子（<code>!w-auto</code>）で強制的に上書きして修正しました。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4>React key collision</h4>
+        <p>
+          <span class="lang-th">ใช้ <code>r.email</code> อย่างเดียวเป็น React key ในตาราง Login Log ชนกันเมื่อคนเดียวกันล็อกอินหลายวัน (เพราะ email ซ้ำ แต่ <code>loginAt</code> ต่างกัน) ทำให้ row render ผิดเงียบๆ แก้เป็น <code>${r.email}-${r.loginAt}</code></span>
+          <span class="lang-en">Using <code>r.email</code> alone as the React key in the Login Log table collided whenever the same person logged in on multiple days (same email, different <code>loginAt</code>), causing rows to silently mis-render. Fixed with <code>${r.email}-${r.loginAt}</code>.</span>
+          <span class="lang-jp">Login LogテーブルでReactのkeyとして<code>r.email</code>のみを使用していたため、同一人物が複数日にログインした場合（同じメールアドレス、異なる<code>loginAt</code>）にキーが衝突し、行が正しく描画されないことがありました。<code>${r.email}-${r.loginAt}</code>に修正しました。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">Sync ล้มเหลวเงียบๆ ดูเหมือนสำเร็จ</span><span class="lang-en">Failed sync silently looked like success</span><span class="lang-jp">同期失敗が成功のように見えてしまう</span></h4>
+        <p>
+          <span class="lang-th">แก้ไขข้อมูลถูก apply แบบ optimistic ใน local state ก่อนแล้วขึ้น toast สำเร็จทันที — ถ้า sync ไป API จริงล้มเหลว (เช่น token หมดอายุ) จะไม่มีอะไรแจ้งเตือนเลย ผู้ใช้เห็น "สำเร็จ" แต่ข้อมูลไม่ถึง server จริง แก้โดยให้ <code>setValue</code> คืนค่า Promise ที่ผู้เรียก await เพื่อขึ้น toast เตือนซ้ำถ้า sync ล้มเหลวจริง</span>
+          <span class="lang-en">Edits were applied optimistically to local state first, showing a success toast immediately — if the background sync to the real API actually failed (e.g. an expired token), nothing surfaced that. The user saw "success" but the change never reached the server. Fixed by having <code>setValue</code> return a Promise the caller <code>await</code>s, to show a follow-up warning toast if the sync genuinely failed.</span>
+          <span class="lang-jp">編集内容はまずローカル状態に楽観的に反映され、即座に成功トーストが表示されていました — バックグラウンドでの実際のAPI同期が失敗した場合（例：トークン期限切れ）でも何も表示されませんでした。ユーザーには「成功」と見えても、変更は実際にはサーバーに届いていませんでした。<code>setValue</code>がPromiseを返すようにし、呼び出し元が<code>await</code>することで、同期が本当に失敗した場合には警告トーストを追加表示するよう修正しました。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">Denominator ไม่ตรงกันระหว่างยอดรวมกับยอดแยกส่วน</span><span class="lang-en">Denominator mismatch between group-wide and scoped totals</span><span class="lang-jp">全体集計と部分集計の分母の不一致</span></h4>
+        <p>
+          <span class="lang-th">Section Dashboard เคยแสดง 8.2% ข้างๆ ยอดรวมทั้งบริษัท 0.2% เพราะหารด้วยฐานคนละแบบ (headcount ดิบ vs. จำนวน License O365) แก้ด้วย <code>estimateLicensedHeadcount()</code> ที่ประเมินสัดส่วน License ตามสัดส่วน headcount ของแต่ละขอบเขต ให้ทุกมุมมองหารด้วยฐานเดียวกันเสมอ</span>
+          <span class="lang-en">Section Dashboard once showed 8.2% next to a group-wide 0.2%, purely because the two divided by different kinds of denominator (raw headcount vs. O365 license count). Fixed with <code>estimateLicensedHeadcount()</code>, which estimates each scope's proportional slice of the license total, so every view divides by the same kind of denominator.</span>
+          <span class="lang-jp">Section Dashboardでは、分母の種類が異なっていた（生の従業員数 vs. O365ライセンス数）ため、全社の0.2%の隣に8.2%と表示されていたことがありました。<code>estimateLicensedHeadcount()</code>で各スコープのライセンス総数に対する比例配分を推定するよう修正し、すべての表示で同じ種類の分母を使用するようにしました。</span>
         </p>
       </div>
     </section>
