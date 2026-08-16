@@ -690,9 +690,9 @@
     <section id="projects">
       <h2><span class="badge">5</span>Project Registration</h2>
       <p class="lead">
-        <span class="lang-th">ใช้ลงทะเบียนโครงการ Automation ที่ลดเวลาทำงานหรือลดการใช้กระดาษ — มีตัวกรองบริษัท/แผนก/สถานะ/หมวดหมู่ และช่องค้นหา</span>
-        <span class="lang-en">Used to register Automation projects that reduce work time or reduce paper usage — includes company/department/status/category filters and a search box.</span>
-        <span class="lang-jp">作業時間を削減または紙の使用を削減するオートメーションプロジェクトを登録するページです — 会社／部門／ステータス／カテゴリのフィルターと検索ボックスがあります。</span>
+        <span class="lang-th">ใช้ลงทะเบียนโครงการ Automation ที่ลดเวลาทำงานหรือลดการใช้กระดาษ — กรองด้วย Dropdown บริษัท/แผนก/สถานะ/หมวดหมู่ (ไม่มีช่องค้นหาข้อความแยกแล้ว ถูกรวมเข้าเป็น Dropdown ทั้งหมดเพื่อความกระชับ)</span>
+        <span class="lang-en">Used to register Automation projects that reduce work time or reduce paper usage — filter using the company/department/status/category dropdowns (there's no separate text search box anymore; it was folded into the dropdowns for a more compact filter bar).</span>
+        <span class="lang-jp">作業時間を削減または紙の使用を削減するオートメーションプロジェクトを登録するページです — 会社／部門／ステータス／カテゴリのドロップダウンで絞り込みます（独立したテキスト検索ボックスはもうありません。フィルターバーをよりコンパクトにするためドロップダウンに統合されました）。</span>
       </p>
       <figure class="shot">
         <img src="images/09-projects-list.jpg" alt="หน้ารายการ Project Registration พร้อมสถิติสรุปและตัวกรอง" onerror="this.classList.add('broken')">
@@ -708,24 +708,19 @@
           <span class="lang-jp">右上の<b>「＋プロジェクトを追加」</b>ボタンをクリックします。</span>
         </li>
         <li>
-          <span class="lang-th">กรอกส่วน "ข้อมูลโครงการ": ชื่อ Project, ชื่อย่อ, บริษัท, หมวดหมู่ (ลดเวลา/ลดกระดาษ), แผนก/ส่วน/ฝ่าย, และเลือกว่าต้องการใช้ฐานข้อมูล SharePoint List ส่วนกลางหรือไม่</span>
-          <span class="lang-en">Fill in the "Project Information" section: Project name, short name, company, category (reduce time / reduce paper), department/section/division, and whether you need a central SharePoint List database.</span>
-          <span class="lang-jp">「プロジェクト情報」欄に入力します：プロジェクト名、略称、会社、カテゴリ（時間削減／紙削減）、部門／セクション／事業部、共通SharePointリストデータベースの要否。</span>
+          <span class="lang-th">ส่วน "ข้อมูลเกี่ยวกับพนักงานและหน่วยงาน" — เลือกบริษัท แล้วแผนก/ส่วนงาน/ฝ่าย จะกรองเหลือเฉพาะของบริษัทนั้น (พิมพ์เองได้ถ้ายังไม่มีในระบบ) ถัดมาระบบแสดงการ์ด "ผู้จัดสร้างและกำกับดูแล" ให้อัตโนมัติ (เติมชื่อผู้ล็อกอินให้เอง ไม่ต้องกรอก) แล้วเลือกผู้อนุมัติระดับ Department และ Division</span>
+          <span class="lang-en">The "Employee &amp; Unit Information" section — pick a company, and the department/section/division options narrow down to that company (you can still type one in if it isn't in the system yet). The system then shows a "Creator" card automatically (pre-filled with your own name — nothing to type), followed by the Department- and Division-level approver fields.</span>
+          <span class="lang-jp">「従業員・部署情報」欄 — 会社を選択すると、部門／セクション／事業部の選択肢がその会社のものに絞り込まれます（システムに未登録の場合は直接入力可）。続いて「作成者」カードが自動的に表示されます（自分の名前が自動入力されるため入力不要）。その後、Department級・Division級の承認者を選択します。</span>
         </li>
         <li>
-          <span class="lang-th">ส่วน "ผู้เกี่ยวข้อง" — ผู้จัดสร้าง (เติมชื่อผู้ล็อกอินอัตโนมัติ) และผู้อนุมัติระดับ Section/Department</span>
-          <span class="lang-en">"Stakeholders" section — Creator (auto-filled with the signed-in user's name) and Section/Department-level approvers.</span>
-          <span class="lang-jp">「関係者」欄 — 作成者（サインインユーザー名が自動入力）とセクション／部門レベルの承認者。</span>
+          <span class="lang-th">ส่วน "รายละเอียดโครงการ" — เลือก <b>หัวข้อการปรับปรุงระบบงาน</b> ก่อน (ตัวเลือกจริงในระบบคือ "TPS Standard Work and Kaizen" กับ "IT Digital Transformation with Power Platform &amp; AI") ตามด้วยสถานะ, % ความคืบหน้า, วันเริ่มต้น/สิ้นสุดโครงการ</span>
+          <span class="lang-en">The "Project Details" section — pick the <b>work type</b> first (the real dropdown options are "TPS Standard Work and Kaizen" and "IT Digital Transformation with Power Platform &amp; AI"), followed by status, % progress, and the project's start/end dates.</span>
+          <span class="lang-jp">「プロジェクト詳細」欄 — まず<b>改善テーマ</b>を選択します（実際のDropdownの選択肢は「TPS Standard Work and Kaizen」と「IT Digital Transformation with Power Platform &amp; AI」）。続いてステータス、進捗率、プロジェクトの開始日／終了日を入力します。</span>
         </li>
         <li>
-          <span class="lang-th">ส่วน "สถานะและกำหนดการ" — สถานะ, % ความคืบหน้า, วันเริ่มต้น/สิ้นสุดโครงการ</span>
-          <span class="lang-en">"Status & Schedule" section — status, % progress, project start/end dates.</span>
-          <span class="lang-jp">「ステータスとスケジュール」欄 — ステータス、進捗率、プロジェクトの開始日／終了日。</span>
-        </li>
-        <li>
-          <span class="lang-th">ส่วน "ผลลัพธ์และเครื่องมือ" — <b>ชั่วโมงที่ลดได้ (ต่อเดือน)</b> กรอกแยกเป็น 2 ช่อง "ชั่วโมง" + "นาที" (เช่น 16 ชม. 20 นาที) เว้นว่างไว้ก่อนได้ ไม่บังคับกรอก (มาใส่ทีหลังเมื่อทราบตัวเลขจริงก็ได้) — ระบบจะแปลงเป็นยอดสะสมต่อวันให้อัตโนมัติ ไม่ต้องคำนวณเอง (ดูวิธีคิดในคู่มือเงื่อนไขการใช้งาน) ส่วน % กระดาษที่ลด + จำนวนแผ่น/เดือน (ก็เป็นอัตราต่อเดือนเช่นกัน) ยังคงจำเป็นเมื่อเลือกหมวดหมู่ "ยกเลิกการใช้กระดาษ" ระบุเครื่องมือ Power Platform/AI ที่ใช้พัฒนา (หรือเครื่องมืออื่นๆ) และชื่อผู้พัฒนาแอปพลิเคชัน (Application Developer) หากพัฒนาด้วย Power Platform</span>
-          <span class="lang-en">"Outcome & Tools" section — <b>Hours Saved (per month)</b> splits into 2 fields, "hours" + "minutes" (e.g. 16 hrs 20 min), and can be left blank (not required — fill it in later once the real number is known) — the system converts it into a daily accrual automatically, no manual math needed (see the Business Rules guide for how). "% Paper Reduced" + sheets/month (also a monthly rate now) is still required for the "eliminate paper" category. Specify the Power Platform/AI tools used for development (or other tools), and the Application Developer's name if it was built with Power Platform.</span>
-          <span class="lang-jp">「成果とツール」欄 — <b>「削減時間（月間）」</b>は「時間」＋「分」の2項目に分かれています（例：16時間20分）。空欄のままでも登録できます（必須ではありません。実数が分かってから後で入力できます）— システムが自動的に日次集計に変換するため、手計算は不要です（計算方法はBusiness Rulesガイドを参照）。「紙削減率」＋月間枚数（これも月間レートになりました）は「紙の使用廃止」カテゴリの場合は引き続き必須です。開発に使用したPower Platform／AIツール（またはその他のツール）と、Power Platformで開発した場合はアプリケーション開発者名も記入します。</span>
+          <span class="lang-th"><b>ชั่วโมงที่ลดได้ (ต่อเดือน)</b> กรอกแยกเป็น 2 ช่อง "ชั่วโมง" + "นาที" (เช่น 16 ชม. 20 นาที) เว้นว่างไว้ก่อนได้ ไม่บังคับกรอก (มาใส่ทีหลังเมื่อทราบตัวเลขจริงก็ได้) — ระบบจะแปลงเป็นยอดสะสมต่อวันให้อัตโนมัติ ไม่ต้องคำนวณเอง (ดูวิธีคิดในคู่มือเงื่อนไขการใช้งาน) ส่วน % กระดาษที่ลด + จำนวนแผ่น/เดือน (ก็เป็นอัตราต่อเดือนเช่นกัน) ยังคงจำเป็นเมื่อเลือกหมวดหมู่ "ยกเลิกการใช้กระดาษ" — ถ้าเลือก "IT Digital Transformation..." จะมีช่องเพิ่มเติม: ชื่อ Project, ชื่อย่อ, หมวดหมู่, ฐานข้อมูล, ผู้พัฒนาแอปพลิเคชัน (Application Developer), เครื่องมือ Power Platform/AI ที่ใช้พัฒนา และรายละเอียด</span>
+          <span class="lang-en"><b>Hours Saved (per month)</b> splits into 2 fields, "hours" + "minutes" (e.g. 16 hrs 20 min), and can be left blank (not required — fill it in later once the real number is known) — the system converts it into a daily accrual automatically, no manual math needed (see the Business Rules guide for how). "% Paper Reduced" + sheets/month (also a monthly rate now) is still required for the "eliminate paper" category — selecting "IT Digital Transformation..." adds further fields: Project Name, Short Name, Category, Database, Application Developer, the Power Platform/AI tools used, and a description.</span>
+          <span class="lang-jp"><b>「削減時間（月間）」</b>は「時間」＋「分」の2項目に分かれています（例：16時間20分）。空欄のままでも登録できます（必須ではありません。実数が分かってから後で入力できます）— システムが自動的に日次集計に変換するため、手計算は不要です（計算方法はBusiness Rulesガイドを参照）。「紙削減率」＋月間枚数（これも月間レートになりました）は「紙の使用廃止」カテゴリの場合は引き続き必須です — 「IT Digital Transformation...」を選択した場合、プロジェクト名、略称、カテゴリ、データベース、アプリケーション開発者、使用するPower Platform／AIツール、詳細説明の項目が追加されます。</span>
         </li>
         <li>
           <span class="lang-th">กด <b>"สร้าง Project"</b></span>
@@ -744,16 +739,8 @@
           <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ข้อมูลพนักงาน/หน่วยงาน + เลือกหัวข้อการปรับปรุง</span><span class="lang-en">Image: Employee/unit info + selecting the work type</span><span class="lang-jp">画像：従業員／部署情報＋改善テーマの選択</span></span><code>images/11-projects-add-form-1.jpg</code></div>
         </figure>
         <figure class="shot">
-          <img src="images/12-projects-add-form-2.jpg" alt="ฟอร์มเพิ่ม Project กรณีเลือกหัวข้อ TPS Standard Work" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ฟอร์มกรณีเลือก TPS Standard Work</span><span class="lang-en">Image: Form when TPS Standard Work is selected</span><span class="lang-jp">画像：TPS Standard Work選択時のフォーム</span></span><code>images/12-projects-add-form-2.jpg</code></div>
-        </figure>
-        <figure class="shot">
-          <img src="images/12-projects-add-form-3.jpg" alt="ฟอร์มเพิ่ม Project กรณีเลือกหัวข้อ IT Digital Tools ส่วนบน" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ฟอร์มกรณีเลือก IT Digital Tools (ส่วนบน)</span><span class="lang-en">Image: Form when IT Digital Tools is selected (top)</span><span class="lang-jp">画像：IT Digital Tools選択時のフォーム（上部）</span></span><code>images/12-projects-add-form-3.jpg</code></div>
-        </figure>
-        <figure class="shot">
-          <img src="images/12-projects-add-form-4.jpg" alt="ฟอร์มเพิ่ม Project กรณีเลือกหัวข้อ IT Digital Tools ส่วนล่าง" onerror="this.classList.add('broken')">
-          <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ฟอร์มกรณีเลือก IT Digital Tools (ส่วนล่าง)</span><span class="lang-en">Image: Form when IT Digital Tools is selected (bottom)</span><span class="lang-jp">画像：IT Digital Tools選択時のフォーム（下部）</span></span><code>images/12-projects-add-form-4.jpg</code></div>
+          <img src="images/12-projects-add-form-2.jpg" alt="ฟอร์มเพิ่ม Project หน้าต่างเปิดทับรายการ Project" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ฟอร์มเพิ่ม Project เปิดทับหน้ารายการ</span><span class="lang-en">Image: Add Project form opened over the list page</span><span class="lang-jp">画像：一覧ページの上に開いたプロジェクト追加フォーム</span></span><code>images/12-projects-add-form-2.jpg</code></div>
         </figure>
       </div>
       <div class="note">
@@ -792,9 +779,10 @@
           <th><span class="lang-th">หลักสูตร</span><span class="lang-en">Course</span><span class="lang-jp">コース</span></th>
           <th><span class="lang-th">จำนวนรอบ</span><span class="lang-en">Number of Rounds</span><span class="lang-jp">回数</span></th>
         </tr>
-        <tr><td>L1 · Beginner</td><td>Smart Paperless Process Builder</td><td><span class="lang-th">4 รอบ (Q3'26 – Q1-Q2'28)</span><span class="lang-en">4 rounds (Q3'26 – Q1-Q2'28)</span><span class="lang-jp">4回（Q3'26～Q1-Q2'28）</span></td></tr>
-        <tr><td>L2 · Intermediate</td><td>Business Automation App Builder</td><td><span class="lang-th">3 รอบ (Q4'26 – Q1-Q2'28)</span><span class="lang-en">3 rounds (Q4'26 – Q1-Q2'28)</span><span class="lang-jp">3回（Q4'26～Q1-Q2'28）</span></td></tr>
-        <tr><td>L3 · Advanced</td><td>AI-Assisted Web Application Development</td><td><span class="lang-th">2 รอบ (Q1-Q2'27 – Q1-Q2'28)</span><span class="lang-en">2 rounds (Q1-Q2'27 – Q1-Q2'28)</span><span class="lang-jp">2回（Q1-Q2'27～Q1-Q2'28）</span></td></tr>
+        <tr><td>L1 · Beginner</td><td>Power Platform Training: Paperless Workflows with Forms, Power Automate &amp; Excel</td><td><span class="lang-th">3 รอบ (Q3'26 – Q1'27)</span><span class="lang-en">3 rounds (Q3'26 – Q1'27)</span><span class="lang-jp">3回（Q3'26～Q1'27）</span></td></tr>
+        <tr><td>L2 · Intermediate</td><td>Power Automate Training (Intermediate Level)</td><td><span class="lang-th">2 รอบ (Q4'26 – Q1'27)</span><span class="lang-en">2 rounds (Q4'26 – Q1'27)</span><span class="lang-jp">2回（Q4'26～Q1'27）</span></td></tr>
+        <tr><td>L2 · Intermediate</td><td>Power Apps Training (Intermediate Level)</td><td><span class="lang-th">2 รอบ (Q4'26 – Q1'27)</span><span class="lang-en">2 rounds (Q4'26 – Q1'27)</span><span class="lang-jp">2回（Q4'26～Q1'27）</span></td></tr>
+        <tr><td>L3 · Advanced</td><td>AI-Assisted Application Development</td><td><span class="lang-th">1 รอบ (Q1'28)</span><span class="lang-en">1 round (Q1'28)</span><span class="lang-jp">1回（Q1'28）</span></td></tr>
       </table>
 
       <figure class="shot">
