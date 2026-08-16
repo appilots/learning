@@ -271,6 +271,11 @@
     <span class="lang-en">System architecture and database details for TPS Office Digital Tools</span>
     <span class="lang-jp">TPS Office Digital Toolsのシステムアーキテクチャとデータベースの詳細</span>
   </p>
+  <p style="font-size:12px; opacity:.75; margin-top:4px;">
+    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-16 — บันทึกการย้าย Backend จาก Azure Functions ไป App Service, คอลัมน์ใหม่ (savingHours widened, updatedAt, MasterEmployees.email/mobilePhone), และบั๊ก INT truncation ที่เพิ่งแก้</span>
+    <span class="lang-en">Last content update: 2026-08-16 — documented the Azure Functions → App Service backend migration, new columns (widened savingHours, updatedAt, MasterEmployees.email/mobilePhone), and the newly-fixed INT truncation bug.</span>
+    <span class="lang-jp">最終更新日：2026-08-16 — Azure Functions → App Serviceへのバックエンド移行、新規カラム（savingHoursの拡張、updatedAt、MasterEmployees.email/mobilePhone）、および修正済みのINT切り捨てバグを記録しました。</span>
+  </p>
   <br>
   <a class="back" href="https://appilots.github.io/learning/tps-office-user-guide.html">
     <span class="lang-th">← กลับไปคู่มือการใช้งานหลัก</span>
@@ -314,8 +319,8 @@
         <span class="lang-jp">このセクションでは、システムがSharePointおよびAzureとどのように接続しているかを説明します — システム管理者／IT担当者向けです。</span>
       </p>
       <figure class="shot">
-        <img src="images/architecture-diagram.jpg" alt="Azure Static Web Apps + Power Automate Bridge architecture diagram" onerror="this.classList.add('broken')">
-        <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: Azure Static Web Apps + Power Automate Bridge</span><span class="lang-en">Image: Azure Static Web Apps + Power Automate Bridge</span><span class="lang-jp">画像：Azure Static Web Apps + Power Automate Bridge</span></span><code>images/architecture-diagram.jpg</code></div>
+        <img src="images/architecture-diagram.jpg" alt="Azure App Service + Power Automate Bridge architecture diagram (needs a redraw — still shows the old Static Web Apps + Functions layout)" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: Azure App Service (Frontend+Backend รวม) + Power Automate Bridge (ต้องวาดใหม่ — ของเดิมยังเป็น Static Web Apps + Functions แยกกัน)</span><span class="lang-en">Image: Azure App Service (combined frontend+backend) + Power Automate Bridge (needs a redraw — the old diagram still shows separate Static Web Apps + Functions)</span><span class="lang-jp">画像：Azure App Service（フロントエンド＋バックエンド統合）＋ Power Automate Bridge（再作成が必要 — 旧図はStatic Web Apps + Functionsが別々のままです）</span></span><code>images/architecture-diagram.jpg</code></div>
       </figure>
       <p>
         <span class="lang-th">ระบบใช้ <b>Power Automate เป็น "สะพาน"</b> อ่านข้อมูลจาก SharePoint แทนการต่อ Microsoft Graph API ตรงๆ เพราะ Connector ของ Power Automate ได้รับอนุมัติจาก Microsoft ไว้ล่วงหน้าแล้ว จึงไม่ติดปัญหา Admin Consent แบบที่เจอกับ Graph API</span>
@@ -335,19 +340,19 @@
             <span class="lang-jp">ATTGの従業員がブラウザで<code>https://tpsit.attg.co.th</code>にアクセスします。</span>
           </li>
           <li>
-            <span class="lang-th">Azure Static Web App (React front-end + Entra ID Sign-in) เรียก <code>/api/*</code></span>
-            <span class="lang-en">The Azure Static Web App (React front-end + Entra ID sign-in) calls <code>/api/*</code>.</span>
-            <span class="lang-jp">Azure Static Web App（Reactフロントエンド + Entra IDサインイン）が<code>/api/*</code>を呼び出します。</span>
+            <span class="lang-th">Azure App Service ตอบกลับหน้าเว็บ (React SPA ที่ Build ไว้ล่วงหน้า, จากโฟลเดอร์ <code>api-appservice/public/</code>) จาก Origin เดียวกันกับ API — ไม่มี Azure Static Web Apps คั่นกลางอีกต่อไป Front-end (React + Entra ID Sign-in) เรียก <code>/api/*</code> แบบ Relative Path เดิม แต่เป็น Origin เดียวกันเลย ไม่ใช่ Cross-Origin</span>
+            <span class="lang-en">Azure App Service serves the web page (a pre-built React SPA, from the <code>api-appservice/public/</code> folder) from the same origin as the API — Azure Static Web Apps no longer sits in between. The front-end (React + Entra ID sign-in) still calls <code>/api/*</code> as a relative path, but it's now the same origin, not cross-origin.</span>
+            <span class="lang-jp">Azure App Serviceは、Webページ（<code>api-appservice/public/</code>フォルダにある事前ビルド済みのReact SPA）をAPIと同じオリジンから配信します — Azure Static Web Appsはもはや間に存在しません。フロントエンド（React + Entra IDサインイン）は引き続き<code>/api/*</code>を相対パスで呼び出しますが、現在は同一オリジンであり、クロスオリジンではありません。</span>
           </li>
           <li>
-            <span class="lang-th">Azure Functions (Backend API) อ่าน Master Data จาก Azure SQL ที่ sync ไว้แล้ว และอ่าน/เขียนข้อมูล Project / Training / Power Champion โดยตรง</span>
-            <span class="lang-en">Azure Functions (backend API) reads Master Data from the already-synced Azure SQL database, and reads/writes Project / Training / Power Champion data directly.</span>
-            <span class="lang-jp">Azure Functions（バックエンドAPI）は、同期済みのAzure SQLからマスターデータを読み取り、Project／Training／Power Championのデータを直接読み書きします。</span>
+            <span class="lang-th">Backend API (Express, บน Azure App Service) อ่าน Master Data จาก Azure SQL ที่ sync ไว้แล้ว และอ่าน/เขียนข้อมูล Project / Training / Power Champion โดยตรง — โค้ด Backend เดิมเขียนเป็น Azure Functions (<code>api/</code>) ปัจจุบัน Runtime จริงที่ Deploy ใช้งานคือ Express บน Azure App Service (<code>api-appservice/</code>) แทนทั้งหมด (ทั้ง Frontend และ Backend ในตัวเดียวกัน — ดูหมายเหตุด้านล่าง) โค้ด <code>api/</code> ยังเก็บไว้ในโปรเจกต์เพื่ออ้างอิง แต่ไม่ใช่สิ่งที่รันอยู่จริงอีกต่อไป</span>
+            <span class="lang-en">The Backend API (Express, on Azure App Service) reads Master Data from the already-synced Azure SQL database, and reads/writes Project / Training / Power Champion data directly — the original backend was written as Azure Functions (<code>api/</code>), but the actual deployed runtime today is entirely an Express app on Azure App Service (<code>api-appservice/</code>) instead (serving both frontend and backend from the one app — see the note below). The <code>api/</code> code is kept in the project for reference but is no longer what's actually running.</span>
+            <span class="lang-jp">Backend API（Express、Azure App Service上）は、同期済みのAzure SQLからマスターデータを読み取り、Project／Training／Power Championのデータを直接読み書きします — 元のバックエンドはAzure Functions（<code>api/</code>）として作成されましたが、現在実際にデプロイされているランタイムは完全にAzure App Service上のExpressアプリ（<code>api-appservice/</code>）です（フロントエンドとバックエンドの両方を1つのアプリでホスト — 下記の注記を参照）。<code>api/</code>のコードは参照用にプロジェクト内に残されていますが、もはや実際に稼働しているものではありません。</span>
           </li>
           <li>
-            <span class="lang-th">Power Automate Scheduled Flow (ทำงานทุก 30 นาที) ดึงข้อมูลจาก SharePoint List (Employee / Department / Division / Section) มาเขียนสำเนาล่าสุดลง Azure SQL — Functions ไม่เคยต่อ SharePoint โดยตรง</span>
-            <span class="lang-en">A Power Automate Scheduled Flow (running every 30 minutes) pulls data from SharePoint Lists (Employee / Department / Division / Section) and writes the latest copy into Azure SQL — Functions never connects to SharePoint directly.</span>
-            <span class="lang-jp">Power Automateのスケジュールフロー（30分ごとに実行）がSharePointリスト（Employee／Department／Division／Section）からデータを取得し、最新のコピーをAzure SQLに書き込みます — FunctionsがSharePointに直接接続することはありません。</span>
+            <span class="lang-th">Power Automate Scheduled Flow (ทำงานทุก 30 นาที) ดึงข้อมูลจาก SharePoint List (Employee / Department / Division / Section) มาเขียนสำเนาล่าสุดลง Azure SQL — Backend ไม่เคยต่อ SharePoint โดยตรง</span>
+            <span class="lang-en">A Power Automate Scheduled Flow (running every 30 minutes) pulls data from SharePoint Lists (Employee / Department / Division / Section) and writes the latest copy into Azure SQL — the backend never connects to SharePoint directly.</span>
+            <span class="lang-jp">Power Automateのスケジュールフロー（30分ごとに実行）がSharePointリスト（Employee／Department／Division／Section）からデータを取得し、最新のコピーをAzure SQLに書き込みます — バックエンドがSharePointに直接接続することはありません。</span>
           </li>
         </ol>
       </div>
@@ -374,6 +379,14 @@
             <span class="lang-jp">追加のAdmin Consentが必要となるGraph APIへの直接接続を回避します — Power Automateコネクタではこの問題は発生しません。</span>
           </li>
         </ol>
+      </div>
+      <div class="card accent-red">
+        <h4><span class="lang-th">ย้ายทั้งระบบจาก Azure Static Web Apps + Functions → App Service เดียว</span><span class="lang-en">Full Migration: Azure Static Web Apps + Functions → a Single App Service</span><span class="lang-jp">全面移行：Azure Static Web Apps + Functions → 単一のApp Service</span></h4>
+        <p>
+          <span class="lang-th">เกิดเหตุขัดข้องระบบ 2 วัน จากการที่ AIAP (ทีมความปลอดภัยกลุ่ม) เปิดใช้ Private Network บน Azure SQL — ต้นเหตุแท้จริงคือขาด DNS Forwarding จากเครือข่ายภายในไปยัง Azure Private Link ไม่ใช่ปัญหาที่โค้ดแอป แต่เพื่อความง่ายในการดูแลและลดความซับซ้อนของเครือข่าย จึงย้าย <b>ทั้ง Frontend และ Backend</b> มารวมเป็น Express App เดียวบน Azure App Service (โฟลเดอร์ <code>api-appservice/</code>, ให้บริการทั้งไฟล์ React SPA ที่ Build ไว้แล้วผ่าน <code>express.static()</code> และ Route <code>/api/*</code> จากแอปเดียวกัน) แทนที่ Azure Static Web Apps + Azure Functions เดิม (<code>api/</code>) — Route/Logic ฝั่ง API เหมือนเดิมทุกจุด แต่สถาปัตยกรรมโฮสติ้งเปลี่ยนไปทั้งหมด ไม่ใช่แค่เปลี่ยน Runtime ของ Backend เพียงอย่างเดียว</span>
+          <span class="lang-en">A 2-day outage occurred after AIAP (the group security team) enabled Private Network on Azure SQL — the real root cause was missing DNS forwarding from the on-prem network to the Azure Private Link, not an application code issue. For easier maintenance and to reduce network complexity, <b>both the frontend and backend</b> were consolidated into a single Express app on Azure App Service (the <code>api-appservice/</code> folder, which serves the pre-built React SPA via <code>express.static()</code> and the <code>/api/*</code> routes from the very same app) — replacing the original Azure Static Web Apps + Azure Functions setup (<code>api/</code>) entirely. The API-side routes/logic are identical, but the hosting architecture changed completely, not just the backend runtime.</span>
+          <span class="lang-jp">AIAP（グループセキュリティチーム）がAzure SQLでPrivate Networkを有効化した後、2日間のシステム障害が発生しました — 真の原因は、オンプレミスネットワークからAzure Private Linkへの DNSフォワーディングが欠落していたことであり、アプリケーションコードの問題ではありませんでした。保守の容易さとネットワークの複雑さを軽減するため、<b>フロントエンドとバックエンドの両方</b>が、Azure App Service上の単一のExpressアプリ（<code>api-appservice/</code>フォルダ。事前ビルド済みのReact SPAを<code>express.static()</code>で配信し、<code>/api/*</code>ルートも同じアプリから提供）に統合され、元のAzure Static Web Apps + Azure Functions構成（<code>api/</code>）を完全に置き換えました。APIサイドのルート／ロジックは同一ですが、ホスティングアーキテクチャ全体が変更されており、バックエンドのランタイムだけの変更ではありません。</span>
+        </p>
       </div>
     </section>
 
@@ -402,11 +415,11 @@
           </div>
         </div>
         <div class="stack-item">
-          <div class="role">Backend API</div>
+          <div class="role">Backend API <span class="pill red" style="margin-right:6px">changed 2026-08-16</span></div>
           <div class="items">
-            <span class="lang-th">Azure Functions (Node.js, v4 programming model) รันแบบ co-located กับ Static Web App</span>
-            <span class="lang-en">Azure Functions (Node.js, v4 programming model), running co-located with the Static Web App.</span>
-            <span class="lang-jp">Azure Functions（Node.js、v4プログラミングモデル）、Static Web Appと同居（co-located）して実行。</span>
+            <span class="lang-th">Express (Node.js) บน Azure App Service — เดิมเป็น Azure Functions (v4 programming model) รันแบบ co-located กับ Static Web App เก็บโค้ดเดิมไว้ที่ <code>api/</code> เพื่ออ้างอิง แต่ไม่ใช่สิ่งที่ Deploy ใช้งานจริงอีกต่อไป</span>
+            <span class="lang-en">Express (Node.js) on Azure App Service — previously Azure Functions (v4 programming model), running co-located with the Static Web App. The original code is kept at <code>api/</code> for reference, but is no longer what's actually deployed.</span>
+            <span class="lang-jp">Azure App Service上のExpress（Node.js）— 以前はAzure Functions（v4プログラミングモデル）で、Static Web Appと同居して実行していました。元のコードは参照用に<code>api/</code>に残されていますが、もはや実際にデプロイされているものではありません。</span>
           </div>
         </div>
         <div class="stack-item">
@@ -414,8 +427,12 @@
           <div class="items">Azure SQL Database (Serverless tier)</div>
         </div>
         <div class="stack-item">
-          <div class="role">Hosting</div>
-          <div class="items">Azure Static Web Apps (Free tier)</div>
+          <div class="role">Hosting <span class="pill red" style="margin-right:6px">changed 2026-08-16</span></div>
+          <div class="items">
+            <span class="lang-th">Azure App Service เดียว ให้บริการทั้ง Frontend (React SPA Build ไว้ล่วงหน้า) และ Backend API จากแอปเดียวกัน — เดิมเป็น Azure Static Web Apps (Free tier) แยกกับ Azure Functions</span>
+            <span class="lang-en">A single Azure App Service, serving both the frontend (a pre-built React SPA) and the Backend API from the same app — previously Azure Static Web Apps (Free tier), separate from Azure Functions.</span>
+            <span class="lang-jp">単一のAzure App Serviceが、フロントエンド（事前ビルド済みのReact SPA）とBackend APIの両方を同じアプリから提供 — 以前はAzure Static Web Apps（Free tier）がAzure Functionsとは別に存在していました。</span>
+          </div>
         </div>
         <div class="stack-item">
           <div class="role">Authentication</div>
@@ -454,15 +471,15 @@
       <h3><span class="lang-th">เหตุผลที่จัดเป็น PaaS ทั้งหมด</span><span class="lang-en">Why everything is classified as PaaS</span><span class="lang-jp">すべてPaaSに分類する理由</span></h3>
       <table>
         <tbody>
-          <tr><th>Azure Static Web Apps</th><td>
-            <span class="lang-th">PaaS — host เว็บให้เลย ไม่ต้องดูแล server/OS เอง</span>
-            <span class="lang-en">PaaS — hosts the website for you, no need to manage the server/OS yourself.</span>
-            <span class="lang-jp">PaaS — Webサイトをそのままホスティングし、サーバー／OSの管理は不要です。</span>
+          <tr><th>Azure App Service <span class="pill blue">now</span></th><td>
+            <span class="lang-th">PaaS — host ทั้งเว็บ (static files) และ backend code (Express) ให้ในแอปเดียว ไม่ต้องดูแล server/OS เอง จ่ายตาม Tier ที่เลือก (ไม่ใช่ Serverless/FaaS แบบ Functions เดิม)</span>
+            <span class="lang-en">PaaS — hosts both the website (static files) and the backend code (Express) in one app, no need to manage the server/OS yourself; billed by the chosen tier (not Serverless/FaaS like the original Functions setup).</span>
+            <span class="lang-jp">PaaS — Webサイト（静的ファイル）とバックエンドコード（Express）の両方を1つのアプリでホスティングし、サーバー／OSの管理は不要です。選択したTierに応じて課金されます（元のFunctions構成のようなServerless／FaaSではありません）。</span>
           </td></tr>
-          <tr><th>Azure Functions</th><td>
-            <span class="lang-th">PaaS (เจาะจงเรียก Serverless/FaaS) — รันโค้ด backend โดยไม่ต้องมี server ให้ดูแล จ่ายตามการใช้งานจริง</span>
-            <span class="lang-en">PaaS (more specifically Serverless/FaaS) — runs backend code without a server to manage, billed based on actual usage.</span>
-            <span class="lang-jp">PaaS（より正確にはServerless／FaaS）— 管理すべきサーバーなしでバックエンドコードを実行し、実際の使用量に応じて課金されます。</span>
+          <tr><th><span class="lang-th">Azure Static Web Apps / Functions</span><span class="lang-en">Azure Static Web Apps / Functions</span><span class="lang-jp">Azure Static Web Apps／Functions</span> <span class="pill gray">legacy</span></th><td>
+            <span class="lang-th">PaaS — สถาปัตยกรรมเดิมก่อน 2026-08-16 (host เว็บ + Serverless/FaaS backend แยกกัน) โค้ดเดิมยังเก็บไว้ที่ <code>api/</code> เพื่ออ้างอิง แต่ไม่ใช่สิ่งที่ Deploy จริงอีกต่อไป</span>
+            <span class="lang-en">PaaS — the original architecture before 2026-08-16 (a separate website host + Serverless/FaaS backend). The original code is still kept at <code>api/</code> for reference, but it's no longer what's actually deployed.</span>
+            <span class="lang-jp">PaaS — 2026-08-16以前の元のアーキテクチャ（Webサイトホストとサーバーレス／FaaSバックエンドが別々）。元のコードは参照用に<code>api/</code>に残されていますが、もはや実際にデプロイされているものではありません。</span>
           </td></tr>
           <tr><th>Azure SQL Database</th><td>
             <span class="lang-th">PaaS — ฐานข้อมูลจัดการให้ครบ (patch, backup, scaling) ไม่ต้องตั้ง VM ฐานข้อมูลเอง</span>
@@ -505,9 +522,9 @@
             <span class="lang-jp">60分間操作がない場合（リクエストが来ると自動的に再開します）。</span>
           </td></tr>
           <tr><th><span class="lang-th">วิธีเชื่อมต่อ</span><span class="lang-en">Connection Method</span><span class="lang-jp">接続方法</span></th><td>
-            <span class="lang-th">Connection string เก็บใน App Settings ของ Azure Functions — ยังไม่ใช้ Managed Identity เพราะต้องใช้ Static Web Apps ระดับ Standard (มีค่าใช้จ่ายเพิ่ม), ปัจจุบันใช้ Free tier</span>
-            <span class="lang-en">The connection string is stored in Azure Functions' App Settings — Managed Identity isn't used yet because it requires the Standard tier of Static Web Apps (an added cost); the Free tier is currently in use.</span>
-            <span class="lang-jp">接続文字列はAzure FunctionsのApp Settingsに保存されています — Managed Identityは、Static Web AppsのStandardプラン（追加費用が発生）が必要なため未使用です。現在はFree tierを使用しています。</span>
+            <span class="lang-th">Connection string เก็บใน Application Settings ของ Azure App Service (เดิมเก็บใน App Settings ของ Azure Functions ก่อนย้ายมา 2026-08-16) — ยังไม่ใช้ Managed Identity เดิมติดข้อจำกัดที่ต้องใช้ Static Web Apps ระดับ Standard แต่ข้อจำกัดนั้นผูกกับสถาปัตยกรรมเก่าที่เลิกใช้ไปแล้ว จึง<b>ควรประเมินใหม่</b>ว่า Azure App Service Tier ปัจจุบันรองรับ Managed Identity ได้หรือไม่ (ยังไม่ได้ตรวจสอบซ้ำหลังย้ายสถาปัตยกรรม)</span>
+            <span class="lang-en">The connection string is stored in Azure App Service's Application Settings (previously in Azure Functions' App Settings, before the 2026-08-16 migration) — Managed Identity still isn't used; the original blocker required the Standard tier of Static Web Apps, but that constraint was tied to the old architecture that's no longer in use, so it's <b>worth re-evaluating</b> whether the current Azure App Service tier supports Managed Identity (not yet re-checked since the architecture migration).</span>
+            <span class="lang-jp">接続文字列はAzure App ServiceのApplication Settingsに保存されています（2026-08-16の移行前はAzure FunctionsのApp Settingsに保存）— Managed Identityはまだ使用されていません。元の制約はStatic Web AppsのStandardプランが必要というものでしたが、その制約はもはや使用されていない旧アーキテクチャに紐づいたものです。そのため、現在のAzure App ServiceのTierがManaged Identityをサポートするかどうか<b>再評価する価値があります</b>（アーキテクチャ移行後、まだ再確認されていません）。</span>
           </td></tr>
         </tbody>
       </table>
@@ -535,10 +552,10 @@
       </p>
       <table>
         <tbody>
-          <tr><th>Function Timeout</th><td>
-            <span class="lang-th">Azure Static Web Apps (Free tier) มี hard timeout ที่ระดับแพลตฟอร์ม <b>45 วินาที</b> ต่อ 1 request ไปยัง Azure Functions — ตั้งค่า timeout ในโค้ดให้นานกว่านี้ไม่มีผล เพราะแพลตฟอร์มตัดก่อน</span>
-            <span class="lang-en">Azure Static Web Apps (Free tier) has a platform-level hard timeout of <b>45 seconds</b> per request to Azure Functions — setting a longer timeout in code has no effect, because the platform cuts it off first.</span>
-            <span class="lang-jp">Azure Static Web Apps（Free tier）には、Azure Functionsへの1リクエストあたり<b>45秒</b>のプラットフォームレベルのハードタイムアウトがあります — コード側でこれより長いタイムアウトを設定しても、プラットフォームが先に切断するため効果はありません。</span>
+          <tr><th>Request Timeout <span class="pill red" style="margin-right:6px">changed 2026-08-16</span></th><td>
+            <span class="lang-th"><b>ข้อจำกัดเดิมเลิกใช้แล้ว:</b> Azure Static Web Apps (Free tier) เคยมี hard timeout ระดับแพลตฟอร์ม 45 วินาทีต่อ 1 request ไปยัง Azure Functions — ตอนนี้ไม่มี SWA คั่นกลางแล้ว (Express บน App Service รับ request ตรงๆ) จึงไม่มี Cap 45 วินาทีนี้อีกต่อไป <b>แต่</b> Azure App Service เอง (โดยเฉพาะ Tier ต่ำ) ก็มีข้อจำกัดของตัวเอง (CPU quota, Idle Timeout ของ Node server เอง) ที่ยังไม่ได้ตรวจสอบตัวเลขจริงหลังย้ายมาใหม่ — ควรทดสอบ request ที่ใช้เวลานานจริงก่อนพึ่งพา</span>
+            <span class="lang-en"><b>The old constraint no longer applies:</b> Azure Static Web Apps (Free tier) used to have a platform-level 45-second hard timeout per request to Azure Functions — there's no longer an SWA hop in between (Express on App Service receives requests directly), so that 45-second cap no longer applies. <b>However,</b> Azure App Service itself (especially on lower tiers) has its own limits (CPU quota, the Node server's own idle timeout) that haven't been re-verified with real numbers since the migration — test a genuinely long-running request before relying on this.</span>
+            <span class="lang-jp"><b>従来の制約はもはや適用されません：</b>Azure Static Web Apps（Free tier）には、Azure Functionsへの1リクエストあたり45秒のプラットフォームレベルのハードタイムアウトがありましたが、現在はSWAが間に存在しないため（App Service上のExpressが直接リクエストを受け取る）、この45秒の上限はもはや適用されません。<b>ただし、</b>Azure App Service自体（特に低いTier）には独自の制限（CPUクォータ、Node serverのアイドルタイムアウト）があり、移行後に実際の数値で再検証されていません — 依存する前に実際に長時間かかるリクエストでテストしてください。</span>
           </td></tr>
           <tr><th>Database Auto-pause</th><td>
             <span class="lang-th">Azure SQL Serverless จะพักการทำงานหลังไม่มีการใช้งาน 60 นาที การ request แรกหลังพักจะช้ากว่าปกติ (cold start) เพราะต้องรอฐานข้อมูลตื่นก่อน</span>
@@ -546,14 +563,14 @@
             <span class="lang-jp">Azure SQL Serverlessは60分間操作がないと一時停止します。一時停止後の最初のリクエストは、データベースの起動を待つ必要があるため（コールドスタート）、通常より遅くなります。</span>
           </td></tr>
           <tr><th>SLA</th><td>
-            <span class="lang-th">Static Web Apps ระดับ Free ไม่มี SLA (Service Level Agreement) รับประกัน uptime — หากต้องการ SLA ต้องอัปเกรดเป็นระดับ Standard</span>
-            <span class="lang-en">The Free tier of Static Web Apps has no SLA (Service Level Agreement) guaranteeing uptime — an SLA requires upgrading to the Standard tier.</span>
-            <span class="lang-jp">Static Web AppsのFree tierには、稼働率を保証するSLA（Service Level Agreement）がありません — SLAが必要な場合はStandardプランへのアップグレードが必要です。</span>
+            <span class="lang-th">Azure App Service ระดับ Free (เช่นเดียวกับ Static Web Apps ระดับ Free เดิม) ไม่มี SLA (Service Level Agreement) รับประกัน uptime — หากต้องการ SLA ต้องอัปเกรด Tier ขึ้นไป (ยังไม่ได้ยืนยัน Tier ปัจจุบันของ App Service ในเอกสารนี้ ควรตรวจสอบใน Azure Portal จริง)</span>
+            <span class="lang-en">Azure App Service's Free tier (same as the old Static Web Apps Free tier) has no SLA (Service Level Agreement) guaranteeing uptime — an SLA requires upgrading the tier (this document hasn't confirmed App Service's current tier; check the real Azure Portal).</span>
+            <span class="lang-jp">Azure App ServiceのFree tier（従来のStatic Web AppsのFree tierと同様）には、稼働率を保証するSLA（Service Level Agreement）がありません — SLAが必要な場合はTierのアップグレードが必要です（本ドキュメントではApp Serviceの現在のTierを確認していません。実際のAzure Portalで確認してください）。</span>
           </td></tr>
-          <tr><th>Custom Domain</th><td>
-            <span class="lang-th">ต้องพึ่ง DNS ภายนอก (เช่น DNS ของโรงงาน) ในการ resolve โดเมนที่กำหนดเอง — หาก DNS นั้นมีปัญหา ผู้ใช้ยังเข้าได้ผ่าน hostname ตรงของ Azure Static Web Apps เสมอ (ดูหมวด "การเข้าใช้งานสำรอง" ด้านล่าง)</span>
-            <span class="lang-en">Relies on external DNS (e.g. the factory's DNS) to resolve the custom domain — if that DNS has issues, users can always still access the app via the direct Azure Static Web Apps hostname (see the "Backup Access" section below).</span>
-            <span class="lang-jp">カスタムドメインの解決には外部DNS（例：工場のDNS）に依存します — そのDNSに問題が発生した場合でも、ユーザーは常にAzure Static Web Appsの直接のホスト名からアクセスできます（下記の「代替アクセス方法」セクションを参照）。</span>
+          <tr><th>Custom Domain <span class="pill red" style="margin-right:6px">re-verify</span></th><td>
+            <span class="lang-th">ต้องพึ่ง DNS ภายนอก (เช่น DNS ของโรงงาน) ในการ resolve โดเมนที่กำหนดเอง — เคยเกิดเหตุขัดข้อง 2 วันจากจุดนี้มาแล้ว (ดูหมวด "ย้ายทั้งระบบ..." ในหมวด 1) หาก DNS มีปัญหาอีก ผู้ใช้ควรยังเข้าได้ผ่าน hostname ตรงของ Azure App Service (<code>*.azurewebsites.net</code>) — <b>เอกสารนี้ยังไม่ได้ยืนยัน Hostname จริงหลังย้ายสถาปัตยกรรม 2026-08-16</b> (เดิมอ้างอิง hostname ของ Azure Static Web Apps ซึ่งใช้ไม่ได้แล้ว) ทีม IT ควรบันทึก Hostname สำรองที่ถูกต้องไว้ล่วงหน้าก่อนเกิดเหตุจริงอีกครั้ง</span>
+            <span class="lang-en">Relies on external DNS (e.g. the factory's DNS) to resolve the custom domain — this exact point already caused a 2-day outage once (see "Full Migration..." in section 1). If DNS has issues again, users should still be able to access the app via the direct Azure App Service hostname (<code>*.azurewebsites.net</code>) — <b>this document hasn't confirmed the real hostname since the 2026-08-16 architecture migration</b> (it used to reference the Azure Static Web Apps hostname, which no longer works). The IT team should record the correct backup hostname ahead of time, before another incident happens.</span>
+            <span class="lang-jp">カスタムドメインの解決には外部DNS（例：工場のDNS）に依存します — この点が原因で実際に2日間の障害が発生したことがあります（セクション1の「全面移行...」を参照）。DNSに再度問題が発生した場合、ユーザーはAzure App Serviceの直接のホスト名（<code>*.azurewebsites.net</code>）からアクセスできるはずです — <b>本ドキュメントでは2026-08-16のアーキテクチャ移行後の実際のホスト名をまだ確認していません</b>（以前はAzure Static Web Appsのホスト名を記載していましたが、もはや使用できません）。次の障害が発生する前に、IT担当者が正しいバックアップホスト名を事前に記録しておくべきです。</span>
           </td></tr>
         </tbody>
       </table>
@@ -612,9 +629,14 @@
           <span class="lang-jp">2026-08-01の実機検証で確認：Azure Static Web Appsの内蔵「Managed Functions」プロキシは、SWA→Functions間の内部通信で<code>Authorization</code>ヘッダーを独自のサービストークンで上書きします — フロントエンドが正しいBearerトークンを設定していても、Functionが受け取る<code>Authorization</code>ヘッダーのaud/issは隠れたバックエンド<code>*.azurewebsites.net</code>を指しており、Entra IDではありません。そのためプロキシが変更しない独自ヘッダー名（<code>X-Auth-Token</code>）を代わりに使用しています。</span>
         </p>
         <p>
-          <span class="lang-th">ฝั่ง client ตั้งค่าใน <code>apiClient.js</code>; ฝั่ง server อ่านใน <code>api/src/shared/auth.js</code>'s <code>requireAuth()</code> — ต้องใช้ชื่อ header ตรงกันทั้ง 2 ฝั่ง</span>
-          <span class="lang-en">Set client-side in <code>apiClient.js</code>; read server-side in <code>api/src/shared/auth.js</code>'s <code>requireAuth()</code> — the header name must match on both sides.</span>
-          <span class="lang-jp">クライアント側は<code>apiClient.js</code>で設定し、サーバー側は<code>api/src/shared/auth.js</code>の<code>requireAuth()</code>で読み取ります — ヘッダー名は両側で一致させる必要があります。</span>
+          <span class="lang-th">ฝั่ง client ตั้งค่าใน <code>apiClient.js</code>; ฝั่ง server อ่านใน <code>api-appservice/src/shared/auth.js</code>'s <code>requireAuth()</code> (เดิมอยู่ที่ <code>api/src/shared/auth.js</code> ก่อนย้าย 2026-08-16 — Logic เดิมทุกจุด) — ต้องใช้ชื่อ header ตรงกันทั้ง 2 ฝั่ง</span>
+          <span class="lang-en">Set client-side in <code>apiClient.js</code>; read server-side in <code>api-appservice/src/shared/auth.js</code>'s <code>requireAuth()</code> (previously at <code>api/src/shared/auth.js</code> before the 2026-08-16 migration — identical logic) — the header name must match on both sides.</span>
+          <span class="lang-jp">クライアント側は<code>apiClient.js</code>で設定し、サーバー側は<code>api-appservice/src/shared/auth.js</code>の<code>requireAuth()</code>で読み取ります（2026-08-16の移行前は<code>api/src/shared/auth.js</code>にありました — ロジックは同一）— ヘッダー名は両側で一致させる必要があります。</span>
+        </p>
+        <p>
+          <span class="lang-th"><b>หมายเหตุหลังย้ายสถาปัตยกรรม:</b> เหตุผลเดิมที่ต้องใช้ <code>X-Auth-Token</code> คือ SWA's Managed Functions proxy เขียนทับ <code>Authorization</code> header — ตอนนี้ไม่มี Proxy นี้คั่นกลางแล้ว (Express รับ request ตรง) จึงยังไม่ยืนยันว่าใช้ <code>Authorization</code> header มาตรฐานได้ปกติหรือไม่ถ้าจะเปลี่ยนกลับ — โค้ดปัจจุบันยังใช้ <code>X-Auth-Token</code> เหมือนเดิมอยู่ (ยังทำงานถูกต้อง ไม่ต้องรีบแก้) เพียงแต่ข้อจำกัดเดิมที่เป็นเหตุผลอาจไม่มีอยู่แล้ว</span>
+          <span class="lang-en"><b>Note after the architecture migration:</b> the original reason for needing <code>X-Auth-Token</code> was SWA's Managed Functions proxy overwriting the <code>Authorization</code> header — that proxy no longer sits in between (Express receives requests directly), so it hasn't been re-confirmed whether a standard <code>Authorization</code> header would now work cleanly if switched back. The current code still uses <code>X-Auth-Token</code> as before (it still works correctly, no urgency to change) — it's just that the original constraint behind it may no longer exist.</span>
+          <span class="lang-jp"><b>アーキテクチャ移行後の注記：</b><code>X-Auth-Token</code>が必要だった元の理由は、SWAのManaged FunctionsプロキシがAuthorizationヘッダーを上書きしていたためでした — このプロキシはもはや間に存在しません（Expressが直接リクエストを受け取ります）。そのため、標準の<code>Authorization</code>ヘッダーに戻した場合に正常に機能するかどうかは再確認されていません。現在のコードは引き続き<code>X-Auth-Token</code>を使用しています（正常に動作しており、急いで変更する必要はありません）— ただ、その根拠となっていた元の制約自体はもはや存在しない可能性があります。</span>
         </p>
       </div>
       <div class="card">
@@ -734,6 +756,21 @@
             <span class="lang-en">Originally a Yes/No toggle — repurposed 2026-08-04 into a database-type picker ("SharePoint List" / "Excel Business"), widened from NVARCHAR(10) to NVARCHAR(30) so the new text isn't truncated; column name kept as-is to avoid a migration.</span>
             <span class="lang-jp">元はYes/Noのトグルでしたが、2026-08-04にデータベース種別の選択項目（「SharePoint List」／「Excel Business」）へ用途変更 — 新しいテキストが切り詰められないようNVARCHAR(10)からNVARCHAR(30)へ拡張。マイグレーションを避けるためカラム名はそのまま維持。</span>
           </td></tr>
+          <tr><th><code>savingHours</code> <span class="pill red">changed</span></th><td>
+            <span class="lang-th">2026-08-16: เปลี่ยนความหมายจาก "ยอดรวมทั้งโครงการ" เป็น "อัตราต่อเดือน" (คู่กับ <code>paperSheetsPerMonth</code> เดิม) พร้อมกันนั้นชนิดข้อมูลถูกขยายจาก <code>INT</code> เป็น <code>DECIMAL(10,4)</code> — ฟอร์มกรอกเป็นชั่วโมง+นาทีแยก 2 ช่อง ได้ค่าทศนิยม (เช่น 16.333) ซึ่ง <code>INT</code> เดิมปัดทิ้งเศษนาทีไปเงียบๆ ทุกครั้งที่บันทึก (ดูหมวด 9 บั๊กที่แก้ไปแล้ว) คอลัมน์เดียวกันนี้บน <code>PowerChampions.savingHoursPerYear</code> ก็ถูกขยายพร้อมกัน ด้วยเหตุผลเดียวกัน</span>
+            <span class="lang-en">2026-08-16: changed meaning from "whole-project total" to "per-month rate" (matching the existing <code>paperSheetsPerMonth</code>), and its type was widened from <code>INT</code> to <code>DECIMAL(10,4)</code> at the same time — the form now collects hours+minutes as 2 separate fields, producing a decimal value (e.g. 16.333) that the old <code>INT</code> column silently rounded away on every save (see section 9, Notable Bug Fixes). <code>PowerChampions.savingHoursPerYear</code> was widened the same way, for the same reason.</span>
+            <span class="lang-jp">2026-08-16：意味が「プロジェクト全体の合計」から「月間レート」に変更され（既存の<code>paperSheetsPerMonth</code>と対応）、同時に型が<code>INT</code>から<code>DECIMAL(10,4)</code>に拡張されました — フォームは時間と分を2つの別項目として収集するようになり、小数値（例：16.333）が生成されますが、旧<code>INT</code>カラムは保存のたびにこれを黙って丸めていました（セクション9「修正済みの主要バグ」を参照）。<code>PowerChampions.savingHoursPerYear</code>も同じ理由で同様に拡張されました。</span>
+          </td></tr>
+          <tr><th><code>updatedAt</code> <span class="pill blue">new</span></th><td>
+            <span class="lang-th">เพิ่ม 2026-08-16 บนตาราง <code>Projects</code> — Stamp จากฝั่ง Frontend ทุกครั้งที่สร้าง/แก้ไข (รูปแบบเดียวกับ <code>createdAt</code> เดิม) ใช้เรียงตารางเริ่มต้นเป็น "Update ล่าสุดอยู่บนสุด" แถวเก่าก่อนหน้านี้ค่าเป็น NULL — Frontend fallback ไปใช้ <code>createdAt</code> แทนเมื่อไม่มีค่านี้</span>
+            <span class="lang-en">Added 2026-08-16 to the <code>Projects</code> table — stamped from the frontend on every create/edit (same pattern as the existing <code>createdAt</code>), used to default-sort the table by "most recently updated first". Pre-existing rows read NULL — the frontend falls back to <code>createdAt</code> when this is absent.</span>
+            <span class="lang-jp">2026-08-16に<code>Projects</code>テーブルへ追加 — 作成／編集のたびにフロントエンドから記録されます（既存の<code>createdAt</code>と同じパターン）。テーブルのデフォルトソート「最終更新が新しい順」に使用されます。既存の行はNULLとなり、この値がない場合フロントエンドは<code>createdAt</code>にフォールバックします。</span>
+          </td></tr>
+          <tr><th><code>MasterEmployees.email</code> / <code>mobilePhone</code> <span class="pill blue">new</span></th><td>
+            <span class="lang-th">เพิ่ม 2026-08-16 — ต้นทาง SharePoint (คอลัมน์ EmailName / Mobile-phone) มีข้อมูลนี้อยู่แล้ว และ <code>MasterApprovers</code> ก็ดึงมาใช้อยู่แล้ว แต่ Power Automate Flow "Sync Employee Master to Azure SQL" ยังไม่ได้ Map 2 คอลัมน์นี้เข้ามา จึงยังว่างอยู่ทุกแถวจนกว่าจะแก้ Flow (นอกโค้ด Repo นี้) — เตรียมคอลัมน์ปลายทางไว้ล่วงหน้าเพื่อให้ Power Champions' phone/email auto-fill เริ่มทำงานได้ทันทีที่ Flow อัปเดตเสร็จ โดยไม่ต้องแก้โค้ดเพิ่ม</span>
+            <span class="lang-en">Added 2026-08-16 — the source SharePoint list (EmailName / Mobile-phone columns) already has this data, and <code>MasterApprovers</code> already reads it, but the "Sync Employee Master to Azure SQL" Power Automate Flow doesn't map these 2 columns yet, so every row reads NULL until the Flow is fixed (outside this repo) — the destination columns are prepared ahead of time so Power Champions' phone/email auto-fill starts working the moment the Flow is updated, with no further code change needed.</span>
+            <span class="lang-jp">2026-08-16に追加 — 元となるSharePointリスト（EmailName／Mobile-phoneカラム）には既にこのデータがあり、<code>MasterApprovers</code>も既に読み取っていますが、「Sync Employee Master to Azure SQL」Power Automate Flowはまだこの2カラムをマッピングしていないため、Flowが修正されるまで（本リポジトリの外での作業）全行がNULLとなります — Flowが更新された瞬間にPower Championsの電話番号／メール自動入力が機能し始めるよう、コード側の変更なしで済むように、あらかじめ格納先カラムを用意してあります。</span>
+          </td></tr>
         </tbody>
       </table>
       <div class="note">
@@ -788,6 +825,22 @@
           <span class="lang-th">Section Dashboard เคยแสดง 8.2% ข้างๆ ยอดรวมทั้งบริษัท 0.2% เพราะหารด้วยฐานคนละแบบ (headcount ดิบ vs. จำนวน License O365) แก้ด้วย <code>estimateLicensedHeadcount()</code> ที่ประเมินสัดส่วน License ตามสัดส่วน headcount ของแต่ละขอบเขต ให้ทุกมุมมองหารด้วยฐานเดียวกันเสมอ</span>
           <span class="lang-en">Section Dashboard once showed 8.2% next to a group-wide 0.2%, purely because the two divided by different kinds of denominator (raw headcount vs. O365 license count). Fixed with <code>estimateLicensedHeadcount()</code>, which estimates each scope's proportional slice of the license total, so every view divides by the same kind of denominator.</span>
           <span class="lang-jp">Section Dashboardでは、分母の種類が異なっていた（生の従業員数 vs. O365ライセンス数）ため、全社の0.2%の隣に8.2%と表示されていたことがありました。<code>estimateLicensedHeadcount()</code>で各スコープのライセンス総数に対する比例配分を推定するよう修正し、すべての表示で同じ種類の分母を使用するようにしました。</span>
+        </p>
+      </div>
+      <div class="card accent-red">
+        <h4><span class="lang-th">คอลัมน์ INT ปัดทิ้งเศษนาทีเงียบๆ ทุกครั้งที่บันทึก</span><span class="lang-en">An INT column silently rounded away the minutes portion on every save</span><span class="lang-jp">INTカラムが保存のたびに分を静かに切り捨てていた</span></h4>
+        <p>
+          <span class="lang-th">หลังเปลี่ยนฟอร์มให้กรอกชั่วโมง+นาทีแยก 2 ช่อง (16 ชม. 20 นาที → 16.333) คอลัมน์ <code>Projects.savingHours</code>/<code>PowerChampions.savingHoursPerYear</code> ยังเป็น <code>INT</code> เดิม ทำให้ทศนิยมถูกปัดทิ้งทุกครั้งที่บันทึก — ผู้ใช้แก้ไขนาที กดบันทึก แล้วเปิดกลับมาดูเจอนาทีหายไปเสมอ (รายงานโดยผู้ใช้: "ช่องนาที บันทึกแล้ว ไม่ Save เมื่อแก้ไข") ตรวจสอบพบด้วยการรันคำสั่ง Save/Read ผ่านโค้ด Repository ตรงๆ แล้วเห็นค่ากลับมาเป็นจำนวนเต็มเสมอ แก้ด้วยการขยายคอลัมน์เป็น <code>DECIMAL(10,4)</code> ทั้ง 2 ตาราง (ทั้ง Migration ใน <code>schema.sql</code> และแก้ Type ในโค้ด Repository) แล้ว Restart Backend Server เพื่อให้โค้ดที่แก้มีผลจริง (แก้แค่ไฟล์เฉยๆ ไม่พอ ต้อง Restart Process ด้วย)</span>
+          <span class="lang-en">After the form was changed to collect hours+minutes as 2 separate fields (16 hrs 20 min → 16.333), the <code>Projects.savingHours</code>/<code>PowerChampions.savingHoursPerYear</code> columns were still the original <code>INT</code>, so the decimal got rounded away on every save — a user would edit the minutes, save, reopen the record, and always find the minutes gone (reported by the user: "the minutes field, after saving, isn't saved when edited"). Confirmed by running a direct Save/Read through the repository code and observing the value always came back as a whole integer. Fixed by widening both columns to <code>DECIMAL(10,4)</code> (both the <code>schema.sql</code> migration and the type in the repository code), then restarting the backend server so the code change actually took effect — editing the file alone wasn't enough, the running process had to be restarted too.</span>
+          <span class="lang-jp">フォームが時間＋分の2つの別項目を収集するように変更された後（16時間20分→16.333）、<code>Projects.savingHours</code>／<code>PowerChampions.savingHoursPerYear</code>カラムは元の<code>INT</code>のままだったため、保存のたびに小数が切り捨てられていました — ユーザーが分を編集して保存し、レコードを開き直すと常に分が消えていました（ユーザー報告：「分の項目が、保存しても編集時に保存されない」）。リポジトリコードを通じて直接Save／Readを実行し、値が常に整数として返ってくることを確認して原因を特定しました。両カラムを<code>DECIMAL(10,4)</code>に拡張して修正しました（<code>schema.sql</code>のマイグレーションとリポジトリコードの型の両方）。その後、コードの変更を実際に反映させるためバックエンドサーバーを再起動しました — ファイルを編集するだけでは不十分で、実行中のプロセスも再起動する必要がありました。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">ตัวกรอง "แผนก" ไม่มีตัวเลือกสำหรับหน่วยงานที่ไม่มีใน Master Data</span><span class="lang-en">Department filter had no option for units missing from Master Data</span><span class="lang-jp">Master Dataに存在しない部署は「部署」フィルターに選択肢がなかった</span></h4>
+        <p>
+          <span class="lang-th">ตัวเลือกในช่อง แผนก/ส่วน/ฝ่าย ของฟอร์ม Project Registration ดึงมาจากรายชื่อพนักงานที่ Sync จาก SharePoint เท่านั้น (<code>MasterEmployees</code>) และไม่มี <code>allowCustom</code> เหมือนช่องผู้อนุมัติ — พบกรณีจริงที่ AT-A ไม่มีพนักงานคนไหนสังกัดแผนก "IT System Management"/"IT Project Management" ใน Master Data เลย ทำให้ผู้ใช้กรอกแผนกนี้ไม่ได้เลยตั้งแต่ต้น (Project ที่พยายามกรอกแผนกนี้เลยมีค่าแผนกว่างเปล่า) แก้โดยเปิด <code>allowCustom</code> ให้ 3 ช่องนี้ และรวมตัวเลือก Dropdown จากทั้ง Master Data <b>และ</b> ค่าที่เคยถูกพิมพ์ไว้ในการลงทะเบียน Project ของบริษัทนั้นๆ เพื่อให้ค่าที่พิมพ์เองครั้งแรกกลายเป็นตัวเลือกให้คนถัดไปทันที</span>
+          <span class="lang-en">The Department/Section/Division dropdown options in the Project Registration form came only from the SharePoint-synced employee list (<code>MasterEmployees</code>), and unlike the approver fields, had no <code>allowCustom</code>. A real case surfaced where AT-A had zero employees under "IT System Management"/"IT Project Management" in Master Data at all, so a user had no way to enter that department in the first place (the affected Project ended up with an empty department field). Fixed by enabling <code>allowCustom</code> on all 3 fields, and merging the dropdown options from both Master Data <b>and</b> whatever values are already used on that company's own registered Projects, so the first free-typed entry immediately becomes an option for the next person.</span>
+          <span class="lang-jp">Project RegistrationフォームのDepartment／Section／Divisionドロップダウンの選択肢は、SharePoint同期済みの従業員リスト（<code>MasterEmployees</code>）のみから取得されており、承認者フィールドとは異なり<code>allowCustom</code>が設定されていませんでした。AT-Aには「IT System Management」／「IT Project Management」に所属する従業員がMaster Dataに1人も存在しないという実例が発生し、ユーザーはそもそもこの部署を入力する方法がありませんでした（該当のProjectは部署欄が空のまま登録されていました）。3つのフィールドすべてに<code>allowCustom</code>を有効化し、Master Data<b>と</b>その会社の登録済みProjectで既に使用されている値の両方からドロップダウンの選択肢をマージすることで修正しました。これにより、最初に自由入力された値が次のユーザーにとって即座に選択肢となります。</span>
         </p>
       </div>
     </section>

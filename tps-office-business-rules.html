@@ -263,6 +263,11 @@
     <span class="lang-en">Every real condition, rule, and piece of business logic built into TIPS from project start through today — for administrators and supervisor-level users and above.</span>
     <span class="lang-jp">プロジェクト開始から現在まで、TIPSに実装されているすべての条件・ルール・業務ロジックをまとめたもの — 管理者および監督職以上のユーザー向け。</span>
   </p>
+  <p style="font-size:12px; opacity:.75; margin-top:4px;">
+    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-16 — เพิ่มตรรกะการคำนวณสะสมรายวัน (Live Accrual) สำหรับชั่วโมงที่ลดได้/ลดกระดาษ, กฎเฉพาะของ Power Champions, และ KPI Targets ที่ตั้งค่าได้จากหน้า Administration</span>
+    <span class="lang-en">Last content update: 2026-08-16 — added the day-by-day live accrual logic for hours saved/paper reduced, Power Champions' own special rules, and the admin-configurable KPI Targets.</span>
+    <span class="lang-jp">最終更新日：2026-08-16 — 削減時間／紙削減の日次ライブ集計ロジック、Power Champions独自のルール、Administrationページで設定可能なKPI Targetsを追加しました。</span>
+  </p>
   <br>
   <a class="back" href="https://appilots.github.io/learning/tps-office-user-guide.html">
     <span class="lang-th">← คู่มือการใช้งานหลัก</span>
@@ -287,6 +292,8 @@
       <li><a href="#kpi"><span class="lang-th">6. ตรรกะเบื้องหลังตัวเลข KPI</span><span class="lang-en">6. Logic Behind the KPI Numbers</span><span class="lang-jp">6. KPI数値の裏側にあるロジック</span></a></li>
       <li><a href="#access"><span class="lang-th">7. สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">7. Access &amp; Admin Rights</span><span class="lang-jp">7. アクセス権限と管理者</span></a></li>
       <li><a href="#dashboard-structure"><span class="lang-th">8. โครงสร้างหน้า Dashboard</span><span class="lang-en">8. Dashboard Page Structure</span><span class="lang-jp">8. Dashboardページの構成</span></a></li>
+      <li><a href="#champions-rules"><span class="lang-th">9. กฎเฉพาะของ Power Champions</span><span class="lang-en">9. Power Champions' Special Rules</span><span class="lang-jp">9. Power Champions独自のルール</span></a></li>
+      <li><a href="#kpi-targets"><span class="lang-th">10. KPI Targets (ตั้งค่าจาก Administration)</span><span class="lang-en">10. KPI Targets (set via Administration)</span><span class="lang-jp">10. KPI Targets（Administrationで設定）</span></a></li>
     </ul>
   </nav>
 
@@ -400,18 +407,18 @@
     </section>
 
     <section id="cancelled">
-      <h2><span class="badge">4</span><span class="lang-th">โครงการที่ยกเลิก (Cancelled)</span><span class="lang-en">Cancelled Projects</span><span class="lang-jp">キャンセルされたプロジェクト</span></h2>
+      <h2><span class="badge">4</span><span class="lang-th">โครงการที่ยกเลิก/พักไว้ (Cancelled / On Hold)</span><span class="lang-en">Cancelled / On Hold Projects</span><span class="lang-jp">キャンセル／保留中のプロジェクト</span></h2>
       <p class="lead">
-        <span class="lang-th">โครงการที่เปลี่ยนสถานะเป็น "ยกเลิกโครงการ" จะถูกตัดออกจากยอดรวมความสำเร็จทุกจุดในระบบ</span>
-        <span class="lang-en">A Project whose status is changed to "Cancelled" is excluded from every achievement total in the system.</span>
-        <span class="lang-jp">ステータスが「キャンセル」に変更されたプロジェクトは、システム内のすべての実績集計から除外されます。</span>
+        <span class="lang-th">โครงการที่เปลี่ยนสถานะเป็น "ยกเลิกโครงการ" หรือ "พักโครงการชั่วคราว" จะไม่สะสมยอด "ชั่วโมงที่ลดได้"/"ลดกระดาษ" เลย ไม่ว่าจะตั้งอัตราต่อเดือนไว้เท่าไหร่ก็ตาม (เพิ่ม "On Hold" เข้ามาคู่กับ "Cancelled" เมื่อ 2026-08-16 พร้อมกับระบบสะสมรายวัน — ดูหมวด 10 "ตรรกะเบื้องหลังตัวเลข KPI")</span>
+        <span class="lang-en">A Project whose status is "Cancelled" or "On Hold" never accrues any "hours saved"/"paper reduced" total, no matter what monthly rate is on file ("On Hold" was added alongside "Cancelled" on 2026-08-16, together with the new day-by-day accrual system — see section 6, "Logic Behind the KPI Numbers").</span>
+        <span class="lang-jp">ステータスが「キャンセル」または「一時保留」のプロジェクトは、月間レートがどのような値であっても「削減時間」／「紙削減」の集計が一切発生しません（「On Hold」は2026-08-16に日次集計システムと同時に「Cancelled」と並んで追加されました — セクション6「KPI数値の裏側にあるロジック」を参照）。</span>
       </p>
       <div class="card accent-red">
         <h4><span class="lang-th">เหตุผล</span><span class="lang-en">Reasoning</span><span class="lang-jp">理由</span></h4>
         <p>
-          <span class="lang-th">โครงการที่ยกเลิกไม่เคยส่งมอบผลลัพธ์ตามที่วางแผนไว้จริง จึงไม่ควรทำให้ตัวเลข "ประหยัดได้เท่าไหร่" สูงเกินจริง</span>
-          <span class="lang-en">A cancelled project never delivered what it originally projected, so it shouldn't inflate any "how much have we actually saved" number.</span>
-          <span class="lang-jp">キャンセルされたプロジェクトは当初予定していた成果を達成していないため、「実際にどれだけ削減できたか」という数値を過大に見せるべきではありません。</span>
+          <span class="lang-th">โครงการที่ยกเลิกไม่เคยส่งมอบผลลัพธ์ตามที่วางแผนไว้จริง จึงไม่ควรทำให้ตัวเลข "ประหยัดได้เท่าไหร่" สูงเกินจริง — โครงการที่พักไว้ชั่วคราวก็เช่นกัน เพราะหยุดดำเนินการจริงตั้งแต่วันที่พัก แม้จะยังไม่ถูกยกเลิกถาวรก็ตาม</span>
+          <span class="lang-en">A cancelled project never delivered what it originally projected, so it shouldn't inflate any "how much have we actually saved" number — an On Hold project is treated the same way, since work has genuinely stopped from the day it was paused, even though it isn't permanently cancelled.</span>
+          <span class="lang-jp">キャンセルされたプロジェクトは当初予定していた成果を達成していないため、「実際にどれだけ削減できたか」という数値を過大に見せるべきではありません — 一時保留中のプロジェクトも同様に扱われます。完全にキャンセルされたわけではありませんが、保留となった日から実質的に作業が停止しているためです。</span>
         </p>
       </div>
       <div class="card">
@@ -424,9 +431,9 @@
         </ul>
       </div>
       <div class="note">
-        <span class="lang-th"><b>ยังคงมองเห็น:</b> Project ที่ถูกยกเลิกยังแสดงในตาราง/รายการ Projects ตามปกติ (แค่ไม่ถูกนับในยอดรวม) — และ "ความคืบหน้าเฉลี่ย" ยังนับ Project ที่ยกเลิกรวมอยู่ด้วย เพราะไม่ใช่ตัวเลขที่อ้างว่า "ประหยัดได้"</span>
-        <span class="lang-en"><b>Still visible:</b> a Cancelled Project still shows normally in the Projects table/list (just not counted in totals) — and "average progress" still includes Cancelled projects, since progress isn't a claim about savings.</span>
-        <span class="lang-jp"><b>引き続き表示される：</b>キャンセルされたプロジェクトはProjectsのテーブル／一覧に通常どおり表示されます（集計に含まれないだけです）— また「平均進捗率」にはキャンセルされたプロジェクトも含まれます。進捗率は削減実績を示すものではないためです。</span>
+        <span class="lang-th"><b>ยังคงมองเห็น:</b> Project ที่ถูกยกเลิก/พักไว้ยังแสดงในตาราง/รายการ Projects ตามปกติ (แค่ไม่ถูกนับในยอดรวม) — และ "ความคืบหน้าเฉลี่ย" ยังนับ Project เหล่านี้รวมอยู่ด้วย เพราะไม่ใช่ตัวเลขที่อ้างว่า "ประหยัดได้" ทุกจุดที่แสดงยอดชั่วโมง/กระดาษของ Project ที่ยกเลิก/พักไว้ จะมีข้อความกำกับ "(ตั้งไว้ X ต่อเดือน — [สถานะ] จึงไม่นับยอดสะสม)" เพื่อยืนยันว่าตัวเลขที่กรอกไม่ได้หายไป แค่ไม่ถูกนับ</span>
+        <span class="lang-en"><b>Still visible:</b> a Cancelled or On Hold Project still shows normally in the Projects table/list (just not counted in totals) — and "average progress" still includes them, since progress isn't a claim about savings. Everywhere the hours/paper figure for a Cancelled/On Hold Project is shown, a note reading "(set at X/month — [status] so it isn't counted)" confirms the entered rate hasn't disappeared, it's simply excluded from the running total.</span>
+        <span class="lang-jp"><b>引き続き表示される：</b>キャンセルまたは保留中のプロジェクトはProjectsのテーブル／一覧に通常どおり表示されます（集計に含まれないだけです）— また「平均進捗率」にはこれらのプロジェクトも含まれます。進捗率は削減実績を示すものではないためです。キャンセル／保留中のプロジェクトの削減時間／紙の数値が表示される箇所には必ず「（月間Xに設定 — [ステータス]のため集計対象外）」という注記が表示され、入力した数値が消えたわけではなく、単に集計から除外されていることを示します。</span>
       </div>
     </section>
 
@@ -467,6 +474,11 @@
         <span class="lang-jp">「削減時間」は時間削減カテゴリであっても必須ではありません — 計画段階でまだ実際の数値が分からないまま登録されるプロジェクトもあるため、後から判明した時点で入力できます。</span>
       </div>
       <div class="note blue">
+        <span class="lang-th"><b>เปลี่ยนหน่วยเป็น "ต่อเดือน" (2026-08-16):</b> "ชั่วโมงที่ลดได้" และ "ประมาณกี่แผ่นต่อเดือน" ตอนนี้เป็นอัตราต่อเดือนทั้งคู่ (ไม่ใช่ยอดรวมทั้งโครงการเหมือนก่อนหน้านี้) ช่อง "ชั่วโมงที่ลดได้" แยกกรอกเป็น 2 ช่องย่อย "ชั่วโมง" + "นาที" เพื่อกรอกง่ายขึ้น (เช่น 16 ชม. 20 นาที) ระบบจะแปลงเป็นทศนิยมเก็บไว้ (16.333) แล้วนำไปคำนวณยอดสะสมรายวันเองในหน้า Dashboard — ดูสูตรเต็มที่หมวด 6</span>
+        <span class="lang-en"><b>Unit changed to "per month" (2026-08-16):</b> "Hours Saved" and "Sheets per Month" are now both monthly rates (not a whole-project total like before). The "Hours Saved" field splits into 2 sub-fields, "hours" + "minutes", for easier entry (e.g. 16 hrs 20 min) — the system converts this to a decimal (16.333) and uses it to compute the live daily accrual shown on Dashboard pages. See section 6 for the full formula.</span>
+        <span class="lang-jp"><b>単位を「月間」に変更（2026-08-16）：</b>「削減時間」と「月間削減枚数」は、以前のようなプロジェクト全体の合計値ではなく、どちらも月間レートになりました。「削減時間」は入力しやすいよう「時間」＋「分」の2つの項目に分かれています（例：16時間20分）— システムはこれを小数（16.333）に変換し、Dashboardページに表示されるライブの日次集計に使用します。完全な計算式はセクション6を参照してください。</span>
+      </div>
+      <div class="note blue">
         <span class="lang-th">ชื่อย่อ Project (Short Name) จะแปลงเป็นตัวพิมพ์ใหญ่และจำกัดไม่เกิน 5 ตัวอักษรโดยอัตโนมัติขณะพิมพ์</span>
         <span class="lang-en">Project Short Name is auto-uppercased and capped at 5 characters as you type.</span>
         <span class="lang-jp">プロジェクトの略称は入力中に自動的に大文字に変換され、5文字までに制限されます。</span>
@@ -480,12 +492,37 @@
         <span class="lang-en">So the numbers in the app are read correctly, instead of assuming the system calculated something wrong.</span>
         <span class="lang-jp">アプリ内の数値を正しく理解し、システムの計算が間違っていると誤解しないために。</span>
       </p>
+      <div class="card accent-blue">
+        <h4><span class="lang-th">🕐 ยอดสะสมรายวัน (Live Accrual) — หัวใจของทุกตัวเลข</span><span class="lang-en">🕐 Live Day-by-Day Accrual — the core of every number</span><span class="lang-jp">🕐 ライブ日次集計 — すべての数値の中核</span></h4>
+        <p>
+          <span class="lang-th">ตั้งแต่ 2026-08-16 "ชั่วโมงที่ลดได้"/"ลดกระดาษ" ที่แสดงในทุกหน้า Dashboard ไม่ใช่ตัวเลขที่กรอกตรงๆ แต่คำนวณสดใหม่ทุกครั้งที่เปิดแอป ด้วยสูตร:</span>
+          <span class="lang-en">Since 2026-08-16, the "hours saved"/"paper reduced" figures shown across every Dashboard page are not the raw entered numbers — they're recomputed fresh every time the app is opened, using this formula:</span>
+          <span class="lang-jp">2026-08-16以降、各Dashboardページに表示される「削減時間」／「紙削減」の数値は、入力された生の数値ではなく、アプリを開くたびに以下の計算式で新たに算出されます：</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">อัตราต่อวัน</span><span class="lang-en">Daily rate</span><span class="lang-jp">日次レート</span></th><td><code>อัตราต่อเดือน ÷ (365.25 ÷ 12)</code> <span class="lang-th">— ค่าเฉลี่ยจำนวนวันต่อเดือน ≈ 30.4375 วัน</span><span class="lang-en">— average days per month ≈ 30.4375</span><span class="lang-jp">— 平均月間日数 ≈ 30.4375日</span></td></tr>
+            <tr><th><span class="lang-th">วันที่ผ่านไปจริง</span><span class="lang-en">Real elapsed days</span><span class="lang-jp">実経過日数</span></th><td><code>วันสิ้นสุดที่มีผล − วันเริ่มต้นโครงการ</code></td></tr>
+            <tr><th><span class="lang-th">ยอดสะสม</span><span class="lang-en">Accrued total</span><span class="lang-jp">累計</span></th><td><code>อัตราต่อวัน × วันที่ผ่านไปจริง</code></td></tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="lang-th"><b>"วันสิ้นสุดที่มีผล" ขึ้นกับสถานะ:</b> ยกเลิก/พักไว้ → ยอดสะสม = 0 เสมอ · เสร็จสิ้น → ใช้วันสิ้นสุดโครงการเต็มช่วง (แม้เสร็จก่อนกำหนดก็นับเต็ม) · ยังไม่เริ่ม/กำลังดำเนินการ → ใช้ <code>min(วันนี้, วันสิ้นสุดโครงการ)</code> ปัดค่าติดลบ (วันเริ่มยังไม่ถึง) เป็น 0 เสมอ</span>
+          <span class="lang-en"><b>"Effective end date" depends on status:</b> Cancelled/On Hold → accrued total is always 0 · Completed → uses the full project end date (counts fully even if finished early) · Not Started/In Progress → uses <code>min(today, project end date)</code>, with negative values (start date not yet reached) always floored to 0.</span>
+          <span class="lang-jp"><b>「有効終了日」はステータスによって決まります：</b>キャンセル／保留中 → 累計は常に0 · 完了 → プロジェクト終了日を全期間分使用（早期完了でも全期間分カウント）· 未着手／進行中 → <code>min(今日, プロジェクト終了日)</code>を使用し、負の値（開始日未到来）は常に0に切り捨て。</span>
+        </p>
+        <p>
+          <span class="lang-th">ทศนิยมแสดงผลปัดไม่เกิน 2 ตำแหน่งทุกจุด — ไม่มี Cache/Cron แยกต่างหาก คำนวณสดล้วนๆ ทุกครั้งที่โหลดหน้า</span>
+          <span class="lang-en">Displayed decimals are always capped at 2 places — there's no separate cache/cron job, everything is computed live on every page load.</span>
+          <span class="lang-jp">表示される小数は常に小数点2桁までに制限されます — 別途のキャッシュ／Cronジョブはなく、ページ読み込みのたびにすべてライブで計算されます。</span>
+        </p>
+      </div>
       <div class="card">
         <h4><span class="lang-th">Time Reduction % คำนวณจากอะไร</span><span class="lang-en">What Time Reduction % is calculated from</span><span class="lang-jp">Time Reduction %の計算方法</span></h4>
         <p>
-          <span class="lang-th">= (รวมชั่วโมงที่ลดได้ ทุก Project ที่ยังไม่ยกเลิก) ÷ (จำนวนผู้ถือ License O365 x 2,080 ชม./ปี) — ใช้ฐาน License (1,166 คน) แทนจำนวนพนักงานทั้งหมด (4,000+ คน) เพราะมีแค่คนถือ License เท่านั้นที่ใช้เครื่องมือ Power Platform ได้จริง การหารด้วยฐานพนักงานทั้งหมดจะทำให้ % ปัดเป็น 0 เสมอ</span>
-          <span class="lang-en">= (total hours saved across every non-cancelled Project) ÷ (O365 license holders × 2,080 hrs/year) — uses the license count (1,166) instead of total headcount (4,000+), since only license holders can actually use these Power Platform tools; dividing by total headcount would always round to 0%.</span>
-          <span class="lang-jp">＝（キャンセルされていないすべてのプロジェクトの削減時間合計）÷（O365ライセンス保有者数 × 年間2,080時間）— 全従業員数（4,000人以上）ではなくライセンス保有者数（1,166人）を使用します。実際にPower Platformツールを利用できるのはライセンス保有者のみであり、全従業員数で割ると常に0%に丸められてしまうためです。</span>
+          <span class="lang-th">= (รวม<b>ยอดสะสม</b>ชั่วโมงที่ลดได้ ทุก Project ที่ยังไม่ยกเลิก/พักไว้) ÷ (จำนวนผู้ถือ License O365 x ชั่วโมงทำงานมาตรฐานต่อปี) — ใช้ฐาน License (1,166 คน) แทนจำนวนพนักงานทั้งหมด (4,000+ คน) เพราะมีแค่คนถือ License เท่านั้นที่ใช้เครื่องมือ Power Platform ได้จริง การหารด้วยฐานพนักงานทั้งหมดจะทำให้ % ปัดเป็น 0 เสมอ — <b>"ชั่วโมงทำงานมาตรฐานต่อปี" ค่าเริ่มต้น 2,080 ชม. (8 ชม./วัน × 260 วันทำงาน) ตอนนี้ตั้งค่าใหม่ได้จากหน้า Administration → KPI Targets ไม่ใช่ค่าคงที่ตายตัวในโค้ดอีกต่อไป</b></span>
+          <span class="lang-en">= (sum of the <b>accrued</b> hours-saved total across every non-Cancelled/non-On-Hold Project) ÷ (O365 license holders × standard annual work hours) — uses the license count (1,166) instead of total headcount (4,000+), since only license holders can actually use these Power Platform tools; dividing by total headcount would always round to 0%. <b>"Standard annual work hours" defaults to 2,080 (8 hrs/day × 260 workdays) but is now admin-configurable from Administration → KPI Targets, no longer a fixed constant in the code.</b></span>
+          <span class="lang-jp">＝（キャンセル／保留中でないすべてのプロジェクトの<b>累計</b>削減時間の合計）÷（O365ライセンス保有者数 × 年間標準労働時間）— 全従業員数（4,000人以上）ではなくライセンス保有者数（1,166人）を使用します。実際にPower Platformツールを利用できるのはライセンス保有者のみであり、全従業員数で割ると常に0%に丸められてしまうためです。<b>「年間標準労働時間」はデフォルトで2,080時間（1日8時間×年間260労働日）ですが、現在はAdministration → KPI Targetsから管理者が設定可能になっており、コード内の固定定数ではなくなりました。</b></span>
         </p>
       </div>
       <div class="card">
@@ -589,6 +626,86 @@
             </td></tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <section id="champions-rules">
+      <h2><span class="badge">9</span><span class="lang-th">กฎเฉพาะของ Power Champions</span><span class="lang-en">Power Champions' Special Rules</span><span class="lang-jp">Power Champions独自のルール</span></h2>
+      <p class="lead">
+        <span class="lang-th">Power Champions <b>ไม่ใช้</b>สูตรสะสมรายวันแบบ Project Registration — ยังคงเป็นตัวเลข "ต่อปี" คงที่ตามเดิม</span>
+        <span class="lang-en">Power Champions do <b>not</b> use the day-by-day accrual formula that Project Registration does — the figures remain fixed "per year" values.</span>
+        <span class="lang-jp">Power Championsは、Project Registrationの日次集計方式を<b>使用しません</b> — 数値は従来どおり固定の「年間」値のままです。</span>
+      </p>
+      <div class="card accent-orange">
+        <h4><span class="lang-th">ทำไมถึงต่างจาก Project Registration</span><span class="lang-en">Why this differs from Project Registration</span><span class="lang-jp">Project Registrationと異なる理由</span></h4>
+        <p>
+          <span class="lang-th">เคยลองออกแบบให้ Power Champions คิดเป็น "ผลรวม 3 ปี" ตามกรอบ FY'2026-2028 แล้วพบปัญหา: Champion ที่ถูกเลือกในปี FY'2027 หรือ FY'2028 จะเหลือเวลาไม่ครบ 3 ปีในแผน ทำให้สูตรรวม 3 ปีขัดแย้งกันเองระหว่างปีที่เลือกต่างกัน จึงกลับมาใช้ "ต่อปี" คงที่ ซึ่งตีความได้ตรงไปตรงมาไม่ว่า Champion จะถูกเลือกปีไหน</span>
+          <span class="lang-en">A "3-year total" framing (matching the FY'2026-2028 roadmap) was tried first, but broke down: a Champion selected in FY'2027 or FY'2028 has fewer than 3 years left on the roadmap, so the 3-year-total formula meant different things depending on which year someone was selected in. Reverted to a fixed "per year" figure instead, which reads consistently no matter which year a Champion is selected.</span>
+          <span class="lang-jp">最初はFY2026〜2028のロードマップに合わせた「3年間合計」という枠組みを試しましたが、破綻しました。FY2027またはFY2028に選出されたChampionはロードマップ上の残り期間が3年に満たないため、3年合計の計算式が選出年によって意味が変わってしまいます。そのため、どの年に選出されても一貫して読み取れる固定の「年間」値に戻しました。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">การเชื่อมกับ Project Registration (เพิ่ม 2026-08-16)</span><span class="lang-en">Linking to Project Registration (added 2026-08-16)</span><span class="lang-jp">Project Registrationとの連携（2026-08-16追加）</span></h4>
+        <p>
+          <span class="lang-th">ช่อง "ชื่อ Project ที่ทำ" เปลี่ยนจากพิมพ์อิสระเป็น Dropdown เลือกจาก Project ที่ลงทะเบียนไว้จริง (พิมพ์เองได้ถ้ายังไม่มีในระบบ) — เมื่อเลือกแล้ว ระบบดึงค่ามาให้อัตโนมัติ 1 ครั้งตอนเลือก (ไม่ผูกติดถาวร แก้ไขต่อได้อิสระ):</span>
+          <span class="lang-en">The "Project Name" field changed from free text to a Dropdown of actually-registered Projects (still free-typeable if not yet in the system). Selecting one auto-fills the following once, at the moment of selection (not permanently linked — still freely editable afterward):</span>
+          <span class="lang-jp">「実施したProject名」欄は自由入力から、実際に登録済みのProjectを選択するDropdownに変更されました（システムに未登録の場合は引き続き直接入力可）。選択すると、その時点で以下が自動入力されます（恒久的にリンクされるわけではなく、その後も自由に編集可能）：</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">ลดเวลาต่อปี (ชม.)</span><span class="lang-en">Hours saved / year</span><span class="lang-jp">年間削減時間</span></th><td><code><span class="lang-th">savingHours ของ Project (อัตราต่อเดือน) × 12</span><span class="lang-en">Project's savingHours (monthly rate) × 12</span><span class="lang-jp">Projectのsaving Hours（月間レート）× 12</span></code></td></tr>
+            <tr><th><span class="lang-th">ลดกระดาษต่อปี (แผ่น)</span><span class="lang-en">Sheets reduced / year</span><span class="lang-jp">年間削減枚数</span></th><td><code><span class="lang-th">paperSheetsPerMonth ของ Project × 12</span><span class="lang-en">Project's paperSheetsPerMonth × 12</span><span class="lang-jp">Projectのpaper SheetsPerMonth × 12</span></code></td></tr>
+            <tr><th><span class="lang-th">วันเริ่ม-สิ้นสุด</span><span class="lang-en">Start/end date</span><span class="lang-jp">開始日／終了日</span></th><td><span class="lang-th">คัดลอกจาก Project ที่เลือกตรงๆ</span><span class="lang-en">Copied straight from the selected Project</span><span class="lang-jp">選択したProjectからそのままコピー</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">มูลค่าเงินที่คืนให้บริษัท</span><span class="lang-en">Money returned to the company</span><span class="lang-jp">会社への還元金額</span></h4>
+        <p>
+          <span class="lang-th">= (ลดเวลาต่อปี × 300 บาท/ชม.) + (ลดกระดาษต่อปี × 1 บาท/แผ่น) — คำนวณสดเสมอ ไม่เก็บเป็นค่าคงที่ในฐานข้อมูล เพื่อไม่ให้หลุด sync กับ 2 ตัวเลขต้นทาง</span>
+          <span class="lang-en">= (hours saved/year × 300 THB/hr) + (sheets reduced/year × 1 THB/sheet) — always computed live, never stored as a fixed value in the database, so it can never drift out of sync with the two source numbers.</span>
+          <span class="lang-jp">＝（年間削減時間 × 300バーツ／時間）＋（年間削減枚数 × 1バーツ／枚）— 常にライブで計算され、データベースに固定値として保存されることはないため、元となる2つの数値と乖離することがありません。</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4><span class="lang-th">เบอร์โทร/Email (ยังไม่สมบูรณ์)</span><span class="lang-en">Phone/Email (not yet complete)</span><span class="lang-jp">電話番号／メール（未完成）</span></h4>
+        <p>
+          <span class="lang-th">ตั้งใจให้ดึงจาก Master Data อัตโนมัติเมื่อเลือกรหัสพนักงาน (คอลัมน์ <code>email</code>/<code>mobilePhone</code> เพิ่มเข้า <code>MasterEmployees</code> แล้ว 2026-08-16) — แต่ Power Automate Flow ที่ Sync ข้อมูลรายวันยังไม่ได้ตั้งค่า Mapping 2 คอลัมน์นี้จาก SharePoint จึงยังว่างอยู่จนกว่าจะแก้ Flow เสร็จ (ต้องทำนอกโค้ด/นอก Repo นี้) ระหว่างนี้ต้องกรอกเอง</span>
+          <span class="lang-en">Designed to auto-fill from Master Data once an Employee ID is selected (the <code>email</code>/<code>mobilePhone</code> columns were added to <code>MasterEmployees</code> on 2026-08-16) — but the daily sync Power Automate Flow hasn't been updated yet to map these 2 columns from SharePoint, so they still read empty until that's done (an action outside this codebase). Fill them in by hand in the meantime.</span>
+          <span class="lang-jp">社員番号を選択するとMaster Dataから自動入力されるよう設計されています（<code>email</code>／<code>mobilePhone</code>カラムは2026-08-16に<code>MasterEmployees</code>へ追加済み）— ただし、日次同期のPower Automate Flowはこの2カラムをSharePointからマッピングするようまだ更新されていないため、それが完了するまでは空欄のままです（このリポジトリの外で行う作業です）。それまでは手入力してください。</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="kpi-targets">
+      <h2><span class="badge">10</span><span class="lang-th">KPI Targets (ตั้งค่าจาก Administration)</span><span class="lang-en">KPI Targets (set via Administration)</span><span class="lang-jp">KPI Targets（Administrationで設定）</span></h2>
+      <p class="lead">
+        <span class="lang-th">เพิ่ม 2026-08-16 — เป้าหมายกลางที่เคยเป็นค่าคงที่ในโค้ด ตอนนี้ตั้งค่าได้จากหน้าเว็บโดย Admin</span>
+        <span class="lang-en">Added 2026-08-16 — the central targets used to be hardcoded constants; they're now admin-editable from the web app.</span>
+        <span class="lang-jp">2026-08-16追加 — 以前はコード内の固定値だった中央目標値が、現在はWebアプリからAdminが編集可能になりました。</span>
+      </p>
+      <div class="card">
+        <h4><span class="lang-th">ค่าเดียวใช้ทั้งกลุ่ม ไม่ใช่รายบริษัท/รายฝ่าย</span><span class="lang-en">One value for the whole group, not per-company/per-division</span><span class="lang-jp">会社／事業部ごとではなく、グループ全体で1つの値</span></h4>
+        <p>
+          <span class="lang-th">ต่างจากดีไซน์แรกเริ่มที่วางแผนให้ตั้งเป้าหมายแยกรายฝ่าย — สรุปสุดท้ายใช้เป้าหมายเดียวทั้งกลุ่ม แก้ 1 ครั้งมีผลกับทุกการ์ด ทุกบริษัท ทุกฝ่ายพร้อมกันทันที (เก็บในตาราง <code>DivisionTargets</code> เดิม แต่ Admin form เขียนแถว sentinel <code>{company:'ALL', division:'ALL'}</code> แถวเดียวเสมอ ไม่ต้อง Migrate Schema ใหม่)</span>
+          <span class="lang-en">Unlike the original per-division design — the final decision uses one shared target for the whole group; one edit affects every card, every company, every division at once. (Still stored in the existing <code>DivisionTargets</code> table, but the Admin form always writes to the single sentinel row <code>{company:'ALL', division:'ALL'}</code> — no new schema migration was needed.)</span>
+          <span class="lang-jp">当初の事業部ごとの設計とは異なり — 最終的にはグループ全体で1つの共有目標を使用することになりました。1回の編集ですべてのカード、すべての会社、すべての事業部に同時に反映されます（既存の<code>DivisionTargets</code>テーブルに保存されますが、Adminフォームは常に単一のセンチネル行<code>{company:'ALL', division:'ALL'}</code>に書き込みます — 新しいスキーママイグレーションは不要でした）。</span>
+        </p>
+      </div>
+      <table>
+        <thead><tr><th><span class="lang-th">เป้าหมาย</span><span class="lang-en">Target</span><span class="lang-jp">目標</span></th><th><span class="lang-th">ค่าเริ่มต้น</span><span class="lang-en">Default</span><span class="lang-jp">デフォルト</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="lang-th">จำนวน Project เป้าหมาย</span><span class="lang-en">Target Project count</span><span class="lang-jp">目標Project数</span></td><td>90</td></tr>
+          <tr><td>% Time Reduction</td><td>5%</td></tr>
+          <tr><td><span class="lang-th">จำนวน Power Champions เป้าหมาย</span><span class="lang-en">Target Power Champions count</span><span class="lang-jp">目標Power Champions数</span></td><td>18</td></tr>
+          <tr><td><span class="lang-th">จำนวนผู้ผ่านการอบรมเป้าหมาย</span><span class="lang-en">Target trained-user count</span><span class="lang-jp">目標研修修了者数</span></td><td>150</td></tr>
+          <tr><td><span class="lang-th">ชั่วโมงทำงานมาตรฐานต่อปี</span><span class="lang-en">Standard annual work hours</span><span class="lang-jp">年間標準労働時間</span></td><td>2,080</td></tr>
+        </tbody>
+      </table>
+      <div class="note red">
+        <span class="lang-th">แก้ไขได้เฉพาะ Full Admin เท่านั้น (บังคับซ้ำทั้ง Frontend และ API ฝั่ง Backend) — User ทั่วไปเห็นค่าปัจจุบันได้แต่เป็นสีเทา แก้ไม่ได้ ถ้ายังไม่เคยตั้งค่าไว้เลย ระบบใช้ค่าเริ่มต้นในตารางด้านบนโดยอัตโนมัติ</span>
+        <span class="lang-en">Editable only by Full Admin (enforced on both the frontend and the backend API) — regular users can see the current values but they're greyed out. If nothing has ever been set, the system automatically falls back to the defaults in the table above.</span>
+        <span class="lang-jp">Full Adminのみが編集可能です（フロントエンドとバックエンドAPIの両方で強制されます）— 一般ユーザーは現在の値を閲覧できますが、グレーアウトされ編集はできません。一度も設定されていない場合、システムは上表のデフォルト値に自動的にフォールバックします。</span>
       </div>
     </section>
 
