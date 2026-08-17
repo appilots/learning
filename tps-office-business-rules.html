@@ -143,6 +143,7 @@
   .card.accent-green { border-left: 4px solid var(--green); }
   .card.accent-orange { border-left: 4px solid var(--orange); }
   .card.accent-red { border-left: 4px solid var(--red); }
+  .card.accent-cyan { border-left: 4px solid var(--cyan); }
   .card h4 { margin: 0 0 6px; font-size: 14.5px; font-weight: 700; }
   .card p, .card ul, .card ol { margin: 6px 0 0; font-size: 13.5px; color: #374151; }
   .card ul, .card ol { padding-right: 0; padding-left: 20px; }
@@ -549,6 +550,46 @@
           <span class="lang-th">ทศนิยมแสดงผลปัดไม่เกิน 2 ตำแหน่งทุกจุด — ไม่มี Cache/Cron แยกต่างหาก คำนวณสดล้วนๆ ทุกครั้งที่โหลดหน้า</span>
           <span class="lang-en">Displayed decimals are always capped at 2 places — there's no separate cache/cron job, everything is computed live on every page load.</span>
           <span class="lang-jp">表示される小数は常に小数点2桁までに制限されます — 別途のキャッシュ／Cronジョブはなく、ページ読み込みのたびにすべてライブで計算されます。</span>
+        </p>
+      </div>
+      <div class="card accent-cyan">
+        <h4><span class="lang-th">📐 ตัวอย่างคำนวณจริง — จากตัวเลขที่กรอก ไปเป็นยอดสะสมที่เห็นในตาราง</span><span class="lang-en">📐 A worked example — from what's entered to the accrued number shown in the table</span><span class="lang-jp">📐 具体的な計算例 — 入力値から表に表示される累計値まで</span></h4>
+        <p>
+          <span class="lang-th">สมมติ Project ตั้งไว้ <b>5 ชม. 25 นาที/เดือน</b>, สถานะ "เสร็จสิ้น", วันเริ่ม 24 มิ.ย. 2026, วันสิ้นสุด 31 ก.ค. 2026 (ห่างกัน 37 วัน):</span>
+          <span class="lang-en">Say a Project is set to <b>5 hrs 25 min/month</b>, status "Completed", start date 24 Jun 2026, end date 31 Jul 2026 (37 days apart):</span>
+          <span class="lang-jp">例えば、あるProjectが<b>月5時間25分</b>に設定され、ステータスは「完了」、開始日は2026年6月24日、終了日は2026年7月31日（37日間）だとします：</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">1. แปลงเป็นทศนิยม</span><span class="lang-en">1. Convert to decimal</span><span class="lang-jp">1. 小数に変換</span></th><td><code>5 + 25÷60 = 5.4167 <span class="lang-th">ชม./เดือน</span><span class="lang-en">hrs/month</span><span class="lang-jp">時間／月</span></code></td></tr>
+            <tr><th><span class="lang-th">2. หาอัตราต่อวัน</span><span class="lang-en">2. Get the daily rate</span><span class="lang-jp">2. 日次レートを算出</span></th><td><code>5.4167 ÷ 30.4375 = 0.17796 <span class="lang-th">ชม./วัน</span><span class="lang-en">hrs/day</span><span class="lang-jp">時間／日</span></code></td></tr>
+            <tr><th><span class="lang-th">3. คูณด้วยจำนวนวัน</span><span class="lang-en">3. Multiply by the day count</span><span class="lang-jp">3. 日数を掛ける</span></th><td><code>0.17796 × 37 <span class="lang-th">วัน</span><span class="lang-en">days</span><span class="lang-jp">日</span> = 6.58 <span class="lang-th">ชม.</span><span class="lang-en">hrs</span><span class="lang-jp">時間</span></code></td></tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="lang-th">→ <b>6.58 ชม.</b> คือตัวเลขที่เห็นในคอลัมน์ "ลดเวลา (สะสมถึงปัจจุบัน)" — เพราะสถานะเป็น "เสร็จสิ้น" จึงนับเต็มทั้ง 37 วันของโครงการ (ไม่ใช่แค่ถึงวันนี้) ถ้าสถานะยังเป็น "กำลังดำเนินการ" อยู่ ขั้นตอนที่ 3 จะใช้ <code>min(วันนี้, วันสิ้นสุดโครงการ)</code> แทนวันสิ้นสุดเต็มช่วง — ตัวเลขจะค่อยๆ ไต่ขึ้นทุกวันจนกว่าจะถึงวันสิ้นสุดหรือถูกปิดเป็น "เสร็จสิ้น"</span>
+          <span class="lang-en">→ <b>6.58 hrs</b> is what shows in the "Hours Saved (accrued to date)" column — since the status is "Completed", it counts the full 37-day project span (not just up to today). If it were still "In Progress", step 3 would use <code>min(today, project end date)</code> instead of the full end date — the number would keep climbing day by day until the end date or the status is set to "Completed".</span>
+          <span class="lang-jp">→ 「削減時間（現在までの累計）」列に表示されるのが<b>6.58時間</b>です — ステータスが「完了」であるため、プロジェクトの全期間37日分をカウントします（今日までではありません）。もし「進行中」のままであれば、ステップ3では全終了日ではなく<code>min(今日, プロジェクト終了日)</code>を使用します — 終了日に達するか、ステータスが「完了」に設定されるまで、数値は日々少しずつ増加していきます。</span>
+        </p>
+      </div>
+      <div class="card accent-cyan">
+        <h4><span class="lang-th">📐 ตัวอย่างที่ 2 — งานเป็นชิ้น/ครั้ง (ไม่ใช่งานประจำทุกวัน)</span><span class="lang-en">📐 Example 2 — a one-off/batch task (not a recurring daily process)</span><span class="lang-jp">📐 例2 — 単発／バッチ作業（毎日の反復業務ではない場合）</span></h4>
+        <p>
+          <span class="lang-th">IT ต้องติดตั้ง PC ใหม่ทดแทนเครื่องที่ครบอายุใช้งาน ตาม Master Plan 3 ปีของ AT-A — รวม <b>45 เครื่องใน 3 ปี</b>, วิธีติดตั้งแบบเดิมใช้ 60 นาที/เครื่อง วิธีใหม่ใช้ 20 นาที/เครื่อง ลดได้ 30 นาที/เครื่อง (แนะนำ: เช็คให้แน่ใจว่าตัวเลขที่ลดได้ตรงกับ 60−20 จริงๆ ก่อนคีย์ข้อมูลจริง)</span>
+          <span class="lang-en">IT needs to install new PCs to replace machines that have reached end-of-life, per AT-A's 3-year Master Plan — <b>45 machines over 3 years</b>. The old install method took 60 min/machine, the new method takes 20 min/machine, saving 30 min/machine (tip: double-check the saved figure actually matches 60−20 before keying in real data).</span>
+          <span class="lang-jp">AT-Aの3ヵ年マスタープランに基づき、耐用年数を迎えたPCを新しいPCに交換します — <b>3年間で45台</b>。従来の設置方法は1台あたり60分、新しい方法は1台あたり20分で、1台あたり30分削減されます（ヒント：実際のデータを入力する前に、削減時間が60−20と一致しているか確認してください）。</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">1. ยอดรวมทั้งแผน</span><span class="lang-en">1. Total across the whole plan</span><span class="lang-jp">1. プラン全体の合計</span></th><td><code>45 <span class="lang-th">เครื่อง</span><span class="lang-en">machines</span><span class="lang-jp">台</span> × 30 <span class="lang-th">นาที</span><span class="lang-en">min</span><span class="lang-jp">分</span> = 1,350 <span class="lang-th">นาที</span><span class="lang-en">min</span><span class="lang-jp">分</span> = 22.5 <span class="lang-th">ชม.</span><span class="lang-en">hrs</span><span class="lang-jp">時間</span></code></td></tr>
+            <tr><th><span class="lang-th">2. ระยะเวลาทั้งแผน</span><span class="lang-en">2. Total plan duration</span><span class="lang-jp">2. プラン全体の期間</span></th><td><code>3 <span class="lang-th">ปี</span><span class="lang-en">years</span><span class="lang-jp">年</span> = 36 <span class="lang-th">เดือน</span><span class="lang-en">months</span><span class="lang-jp">ヶ月</span></code></td></tr>
+            <tr><th><span class="lang-th">3. ยอดที่ต้องกรอกต่อเดือน</span><span class="lang-en">3. What to enter per month</span><span class="lang-jp">3. 月間入力値</span></th><td><code>22.5 <span class="lang-th">ชม.</span><span class="lang-en">hrs</span><span class="lang-jp">時間</span> ÷ 36 <span class="lang-th">เดือน</span><span class="lang-en">months</span><span class="lang-jp">ヶ月</span> = 0.625 <span class="lang-th">ชม./เดือน</span><span class="lang-en">hrs/month</span><span class="lang-jp">時間／月</span> ≈ 0 <span class="lang-th">ชม.</span><span class="lang-en">hrs</span><span class="lang-jp">時間</span> 38 <span class="lang-th">นาที</span><span class="lang-en">min</span><span class="lang-jp">分</span></code></td></tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="lang-th">→ กรอก <b>0 ชม. 38 นาที/เดือน</b> ในช่อง "ชั่วโมงที่ลดได้ (ต่อเดือน)" <b>และ</b>ตั้งวันเริ่มต้น/สิ้นสุดโครงการให้ครอบคลุมเต็มช่วง 3 ปีของแผน (เช่น วันนี้ → อีก 3 ปีข้างหน้า) — สำคัญมาก เพราะระบบจะเอายอดต่อเดือนนี้ไปกระจายเป็นยอดสะสมตามจำนวนวันที่ผ่านไปจริงในช่วงที่ตั้งไว้ ถ้าตั้งช่วงเวลาสั้นกว่าแผนจริง ยอดสะสมจะโตเร็วเกินความเป็นจริง งานลักษณะนี้เหมาะกับหัวข้อการปรับปรุง "TPS Standard Work and Kaizen" (ลดขั้นตอน/เวลาการทำงาน) มากกว่า "IT Digital Tools" เพราะเป็นการปรับปรุงกระบวนการหน้างาน ไม่ใช่การพัฒนาแอป</span>
+          <span class="lang-en">→ Enter <b>0 hrs 38 min/month</b> in "Hours Saved (per month)" <b>and</b> set the project's start/end dates to span the full 3-year plan (e.g. today → 3 years from now) — this matters a lot, because the system spreads this monthly figure into an accrued total based on how many days have really elapsed within that window. Setting a shorter window than the real plan would make the accrued number climb faster than reality. Work like this fits the "TPS Standard Work and Kaizen" work type (Improvement Topic: reducing process time/steps) better than "IT Digital Tools", since it's a floor-level process improvement, not app development.</span>
+          <span class="lang-jp">→ 「削減時間（月間）」欄に<b>0時間38分／月</b>を入力し、<b>かつ</b>プロジェクトの開始日／終了日を3ヵ年プラン全体（例：今日から3年後まで）に設定してください — これは非常に重要です。システムはこの月間数値を、設定した期間内で実際に経過した日数に基づいて累計に配分するためです。実際のプランより短い期間を設定すると、累計値が実際より速く増加してしまいます。この種の作業はアプリ開発ではなく現場レベルのプロセス改善であるため、「IT Digital Tools」よりも「TPS Standard Work and Kaizen」（改善テーマ：工程・時間の削減）の方が適しています。</span>
         </p>
       </div>
       <div class="card">
