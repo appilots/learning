@@ -180,6 +180,21 @@
   footer { text-align: center; padding: 30px; color: var(--ink-light); font-size: 12.5px; border-top: 1px solid var(--border); }
 
   .flow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 14px 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* --- Screenshots (annotated) --- */
+  figure.shot { margin: 16px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--surface); }
+  figure.shot img { display: block; width: 100%; height: auto; }
+  figure.shot .fallback {
+    display: none; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    padding: 30px 20px; background: repeating-linear-gradient(135deg, #F3F4F6, #F3F4F6 10px, #EAECEF 10px, #EAECEF 20px);
+    color: var(--ink-light); font-size: 12.5px; text-align: center;
+  }
+  figure.shot .fallback code { background: white; }
+  figure.shot img.broken { display: none; }
+  figure.shot img.broken + .fallback { display: flex; }
+  figure.shot figcaption { padding: 8px 14px; font-size: 12px; color: var(--ink-light); background: var(--surface-muted); border-top: 1px solid var(--border); }
   .flow-item {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -208,6 +223,10 @@
     .note.blue { background: #10233D; border-color: #1E4B7A; color: #9CCBFF; }
     .note.red { background: #3A1414; border-color: #6B2323; color: #FCA5A5; }
     .note.green { background: #10240F; border-color: #1E4B1E; color: #A7E3A7; }
+    figure.shot { background: #1E2126; border-color: #2C2F36; }
+    figure.shot .fallback { background: repeating-linear-gradient(135deg, #23262C, #23262C 10px, #1B1D22 10px, #1B1D22 20px); color: #9CA3AF; }
+    figure.shot .fallback code { background: #16181C; }
+    figure.shot figcaption { background: #23262C; border-color: #2C2F36; }
   }
 
   /* --- Trilingual system (EN/TH/JP), AISIN theme pattern --- */
@@ -334,6 +353,11 @@
         <span class="lang-en">TPS Standard Work projects have no Project Name to fill in, so the table/detail display falls back to showing the selected <b>Improvement Topic</b> instead (Division name is left out — too long and cluttered), so each project is still distinguishable even without a name.</span>
         <span class="lang-jp">TPS Standard Workのプロジェクトには入力するプロジェクト名がないため、テーブル／詳細画面では代わりに選択された<b>改善テーマ</b>が表示されます（事業部名は長く煩雑になるため含まれません）— これにより、名前がなくても各プロジェクトを区別できます。</span>
       </div>
+      <figure class="shot">
+        <img src="images/rule-worktype-dropdown.jpg" alt="วงกลมล้อมช่องหัวข้อการปรับปรุงระบบงานในฟอร์ม Project" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ช่อง "หัวข้อการปรับปรุงระบบงาน" ที่ต้องเลือกก่อนเป็นอันดับแรก</span><span class="lang-en">Image: the "Work Type" field that must be chosen first</span><span class="lang-jp">画像：最初に選択する必要がある「改善テーマ」欄</span></span><code>images/rule-worktype-dropdown.jpg</code></div>
+        <figcaption><span class="lang-th">เลือกที่นี่ก่อน — ฟิลด์ที่เหลือทั้งหมดเปลี่ยนตามค่านี้</span><span class="lang-en">Choose this first — every other field on the form follows from it</span><span class="lang-jp">まずここを選択 — 他のすべてのフィールドはこの値に従って変化します</span></figcaption>
+      </figure>
     </section>
 
     <section id="position">
@@ -390,6 +414,11 @@
           <span class="lang-en">The database field names were kept as-is to avoid a migration — only where the data comes from and what's shown on screen changed.</span>
           <span class="lang-jp">データベースのフィールド名はマイグレーションを避けるためそのまま維持されています — 変更されたのはデータの取得元と画面表示のみです。</span>
         </p>
+        <figure class="shot">
+          <img src="images/rule-approver-fields.jpg" alt="วงกลมล้อมช่องผู้อนุมัติ DEPARTMENT และ DIVISION ในฟอร์ม Project" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ช่องผู้อนุมัติทั้ง 2 ระดับ ตามที่แสดงจริงบนฟอร์ม</span><span class="lang-en">Image: both approver fields as they actually appear on the form</span><span class="lang-jp">画像：フォームに実際に表示される2段階の承認者欄</span></span><code>images/rule-approver-fields.jpg</code></div>
+          <figcaption><span class="lang-th">ป้ายที่เห็นคือ "DEPARTMENT"/"DIVISION" แต่ field เบื้องหลังคือ sectionApprover/departmentApprover ตามตารางด้านบน</span><span class="lang-en">The labels shown are "DEPARTMENT"/"DIVISION", but the underlying fields are sectionApprover/departmentApprover per the table above</span><span class="lang-jp">表示ラベルは「DEPARTMENT」／「DIVISION」ですが、内部のフィールドは上表の通りsectionApprover／departmentApprover</span></figcaption>
+        </figure>
       </div>
       <div class="card">
         <h4><span class="lang-th">การกรอกอัตโนมัติ</span><span class="lang-en">Auto-fill</span><span class="lang-jp">自動入力</span></h4>
@@ -435,6 +464,11 @@
         <span class="lang-en"><b>Still visible:</b> a Cancelled or On Hold Project still shows normally in the Projects table/list (just not counted in totals) — and "average progress" still includes them, since progress isn't a claim about savings. Everywhere the hours/paper figure for a Cancelled/On Hold Project is shown, a note reading "(set at X/month — [status] so it isn't counted)" confirms the entered rate hasn't disappeared, it's simply excluded from the running total.</span>
         <span class="lang-jp"><b>引き続き表示される：</b>キャンセルまたは保留中のプロジェクトはProjectsのテーブル／一覧に通常どおり表示されます（集計に含まれないだけです）— また「平均進捗率」にはこれらのプロジェクトも含まれます。進捗率は削減実績を示すものではないためです。キャンセル／保留中のプロジェクトの削減時間／紙の数値が表示される箇所には必ず「（月間Xに設定 — [ステータス]のため集計対象外）」という注記が表示され、入力した数値が消えたわけではなく、単に集計から除外されていることを示します。</span>
       </div>
+      <figure class="shot">
+        <img src="images/rule-cancelled-note.jpg" alt="วงกลมล้อมข้อความกำกับที่คอลัมน์ลดเวลาของ Project ที่ยกเลิก" onerror="this.classList.add('broken')">
+        <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ตาราง Project — แถวที่ยกเลิกโครงการ พร้อมข้อความกำกับที่คอลัมน์ลดเวลา</span><span class="lang-en">Image: the Projects table — a Cancelled row, with the note on the hours-saved column</span><span class="lang-jp">画像：Projectテーブル — キャンセル行と、削減時間列に表示される注記</span></span><code>images/rule-cancelled-note.jpg</code></div>
+        <figcaption><span class="lang-th">"⏱ - (ตั้งไว้ 70 ชม./เดือน — ยกเลิกโครงการ...)" — ตัวเลขที่กรอกไว้ยังอยู่ แค่ไม่ถูกนับ</span><span class="lang-en">"⏱ - (set at 70 hrs/month — Cancelled...)" — the entered figure is still there, just excluded from the total</span><span class="lang-jp">「⏱ -（月間70時間に設定 — キャンセル...）」— 入力した数値は残っていますが、集計からは除外されています</span></figcaption>
+      </figure>
     </section>
 
     <section id="validation">
@@ -658,6 +692,11 @@
             <tr><th><span class="lang-th">วันเริ่ม-สิ้นสุด</span><span class="lang-en">Start/end date</span><span class="lang-jp">開始日／終了日</span></th><td><span class="lang-th">คัดลอกจาก Project ที่เลือกตรงๆ</span><span class="lang-en">Copied straight from the selected Project</span><span class="lang-jp">選択したProjectからそのままコピー</span></td></tr>
           </tbody>
         </table>
+        <figure class="shot">
+          <img src="images/rule-champion-project-dropdown.jpg" alt="วงกลมล้อม Dropdown ชื่อ Project ในฟอร์มเพิ่ม Power Champion" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: Dropdown "ชื่อ Project ที่ทำ" ในฟอร์มเพิ่ม Power Champion</span><span class="lang-en">Image: the "Project Name" Dropdown on the Add Power Champion form</span><span class="lang-jp">画像：Power Champion追加フォームの「実施したProject名」Dropdown</span></span><code>images/rule-champion-project-dropdown.jpg</code></div>
+          <figcaption><span class="lang-th">เลือก Project ที่นี่ — ช่องลดเวลา/ลดกระดาษต่อปีด้านล่างจะเติมให้อัตโนมัติ 1 ครั้ง</span><span class="lang-en">Select a Project here — the hours/sheets-per-year fields below auto-fill once</span><span class="lang-jp">ここでProjectを選択すると、下の年間削減時間／削減枚数欄が一度だけ自動入力されます</span></figcaption>
+        </figure>
       </div>
       <div class="card">
         <h4><span class="lang-th">มูลค่าเงินที่คืนให้บริษัท</span><span class="lang-en">Money returned to the company</span><span class="lang-jp">会社への還元金額</span></h4>
@@ -691,6 +730,11 @@
           <span class="lang-en">Unlike the original per-division design — the final decision uses one shared target for the whole group; one edit affects every card, every company, every division at once. (Still stored in the existing <code>DivisionTargets</code> table, but the Admin form always writes to the single sentinel row <code>{company:'ALL', division:'ALL'}</code> — no new schema migration was needed.)</span>
           <span class="lang-jp">当初の事業部ごとの設計とは異なり — 最終的にはグループ全体で1つの共有目標を使用することになりました。1回の編集ですべてのカード、すべての会社、すべての事業部に同時に反映されます（既存の<code>DivisionTargets</code>テーブルに保存されますが、Adminフォームは常に単一のセンチネル行<code>{company:'ALL', division:'ALL'}</code>に書き込みます — 新しいスキーママイグレーションは不要でした）。</span>
         </p>
+        <figure class="shot">
+          <img src="images/rule-kpi-targets.jpg" alt="วงกลมล้อมช่องตั้งค่า KPI Targets ทั้ง 5 ในหน้า Administration" onerror="this.classList.add('broken')">
+          <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: ช่องตั้งค่า KPI Targets ทั้ง 5 ในหน้า Administration</span><span class="lang-en">Image: all 5 KPI Target input fields on the Administration page</span><span class="lang-jp">画像：Administrationページの5つのKPI Target入力欄</span></span><code>images/rule-kpi-targets.jpg</code></div>
+          <figcaption><span class="lang-th">แก้ 1 ครั้ง มีผลกับทุกการ์ด ทุกบริษัท ทุกฝ่ายทันที (เฉพาะ Full Admin)</span><span class="lang-en">One edit here affects every card, company, and division at once (Full Admin only)</span><span class="lang-jp">ここでの1回の編集がすべてのカード、会社、事業部に同時に反映されます（Full Adminのみ）</span></figcaption>
+        </figure>
       </div>
       <table>
         <thead><tr><th><span class="lang-th">เป้าหมาย</span><span class="lang-en">Target</span><span class="lang-jp">目標</span></th><th><span class="lang-th">ค่าเริ่มต้น</span><span class="lang-en">Default</span><span class="lang-jp">デフォルト</span></th></tr></thead>

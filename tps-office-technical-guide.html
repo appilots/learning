@@ -424,7 +424,7 @@
         </div>
         <div class="stack-item">
           <div class="role">Database</div>
-          <div class="items">Azure SQL Database (Serverless tier)</div>
+          <div class="items">Azure SQL Database (Basic tier, 5 DTU)</div>
         </div>
         <div class="stack-item">
           <div class="role">Hosting <span class="pill red" style="margin-right:6px">changed 2026-08-16</span></div>
@@ -494,9 +494,9 @@
         </tbody>
       </table>
       <div class="note">
-        <span class="lang-th">การเลือกใช้ PaaS ล้วนๆ นี่แหละที่ทำให้ต้นทุนต่ำ (Free tier + Serverless auto-pause, ดูหมวด 3 และ 4) และไม่ต้องมีคนคอย patch/ดูแล server เลย</span>
-        <span class="lang-en">Choosing an all-PaaS approach is exactly what keeps costs low (Free tier + Serverless auto-pause — see sections 3 and 4) and eliminates the need for anyone to patch/maintain servers at all.</span>
-        <span class="lang-jp">PaaSのみを採用することで、コストを低く抑えられ（Free tier＋Serverlessの自動一時停止 — セクション3・4参照）、サーバーのパッチ適用・保守を行う担当者も不要になります。</span>
+        <span class="lang-th">การเลือกใช้ PaaS ล้วนๆ นี่แหละที่ทำให้ต้นทุนต่ำ (SQL Basic tier ราคาคงที่ ~$5/เดือน, ดูหมวด 3 และ 4) และไม่ต้องมีคนคอย patch/ดูแล server เลย</span>
+        <span class="lang-en">Choosing an all-PaaS approach is exactly what keeps costs low (SQL Basic tier at a flat ~$5/month — see sections 3 and 4) and eliminates the need for anyone to patch/maintain servers at all.</span>
+        <span class="lang-jp">PaaSのみを採用することで、コストを低く抑えられ（SQL Basic tierは定額約$5／月 — セクション3・4参照）、サーバーのパッチ適用・保守を行う担当者も不要になります。</span>
       </div>
     </section>
 
@@ -509,17 +509,16 @@
       </p>
       <table>
         <tbody>
-          <tr><th>Type</th><td>Azure SQL Database (Serverless)</td></tr>
+          <tr><th>Type</th><td>Azure SQL Database (Basic tier)</td></tr>
           <tr><th>Database Name</th><td><code>tps-office-db</code></td></tr>
           <tr><th>Server</th><td><code>sql-tps-office.database.windows.net</code></td></tr>
-          <tr><th>SKU</th><td><code>GP_S_Gen5</code> (General Purpose, Serverless, Gen5)</td></tr>
-          <tr><th>Min Capacity</th><td>0.5 vCore</td></tr>
+          <tr><th>SKU</th><td><code>Basic</code> — 5 DTU, max 2 GB storage</td></tr>
           <tr><th>Region</th><td>Southeast Asia</td></tr>
           <tr><th>Resource Group</th><td><code>rg-tps-office</code></td></tr>
           <tr><th>Auto-pause</th><td>
-            <span class="lang-th">หลังไม่มีการใช้งาน 60 นาที (ปลุกกลับมาเองอัตโนมัติเมื่อมี request เข้ามา)</span>
-            <span class="lang-en">After 60 minutes of inactivity (automatically wakes up when a request comes in).</span>
-            <span class="lang-jp">60分間操作がない場合（リクエストが来ると自動的に再開します）。</span>
+            <span class="lang-th"><b>ไม่มี</b> — Basic tier ทำงานตลอด 24 ชั่วโมง ไม่พักการทำงานเหมือน Serverless tier ที่เคยวางแผนไว้แต่ไม่ได้ใช้จริง (ยืนยัน 2026-08-04)</span>
+            <span class="lang-en"><b>None</b> — the Basic tier runs continuously and never pauses, unlike the Serverless tier that was originally planned but never actually deployed (confirmed 2026-08-04).</span>
+            <span class="lang-jp"><b>なし</b> — Basic tierは24時間稼働し、当初計画されていたが実際には導入されなかったServerless tierのように一時停止することはありません（2026-08-04確認）。</span>
           </td></tr>
           <tr><th><span class="lang-th">วิธีเชื่อมต่อ</span><span class="lang-en">Connection Method</span><span class="lang-jp">接続方法</span></th><td>
             <span class="lang-th">Connection string เก็บใน Application Settings ของ Azure App Service (เดิมเก็บใน App Settings ของ Azure Functions ก่อนย้ายมา 2026-08-16) — ยังไม่ใช้ Managed Identity เดิมติดข้อจำกัดที่ต้องใช้ Static Web Apps ระดับ Standard แต่ข้อจำกัดนั้นผูกกับสถาปัตยกรรมเก่าที่เลิกใช้ไปแล้ว จึง<b>ควรประเมินใหม่</b>ว่า Azure App Service Tier ปัจจุบันรองรับ Managed Identity ได้หรือไม่ (ยังไม่ได้ตรวจสอบซ้ำหลังย้ายสถาปัตยกรรม)</span>
@@ -537,18 +536,18 @@
         </p>
       </div>
       <div class="note">
-        <span class="lang-th"><b>หมายเหตุด้านต้นทุน:</b> ค่าใช้จ่ายจริงอิงราคา Retail ของ Azure สำหรับ SKU นี้ (Southeast Asia) อยู่ที่ $0.620892/vCore-hour — ดูตัวเลขประมาณการรายเดือน 3 สถานการณ์ (ไม่มี keep-alive / keep-alive เฉพาะเวลาทำงาน / เปิดตลอด 24/7) ได้ที่หน้า Administration ในแอปเช่นกัน</span>
-        <span class="lang-en"><b>Cost note:</b> the actual cost is based on Azure's Retail price for this SKU (Southeast Asia) at $0.620892/vCore-hour — see the 3 monthly cost-estimate scenarios (no keep-alive / business-hours-only keep-alive / always-on 24/7) on the Administration page in the app as well.</span>
-        <span class="lang-jp"><b>コストに関する注記：</b>実際の費用は、このSKU（Southeast Asia）のAzureリテール価格 $0.620892／vCore時間 に基づきます — 月額費用の見積もり3パターン（keep-aliveなし／業務時間帯のみkeep-alive／24時間365日稼働）についても、アプリのAdministrationページで確認できます。</span>
+        <span class="lang-th"><b>หมายเหตุด้านต้นทุน:</b> ค่าใช้จ่ายจริงอิงราคา Azure Retail Prices API สำหรับ Basic tier (Southeast Asia, เช็ค 2026-08-04) อยู่ที่ <b>$0.161/วัน คงที่</b> (~$5/เดือน) ไม่ผันแปรตามการใช้งานเหมือนรุ่น Serverless ที่เคยวางแผนไว้ — ไม่ต้องมี keep-alive Timer ใดๆ อีกต่อไป ดูตัวเลขที่หน้า Administration ในแอปเช่นกัน</span>
+        <span class="lang-en"><b>Cost note:</b> the actual cost is based on the Azure Retail Prices API for the Basic tier (Southeast Asia, checked 2026-08-04) at a <b>flat $0.161/day</b> (~$5/month), which doesn't vary with usage the way the originally-planned Serverless tier would have — no keep-alive Timer is needed anymore. See the same figure on the Administration page in the app.</span>
+        <span class="lang-jp"><b>コストに関する注記：</b>実際の費用は、Basic tier（Southeast Asia、2026-08-04確認）のAzure Retail Prices APIに基づき、<b>1日あたり定額$0.161</b>（約$5／月）で、当初計画されていたServerless tierのように使用量に応じて変動することはありません — keep-alive Timerはもはや不要です。同じ数値はアプリのAdministrationページでも確認できます。</span>
       </div>
     </section>
 
     <section id="limits">
       <h2><span class="badge">4</span><span class="lang-th">ข้อจำกัดของแพลตฟอร์ม</span><span class="lang-en">Platform Limitations</span><span class="lang-jp">プラットフォームの制限</span></h2>
       <p class="lead">
-        <span class="lang-th">ข้อจำกัดจริงของ tier ที่ใช้อยู่ (Free / Serverless) ที่ทีม dev ควรรู้ก่อนออกแบบ feature ใหม่ที่ทำงานหนักหรือใช้เวลานาน</span>
-        <span class="lang-en">The real limitations of the tiers in use (Free / Serverless) that the dev team should know before designing new features that are heavy or long-running.</span>
-        <span class="lang-jp">重い処理や長時間実行される新機能を設計する前に、開発チームが知っておくべき、現在使用中のプラン（Free／Serverless）の実際の制限事項。</span>
+        <span class="lang-th">ข้อจำกัดจริงของ tier ที่ใช้อยู่ (App Service Free / SQL Basic) ที่ทีม dev ควรรู้ก่อนออกแบบ feature ใหม่ที่ทำงานหนักหรือใช้เวลานาน</span>
+        <span class="lang-en">The real limitations of the tiers in use (App Service Free / SQL Basic) that the dev team should know before designing new features that are heavy or long-running.</span>
+        <span class="lang-jp">重い処理や長時間実行される新機能を設計する前に、開発チームが知っておくべき、現在使用中のプラン（App Service Free／SQL Basic）の実際の制限事項。</span>
       </p>
       <table>
         <tbody>
@@ -557,10 +556,10 @@
             <span class="lang-en"><b>The old constraint no longer applies:</b> Azure Static Web Apps (Free tier) used to have a platform-level 45-second hard timeout per request to Azure Functions — there's no longer an SWA hop in between (Express on App Service receives requests directly), so that 45-second cap no longer applies. <b>However,</b> Azure App Service itself (especially on lower tiers) has its own limits (CPU quota, the Node server's own idle timeout) that haven't been re-verified with real numbers since the migration — test a genuinely long-running request before relying on this.</span>
             <span class="lang-jp"><b>従来の制約はもはや適用されません：</b>Azure Static Web Apps（Free tier）には、Azure Functionsへの1リクエストあたり45秒のプラットフォームレベルのハードタイムアウトがありましたが、現在はSWAが間に存在しないため（App Service上のExpressが直接リクエストを受け取る）、この45秒の上限はもはや適用されません。<b>ただし、</b>Azure App Service自体（特に低いTier）には独自の制限（CPUクォータ、Node serverのアイドルタイムアウト）があり、移行後に実際の数値で再検証されていません — 依存する前に実際に長時間かかるリクエストでテストしてください。</span>
           </td></tr>
-          <tr><th>Database Auto-pause</th><td>
-            <span class="lang-th">Azure SQL Serverless จะพักการทำงานหลังไม่มีการใช้งาน 60 นาที การ request แรกหลังพักจะช้ากว่าปกติ (cold start) เพราะต้องรอฐานข้อมูลตื่นก่อน</span>
-            <span class="lang-en">Azure SQL Serverless pauses after 60 minutes of inactivity. The first request after a pause will be slower than usual (cold start) because it has to wait for the database to wake up first.</span>
-            <span class="lang-jp">Azure SQL Serverlessは60分間操作がないと一時停止します。一時停止後の最初のリクエストは、データベースの起動を待つ必要があるため（コールドスタート）、通常より遅くなります。</span>
+          <tr><th>SQL Basic DTU Ceiling</th><td>
+            <span class="lang-th">Basic tier จำกัดที่ 5 DTU ตายตัว (ไม่ auto-scale) — ข้อมูล snapshot ล่าสุด (2026-08-04) พบ peak DTU 24 ชม. อยู่ที่ ~65% ยังมี headroom แต่ query หนักพร้อมกันหลายตัวเสี่ยง throttle ได้ ควรดูแนวโน้มที่หน้า Administration → Database ก่อนเพิ่ม feature ที่ query หนัก</span>
+            <span class="lang-en">The Basic tier is capped at a fixed 5 DTU (no auto-scaling) — the latest snapshot (2026-08-04) showed a 24h peak DTU usage of ~65%. There's still headroom, but several heavy queries running concurrently risk throttling. Check the trend on Administration → Database before adding a query-heavy feature.</span>
+            <span class="lang-jp">Basic tierは5 DTUに固定されています（自動スケーリングなし）— 最新のスナップショット（2026-08-04）では24時間のピークDTU使用率は約65%でした。まだ余裕はありますが、複数の重いクエリが同時実行されるとスロットリングのリスクがあります。クエリの重い機能を追加する前に、Administration → Databaseでトレンドを確認してください。</span>
           </td></tr>
           <tr><th>SLA</th><td>
             <span class="lang-th">Azure App Service ระดับ Free (เช่นเดียวกับ Static Web Apps ระดับ Free เดิม) ไม่มี SLA (Service Level Agreement) รับประกัน uptime — หากต้องการ SLA ต้องอัปเกรด Tier ขึ้นไป (ยังไม่ได้ยืนยัน Tier ปัจจุบันของ App Service ในเอกสารนี้ ควรตรวจสอบใน Azure Portal จริง)</span>
@@ -575,9 +574,9 @@
         </tbody>
       </table>
       <div class="note">
-        <span class="lang-th">Administration → Database ในแอปใช้เวลาตอบสนองของ query "list tables" (เกิน ~2.5 วินาที) เป็นตัวบ่งชี้ว่าฐานข้อมูลเพิ่ง resume จากการ pause หรือไม่ — ไม่ใช่การเช็คสถานะผ่าน Azure Resource Manager โดยตรง</span>
-        <span class="lang-en">The Administration → Database page in the app uses the response time of the "list tables" query (over ~2.5 seconds) as an indicator of whether the database just resumed from a pause — it is not a direct status check via Azure Resource Manager.</span>
-        <span class="lang-jp">アプリのAdministration → Databaseページでは、「list tables」クエリの応答時間（約2.5秒超）を、データベースが一時停止から復帰したばかりかどうかの指標として使用しています — Azure Resource Managerを介した直接的なステータスチェックではありません。</span>
+        <span class="lang-th">Administration → Database ในแอปใช้เวลาตอบสนองของ query "list tables" (เกิน ~2.5 วินาที) เป็นสัญญาณทั่วไปว่า "มีบางอย่างผิดปกติ" เท่านั้น — <b>ไม่ใช่</b>ตัวบ่งชี้การ resume จากการ pause อีกต่อไป (Basic tier ไม่มี auto-pause ให้ resume) และไม่ใช่การเช็คสถานะผ่าน Azure Resource Manager โดยตรงเช่นเดิม</span>
+        <span class="lang-en">The Administration → Database page in the app uses the response time of the "list tables" query (over ~2.5 seconds) only as a generic "something's off" signal — it is <b>no longer</b> a pause/resume indicator (the Basic tier has no auto-pause to resume from), and, as before, it is not a direct status check via Azure Resource Manager.</span>
+        <span class="lang-jp">アプリのAdministration → Databaseページでは、「list tables」クエリの応答時間（約2.5秒超）を、単に「何かがおかしい」という汎用的なシグナルとしてのみ使用しています — Basic tierには復帰すべきauto-pauseがないため、<b>もはや</b>一時停止からの復帰を示す指標ではなく、また従来通りAzure Resource Managerを介した直接的なステータスチェックでもありません。</span>
       </div>
     </section>
 
