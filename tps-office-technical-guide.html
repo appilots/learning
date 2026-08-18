@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คู่มือเทคนิค (IT) — TPS Office Digital Tools</title>
+<title>คู่มือเทคนิค (IT) — GuruApp</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -260,21 +260,21 @@
     <button type="button" data-lang="en">EN</button>
     <button type="button" data-lang="ja">JP</button>
   </div>
-  <span class="tag">TPS OFFICE · TECHNICAL / IT GUIDE</span>
+  <span class="tag">GuruApp · GATEWAY TO UNIFIED RESOURCES &amp; UTILITIES — TECHNICAL / IT GUIDE</span>
   <h1>
     <span class="lang-th">คู่มือเทคนิค (สำหรับทีม IT)</span>
     <span class="lang-en">Technical Guide (for the IT Team)</span>
     <span class="lang-jp">技術ガイド（IT担当者向け）</span>
   </h1>
   <p>
-    <span class="lang-th">สถาปัตยกรรมระบบและรายละเอียดฐานข้อมูลของ TPS Office Digital Tools</span>
-    <span class="lang-en">System architecture and database details for TPS Office Digital Tools</span>
-    <span class="lang-jp">TPS Office Digital Toolsのシステムアーキテクチャとデータベースの詳細</span>
+    <span class="lang-th">สถาปัตยกรรมระบบและรายละเอียดฐานข้อมูลของ GuruApp</span>
+    <span class="lang-en">System architecture and database details for GuruApp</span>
+    <span class="lang-jp">GuruAppのシステムアーキテクチャとデータベースの詳細</span>
   </p>
   <p style="font-size:12px; opacity:.75; margin-top:4px;">
-    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-16 — บันทึกการย้าย Backend จาก Azure Functions ไป App Service, คอลัมน์ใหม่ (savingHours widened, updatedAt, MasterEmployees.email/mobilePhone), และบั๊ก INT truncation ที่เพิ่งแก้</span>
-    <span class="lang-en">Last content update: 2026-08-16 — documented the Azure Functions → App Service backend migration, new columns (widened savingHours, updatedAt, MasterEmployees.email/mobilePhone), and the newly-fixed INT truncation bug.</span>
-    <span class="lang-jp">最終更新日：2026-08-16 — Azure Functions → App Serviceへのバックエンド移行、新規カラム（savingHoursの拡張、updatedAt、MasterEmployees.email/mobilePhone）、および修正済みのINT切り捨てバグを記録しました。</span>
+    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-18 — เปลี่ยนชื่อระบบเป็น GuruApp ทั้งหมด, คอลัมน์ใหม่สำหรับสถานะ "พักโครงการชั่วคราว" (<code>pausedAt</code>, <code>pausedDaysTotal</code>), ตารางใหม่ <code>ProjectActivityLog</code>, เพิ่มเอกสารกลไกแจ้งเตือนทางอีเมลผ่าน Microsoft Graph</span>
+    <span class="lang-en">Last content update: 2026-08-18 — the system was fully renamed to GuruApp, new columns for the "On Hold" status (<code>pausedAt</code>, <code>pausedDaysTotal</code>), a new <code>ProjectActivityLog</code> table, and documented the Microsoft Graph email notification mechanism.</span>
+    <span class="lang-jp">最終更新日：2026-08-18 — システム名をGuruAppに全面変更、「一時停止」ステータス用の新規カラム（<code>pausedAt</code>、<code>pausedDaysTotal</code>）、新規テーブル<code>ProjectActivityLog</code>、Microsoft Graphによるメール通知の仕組みを文書化しました。</span>
   </p>
   <br>
   <a class="back" href="https://appilots.github.io/learning/tps-office-user-guide.html">
@@ -393,9 +393,9 @@
     <section id="stack">
       <h2><span class="badge">2</span><span class="lang-th">Tech Stack ที่ใช้สร้างระบบ</span><span class="lang-en">Tech Stack</span><span class="lang-jp">技術スタック</span></h2>
       <p class="lead">
-        <span class="lang-th">เทคโนโลยีหลักที่ใช้สร้างและรันระบบ TPS Office Digital Tools แบ่งตามชั้นการทำงาน</span>
-        <span class="lang-en">The core technologies used to build and run TPS Office Digital Tools, organized by layer.</span>
-        <span class="lang-jp">TPS Office Digital Toolsの構築・実行に使用する主要技術（レイヤー別）。</span>
+        <span class="lang-th">เทคโนโลยีหลักที่ใช้สร้างและรันระบบ GuruApp แบ่งตามชั้นการทำงาน</span>
+        <span class="lang-en">The core technologies used to build and run GuruApp, organized by layer.</span>
+        <span class="lang-jp">GuruAppの構築・実行に使用する主要技術（レイヤー別）。</span>
       </p>
       <div class="stack-grid">
         <div class="stack-item">
@@ -668,6 +668,28 @@
           <span class="lang-jp"><b>既知の残存制限：</b>クライアント（<code>src/config/permissions.js</code>）とサーバー（<code>api/src/shared/auth.js</code>）はそれぞれ独自に<code>PEOPLE</code>のコピーを保持しています — クライアント／サーバー間で共有される単一の情報源はまだ存在しません（各側3つの別リストから1つのリストへ改善済み）。</span>
         </p>
       </div>
+      <div class="card">
+        <h4><span class="lang-th">อีเมลแจ้งเตือน: Delegated Graph <code>/me/sendMail</code>, ไม่มี Service Account</span><span class="lang-en">Email notifications: delegated Graph <code>/me/sendMail</code>, no service account</span><span class="lang-jp">メール通知：delegated GraphによるOn Hold <code>/me/sendMail</code>、サービスアカウントなし</span></h4>
+        <p>
+          <span class="lang-th">ทุกอีเมลที่ระบบส่งออกไป (<code>src/services/emailService.js</code>) ใช้ <code>msalInstance.acquireTokenSilent()</code> ดึง access token ของผู้ใช้ที่ล็อกอินอยู่ (scope <code>Mail.Send</code>, ดู <code>mailRequest</code> ใน <code>authConfig.js</code>) แล้วยิงตรงไปที่ Graph <code>POST /me/sendMail</code> — อีเมลจึงส่งออกจากกล่องจดหมายของผู้ใช้คนนั้นเอง (ปรากฏใน Sent Items ของเขา) ไม่ใช่จาก Shared Mailbox หรือ Service Account ใดๆ ทั้งหมดเป็น fire-and-forget: อีเมลส่งไม่สำเร็จจะไม่ block หรือ rollback การบันทึกข้อมูลที่ทำให้เกิดอีเมลนั้น</span>
+          <span class="lang-en">Every email the system sends (<code>src/services/emailService.js</code>) uses <code>msalInstance.acquireTokenSilent()</code> to get the signed-in user's own access token (<code>Mail.Send</code> scope, see <code>mailRequest</code> in <code>authConfig.js</code>) and calls Graph's <code>POST /me/sendMail</code> directly — so every email is sent from that user's own mailbox (it shows up in their own Sent Items), never from a shared mailbox or service account. All of it is fire-and-forget: a failed send never blocks or rolls back the record change that triggered it.</span>
+          <span class="lang-jp">システムが送信するすべてのメール（<code>src/services/emailService.js</code>）は、<code>msalInstance.acquireTokenSilent()</code>でログイン中のユーザー自身のアクセストークンを取得し（<code>Mail.Send</code>スコープ、<code>authConfig.js</code>の<code>mailRequest</code>参照）、Graphの<code>POST /me/sendMail</code>を直接呼び出します — そのため、すべてのメールはそのユーザー自身のメールボックスから送信され（本人のSent Itemsに残ります）、共有メールボックスやサービスアカウントからは送信されません。すべてfire-and-forgetであり、送信失敗がその原因となったデータ変更をブロックしたりロールバックしたりすることはありません。</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">承認者通知<br>(2026-08-01〜)</span><span class="lang-en">Approver notification<br>(since 2026-08-01)</span><span class="lang-jp">承認者通知<br>（2026-08-01〜）</span></th><td>
+              <span class="lang-th"><code>sendProjectApprovalEmail()</code> — เฉพาะตอนสร้าง Project ใหม่ ส่งถึงผู้สร้างเอง + Section/Department Approver ที่ตั้งไว้บน Project นั้น (สูงสุด 3 คน หัก duplicate ด้วย email ตัวพิมพ์เล็ก)</span>
+              <span class="lang-en">On create only, to the creator plus that Project's Section/Department Approvers (up to 3 people, de-duplicated by lowercased email).</span>
+              <span class="lang-jp">作成時のみ、作成者本人とそのProjectに設定されたSection／Department承認者に送信（最大3名、小文字化したメールアドレスで重複排除）。</span>
+            </td></tr>
+            <tr><th><span class="lang-th">แจ้งการเปลี่ยนแปลง<br>(เพิ่ม 2026-08-18)</span><span class="lang-en">Change notification<br>(added 2026-08-18)</span><span class="lang-jp">変更通知<br>（2026-08-18追加）</span></th><td>
+              <span class="lang-th"><code>sendProjectChangeNotification()</code> — ทุกครั้งที่สร้าง<b>หรือ</b>แก้ไข Project ส่งถึงที่อยู่คงที่ <code>santi.s@attg.co.th</code> เพียงที่เดียว เป็น Information copy แยกจากอีเมลแจ้งผู้อนุมัติด้านบนโดยสิ้นเชิง</span>
+              <span class="lang-en">On every create <b>and</b> every edit, to the single fixed address <code>santi.s@attg.co.th</code> only — an Information copy, entirely separate from the approver notification above.</span>
+              <span class="lang-jp">作成時<b>および</b>編集時の両方で、固定アドレス<code>santi.s@attg.co.th</code>のみに送信されます — 上記の承認者通知とは完全に独立した、情報共有目的のコピーです。</span>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section id="sync">
@@ -770,6 +792,16 @@
             <span class="lang-en">Added 2026-08-16 — the source SharePoint list (EmailName / Mobile-phone columns) already has this data, and <code>MasterApprovers</code> already reads it, but the "Sync Employee Master to Azure SQL" Power Automate Flow doesn't map these 2 columns yet, so every row reads NULL until the Flow is fixed (outside this repo) — the destination columns are prepared ahead of time so Power Champions' phone/email auto-fill starts working the moment the Flow is updated, with no further code change needed.</span>
             <span class="lang-jp">2026-08-16に追加 — 元となるSharePointリスト（EmailName／Mobile-phoneカラム）には既にこのデータがあり、<code>MasterApprovers</code>も既に読み取っていますが、「Sync Employee Master to Azure SQL」Power Automate Flowはまだこの2カラムをマッピングしていないため、Flowが修正されるまで（本リポジトリの外での作業）全行がNULLとなります — Flowが更新された瞬間にPower Championsの電話番号／メール自動入力が機能し始めるよう、コード側の変更なしで済むように、あらかじめ格納先カラムを用意してあります。</span>
           </td></tr>
+          <tr><th><code>pausedAt</code> / <code>pausedDaysTotal</code> <span class="pill blue">new</span></th><td>
+            <span class="lang-th">เพิ่ม 2026-08-17 บนตาราง <code>Projects</code> — ก่อนหน้านี้สถานะ "On Hold" ตัดยอดสะสมเป็น 0 ทันทีเพราะไม่มีที่เก็บ "วันที่กดพัก" เลย <code>pausedAt</code> (DATE, NULL) คือวันที่ Project เข้าสู่ On Hold ล่าสุด ใช้เป็น effective end date แทน <code>endDate</code> เมื่อสถานะเป็น On Hold; <code>pausedDaysTotal</code> (INT, DEFAULT 0) สะสมจำนวนวันของทุกช่วงพักที่จบไปแล้ว ให้สูตรคำนวณวันที่ผ่านไปจริงหักช่วงที่พักออกเมื่อกลับมาทำต่อ ทั้งคู่คำนวณฝั่ง Frontend โดย <code>resolvePauseTracking()</code> ใน <code>ProjectsPage.jsx</code> ทุกครั้งที่เปลี่ยนสถานะ ไม่ใช่ trigger ฝั่ง DB — ดูสูตรเต็มที่ <code>computeAccruedValue()</code> ใน <code>useLivePlatformData.js</code> และเงื่อนไขการใช้งานข้อ 8</span>
+            <span class="lang-en">Added 2026-08-17 to the <code>Projects</code> table — previously "On Hold" cut the accrued value to 0 immediately because there was nowhere to store "the date it was paused." <code>pausedAt</code> (DATE, NULL) is the date the Project most recently entered On Hold, used as the effective end date in place of <code>endDate</code> while On Hold; <code>pausedDaysTotal</code> (INT, DEFAULT 0) accumulates the day-count of every completed past pause period, so the elapsed-days formula can subtract paused time back out once work resumes. Both are computed client-side by <code>resolvePauseTracking()</code> in <code>ProjectsPage.jsx</code> on every status change, not a DB-side trigger — see the full formula in <code>computeAccruedValue()</code> (<code>useLivePlatformData.js</code>) and Business Rules section 8.</span>
+            <span class="lang-jp">2026-08-17に<code>Projects</code>テーブルへ追加 — 以前は「一時停止」となると、「一時停止された日付」を保存する場所が全くなかったため、累積値が即座に0になっていました。<code>pausedAt</code>（DATE、NULL許容）は、Projectが直近で一時停止状態になった日付で、一時停止中は<code>endDate</code>の代わりに実効終了日として使用されます。<code>pausedDaysTotal</code>（INT、デフォルト0）は、過去に完了したすべての一時停止期間の日数を積算し、作業再開後に経過日数の計算式が一時停止期間を差し引けるようにします。両方とも、ステータス変更のたびに<code>ProjectsPage.jsx</code>内の<code>resolvePauseTracking()</code>によりクライアント側で計算されます（DB側のトリガーではありません）— 完全な計算式は<code>computeAccruedValue()</code>（<code>useLivePlatformData.js</code>）とBusiness Rules第8項を参照してください。</span>
+          </td></tr>
+          <tr><th><code>ProjectActivityLog</code> <span class="pill blue">new table</span></th><td>
+            <span class="lang-th">เพิ่ม 2026-08-18 — ตาราง audit log แยกต่างหาก (ไม่ใช่คอลัมน์บน <code>Projects</code>) บันทึกทุกครั้งที่มีการสร้าง/แก้ไข Project: <code>projectId</code>, <code>projectName</code>, <code>workType</code> ("TPS"/"IT"), <code>company</code>, <code>action</code> ("created"/"edited"), <code>actorName</code>, <code>actorEmail</code>, <code>occurredAt</code>, และ <code>details</code> (NVARCHAR(MAX), สรุป field ที่เปลี่ยนแบบ "ก่อน → หลัง" คำนวณโดย <code>summarizeProjectChanges()</code> ใน <code>ProjectsPage.jsx</code>) — <code>actorEmail</code> เขียนจาก <code>auth.email</code> ที่ยืนยันฝั่ง Server เท่านั้น ไม่เคยเชื่อค่าจาก client body เดียวกับ pattern ของ <code>LoginLog</code> เดิม เขียนผ่าน route <code>api-appservice/src/routes/projectActivityLog.js</code> (POST เปิดให้ผู้ใช้ที่ล็อกอินทุกคน, GET จำกัดเฉพาะ Admin)</span>
+            <span class="lang-en">Added 2026-08-18 — a separate audit-log table (not a column on <code>Projects</code>) recording every Project create/edit: <code>projectId</code>, <code>projectName</code>, <code>workType</code> ("TPS"/"IT"), <code>company</code>, <code>action</code> ("created"/"edited"), <code>actorName</code>, <code>actorEmail</code>, <code>occurredAt</code>, and <code>details</code> (NVARCHAR(MAX), a "before → after" field-diff summary computed by <code>summarizeProjectChanges()</code> in <code>ProjectsPage.jsx</code>) — <code>actorEmail</code> is always written from the server-verified <code>auth.email</code>, never trusted from the client body, the same pattern the existing <code>LoginLog</code> table already uses. Written via <code>api-appservice/src/routes/projectActivityLog.js</code> (POST open to any signed-in user, GET restricted to Admins).</span>
+            <span class="lang-jp">2026-08-18追加 — <code>Projects</code>のカラムではなく、独立した監査ログテーブルとして、Projectの作成・編集のたびに以下を記録します：<code>projectId</code>、<code>projectName</code>、<code>workType</code>（"TPS"／"IT"）、<code>company</code>、<code>action</code>（"created"／"edited"）、<code>actorName</code>、<code>actorEmail</code>、<code>occurredAt</code>、および<code>details</code>（NVARCHAR(MAX)、<code>ProjectsPage.jsx</code>の<code>summarizeProjectChanges()</code>が算出する「変更前→変更後」のフィールド差分要約）— <code>actorEmail</code>は常にサーバー側で検証済みの<code>auth.email</code>から書き込まれ、クライアントのリクエストボディの値は信用しません。既存の<code>LoginLog</code>テーブルと同じパターンです。<code>api-appservice/src/routes/projectActivityLog.js</code>経由で書き込まれます（POSTはログイン済みの全ユーザーに開放、GETはAdminのみに制限）。</span>
+          </td></tr>
         </tbody>
       </table>
       <div class="note">
@@ -848,9 +880,9 @@
 </div>
 
 <footer>
-  <span class="lang-th">TPS Office Digital Tools — ATTG Group · Technical / IT Guide</span>
-  <span class="lang-en">TPS Office Digital Tools — ATTG Group · Technical / IT Guide</span>
-  <span class="lang-jp">TPS Office Digital Tools — ATTG Group · Technical / IT Guide</span>
+  <span class="lang-th">GuruApp · Gateway to Unified Resources &amp; Utilities — ATTG Group · Technical / IT Guide</span>
+  <span class="lang-en">GuruApp · Gateway to Unified Resources &amp; Utilities — ATTG Group · Technical / IT Guide</span>
+  <span class="lang-jp">GuruApp · Gateway to Unified Resources &amp; Utilities — ATTG Group · Technical / IT Guide</span>
 </footer>
 
 <script>

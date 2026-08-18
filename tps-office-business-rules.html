@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เงื่อนไขการใช้งาน (Business Rules) — TPS Office Digital Tools</title>
+<title>เงื่อนไขการใช้งาน (Business Rules) — GuruApp</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -272,21 +272,21 @@
     <button type="button" data-lang="en">EN</button>
     <button type="button" data-lang="ja">JP</button>
   </div>
-  <span class="tag">TIPS · TPS &amp; IT PROJECT SYSTEM — BUSINESS RULES</span>
+  <span class="tag">GuruApp · GATEWAY TO UNIFIED RESOURCES &amp; UTILITIES — BUSINESS RULES</span>
   <h1>
     <span class="lang-th">เงื่อนไขการใช้งานและกฎเชิงธุรกิจ</span>
     <span class="lang-en">Usage Conditions &amp; Business Rules</span>
     <span class="lang-jp">利用条件・業務ルール</span>
   </h1>
   <p>
-    <span class="lang-th">รวมเงื่อนไข กติกา และตรรกะการทำงานทั้งหมดที่ระบบ TIPS ใช้จริง ตั้งแต่เริ่มโครงการจนถึงปัจจุบัน — สำหรับผู้ดูแลระบบและผู้ใช้งานระดับหัวหน้างานขึ้นไป</span>
-    <span class="lang-en">Every real condition, rule, and piece of business logic built into TIPS from project start through today — for administrators and supervisor-level users and above.</span>
-    <span class="lang-jp">プロジェクト開始から現在まで、TIPSに実装されているすべての条件・ルール・業務ロジックをまとめたもの — 管理者および監督職以上のユーザー向け。</span>
+    <span class="lang-th">รวมเงื่อนไข กติกา และตรรกะการทำงานทั้งหมดที่ระบบ GuruApp ใช้จริง ตั้งแต่เริ่มโครงการจนถึงปัจจุบัน — สำหรับผู้ดูแลระบบและผู้ใช้งานระดับหัวหน้างานขึ้นไป</span>
+    <span class="lang-en">Every real condition, rule, and piece of business logic built into GuruApp from project start through today — for administrators and supervisor-level users and above.</span>
+    <span class="lang-jp">プロジェクト開始から現在まで、GuruAppに実装されているすべての条件・ルール・業務ロジックをまとめたもの — 管理者および監督職以上のユーザー向け。</span>
   </p>
   <p style="font-size:12px; opacity:.75; margin-top:4px;">
-    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-16 — เพิ่มตรรกะการคำนวณสะสมรายวัน (Live Accrual) สำหรับชั่วโมงที่ลดได้/ลดกระดาษ, กฎเฉพาะของ Power Champions, และ KPI Targets ที่ตั้งค่าได้จากหน้า Administration</span>
-    <span class="lang-en">Last content update: 2026-08-16 — added the day-by-day live accrual logic for hours saved/paper reduced, Power Champions' own special rules, and the admin-configurable KPI Targets.</span>
-    <span class="lang-jp">最終更新日：2026-08-16 — 削減時間／紙削減の日次ライブ集計ロジック、Power Champions独自のルール、Administrationページで設定可能なKPI Targetsを追加しました。</span>
+    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-18 — สถานะ "พักโครงการชั่วคราว" เปลี่ยนจากตัด 0 ทันทีเป็นค้างยอด ณ วันที่กดพัก แล้วข้ามช่วงที่พักเมื่อกลับมาทำต่อ (ดูข้อ 8), Power Champion ที่ผูกกับ Project จริงเปลี่ยนมาใช้ยอดสะสมสดแบบเดียวกับ Project Registration แทนค่าคงที่ต่อปี (ดูข้อ 9), เปลี่ยนชื่อระบบเป็น GuruApp ทั้งหมด</span>
+    <span class="lang-en">Last content update: 2026-08-18 — the "On Hold" status changed from cutting to 0 immediately to freezing the accrued value at the pause date, then skipping the paused duration on resume (see section 8); a Power Champion linked to a real Project now uses the same live accrued value as Project Registration instead of a fixed per-year figure (see section 9); the system was fully renamed to GuruApp.</span>
+    <span class="lang-jp">最終更新日：2026-08-18 — 「一時停止」ステータスが即座に0にする方式から、一時停止日時点の累積値を凍結し、再開時に停止期間をスキップする方式に変更されました（第8項参照）。実際のProjectに紐付いたPower Championは、固定の年間値ではなくProject Registrationと同じライブ累積値を使用するようになりました（第9項参照）。システム名はGuruAppに全面変更されました。</span>
   </p>
   <br>
   <a class="back" href="https://appilots.github.io/learning/tps-office-user-guide.html">
@@ -439,31 +439,50 @@
     <section id="cancelled">
       <h2><span class="badge">4</span><span class="lang-th">โครงการที่ยกเลิก/พักไว้ (Cancelled / On Hold)</span><span class="lang-en">Cancelled / On Hold Projects</span><span class="lang-jp">キャンセル／保留中のプロジェクト</span></h2>
       <p class="lead">
-        <span class="lang-th">โครงการที่เปลี่ยนสถานะเป็น "ยกเลิกโครงการ" หรือ "พักโครงการชั่วคราว" จะไม่สะสมยอด "ชั่วโมงที่ลดได้"/"ลดกระดาษ" เลย ไม่ว่าจะตั้งอัตราต่อเดือนไว้เท่าไหร่ก็ตาม (เพิ่ม "On Hold" เข้ามาคู่กับ "Cancelled" เมื่อ 2026-08-16 พร้อมกับระบบสะสมรายวัน — ดูหมวด 10 "ตรรกะเบื้องหลังตัวเลข KPI")</span>
-        <span class="lang-en">A Project whose status is "Cancelled" or "On Hold" never accrues any "hours saved"/"paper reduced" total, no matter what monthly rate is on file ("On Hold" was added alongside "Cancelled" on 2026-08-16, together with the new day-by-day accrual system — see section 6, "Logic Behind the KPI Numbers").</span>
-        <span class="lang-jp">ステータスが「キャンセル」または「一時保留」のプロジェクトは、月間レートがどのような値であっても「削減時間」／「紙削減」の集計が一切発生しません（「On Hold」は2026-08-16に日次集計システムと同時に「Cancelled」と並んで追加されました — セクション6「KPI数値の裏側にあるロジック」を参照）。</span>
+        <span class="lang-th"><b>อัปเดต 2026-08-17:</b> "ยกเลิกโครงการ" กับ "พักโครงการชั่วคราว" ไม่ได้ทำงานเหมือนกันอีกต่อไป — ยกเลิกยังคงเป็น 0 เสมอเหมือนเดิม แต่พักโครงการชั่วคราวตอนนี้ "ค้างยอด" ไว้ ณ วันที่กดพัก แทนที่จะรีเซ็ตเป็น 0 (ดูหมวด 6 "ตรรกะเบื้องหลังตัวเลข KPI" สำหรับตัวอย่างคำนวณ)</span>
+        <span class="lang-en"><b>Updated 2026-08-17:</b> "Cancelled" and "On Hold" no longer behave the same way — Cancelled still always reads 0, but On Hold now <b>freezes</b> the accrued total at the date it was paused, instead of resetting to 0 (see section 6, "Logic Behind the KPI Numbers", for a worked example).</span>
+        <span class="lang-jp"><b>2026-08-17更新：</b>「キャンセル」と「一時保留」はもはや同じ動作をしません — キャンセルは引き続き常に0ですが、一時保留は現在、0にリセットされるのではなく、保留にした時点の累計値を<b>凍結</b>します（計算例はセクション6「KPI数値の裏側にあるロジック」を参照）。</span>
       </p>
       <div class="card accent-red">
-        <h4><span class="lang-th">เหตุผล</span><span class="lang-en">Reasoning</span><span class="lang-jp">理由</span></h4>
+        <h4><span class="lang-th">ยกเลิกโครงการ (Cancelled) — เป็น 0 เสมอ ตัดออกจากทุกยอดรวม</span><span class="lang-en">Cancelled — always 0, excluded from every total</span><span class="lang-jp">キャンセル — 常に0、すべての集計から除外</span></h4>
         <p>
-          <span class="lang-th">โครงการที่ยกเลิกไม่เคยส่งมอบผลลัพธ์ตามที่วางแผนไว้จริง จึงไม่ควรทำให้ตัวเลข "ประหยัดได้เท่าไหร่" สูงเกินจริง — โครงการที่พักไว้ชั่วคราวก็เช่นกัน เพราะหยุดดำเนินการจริงตั้งแต่วันที่พัก แม้จะยังไม่ถูกยกเลิกถาวรก็ตาม</span>
-          <span class="lang-en">A cancelled project never delivered what it originally projected, so it shouldn't inflate any "how much have we actually saved" number — an On Hold project is treated the same way, since work has genuinely stopped from the day it was paused, even though it isn't permanently cancelled.</span>
-          <span class="lang-jp">キャンセルされたプロジェクトは当初予定していた成果を達成していないため、「実際にどれだけ削減できたか」という数値を過大に見せるべきではありません — 一時保留中のプロジェクトも同様に扱われます。完全にキャンセルされたわけではありませんが、保留となった日から実質的に作業が停止しているためです。</span>
+          <span class="lang-th">โครงการที่ยกเลิกไม่เคยส่งมอบผลลัพธ์ตามที่วางแผนไว้จริง จึงไม่ควรทำให้ตัวเลข "ประหยัดได้เท่าไหร่" สูงเกินจริง — พฤติกรรมนี้ไม่เปลี่ยนแปลง</span>
+          <span class="lang-en">A cancelled project never delivered what it originally projected, so it shouldn't inflate any "how much have we actually saved" number — this behavior is unchanged.</span>
+          <span class="lang-jp">キャンセルされたプロジェクトは当初予定していた成果を達成していないため、「実際にどれだけ削減できたか」という数値を過大に見せるべきではありません — この動作に変更はありません。</span>
+        </p>
+      </div>
+      <div class="card accent-orange">
+        <h4><span class="lang-th">พักโครงการชั่วคราว (On Hold) — ค้างยอด ณ วันที่พัก ไม่ใช่ 0</span><span class="lang-en">On Hold — freezes at the pause date, not 0</span><span class="lang-jp">一時保留 — 保留日で凍結、0ではない</span></h4>
+        <p>
+          <span class="lang-th">เดิม On Hold ถูกปฏิบัติเหมือน Cancelled ทุกประการ (เป็น 0 เสมอ) — แต่พบว่านั่นทำให้งานที่ทำไปแล้วจริงก่อนกดพัก "หายไป" จาก Dashboard ทันที ทั้งที่ยังไม่ได้ถูกยกเลิก ตอนนี้ระบบจะ<b>เก็บวันที่กดพักไว้ (pausedAt)</b> แล้วคำนวณยอดสะสมค้างไว้ ณ วันนั้น (เหมือนกับที่สถานะ "เสร็จสิ้น" ใช้วันสิ้นสุดโครงการ) — ยอดจะไม่โตขึ้นอีกระหว่างที่ยังพักอยู่ แต่ก็ไม่ลดลงเป็น 0 เช่นกัน</span>
+          <span class="lang-en">On Hold used to be treated exactly like Cancelled (always 0) — but that meant real work already done before pausing would vanish from the Dashboard immediately, even though the Project hadn't actually been cancelled. The system now <b>stores the date it was paused (pausedAt)</b> and freezes the accrued total there (the same treatment "Completed" already gives the project's end date) — the number stops growing while paused, but it doesn't drop to 0 either.</span>
+          <span class="lang-jp">以前は一時保留もキャンセルとまったく同じ扱い（常に0）でした — しかしそれでは、実際にキャンセルされたわけではないのに、保留前にすでに行った実際の作業がDashboardから即座に消えてしまうことになります。現在システムは<b>保留にした日付（pausedAt）</b>を保存し、その時点で累計値を凍結します（「完了」ステータスがプロジェクト終了日に対して行うのと同じ扱いです）— 保留中は数値が増加しなくなりますが、0に戻ることもありません。</span>
+        </p>
+        <p>
+          <span class="lang-th"><b>กลับมาทำต่อ (Resume):</b> ถ้าเปลี่ยนสถานะออกจาก On Hold ภายหลัง (เช่น กลับเป็น "กำลังดำเนินการ") ระบบจะบันทึกจำนวนวันที่พักไปสะสมไว้ (pausedDaysTotal) แล้วคำนวณยอดต่อโดย<b>ข้ามช่วงที่พักไป</b> — ไม่นับรวมเป็นวันที่ทำงานจริง แม้จะพัก-กลับมาทำต่อหลายรอบก็ยังคำนวณถูกต้องสะสมไปเรื่อยๆ</span>
+          <span class="lang-en"><b>Resuming:</b> if the status later changes away from On Hold (e.g. back to "In Progress"), the system banks the number of days it was paused (pausedDaysTotal) and continues accruing while <b>skipping the paused period</b> — those days never count as real working time. This stays correct even across multiple pause/resume cycles on the same Project.</span>
+          <span class="lang-jp"><b>再開：</b>後でステータスが一時保留から変更された場合（例：「進行中」に戻る）、システムは保留していた日数を積算し（pausedDaysTotal）、<b>保留期間をスキップして</b>集計を継続します — その期間は実際の作業日数としてカウントされません。同一プロジェクトで複数回の保留・再開を繰り返しても正しく積算されます。</span>
         </p>
       </div>
       <div class="card">
-        <h4><span class="lang-th">ตัวเลขที่ถูกตัดออก</span><span class="lang-en">What gets excluded</span><span class="lang-jp">除外される項目</span></h4>
+        <h4><span class="lang-th">ตัวเลขที่ถูกตัดออก (เฉพาะ Cancelled)</span><span class="lang-en">What gets excluded (Cancelled only)</span><span class="lang-jp">除外される項目（キャンセルのみ）</span></h4>
+        <p>
+          <span class="lang-th">รายการด้านล่างนี้ใช้กับ <b>Cancelled เท่านั้น</b> — On Hold ยังคงมีส่วนร่วมในทุกยอดรวมด้านล่าง เพียงแต่เป็นยอดที่ค้างไว้ ไม่ใช่ยอดที่ยังโตขึ้นเรื่อยๆ:</span>
+          <span class="lang-en">The list below applies to <b>Cancelled only</b> — an On Hold Project still contributes to every total below, just with a frozen (not still-growing) number:</span>
+          <span class="lang-jp">以下のリストは<b>キャンセルのみ</b>に適用されます — 一時保留中のプロジェクトは以下のすべての集計に引き続き寄与しますが、増加し続ける数値ではなく凍結された数値です：</span>
+        </p>
         <ul>
           <li><span class="lang-th">การ์ด KPI ในหน้า Projects (ชั่วโมงที่ลดได้ / ลดกระดาษเฉลี่ย)</span><span class="lang-en">The KPI cards on the Projects page (hours saved / average paper reduction)</span><span class="lang-jp">Projectsページ内のKPIカード（削減時間／平均紙削減率）</span></li>
           <li><span class="lang-th">การ์ดมูลค่าบน Executive Dashboard (Automation Value, Paperless Value)</span><span class="lang-en">The Executive Dashboard value cards (Automation Value, Paperless Value)</span><span class="lang-jp">Executive Dashboardの価値カード（Automation Value、Paperless Value）</span></li>
           <li><span class="lang-th">Strategic Goals Pillar cards, กราฟ Reduce Time by Division/Section, กราฟ Paper Reduction Trend</span><span class="lang-en">Strategic Goals Pillar cards, the Reduce Time by Division/Section charts, the Paper Reduction Trend chart</span><span class="lang-jp">Strategic Goals Pillarカード、Reduce Time by Division/Sectionグラフ、Paper Reduction Trendグラフ</span></li>
           <li><span class="lang-th">Section Dashboard (ManagerDashboardPage) ทุกตัวเลข</span><span class="lang-en">Every number on the Section Dashboard (ManagerDashboardPage)</span><span class="lang-jp">Section Dashboard（ManagerDashboardPage）のすべての数値</span></li>
+          <li><span class="lang-th">หน้าอันดับมูลค่าโครงการ (Project Value Rankings) — ดูหมวด 8</span><span class="lang-en">The Project Value Rankings page — see section 8</span><span class="lang-jp">プロジェクト価値ランキングページ — セクション8を参照</span></li>
         </ul>
       </div>
       <div class="note">
-        <span class="lang-th"><b>ยังคงมองเห็น:</b> Project ที่ถูกยกเลิก/พักไว้ยังแสดงในตาราง/รายการ Projects ตามปกติ (แค่ไม่ถูกนับในยอดรวม) — และ "ความคืบหน้าเฉลี่ย" ยังนับ Project เหล่านี้รวมอยู่ด้วย เพราะไม่ใช่ตัวเลขที่อ้างว่า "ประหยัดได้" ทุกจุดที่แสดงยอดชั่วโมง/กระดาษของ Project ที่ยกเลิก/พักไว้ จะมีข้อความกำกับ "(ตั้งไว้ X ต่อเดือน — [สถานะ] จึงไม่นับยอดสะสม)" เพื่อยืนยันว่าตัวเลขที่กรอกไม่ได้หายไป แค่ไม่ถูกนับ</span>
-        <span class="lang-en"><b>Still visible:</b> a Cancelled or On Hold Project still shows normally in the Projects table/list (just not counted in totals) — and "average progress" still includes them, since progress isn't a claim about savings. Everywhere the hours/paper figure for a Cancelled/On Hold Project is shown, a note reading "(set at X/month — [status] so it isn't counted)" confirms the entered rate hasn't disappeared, it's simply excluded from the running total.</span>
-        <span class="lang-jp"><b>引き続き表示される：</b>キャンセルまたは保留中のプロジェクトはProjectsのテーブル／一覧に通常どおり表示されます（集計に含まれないだけです）— また「平均進捗率」にはこれらのプロジェクトも含まれます。進捗率は削減実績を示すものではないためです。キャンセル／保留中のプロジェクトの削減時間／紙の数値が表示される箇所には必ず「（月間Xに設定 — [ステータス]のため集計対象外）」という注記が表示され、入力した数値が消えたわけではなく、単に集計から除外されていることを示します。</span>
+        <span class="lang-th"><b>ยังคงมองเห็น:</b> Project ที่ถูกยกเลิก/พักไว้ยังแสดงในตาราง/รายการ Projects ตามปกติเสมอ — และ "ความคืบหน้าเฉลี่ย" ยังนับ Project เหล่านี้รวมอยู่ด้วย เพราะไม่ใช่ตัวเลขที่อ้างว่า "ประหยัดได้" ข้อความกำกับ "(ตั้งไว้ X ต่อเดือน — [สถานะ] จึงไม่นับยอดสะสม)" จะขึ้นเฉพาะตอนที่ยอดสะสมจริงเป็น 0 เท่านั้น (เช่น Cancelled เสมอ, หรือ On Hold ที่เพิ่งพักในวันเดียวกัน) — On Hold ที่มียอดค้างไว้จริงจะแสดงตัวเลขนั้นตามปกติ ไม่มีข้อความกำกับ</span>
+        <span class="lang-en"><b>Still visible:</b> a Cancelled or On Hold Project always shows normally in the Projects table/list — and "average progress" still includes them, since progress isn't a claim about savings. The note "(set at X/month — [status] so it isn't counted)" only appears when the real accrued total is 0 (always true for Cancelled; true for On Hold only if it was paused the same day). An On Hold Project with a genuine frozen total just shows that number normally, with no note.</span>
+        <span class="lang-jp"><b>引き続き表示される：</b>キャンセルまたは保留中のプロジェクトは常にProjectsのテーブル／一覧に通常どおり表示されます — また「平均進捗率」にはこれらのプロジェクトも含まれます。進捗率は削減実績を示すものではないためです。「（月間Xに設定 — [ステータス]のため集計対象外）」という注記は、実際の累計値が0の場合にのみ表示されます（キャンセルの場合は常に該当、一時保留の場合は同日に保留にした場合のみ該当）。実際に凍結された累計値を持つ一時保留中のプロジェクトは、注記なしでその数値がそのまま表示されます。</span>
       </div>
       <figure class="shot">
         <img src="images/rule-cancelled-note.jpg" alt="วงกลมล้อมข้อความกำกับที่คอลัมน์ลดเวลาของ Project ที่ยกเลิก" onerror="this.classList.add('broken')">
@@ -542,9 +561,9 @@
           </tbody>
         </table>
         <p>
-          <span class="lang-th"><b>"วันสิ้นสุดที่มีผล" ขึ้นกับสถานะ:</b> ยกเลิก/พักไว้ → ยอดสะสม = 0 เสมอ · เสร็จสิ้น → ใช้วันสิ้นสุดโครงการเต็มช่วง (แม้เสร็จก่อนกำหนดก็นับเต็ม) · ยังไม่เริ่ม/กำลังดำเนินการ → ใช้ <code>min(วันนี้, วันสิ้นสุดโครงการ)</code> ปัดค่าติดลบ (วันเริ่มยังไม่ถึง) เป็น 0 เสมอ</span>
-          <span class="lang-en"><b>"Effective end date" depends on status:</b> Cancelled/On Hold → accrued total is always 0 · Completed → uses the full project end date (counts fully even if finished early) · Not Started/In Progress → uses <code>min(today, project end date)</code>, with negative values (start date not yet reached) always floored to 0.</span>
-          <span class="lang-jp"><b>「有効終了日」はステータスによって決まります：</b>キャンセル／保留中 → 累計は常に0 · 完了 → プロジェクト終了日を全期間分使用（早期完了でも全期間分カウント）· 未着手／進行中 → <code>min(今日, プロジェクト終了日)</code>を使用し、負の値（開始日未到来）は常に0に切り捨て。</span>
+          <span class="lang-th"><b>"วันสิ้นสุดที่มีผล" ขึ้นกับสถานะ (อัปเดต 2026-08-17):</b> ยกเลิก → ยอดสะสม = 0 เสมอ · <b>พักโครงการชั่วคราว → ใช้วันที่กดพัก (pausedAt) เป็นวันสิ้นสุดที่มีผล</b> (ค้างยอดไว้ ไม่ใช่ 0) · เสร็จสิ้น → ใช้วันสิ้นสุดโครงการเต็มช่วง (แม้เสร็จก่อนกำหนดก็นับเต็ม) · ยังไม่เริ่ม/กำลังดำเนินการ → ใช้ <code>min(วันนี้, วันสิ้นสุดโครงการ)</code> ปัดค่าติดลบ (วันเริ่มยังไม่ถึง) เป็น 0 เสมอ — และในทุกสถานะที่ไม่ใช่พักไว้ จำนวนวันที่ผ่านไปจริงจะ<b>หักลบวันที่เคยพักไว้ในอดีตออกก่อน (pausedDaysTotal)</b> ถ้า Project นั้นเคยผ่านการพัก-กลับมาทำต่อมาก่อน</span>
+          <span class="lang-en"><b>"Effective end date" depends on status (updated 2026-08-17):</b> Cancelled → accrued total is always 0 · <b>On Hold → uses the date it was paused (pausedAt) as the effective end date</b> (frozen, not 0) · Completed → uses the full project end date (counts fully even if finished early) · Not Started/In Progress → uses <code>min(today, project end date)</code>, with negative values (start date not yet reached) always floored to 0 — and for every non-paused status, the real elapsed-day count first <b>subtracts any past paused days on record (pausedDaysTotal)</b>, if this Project has ever been paused and resumed before.</span>
+          <span class="lang-jp"><b>「有効終了日」はステータスによって決まります（2026-08-17更新）：</b>キャンセル → 累計は常に0 · <b>一時保留 → 保留にした日付（pausedAt）を有効終了日として使用</b>（凍結、0ではない）· 完了 → プロジェクト終了日を全期間分使用（早期完了でも全期間分カウント）· 未着手／進行中 → <code>min(今日, プロジェクト終了日)</code>を使用し、負の値（開始日未到来）は常に0に切り捨て — 保留中以外のすべてのステータスにおいて、このProjectが過去に保留・再開されたことがある場合、実経過日数の計算前に<b>過去の保留日数（pausedDaysTotal）</b>が差し引かれます。</span>
         </p>
         <p>
           <span class="lang-th">ทศนิยมแสดงผลปัดไม่เกิน 2 ตำแหน่งทุกจุด — ไม่มี Cache/Cron แยกต่างหาก คำนวณสดล้วนๆ ทุกครั้งที่โหลดหน้า</span>
@@ -590,6 +609,26 @@
           <span class="lang-th">→ กรอก <b>0 ชม. 38 นาที/เดือน</b> ในช่อง "ชั่วโมงที่ลดได้ (ต่อเดือน)" <b>และ</b>ตั้งวันเริ่มต้น/สิ้นสุดโครงการให้ครอบคลุมเต็มช่วง 3 ปีของแผน (เช่น วันนี้ → อีก 3 ปีข้างหน้า) — สำคัญมาก เพราะระบบจะเอายอดต่อเดือนนี้ไปกระจายเป็นยอดสะสมตามจำนวนวันที่ผ่านไปจริงในช่วงที่ตั้งไว้ ถ้าตั้งช่วงเวลาสั้นกว่าแผนจริง ยอดสะสมจะโตเร็วเกินความเป็นจริง งานลักษณะนี้เหมาะกับหัวข้อการปรับปรุง "TPS Standard Work and Kaizen" (ลดขั้นตอน/เวลาการทำงาน) มากกว่า "IT Digital Tools" เพราะเป็นการปรับปรุงกระบวนการหน้างาน ไม่ใช่การพัฒนาแอป</span>
           <span class="lang-en">→ Enter <b>0 hrs 38 min/month</b> in "Hours Saved (per month)" <b>and</b> set the project's start/end dates to span the full 3-year plan (e.g. today → 3 years from now) — this matters a lot, because the system spreads this monthly figure into an accrued total based on how many days have really elapsed within that window. Setting a shorter window than the real plan would make the accrued number climb faster than reality. Work like this fits the "TPS Standard Work and Kaizen" work type (Improvement Topic: reducing process time/steps) better than "IT Digital Tools", since it's a floor-level process improvement, not app development.</span>
           <span class="lang-jp">→ 「削減時間（月間）」欄に<b>0時間38分／月</b>を入力し、<b>かつ</b>プロジェクトの開始日／終了日を3ヵ年プラン全体（例：今日から3年後まで）に設定してください — これは非常に重要です。システムはこの月間数値を、設定した期間内で実際に経過した日数に基づいて累計に配分するためです。実際のプランより短い期間を設定すると、累計値が実際より速く増加してしまいます。この種の作業はアプリ開発ではなく現場レベルのプロセス改善であるため、「IT Digital Tools」よりも「TPS Standard Work and Kaizen」（改善テーマ：工程・時間の削減）の方が適しています。</span>
+        </p>
+      </div>
+      <div class="card accent-cyan">
+        <h4><span class="lang-th">📐 ตัวอย่างที่ 3 — พักโครงการแล้วกลับมาทำต่อ (On Hold freeze + resume)</span><span class="lang-en">📐 Example 3 — pausing a Project, then resuming it (On Hold freeze + resume)</span><span class="lang-jp">📐 例3 — プロジェクトを保留し、その後再開する（On Holdの凍結と再開）</span></h4>
+        <p>
+          <span class="lang-th">สมมติ Project ตั้งไว้ <b>10 ชม./เดือน</b> (อัตราต่อวัน = 10 ÷ 30.4375 = 0.3286 ชม./วัน) เริ่ม 1 ม.ค. 2026:</span>
+          <span class="lang-en">Say a Project is set to <b>10 hrs/month</b> (daily rate = 10 ÷ 30.4375 = 0.3286 hrs/day), starting 1 Jan 2026:</span>
+          <span class="lang-jp">例えば、あるProjectが<b>月10時間</b>に設定され（日次レート = 10 ÷ 30.4375 = 0.3286時間／日）、2026年1月1日に開始したとします：</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">1. กดพัก 31 ม.ค. (ผ่านมา 30 วัน)</span><span class="lang-en">1. Paused on 31 Jan (30 days in)</span><span class="lang-jp">1. 1月31日に保留（30日経過）</span></th><td><code>0.3286 × 30 = 9.86 <span class="lang-th">ชม. — ค้างไว้ตรงนี้</span><span class="lang-en">hrs — frozen here</span><span class="lang-jp">時間 — ここで凍結</span></code></td></tr>
+            <tr><th><span class="lang-th">2. กลับมาทำต่อ 20 ก.พ. (พักไป 20 วัน)</span><span class="lang-en">2. Resumed on 20 Feb (paused 20 days)</span><span class="lang-jp">2. 2月20日に再開（20日間保留）</span></th><td><code>pausedDaysTotal = 20 <span class="lang-th">วัน (บันทึกไว้ ยังไม่ลบยอดอะไร)</span><span class="lang-en">days (banked, doesn't remove anything yet)</span><span class="lang-jp">日（積算のみ、まだ何も差し引かれない）</span></code></td></tr>
+            <tr><th><span class="lang-th">3. เปิดดูวันที่ 2 มี.ค. (ผ่านมาจริง 60 วันจากวันเริ่ม)</span><span class="lang-en">3. Checked again on 2 Mar (60 raw days since start)</span><span class="lang-jp">3. 3月2日に再確認（開始から実際60日経過）</span></th><td><code>60 − 20 = 40 <span class="lang-th">วันที่นับจริง</span><span class="lang-en">effective days</span><span class="lang-jp">有効日数</span> → 0.3286 × 40 = 13.14 <span class="lang-th">ชม.</span><span class="lang-en">hrs</span><span class="lang-jp">時間</span></code></td></tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="lang-th">→ ระหว่างวันที่ 31 ม.ค. – 20 ก.พ. (ตอนยังพักอยู่) ตัวเลขในตารางจะค้างที่ <b>9.86 ชม.</b> นิ่งๆ ไม่ขยับ แม้จะเปิดหน้าเว็บซ้ำกี่ครั้งก็ตาม — พอกลับมาทำต่อและเวลาผ่านไปอีก ตัวเลขจะเริ่มขยับขึ้นอีกครั้งจาก <b>13.14 ชม.</b> (ไม่ใช่นับต่อจาก 9.86 ชม. ตรงๆ เพราะ 20 วันที่พักไปถูกข้ามไม่นับ) ถ้า Project นี้พัก-กลับมาทำต่ออีกในอนาคต หลักการเดียวกันนี้จะใช้ซ้ำทุกครั้ง</span>
+          <span class="lang-en">→ Between 31 Jan and 20 Feb (while still paused), the table shows a steady <b>9.86 hrs</b> that doesn't move, no matter how many times the page is reloaded — once resumed and more time passes, the number starts climbing again from <b>13.14 hrs</b> (not simply continuing on from 9.86 hrs, since the 20 paused days are skipped). If this Project is paused and resumed again later, the same logic repeats each time.</span>
+          <span class="lang-jp">→ 1月31日から2月20日まで（保留中）は、ページを何度再読み込みしても表の数値は<b>9.86時間</b>のまま変化しません — 再開後さらに時間が経過すると、数値は<b>13.14時間</b>から再び増加を始めます（9.86時間からそのまま継続するのではなく、保留していた20日間はスキップされます）。このProjectが今後再び保留・再開された場合も、同じロジックがそのたびに適用されます。</span>
         </p>
       </div>
       <div class="card">
@@ -707,44 +746,49 @@
     <section id="champions-rules">
       <h2><span class="badge">9</span><span class="lang-th">กฎเฉพาะของ Power Champions</span><span class="lang-en">Power Champions' Special Rules</span><span class="lang-jp">Power Champions独自のルール</span></h2>
       <p class="lead">
-        <span class="lang-th">Power Champions <b>ไม่ใช้</b>สูตรสะสมรายวันแบบ Project Registration — ยังคงเป็นตัวเลข "ต่อปี" คงที่ตามเดิม</span>
-        <span class="lang-en">Power Champions do <b>not</b> use the day-by-day accrual formula that Project Registration does — the figures remain fixed "per year" values.</span>
-        <span class="lang-jp">Power Championsは、Project Registrationの日次集計方式を<b>使用しません</b> — 数値は従来どおり固定の「年間」値のままです。</span>
+        <span class="lang-th">แก้ไข 2026-08-18: Power Champion ที่ผูกกับ Project จริงที่ลงทะเบียนไว้ <b>ใช้สูตรสะสมรายวันเดียวกับ Project Registration ทุกประการ</b> (รวมผลของสถานะพักโครงการ) — ตัวเลข "ต่อปี" คงที่ใช้เฉพาะกรณี Champion <b>ไม่ได้ผูก</b> กับ Project ใดเลย (พิมพ์ชื่อเองแล้วไม่ตรงกับ Project ในระบบ หรือ Project ที่เคยผูกถูกเปลี่ยนชื่อ/ลบไปแล้ว)</span>
+        <span class="lang-en">Updated 2026-08-18: a Power Champion linked to a real registered Project now uses <b>the exact same day-by-day accrual formula as Project Registration</b> (including the On Hold pause effect) — the fixed "per year" figure only applies when a Champion is <b>not</b> linked to any Project at all (a free-typed name that doesn't match one on file, or a once-linked Project that was later renamed or deleted).</span>
+        <span class="lang-jp">2026-08-18更新：実際に登録済みのProjectに紐付けられたPower Championは、<b>Project Registrationとまったく同じ日次集計の計算式</b>（On Hold一時停止の影響を含む）を使用します — 固定の「年間」数値が適用されるのは、Championが<b>どのProjectにも紐付いていない</b>場合のみです（システム上に一致するものがない自由入力の名前、または一度紐付いていたProjectがその後名称変更・削除された場合）。</span>
       </p>
       <div class="card accent-orange">
-        <h4><span class="lang-th">ทำไมถึงต่างจาก Project Registration</span><span class="lang-en">Why this differs from Project Registration</span><span class="lang-jp">Project Registrationと異なる理由</span></h4>
+        <h4><span class="lang-th">ทำไมกรณีไม่ผูก Project ยังใช้ตัวเลขคงที่ต่อปี</span><span class="lang-en">Why the unlinked fallback still uses a fixed per-year number</span><span class="lang-jp">Project未紐付けの場合になぜ固定の年間数値を使うのか</span></h4>
         <p>
-          <span class="lang-th">เคยลองออกแบบให้ Power Champions คิดเป็น "ผลรวม 3 ปี" ตามกรอบ FY'2026-2028 แล้วพบปัญหา: Champion ที่ถูกเลือกในปี FY'2027 หรือ FY'2028 จะเหลือเวลาไม่ครบ 3 ปีในแผน ทำให้สูตรรวม 3 ปีขัดแย้งกันเองระหว่างปีที่เลือกต่างกัน จึงกลับมาใช้ "ต่อปี" คงที่ ซึ่งตีความได้ตรงไปตรงมาไม่ว่า Champion จะถูกเลือกปีไหน</span>
-          <span class="lang-en">A "3-year total" framing (matching the FY'2026-2028 roadmap) was tried first, but broke down: a Champion selected in FY'2027 or FY'2028 has fewer than 3 years left on the roadmap, so the 3-year-total formula meant different things depending on which year someone was selected in. Reverted to a fixed "per year" figure instead, which reads consistently no matter which year a Champion is selected.</span>
-          <span class="lang-jp">最初はFY2026〜2028のロードマップに合わせた「3年間合計」という枠組みを試しましたが、破綻しました。FY2027またはFY2028に選出されたChampionはロードマップ上の残り期間が3年に満たないため、3年合計の計算式が選出年によって意味が変わってしまいます。そのため、どの年に選出されても一貫して読み取れる固定の「年間」値に戻しました。</span>
+          <span class="lang-th">เคยลองออกแบบให้ Power Champions คิดเป็น "ผลรวม 3 ปี" ตามกรอบ FY'2026-2028 แล้วพบปัญหา: Champion ที่ถูกเลือกในปี FY'2027 หรือ FY'2028 จะเหลือเวลาไม่ครบ 3 ปีในแผน ทำให้สูตรรวม 3 ปีขัดแย้งกันเองระหว่างปีที่เลือกต่างกัน จึงกลับมาใช้ "ต่อปี" คงที่ ซึ่งตีความได้ตรงไปตรงมาไม่ว่า Champion จะถูกเลือกปีไหน — ตัวเลขนี้ใช้เป็น fallback เมื่อไม่มี Project จริงให้คำนวณสดได้เท่านั้น</span>
+          <span class="lang-en">A "3-year total" framing (matching the FY'2026-2028 roadmap) was tried first, but broke down: a Champion selected in FY'2027 or FY'2028 has fewer than 3 years left on the roadmap, so the 3-year-total formula meant different things depending on which year someone was selected in. Reverted to a fixed "per year" figure instead, which reads consistently no matter which year a Champion is selected — this number only ever gets used as a fallback when there's no real Project to compute a live figure from.</span>
+          <span class="lang-jp">最初はFY2026〜2028のロードマップに合わせた「3年間合計」という枠組みを試しましたが、破綻しました。FY2027またはFY2028に選出されたChampionはロードマップ上の残り期間が3年に満たないため、3年合計の計算式が選出年によって意味が変わってしまいます。そのため、どの年に選出されても一貫して読み取れる固定の「年間」値に戻しました — この数値は、ライブ計算の元になる実Projectが存在しない場合のフォールバックとしてのみ使用されます。</span>
         </p>
       </div>
       <div class="card">
-        <h4><span class="lang-th">การเชื่อมกับ Project Registration (เพิ่ม 2026-08-16)</span><span class="lang-en">Linking to Project Registration (added 2026-08-16)</span><span class="lang-jp">Project Registrationとの連携（2026-08-16追加）</span></h4>
+        <h4><span class="lang-th">การเชื่อมกับ Project Registration (เพิ่ม 2026-08-16, ปรับเป็นค่าสด 2026-08-18)</span><span class="lang-en">Linking to Project Registration (added 2026-08-16, made live 2026-08-18)</span><span class="lang-jp">Project Registrationとの連携（2026-08-16追加、2026-08-18にライブ化）</span></h4>
         <p>
-          <span class="lang-th">ช่อง "ชื่อ Project ที่ทำ" เปลี่ยนจากพิมพ์อิสระเป็น Dropdown เลือกจาก Project ที่ลงทะเบียนไว้จริง (พิมพ์เองได้ถ้ายังไม่มีในระบบ) — เมื่อเลือกแล้ว ระบบดึงค่ามาให้อัตโนมัติ 1 ครั้งตอนเลือก (ไม่ผูกติดถาวร แก้ไขต่อได้อิสระ):</span>
-          <span class="lang-en">The "Project Name" field changed from free text to a Dropdown of actually-registered Projects (still free-typeable if not yet in the system). Selecting one auto-fills the following once, at the moment of selection (not permanently linked — still freely editable afterward):</span>
-          <span class="lang-jp">「実施したProject名」欄は自由入力から、実際に登録済みのProjectを選択するDropdownに変更されました（システムに未登録の場合は引き続き直接入力可）。選択すると、その時点で以下が自動入力されます（恒久的にリンクされるわけではなく、その後も自由に編集可能）：</span>
+          <span class="lang-th">ช่อง "ชื่อ Project ที่ทำ" เปลี่ยนจากพิมพ์อิสระเป็น Dropdown เลือกจาก Project ที่ลงทะเบียนไว้จริง (พิมพ์เองได้ถ้ายังไม่มีในระบบ) — เมื่อเลือกแล้ว ระบบเติมค่าต่อไปนี้ให้ทันที โดยใช้ยอดสะสม ณ วันนี้ของ Project นั้น (ไม่ใช่ค่าคงที่ × 12 อีกต่อไป):</span>
+          <span class="lang-en">The "Project Name" field changed from free text to a Dropdown of actually-registered Projects (still free-typeable if not yet in the system). Selecting one instantly fills in the following, using that Project's own accrued-to-date value (no longer a flat × 12):</span>
+          <span class="lang-jp">「実施したProject名」欄は自由入力から、実際に登録済みのProjectを選択するDropdownに変更されました（システムに未登録の場合は引き続き直接入力可）。選択すると、そのProject自身の本日時点の累積値を使って、以下が即座に入力されます（もはや固定の×12ではありません）：</span>
         </p>
         <table>
           <tbody>
-            <tr><th><span class="lang-th">ลดเวลาต่อปี (ชม.)</span><span class="lang-en">Hours saved / year</span><span class="lang-jp">年間削減時間</span></th><td><code><span class="lang-th">savingHours ของ Project (อัตราต่อเดือน) × 12</span><span class="lang-en">Project's savingHours (monthly rate) × 12</span><span class="lang-jp">Projectのsaving Hours（月間レート）× 12</span></code></td></tr>
-            <tr><th><span class="lang-th">ลดกระดาษต่อปี (แผ่น)</span><span class="lang-en">Sheets reduced / year</span><span class="lang-jp">年間削減枚数</span></th><td><code><span class="lang-th">paperSheetsPerMonth ของ Project × 12</span><span class="lang-en">Project's paperSheetsPerMonth × 12</span><span class="lang-jp">Projectのpaper SheetsPerMonth × 12</span></code></td></tr>
+            <tr><th><span class="lang-th">ลดเวลาต่อปี (ชม.)</span><span class="lang-en">Hours saved / year</span><span class="lang-jp">年間削減時間</span></th><td><code><span class="lang-th">ยอดสะสมของ Project ณ วันนี้ (สูตรเดียวกับข้อ 6)</span><span class="lang-en">The Project's own accrued-to-date value (same formula as section 6)</span><span class="lang-jp">Projectの本日時点の累積値（第6項と同じ計算式）</span></code></td></tr>
+            <tr><th><span class="lang-th">ลดกระดาษต่อปี (แผ่น)</span><span class="lang-en">Sheets reduced / year</span><span class="lang-jp">年間削減枚数</span></th><td><code><span class="lang-th">ยอดสะสมของ Project ณ วันนี้ เช่นเดียวกัน</span><span class="lang-en">Same, the Project's own accrued-to-date value</span><span class="lang-jp">同様に、Projectの本日時点の累積値</span></code></td></tr>
             <tr><th><span class="lang-th">วันเริ่ม-สิ้นสุด</span><span class="lang-en">Start/end date</span><span class="lang-jp">開始日／終了日</span></th><td><span class="lang-th">คัดลอกจาก Project ที่เลือกตรงๆ</span><span class="lang-en">Copied straight from the selected Project</span><span class="lang-jp">選択したProjectからそのままコピー</span></td></tr>
           </tbody>
         </table>
         <figure class="shot">
           <img src="images/rule-champion-project-dropdown.jpg" alt="วงกลมล้อม Dropdown ชื่อ Project ในฟอร์มเพิ่ม Power Champion" onerror="this.classList.add('broken')">
           <div class="fallback"><span>🖼️ <span class="lang-th">ภาพ: Dropdown "ชื่อ Project ที่ทำ" ในฟอร์มเพิ่ม Power Champion</span><span class="lang-en">Image: the "Project Name" Dropdown on the Add Power Champion form</span><span class="lang-jp">画像：Power Champion追加フォームの「実施したProject名」Dropdown</span></span><code>images/rule-champion-project-dropdown.jpg</code></div>
-          <figcaption><span class="lang-th">เลือก Project ที่นี่ — ช่องลดเวลา/ลดกระดาษต่อปีด้านล่างจะเติมให้อัตโนมัติ 1 ครั้ง</span><span class="lang-en">Select a Project here — the hours/sheets-per-year fields below auto-fill once</span><span class="lang-jp">ここでProjectを選択すると、下の年間削減時間／削減枚数欄が一度だけ自動入力されます</span></figcaption>
+          <figcaption><span class="lang-th">เลือก Project ที่นี่ — ช่องลดเวลา/ลดกระดาษต่อปีด้านล่างจะเติมยอดสะสม ณ วันนี้ให้ทันที</span><span class="lang-en">Select a Project here — the hours/sheets-per-year fields below instantly fill with its accrued-to-date value</span><span class="lang-jp">ここでProjectを選択すると、下の年間削減時間／削減枚数欄にその本日時点の累積値が即座に入力されます</span></figcaption>
         </figure>
+        <div class="note">
+          <span class="lang-th">ตราบใดที่ชื่อ Project ยังตรงกับ Project จริงในระบบ ทุกหน้าที่แสดง Champion นี้ (รายชื่อ, Ranking, การ์ดรายละเอียด, มูลค่าเงินคืน) จะคำนวณยอดสะสมสดใหม่ทุกครั้งที่เปิดดู — ไม่ใช่ใช้ค่าที่เติมไว้ตอนเลือกครั้งแรก ค่าที่เติมไว้นั้นจะถูกใช้แสดงผลจริงก็ต่อเมื่อ "การผูก" ขาดไปแล้วเท่านั้น (Project ถูกเปลี่ยนชื่อหรือลบ) เพื่อให้ยังมีตัวเลขให้แสดงแทนที่จะว่างเปล่า</span>
+          <span class="lang-en">As long as the Project name still matches a real Project on file, every place this Champion appears (list, Ranking, detail card, money returned) recomputes the accrued value live on every view — not the value that was filled in at selection time. That filled-in value only ever gets shown once the link has actually broken (the Project was renamed or deleted), so there's still a number to display instead of a blank.</span>
+          <span class="lang-jp">Project名が実際のProjectと一致し続けている限り、このChampionが表示されるすべての箇所（一覧、Ranking、詳細カード、還元金額）は、表示のたびに累積値をライブで再計算します — 選択時に入力された値ではありません。入力された値が実際に表示されるのは、紐付けが実際に切れた場合（Projectが名称変更または削除された場合）のみで、空欄にする代わりに何らかの数値を表示し続けるためです。</span>
+        </div>
       </div>
       <div class="card">
         <h4><span class="lang-th">มูลค่าเงินที่คืนให้บริษัท</span><span class="lang-en">Money returned to the company</span><span class="lang-jp">会社への還元金額</span></h4>
         <p>
-          <span class="lang-th">= (ลดเวลาต่อปี × 300 บาท/ชม.) + (ลดกระดาษต่อปี × 1 บาท/แผ่น) — คำนวณสดเสมอ ไม่เก็บเป็นค่าคงที่ในฐานข้อมูล เพื่อไม่ให้หลุด sync กับ 2 ตัวเลขต้นทาง</span>
-          <span class="lang-en">= (hours saved/year × 300 THB/hr) + (sheets reduced/year × 1 THB/sheet) — always computed live, never stored as a fixed value in the database, so it can never drift out of sync with the two source numbers.</span>
-          <span class="lang-jp">＝（年間削減時間 × 300バーツ／時間）＋（年間削減枚数 × 1バーツ／枚）— 常にライブで計算され、データベースに固定値として保存されることはないため、元となる2つの数値と乖離することがありません。</span>
+          <span class="lang-th">= (ลดเวลาต่อปี × 300 บาท/ชม.) + (ลดกระดาษต่อปี × 1 บาท/แผ่น) — ใช้ตัวเลขเดียวกับตารางด้านบน (ยอดสะสมสดถ้ายังผูกกับ Project จริง หรือค่าคงที่ต่อปีถ้าไม่ผูก) คำนวณสดเสมอ ไม่เก็บเป็นค่าคงที่ในฐานข้อมูล เพื่อไม่ให้หลุด sync กับตัวเลขต้นทาง</span>
+          <span class="lang-en">= (hours saved/year × 300 THB/hr) + (sheets reduced/year × 1 THB/sheet) — uses the exact same figures as the table above (the live accrued value while still linked to a real Project, or the fixed per-year value otherwise), always computed live and never stored as a fixed value in the database, so it can never drift out of sync with its source numbers.</span>
+          <span class="lang-jp">＝（年間削減時間 × 300バーツ／時間）＋（年間削減枚数 × 1バーツ／枚）— 上表とまったく同じ数値（実Projectに紐付いている間はライブの累積値、そうでない場合は固定の年間値）を使用し、常にライブで計算され、データベースに固定値として保存されることはないため、元となる数値と乖離することがありません。</span>
         </p>
       </div>
       <div class="card">
@@ -798,9 +842,9 @@
 </div>
 
 <footer>
-  <span class="lang-th">TIPS · TPS &amp; IT Project System — ATTG Group · Usage Conditions &amp; Business Rules</span>
-  <span class="lang-en">TIPS · TPS &amp; IT Project System — ATTG Group · Usage Conditions &amp; Business Rules</span>
-  <span class="lang-jp">TIPS · TPS &amp; IT Project System — ATTG Group · Usage Conditions &amp; Business Rules</span>
+  <span class="lang-th">GuruApp · Gateway to Unified Resources &amp; Utilities — ATTG Group · Usage Conditions &amp; Business Rules</span>
+  <span class="lang-en">GuruApp · Gateway to Unified Resources &amp; Utilities — ATTG Group · Usage Conditions &amp; Business Rules</span>
+  <span class="lang-jp">GuruApp · Gateway to Unified Resources &amp; Utilities — ATTG Group · Usage Conditions &amp; Business Rules</span>
 </footer>
 
 <script>
