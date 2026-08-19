@@ -634,9 +634,9 @@
       <div class="card">
         <h4><span class="lang-th">Time Reduction % คำนวณจากอะไร</span><span class="lang-en">What Time Reduction % is calculated from</span><span class="lang-jp">Time Reduction %の計算方法</span></h4>
         <p>
-          <span class="lang-th">= (รวม<b>ยอดสะสม</b>ชั่วโมงที่ลดได้ ทุก Project ที่ยังไม่ยกเลิก/พักไว้) ÷ (จำนวนผู้ถือ License O365 x ชั่วโมงทำงานมาตรฐานต่อปี) — ใช้ฐาน License (1,166 คน) แทนจำนวนพนักงานทั้งหมด (4,000+ คน) เพราะมีแค่คนถือ License เท่านั้นที่ใช้เครื่องมือ Power Platform ได้จริง การหารด้วยฐานพนักงานทั้งหมดจะทำให้ % ปัดเป็น 0 เสมอ — <b>"ชั่วโมงทำงานมาตรฐานต่อปี" ค่าเริ่มต้น 2,080 ชม. (8 ชม./วัน × 260 วันทำงาน) ตอนนี้ตั้งค่าใหม่ได้จากหน้า Administration → KPI Targets ไม่ใช่ค่าคงที่ตายตัวในโค้ดอีกต่อไป</b></span>
-          <span class="lang-en">= (sum of the <b>accrued</b> hours-saved total across every non-Cancelled/non-On-Hold Project) ÷ (O365 license holders × standard annual work hours) — uses the license count (1,166) instead of total headcount (4,000+), since only license holders can actually use these Power Platform tools; dividing by total headcount would always round to 0%. <b>"Standard annual work hours" defaults to 2,080 (8 hrs/day × 260 workdays) but is now admin-configurable from Administration → KPI Targets, no longer a fixed constant in the code.</b></span>
-          <span class="lang-jp">＝（キャンセル／保留中でないすべてのプロジェクトの<b>累計</b>削減時間の合計）÷（O365ライセンス保有者数 × 年間標準労働時間）— 全従業員数（4,000人以上）ではなくライセンス保有者数（1,166人）を使用します。実際にPower Platformツールを利用できるのはライセンス保有者のみであり、全従業員数で割ると常に0%に丸められてしまうためです。<b>「年間標準労働時間」はデフォルトで2,080時間（1日8時間×年間260労働日）ですが、現在はAdministration → KPI Targetsから管理者が設定可能になっており、コード内の固定定数ではなくなりました。</b></span>
+          <span class="lang-th">= (รวม<b>ยอดสะสม</b>ชั่วโมงที่ลดได้ ทุก Project ที่ยังไม่ยกเลิก/พักไว้) ÷ (จำนวนผู้ถือ License O365 x ชั่วโมงทำงานมาตรฐานต่อปี) — ใช้ฐาน License (1,166 คน) แทนจำนวนพนักงานทั้งหมด (4,000+ คน) เพราะมีแค่คนถือ License เท่านั้นที่ใช้เครื่องมือ Power Platform ได้จริง การหารด้วยฐานพนักงานทั้งหมดจะทำให้ % ปัดเป็น 0 เสมอ — <b>"ชั่วโมงทำงานมาตรฐานต่อปี" ค่าเริ่มต้น 1,984 ชม. (8 ชม./วัน × 248 วันทำงาน — ปรับจาก 260 วัน เป็น 2026-08-19 ให้ตรงกับวันทำงานจริงหลังหักวันหยุดนักขัตฤกษ์ของไทย) ตอนนี้ตั้งค่าใหม่ได้จากหน้า Administration → KPI Targets ไม่ใช่ค่าคงที่ตายตัวในโค้ดอีกต่อไป</b></span>
+          <span class="lang-en">= (sum of the <b>accrued</b> hours-saved total across every non-Cancelled/non-On-Hold Project) ÷ (O365 license holders × standard annual work hours) — uses the license count (1,166) instead of total headcount (4,000+), since only license holders can actually use these Power Platform tools; dividing by total headcount would always round to 0%. <b>"Standard annual work hours" defaults to 1,984 (8 hrs/day × 248 workdays — changed from 260 workdays on 2026-08-19 to match actual working days after Thai public holidays) but is now admin-configurable from Administration → KPI Targets, no longer a fixed constant in the code.</b></span>
+          <span class="lang-jp">＝（キャンセル／保留中でないすべてのプロジェクトの<b>累計</b>削減時間の合計）÷（O365ライセンス保有者数 × 年間標準労働時間）— 全従業員数（4,000人以上）ではなくライセンス保有者数（1,166人）を使用します。実際にPower Platformツールを利用できるのはライセンス保有者のみであり、全従業員数で割ると常に0%に丸められてしまうためです。<b>「年間標準労働時間」はデフォルトで1,984時間（1日8時間×年間248労働日 — タイの祝日を考慮し2026-08-19に260労働日から変更）ですが、現在はAdministration → KPI Targetsから管理者が設定可能になっており、コード内の固定定数ではなくなりました。</b></span>
         </p>
       </div>
       <div class="card">
@@ -828,7 +828,7 @@
           <tr><td>% Time Reduction</td><td>5%</td></tr>
           <tr><td><span class="lang-th">จำนวน Power Champions เป้าหมาย</span><span class="lang-en">Target Power Champions count</span><span class="lang-jp">目標Power Champions数</span></td><td>18</td></tr>
           <tr><td><span class="lang-th">จำนวนผู้ผ่านการอบรมเป้าหมาย</span><span class="lang-en">Target trained-user count</span><span class="lang-jp">目標研修修了者数</span></td><td>150</td></tr>
-          <tr><td><span class="lang-th">ชั่วโมงทำงานมาตรฐานต่อปี</span><span class="lang-en">Standard annual work hours</span><span class="lang-jp">年間標準労働時間</span></td><td>2,080</td></tr>
+          <tr><td><span class="lang-th">ชั่วโมงทำงานมาตรฐานต่อปี</span><span class="lang-en">Standard annual work hours</span><span class="lang-jp">年間標準労働時間</span></td><td>1,984</td></tr>
         </tbody>
       </table>
       <div class="note red">
