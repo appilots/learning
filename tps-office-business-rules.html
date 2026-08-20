@@ -284,9 +284,9 @@
     <span class="lang-jp">プロジェクト開始から現在まで、GuruAppに実装されているすべての条件・ルール・業務ロジックをまとめたもの — 管理者および監督職以上のユーザー向け。</span>
   </p>
   <p style="font-size:12px; opacity:.75; margin-top:4px;">
-    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-18 — สถานะ "พักโครงการชั่วคราว" เปลี่ยนจากตัด 0 ทันทีเป็นค้างยอด ณ วันที่กดพัก แล้วข้ามช่วงที่พักเมื่อกลับมาทำต่อ (ดูข้อ 8), Power Champion ที่ผูกกับ Project จริงเปลี่ยนมาใช้ยอดสะสมสดแบบเดียวกับ Project Registration แทนค่าคงที่ต่อปี (ดูข้อ 9), เปลี่ยนชื่อระบบเป็น GuruApp ทั้งหมด</span>
-    <span class="lang-en">Last content update: 2026-08-18 — the "On Hold" status changed from cutting to 0 immediately to freezing the accrued value at the pause date, then skipping the paused duration on resume (see section 8); a Power Champion linked to a real Project now uses the same live accrued value as Project Registration instead of a fixed per-year figure (see section 9); the system was fully renamed to GuruApp.</span>
-    <span class="lang-jp">最終更新日：2026-08-18 — 「一時停止」ステータスが即座に0にする方式から、一時停止日時点の累積値を凍結し、再開時に停止期間をスキップする方式に変更されました（第8項参照）。実際のProjectに紐付いたPower Championは、固定の年間値ではなくProject Registrationと同じライブ累積値を使用するようになりました（第9項参照）。システム名はGuruAppに全面変更されました。</span>
+    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-20 — เพิ่มหมวดใหม่ "กฎการให้คะแนน Evaluate Projects" (ข้อ 10): ปีงบประมาณ, ทำเนียบกรรมการแยกจาก Admin, เกณฑ์ 6 หมวดรวม 100 คะแนน, การจัดอันดับ, โครงสร้างรางวัลและกฎว่าผู้พัฒนาจริงเป็นผู้รับรางวัล</span>
+    <span class="lang-en">Last content update: 2026-08-20 — added a new "Evaluate Projects Scoring Rules" section (section 10): the fiscal year, the judging-panel roster being separate from Admin, the 6-category 100-point rubric, ranking logic, the reward structure, and the rule that the reward goes to whoever actually did the development.</span>
+    <span class="lang-jp">最終更新日：2026-08-20 — 新しい「プロジェクト評価の採点ルール」（第10項）を追加：会計年度、Adminとは別の審査委員名簿、6項目合計100点の採点基準、順位付けロジック、賞品の構成、実際に開発した人が受賞するというルール。</span>
   </p>
   <br>
   <a class="back" href="https://appilots.github.io/learning/tps-office-user-guide.html">
@@ -313,7 +313,8 @@
       <li><a href="#access"><span class="lang-th">7. สิทธิ์การเข้าถึงและ Admin</span><span class="lang-en">7. Access &amp; Admin Rights</span><span class="lang-jp">7. アクセス権限と管理者</span></a></li>
       <li><a href="#dashboard-structure"><span class="lang-th">8. โครงสร้างหน้า Dashboard</span><span class="lang-en">8. Dashboard Page Structure</span><span class="lang-jp">8. Dashboardページの構成</span></a></li>
       <li><a href="#champions-rules"><span class="lang-th">9. กฎเฉพาะของ Power Champions</span><span class="lang-en">9. Power Champions' Special Rules</span><span class="lang-jp">9. Power Champions独自のルール</span></a></li>
-      <li><a href="#kpi-targets"><span class="lang-th">10. KPI Targets (ตั้งค่าจาก Administration)</span><span class="lang-en">10. KPI Targets (set via Administration)</span><span class="lang-jp">10. KPI Targets（Administrationで設定）</span></a></li>
+      <li><a href="#evaluate-rules"><span class="lang-th">10. กฎการให้คะแนน Evaluate Projects</span><span class="lang-en">10. Evaluate Projects Scoring Rules</span><span class="lang-jp">10. プロジェクト評価の採点ルール</span></a></li>
+      <li><a href="#kpi-targets"><span class="lang-th">11. KPI Targets (ตั้งค่าจาก Administration)</span><span class="lang-en">11. KPI Targets (set via Administration)</span><span class="lang-jp">11. KPI Targets（Administrationで設定）</span></a></li>
     </ul>
   </nav>
 
@@ -801,8 +802,96 @@
       </div>
     </section>
 
+    <section id="evaluate-rules">
+      <h2><span class="badge">10</span><span class="lang-th">กฎการให้คะแนน Evaluate Projects</span><span class="lang-en">Evaluate Projects Scoring Rules</span><span class="lang-jp">プロジェクト評価の採点ルール</span></h2>
+      <p class="lead">
+        <span class="lang-th">เพิ่ม 2026-08-20: หน้าให้คะแนนเพื่อคัดเลือก Power Champion ประจำปี — มีกฎเฉพาะแยกจากส่วนอื่นของระบบดังนี้</span>
+        <span class="lang-en">Added 2026-08-20: the scoring page for the annual Power Champion selection has its own rules, separate from the rest of the system:</span>
+        <span class="lang-jp">2026-08-20追加：年次Power Champion選考の採点ページには、システムの他の部分とは独立した以下のルールがあります。</span>
+      </p>
+
+      <div class="card">
+        <h4><span class="lang-th">ปีงบประมาณ (Fiscal Year)</span><span class="lang-en">Fiscal Year</span><span class="lang-jp">会計年度</span></h4>
+        <p>
+          <span class="lang-th">TPS Office นับปีงบประมาณ <b>1 เมษายน – 31 มีนาคม</b> ไม่ใช่ปีปฏิทิน (ต่างจากตัวเลขอื่นในระบบที่อ้างอิงปีปฏิทิน) — Project ที่วันสิ้นสุดอยู่ในช่วง 1 เม.ย. 2569 – 31 มี.ค. 2570 จะถูกจัดเป็น FY'2027 เป็นต้น ตัวกรองปีทั้งในหน้า Evaluate Projects และ Project Value Rankings ใช้ตรรกะเดียวกันนี้ และ Default เป็นปีงบประมาณปัจจุบันเสมอ</span>
+          <span class="lang-en">TPS Office's fiscal year runs <b>1 April – 31 March</b>, not the calendar year (unlike other figures elsewhere in the system, which use calendar years). A Project whose end date falls between 1 Apr 2026 and 31 Mar 2027 is classified as FY'2027, and so on. The year filter on both the Evaluate Projects and Project Value Rankings pages uses this same logic, and always defaults to the current fiscal year.</span>
+          <span class="lang-jp">TPS Officeの会計年度は<b>4月1日～3月31日</b>で、暦年ではありません（システム内の他の数値が暦年基準であるのとは異なります）。終了日が2026年4月1日～2027年3月31日の範囲にあるProjectはFY2027として分類されます。Evaluate ProjectsページとProject Value Rankingsページの年度フィルターは同じロジックを使用し、常に現在の会計年度がデフォルトです。</span>
+        </p>
+      </div>
+
+      <div class="card accent-orange">
+        <h4><span class="lang-th">สิทธิ์การเข้าถึง — ทำเนียบกรรมการ (Evaluator) แยกจาก Admin</span><span class="lang-en">Access — the Evaluator roster is separate from Admin</span><span class="lang-jp">アクセス権限 — 審査委員（Evaluator）名簿はAdminとは別</span></h4>
+        <p>
+          <span class="lang-th">การเห็นเมนูและให้คะแนนได้ ควบคุมด้วยรายชื่อ Evaluator ซึ่งเป็นคนละชุดกับ Admin โดยเจตนา — บาง Admin ไม่ได้อยู่ในทำเนียบกรรมการ และบางกรรมการก็ไม่ใช่ Admin เลย บังคับทั้งฝั่ง Frontend (ซ่อนเมนู) และฝั่ง Backend (API ปฏิเสธคำขอเขียนข้อมูลจากบัญชีที่ไม่ใช่ Evaluator แม้จะพยายามเรียก API ตรงๆ ก็ตาม)</span>
+          <span class="lang-en">Who can see the menu and submit scores is controlled by the Evaluator list, deliberately kept separate from Admin — some Admins aren't on the judging panel, and some panel members aren't Admins at all. Enforced on both the Frontend (menu hidden) and the Backend (the API rejects write requests from any account that isn't an Evaluator, even if the API is called directly).</span>
+          <span class="lang-jp">メニューの表示および採点可否は、意図的にAdminとは別に管理されているEvaluatorリストによって制御されます — 一部のAdminは審査委員ではなく、一部の審査委員はAdminでは全くありません。フロントエンド（メニューの非表示）とバックエンド（Evaluatorでないアカウントからの書き込みリクエストは、APIを直接呼び出した場合でも拒否されます）の両方で強制されます。</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h4><span class="lang-th">เกณฑ์การให้คะแนน — 6 หมวด รวม 100 คะแนน</span><span class="lang-en">Scoring Rubric — 6 categories, 100 points total</span><span class="lang-jp">採点基準 — 6項目・合計100点</span></h4>
+        <p>
+          <span class="lang-th">ให้คะแนนได้เฉพาะ Project ที่สถานะ <b>Completed</b> เท่านั้น ตามเกณฑ์ 6 หมวดต่อไปนี้ (น้ำหนักปรับล่าสุด 2026-08-20 ให้หมวด 2 และ 3 เท่ากัน) — รายละเอียดระดับคะแนนแบบเต็มอยู่ที่ <a href="https://appilots.github.io/learning/tps-office-project-scoring-criteria.html" target="_blank" rel="noopener noreferrer">เกณฑ์การให้คะแนน Power Champion ↗</a> ซึ่งเป็นเอกสารต้นทางเดียวกับที่แสดงในแอปทุกคำ</span>
+          <span class="lang-en">Only Projects with status <b>Completed</b> are scorable, against the 6 categories below (weights last adjusted 2026-08-20 to give categories 2 and 3 equal weight) — full score-band detail lives at <a href="https://appilots.github.io/learning/tps-office-project-scoring-criteria.html" target="_blank" rel="noopener noreferrer">Power Champion Scoring Criteria ↗</a>, the same source document the app's own in-app rubric panels are copied from word-for-word.</span>
+          <span class="lang-jp">採点対象は<b>Completed</b>ステータスのProjectのみで、以下の6項目で評価します（配点は2026-08-20に項目2と3が同じ重みになるよう最終調整）— 詳細なスコア基準は<a href="https://appilots.github.io/learning/tps-office-project-scoring-criteria.html" target="_blank" rel="noopener noreferrer">Power Champion採点基準↗</a>を参照してください。アプリ内の採点基準パネルも、この文書と一字一句同じ内容です。</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">1. ผลลัพธ์ทางธุรกิจที่วัดผลได้</span><span class="lang-en">1. Measurable Business Result</span><span class="lang-jp">1. 測定可能な業務成果</span></th><td><code>35</code></td></tr>
+            <tr><th><span class="lang-th">2. การวิเคราะห์ปัญหาและ Root Cause</span><span class="lang-en">2. Problem Analysis &amp; Root Cause</span><span class="lang-jp">2. 問題分析とRoot Cause</span></th><td><code>20</code></td></tr>
+            <tr><th><span class="lang-th">3. นวัตกรรมและการประยุกต์ใช้เทคโนโลยี</span><span class="lang-en">3. Innovation &amp; Technology Application</span><span class="lang-jp">3. イノベーションと技術活用</span></th><td><code>20</code></td></tr>
+            <tr><th><span class="lang-th">4. ความยั่งยืนและศักยภาพขยายผล</span><span class="lang-en">4. Sustainability &amp; Scalability</span><span class="lang-jp">4. 持続可能性と展開可能性</span></th><td><code>10</code></td></tr>
+            <tr><th><span class="lang-th">5. การมีส่วนร่วมของทีม (เทียบสัดส่วนตามขนาดทีม)</span><span class="lang-en">5. Team Involvement (relative to team size)</span><span class="lang-jp">5. チームの関与度（チーム規模に応じて評価）</span></th><td><code>5</code></td></tr>
+            <tr><th><span class="lang-th">6. การนำเสนอและการตอบคำถาม</span><span class="lang-en">6. Presentation &amp; Q&amp;A</span><span class="lang-jp">6. 発表と質疑応答</span></th><td><code>10</code></td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <span class="lang-th">หมวดที่ 5 ตั้งใจใช้เกณฑ์ <b>สัดส่วนเทียบกับขนาดทีม</b> ไม่ใช่จำนวนคนขั้นต่ำแบบตายตัว — เพราะบางแผนกมีคนแค่ 2 คน (หัวหน้า+ลูกน้อง 1 คน) ทำให้เกณฑ์แบบ "ต้องมี 3 คนขึ้นไปจึงได้คะแนนเต็ม" กีดกันแผนกเล็กออกจากคะแนนเต็มโดยโครงสร้าง ไม่ว่าผลงานจะดีแค่ไหน</span>
+          <span class="lang-en">Category 5 deliberately uses a <b>proportion-of-team-size</b> criterion, not a fixed minimum headcount — because some departments have only 2 people total (1 head + 1 subordinate), a "must have 3+ people for full marks" rule would structurally lock small departments out of the top score no matter how good the work is.</span>
+          <span class="lang-jp">項目5は意図的に<b>チーム規模に対する比率</b>を基準としており、固定の最低人数ではありません — 一部の部署は合計2名（責任者1名＋部下1名）のみのため、「満点には3名以上必要」という基準では、成果の質にかかわらず小規模部署が構造的に満点から排除されてしまうためです。</span>
+        </div>
+        <p>
+          <span class="lang-th">ช่องกรอกคะแนนแต่ละหมวดมี <code>max</code> เท่ากับคะแนนเต็มของหมวดนั้น — ใส่เกินคะแนนเต็มไม่ได้ ช่องจะขึ้นกรอบแดงพร้อมข้อความแจ้งเตือนทันทีที่พิมพ์ และปุ่ม "บันทึกคะแนน" จะถูก disable ไว้จนกว่าทุกหมวดจะอยู่ในช่วงที่ถูกต้อง</span>
+          <span class="lang-en">Each category's input field has a <code>max</code> equal to that category's full points — a score above the max can't be entered; the field shows a red border and error text immediately as it's typed, and the "Save Score" button stays disabled until every category is within range.</span>
+          <span class="lang-jp">各項目の入力欄には、その項目の満点と同じ<code>max</code>値が設定されています — 満点を超える点数は入力できず、入力した瞬間に赤枠とエラーメッセージが表示されます。「採点を保存」ボタンは、すべての項目が有効な範囲に収まるまで無効化されたままです。</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h4><span class="lang-th">1 คนให้คะแนนได้ 1 Project ต่อ 1 ครั้งต่อปี</span><span class="lang-en">One score per evaluator, per Project, per fiscal year</span><span class="lang-jp">1人につき1プロジェクト・年度あたり1採点</span></h4>
+        <p>
+          <span class="lang-th">รหัสประจำตัวของการให้คะแนนแต่ละครั้งประกอบจาก <code>รหัส Project + FY ของ Project นั้น (จากวันสิ้นสุดจริง) + อีเมลผู้ประเมิน</code> — ใช้ FY ของ Project เองเสมอ ไม่ใช่ตัวกรองปีที่กำลังเลือกอยู่บนหน้าจอ (ซึ่งอาจเป็น "ทุกปี") กดปุ่ม "ให้คะแนน" ซ้ำจะเปิดคะแนนเดิมของตัวเองขึ้นมาแก้ไข ไม่ใช่สร้างรายการใหม่ซ้อนกัน</span>
+          <span class="lang-en">Each score's identity key is composed of <code>the Project's own ID + its fiscal year (from its real end date) + the evaluator's email</code> — always the Project's own FY, never the page's currently-selected year filter (which can be "all years"). Clicking "Score" again on an already-scored Project reopens that evaluator's existing score for editing, not a duplicate entry.</span>
+          <span class="lang-jp">各採点の識別キーは、<code>Project ID＋そのProjectの会計年度（実際の終了日から算出）＋評価者のメールアドレス</code>で構成されます — 常にProject自身のFYを使用し、画面上で現在選択されている年度フィルター（「全年度」の場合もある）は使用しません。すでに採点済みのProjectで再度「採点」をクリックすると、重複登録ではなく、その評価者自身の既存の採点が編集用に開かれます。</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h4><span class="lang-th">การจัดอันดับในแท็บ "ภาพรวม/สรุปผล"</span><span class="lang-en">Ranking in the "Overview / Ranking" tab</span><span class="lang-jp">「概要／集計」タブでの順位付け</span></h4>
+        <p>
+          <span class="lang-th">เรียงตามปี FY ใหม่สุดก่อน แล้วเรียงตามมูลค่าที่ลดได้ (บาท) มากไปน้อยในปีเดียวกัน — ใช้สูตรมูลค่าเดียวกับหน้า Project Value Rankings ทุกประการ: (ลดเวลาต่อปี × 300 บาท/ชม.) + (ลดกระดาษต่อปี × 1 บาท/แผ่น) คำนวณสดจากยอดสะสม ไม่ใช่ค่าคงที่</span>
+          <span class="lang-en">Sorted by fiscal year (newest first), then by value saved (THB, highest first within the same year) — using the exact same value formula as the Project Value Rankings page: (hours saved/year × 300 THB/hr) + (sheets reduced/year × 1 THB/sheet), computed live from the accrued value, not a fixed figure.</span>
+          <span class="lang-jp">会計年度の新しい順に並べ、同一年度内では削減金額（バーツ）の高い順にソートされます — Project Value Rankingsページとまったく同じ計算式を使用します：（年間削減時間 × 300バーツ／時間）＋（年間削減枚数 × 1バーツ／枚）。固定値ではなく、累積値からライブで計算されます。</span>
+        </p>
+      </div>
+
+      <div class="card accent-orange">
+        <h4><span class="lang-th">โครงสร้างรางวัลและผู้รับรางวัล</span><span class="lang-en">Reward Structure &amp; Who Receives It</span><span class="lang-jp">賞品の構成と受賞者</span></h4>
+        <p>
+          <span class="lang-th">จาก 20 Project ที่นำเสนอ คัดเลือก Top 6 ตามคะแนนรวมสูงสุด รับ Notebook + หุ่นยนต์ "Project Success" ส่วนอีก 14 Project ที่เหลือ (นำเสนอครบทุกทีมแต่ไม่ติด Top 6) ได้รับหุ่นยนต์ "Project Success" เป็นของที่ระลึก</span>
+          <span class="lang-en">Of the 20 Projects presented, the Top 6 by total score receive a Notebook + a "Project Success" robot; the other 14 (which presented but didn't make the Top 6) receive the "Project Success" robot as a keepsake.</span>
+          <span class="lang-jp">発表された20プロジェクトのうち、合計点上位6件はNotebook＋「Project Success」ロボットを受け取ります。残り14件（発表はしたが上位6件に入らなかったプロジェクト）は、記念品として「Project Success」ロボットを受け取ります。</span>
+        </p>
+        <div class="note red">
+          <span class="lang-th"><b>รางวัลมอบให้ผู้พัฒนาจริง ไม่ใช่ตำแหน่งบนกระดาษ:</b> หากหัวหน้า Section เป็นผู้ลงมือพัฒนาโครงการเอง รางวัลมอบให้หัวหน้า Section — แต่ถ้าลูกน้องในทีมเป็นผู้ลงมือพัฒนา ต้องมอบรางวัลให้ลูกน้องคนนั้นโดยตรง ไม่ใช่หัวหน้า Section แม้จะเป็นผู้รับผิดชอบ Project ในระบบก็ตาม (เพิ่ม 2026-08-20)</span>
+          <span class="lang-en"><b>The reward goes to whoever actually did the development, not whoever's listed as owner:</b> if a Section head personally built the Project, the Section head receives the reward — but if a team member built it, that team member receives it directly, not the Section head, even if the head is the Project's owner of record in the system. (Added 2026-08-20)</span>
+          <span class="lang-jp"><b>賞品は実際に開発した人に贈られます。書類上の担当者ではありません：</b>Section長自身がProjectを開発した場合はSection長が受賞します — ただし、チームメンバーが開発した場合は、システム上のProject責任者がSection長であっても、実際に開発したそのメンバー本人に直接贈られます。（2026-08-20追加）</span>
+        </div>
+      </div>
+    </section>
+
     <section id="kpi-targets">
-      <h2><span class="badge">10</span><span class="lang-th">KPI Targets (ตั้งค่าจาก Administration)</span><span class="lang-en">KPI Targets (set via Administration)</span><span class="lang-jp">KPI Targets（Administrationで設定）</span></h2>
+      <h2><span class="badge">11</span><span class="lang-th">KPI Targets (ตั้งค่าจาก Administration)</span><span class="lang-en">KPI Targets (set via Administration)</span><span class="lang-jp">KPI Targets（Administrationで設定）</span></h2>
       <p class="lead">
         <span class="lang-th">เพิ่ม 2026-08-16 — เป้าหมายกลางที่เคยเป็นค่าคงที่ในโค้ด ตอนนี้ตั้งค่าได้จากหน้าเว็บโดย Admin</span>
         <span class="lang-en">Added 2026-08-16 — the central targets used to be hardcoded constants; they're now admin-editable from the web app.</span>
