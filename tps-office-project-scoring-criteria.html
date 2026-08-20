@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เกณฑ์การใช้คะแนนสำหรับ Project Present</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B2A6B;
+    --navy-dark: #0D1A4A;
+    --blue: #2563EB;
+    --blue-dark: #1D4ED8;
+    --cyan: #00B7C3;
+    --green: #107C10;
+    --orange: #FFAA44;
+    --red: #D13438;
+    --violet: #7C3AED;
+    --ink: #0F172A;
+    --ink-light: #475569;
+    --surface: #FFFFFF;
+    --surface-muted: #F8FAFC;
+    --border: #E2E8F0;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Inter", "Noto Sans Thai", "Segoe UI", -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--surface-muted);
+    line-height: 1.65;
+  }
+  a { color: var(--blue); }
+  .header {
+    background: linear-gradient(160deg, #0D1729 0%, #1B2A6B 55%, #243680 100%);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .header .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .header h1 { font-size: 30px; margin: 0 0 8px; font-weight: 800; }
+  .header p { margin: 0; opacity: 0.85; font-size: 15px; }
+  .layout {
+    display: grid;
+    grid-template-columns: 250px minmax(0,1fr);
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .toc {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 28px 20px;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .toc h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-light); margin: 0 0 12px; }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: 2px; }
+  .toc a { display: block; padding: 7px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: 13.5px; }
+  .toc a:hover { background: var(--surface-muted); }
+  .toc-back-btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    margin-top: 18px; padding: 10px 14px; border-radius: 10px;
+    background: var(--navy); color: white !important; text-decoration: none;
+    font-size: 13px; font-weight: 700; text-align: center;
+  }
+  .toc-back-btn:hover { background: var(--navy-dark); }
+  main { padding: 36px 40px 80px; min-width: 0; }
+  section { margin-bottom: 52px; scroll-margin-top: 20px; }
+  section h2 {
+    font-size: 22px; font-weight: 800; margin: 0 0 6px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  section h2 .badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 9px;
+    background: var(--navy); color: white; font-size: 14px; font-weight: 800; flex-shrink: 0;
+  }
+  section > p.lead { color: var(--ink-light); margin: 0 0 22px; font-size: 14.5px; }
+  h3 { font-size: 16px; font-weight: 700; margin: 26px 0 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+  .card.accent-blue { border-left: 4px solid var(--blue); }
+  .card.accent-green { border-left: 4px solid var(--green); }
+  .card.accent-orange { border-left: 4px solid var(--orange); }
+  .card.accent-cyan { border-left: 4px solid var(--cyan); }
+  .card.accent-violet { border-left: 4px solid var(--violet); }
+  .card.accent-red { border-left: 4px solid var(--red); }
+  .card h4 { margin: 0 0 6px; font-size: 14.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .card p, .card ul, .card ol { margin: 6px 0 0; font-size: 13.5px; color: #374151; }
+  .card ul, .card ol { padding-right: 0; padding-left: 20px; }
+  .card li { margin-bottom: 5px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .note { background: #FFF8E6; border: 1px solid #F2D98A; border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #7A5B00; margin: 14px 0; }
+  .note.blue { background: #EAF3FF; border-color: #B9D8FF; color: #0B4C93; }
+  .note.red { background: #FDECEC; border-color: #F3B9B9; color: #8A1F22; }
+  .note.green { background: #EAF6EA; border-color: #B9DDB9; color: #0F5C0F; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 14px 0; }
+  th, td { text-align: right; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  th { text-align: right; background: var(--surface-muted); font-weight: 700; font-size: 12.5px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.03em; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+  .pill.blue { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .pill.green { background: rgba(16,124,16,0.12); color: var(--green); }
+  .pill.orange { background: rgba(255,170,68,0.18); color: #8A5300; }
+  .pill.violet { background: rgba(124,58,237,0.12); color: var(--violet); }
+  .pill.red { background: rgba(209,52,56,0.12); color: var(--red); }
+  .pill.gray { background: #EEF0F2; color: #4B5563; }
+  footer { text-align: center; padding: 30px; color: var(--ink-light); font-size: 12.5px; border-top: 1px solid var(--border); }
+
+  /* --- Judging-panel roster --- */
+  .panel-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 18px 0; }
+  .panel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 14px; text-align: center; box-shadow: 0 2px 8px rgba(15,23,42,0.04); }
+  .panel-card .lvl { width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; color: white; }
+  .panel-card h4 { margin: 0 0 4px; font-size: 14px; font-weight: 800; }
+  .panel-card p { margin: 0; font-size: 12px; color: var(--ink-light); }
+
+  /* --- Scoring rubric cards --- */
+  .rubric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(15,23,42,0.04); }
+  .rubric-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
+  .rubric-head h4 { margin: 0; font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+  .rubric-weight { font-size: 22px; font-weight: 800; }
+  .rubric-num { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 9px; color: white; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  .rubric-desc { font-size: 13.5px; color: var(--ink-light); margin: 6px 0 14px; }
+  .band-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .band-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; text-align: right; }
+  .band-table tr:last-child td { border-bottom: none; }
+  .band-table .band-score { white-space: nowrap; font-weight: 800; width: 78px; }
+  .band-table .band-text { color: #374151; }
+
+  /* --- Scorecard (printable) --- */
+  .scorecard-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 16px 0; }
+  .scorecard-table th, .scorecard-table td { border: 1px solid var(--border); padding: 8px 8px; text-align: center; }
+  .scorecard-table thead th { background: var(--navy); color: white; font-weight: 700; font-size: 11.5px; }
+  .scorecard-table td.label { text-align: right; font-weight: 700; background: var(--surface-muted); white-space: nowrap; }
+  .scorecard-table td.total { font-weight: 800; background: #FFF8E6; }
+
+  .timeline { display: flex; align-items: stretch; gap: 0; margin: 18px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .timeline > div { flex: 1; padding: 16px 14px; text-align: center; position: relative; }
+  .timeline > div:not(:last-child)::after {
+    content: '→'; position: absolute; left: -2px; top: 50%; transform: translateY(-50%);
+    color: var(--ink-light); font-size: 16px; z-index: 1;
+  }
+  .timeline .t-min { font-size: 24px; font-weight: 800; }
+  .timeline .t-label { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+
+  .funnel { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+  .funnel .f-box { text-align: center; padding: 16px 22px; border-radius: 14px; color: white; font-weight: 800; }
+  .funnel .f-num { font-size: 26px; }
+  .funnel .f-label { font-size: 11.5px; font-weight: 600; opacity: 0.9; margin-top: 2px; }
+  .funnel .f-arrow { font-size: 20px; color: var(--ink-light); }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    .grid2, .grid3, .grid4, .panel-row { grid-template-columns: 1fr; }
+    main { padding: 24px 18px 60px; }
+    .funnel { flex-direction: column; }
+    .funnel .f-arrow { transform: rotate(90deg); }
+  }
+
+  @media print {
+    .toc, .toc-back-btn { display: none; }
+    .layout { grid-template-columns: 1fr; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { page-break-inside: avoid; margin-bottom: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="tag">GuruApp · TPS Office Digital Transformation</span>
+  <h1>เกณฑ์การใช้คะแนนสำหรับ Project Present</h1>
+  <p>คู่มือให้คะแนนสำหรับคณะกรรมการคัดเลือก Power Champion ประจำปี — 20 Project เข้ารอบ คัดเหลือ 6 Project</p>
+</div>
+
+<div class="layout">
+  <nav class="toc">
+    <h2>สารบัญ</h2>
+    <ul>
+      <li><a href="#overview">1. ภาพรวมกิจกรรม</a></li>
+      <li><a href="#panel">2. คณะกรรมการ</a></li>
+      <li><a href="#format">3. รูปแบบการนำเสนอ</a></li>
+      <li><a href="#rubric">4. เกณฑ์การให้คะแนน 6 หมวด</a></li>
+      <li><a href="#scorecard">5. ใบให้คะแนน</a></li>
+      <li><a href="#selection">6. วิธีสรุปผลและคัดเลือก</a></li>
+      <li><a href="#ethics">7. ข้อพึงระวังของกรรมการ</a></li>
+    </ul>
+    <a class="toc-back-btn" href="https://appilots.github.io/learning/tps-office-user-guide.html" target="_blank" rel="noopener noreferrer">📘 คู่มือการใช้งาน GuruApp ↗</a>
+  </nav>
+
+  <main>
+
+    <section id="overview">
+      <h2><span class="badge">1</span>ภาพรวมกิจกรรม</h2>
+      <p class="lead">งานนำเสนอ Project เพื่อคัดเลือก Power Champion ประจำปี — แต่ละแผนกนำเสนอผลงานการปรับปรุงงานของตนต่อคณะกรรมการผู้บริหาร เพื่อคัดเลือกทีมที่โดดเด่นที่สุดเป็นต้นแบบให้ทั้งองค์กร</p>
+
+      <div class="funnel">
+        <div class="f-box" style="background:var(--navy);">
+          <div class="f-num">20</div>
+          <div class="f-label">PROJECT นำเสนอ</div>
+        </div>
+        <div class="f-arrow">→</div>
+        <div class="f-box" style="background:var(--blue);">
+          <div class="f-num">15 นาที</div>
+          <div class="f-label">ต่อ PROJECT (รวม Q&amp;A)</div>
+        </div>
+        <div class="f-arrow">→</div>
+        <div class="f-box" style="background:var(--orange);">
+          <div class="f-num">6</div>
+          <div class="f-label">POWER CHAMPION ที่คัดเลือก</div>
+        </div>
+        <div class="f-arrow">→</div>
+        <div class="f-box" style="background:var(--green);">
+          <div class="f-num">🎁 Notebook</div>
+          <div class="f-label">รางวัลคนละ 1 เครื่อง</div>
+        </div>
+      </div>
+
+      <div class="note blue">
+        <b>เป้าหมายของเกณฑ์นี้:</b> ให้กรรมการทุกระดับ — ตั้งแต่ MGR. ที่ดูแลระบบใกล้ชิดที่สุด ไปจนถึง EVP. ที่มองภาพกลยุทธ์องค์กร — ให้คะแนนบนบรรทัดฐานเดียวกัน ลดความคลาดเคลื่อนจากความรู้สึกส่วนตัว และทำให้ผลการคัดเลือกอธิบายได้ชัดเจนต่อทุกแผนกที่เข้าร่วม ไม่ว่าจะได้รับเลือกหรือไม่ก็ตาม
+      </div>
+    </section>
+
+    <section id="panel">
+      <h2><span class="badge">2</span>คณะกรรมการ</h2>
+      <p class="lead">คณะกรรมการ 4 ระดับ ครอบคลุมมุมมองตั้งแต่ผู้ที่เข้าใจระบบ TPS ในรายละเอียด ไปจนถึงผู้บริหารระดับสูงที่ตัดสินใจเชิงกลยุทธ์ — แต่ละท่านให้คะแนนอิสระตามเกณฑ์เดียวกันในหมวดที่ 4</p>
+      <div class="panel-row">
+        <div class="panel-card">
+          <div class="lvl" style="background:var(--cyan);">MGR</div>
+          <h4>MGR. (PM. ระบบ TPS)</h4>
+          <p>ผู้สอนและดูแลระบบ TPS โดยตรง — ประเมินความถูกต้องเชิงเทคนิคและวิธีการ</p>
+        </div>
+        <div class="panel-card">
+          <div class="lvl" style="background:var(--blue);">GM</div>
+          <h4>GM.</h4>
+          <p>ผู้บริหารระดับฝ่าย — ประเมินผลกระทบต่อฝ่ายงานและความเป็นไปได้ในการขยายผล</p>
+        </div>
+        <div class="panel-card">
+          <div class="lvl" style="background:var(--navy);">VP</div>
+          <h4>VP.</h4>
+          <p>ผู้บริหารระดับสายงาน — ประเมินคุณค่าทางธุรกิจและความยั่งยืนในภาพรวม</p>
+        </div>
+        <div class="panel-card">
+          <div class="lvl" style="background:var(--violet);">EVP</div>
+          <h4>EVP.</h4>
+          <p>ผู้บริหารระดับสูงสุด — ประเมินความสอดคล้องกับทิศทางกลยุทธ์ขององค์กร</p>
+        </div>
+      </div>
+      <div class="note">
+        <b>น้ำหนักคะแนน:</b> แนะนำให้ทุกท่านมีน้ำหนักเท่ากัน (1 คน = 1 คะแนนเต็ม 100) แล้วนำมาเฉลี่ยรวมทุกท่าน — วิธีนี้เรียบง่าย โปร่งใส และตรวจสอบย้อนกลับได้ง่ายที่สุดเมื่อต้องอธิบายผลให้ผู้เข้าร่วมฟัง
+      </div>
+    </section>
+
+    <section id="format">
+      <h2><span class="badge">3</span>รูปแบบการนำเสนอ</h2>
+      <p class="lead">15 นาทีต่อ Project รวมถามตอบ — แนะนำแบ่งเวลาดังนี้เพื่อให้ทุกทีมมีเวลาเท่ากันและกรรมการมีเวลาซักถามเพียงพอ</p>
+      <div class="timeline">
+        <div style="background:#EAF3FF;">
+          <div class="t-min">10 นาที</div>
+          <div class="t-label">นำเสนอ Project</div>
+        </div>
+        <div style="background:#FFF8E6;">
+          <div class="t-min">4 นาที</div>
+          <div class="t-label">ถาม-ตอบกับกรรมการ</div>
+        </div>
+        <div style="background:#EAF6EA;">
+          <div class="t-min">1 นาที</div>
+          <div class="t-label">กรรมการบันทึกคะแนน</div>
+        </div>
+      </div>
+      <div class="card accent-blue">
+        <h4>📋 สิ่งที่ควรอยู่ในการนำเสนอทุก Project</h4>
+        <ul>
+          <li>ปัญหาเดิมคืออะไร และเหตุใดจึงเลือกทำโครงการนี้ (Before)</li>
+          <li>วิธีแก้ไข/เครื่องมือที่ใช้ และเหตุผลที่เลือกวิธีนี้</li>
+          <li>ผลลัพธ์จริงที่วัดได้ (After) — ชั่วโมง/บาท/แผ่นกระดาษที่ลดได้ พร้อมหลักฐาน</li>
+          <li>ใครมีส่วนร่วมบ้าง และแผนต่อยอด/ขยายผลในอนาคต</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="rubric">
+      <h2><span class="badge">4</span>เกณฑ์การให้คะแนน 6 หมวด</h2>
+      <p class="lead">รวม 100 คะแนน — น้ำหนักแต่ละหมวดสะท้อนสิ่งที่ TPS Office ให้ความสำคัญที่สุด: <b>ผลลัพธ์ทางธุรกิจที่วัดผลได้จริง</b> เป็นหมวดใหญ่ที่สุด ตามด้วยการประยุกต์ใช้เทคโนโลยีอย่างสร้างสรรค์</p>
+
+      <div class="rubric-card">
+        <div class="rubric-head">
+          <h4><span class="rubric-num" style="background:var(--green);">1</span>ผลลัพธ์ทางธุรกิจที่วัดผลได้ (Business Impact)</h4>
+          <span class="rubric-weight" style="color:var(--green);">30 คะแนน</span>
+        </div>
+        <p class="rubric-desc">ชั่วโมง/มูลค่า (บาท) ที่ประหยัดได้จริง, % Time Reduction, ปริมาณกระดาษที่ลดได้ — เทียบกับความพยายามที่ลงทุนไป มีหลักฐานก่อน-หลังชัดเจน</p>
+        <table class="band-table">
+          <tr><td class="band-score"><span class="pill green">25–30</span></td><td class="band-text">ผลลัพธ์ชัดเจน มีตัวเลขและหลักฐานก่อน-หลังครบถ้วน ผลกระทบสูงต่อองค์กรหรือหลายแผนก</td></tr>
+          <tr><td class="band-score"><span class="pill blue">18–24</span></td><td class="band-text">มีผลลัพธ์เป็นตัวเลขชัดเจน แต่ขอบเขตผลกระทบจำกัดอยู่ในทีม/แผนกเดียว</td></tr>
+          <tr><td class="band-score"><span class="pill orange">10–17</span></td><td class="band-text">มีผลลัพธ์ในเชิงคุณภาพ แต่ยังไม่มีตัวเลขหรือหลักฐานวัดผลที่หนักแน่น</td></tr>
+          <tr><td class="band-score"><span class="pill red">0–9</span></td><td class="band-text">ยังไม่เห็นผลลัพธ์ที่วัดผลได้ หรือเป็นเพียงแผนงานที่ยังไม่เริ่มดำเนินการ</td></tr>
+        </table>
+      </div>
+
+      <div class="rubric-card">
+        <div class="rubric-head">
+          <h4><span class="rubric-num" style="background:var(--cyan);">2</span>การวิเคราะห์ปัญหาและ Root Cause</h4>
+          <span class="rubric-weight" style="color:var(--cyan);">15 คะแนน</span>
+        </div>
+        <p class="rubric-desc">ใช้เครื่องมือวิเคราะห์ก่อนลงมือทำ (Yamazumi Chart, Muda 7 ประเภท, 5Why) เข้าใจสาเหตุที่แท้จริงของปัญหา ไม่ใช่แค่แก้อาการที่ปลายเหตุ</p>
+        <table class="band-table">
+          <tr><td class="band-score"><span class="pill green">13–15</span></td><td class="band-text">วิเคราะห์ root cause อย่างเป็นระบบด้วยเครื่องมือที่เหมาะสม อธิบายได้ว่าทำไมจึงเป็นสาเหตุจริง</td></tr>
+          <tr><td class="band-score"><span class="pill blue">9–12</span></td><td class="band-text">มีการวิเคราะห์ปัญหาในระดับหนึ่ง แต่ยังไม่ครบถ้วนหรือไม่ได้ใช้เครื่องมือที่เป็นระบบ</td></tr>
+          <tr><td class="band-score"><span class="pill orange">5–8</span></td><td class="band-text">ระบุปัญหาได้ แต่การวิเคราะห์สาเหตุยังผิวเผิน</td></tr>
+          <tr><td class="band-score"><span class="pill red">0–4</span></td><td class="band-text">ไม่มีการวิเคราะห์ปัญหาก่อนลงมือแก้ไข</td></tr>
+        </table>
+      </div>
+
+      <div class="rubric-card">
+        <div class="rubric-head">
+          <h4><span class="rubric-num" style="background:var(--blue);">3</span>นวัตกรรมและการประยุกต์ใช้เทคโนโลยี</h4>
+          <span class="rubric-weight" style="color:var(--blue);">20 คะแนน</span>
+        </div>
+        <p class="rubric-desc">การใช้ Power Apps / Power Automate / Power BI หรือเครื่องมือดิจิทัลอื่นอย่างสร้างสรรค์ — ความคิดนอกกรอบในการออกแบบวิธีแก้ปัญหา ไม่ใช่แค่ทำสิ่งเดิมในรูปแบบดิจิทัล</p>
+        <table class="band-table">
+          <tr><td class="band-score"><span class="pill green">17–20</span></td><td class="band-text">ใช้เทคโนโลยีอย่างสร้างสรรค์ แก้ปัญหาด้วยมุมมองใหม่ เป็นต้นแบบให้ทีมอื่นนำไปประยุกต์ได้</td></tr>
+          <tr><td class="band-score"><span class="pill blue">12–16</span></td><td class="band-text">ใช้เทคโนโลยีได้เหมาะสมกับปัญหา แต่เป็นการประยุกต์ใช้ตามรูปแบบที่มีอยู่แล้ว</td></tr>
+          <tr><td class="band-score"><span class="pill orange">6–11</span></td><td class="band-text">มีการใช้เครื่องมือดิจิทัล แต่ยังใช้ศักยภาพของเครื่องมือได้ไม่เต็มที่</td></tr>
+          <tr><td class="band-score"><span class="pill red">0–5</span></td><td class="band-text">แทบไม่มีการใช้เทคโนโลยี/เครื่องมือดิจิทัลในการแก้ปัญหา</td></tr>
+        </table>
+      </div>
+
+      <div class="rubric-card">
+        <div class="rubric-head">
+          <h4><span class="rubric-num" style="background:var(--navy);">4</span>ความยั่งยืนและศักยภาพขยายผล</h4>
+          <span class="rubric-weight" style="color:var(--navy);">15 คะแนน</span>
+        </div>
+        <p class="rubric-desc">ใช้งานต่อเนื่องจริง ไม่ใช่ทำครั้งเดียวจบ มีเอกสาร/SOP ส่งต่อให้คนอื่นดูแลต่อได้ และมีศักยภาพขยายไปยังแผนกหรือบริษัทอื่นในเครือ ATTG</p>
+        <table class="band-table">
+          <tr><td class="band-score"><span class="pill green">13–15</span></td><td class="band-text">ใช้งานต่อเนื่องมั่นคง มีเอกสารส่งต่อครบถ้วน และมีแผน/ตัวอย่างการขยายผลไปแผนกอื่นแล้ว</td></tr>
+          <tr><td class="band-score"><span class="pill blue">9–12</span></td><td class="band-text">ใช้งานต่อเนื่องในทีมตนเอง แต่ยังไม่มีแผนหรือเอกสารรองรับการขยายผล</td></tr>
+          <tr><td class="band-score"><span class="pill orange">5–8</span></td><td class="band-text">ยังอยู่ในช่วงทดลองใช้ ความต่อเนื่องยังไม่ชัดเจน</td></tr>
+          <tr><td class="band-score"><span class="pill red">0–4</span></td><td class="band-text">มีความเสี่ยงสูงที่จะเลิกใช้เมื่อจบโครงการ ไม่มีผู้ดูแลต่อ</td></tr>
+        </table>
+      </div>
+
+      <div class="rubric-card">
+        <div class="rubric-head">
+          <h4><span class="rubric-num" style="background:var(--violet);">5</span>การมีส่วนร่วมของทีมและการพัฒนาบุคลากร</h4>
+          <span class="rubric-weight" style="color:var(--violet);">10 คะแนน</span>
+        </div>
+        <p class="rubric-desc">จำนวนคนในแผนกที่มีส่วนร่วมจริง การถ่ายทอดความรู้ให้เพื่อนร่วมทีม และการสร้าง Citizen Developer หน้าใหม่ผ่านโครงการนี้</p>
+        <table class="band-table">
+          <tr><td class="band-score"><span class="pill green">9–10</span></td><td class="band-text">ทีมมีส่วนร่วมกว้างขวาง ถ่ายทอดความรู้ให้เพื่อนร่วมงานได้จริง เกิด Citizen Developer หน้าใหม่</td></tr>
+          <tr><td class="band-score"><span class="pill blue">6–8</span></td><td class="band-text">มีผู้ร่วมโครงการมากกว่า 1 คน แต่ความรู้ยังกระจุกอยู่กับผู้นำเสนอเป็นหลัก</td></tr>
+          <tr><td class="band-score"><span class="pill orange">3–5</span></td><td class="band-text">ทำโดยผู้นำเสนอเป็นหลัก มีผู้ร่วมทีมเพียงเล็กน้อย</td></tr>
+          <tr><td class="band-score"><span class="pill red">0–2</span></td><td class="band-text">ทำคนเดียวทั้งหมด ไม่มีการถ่ายทอดความรู้</td></tr>
+        </table>
+      </div>
+
+      <div class="rubric-card">
+        <div class="rubric-head">
+          <h4><span class="rubric-num" style="background:var(--orange);">6</span>การนำเสนอและการตอบคำถาม</h4>
+          <span class="rubric-weight" style="color:#8A5300;">10 คะแนน</span>
+        </div>
+        <p class="rubric-desc">ความชัดเจน กระชับ ตรงประเด็นภายในเวลาที่กำหนด และความมั่นใจ/ความแม่นยำในการตอบคำถามกรรมการ</p>
+        <table class="band-table">
+          <tr><td class="band-score"><span class="pill green">9–10</span></td><td class="band-text">นำเสนอชัดเจน ตรงเวลา ตอบคำถามกรรมการได้ตรงประเด็นทุกข้อพร้อมข้อมูลรองรับ</td></tr>
+          <tr><td class="band-score"><span class="pill blue">6–8</span></td><td class="band-text">นำเสนอเข้าใจง่าย แต่ตอบคำถามบางข้อได้ไม่ครบถ้วน</td></tr>
+          <tr><td class="band-score"><span class="pill orange">3–5</span></td><td class="band-text">นำเสนอไม่ตรงเวลาหรือเนื้อหาสับสน ตอบคำถามได้เพียงบางส่วน</td></tr>
+          <tr><td class="band-score"><span class="pill red">0–2</span></td><td class="band-text">นำเสนอไม่ชัดเจน หรือไม่สามารถตอบคำถามกรรมการได้</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="scorecard">
+      <h2><span class="badge">5</span>ใบให้คะแนน</h2>
+      <p class="lead">ใบให้คะแนนสำหรับกรรมการ 1 ท่าน ใช้ 1 ใบต่อ 1 Project — พิมพ์หรือถ่ายสำเนาให้กรรมการทุกท่านก่อนเริ่มงาน</p>
+      <div style="overflow-x:auto;">
+      <table class="scorecard-table">
+        <thead>
+          <tr>
+            <th style="text-align:right;">หมวดคะแนน</th>
+            <th>คะแนนเต็ม</th>
+            <th>คะแนนที่ให้</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="label">1. ผลลัพธ์ทางธุรกิจที่วัดผลได้</td><td>30</td><td></td></tr>
+          <tr><td class="label">2. การวิเคราะห์ปัญหาและ Root Cause</td><td>15</td><td></td></tr>
+          <tr><td class="label">3. นวัตกรรมและการประยุกต์ใช้เทคโนโลยี</td><td>20</td><td></td></tr>
+          <tr><td class="label">4. ความยั่งยืนและศักยภาพขยายผล</td><td>15</td><td></td></tr>
+          <tr><td class="label">5. การมีส่วนร่วมของทีม</td><td>10</td><td></td></tr>
+          <tr><td class="label">6. การนำเสนอและการตอบคำถาม</td><td>10</td><td></td></tr>
+          <tr><td class="label total">รวมคะแนน</td><td class="total">100</td><td class="total"></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h4>ข้อมูลสำหรับกรอก</h4>
+          <p>ชื่อ Project: ______________________</p>
+          <p>แผนก/บริษัท: ______________________</p>
+          <p>ชื่อกรรมการ: ______________________</p>
+          <p>ตำแหน่ง: ☐ MGR &nbsp; ☐ GM &nbsp; ☐ VP &nbsp; ☐ EVP</p>
+        </div>
+        <div class="card">
+          <h4>ความเห็นเพิ่มเติม</h4>
+          <p>จุดเด่นที่สุดของ Project นี้:</p>
+          <p>_______________________________</p>
+          <p>ข้อเสนอแนะเพื่อพัฒนาต่อ:</p>
+          <p>_______________________________</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="selection">
+      <h2><span class="badge">6</span>วิธีสรุปผลและคัดเลือก</h2>
+      <p class="lead">ขั้นตอนหลังจบการนำเสนอทั้ง 20 Project เพื่อให้ได้รายชื่อ 6 Power Champion อย่างโปร่งใส ตรวจสอบย้อนกลับได้</p>
+      <ol class="card" style="list-style-position:inside; padding-right:20px;">
+        <li>รวมคะแนนทั้ง 6 หมวดของกรรมการแต่ละท่าน เป็นคะแนนรวมต่อ 1 ท่าน ต่อ 1 Project (เต็ม 100)</li>
+        <li>เฉลี่ยคะแนนจากกรรมการทุกท่านที่ให้คะแนน Project นั้น เป็น <b>คะแนนเฉลี่ยสุดท้ายของ Project</b></li>
+        <li>เรียงลำดับ 20 Project ตามคะแนนเฉลี่ยจากมากไปน้อย เลือก 6 อันดับแรกเป็น Power Champion</li>
+        <li>กรณีคะแนนเฉลี่ยเท่ากันในลำดับที่ 6 — ใช้คะแนนหมวดที่ 1 (ผลลัพธ์ทางธุรกิจ) ที่สูงกว่าเป็นตัวตัดสิน เนื่องจากเป็นหมวดที่มีน้ำหนักสูงสุดและสะท้อนคุณค่าที่แท้จริงของโครงการ</li>
+        <li>ประกาศผลพร้อมค่าเฉลี่ยคะแนนของทั้ง 20 Project (ไม่ใช่แค่ 6 ทีมที่ได้รับเลือก) เพื่อความโปร่งใสต่อทุกแผนกที่เข้าร่วม</li>
+      </ol>
+      <div class="note green">
+        <b>🏆 รางวัล:</b> Power Champion ทั้ง 6 Project ได้รับ Notebook คนละ 1 เครื่อง และขึ้นทะเบียนเป็น Power Champion ประจำปีในระบบ GuruApp
+      </div>
+    </section>
+
+    <section id="ethics">
+      <h2><span class="badge">7</span>ข้อพึงระวังของกรรมการ</h2>
+      <p class="lead">แนวปฏิบัติสั้นๆ เพื่อให้ผลการตัดสินยุติธรรมและได้รับการยอมรับจากทุกฝ่าย</p>
+      <div class="grid2">
+        <div class="card accent-red">
+          <h4>⚖️ ผลประโยชน์ทับซ้อน</h4>
+          <p>กรรมการที่เป็นผู้บังคับบัญชาโดยตรงของทีมที่นำเสนอ ควรงดให้คะแนน Project นั้น หรือระบุไว้อย่างชัดเจนหากไม่สามารถงดได้ เพื่อให้ผลรวมยังคงเป็นกลาง</p>
+        </div>
+        <div class="card accent-blue">
+          <h4>📝 ให้คะแนนทันทีหลังแต่ละ Project</h4>
+          <p>บันทึกคะแนนขณะความทรงจำยังสดใหม่ ก่อนเริ่มฟัง Project ถัดไป — ป้องกันไม่ให้ Project ท้ายๆ ได้เปรียบหรือเสียเปรียบจากความจำที่เลือนไป</p>
+        </div>
+        <div class="card accent-green">
+          <h4>🎯 ยึดเกณฑ์ ไม่ใช่ความประทับใจ</h4>
+          <p>การนำเสนอที่ดูดีไม่ควรมีน้ำหนักเกินหมวดที่ 6 (10 คะแนน) — ผลลัพธ์ทางธุรกิจจริง (หมวด 1) ยังคงเป็นเกณฑ์หลักเสมอ</p>
+        </div>
+        <div class="card accent-orange">
+          <h4>🔁 ใช้มาตรฐานเดียวกันทุก Project</h4>
+          <p>หลีกเลี่ยงการ "ผ่อนเกณฑ์" ให้ Project แรกๆ แล้วเข้มขึ้นในช่วงท้าย — ทบทวนตารางระดับคะแนน (หมวดที่ 4) ก่อนเริ่มงานทุกครั้ง</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  GuruApp · Digital Transformation Office · ATTG Group
+</footer>
+
+</body>
+</html>
