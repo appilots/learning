@@ -284,9 +284,9 @@
     <span class="lang-jp">プロジェクト開始から現在まで、GuruAppに実装されているすべての条件・ルール・業務ロジックをまとめたもの — 管理者および監督職以上のユーザー向け。</span>
   </p>
   <p style="font-size:12px; opacity:.75; margin-top:4px;">
-    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-20 — เพิ่มหมวดใหม่ "กฎการให้คะแนน Evaluate Projects" (ข้อ 10): ปีงบประมาณ, ทำเนียบกรรมการแยกจาก Admin, เกณฑ์ 6 หมวดรวม 100 คะแนน, การจัดอันดับ, โครงสร้างรางวัลและกฎว่าผู้พัฒนาจริงเป็นผู้รับรางวัล</span>
-    <span class="lang-en">Last content update: 2026-08-20 — added a new "Evaluate Projects Scoring Rules" section (section 10): the fiscal year, the judging-panel roster being separate from Admin, the 6-category 100-point rubric, ranking logic, the reward structure, and the rule that the reward goes to whoever actually did the development.</span>
-    <span class="lang-jp">最終更新日：2026-08-20 — 新しい「プロジェクト評価の採点ルール」（第10項）を追加：会計年度、Adminとは別の審査委員名簿、6項目合計100点の採点基準、順位付けロジック、賞品の構成、実際に開発した人が受賞するというルール。</span>
+    <span class="lang-th">ปรับปรุงเนื้อหาล่าสุด: 2026-08-21 — เพิ่มคำอธิบาย "ตัวคูณตามช่วงความคืบหน้า" (Progress Recognition Multiplier) ในหมวด 6 — ยอดสะสมที่แสดงผลจริงถูกคูณด้วยตัวคูณ 5 ระดับตาม % ความคืบหน้าของโครงการ ไม่ใช่แค่อัตราต่อวัน × วันที่ผ่านไปอีกต่อไป</span>
+    <span class="lang-en">Last content update: 2026-08-21 — added an explanation of the "Progress Recognition Multiplier" in section 6 — the accrued total actually shown is now scaled by a 5-tier multiplier based on the Project's progress %, not just daily rate × elapsed days.</span>
+    <span class="lang-jp">最終更新日：2026-08-21 — 第6項に「進捗連動の認識係数」（Progress Recognition Multiplier）の説明を追加 — 実際に表示される累計値は、単純な日次レート×経過日数ではなく、Projectの進捗率に応じた5段階の係数で調整されるようになりました。</span>
   </p>
   <br>
   <a class="back" href="https://appilots.github.io/learning/tps-office-user-guide.html">
@@ -558,7 +558,9 @@
           <tbody>
             <tr><th><span class="lang-th">อัตราต่อวัน</span><span class="lang-en">Daily rate</span><span class="lang-jp">日次レート</span></th><td><code>อัตราต่อเดือน ÷ (365.25 ÷ 12)</code> <span class="lang-th">— ค่าเฉลี่ยจำนวนวันต่อเดือน ≈ 30.4375 วัน</span><span class="lang-en">— average days per month ≈ 30.4375</span><span class="lang-jp">— 平均月間日数 ≈ 30.4375日</span></td></tr>
             <tr><th><span class="lang-th">วันที่ผ่านไปจริง</span><span class="lang-en">Real elapsed days</span><span class="lang-jp">実経過日数</span></th><td><code>วันสิ้นสุดที่มีผล − วันเริ่มต้นโครงการ</code></td></tr>
-            <tr><th><span class="lang-th">ยอดสะสม</span><span class="lang-en">Accrued total</span><span class="lang-jp">累計</span></th><td><code>อัตราต่อวัน × วันที่ผ่านไปจริง</code></td></tr>
+            <tr><th><span class="lang-th">% ความคืบหน้า</span><span class="lang-en">Progress %</span><span class="lang-jp">進捗率</span></th><td><code>วันที่ผ่านไปจริง ÷ ระยะเวลาทั้งหมดของโครงการ × 100</code> <span class="lang-th">— เสร็จสิ้น = 100 เสมอ, ยกเลิก = 0 เสมอ (ไม่ใช่คำนวณจากวันที่)</span><span class="lang-en">— Completed is always 100, Cancelled is always 0 (not date-derived)</span><span class="lang-jp">— 完了は常に100、キャンセルは常に0（日付から算出されない）</span></td></tr>
+            <tr><th><span class="lang-th">ตัวคูณตามช่วงความคืบหน้า</span><span class="lang-en">Progress recognition multiplier</span><span class="lang-jp">進捗連動の認識係数</span></th><td><code><span class="lang-th">ดูตาราง 5 ช่วงด้านล่าง</span><span class="lang-en">see the 5-tier table below</span><span class="lang-jp">下記の5段階表を参照</span></code></td></tr>
+            <tr><th><span class="lang-th">ยอดสะสม (ที่แสดงผลจริง)</span><span class="lang-en">Accrued total (what's actually shown)</span><span class="lang-jp">累計（実際の表示値）</span></th><td><code>อัตราต่อวัน × วันที่ผ่านไปจริง × ตัวคูณตามช่วงความคืบหน้า</code></td></tr>
           </tbody>
         </table>
         <p>
@@ -570,6 +572,28 @@
           <span class="lang-th">ทศนิยมแสดงผลปัดไม่เกิน 2 ตำแหน่งทุกจุด — ไม่มี Cache/Cron แยกต่างหาก คำนวณสดล้วนๆ ทุกครั้งที่โหลดหน้า</span>
           <span class="lang-en">Displayed decimals are always capped at 2 places — there's no separate cache/cron job, everything is computed live on every page load.</span>
           <span class="lang-jp">表示される小数は常に小数点2桁までに制限されます — 別途のキャッシュ／Cronジョブはなく、ページ読み込みのたびにすべてライブで計算されます。</span>
+        </p>
+      </div>
+      <div class="card accent-orange">
+        <h4><span class="lang-th">🎚️ ตัวคูณตามช่วงความคืบหน้า (Progress Recognition Multiplier)</span><span class="lang-en">🎚️ Progress Recognition Multiplier</span><span class="lang-jp">🎚️ 進捗連動の認識係数</span></h4>
+        <p>
+          <span class="lang-th">เพิ่ม 2026-08-20 หลังนำเสนอต่อ VP และ PM TPS Manager — สูตรยอดสะสมแบบ "นับตามวันที่ผ่านไปล้วนๆ" ด้านบนอธิบายต่อผู้บริหารยาก เพราะแค่เวลาผ่านไปไม่ได้แปลว่าผลลัพธ์ที่ประกาศไว้ถูกทำสำเร็จจริงแล้ว ระบบจึงคูณยอดสะสมรายวันด้วยตัวคูณตาม % ความคืบหน้าของโครงการอีกชั้นหนึ่ง (คูณเพิ่มจากสูตรเดิม ไม่ได้แทนที่) แบ่งเป็น 5 ช่วง ช่วงละ 20 คะแนน โดย<b>ขอบล่างของแต่ละช่วงนับรวมอยู่ในช่วงล่าง ไม่ใช่ช่วงบน</b>:</span>
+          <span class="lang-en">Added 2026-08-20, after presenting to the VP and PM TPS Manager — the pure day-by-day accrual formula above was hard to defend in a leadership review, since calendar time passing alone doesn't mean a Project's declared savings are actually being realized. So the daily accrual is scaled by one more factor based on the Project's progress %, layered on top of (not replacing) the formula above. It's split into 5 bands of 20 points each, where <b>the lower edge of each band belongs to the band below it, not the one above</b>:</span>
+          <span class="lang-jp">2026-08-20追加、VPおよびPM TPS Managerへの説明を経て — 上記の純粋な日次経過による累計方式は、経営層へのレビューで説明しづらいものでした。単に時間が経過しただけでは、宣言された削減効果が実際に実現されているとは限らないためです。そこで、日次累計にProjectの進捗率に応じた係数をもう一段階掛け合わせるようにしました（上記の計算式を置き換えるのではなく、その上に掛け合わせます）。20点刻みの5段階に分かれており、<b>各段階の下限値はその段階自体に属し、上の段階には属しません</b>：</span>
+        </p>
+        <table>
+          <tbody>
+            <tr><th><span class="lang-th">ความคืบหน้า 0–20%</span><span class="lang-en">Progress 0–20%</span><span class="lang-jp">進捗 0〜20%</span></th><td><code>× 0.2</code></td></tr>
+            <tr><th><span class="lang-th">ความคืบหน้า 21–40%</span><span class="lang-en">Progress 21–40%</span><span class="lang-jp">進捗 21〜40%</span></th><td><code>× 0.4</code></td></tr>
+            <tr><th><span class="lang-th">ความคืบหน้า 41–60%</span><span class="lang-en">Progress 41–60%</span><span class="lang-jp">進捗 41〜60%</span></th><td><code>× 0.6</code></td></tr>
+            <tr><th><span class="lang-th">ความคืบหน้า 61–80%</span><span class="lang-en">Progress 61–80%</span><span class="lang-jp">進捗 61〜80%</span></th><td><code>× 0.8</code></td></tr>
+            <tr><th><span class="lang-th">ความคืบหน้า 81–100%</span><span class="lang-en">Progress 81–100%</span><span class="lang-jp">進捗 81〜100%</span></th><td><code>× 1.0 <span class="lang-th">(รับรู้เต็มจำนวน)</span><span class="lang-en">(fully recognized)</span><span class="lang-jp">（全額認識）</span></code></td></tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="lang-th">พูดง่ายๆ: โครงการที่เพิ่งเริ่ม (ความคืบหน้าต่ำ) จะเห็นยอดสะสมแค่เศษเสี้ยวของยอดที่คำนวณจากวันที่ผ่านไปอย่างเดียว แล้วค่อยๆ ขยับรับรู้เต็มจำนวนเมื่อความคืบหน้าจริงพิสูจน์ตัวเองผ่าน 80% — สถานะ "เสร็จสิ้น" มีความคืบหน้า 100% เสมอ (จากตารางด้านบน) จึงได้ตัวคูณ × 1.0 เต็มเสมอ ตัวอย่างคำนวณด้านล่างทุกอันจึงไม่มีตัวเลขเปลี่ยนจากก่อนเพิ่มตัวคูณนี้</span>
+          <span class="lang-en">In short: a Project that just started (low progress) only shows a fraction of what the pure day-based formula would produce, then steps up toward full recognition as real progress passes 80%. Since "Completed" status is always 100% progress (per the table above), it always gets the full × 1.0 multiplier — so none of the worked examples below have a different final number than before this multiplier existed.</span>
+          <span class="lang-jp">つまり、開始したばかりのProject（進捗が低い状態）では、日数のみに基づく計算式で算出される値のごく一部しか表示されず、進捗が実際に80%を超えるにつれて段階的に全額認識に近づいていきます。「完了」ステータスは常に進捗100%（上記の表参照）であるため、常に×1.0の全額係数が適用されます — そのため、下記のすべての計算例は、この係数導入前と最終的な数値に変わりはありません。</span>
         </p>
       </div>
       <div class="card accent-cyan">
