@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ข้อกำหนดการใช้งาน A-SOP</title>
+<style>
+  :root {
+    --navy: #1B2A6B;
+    --navy-dark: #0D1A4A;
+    --blue: #0078D4;
+    --green: #107C10;
+    --orange: #FFAA44;
+    --red: #D13438;
+    --ink: #1F2937;
+    --ink-light: #6B7280;
+    --surface: #F4F6FB;
+    --border: #E5E9F2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Noto Sans Thai", "Noto Sans JP", -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--surface);
+    line-height: 1.6;
+  }
+  header.topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+    color: #fff;
+    padding: 14px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  header.topbar .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; }
+  header.topbar .brand .badge { background: #fff; color: var(--navy); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 800; }
+  .lang-switch { display: flex; gap: 6px; background: rgba(255,255,255,0.12); border-radius: 10px; padding: 4px; }
+  .lang-switch button {
+    border: none; background: transparent; color: #fff; opacity: 0.7;
+    padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer;
+  }
+  .lang-switch button.active { background: #fff; color: var(--navy); opacity: 1; }
+  .layout { display: flex; max-width: 1280px; margin: 0 auto; align-items: flex-start; }
+  nav.toc {
+    position: sticky; top: 64px;
+    width: 260px; flex-shrink: 0;
+    padding: 24px 16px; height: calc(100vh - 64px); overflow-y: auto;
+  }
+  nav.toc a {
+    display: block; padding: 8px 12px; border-radius: 8px;
+    color: var(--ink-light); text-decoration: none; font-size: 13px; font-weight: 600;
+    margin-bottom: 2px;
+  }
+  nav.toc a:hover { background: #fff; color: var(--navy); }
+  nav.toc .group-title {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .05em; font-weight: 800;
+    color: var(--navy); margin: 18px 12px 6px; opacity: .7;
+  }
+  main { flex: 1; min-width: 0; padding: 32px 32px 80px; }
+  .cover {
+    background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+    color: #fff; border-radius: 20px; padding: 40px 36px; margin-bottom: 32px;
+    box-shadow: 0 8px 24px rgba(27,42,107,0.25);
+  }
+  .cover h1 { font-size: 28px; margin: 0 0 8px; }
+  .cover p { margin: 0; opacity: .85; font-size: 14px; max-width: 680px; }
+  section.page {
+    background: #fff; border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px 28px 32px; margin-bottom: 24px;
+    scroll-margin-top: 80px;
+  }
+  section.page h2 {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 19px; margin: 0 0 14px; color: var(--navy);
+  }
+  section.page h2 .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 8px; background: var(--navy); color: #fff;
+    font-size: 13px; font-weight: 800; flex-shrink: 0;
+  }
+  ul.rules { margin: 0; padding-left: 22px; }
+  ul.rules li { margin-bottom: 10px; font-size: 14px; }
+  ul.rules ul { margin-top: 6px; padding-left: 20px; }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 800; border-radius: 999px;
+    padding: 2px 9px; margin-right: 6px; vertical-align: middle;
+  }
+  .tag.role { background: #EAF3FF; color: #1E4E8C; }
+  .tag.warn { background: #FFF1EC; color: #A5341C; }
+  .note {
+    background: #FFF7E6; border: 1px solid #FFE0A3; border-radius: 10px;
+    padding: 10px 14px; font-size: 13px; margin-top: 14px; color: #7A5300;
+  }
+  .note.info { background: #EAF3FF; border-color: #BFDBFE; color: #1E4E8C; }
+  footer { text-align: center; padding: 24px; color: var(--ink-light); font-size: 12px; }
+  [data-lang] { display: none; }
+  body.lang-th [data-lang="th"] { display: block; }
+  body.lang-en [data-lang="en"] { display: block; }
+  body.lang-ja [data-lang="ja"] { display: block; }
+  span[data-lang] { display: none; }
+  body.lang-th span[data-lang="th"] { display: inline; }
+  body.lang-en span[data-lang="en"] { display: inline; }
+  body.lang-ja span[data-lang="ja"] { display: inline; }
+  @media (max-width: 900px) {
+    nav.toc { display: none; }
+    main { padding: 20px; }
+  }
+</style>
+</head>
+<body class="lang-th">
+
+<header class="topbar">
+  <div class="brand">
+    <span>ATTG Smart Office Portal</span>
+    <span class="badge">A-SOP</span>
+  </div>
+  <div class="lang-switch">
+    <button data-setlang="th" class="active">ไทย</button>
+    <button data-setlang="en">English</button>
+    <button data-setlang="ja">日本語</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc">
+    <div data-lang="th">
+      <div class="group-title">การเข้าถึงระบบ</div>
+      <a href="#t1">1. การเข้าสู่ระบบและโดเมนที่รับ</a>
+      <a href="#t2">2. บัญชีรหัสพนักงาน</a>
+      <a href="#t3">3. สิทธิ์การเข้าถึง Portal</a>
+      <div class="group-title">แบบฟอร์มดิจิทัล</div>
+      <a href="#t4">4. การส่งและอนุมัติคำขอ</a>
+      <a href="#t5">5. การแชร์บริการข้ามฝ่าย</a>
+      <div class="group-title">แอปพลิเคชันภายนอก</div>
+      <a href="#t6">6. ศูนย์รวม Link แอปพลิเคชัน</a>
+      <div class="group-title">OCR</div>
+      <a href="#t7">7. โหมดเร็ว vs โหมดละเอียด</a>
+      <a href="#t8">8. ระดับความมั่นใจของข้อมูล</a>
+      <a href="#t9">9. ขีดจำกัดไฟล์และรูปแบบเอกสาร</a>
+      <a href="#t10">10. การแชร์เอกสารและความเป็นส่วนตัว</a>
+      <div class="group-title">ทั่วไป</div>
+      <a href="#t11">11. ระดับสิทธิ์ผู้ใช้งาน</a>
+      <a href="#t12">12. ความรับผิดชอบของผู้ใช้งาน</a>
+    </div>
+    <div data-lang="en">
+      <div class="group-title">System Access</div>
+      <a href="#t1">1. Sign-in &amp; Allowed Domains</a>
+      <a href="#t2">2. Employee-Code Accounts</a>
+      <a href="#t3">3. Portal Access Rights</a>
+      <div class="group-title">Digital Forms</div>
+      <a href="#t4">4. Submitting &amp; Approving Requests</a>
+      <a href="#t5">5. Cross-Department Sharing</a>
+      <div class="group-title">External Applications</div>
+      <a href="#t6">6. Application Link Hub</a>
+      <div class="group-title">OCR</div>
+      <a href="#t7">7. Fast Mode vs Detailed Mode</a>
+      <a href="#t8">8. Data Confidence Levels</a>
+      <a href="#t9">9. File Limits &amp; Formats</a>
+      <a href="#t10">10. Document Sharing &amp; Privacy</a>
+      <div class="group-title">General</div>
+      <a href="#t11">11. User Role Tiers</a>
+      <a href="#t12">12. User Responsibilities</a>
+    </div>
+    <div data-lang="ja">
+      <div class="group-title">システムアクセス</div>
+      <a href="#t1">1. ログインと許可ドメイン</a>
+      <a href="#t2">2. 社員コードアカウント</a>
+      <a href="#t3">3. ポータルアクセス権限</a>
+      <div class="group-title">デジタルフォーム</div>
+      <a href="#t4">4. 申請と承認</a>
+      <a href="#t5">5. 部門間の共有</a>
+      <div class="group-title">外部アプリケーション</div>
+      <a href="#t6">6. アプリケーションリンクハブ</a>
+      <div class="group-title">OCR</div>
+      <a href="#t7">7. 高速モードと詳細モード</a>
+      <a href="#t8">8. データ信頼度レベル</a>
+      <a href="#t9">9. ファイル制限と形式</a>
+      <a href="#t10">10. 書類の共有とプライバシー</a>
+      <div class="group-title">全般</div>
+      <a href="#t11">11. ユーザー権限区分</a>
+      <a href="#t12">12. ユーザーの責任</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="cover">
+      <div data-lang="th">
+        <h1>ข้อกำหนดการใช้งาน A-SOP</h1>
+        <p>เอกสารนี้สรุปเงื่อนไข กติกา และข้อจำกัดของแต่ละหน้าการใช้งานในระบบ ATTG Smart Office Portal (A-SOP) เพื่อให้ผู้ใช้งานทุกระดับเข้าใจสิทธิ์และหน้าที่ของตนก่อนใช้งานระบบ</p>
+      </div>
+      <div data-lang="en">
+        <h1>A-SOP Terms of Use</h1>
+        <p>This document summarizes the conditions, rules, and constraints of each page in the ATTG Smart Office Portal (A-SOP), so every user understands their rights and responsibilities before using the system.</p>
+      </div>
+      <div data-lang="ja">
+        <h1>A-SOP 利用規約</h1>
+        <p>本ドキュメントは、ATTG Smart Office Portal(A-SOP)の各ページにおける条件、ルール、制約をまとめたものです。すべての利用者がシステムを利用する前に、自身の権利と責任を理解できるようにするためのものです。</p>
+      </div>
+    </div>
+
+    <!-- 1. Sign-in -->
+    <section class="page" id="t1">
+      <h2><span class="num">1</span><span data-lang="th">การเข้าสู่ระบบและโดเมนที่รับ</span><span data-lang="en">Sign-in &amp; Allowed Domains</span><span data-lang="ja">ログインと許可ドメイン</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>รับเฉพาะบัญชี Microsoft 365 ที่อยู่ในโดเมนของ AISIN Group/ATTG เท่านั้น — บัญชีอีเมลส่วนตัวหรือบัญชีนอกองค์กรใช้งานไม่ได้</li>
+        <li>ผู้ใช้บางส่วนอาจ Login ด้วย UPN ที่เป็นรหัสพนักงาน (เช่น 0158-ATA@ap01.aisingroup.com) แทนอีเมลจริง — ระบบจะดึงอีเมลจริงจากบัญชี Microsoft 365 โดยอัตโนมัติเพื่อใช้ระบุตัวตนในระบบ</li>
+        <li>เซสชันการเข้าสู่ระบบผูกกับเบราว์เซอร์/แท็บที่ใช้งาน — ปิดเบราว์เซอร์หรือออกจากระบบจะต้องเข้าสู่ระบบใหม่</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>Only Microsoft 365 accounts within the AISIN Group/ATTG domain are accepted — personal or external-organization email accounts cannot sign in</li>
+        <li>Some users may sign in with a UPN that looks like an employee code (e.g. 0158-ATA@ap01.aisingroup.com) rather than a real email address — the system automatically resolves their real email from the Microsoft 365 account to identify them</li>
+        <li>A sign-in session is tied to the browser/tab in use — closing the browser or signing out requires signing in again</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>AISIN Group/ATTGドメイン内のMicrosoft 365アカウントのみ利用可能です。個人メールや組織外のアカウントではログインできません</li>
+        <li>一部のユーザーは実際のメールアドレスではなく、社員コードのようなUPN(例:0158-ATA@ap01.aisingroup.com)でログインする場合がありますが、システムはMicrosoft 365アカウントから実際のメールアドレスを自動的に取得して本人確認に使用します</li>
+        <li>ログインセッションは使用中のブラウザ/タブに紐づいています。ブラウザを閉じるか、ログアウトすると再度ログインが必要です</li>
+      </ul>
+    </section>
+
+    <!-- 2. Employee code -->
+    <section class="page" id="t2">
+      <h2><span class="num">2</span><span data-lang="th">บัญชีรหัสพนักงาน</span><span data-lang="en">Employee-Code Accounts</span><span data-lang="ja">社員コードアカウント</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>ใช้สำหรับผู้ที่ยังไม่มีบัญชี Microsoft 365 เช่น พนักงานใหม่หรือ Outsource</li>
+        <li>รหัสผ่านต้องมีความยาวอย่างน้อย 12 ตัวอักษร ประกอบด้วยตัวพิมพ์เล็ก ตัวพิมพ์ใหญ่ และตัวเลขอย่างละ 1 ตัวขึ้นไป</li>
+        <li>บัญชีใหม่จะ <b>ใช้งานไม่ได้ทันที</b> — ต้องรอหัวหน้าแผนก (หรือผู้จัดการส่วน หากแผนกไม่มีหัวหน้า) อนุมัติผ่านอีเมลก่อน</li>
+        <li>คำขอจาก Outsource (กลุ่ม B) จะจัดเส้นทางอนุมัติผ่านรายชื่อ "ผู้อนุมัติ Outsource" ที่ตั้งค่าไว้ ไม่ใช้ผังองค์กรแบบพนักงานประจำ เนื่องจากไม่มีข้อมูลในฐานพนักงานหลัก</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>Intended for anyone without a Microsoft 365 account yet, such as new hires or outsourced staff</li>
+        <li>Passwords must be at least 12 characters, including at least one lowercase letter, one uppercase letter, and one digit</li>
+        <li>A new account is <b>not usable immediately</b> — it must first be approved by email by the department head (or section manager if the department has none)</li>
+        <li>Requests from outsourced (Group B) staff route through a configured "Outsource Approvers" list instead of the regular-employee org chart, since they have no record in the master employee database</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>Microsoft 365アカウントをまだお持ちでない方(新入社員、業務委託スタッフなど)向けです</li>
+        <li>パスワードは12文字以上で、英小文字、英大文字、数字をそれぞれ1文字以上含む必要があります</li>
+        <li>新規アカウントは<b>すぐには使用できません</b>。まず部門長(部門長不在の場合はセクションマネージャー)によるメールでの承認が必要です</li>
+        <li>業務委託(グループB)からの申請は、正社員の組織図ではなく設定済みの「業務委託承認者」リストを通じて処理されます。マスター社員データベースに記録がないためです</li>
+      </ul>
+    </section>
+
+    <!-- 3. Portal access -->
+    <section class="page" id="t3">
+      <h2><span class="num">3</span><span data-lang="th">สิทธิ์การเข้าถึง Portal</span><span data-lang="en">Portal Access Rights</span><span data-lang="ja">ポータルアクセス権限</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>ผู้ใช้ที่มีบัญชี O365 ทุกคน <b>เห็น Portal ที่เปิดใช้งานอยู่ได้ทุกฝ่ายโดยอัตโนมัติ</b> ในระดับ "User" แม้จะยังไม่เคยถูกเพิ่มชื่อในฝ่ายนั้นมาก่อน</li>
+        <li>สิทธิ์ระดับสูงกว่า User (เช่น Admin ของฝ่าย) ต้องมีชื่ออยู่ในรายชื่อสมาชิก Portal นั้นอย่างชัดเจนเท่านั้น — ไม่ได้รับสิทธิ์อัตโนมัติ</li>
+        <li>สิ่งที่แก้ไขได้จริงในแต่ละ Portal ขึ้นอยู่กับสิทธิ์ที่ Portal นั้นกำหนดไว้ ไม่ใช่ทุกคนที่ Login เข้ามาได้จะแก้ไขข้อมูลได้เหมือนกัน</li>
+        <li>ถ้าไม่มี Portal ที่ active อยู่เลยในระบบ ผู้ใช้จะเห็นหน้า "ยังไม่มีสิทธิ์เข้าใช้งาน" — กรณีนี้ให้ติดต่อผู้ดูแลระบบ ไม่ใช่ปัญหาของบัญชีผู้ใช้เอง</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>Every user with an O365 account <b>automatically sees every active Portal</b> at "User" level, even if they've never been explicitly added to that department before</li>
+        <li>Rights above User level (e.g. department Admin) require an explicit entry in that Portal's member list — this is never granted automatically</li>
+        <li>What you can actually edit in a given Portal depends on the rights that Portal has configured — not everyone who can sign in has the same editing rights</li>
+        <li>If the system has zero active Portals at all, the user sees a "not yet provisioned" screen — this should be reported to the system administrator, not treated as a problem with the user's own account</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>O365アカウントを持つすべてのユーザーは、その部門に明示的に追加されたことがなくても、<b>有効なすべてのポータルを「User」レベルで自動的に閲覧できます</b></li>
+        <li>Userレベルを超える権限(部門管理者など)は、そのポータルのメンバーリストに明示的に登録されている場合にのみ付与され、自動的には付与されません</li>
+        <li>実際に編集できる内容は各ポータルが設定した権限によって異なります。ログインできる全員が同じ編集権限を持つわけではありません</li>
+        <li>システムに有効なポータルが一つもない場合、ユーザーには「まだ権限が付与されていません」という画面が表示されます。これはユーザー自身のアカウントの問題ではなく、システム管理者に連絡すべき事項です</li>
+      </ul>
+    </section>
+
+    <!-- 4. Requests/approval -->
+    <section class="page" id="t4">
+      <h2><span class="num">4</span><span data-lang="th">การส่งและอนุมัติคำขอ</span><span data-lang="en">Submitting &amp; Approving Requests</span><span data-lang="ja">申請と承認</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>คำขอทุกรายการต้องผ่านสายการอนุมัติที่ผู้ดูแลบริการกำหนดไว้ล่วงหน้า (เช่น IT Review → Section → Department) — ผู้ยื่นคำขอไม่สามารถข้ามขั้นตอนได้</li>
+        <li>ผู้อนุมัติแต่ละระดับจะได้รับอีเมลแจ้งเตือนโดยอัตโนมัติเมื่อถึงคิวของตน</li>
+        <li>บริการบางประเภทจำกัดเฉพาะบางบริษัทในกลุ่ม (เช่น SNF, NIC, ATFB, SATI, TEP, AT-A) — จะไม่ปรากฏให้พนักงานบริษัทอื่นเห็น</li>
+        <li>บริการที่แสดงสถานะ "เร็ว ๆ นี้" ยังไม่เปิดให้ยื่นคำขอจริง</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>Every request must pass through the approval chain the service admin pre-configured (e.g. IT Review → Section → Department) — a requester cannot skip a step</li>
+        <li>Each approver is automatically notified by email once it's their turn</li>
+        <li>Some services are restricted to specific companies within the group (e.g. SNF, NIC, ATFB, SATI, TEP, AT-A) and won't appear to employees of other companies</li>
+        <li>A service marked "Coming Soon" cannot yet accept real submissions</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>すべての申請は、サービス管理者が事前に設定した承認フロー(例:IT Review → Section → Department)を経由する必要があり、申請者はステップを飛ばすことはできません</li>
+        <li>各承認者は、自分の順番になると自動的にメールで通知を受け取ります</li>
+        <li>一部のサービスはグループ内の特定の会社(SNF、NIC、ATFB、SATI、TEP、AT-Aなど)に限定されており、それ以外の会社の社員には表示されません</li>
+        <li>「近日公開」と表示されているサービスは、まだ実際の申請を受け付けていません</li>
+      </ul>
+    </section>
+
+    <!-- 5. Sharing -->
+    <section class="page" id="t5">
+      <h2><span class="num">5</span><span data-lang="th">การแชร์บริการข้ามฝ่าย</span><span data-lang="en">Cross-Department Sharing</span><span data-lang="ja">部門間の共有</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>บริการที่สร้างขึ้นจะมองเห็นได้เฉพาะฝ่ายเจ้าของเป็นค่าเริ่มต้น จนกว่าเจ้าของจะแชร์ให้ฝ่ายอื่นอย่างชัดเจน</li>
+        <li>เอกสาร/บริการที่ถูกแชร์มาใหม่ (ไม่เกิน 7 วัน) จะมีสัญลักษณ์แจ้งเตือนพิเศษ ให้สังเกตได้ง่าย</li>
+        <li>การยกเลิกการแชร์ทำได้ทุกเมื่อโดยเจ้าของบริการ ฝ่ายที่เคยเห็นจะไม่เห็นบริการนั้นอีกทันที</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>A newly created service is visible only to its owning department by default, until the owner explicitly shares it with others</li>
+        <li>A recently shared document/service (within 7 days) is marked with a special badge so it's easy to notice</li>
+        <li>The owner can revoke sharing at any time; departments that could previously see it lose access immediately</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>新規作成されたサービスは、所有部門が明示的に他部門と共有するまで、デフォルトでは所有部門にのみ表示されます</li>
+        <li>最近共有された書類/サービス(7日以内)には、気づきやすいように特別なバッジが表示されます</li>
+        <li>所有部門はいつでも共有を取り消すことができ、それまで閲覧できていた部門は即座にアクセスできなくなります</li>
+      </ul>
+    </section>
+
+    <!-- 6. App hub -->
+    <section class="page" id="t6">
+      <h2><span class="num">6</span><span data-lang="th">ศูนย์รวม Link แอปพลิเคชัน</span><span data-lang="en">Application Link Hub</span><span data-lang="ja">アプリケーションリンクハブ</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>A-SOP ทำหน้าที่เป็น "ทางเข้ารวม" ไปยังระบบภายนอกเท่านั้น — ไม่ได้เก็บ ควบคุม หรือรับผิดชอบข้อมูลภายในระบบปลายทาง</li>
+        <li>ลิงก์ที่เปิดจะพาไปยังหน้าเว็บของระบบต้นทางในแท็บใหม่ ผู้ใช้ต้อง Login ระบบปลายทางแยกต่างหากหากระบบนั้นไม่ได้เชื่อม SSO ไว้</li>
+        <li>ลิงก์ที่แสดงสถานะ "เร็ว ๆ นี้" ยังไม่มี URL จริงให้ใช้งาน</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>A-SOP acts only as a "single entry point" to external systems — it does not store, control, or take responsibility for data inside the destination systems</li>
+        <li>Clicking a link opens the destination system's own page in a new tab; users must sign in to the destination system separately if it isn't connected via SSO</li>
+        <li>A link marked "Coming Soon" has no real URL to use yet</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>A-SOPは外部システムへの「単一の入口」として機能するのみで、接続先システム内のデータを保存・管理・保証するものではありません</li>
+        <li>リンクをクリックすると、新しいタブで接続先システムの画面が開きます。SSO連携されていないシステムの場合は、別途そのシステムへのログインが必要です</li>
+        <li>「近日公開」と表示されているリンクには、まだ実際に使用できるURLがありません</li>
+      </ul>
+    </section>
+
+    <!-- 7. Fast vs detailed -->
+    <section class="page" id="t7">
+      <h2><span class="num">7</span><span data-lang="th">โหมดเร็ว vs โหมดละเอียด (OCR)</span><span data-lang="en">Fast Mode vs Detailed Mode (OCR)</span><span data-lang="ja">高速モードと詳細モード(OCR)</span></h2>
+      <ul class="rules" data-lang="th">
+        <li><b>โหมดเร็ว</b> (ค่าเริ่มต้น): ประมวลผลในเครื่องเซิร์ฟเวอร์เอง (Tesseract/อ่านข้อความจาก PDF โดยตรง) ไม่มีค่าใช้จ่ายเพิ่มเติม ไม่ส่งข้อมูลออกไปยังบริการภายนอก เหมาะกับเอกสารทั่วไปที่ต้องการความรวดเร็ว</li>
+        <li><b>โหมดละเอียด</b>: ส่งเอกสารไปประมวลผลผ่าน Azure Document Intelligence ให้ความแม่นยำสูงกว่า มีค่าคะแนนความมั่นใจจริงต่อฟิลด์ และมีเส้นชี้ตำแหน่งบนเอกสารต้นฉบับที่แม่นยำกว่า แต่ใช้เวลานานกว่าและมีข้อจำกัดปริมาณการใช้งานต่อเดือน</li>
+        <li>ทั้งสองโหมดใช้ชุดฟิลด์ (เลขที่เอกสาร, วันที่, ยอดรวม ฯลฯ) เดียวกัน แต่โหมดเร็วอาจดึงข้อมูลได้ไม่ครบทุกฟิลด์เท่าโหมดละเอียดในเอกสารที่มีรูปแบบซับซ้อนผิดปกติ</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li><b>Fast mode</b> (default): processes on the server itself (Tesseract / reading text directly from the PDF), at no extra cost, and never sends data to any external service. Suited to everyday documents where speed matters</li>
+        <li><b>Detailed mode</b>: sends the document to Azure Document Intelligence for processing. More accurate, with a real per-field confidence score and more precise position markers on the original document — but slower, and subject to a monthly usage cap</li>
+        <li>Both modes extract the same set of fields (document number, date, total amount, etc.), but Fast mode may not capture every field as completely as Detailed mode on unusually complex layouts</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li><b>高速モード</b>(デフォルト):サーバー自体で処理を行い(Tesseract/PDFから直接テキストを読み取り)、追加費用は発生せず、外部サービスへデータを送信しません。速度が重要な通常業務に適しています</li>
+        <li><b>詳細モード</b>:書類をAzure Document Intelligenceに送信して処理します。より高精度で、各項目に実際の信頼度スコアが付き、元の書類上の位置マーカーもより正確ですが、処理に時間がかかり、月間利用量に上限があります</li>
+        <li>両モードとも同じ項目セット(書類番号、日付、合計金額など)を抽出しますが、非常に複雑なレイアウトの書類では高速モードが詳細モードほど完全にすべての項目を取得できない場合があります</li>
+      </ul>
+    </section>
+
+    <!-- 8. Confidence -->
+    <section class="page" id="t8">
+      <h2><span class="num">8</span><span data-lang="th">ระดับความมั่นใจของข้อมูล</span><span data-lang="en">Data Confidence Levels</span><span data-lang="ja">データ信頼度レベル</span></h2>
+      <ul class="rules" data-lang="th">
+        <li><b>โหมดละเอียด</b> ใช้คะแนนความมั่นใจจริงจาก AI: <b>มั่นใจสูง (เขียว)</b> ตั้งแต่ 80% ขึ้นไป, <b>ตรวจสอบ (ส้ม)</b> 40–79%, <b>ไม่พบ/ต่ำ (แดง)</b> ต่ำกว่า 40%</li>
+        <li><b>โหมดเร็ว</b> ไม่มีคะแนนต่อเนื่อง แต่ละฟิลด์จะถูกจัดระดับตามความน่าเชื่อถือของรูปแบบที่ตรวจพบในเอกสาร (เช่น พบป้ายชื่อฟิลด์ตรงกับค่าในบรรทัดเดียวกัน = มั่นใจสูง; ต้องเดาจากบริบท = ตรวจสอบ)</li>
+        <li>ทุกค่าที่ระบบอ่านได้ ไม่ว่าจะระดับความมั่นใจใด ควรได้รับการตรวจทานจากผู้ใช้ก่อนกด "ยืนยันและบันทึก" เสมอ — ระบบ AI อาจอ่านผิดพลาดได้แม้จะมั่นใจสูง</li>
+        <li>เมื่อผู้ใช้กดปุ่ม "ยืนยัน" (เครื่องหมายถูก) ที่แถวใด ค่าฟิลด์นั้นจะถือเป็น "มั่นใจสูง" ทันที ตามการยืนยันด้วยสายตาของผู้ใช้ ไม่ใช่คะแนนจาก AI</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li><b>Detailed mode</b> uses a real AI confidence score: <b>High confidence (green)</b> is 80% or above, <b>Needs review (orange)</b> is 40–79%, <b>Not found/low (red)</b> is below 40%</li>
+        <li><b>Fast mode</b> has no continuous score — each field is tiered by how reliable the pattern match found in the document was (e.g. a field label sitting right next to its value on the same line = High confidence; a value inferred from surrounding context = Needs review)</li>
+        <li>Every extracted value, regardless of its confidence tier, should always be visually reviewed before clicking "Confirm &amp; Save" — the AI can still misread even a High-confidence value</li>
+        <li>Clicking "Confirm" (the checkmark) on a row immediately marks that field as "High confidence," based on the user's own visual verification, not the AI's score</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li><b>詳細モード</b>は実際のAI信頼度スコアを使用します:<b>高信頼度(緑)</b>は80%以上、<b>要確認(オレンジ)</b>は40〜79%、<b>未検出・低い(赤)</b>は40%未満</li>
+        <li><b>高速モード</b>には連続的なスコアはなく、書類内で検出されたパターンマッチの信頼性に基づいて各項目が等級付けされます(例:項目ラベルが同じ行の値のすぐ隣にある場合=高信頼度、周囲の文脈から推測された値=要確認)</li>
+        <li>信頼度レベルに関わらず、抽出されたすべての値は「確認して保存」をクリックする前に必ず目視で確認してください。高信頼度であってもAIが誤読する可能性があります</li>
+        <li>行の「確認」(チェックマーク)をクリックすると、AIのスコアではなくユーザー自身の目視確認に基づき、その項目は即座に「高信頼度」としてマークされます</li>
+      </ul>
+    </section>
+
+    <!-- 9. File limits -->
+    <section class="page" id="t9">
+      <h2><span class="num">9</span><span data-lang="th">ขีดจำกัดไฟล์และรูปแบบเอกสาร</span><span data-lang="en">File Limits &amp; Formats</span><span data-lang="ja">ファイル制限と形式</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>รองรับไฟล์ PDF, JPG, PNG เท่านั้น — ไฟล์ประเภทอื่น (เช่น Word, Excel) ไม่สามารถอัปโหลดเพื่ออ่านด้วย OCR ได้</li>
+        <li>ขนาดไฟล์สูงสุด 4 MB ต่อไฟล์ — ไฟล์ที่ใหญ่กว่านี้ต้องบีบอัดหรือแปลงรูปแบบก่อนอัปโหลด</li>
+        <li>ไฟล์ PDF ที่เป็นภาพสแกนล้วน (ไม่มีชั้นข้อความ) จะไม่สามารถอ่านด้วยโหมดเร็วได้ — ให้แปลงเป็นไฟล์รูปภาพ (JPG/PNG) แล้วอัปโหลดใหม่แทน</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>Only PDF, JPG, and PNG files are supported — other file types (e.g. Word, Excel) cannot be uploaded for OCR reading</li>
+        <li>Maximum file size is 4 MB — larger files must be compressed or converted before uploading</li>
+        <li>A purely image-scanned PDF (with no text layer) cannot be read in Fast mode — convert it to an image file (JPG/PNG) and upload that instead</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>対応形式はPDF、JPG、PNGのみです。それ以外のファイル形式(Word、Excelなど)はOCR読み取り用にアップロードできません</li>
+        <li>最大ファイルサイズは4MBです。これより大きいファイルは、アップロード前に圧縮または形式変換が必要です</li>
+        <li>テキストレイヤーを持たない、画像スキャンのみのPDFは高速モードでは読み取れません。画像ファイル(JPG/PNG)に変換してから再アップロードしてください</li>
+      </ul>
+    </section>
+
+    <!-- 10. Document sharing/privacy -->
+    <section class="page" id="t10">
+      <h2><span class="num">10</span><span data-lang="th">การแชร์เอกสารและความเป็นส่วนตัว</span><span data-lang="en">Document Sharing &amp; Privacy</span><span data-lang="ja">書類の共有とプライバシー</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>เอกสารที่อัปโหลด (รวมถึงไฟล์ต้นฉบับ) จัดเก็บไว้ในระบบฐานข้อมูลของ A-SOP เอง</li>
+        <li>โหมดเร็วประมวลผลในเซิร์ฟเวอร์ของระบบเอง ไม่ส่งข้อมูลออกไปนอกองค์กร; โหมดละเอียดส่งเฉพาะตัวเอกสารไปยัง Azure Document Intelligence (บริการของ Microsoft Azure ที่องค์กรใช้งานอยู่แล้ว) เพื่อประมวลผลเท่านั้น</li>
+        <li>เอกสารจะแสดงเฉพาะผู้ใช้ในหน่วยงานย่อยเดียวกัน หรือหน่วยงานที่ได้รับการแชร์ให้เท่านั้น</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>Uploaded documents (including the original file) are stored in A-SOP's own database</li>
+        <li>Fast mode processes entirely on the system's own server and never sends data outside the organization; Detailed mode sends only the document itself to Azure Document Intelligence (a Microsoft Azure service the organization already uses) for processing</li>
+        <li>A document is only visible to users in the same sub-unit, or to a sub-unit it has been explicitly shared with</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>アップロードされた書類(元のファイルを含む)はA-SOP自身のデータベースに保存されます</li>
+        <li>高速モードはシステム自体のサーバー上で完全に処理され、組織外へデータが送信されることはありません。詳細モードは書類そのものをAzure Document Intelligence(組織がすでに利用しているMicrosoft Azureのサービス)へ処理のためにのみ送信します</li>
+        <li>書類は同じサブユニットのユーザー、または明示的に共有されたサブユニットのユーザーにのみ表示されます</li>
+      </ul>
+    </section>
+
+    <!-- 11. Role tiers -->
+    <section class="page" id="t11">
+      <h2><span class="num">11</span><span data-lang="th">ระดับสิทธิ์ผู้ใช้งาน</span><span data-lang="en">User Role Tiers</span><span data-lang="ja">ユーザー権限区分</span></h2>
+      <ul class="rules" data-lang="th">
+        <li><span class="tag role">User</span> ผู้ใช้งานทั่วไป — ยื่นคำขอ ใช้ Application Hub และ OCR ได้ แต่แก้ไขการตั้งค่าของฝ่ายไม่ได้</li>
+        <li><span class="tag role">Admin</span> ผู้ดูแลฝ่าย — สร้าง/แก้ไขบริการ, จัดการ Application Link, จัดการสมาชิกและสิทธิ์ภายในฝ่ายของตนเอง</li>
+        <li><span class="tag role">Super Admin</span> ผู้ดูแลระบบสูงสุด (จำนวนจำกัดเฉพาะบุคคล) — มองเห็นและสร้าง Portal ได้ทุกฝ่าย เข้าหน้า "การจัดการระบบ" ระดับองค์กร และเป็นผู้เดียวที่แก้ไขรายการ "ประเภทเอกสารย่อย" ของ OCR ได้ (เพื่อป้องกันแต่ละฝ่ายตั้งประเภทซ้ำซ้อนกันเอง)</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li><span class="tag role">User</span> Regular user — can submit requests and use the Application Hub and OCR, but cannot change their department's own configuration</li>
+        <li><span class="tag role">Admin</span> Department admin — can create/edit services, manage Application Links, and manage members and rights within their own department</li>
+        <li><span class="tag role">Super Admin</span> Top-level administrator (a small, fixed set of people) — can see and create every Portal, access the organization-wide "System Management" page, and is the only role that can edit the global OCR "document sub-type" list (to prevent departments from independently creating conflicting or duplicate types)</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li><span class="tag role">User</span> 一般ユーザー — 申請の送信、アプリケーションハブとOCRの利用が可能ですが、自部門の設定を変更することはできません</li>
+        <li><span class="tag role">Admin</span> 部門管理者 — サービスの作成/編集、アプリケーションリンクの管理、自部門内のメンバーと権限の管理が可能です</li>
+        <li><span class="tag role">Super Admin</span> 最上位管理者(少数の特定の人物のみ)— すべてのポータルの閲覧・作成が可能で、組織全体の「システム管理」ページにアクセスでき、OCRの「書類サブタイプ」のグローバルリストを編集できる唯一の権限です(各部門が独自に競合・重複した種類を作成するのを防ぐため)</li>
+      </ul>
+    </section>
+
+    <!-- 12. Responsibilities -->
+    <section class="page" id="t12">
+      <h2><span class="num">12</span><span data-lang="th">ความรับผิดชอบของผู้ใช้งาน</span><span data-lang="en">User Responsibilities</span><span data-lang="ja">ユーザーの責任</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>ผู้ใช้งานต้องตรวจสอบความถูกต้องของข้อมูลที่กรอกหรือที่ระบบอ่านได้ (โดยเฉพาะจาก OCR) ก่อนยืนยัน/บันทึก ทุกครั้ง</li>
+        <li>ห้ามใช้บัญชีของผู้อื่นในการเข้าสู่ระบบ หรือแชร์รหัสผ่านให้บุคคลอื่น</li>
+        <li>ข้อมูลที่ยื่นผ่านแบบฟอร์มดิจิทัลถือเป็นคำขออย่างเป็นทางการ มีผลเทียบเท่าการยื่นเอกสารกระดาษ</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>Users must verify the accuracy of any information they enter or that the system extracts (especially via OCR) every time, before confirming or saving</li>
+        <li>Do not sign in using someone else's account, or share your password with anyone else</li>
+        <li>Information submitted through a digital form is an official request, carrying the same weight as a paper submission</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>ユーザーは、入力した情報やシステムが抽出した情報(特にOCRによるもの)の正確性を、確認・保存する前に毎回検証する必要があります</li>
+        <li>他人のアカウントでログインしたり、パスワードを他人と共有したりしないでください</li>
+        <li>デジタルフォームを通じて提出された情報は正式な申請とみなされ、紙の申請書と同等の効力を持ちます</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span data-lang="th">ATTG Smart Office Portal (A-SOP) · เอกสารนี้อาจปรับปรุงตามการเปลี่ยนแปลงของระบบในอนาคต</span>
+  <span data-lang="en">ATTG Smart Office Portal (A-SOP) · This document may be updated as the system changes in the future.</span>
+  <span data-lang="ja">ATTG Smart Office Portal (A-SOP) · 本ドキュメントは今後のシステム変更に応じて更新される場合があります。</span>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-setlang]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var lang = btn.getAttribute('data-setlang');
+      document.body.className = 'lang-' + lang;
+      document.querySelectorAll('.lang-switch button').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      try { localStorage.setItem('asop-manual-lang', lang); } catch (e) {}
+    });
+  });
+  try {
+    var saved = localStorage.getItem('asop-manual-lang');
+    if (saved && ['th', 'en', 'ja'].includes(saved)) {
+      document.body.className = 'lang-' + saved;
+      document.querySelectorAll('.lang-switch button').forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-setlang') === saved);
+      });
+    }
+  } catch (e) {}
+</script>
+</body>
+</html>
