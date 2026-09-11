@@ -1,0 +1,659 @@
+<title>App Host Setup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #F3F5F6;
+    --surface: #FFFFFF;
+    --surface-2: #EDF1F3;
+    --ink: #172431;
+    --ink-muted: #5C6B7A;
+    --accent: #0F7C8C;
+    --accent-ink: #FFFFFF;
+    --accent-warm: #B8631F;
+    --accent-warm-bg: #FBEEE1;
+    --line: #DCE3E8;
+    --terminal-bg: #0D1B24;
+    --terminal-text: #B9F5D8;
+    --terminal-muted: #6B8A82;
+    --code-inline-bg: #E7EEF0;
+    --shadow: rgba(23, 36, 49, 0.08);
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0F1720;
+      --surface: #16212B;
+      --surface-2: #1C2934;
+      --ink: #E7EEF2;
+      --ink-muted: #93A4B2;
+      --accent: #35B4C4;
+      --accent-ink: #04262B;
+      --accent-warm: #E0954A;
+      --accent-warm-bg: #2A2015;
+      --line: #29404D;
+      --terminal-bg: #060D12;
+      --terminal-text: #9FF3CE;
+      --terminal-muted: #4E7268;
+      --code-inline-bg: #1F2E38;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #0F1720;
+    --surface: #16212B;
+    --surface-2: #1C2934;
+    --ink: #E7EEF2;
+    --ink-muted: #93A4B2;
+    --accent: #35B4C4;
+    --accent-ink: #04262B;
+    --accent-warm: #E0954A;
+    --accent-warm-bg: #2A2015;
+    --line: #29404D;
+    --terminal-bg: #060D12;
+    --terminal-text: #9FF3CE;
+    --terminal-muted: #4E7268;
+    --code-inline-bg: #1F2E38;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding-inline: max(16px, calc((100vw - 1180px) / 2));
+    padding-block: 40px 80px;
+  }
+
+  h1, h2, h3 { text-wrap: balance; font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+
+  code, pre, .mono { font-family: 'IBM Plex Mono', 'SF Mono', Consolas, monospace; }
+
+  a { color: var(--accent); }
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 36px;
+  }
+
+  .masthead .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+
+  .masthead h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .masthead .sub {
+    max-width: 60ch;
+    color: var(--ink-muted);
+    font-size: 15px;
+    margin: 10px 0 0;
+  }
+
+  .masthead .meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  .rail {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rail a {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--ink-muted);
+    font-size: 13px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+  }
+
+  .rail a .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+  }
+
+  .rail a.active {
+    color: var(--ink);
+    background: var(--surface-2);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  .rail a.active .n { color: var(--accent); }
+
+  main { min-width: 0; }
+
+  .diagram {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+
+  .diagram .node {
+    flex: 1 1 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface-2);
+    text-align: center;
+  }
+
+  .diagram .node.stack { flex: 1 1 220px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px; background: transparent; border: 1px dashed var(--line); }
+  .diagram .node.stack .box { padding: 12px 8px; border-radius: 7px; background: var(--surface); border: 1px solid var(--line); font-size: 12.5px; }
+  .diagram .node.stack .label { grid-column: 1 / -1; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+
+  .diagram .node strong { font-size: 13.5px; }
+  .diagram .node span { font-size: 11.5px; color: var(--ink-muted); font-family: 'IBM Plex Mono', monospace; }
+
+  .diagram .arrow { display: flex; align-items: center; color: var(--ink-muted); font-size: 20px; flex: 0 0 auto; }
+  @media (max-width: 640px) { .diagram .arrow { display: none; } .diagram { flex-direction: column; } }
+
+  section.phase {
+    scroll-margin-top: 20px;
+    padding-top: 8px;
+    margin-bottom: 44px;
+  }
+
+  .phase-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .phase-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phase-head h2 { font-size: 20px; margin: 0; font-weight: 600; }
+
+  .phase-body { padding-left: 48px; }
+  .phase-body p { margin: 0 0 14px; max-width: 68ch; color: var(--ink); }
+  .phase-body p.muted { color: var(--ink-muted); font-size: 14px; }
+
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin: 16px 0 20px;
+    max-width: 620px;
+  }
+  .specs .item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .specs .item .k { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; }
+  .specs .item .v { font-family: 'IBM Plex Mono', monospace; font-size: 14px; margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+  .steps { margin: 0 0 18px; padding-left: 22px; max-width: 68ch; }
+  .steps li { margin-bottom: 6px; }
+
+  .codeblock {
+    position: relative;
+    background: var(--terminal-bg);
+    border-radius: 10px;
+    margin: 0 0 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .codeblock .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--terminal-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .codeblock pre {
+    margin: 0;
+    padding: 14px 16px 16px;
+    overflow-x: auto;
+    color: var(--terminal-text);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .copy-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--terminal-muted);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 5px;
+    padding: 3px 8px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { color: var(--terminal-text); border-color: rgba(255,255,255,0.25); }
+  .copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  code.inline {
+    background: var(--code-inline-bg);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    background: var(--accent-warm-bg);
+    border: 1px solid color-mix(in srgb, var(--accent-warm) 35%, transparent);
+    border-radius: 9px;
+    padding: 12px 14px;
+    margin: 0 0 18px;
+    max-width: 68ch;
+    font-size: 13.5px;
+  }
+  .callout .ic { flex-shrink: 0; color: var(--accent-warm); font-weight: 700; }
+  .callout strong { color: var(--accent-warm); }
+
+  table.handoff {
+    width: 100%;
+    max-width: 68ch;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-bottom: 10px;
+  }
+  table.handoff th, table.handoff td {
+    text-align: left;
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  table.handoff th { color: var(--ink-muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  table.handoff td.field { font-family: 'IBM Plex Mono', monospace; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-muted);
+    font-size: 12.5px;
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .rail { position: static; flex-direction: row; overflow-x: auto; gap: 4px; padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+    .rail a { white-space: nowrap; border-left: none; border-bottom: 2px solid transparent; }
+    .rail a.active { border-left-color: transparent; border-bottom-color: var(--accent); }
+    .phase-body { padding-left: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+
+<div class="masthead">
+  <div>
+    <p class="eyebrow">Infrastructure &middot; ATTG Group</p>
+    <h1>App Host Setup</h1>
+    <p class="sub">ตั้งค่าเครื่อง VM บน Nutanix สำหรับรันแอปภายในที่พัฒนาขึ้นเอง (เริ่มจาก ATTG ACM) พร้อมฐานข้อมูล SQL Server Express ของตัวเอง — ไม่พึ่งพา Cloud ใดๆ ทั้งสิ้น</p>
+  </div>
+  <p class="meta">v1.0 &middot; สำหรับทีม IT Local<br>ผู้ดูแล: แผนก IT ATTG</p>
+</div>
+
+<div class="layout">
+  <nav class="rail" id="rail">
+    <a href="#overview"><span class="n">00</span> ภาพรวม</a>
+    <a href="#phase-1"><span class="n">01</span> สร้าง VM บน Nutanix</a>
+    <a href="#phase-2"><span class="n">02</span> ตั้งค่า OS พื้นฐาน</a>
+    <a href="#phase-3"><span class="n">03</span> ติดตั้ง Docker</a>
+    <a href="#phase-4"><span class="n">04</span> ตั้ง SQL Express</a>
+    <a href="#phase-5"><span class="n">05</span> เครือข่าย/Firewall</a>
+    <a href="#phase-6"><span class="n">06</span> ตรวจสอบระบบ</a>
+    <a href="#handoff"><span class="n">07</span> ส่งมอบข้อมูล</a>
+  </nav>
+
+  <main>
+    <section class="phase" id="overview">
+      <div class="phase-head"><div class="phase-num">00</div><h2>ภาพรวม</h2></div>
+      <div class="phase-body">
+        <p>เครื่องนี้จะเป็น <strong>ที่รวมกลาง</strong> สำหรับรันแอปภายในที่เขียนขึ้นเองทั้งหมด (เริ่มจาก ATTG ACM และแอปในอนาคต) โดยใช้ Docker แยกแต่ละแอปเป็นกล่องอิสระ และมี SQL Server Express เป็นฐานข้อมูลกลางของตัวเอง เนื่องจากทั้ง 6 บริษัทในกลุ่ม ATTG เชื่อมเครือข่ายภายในถึงกันอยู่แล้ว เครื่องเดียวนี้จึงให้บริการทุกบริษัทได้โดยไม่ต้องพึ่ง Cloud</p>
+        <div class="diagram">
+          <div class="node"><strong>เครือข่าย ATTG</strong><span>6 บริษัท เชื่อมถึงกัน</span></div>
+          <div class="arrow">&rarr;</div>
+          <div class="node"><strong>VM บน Nutanix</strong><span>Ubuntu Server 24.04 LTS</span></div>
+          <div class="arrow">&rarr;</div>
+          <div class="node stack">
+            <div class="label">Docker containers</div>
+            <div class="box">App container<br><span class="mono" style="font-size:10px">(ACM, …)</span></div>
+            <div class="box">SQL Express<br><span class="mono" style="font-size:10px">container</span></div>
+          </div>
+        </div>
+        <p class="muted">เอกสารนี้ทำเป็น 7 ขั้นตอนตามลำดับที่ต้องทำจริง — ทำตามตั้งแต่ขั้นตอน 01 ไปเรื่อยๆ ได้เลย แต่ละ code block กดปุ่ม "คัดลอก" ได้ทันที</p>
+        <div class="callout"><span class="ic">!</span><div><strong>ก่อนเริ่ม ต้องขอข้อมูลนี้จากทีมดูแลเครือข่าย (Network) ก่อน</strong> — ไม่งั้นจะติดตอนขั้นตอน 02:
+        <ul class="steps" style="margin-top:8px">
+          <li><strong>Static IP Address</strong> ที่จะให้เครื่องนี้ใช้ (1 หมายเลข ห้ามซ้ำกับเครื่องอื่น)</li>
+          <li><strong>Subnet Mask / CIDR</strong> ของวงนั้น (เช่น /24)</li>
+          <li><strong>Default Gateway</strong> ของวงนั้น</li>
+          <li><strong>DNS Server</strong> ภายในบริษัท (1-2 หมายเลข)</li>
+          <li><strong>VLAN / Port Group</strong> ใน Nutanix ที่ต้องเลือกตอนสร้าง VM (ชื่อ subnet ที่ทั้ง 6 บริษัทเชื่อมถึงกัน)</li>
+        </ul>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-1">
+      <div class="phase-head"><div class="phase-num">01</div><h2>สร้าง VM บน Nutanix</h2></div>
+      <div class="phase-body">
+        <p>สเปกเครื่องที่แนะนำ และเหตุผล — SQL Server Express (ฟรี) มีเพดานของตัวเองอยู่แล้วไม่ว่าเครื่องจะแรงแค่ไหน: ใช้ RAM ได้จริงสูงสุด ~1.4 GB ต่อฐานข้อมูล และใช้ CPU ได้สูงสุด 4 core เท่านั้น ส่วน RAM/CPU ที่เหลือของเครื่องจะไปให้ตัว OS + Docker + แอปต่างๆ ที่รันคู่กัน:</p>
+        <div class="specs">
+          <div class="item"><div class="k">OS</div><div class="v">Ubuntu Server 24.04 LTS</div></div>
+          <div class="item"><div class="k">vCPU</div><div class="v">4 (1 socket)</div></div>
+          <div class="item"><div class="k">RAM</div><div class="v">8 GB</div></div>
+          <div class="item"><div class="k">Disk</div><div class="v">80 GB (thin)</div></div>
+          <div class="item"><div class="k">Network</div><div class="v">ATTG Internal VLAN</div></div>
+          <div class="item"><div class="k">Hostname</div><div class="v">attg-apphost-01</div></div>
+        </div>
+        <div class="callout"><span class="ic">!</span><div><strong>ขยายได้ทีหลัง</strong> — ถ้าเพิ่มแอปมากขึ้นแล้วเครื่องเริ่มช้า ปรับเพิ่ม vCPU/RAM ผ่าน Prism ได้เลยโดยไม่ต้องสร้างใหม่ (แต่ SQL Express เองจะยังใช้ RAM/CPU ได้แค่เพดานเดิม ไม่ว่าจะเพิ่มเครื่องแค่ไหน — ถ้าวันหนึ่งฐานข้อมูลโตเกิน 10GB/ตัว หรือใช้งานหนักมาก ค่อยพิจารณาอัปเกรดเป็น SQL Server Standard ทีหลัง)</div></div>
+
+        <p><strong>ขั้นตอนใน Prism Central:</strong></p>
+        <ol class="steps">
+          <li>เข้า Prism Central &rarr; เมนู <strong>Compute &amp; Storage &rarr; VMs</strong> &rarr; กด <strong>Create VM</strong></li>
+          <li>ถ้ายังไม่มี ISO ของ Ubuntu Server 24.04 ในระบบ ให้ไปที่ <strong>Settings &rarr; Image Configuration</strong> อัปโหลด ISO ก่อน แล้วค่อยกลับมา Create VM</li>
+          <li>Name: <code class="inline">attg-apphost-01</code></li>
+          <li>vCPU(s): <code class="inline">1</code> socket &times; <code class="inline">4</code> core — Memory: <code class="inline">8</code> GiB</li>
+          <li>Disk: Add New Disk &rarr; Type: SCSI &rarr; Size: <code class="inline">80</code> GiB &rarr; เลือก Storage Container ที่ IT กำหนด</li>
+          <li>CD-ROM: แนบ ISO ของ Ubuntu Server ที่อัปโหลดไว้</li>
+          <li>Network Adapter (NIC): เลือก VLAN/Subnet ที่ทีมเครือข่ายบอกไว้ (ข้อมูลจากกล่องด้านบน)</li>
+          <li>กด Save แล้ว Power On เครื่อง จากนั้นเปิด <strong>Console</strong> เพื่อเริ่มติดตั้ง Ubuntu</li>
+          <li>ระหว่างติดตั้ง Ubuntu: เลือกติดตั้ง <strong>OpenSSH Server</strong> ด้วย (มีตัวเลือกให้ติ๊กตอนถามเรื่อง Featured Server Snaps) — จำเป็นเพื่อจะได้ SSH เข้ามาทำขั้นตอนถัดไปจากเครื่องอื่นได้ ไม่ต้องเปิด Console ค้างไว้</li>
+          <li>ตั้ง username/password สำหรับ login ตอนติดตั้ง แล้วรอจนติดตั้งเสร็จ + reboot</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-2">
+      <div class="phase-head"><div class="phase-num">02</div><h2>ตั้งค่า OS พื้นฐาน</h2></div>
+      <div class="phase-body">
+        <p>SSH เข้าเครื่อง (จาก PuTTY หรือ Terminal) ด้วย IP ที่ Ubuntu แสดงตอนติดตั้งเสร็จ แล้วรันตามลำดับ:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>sudo apt update &amp;&amp; sudo apt full-upgrade -y
+sudo timedatectl set-timezone Asia/Bangkok
+sudo hostnamectl set-hostname attg-apphost-01</pre>
+        </div>
+
+        <p><strong>ก่อนตั้ง Static IP ต้องรู้ชื่อการ์ดเครือข่ายก่อน</strong> (ไม่ใช่ทุกเครื่องชื่อ <code class="inline">ens160</code> เหมือนกัน) รันคำสั่งนี้ดูชื่อจริง:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>ip a</pre>
+        </div>
+        <p class="muted">มองหาชื่อการ์ดที่ไม่ใช่ <code class="inline">lo</code> (เช่น <code class="inline">ens160</code>, <code class="inline">eth0</code>, <code class="inline">enp0s3</code>) — ใช้ชื่อนั้นแทนในไฟล์ด้านล่าง</p>
+
+        <p>แก้ไฟล์ <code class="inline">/etc/netplan/00-installer-config.yaml</code> (เปิดด้วย <code class="inline">sudo nano /etc/netplan/00-installer-config.yaml</code>) แล้ว<strong>แทนที่ค่าทั้งหมดด้วยข้อมูลจริง</strong>ที่ขอจากทีมเครือข่ายไว้ในขั้นตอนแรก:</p>
+        <div class="codeblock">
+          <div class="bar"><span>yaml — ตัวอย่าง</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>network:
+  version: 2
+  ethernets:
+    ens160:                      # &larr; เปลี่ยนเป็นชื่อจริงจาก `ip a`
+      addresses: [10.20.5.50/24]  # &larr; IP ที่ Network ตั้งให้ + subnet (/24 = 255.255.255.0)
+      routes:
+        - to: default
+          via: 10.20.5.1          # &larr; Default Gateway ที่ Network ให้มา
+      nameservers:
+        addresses: [10.20.0.10, 10.20.0.11]  # &larr; DNS Server ภายในบริษัท</pre>
+        </div>
+        <p class="muted">ตัวเลข IP ในตัวอย่างเป็นแค่ตัวอย่างเฉยๆ ต้องเปลี่ยนเป็นเลขจริงที่ทีมเครือข่ายให้มาทั้งหมด</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>sudo netplan apply
+ip a   # เช็คว่า IP ใหม่ขึ้นแล้ว
+ping -c 3 10.20.5.1   # ทดสอบ ping หา gateway ให้แน่ใจว่าต่อเน็ตได้</pre>
+        </div>
+        <p>เมื่อ IP ใหม่ใช้งานได้แล้ว ให้ reboot อีกครั้งให้ชื่อเครื่องใหม่มีผลเต็มที่:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>sudo reboot</pre>
+        </div>
+        <p class="muted">หลัง reboot ให้ SSH เข้าใหม่โดยใช้ <strong>Static IP ตัวใหม่</strong> แทน IP เดิม</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-3">
+      <div class="phase-head"><div class="phase-num">03</div><h2>ติดตั้ง Docker</h2></div>
+      <div class="phase-body">
+        <p>ใช้สคริปต์ติดตั้งอย่างเป็นทางการของ Docker (ครอบคลุม Docker Engine + Compose ในตัว ไม่ต้องติดตั้งแยก):</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>curl -fsSL https://get.docker.com | sudo sh
+sudo usermod -aG docker $USER
+newgrp docker</pre>
+        </div>
+        <p>ตรวจว่าติดตั้งสำเร็จ — ควรเห็นเลขเวอร์ชันแบบนี้:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker --version
+# Docker version 27.x.x, build xxxxxxx
+
+docker compose version
+# Docker Compose version v2.x.x</pre>
+        </div>
+        <p>ทดสอบว่า Docker รันคอนเทนเนอร์ได้จริง (ไม่ใช่แค่ติดตั้งอย่างเดียว):</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker run hello-world</pre>
+        </div>
+        <p class="muted">ถ้าเห็นข้อความ "Hello from Docker!" แปลว่า Docker ทำงานสมบูรณ์ 100% พร้อมไปขั้นตอนถัดไป</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-4">
+      <div class="phase-head"><div class="phase-num">04</div><h2>ตั้ง SQL Express + โฟลเดอร์แอป</h2></div>
+      <div class="phase-body">
+        <p>สร้างโฟลเดอร์กลางเก็บทุกแอป แล้ววาง docker-compose.yml สำหรับฐานข้อมูล:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>sudo mkdir -p /opt/attg-apps
+cd /opt/attg-apps</pre>
+        </div>
+        <p>สร้างไฟล์ <code class="inline">docker-compose.yml</code>:</p>
+        <div class="codeblock">
+          <div class="bar"><span>docker-compose.yml</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>services:
+  sql-express:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: attg-sql-express
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+      SA_PASSWORD: "&lt;ตั้งรหัสผ่านที่ปลอดภัย&gt;"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sql-data:</pre>
+        </div>
+        <div class="callout"><span class="ic">!</span><div><strong>รหัสผ่าน SA</strong> ต้องมีตัวใหญ่+เล็ก+ตัวเลข+สัญลักษณ์ อย่างน้อย 8 ตัว ไม่งั้นคอนเทนเนอร์จะไม่ยอมสตาร์ท เก็บรหัสนี้ไว้ส่งให้ทีมแอปในขั้นตอนที่ 07 (ห้ามใช้รหัสผ่านง่ายๆ เพราะเป็นบัญชีสิทธิ์สูงสุดของฐานข้อมูล)</div></div>
+
+        <p><strong>แต่ละบรรทัดในไฟล์หมายถึงอะไร:</strong></p>
+        <table class="handoff">
+          <thead><tr><th>บรรทัด</th><th>ความหมาย</th></tr></thead>
+          <tbody>
+            <tr><td class="field">image</td><td>เวอร์ชัน SQL Server ที่ Microsoft ปล่อยอย่างเป็นทางการ (ล็อกเวอร์ชันไว้ ไม่สุ่มดึงตัวใหม่เอง)</td></tr>
+            <tr><td class="field">ACCEPT_EULA</td><td>ยอมรับเงื่อนไขการใช้งานของ Microsoft (ต้องเป็น "Y" ไม่งั้นรันไม่ได้)</td></tr>
+            <tr><td class="field">MSSQL_PID</td><td>เลือกรุ่นฟรี (Express) — ถ้าไม่ใส่จะไปใช้รุ่น Developer โดย default</td></tr>
+            <tr><td class="field">ports</td><td>เปิดพอร์ต 1433 (พอร์ตมาตรฐานของ SQL Server) ให้แอปอื่นต่อเข้ามาได้</td></tr>
+            <tr><td class="field">volumes</td><td>เก็บข้อมูลฐานข้อมูลไว้นอกคอนเทนเนอร์ — ถ้าลบ/สร้างคอนเทนเนอร์ใหม่ ข้อมูลจะไม่หาย</td></tr>
+            <tr><td class="field">restart</td><td>ถ้าเครื่อง Server รีสตาร์ท คอนเทนเนอร์นี้จะเปิดขึ้นมาเองอัตโนมัติ</td></tr>
+          </tbody>
+        </table>
+
+        <p>สั่งรัน:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker compose up -d
+docker ps</pre>
+        </div>
+        <p>ผลลัพธ์ <code class="inline">docker ps</code> ที่ถูกต้องควรมีลักษณะนี้ (สถานะเป็น "Up"):</p>
+        <div class="codeblock">
+          <div class="bar"><span>output ตัวอย่าง</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>CONTAINER ID   IMAGE                              STATUS         PORTS
+a1b2c3d4e5f6   mcr.microsoft.com/mssql/server...  Up 2 minutes   0.0.0.0:1433->1433/tcp</pre>
+        </div>
+        <p class="muted">ถ้า STATUS ขึ้น "Restarting" ซ้ำๆ แปลว่ารหัสผ่าน SA ไม่ผ่านเงื่อนไขความปลอดภัย — กลับไปแก้ในไฟล์แล้วรัน <code class="inline">docker compose up -d</code> ใหม่</p>
+        <p class="muted">แอปแต่ละตัว (เช่น ATTG ACM) จะมี service เพิ่มเข้ามาในไฟล์นี้ทีหลัง — ทีมแอปจะส่งไฟล์ที่อัปเดตแล้วมาให้รัน <code class="inline">docker compose up -d</code> ซ้ำอีกครั้งตอนติดตั้งแอปจริง</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-5">
+      <div class="phase-head"><div class="phase-num">05</div><h2>เครือข่ายและ Firewall</h2></div>
+      <div class="phase-body">
+        <p>เปิดพอร์ตเฉพาะจากวง IP ภายในของกลุ่ม ATTG เท่านั้น (แก้ <code class="inline">10.x.0.0/16</code> เป็นวง IP จริงของบริษัท):</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>sudo ufw allow from 10.x.0.0/16 to any port 1433 proto tcp
+sudo ufw allow from 10.x.0.0/16 to any port 80,443 proto tcp
+sudo ufw enable</pre>
+        </div>
+        <p class="muted">พอร์ต 1433 = ฐานข้อมูล, พอร์ต 80/443 = สำหรับหน้าเว็บแอปที่จะติดตั้งภายหลัง ไม่ต้องเปิดออกอินเทอร์เน็ตเลย เพราะใช้แค่ภายในเครือข่าย ATTG</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-6">
+      <div class="phase-head"><div class="phase-num">06</div><h2>ตรวจสอบว่าใช้งานได้</h2></div>
+      <div class="phase-body">
+        <p>เช็คว่า container ฐานข้อมูลรันอยู่และตอบสนอง:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker exec -it attg-sql-express /opt/mssql-tools18/bin/sqlcmd \
+  -S localhost -U sa -P '&lt;รหัสผ่านที่ตั้งไว้&gt;' -C \
+  -Q "SELECT @@VERSION"</pre>
+        </div>
+        <p>ถ้าเห็นข้อความเวอร์ชัน SQL Server ตอบกลับมา แปลว่าฐานข้อมูลพร้อมใช้งานแล้ว</p>
+      </div>
+    </section>
+
+    <section class="phase" id="handoff">
+      <div class="phase-head"><div class="phase-num">07</div><h2>ส่งข้อมูลกลับให้ทีมแอป</h2></div>
+      <div class="phase-body">
+        <p>เมื่อทำครบ 6 ขั้นตอนแล้ว รบกวนส่งข้อมูลนี้กลับมา (ส่งรหัสผ่านผ่านช่องทางที่ปลอดภัย ไม่ส่งทางแชทเปิด):</p>
+        <table class="handoff">
+          <thead><tr><th>รายการ</th><th>ตัวอย่าง</th></tr></thead>
+          <tbody>
+            <tr><td class="field">Hostname / Static IP</td><td>attg-apphost-01 / 10.x.x.x</td></tr>
+            <tr><td class="field">Docker version</td><td>ผลจาก <code class="inline">docker --version</code></td></tr>
+            <tr><td class="field">SQL SA password</td><td>ส่งแยกช่องทางปลอดภัย</td></tr>
+            <tr><td class="field">พอร์ต 1433 เปิดแล้ว</td><td>ยืนยัน ✓</td></tr>
+            <tr><td class="field">ผู้ติดต่อ IT</td><td>ชื่อ + เบอร์/อีเมล</td></tr>
+          </tbody>
+        </table>
+        <p class="muted">หลังจากนี้ทีมแอปจะส่งไฟล์แอปจริง (Dockerfile + docker-compose service เพิ่ม) มาให้ deploy ต่อ ไม่ต้องตั้งค่าอะไรเพิ่มจากขั้นตอนนี้แล้ว</p>
+      </div>
+    </section>
+
+    <footer>ATTG Group &middot; Internal Infrastructure Document &middot; จัดทำเพื่อการติดตั้งจริง ไม่ใช่เอกสารสาธารณะ</footer>
+  </main>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var pre = btn.closest('.codeblock').querySelector('pre');
+        var text = pre.textContent;
+        var done = function () {
+          var old = btn.textContent;
+          btn.textContent = 'คัดลอกแล้ว';
+          setTimeout(function () { btn.textContent = old; }, 1400);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(fallback);
+        } else {
+          fallback();
+        }
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+      });
+    });
+
+    var sections = Array.from(document.querySelectorAll('section.phase'));
+    var links = Array.from(document.querySelectorAll('.rail a'));
+    function onScroll() {
+      var pos = window.scrollY + 120;
+      var current = sections[0];
+      sections.forEach(function (s) { if (s.offsetTop <= pos) current = s; });
+      links.forEach(function (l) {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current.id);
+      });
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
