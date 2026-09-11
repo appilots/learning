@@ -351,9 +351,9 @@
   <div>
     <p class="eyebrow">Infrastructure &middot; ATTG Group</p>
     <h1>App Host Setup</h1>
-    <p class="sub">ตั้งค่าเครื่อง VM บน Nutanix สำหรับรันแอปภายในที่พัฒนาขึ้นเอง (เริ่มจาก ATTG ACM) พร้อมฐานข้อมูล SQL Server Express ของตัวเอง — ไม่พึ่งพา Cloud ใดๆ ทั้งสิ้น</p>
+    <p class="sub">ตั้งค่าเครื่อง VM บน Nutanix สำหรับรันแอปภายในที่พัฒนาขึ้นเอง พร้อมฐานข้อมูล SQL Server Express ของตัวเอง — ไม่พึ่งพา Cloud ใดๆ ทั้งสิ้น แล้วติดตั้งแอปตัวแรก (ATTG ACM) ให้เสร็จสมบูรณ์</p>
   </div>
-  <p class="meta">v1.0 &middot; สำหรับทีม IT Local<br>ผู้ดูแล: แผนก IT ATTG</p>
+  <p class="meta">v1.1 &middot; สำหรับทีม IT Local<br>ผู้ดูแล: แผนก IT ATTG</p>
 </div>
 
 <div class="layout">
@@ -366,6 +366,12 @@
     <a href="#phase-5"><span class="n">05</span> เครือข่าย/Firewall</a>
     <a href="#phase-6"><span class="n">06</span> ตรวจสอบระบบ</a>
     <a href="#handoff"><span class="n">07</span> ส่งมอบข้อมูล</a>
+    <a href="#phase-8"><span class="n">08</span> นำไฟล์ ACM ขึ้นเครื่อง</a>
+    <a href="#phase-9"><span class="n">09</span> ตั้งค่า .env ของ ACM</a>
+    <a href="#phase-10"><span class="n">10</span> Build และรัน ACM</a>
+    <a href="#phase-11"><span class="n">11</span> ตรวจสอบ ACM</a>
+    <a href="#phase-12"><span class="n">12</span> ข้อมูลเริ่มต้น</a>
+    <a href="#phase-13"><span class="n">13</span> ดูแลต่อเนื่อง</a>
   </nav>
 
   <main>
@@ -606,11 +612,149 @@ sudo ufw enable</pre>
             <tr><td class="field">ผู้ติดต่อ IT</td><td>ชื่อ + เบอร์/อีเมล</td></tr>
           </tbody>
         </table>
-        <p class="muted">หลังจากนี้ทีมแอปจะส่งไฟล์แอปจริง (Dockerfile + docker-compose service เพิ่ม) มาให้ deploy ต่อ ไม่ต้องตั้งค่าอะไรเพิ่มจากขั้นตอนนี้แล้ว</p>
+        <p class="muted">เครื่องพร้อมใช้งานแล้ว — ต่อจากนี้เป็นขั้นตอนติดตั้งแอป ATTG ACM ตัวแรกบนเครื่องนี้ (ขั้นตอน 08 เป็นต้นไป)</p>
       </div>
     </section>
 
-    <footer>ATTG Group &middot; Internal Infrastructure Document &middot; จัดทำเพื่อการติดตั้งจริง ไม่ใช่เอกสารสาธารณะ</footer>
+    <div style="margin: 48px 0 32px; padding-top: 24px; border-top: 2px solid var(--line);">
+      <p class="mono" style="font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px;">ส่วนที่ 2</p>
+      <h2 style="font-size: 22px; margin: 0;">ติดตั้ง ATTG ACM บนเครื่องที่เตรียมไว้</h2>
+      <p class="muted" style="max-width: 68ch; margin-top: 8px;">แอปตัวแรกที่จะรันบนเครื่องกลางนี้ — โปรเจกต์มี Docker และ docker-compose ที่ทีมแอปเตรียมไว้ให้ครบแล้ว งานของ IT คือนำไฟล์ขึ้นเครื่องแล้วสั่งรัน</p>
+    </div>
+
+    <section class="phase" id="phase-8">
+      <div class="phase-head"><div class="phase-num">08</div><h2>นำไฟล์โปรเจกต์ ACM ขึ้นเครื่อง</h2></div>
+      <div class="phase-body">
+        <p>ทีมแอปจะส่งโฟลเดอร์โปรเจกต์ทั้งหมด (ไฟล์ .zip หรือที่อยู่ git repository) มาให้ — นำขึ้นไปไว้ในโฟลเดอร์กลางที่สร้างไว้ตั้งแต่ขั้นตอน 04:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>cd /opt/attg-apps
+# ถ้าได้รับเป็น .zip (อัปโหลดผ่าน scp/WinSCP มาที่ /opt/attg-apps ก่อน):
+sudo apt install -y unzip
+unzip attg-acm.zip -d attg-acm
+cd attg-acm
+
+# หรือถ้าทีมแอปให้ที่อยู่ git repository แทน:
+# git clone &lt;URL ที่ทีมแอปให้&gt; attg-acm
+# cd attg-acm</pre>
+        </div>
+        <p>เช็คว่าไฟล์สำคัญอยู่ครบ:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>ls
+# ควรเห็น: Dockerfile  docker-compose.yml  .env.example  package.json  api-server/  sql/  src/</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-9">
+      <div class="phase-head"><div class="phase-num">09</div><h2>ตั้งค่า .env ของ ACM</h2></div>
+      <div class="phase-body">
+        <p>คัดลอกไฟล์ตัวอย่างแล้วตั้งรหัสผ่านฐานข้อมูล (คนละตัวกับ SQL Express ที่อาจมีแอปอื่นใช้ร่วม — แอปนี้มี container ฐานข้อมูลของตัวเอง):</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>cp .env.example .env
+nano .env</pre>
+        </div>
+        <p>ตั้งค่าบรรทัดนี้เป็นรหัสผ่านจริง (ที่เหลือมีค่ามาให้แล้ว ไม่ต้องแก้):</p>
+        <div class="codeblock">
+          <div class="bar"><span>.env</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>SQL_SA_PASSWORD=&lt;ตั้งรหัสผ่านที่ปลอดภัย เช่น Attg#Sql2026!&gt;</pre>
+        </div>
+        <div class="callout"><span class="ic">!</span><div>รหัสผ่านต้องมีตัวใหญ่+เล็ก+ตัวเลข+สัญลักษณ์ อย่างน้อย 8 ตัว และ<strong>ต้องเก็บไว้ส่งให้ทีมแอป</strong> (ใช้ต่อฐานข้อมูลตอน debug) — ส่งผ่านช่องทางปลอดภัย ไม่ใช่แชทเปิด</div></div>
+        <p class="muted">บันทึกไฟล์แล้วออกจาก nano ด้วย <code class="inline">Ctrl+O</code> (save) แล้ว <code class="inline">Ctrl+X</code> (ออก)</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-10">
+      <div class="phase-head"><div class="phase-num">10</div><h2>Build และรัน ACM</h2></div>
+      <div class="phase-body">
+        <p>คำสั่งเดียวจบ — สร้าง image ของแอป + ดึง image ของ SQL Express + รันทั้งคู่พร้อมกัน:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker compose up -d --build</pre>
+        </div>
+        <p class="muted">รอบแรกจะใช้เวลา 3-5 นาที (ดาวน์โหลด image + ติดตั้ง Azure CLI ข้างใน) รอบต่อไปจะเร็วขึ้นมากเพราะ Docker จำ layer เดิมไว้</p>
+        <p>ดูความคืบหน้าได้ระหว่างรอ:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker compose logs -f</pre>
+        </div>
+        <p class="muted">กด <code class="inline">Ctrl+C</code> เพื่อออกจากหน้าจอ log (ไม่ได้หยุดคอนเทนเนอร์ แค่เลิกดู)</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-11">
+      <div class="phase-head"><div class="phase-num">11</div><h2>ตรวจสอบ ACM ว่าใช้งานได้</h2></div>
+      <div class="phase-body">
+        <p>เช็คว่าทั้ง 2 container รันอยู่และสถานะเป็น "Up" / "healthy":</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker compose ps</pre>
+        </div>
+        <div class="codeblock">
+          <div class="bar"><span>output ตัวอย่าง</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>NAME              STATUS
+attg-acm-sql      Up 2 minutes (healthy)
+attg-acm-app      Up 1 minute</pre>
+        </div>
+        <p>ทดสอบว่าเว็บตอบสนอง:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>curl -I http://localhost:8080
+# ควรเห็น HTTP/1.1 200 OK</pre>
+        </div>
+        <p>จากนั้นเปิดเบราว์เซอร์ (จากเครื่องอื่นในเครือข่าย ATTG) ไปที่ <code class="inline">http://&lt;IP ของเครื่องนี้&gt;:8080</code> ควรเห็นหน้า Login ของ ATTG ACM</p>
+        <p class="muted">ถ้าเปิดไม่ขึ้น เช็คว่า Firewall เปิดพอร์ต 8080 ไว้แล้วหรือยัง (ย้อนกลับไปขั้นตอน 05)</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-12">
+      <div class="phase-head"><div class="phase-num">12</div><h2>ข้อมูลเริ่มต้น</h2></div>
+      <div class="phase-body">
+        <div class="callout"><span class="ic">!</span><div><strong>ส่วนนี้ยังรอการตัดสินใจจากทีมแอป</strong> — ตอนนี้แอปยังดึงข้อมูลจริงผ่าน Azure CLI (<code class="inline">az</code>) ซึ่งต้อง login ด้วยบัญชีพิเศษ (Service Principal) ก่อนถึงจะกดปุ่ม "อัปเดตข้อมูล" ในแอปแล้วได้ผลลัพธ์ ถ้าทีมแอปเปลี่ยนไปใช้วิธีอื่น (เช่น Import Excel) ขั้นตอนนี้จะไม่จำเป็นอีกต่อไป</div></div>
+        <p>ถ้ายังใช้วิธี Azure CLI อยู่ ให้ login เข้า container ของแอปแล้วสั่ง login ด้วย Service Principal ที่ทีมแอปเตรียมไว้ให้:</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker compose exec app az login --service-principal \
+  -u &lt;appId ที่ทีมแอปให้&gt; \
+  -p &lt;password ที่ทีมแอปให้&gt; \
+  --tenant &lt;tenant ที่ทีมแอปให้&gt;</pre>
+        </div>
+        <p class="muted">หลัง login สำเร็จ กลับไปกดปุ่ม "อัปเดตข้อมูล" ในหน้าเว็บได้เลย ระบบจะดึงข้อมูลจริงเข้าฐานข้อมูลให้อัตโนมัติ</p>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-13">
+      <div class="phase-head"><div class="phase-num">13</div><h2>ดูแลต่อเนื่อง</h2></div>
+      <div class="phase-body">
+        <p><strong>เมื่อทีมแอปส่งโค้ดเวอร์ชันใหม่มา:</strong></p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>cd /opt/attg-apps/attg-acm
+# แทนที่ไฟล์ด้วยเวอร์ชันใหม่ (หรือ git pull ถ้าใช้ git) แล้ว:
+docker compose up -d --build</pre>
+        </div>
+        <p class="muted">ข้อมูลในฐานข้อมูลจะไม่หาย เพราะเก็บอยู่ใน Docker volume แยกจากตัวแอป</p>
+
+        <p><strong>ถ้าต้องรีสตาร์ททั้งหมด:</strong></p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker compose restart</pre>
+        </div>
+
+        <p><strong>สำรองข้อมูลฐานข้อมูล</strong> (แนะนำทำเป็นระยะ):</p>
+        <div class="codeblock">
+          <div class="bar"><span>bash</span><button class="copy-btn" data-copy>คัดลอก</button></div>
+          <pre>docker compose exec sql /opt/mssql-tools18/bin/sqlcmd \
+  -S localhost -U sa -P '&lt;รหัสผ่าน&gt;' -C \
+  -Q "BACKUP DATABASE AttgAcmDB TO DISK = '/var/opt/mssql/backup.bak'"</pre>
+        </div>
+        <p class="muted">ไฟล์ backup จะอยู่ใน volume เดียวกับข้อมูลจริง — ถ้าจะเก็บให้ปลอดภัยจริง ควร copy ไฟล์นี้ออกไปเก็บที่อื่นด้วย (เช่น <code class="inline">docker compose cp sql:/var/opt/mssql/backup.bak ./backup.bak</code>)</p>
+      </div>
+    </section>
+
+    <footer>ATTG Group &middot; Internal Infrastructure &amp; Deployment Document &middot; ไม่ใช่เอกสารสาธารณะ</footer>
   </main>
 </div>
 
