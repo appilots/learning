@@ -261,6 +261,7 @@
         <li>การเห็นข้อมูลของฝ่ายอื่นนอกเหนือจากข้างต้น (เช่น ฝ่ายอื่นแชร์ให้ใช้งานร่วมกัน) ต้องได้รับการเพิ่มชื่อในรายชื่อสมาชิก Portal นั้นอย่างชัดเจนจาก Admin ของฝ่ายนั้นเท่านั้น — ไม่ได้รับสิทธิ์อัตโนมัติ และไม่สามารถเลือกดูฝ่ายอื่นเองผ่าน Dropdown ได้ตามใจชอบ</li>
         <li>สิทธิ์ระดับสูงกว่า User (เช่น Admin ของฝ่าย) ต้องมีชื่ออยู่ในรายชื่อสมาชิก Portal นั้นอย่างชัดเจนเท่านั้นเช่นกัน ไม่ได้รับสิทธิ์อัตโนมัติ</li>
         <li>ถ้าข้อมูลฝ่ายของท่านใน Master Data ยังไม่ตรงกับฝ่ายใดในระบบเลย ผู้ใช้จะเห็นหน้า "ยังไม่มีสิทธิ์เข้าใช้งาน" — กรณีนี้ให้ติดต่อผู้ดูแลระบบของหน่วยงานท่าน ไม่ใช่ปัญหาของบัญชีผู้ใช้เอง</li>
+        <li>พนักงานที่เป็น <b>หัวหน้า Section/Department/Division ขึ้นไป หรือดำรงตำแหน่ง VP/EVP/President</b> (ตามข้อมูล Master Data) จะได้รับสิทธิ์ <b>Admin ของฝ่ายตนเองโดยอัตโนมัติ</b> เช่นกัน ไม่ต้องรอ Admin คนอื่นเพิ่มชื่อให้ — ระบบจะตรวจสอบสถานะนี้ปีละ 1 ครั้ง (เริ่มรอบวันที่ 1 เมษายนของทุกปี ตามรอบการปรับตำแหน่งของบริษัท) และเมื่อมีการเลื่อนสิทธิ์เกิดขึ้น ระบบจะส่งอีเมลแจ้ง Super Admin โดยอัตโนมัติเพื่อความโปร่งใส ทั้งนี้สิทธิ์ที่ได้รับจะไม่ถูกลดระดับอัตโนมัติแม้ตำแหน่งจะเปลี่ยนไป (ต้องแจ้ง Super Admin ให้ปรับด้วยตนเอง)</li>
       </ul>
       <ul class="rules" data-lang="en">
         <li>Every employee with an O365 account <b>automatically sees only their own department's data</b> at "User" level — the system matches your department for you from Employee Master Data; no Admin needs to add you first</li>
@@ -268,6 +269,7 @@
         <li>Seeing any OTHER department's data beyond the above (e.g. a department sharing access with another) requires an explicit entry in that Portal's own member list, added by that department's Admin — this is never granted automatically, and you cannot freely browse to another department via the Dropdown on your own</li>
         <li>Rights above User level (e.g. department Admin) likewise require an explicit entry in that Portal's member list — never granted automatically</li>
         <li>If your department in Master Data doesn't match any department in the system yet, you'll see a "not yet provisioned" screen — this should be reported to your department's own administrator, not treated as a problem with your account</li>
+        <li>An employee who is a <b>Section/Department/Division Head or holds a VP/EVP/President title</b> (per Master Data) likewise automatically receives <b>Admin rights for their own department</b> — no other Admin needs to add them. The system re-checks this status once a year (each cycle starting April 1, matching the company's own promotion cycle), and automatically emails the Super Admin whenever a promotion like this happens, for transparency. Rights granted this way are never automatically downgraded even if the position later changes (a Super Admin must adjust that manually)</li>
       </ul>
       <ul class="rules" data-lang="ja">
         <li>O365アカウントを持つすべての社員は、<b>自分自身の部門のデータのみを自動的に閲覧できます</b>(「User」レベル)— 部門はEmployee Master Dataから自動的に照合され、管理者が先に登録する必要はありません</li>
@@ -275,6 +277,7 @@
         <li>上記以外の他部門のデータを閲覧するには(例:他部門との共有)、その部門の管理者がポータルのメンバーリストに明示的に登録する必要があります — 自動的には付与されず、Dropdownから自由に他部門を選んで見ることもできません</li>
         <li>Userレベルを超える権限(部門管理者など)も、そのポータルのメンバーリストに明示的に登録されている場合にのみ付与されます</li>
         <li>Master Data上のあなたの部門情報がシステム内のどの部門とも一致しない場合、「まだ権限が付与されていません」という画面が表示されます。これはご自身のアカウントの問題ではなく、あなたの部門の管理者に連絡すべき事項です</li>
+        <li>Master Dataにおいて<b>Section/Department/Divisionの責任者、またはVP/EVP/President</b>の役職を持つ社員も、同様に<b>自分自身の部門のAdmin権限を自動的に取得</b>します — 他の管理者が登録する必要はありません。このステータスは年に1回(会社の人事異動サイクルに合わせ、毎年4月1日開始のサイクルで)再確認され、昇格が発生した場合はSuper Adminに自動でメール通知が送られ、透明性を確保します。この方法で付与された権限は、役職が変わっても自動的に降格されることはありません(変更が必要な場合はSuper Adminが手動で調整します)</li>
       </ul>
     </section>
 
@@ -435,17 +438,17 @@
     <section class="page" id="t11">
       <h2><span class="num">11</span><span data-lang="th">ระดับสิทธิ์ผู้ใช้งาน</span><span data-lang="en">User Role Tiers</span><span data-lang="ja">ユーザー権限区分</span></h2>
       <ul class="rules" data-lang="th">
-        <li><span class="tag role">User</span> ผู้ใช้งานทั่วไป — ยื่นคำขอ ใช้ Application Hub และ OCR ได้ แต่แก้ไขการตั้งค่าของฝ่ายไม่ได้</li>
+        <li><span class="tag role">User</span> ผู้ใช้งานทั่วไป — ยื่นคำขอและใช้ Application Hub ได้เต็มที่ ใช้ OCR สแกน/อ่านตัวอย่างเอกสารได้ฟรี แต่<b>บันทึกเอกสาร OCR ไม่ได้</b> (ต้องได้รับสิทธิ์เพิ่มจาก Admin ของฝ่ายก่อน) และแก้ไขการตั้งค่าของฝ่ายไม่ได้</li>
         <li><span class="tag role">Admin</span> ผู้ดูแลฝ่าย — สร้าง/แก้ไขบริการ, จัดการ Application Link, จัดการสมาชิกและสิทธิ์ภายในฝ่ายของตนเอง</li>
         <li><span class="tag role">Super Admin</span> ผู้ดูแลระบบสูงสุด (จำนวนจำกัดเฉพาะบุคคล) — มองเห็นและสร้าง Portal ได้ทุกฝ่าย เข้าหน้า "การจัดการระบบ" ระดับองค์กร และเป็นผู้เดียวที่แก้ไขรายการ "ประเภทเอกสารย่อย" ของ OCR ได้ (เพื่อป้องกันแต่ละฝ่ายตั้งประเภทซ้ำซ้อนกันเอง)</li>
       </ul>
       <ul class="rules" data-lang="en">
-        <li><span class="tag role">User</span> Regular user — can submit requests and use the Application Hub and OCR, but cannot change their department's own configuration</li>
+        <li><span class="tag role">User</span> Regular user — can fully submit requests and use the Application Hub, and can scan/preview a document with OCR for free, but <b>cannot save an OCR document</b> (requires an extra grant from their department's Admin), and cannot change their department's own configuration</li>
         <li><span class="tag role">Admin</span> Department admin — can create/edit services, manage Application Links, and manage members and rights within their own department</li>
         <li><span class="tag role">Super Admin</span> Top-level administrator (a small, fixed set of people) — can see and create every Portal, access the organization-wide "System Management" page, and is the only role that can edit the global OCR "document sub-type" list (to prevent departments from independently creating conflicting or duplicate types)</li>
       </ul>
       <ul class="rules" data-lang="ja">
-        <li><span class="tag role">User</span> 一般ユーザー — 申請の送信、アプリケーションハブとOCRの利用が可能ですが、自部門の設定を変更することはできません</li>
+        <li><span class="tag role">User</span> 一般ユーザー — 申請の送信とアプリケーションハブの利用は問題なく行えます。OCRでの書類のスキャン・プレビューも無料で利用できますが、<b>OCR書類の保存はできません</b>(部門の管理者から追加の権限付与が必要です)。また、自部門の設定を変更することはできません</li>
         <li><span class="tag role">Admin</span> 部門管理者 — サービスの作成/編集、アプリケーションリンクの管理、自部門内のメンバーと権限の管理が可能です</li>
         <li><span class="tag role">Super Admin</span> 最上位管理者(少数の特定の人物のみ)— すべてのポータルの閲覧・作成が可能で、組織全体の「システム管理」ページにアクセスでき、OCRの「書類サブタイプ」のグローバルリストを編集できる唯一の権限です(各部門が独自に競合・重複した種類を作成するのを防ぐため)</li>
       </ul>
