@@ -147,9 +147,11 @@
       <a href="#t8">8. ระดับความมั่นใจของข้อมูล</a>
       <a href="#t9">9. ขีดจำกัดไฟล์และรูปแบบเอกสาร</a>
       <a href="#t10">10. การแชร์เอกสารและความเป็นส่วนตัว</a>
+      <a href="#t14">14. ขั้นตอนการอ่าน OCR และ Master Data</a>
       <div class="group-title">ทั่วไป</div>
       <a href="#t11">11. ระดับสิทธิ์ผู้ใช้งาน</a>
       <a href="#t12">12. ความรับผิดชอบของผู้ใช้งาน</a>
+      <a href="#t13">13. Master Data ผู้ขาย และผลลัพธ์โครงการ (ROI)</a>
     </div>
     <div data-lang="en">
       <div class="group-title">System Access</div>
@@ -166,9 +168,11 @@
       <a href="#t8">8. Data Confidence Levels</a>
       <a href="#t9">9. File Limits &amp; Formats</a>
       <a href="#t10">10. Document Sharing &amp; Privacy</a>
+      <a href="#t14">14. OCR Reading &amp; Master Data Matching Steps</a>
       <div class="group-title">General</div>
       <a href="#t11">11. User Role Tiers</a>
       <a href="#t12">12. User Responsibilities</a>
+      <a href="#t13">13. Vendor Master Data &amp; ROI Reporting</a>
     </div>
     <div data-lang="ja">
       <div class="group-title">システムアクセス</div>
@@ -185,9 +189,11 @@
       <a href="#t8">8. データ信頼度レベル</a>
       <a href="#t9">9. ファイル制限と形式</a>
       <a href="#t10">10. 書類の共有とプライバシー</a>
+      <a href="#t14">14. OCR読み取りとマスターデータ照合の流れ</a>
       <div class="group-title">全般</div>
       <a href="#t11">11. ユーザー権限区分</a>
       <a href="#t12">12. ユーザーの責任</a>
+      <a href="#t13">13. 取引先マスターデータとROIレポート</a>
     </div>
   </nav>
 
@@ -215,16 +221,19 @@
         <li>รับเฉพาะบัญชี Microsoft 365 ที่อยู่ในโดเมนของ AISIN Group/ATTG เท่านั้น — บัญชีอีเมลส่วนตัวหรือบัญชีนอกองค์กรใช้งานไม่ได้</li>
         <li>ผู้ใช้บางส่วนอาจ Login ด้วย UPN ที่เป็นรหัสพนักงาน (เช่น 0158-ATA@ap01.aisingroup.com) แทนอีเมลจริง — ระบบจะดึงอีเมลจริงจากบัญชี Microsoft 365 โดยอัตโนมัติเพื่อใช้ระบุตัวตนในระบบ</li>
         <li>เซสชันการเข้าสู่ระบบผูกกับเบราว์เซอร์/แท็บที่ใช้งาน — ปิดเบราว์เซอร์หรือออกจากระบบจะต้องเข้าสู่ระบบใหม่</li>
+        <li>Super Admin สามารถกำหนดรายชื่อโดเมนอีเมล/บัญชีที่อนุญาตให้ Login ได้เองผ่านหน้า "Access Control" เนื่องจากกลุ่ม ATTG ใช้ระบบ Single Sign-On ร่วมกันแต่มีหลายโดเมนบริษัทในเครือ</li>
       </ul>
       <ul class="rules" data-lang="en">
         <li>Only Microsoft 365 accounts within the AISIN Group/ATTG domain are accepted — personal or external-organization email accounts cannot sign in</li>
         <li>Some users may sign in with a UPN that looks like an employee code (e.g. 0158-ATA@ap01.aisingroup.com) rather than a real email address — the system automatically resolves their real email from the Microsoft 365 account to identify them</li>
         <li>A sign-in session is tied to the browser/tab in use — closing the browser or signing out requires signing in again</li>
+        <li>A Super Admin can manage the list of allowed email domains/accounts themselves via the "Access Control" page, since the whole ATTG group shares one single sign-on system across several separate company domains</li>
       </ul>
       <ul class="rules" data-lang="ja">
         <li>AISIN Group/ATTGドメイン内のMicrosoft 365アカウントのみ利用可能です。個人メールや組織外のアカウントではログインできません</li>
         <li>一部のユーザーは実際のメールアドレスではなく、社員コードのようなUPN(例:0158-ATA@ap01.aisingroup.com)でログインする場合がありますが、システムはMicrosoft 365アカウントから実際のメールアドレスを自動的に取得して本人確認に使用します</li>
         <li>ログインセッションは使用中のブラウザ/タブに紐づいています。ブラウザを閉じるか、ログアウトすると再度ログインが必要です</li>
+        <li>ATTGグループ全体で1つのシングルサインオンを共有しつつ複数のグループ会社ドメインが存在するため、スーパー管理者は「Access Control」画面からログインを許可するメールドメイン/アカウントを自身で管理できます</li>
       </ul>
     </section>
 
@@ -387,21 +396,27 @@
         <li>ทุกค่าที่ระบบอ่านได้ ไม่ว่าจะระดับความมั่นใจใด ควรได้รับการตรวจทานจากผู้ใช้ก่อนกด "ยืนยันและบันทึก" เสมอ — ระบบ AI อาจอ่านผิดพลาดได้แม้จะมั่นใจสูง</li>
         <li>เมื่อผู้ใช้กดปุ่ม "ยืนยัน" (เครื่องหมายถูก) ที่แถวใด ค่าฟิลด์นั้นจะถือเป็น "มั่นใจสูง" ทันที ตามการยืนยันด้วยสายตาของผู้ใช้ ไม่ใช่คะแนนจาก AI</li>
       
-        <li>กรณีที่ระบบสามารถอ่านข้อมูลหลักของเอกสาร (เลขที่เอกสาร วันที่ และจำนวนเงิน) ได้น้อยเกินไป เช่น หน้าภาคผนวก ระบบจะแจ้งเตือนว่า<b>เอกสารดังกล่าวอาจมิใช่เอกสารในกลุ่มที่จัดเก็บในฐานข้อมูล OCR</b> ผู้ใช้งานพึงพิจารณาเลือกเอกสารใหม่ และหากผู้ใช้งานยืนยันการบันทึก ผู้ใช้งานเป็นผู้รับผิดชอบต่อความครบถ้วนและความถูกต้องของข้อมูลที่บันทึกนั้น</li></ul>
+        <li>กรณีที่ระบบสามารถอ่านข้อมูลหลักของเอกสาร (เลขที่เอกสาร วันที่ และจำนวนเงิน) ได้น้อยเกินไป เช่น หน้าภาคผนวก ระบบจะแจ้งเตือนว่า<b>เอกสารดังกล่าวอาจมิใช่เอกสารในกลุ่มที่จัดเก็บในฐานข้อมูล OCR</b> ผู้ใช้งานพึงพิจารณาเลือกเอกสารใหม่ และหากผู้ใช้งานยืนยันการบันทึก ผู้ใช้งานเป็นผู้รับผิดชอบต่อความครบถ้วนและความถูกต้องของข้อมูลที่บันทึกนั้น</li>
+        <li><b>เลขผู้เสียภาษีของผู้ขาย (Vendor Tax ID)</b> จะถูกตั้งเป็น "ตรวจสอบ" บังคับทุกครั้งที่อ่านได้ไม่ครบ 13 หลัก ไม่ว่า AI จะให้คะแนนความมั่นใจสูงเพียงใด เนื่องจากเป็นคีย์หลักที่เชื่อมข้อมูลเข้าสู่ระบบ SAP</li>
+        <li>สีของแต่ละเอกสารในตาราง "ศูนย์รวมเอกสาร (OCR)" ยึดตาม<b>ฟิลด์ที่แย่ที่สุดในเอกสารนั้น</b> ไม่ใช่ค่าเฉลี่ย — มีฟิลด์แดงแม้เพียง 1 ช่อง ทั้งเอกสารจะแสดงเป็นสีแดงทันที</li></ul>
       <ul class="rules" data-lang="en">
         <li><b>Detailed mode</b> uses a real AI confidence score: <b>High confidence (green)</b> is 80% or above, <b>Needs review (orange)</b> is 40–79%, <b>Not found/low (red)</b> is below 40%</li>
         <li><b>Fast mode</b> has no continuous score — each field is tiered by how reliable the pattern match found in the document was (e.g. a field label sitting right next to its value on the same line = High confidence; a value inferred from surrounding context = Needs review)</li>
         <li>Every extracted value, regardless of its confidence tier, should always be visually reviewed before clicking "Confirm &amp; Save" — the AI can still misread even a High-confidence value</li>
         <li>Clicking "Confirm" (the checkmark) on a row immediately marks that field as "High confidence," based on the user's own visual verification, not the AI's score</li>
       
-        <li>Where too few key details of a document (document number, date and amount) can be read, for example an appendix page, the system will flag the document as <b>possibly not belonging in the OCR database</b>. The user should consider selecting a different document and, if the user nevertheless confirms the save, remains responsible for the completeness and accuracy of the data saved.</li></ul>
+        <li>Where too few key details of a document (document number, date and amount) can be read, for example an appendix page, the system will flag the document as <b>possibly not belonging in the OCR database</b>. The user should consider selecting a different document and, if the user nevertheless confirms the save, remains responsible for the completeness and accuracy of the data saved.</li>
+        <li>The vendor's <b>Tax ID</b> is always forced into "Needs review" whenever it isn't read as exactly 13 digits, no matter how high the AI's own confidence score is — it's the key field used to link saved data into SAP</li>
+        <li>A document's color in the "OCR Document Hub" table reflects its <b>single worst field</b>, not an average — even one red field anywhere in the document makes the whole document show as red</li></ul>
       <ul class="rules" data-lang="ja">
         <li><b>詳細モード</b>は実際のAI信頼度スコアを使用します:<b>高信頼度(緑)</b>は80%以上、<b>要確認(オレンジ)</b>は40〜79%、<b>未検出・低い(赤)</b>は40%未満</li>
         <li><b>高速モード</b>には連続的なスコアはなく、書類内で検出されたパターンマッチの信頼性に基づいて各項目が等級付けされます(例:項目ラベルが同じ行の値のすぐ隣にある場合=高信頼度、周囲の文脈から推測された値=要確認)</li>
         <li>信頼度レベルに関わらず、抽出されたすべての値は「確認して保存」をクリックする前に必ず目視で確認してください。高信頼度であってもAIが誤読する可能性があります</li>
         <li>行の「確認」(チェックマーク)をクリックすると、AIのスコアではなくユーザー自身の目視確認に基づき、その項目は即座に「高信頼度」としてマークされます</li>
       
-        <li>書類の主要項目(書類番号、日付および金額)がほとんど読み取れない場合(付録ページなど)、システムは当該書類が<b>OCRデータベースの保存対象外である可能性がある</b>旨を警告します。利用者は別の書類の選択を検討するものとし、それでも保存を確定した場合、保存した内容の完全性および正確性について利用者自身が責任を負います。</li></ul>
+        <li>書類の主要項目(書類番号、日付および金額)がほとんど読み取れない場合(付録ページなど)、システムは当該書類が<b>OCRデータベースの保存対象外である可能性がある</b>旨を警告します。利用者は別の書類の選択を検討するものとし、それでも保存を確定した場合、保存した内容の完全性および正確性について利用者自身が責任を負います。</li>
+        <li>取引先の<b>税番号(Tax ID)</b>は、AIの信頼度スコアが高くても13桁ちょうどで読み取れなかった場合は常に強制的に「要確認」になります。SAPへのデータ連携に使用される重要な項目のためです</li>
+        <li>「OCR書類ハブ」の表における書類の色は、平均ではなく<b>その書類内で最も悪い項目</b>を反映します。赤色の項目が1つでもあれば、書類全体が赤で表示されます</li></ul>
     </section>
 
     <!-- 9. File limits -->
@@ -465,16 +480,19 @@
         <li><span class="tag role">User</span> ผู้ใช้งานทั่วไป — ยื่นคำขอและใช้ Application Hub ได้เต็มที่ ใช้ OCR สแกน/อ่านตัวอย่างเอกสารได้ฟรี แต่<b>บันทึกเอกสาร OCR ไม่ได้</b> (ต้องได้รับสิทธิ์เพิ่มจาก Admin ของฝ่ายก่อน) และแก้ไขการตั้งค่าของฝ่ายไม่ได้</li>
         <li><span class="tag role">Admin</span> ผู้ดูแลฝ่าย — สร้าง/แก้ไขบริการ, จัดการ Application Link, จัดการสมาชิกและสิทธิ์ภายในฝ่ายของตนเอง</li>
         <li><span class="tag role">Super Admin</span> ผู้ดูแลระบบสูงสุด (จำนวนจำกัดเฉพาะบุคคล) — มองเห็นและสร้าง Portal ได้ทุกฝ่าย เข้าหน้า "การจัดการระบบ" ระดับองค์กร และเป็นผู้เดียวที่แก้ไขรายการ "ประเภทเอกสารย่อย" ของ OCR ได้ (เพื่อป้องกันแต่ละฝ่ายตั้งประเภทซ้ำซ้อนกันเอง)</li>
+        <li><b>สิทธิ์แก้ไข/ลบเอกสาร OCR</b>: พนักงานทั่วไปแก้ไข/ลบได้เฉพาะเอกสารที่ตนเองสแกนเท่านั้น ส่วนหัวหน้าแผนกขึ้นไปสามารถจัดการเอกสารของทีม/สายงานที่ตนดูแลได้ — ไม่ใช่สมาชิก Portal ทุกคนที่จะแก้ไข/ลบเอกสารของผู้อื่นได้ดังเดิมอีกต่อไป</li>
       </ul>
       <ul class="rules" data-lang="en">
         <li><span class="tag role">User</span> Regular user — can fully submit requests and use the Application Hub, and can scan/preview a document with OCR for free, but <b>cannot save an OCR document</b> (requires an extra grant from their department's Admin), and cannot change their department's own configuration</li>
         <li><span class="tag role">Admin</span> Department admin — can create/edit services, manage Application Links, and manage members and rights within their own department</li>
         <li><span class="tag role">Super Admin</span> Top-level administrator (a small, fixed set of people) — can see and create every Portal, access the organization-wide "System Management" page, and is the only role that can edit the global OCR "document sub-type" list (to prevent departments from independently creating conflicting or duplicate types)</li>
+        <li><b>OCR document edit/delete rights</b>: a regular employee can only edit/delete documents they personally scanned; department heads and above can manage documents for their own team/reporting chain — any Portal member being able to edit or delete anyone else's document is no longer the case</li>
       </ul>
       <ul class="rules" data-lang="ja">
         <li><span class="tag role">User</span> 一般ユーザー — 申請の送信とアプリケーションハブの利用は問題なく行えます。OCRでの書類のスキャン・プレビューも無料で利用できますが、<b>OCR書類の保存はできません</b>(部門の管理者から追加の権限付与が必要です)。また、自部門の設定を変更することはできません</li>
         <li><span class="tag role">Admin</span> 部門管理者 — サービスの作成/編集、アプリケーションリンクの管理、自部門内のメンバーと権限の管理が可能です</li>
         <li><span class="tag role">Super Admin</span> 最上位管理者(少数の特定の人物のみ)— すべてのポータルの閲覧・作成が可能で、組織全体の「システム管理」ページにアクセスでき、OCRの「書類サブタイプ」のグローバルリストを編集できる唯一の権限です(各部門が独自に競合・重複した種類を作成するのを防ぐため)</li>
+        <li><b>OCR書類の編集・削除権限</b>:一般社員は自分がスキャンした書類のみ編集・削除できます。部門長以上は自分が管理するチーム/系統の書類を管理できます — 以前のようにポータルのメンバー全員が他人の書類を編集・削除できる仕様ではなくなりました</li>
       </ul>
     </section>
 
@@ -496,6 +514,54 @@
         <li>ユーザーは、入力した情報やシステムが抽出した情報(特にOCRによるもの)の正確性を、確認・保存する前に毎回検証する必要があります</li>
         <li>他人のアカウントでログインしたり、パスワードを他人と共有したりしないでください</li>
         <li>デジタルフォームを通じて提出された情報は正式な申請とみなされ、紙の申請書と同等の効力を持ちます</li>
+      </ul>
+    </section>
+
+    <!-- 13. Master Data & ROI Reporting -->
+    <section class="page" id="t13">
+      <h2><span class="num">13</span><span data-lang="th">Master Data ผู้ขาย และรายงานผลลัพธ์โครงการ (ROI)</span><span data-lang="en">Vendor Master Data &amp; Project ROI Reporting</span><span data-lang="ja">取引先マスターデータとプロジェクトROIレポート</span></h2>
+      <ul class="rules" data-lang="th">
+        <li>ตั้งแต่ 1 ต.ค. 2569 ข้อมูล <b>Master Data ผู้ขาย/องค์กร</b> ย้ายไปเป็นตารางกลางที่ <b>ใช้ร่วมกันทุกฝ่าย/ทุกบริษัทในเครือ</b> (ไม่จำกัดขอบเขตเฉพาะหน่วยงานของผู้ใช้งานเหมือนก่อนหน้านี้) — ผู้ขาย/คู่ค้าใหม่ที่สแกนพบจะถูกบันทึกเข้าฐานข้อมูลกลางนี้<b>ทันทีโดยอัตโนมัติ</b> ไม่ต้องรอ Admin อนุมัติอีกต่อไป ผู้ใช้งานจึงควรตรวจสอบความถูกต้องของชื่อ/เลขผู้เสียภาษีก่อนบันทึกเอกสารให้ละเอียดเป็นพิเศษ เนื่องจากข้อมูลที่ผิดอาจถูกนำไปใช้กับเอกสารฉบับอื่นของผู้ขายรายเดียวกันในฝ่ายอื่นโดยไม่มีผู้ตรวจทาน</li>
+        <li>ตัวเลขในหน้า <b>ผลลัพธ์โครงการ</b> (จำนวนเอกสาร มูลค่าที่ประหยัดได้ ต้นทุน และ Net ROI) เป็น<b>การประมาณการเพื่อการตัดสินใจเชิงบริหารภายใน</b> โดยอ้างอิงจากสมมติฐานที่ปรับได้ (เช่น ค่าแรงเฉลี่ยต่อชั่วโมง) ไม่ใช่ตัวเลขบัญชีที่ผ่านการตรวจสอบ และไม่ควรนำไปอ้างอิงหรือเผยแพร่ภายนอกองค์กรโดยไม่ผ่านการตรวจทานจากผู้บริหารที่เกี่ยวข้อง</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li>As of 1 Oct 2026, <b>Vendor / Organization Master Data</b> moved to a central table <b>shared across every department and group company</b> (no longer scoped to just the user's own department as before) — a newly-scanned vendor/customer is saved into this shared database <b>immediately and automatically</b>, with no Admin approval step anymore, so users should double-check a vendor's name/Tax ID especially carefully before saving: an incorrect value can silently carry over to that same vendor's other documents in a different department with no one reviewing it</li>
+        <li>Figures on the <b>Project Results (ROI)</b> page (document counts, value saved, cost, and Net ROI) are <b>internal management-decision estimates</b> based on adjustable assumptions (such as average hourly wage), not audited accounting figures, and must not be cited or published outside the organization without review by the relevant management</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li>2026年10月1日以降、<b>取引先/組織マスターデータ</b>は<b>全部門・全グループ会社で共有する中央テーブル</b>に移行しました(従来のように利用者自身の部門のみに限定されなくなりました)。新たにスキャンされた取引先/顧客は、管理者の承認なしに<b>即座に自動的に</b>この共有データベースへ保存されます。誤った値が他部門の同一取引先の別書類にも誰のレビューもなく引き継がれる可能性があるため、保存前に取引先名・税番号の確認は特に慎重に行ってください</li>
+        <li><b>プロジェクト成果(ROI)</b>ページの数値(書類件数、削減効果額、コスト、Net ROI)は、調整可能な前提条件(平均時給など)に基づく<b>社内の経営判断用の概算</b>であり、監査済みの会計数値ではありません。関連する経営層による確認を経ずに、組織外へ引用・公開してはなりません</li>
+      </ul>
+    </section>
+
+    <section class="page" id="t14">
+      <h2><span class="num">14</span><span data-lang="th">ขั้นตอนการอ่านเอกสารด้วย OCR และการจับคู่ Master Data</span><span data-lang="en">OCR Document Reading &amp; Master Data Matching Steps</span><span data-lang="ja">OCR書類読み取りとマスターデータ照合の流れ</span></h2>
+      <ul class="rules" data-lang="th">
+        <li><b>ขั้นที่ 1 — เลือกโหมดอ่าน:</b> โหมดเร็ว (อ่านในเครื่องด้วย Tesseract) หรือโหมดละเอียด (Azure Document Intelligence) หรือ Auto (ลองโหมดเร็วก่อน) ตามที่อธิบายไว้ในหัวข้อ "โหมดเร็ว vs โหมดละเอียด"</li>
+        <li><b>ขั้นที่ 2 — ดึงข้อมูลดิบจากเอกสาร:</b> ระบบอ่านชื่อผู้ซื้อ/ผู้ขาย ที่อยู่ เลขประจำตัวผู้เสียภาษี เลขที่เอกสาร และยอดเงินต่างๆ ออกมาก่อน</li>
+        <li><b>ขั้นที่ 3 — ตรวจสอบว่าใครคือบริษัทในกลุ่ม ATTG:</b> ระบบเทียบชื่อที่อ่านได้กับ <b>Master Company</b> (รายชื่อบริษัทในกลุ่ม ATTG ที่ดูแลผ่าน TPS Office/GuruApp) หากเอกสารต้นฉบับระบุบริษัทในกลุ่มผิดช่อง (เช่น ใส่ไว้เป็น SUPPLIER ทั้งที่จริงเราเป็นฝ่ายซื้อ) ระบบจะสลับให้บริษัทในกลุ่มไปอยู่ช่อง "ผู้ซื้อ" เสมอ ไม่ว่าเอกสารต้นฉบับจะระบุไว้ว่าอย่างไร</li>
+        <li><b>ขั้นที่ 4 — จับคู่กับ Vendor Master:</b> ฝั่งที่ไม่ใช่บริษัทในกลุ่ม (ผู้ขายหรือลูกค้าภายนอก) จะถูกเทียบกับ <b>Vendor Master</b> (ดูแลผ่าน TPS Office/GuruApp เช่นกัน) โดยเทียบเลขประจำตัวผู้เสียภาษีก่อน หากไม่พบจึงเทียบชื่อ — เมื่อพบรายการที่สถานะ "ยืนยันแล้ว" ระบบจะดึงชื่อ/ที่อยู่/เลขผู้เสียภาษีที่ถูกต้องจาก Master Data มาแทนที่ค่าที่ OCR อ่านได้ทันที</li>
+        <li><b>ขั้นที่ 5 — แสดงผลให้ตรวจสอบ:</b> ผู้ใช้งานเห็นข้อมูลที่อ่านและปรับแก้แล้วบนหน้าจอยืนยัน สามารถแก้ไขเพิ่มเติมเองได้ก่อนบันทึกจริง</li>
+        <li><b>ขั้นที่ 6 — ตอนบันทึกเอกสาร:</b> หาก Vendor รายนั้นยังไม่เคยมีใน Vendor Master ระบบจะสร้างรายการใหม่ให้อัตโนมัติ (พยายามแยกที่อยู่เป็นเลขที่/ตำบล/อำเภอ/จังหวัด/รหัสไปรษณีย์ให้ หากรูปแบบที่อยู่ตรงกับแพทเทิร์นที่ระบบรู้จัก) และตั้งสถานะเป็น "ยืนยันแล้ว" ทันที เพื่อให้พร้อมใช้จับคู่กับเอกสารถัดไปของผู้ขายรายเดียวกัน</li>
+        <li>ข้อมูล Master Company และ Vendor Master เป็นข้อมูลกลางที่ใช้ร่วมกันทุก Portal/บริษัทในเครือ การแก้ไขทำได้จากหน้า Administration ของ TPS Office (GuruApp) เท่านั้น ไม่สามารถแก้ไขจากหน้าเอกสาร OCR ของแต่ละ Portal ได้โดยตรง</li>
+      </ul>
+      <ul class="rules" data-lang="en">
+        <li><b>Step 1 — Choose a reading mode:</b> Fast (local Tesseract), Detailed (Azure Document Intelligence), or Auto (tries Fast first) — see "Fast Mode vs Detailed Mode" above</li>
+        <li><b>Step 2 — Extract raw fields:</b> the system reads the buyer/seller name, address, tax ID, document number, and amounts from the document</li>
+        <li><b>Step 3 — Identify which party is the ATTG group:</b> the extracted names are checked against <b>Master Company</b> (the ATTG group's own company list, managed via TPS Office/GuruApp). If the source document mislabels which role our own company plays (e.g. lists it as SUPPLIER when we are actually the buyer), the system swaps it so our own company always ends up in the "buyer" field, regardless of how the original document labeled it</li>
+        <li><b>Step 4 — Match against Vendor Master:</b> whichever party is not one of our own group companies (the external vendor or customer) is checked against <b>Vendor Master</b> (also managed via TPS Office/GuruApp) — by tax ID first, then by name if no tax ID match. When a "Confirmed" record is found, its verified name/address/tax ID immediately replace whatever the OCR read</li>
+        <li><b>Step 5 — Review on screen:</b> the user sees the read-and-reconciled fields on the confirm screen and may edit them further before saving</li>
+        <li><b>Step 6 — On save:</b> if that vendor isn't in Vendor Master yet, the system automatically creates a new record (attempting to split the address into number/sub-district/district/province/postal code when the address matches a recognized pattern), immediately marked "Confirmed" so it's ready to match the next document from the same vendor</li>
+        <li>Master Company and Vendor Master are shared data used by every Portal/group company — they can only be edited from TPS Office (GuruApp)'s own Administration page, not directly from any Portal's OCR document screen</li>
+      </ul>
+      <ul class="rules" data-lang="ja">
+        <li><b>ステップ1 — 読み取りモードの選択:</b> 高速モード(ローカルのTesseract)、詳細モード(Azure Document Intelligence)、または自動(まず高速モードを試す)。上記「高速モードと詳細モード」を参照</li>
+        <li><b>ステップ2 — 書類から生データを抽出:</b> 買主/売主名、住所、納税者番号、書類番号、金額などを読み取ります</li>
+        <li><b>ステップ3 — ATTGグループのどちらかを判定:</b> 読み取った名称を<b>マスター企業</b>(TPS Office/GuruAppで管理するATTGグループ自社の会社リスト)と照合します。元の書類で自社の役割が誤って記載されていた場合(買主であるにもかかわらずSUPPLIERと記載されているなど)、元の書類の記載にかかわらず、自社が常に「買主」欄に入るよう入れ替えます</li>
+        <li><b>ステップ4 — ベンダーマスターとの照合:</b> 自社グループ以外の当事者(外部の取引先または顧客)は<b>ベンダーマスター</b>(同じくTPS Office/GuruAppで管理)と照合されます。まず納税者番号で照合し、一致しない場合は名称で照合します。「確認済み」のレコードが見つかった場合、その検証済みの名称/住所/納税者番号がOCRの読み取り結果を即座に置き換えます</li>
+        <li><b>ステップ5 — 画面での確認:</b> 読み取り・調整済みの項目が確認画面に表示され、保存前にユーザーがさらに編集できます</li>
+        <li><b>ステップ6 — 保存時:</b> その取引先がまだベンダーマスターに登録されていない場合、システムが自動的に新規レコードを作成します(住所が認識可能なパターンに一致する場合、番地/タンボン/アンプー/県/郵便番号への分割を試みます)。即座に「確認済み」として登録され、同じ取引先からの次の書類との照合にすぐ使用できます</li>
+        <li>マスター企業とベンダーマスターは、すべてのポータル/グループ会社で共有されるデータです。編集はTPS Office(GuruApp)の管理画面からのみ行うことができ、各ポータルのOCR書類画面から直接編集することはできません</li>
       </ul>
     </section>
 
