@@ -48,16 +48,57 @@
     width: 260px; flex-shrink: 0;
     padding: 24px 16px; height: calc(100vh - 64px); overflow-y: auto;
   }
+  nav.toc { padding: 20px 14px; }
   nav.toc a {
-    display: block; padding: 8px 12px; border-radius: 8px;
+    display: block; padding: 7px 10px; border-radius: 8px;
     color: var(--ink-light); text-decoration: none; font-size: 13px; font-weight: 600;
-    margin-bottom: 2px;
+    margin-bottom: 1px; position: relative;
   }
   nav.toc a:hover { background: #fff; color: var(--navy); }
-  nav.toc .group-title {
-    font-size: 11px; text-transform: uppercase; letter-spacing: .05em; font-weight: 800;
-    color: var(--navy); margin: 18px 12px 6px; opacity: .7;
+  nav.toc a.active {
+    background: #fff; color: var(--navy); font-weight: 800;
+    box-shadow: inset 3px 0 0 var(--blue);
   }
+  .nav-search-wrap { position: relative; margin: 0 2px 18px; }
+  .nav-search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--ink-light); display: flex; pointer-events: none; }
+  .nav-search-icon svg { width: 14px; height: 14px; }
+  .nav-search {
+    width: 100%; box-sizing: border-box; padding: 9px 12px 9px 32px;
+    border: 1px solid var(--border); border-radius: 10px; font-size: 13px;
+    font-family: inherit; background: #fff; color: var(--ink); outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .nav-search:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,120,212,.12); }
+  .nav-group { border: none; margin: 0; }
+  .nav-group + .nav-group, .nav-group + .group-link-single, .group-link-single + .nav-group {
+    border-top: 1px solid var(--border); margin-top: 6px; padding-top: 6px;
+  }
+  .nav-group summary {
+    display: flex; align-items: center; gap: 9px; list-style: none; cursor: pointer;
+    padding: 7px 10px; border-radius: 8px; user-select: none;
+  }
+  .nav-group summary::-webkit-details-marker { display: none; }
+  .nav-group summary::marker { content: ""; }
+  .nav-group summary:hover { background: #fff; }
+  .nav-icon {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 24px; height: 24px; border-radius: 7px; background: var(--navy); color: #fff;
+  }
+  .nav-icon svg { width: 14px; height: 14px; }
+  .nav-group summary .label {
+    flex: 1; font-size: 11.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--navy);
+  }
+  .chevron { width: 13px; height: 13px; color: var(--ink-light); transition: transform .18s ease; flex-shrink: 0; }
+  .nav-group[open] > summary .chevron { transform: rotate(90deg); }
+  .group-items { padding: 2px 0 4px 33px; display: flex; flex-direction: column; }
+  .group-link-single {
+    display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 8px;
+    color: var(--navy); text-decoration: none; font-size: 11.5px; font-weight: 800;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  .group-link-single:hover { background: #fff; }
+  .group-link-single.active { background: #fff; box-shadow: inset 3px 0 0 var(--blue); }
   main { flex: 1; min-width: 0; padding: 32px 32px 80px; }
   .cover {
     background: linear-gradient(135deg, var(--navy), var(--navy-dark));
@@ -132,68 +173,117 @@
 
 <div class="layout">
   <nav class="toc">
+    <div class="nav-search-wrap">
+      <span class="nav-search-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.8" cy="8.8" r="5.8"/><line x1="13" y1="13" x2="17.3" y2="17.3"/></svg></span>
+      <input type="search" class="nav-search" data-ph-th="ค้นหาหัวข้อ..." data-ph-en="Search topics..." data-ph-ja="トピックを検索..." placeholder="ค้นหาหัวข้อ...">
+    </div>
     <div data-lang="th">
-      <div class="group-title">การเข้าถึงระบบ</div>
-      <a href="#t1">1. การเข้าสู่ระบบและโดเมนที่รับ</a>
-      <a href="#t2">2. บัญชีรหัสพนักงาน</a>
-      <a href="#t3">3. สิทธิ์การเข้าถึง Portal</a>
-      <div class="group-title">แบบฟอร์มดิจิทัล</div>
-      <a href="#t4">4. การส่งและอนุมัติคำขอ</a>
-      <a href="#t5">5. การแชร์บริการข้ามฝ่าย</a>
-      <div class="group-title">แอปพลิเคชันภายนอก</div>
-      <a href="#t6">6. ศูนย์รวม Link แอปพลิเคชัน</a>
-      <div class="group-title">OCR</div>
-      <a href="#t7">7. โหมดเร็ว vs โหมดละเอียด</a>
-      <a href="#t8">8. ระดับความมั่นใจของข้อมูล</a>
-      <a href="#t9">9. ขีดจำกัดไฟล์และรูปแบบเอกสาร</a>
-      <a href="#t10">10. การแชร์เอกสารและความเป็นส่วนตัว</a>
-      <a href="#t14">14. ขั้นตอนการอ่าน OCR และ Master Data</a>
-      <div class="group-title">ทั่วไป</div>
-      <a href="#t11">11. ระดับสิทธิ์ผู้ใช้งาน</a>
-      <a href="#t12">12. ความรับผิดชอบของผู้ใช้งาน</a>
-      <a href="#t13">13. Master Data ผู้ขาย และผลลัพธ์โครงการ (ROI)</a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.3l6.3 2.6v4.6c0 4.6-3.1 6.9-6.3 7.8-3.2-.9-6.3-3.2-6.3-7.8V4.9z"/><path d="M7.2 10l1.9 1.9 3.7-3.7"/></svg></span><span class="label">การเข้าถึงระบบ</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t1">การเข้าสู่ระบบและโดเมนที่รับ</a>
+          <a href="#t2">บัญชีรหัสพนักงาน</a>
+          <a href="#t3">สิทธิ์การเข้าถึง Portal</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.5h6l3 3v11a1 1 0 01-1 1h-8a1 1 0 01-1-1v-13a1 1 0 011-1z"/><path d="M11.5 2.5v3h3"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13.3" x2="13" y2="13.3"/><line x1="7" y1="16.1" x2="10.5" y2="16.1"/></svg></span><span class="label">แบบฟอร์มดิจิทัล</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t4">การส่งและอนุมัติคำขอ</a>
+          <a href="#t5">การแชร์บริการข้ามฝ่าย</a>
+        </div>
+      </details>
+      <a class="group-link-single" href="#t6"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.3" width="6.5" height="4.2" rx="2.1"/><rect x="11" y="7.2" width="6.5" height="4.2" rx="2.1"/><line x1="8.3" y1="11" x2="11.7" y2="9.5"/></svg></span><span>แอปพลิเคชันภายนอก</span></a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5V5.3a1 1 0 011-1H7"/><path d="M13 4.3h2a1 1 0 011 1V7.5"/><path d="M4 12.5v2.2a1 1 0 001 1H7"/><path d="M16 12.5v2.2a1 1 0 01-1 1H13"/><line x1="4" y1="10" x2="16" y2="10"/></svg></span><span class="label">OCR</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t7">โหมดเร็ว vs โหมดละเอียด</a>
+          <a href="#t8">ระดับความมั่นใจของข้อมูล</a>
+          <a href="#t9">ขีดจำกัดไฟล์และรูปแบบเอกสาร</a>
+          <a href="#t10">การแชร์เอกสารและความเป็นส่วนตัว</a>
+          <a href="#t14">ขั้นตอนการอ่าน OCR และ Master Data</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="2.8" width="5.4" height="5.4" rx="1.3"/><rect x="11.8" y="2.8" width="5.4" height="5.4" rx="1.3"/><rect x="2.8" y="11.8" width="5.4" height="5.4" rx="1.3"/><rect x="11.8" y="11.8" width="5.4" height="5.4" rx="1.3"/></svg></span><span class="label">ทั่วไป</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t11">ระดับสิทธิ์ผู้ใช้งาน</a>
+          <a href="#t12">ความรับผิดชอบของผู้ใช้งาน</a>
+          <a href="#t13">Master Data ผู้ขาย และผลลัพธ์โครงการ (ROI)</a>
+        </div>
+      </details>
     </div>
     <div data-lang="en">
-      <div class="group-title">System Access</div>
-      <a href="#t1">1. Sign-in &amp; Allowed Domains</a>
-      <a href="#t2">2. Employee-Code Accounts</a>
-      <a href="#t3">3. Portal Access Rights</a>
-      <div class="group-title">Digital Forms</div>
-      <a href="#t4">4. Submitting &amp; Approving Requests</a>
-      <a href="#t5">5. Cross-Department Sharing</a>
-      <div class="group-title">External Applications</div>
-      <a href="#t6">6. Application Link Hub</a>
-      <div class="group-title">OCR</div>
-      <a href="#t7">7. Fast Mode vs Detailed Mode</a>
-      <a href="#t8">8. Data Confidence Levels</a>
-      <a href="#t9">9. File Limits &amp; Formats</a>
-      <a href="#t10">10. Document Sharing &amp; Privacy</a>
-      <a href="#t14">14. OCR Reading &amp; Master Data Matching Steps</a>
-      <div class="group-title">General</div>
-      <a href="#t11">11. User Role Tiers</a>
-      <a href="#t12">12. User Responsibilities</a>
-      <a href="#t13">13. Vendor Master Data &amp; ROI Reporting</a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.3l6.3 2.6v4.6c0 4.6-3.1 6.9-6.3 7.8-3.2-.9-6.3-3.2-6.3-7.8V4.9z"/><path d="M7.2 10l1.9 1.9 3.7-3.7"/></svg></span><span class="label">System Access</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t1">Sign-in &amp; Allowed Domains</a>
+          <a href="#t2">Employee-Code Accounts</a>
+          <a href="#t3">Portal Access Rights</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.5h6l3 3v11a1 1 0 01-1 1h-8a1 1 0 01-1-1v-13a1 1 0 011-1z"/><path d="M11.5 2.5v3h3"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13.3" x2="13" y2="13.3"/><line x1="7" y1="16.1" x2="10.5" y2="16.1"/></svg></span><span class="label">Digital Forms</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t4">Submitting &amp; Approving Requests</a>
+          <a href="#t5">Cross-Department Sharing</a>
+        </div>
+      </details>
+      <a class="group-link-single" href="#t6"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.3" width="6.5" height="4.2" rx="2.1"/><rect x="11" y="7.2" width="6.5" height="4.2" rx="2.1"/><line x1="8.3" y1="11" x2="11.7" y2="9.5"/></svg></span><span>External Applications</span></a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5V5.3a1 1 0 011-1H7"/><path d="M13 4.3h2a1 1 0 011 1V7.5"/><path d="M4 12.5v2.2a1 1 0 001 1H7"/><path d="M16 12.5v2.2a1 1 0 01-1 1H13"/><line x1="4" y1="10" x2="16" y2="10"/></svg></span><span class="label">OCR</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t7">Fast Mode vs Detailed Mode</a>
+          <a href="#t8">Data Confidence Levels</a>
+          <a href="#t9">File Limits &amp; Formats</a>
+          <a href="#t10">Document Sharing &amp; Privacy</a>
+          <a href="#t14">OCR Reading &amp; Master Data Matching Steps</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="2.8" width="5.4" height="5.4" rx="1.3"/><rect x="11.8" y="2.8" width="5.4" height="5.4" rx="1.3"/><rect x="2.8" y="11.8" width="5.4" height="5.4" rx="1.3"/><rect x="11.8" y="11.8" width="5.4" height="5.4" rx="1.3"/></svg></span><span class="label">General</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t11">User Role Tiers</a>
+          <a href="#t12">User Responsibilities</a>
+          <a href="#t13">Vendor Master Data &amp; ROI Reporting</a>
+        </div>
+      </details>
     </div>
     <div data-lang="ja">
-      <div class="group-title">システムアクセス</div>
-      <a href="#t1">1. ログインと許可ドメイン</a>
-      <a href="#t2">2. 社員コードアカウント</a>
-      <a href="#t3">3. ポータルアクセス権限</a>
-      <div class="group-title">デジタルフォーム</div>
-      <a href="#t4">4. 申請と承認</a>
-      <a href="#t5">5. 部門間の共有</a>
-      <div class="group-title">外部アプリケーション</div>
-      <a href="#t6">6. アプリケーションリンクハブ</a>
-      <div class="group-title">OCR</div>
-      <a href="#t7">7. 高速モードと詳細モード</a>
-      <a href="#t8">8. データ信頼度レベル</a>
-      <a href="#t9">9. ファイル制限と形式</a>
-      <a href="#t10">10. 書類の共有とプライバシー</a>
-      <a href="#t14">14. OCR読み取りとマスターデータ照合の流れ</a>
-      <div class="group-title">全般</div>
-      <a href="#t11">11. ユーザー権限区分</a>
-      <a href="#t12">12. ユーザーの責任</a>
-      <a href="#t13">13. 取引先マスターデータとROIレポート</a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.3l6.3 2.6v4.6c0 4.6-3.1 6.9-6.3 7.8-3.2-.9-6.3-3.2-6.3-7.8V4.9z"/><path d="M7.2 10l1.9 1.9 3.7-3.7"/></svg></span><span class="label">システムアクセス</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t1">ログインと許可ドメイン</a>
+          <a href="#t2">社員コードアカウント</a>
+          <a href="#t3">ポータルアクセス権限</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.5h6l3 3v11a1 1 0 01-1 1h-8a1 1 0 01-1-1v-13a1 1 0 011-1z"/><path d="M11.5 2.5v3h3"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13.3" x2="13" y2="13.3"/><line x1="7" y1="16.1" x2="10.5" y2="16.1"/></svg></span><span class="label">デジタルフォーム</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t4">申請と承認</a>
+          <a href="#t5">部門間の共有</a>
+        </div>
+      </details>
+      <a class="group-link-single" href="#t6"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.3" width="6.5" height="4.2" rx="2.1"/><rect x="11" y="7.2" width="6.5" height="4.2" rx="2.1"/><line x1="8.3" y1="11" x2="11.7" y2="9.5"/></svg></span><span>外部アプリケーション</span></a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5V5.3a1 1 0 011-1H7"/><path d="M13 4.3h2a1 1 0 011 1V7.5"/><path d="M4 12.5v2.2a1 1 0 001 1H7"/><path d="M16 12.5v2.2a1 1 0 01-1 1H13"/><line x1="4" y1="10" x2="16" y2="10"/></svg></span><span class="label">OCR</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t7">高速モードと詳細モード</a>
+          <a href="#t8">データ信頼度レベル</a>
+          <a href="#t9">ファイル制限と形式</a>
+          <a href="#t10">書類の共有とプライバシー</a>
+          <a href="#t14">OCR読み取りとマスターデータ照合の流れ</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="2.8" width="5.4" height="5.4" rx="1.3"/><rect x="11.8" y="2.8" width="5.4" height="5.4" rx="1.3"/><rect x="2.8" y="11.8" width="5.4" height="5.4" rx="1.3"/><rect x="11.8" y="11.8" width="5.4" height="5.4" rx="1.3"/></svg></span><span class="label">全般</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#t11">ユーザー権限区分</a>
+          <a href="#t12">ユーザーの責任</a>
+          <a href="#t13">取引先マスターデータとROIレポート</a>
+        </div>
+      </details>
     </div>
   </nav>
 
@@ -593,6 +683,50 @@
       });
     }
   } catch (e) {}
+
+  (function () {
+    var sections = document.querySelectorAll('section.page[id]')
+    var navLinks = document.querySelectorAll('nav.toc a[href^="#"]')
+    var map = {}
+    navLinks.forEach(function (a) { var id = a.getAttribute('href'); (map[id] = map[id] || []).push(a) })
+    var current = null
+    function setActive(id) {
+      if (current) (map[current] || []).forEach(function (a) { a.classList.remove('active') })
+      current = id
+      ;(map[current] || []).forEach(function (a) {
+        a.classList.add('active')
+        var d = a.closest('details'); if (d) d.open = true
+      })
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) setActive('#' + e.target.id) })
+      }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 })
+      sections.forEach(function (s) { io.observe(s) })
+    }
+  })()
+
+  ;(function () {
+    var input = document.querySelector('.nav-search')
+    if (!input) return
+    function currentLang() { return (document.body.className.match(/lang-(\w+)/) || [])[1] || 'th' }
+    function applyPlaceholder() { input.placeholder = input.getAttribute('data-ph-' + currentLang()) || input.placeholder }
+    applyPlaceholder()
+    document.querySelectorAll('[data-setlang]').forEach(function (btn) { btn.addEventListener('click', applyPlaceholder) })
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase()
+      var scope = document.querySelector('nav.toc > div[data-lang="' + currentLang() + '"]')
+      if (!scope) return
+      scope.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.style.display = (!q || a.textContent.toLowerCase().indexOf(q) !== -1) ? '' : 'none'
+      })
+      scope.querySelectorAll('.nav-group').forEach(function (g) {
+        var anyVisible = Array.prototype.some.call(g.querySelectorAll('a[href^="#"]'), function (a) { return a.style.display !== 'none' })
+        g.style.display = anyVisible ? '' : 'none'
+        if (q && anyVisible) g.open = true
+      })
+    })
+  })()
 </script>
 </body>
 </html>

@@ -50,16 +50,57 @@
     width: 260px; flex-shrink: 0;
     padding: 24px 16px; height: calc(100vh - 64px); overflow-y: auto;
   }
+  nav.toc { padding: 20px 14px; }
   nav.toc a {
-    display: block; padding: 8px 12px; border-radius: 8px;
+    display: block; padding: 7px 10px; border-radius: 8px;
     color: var(--ink-light); text-decoration: none; font-size: 13px; font-weight: 600;
-    margin-bottom: 2px;
+    margin-bottom: 1px; position: relative;
   }
   nav.toc a:hover { background: #fff; color: var(--navy); }
-  nav.toc .group-title {
-    font-size: 11px; text-transform: uppercase; letter-spacing: .05em; font-weight: 800;
-    color: var(--navy); margin: 18px 12px 6px; opacity: .7;
+  nav.toc a.active {
+    background: #fff; color: var(--navy); font-weight: 800;
+    box-shadow: inset 3px 0 0 var(--blue);
   }
+  .nav-search-wrap { position: relative; margin: 0 2px 18px; }
+  .nav-search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--ink-light); display: flex; pointer-events: none; }
+  .nav-search-icon svg { width: 14px; height: 14px; }
+  .nav-search {
+    width: 100%; box-sizing: border-box; padding: 9px 12px 9px 32px;
+    border: 1px solid var(--border); border-radius: 10px; font-size: 13px;
+    font-family: inherit; background: #fff; color: var(--ink); outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .nav-search:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,120,212,.12); }
+  .nav-group { border: none; margin: 0; }
+  .nav-group + .nav-group, .nav-group + .group-link-single, .group-link-single + .nav-group {
+    border-top: 1px solid var(--border); margin-top: 6px; padding-top: 6px;
+  }
+  .nav-group summary {
+    display: flex; align-items: center; gap: 9px; list-style: none; cursor: pointer;
+    padding: 7px 10px; border-radius: 8px; user-select: none;
+  }
+  .nav-group summary::-webkit-details-marker { display: none; }
+  .nav-group summary::marker { content: ""; }
+  .nav-group summary:hover { background: #fff; }
+  .nav-icon {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 24px; height: 24px; border-radius: 7px; background: var(--navy); color: #fff;
+  }
+  .nav-icon svg { width: 14px; height: 14px; }
+  .nav-group summary .label {
+    flex: 1; font-size: 11.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--navy);
+  }
+  .chevron { width: 13px; height: 13px; color: var(--ink-light); transition: transform .18s ease; flex-shrink: 0; }
+  .nav-group[open] > summary .chevron { transform: rotate(90deg); }
+  .group-items { padding: 2px 0 4px 33px; display: flex; flex-direction: column; }
+  .group-link-single {
+    display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 8px;
+    color: var(--navy); text-decoration: none; font-size: 11.5px; font-weight: 800;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  .group-link-single:hover { background: #fff; }
+  .group-link-single.active { background: #fff; box-shadow: inset 3px 0 0 var(--blue); }
   main { flex: 1; min-width: 0; padding: 32px 32px 80px; }
   .cover {
     background: linear-gradient(135deg, var(--navy), var(--navy-dark));
@@ -129,92 +170,150 @@
 
 <div class="layout">
   <nav class="toc">
+    <div class="nav-search-wrap">
+      <span class="nav-search-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.8" cy="8.8" r="5.8"/><line x1="13" y1="13" x2="17.3" y2="17.3"/></svg></span>
+      <input type="search" class="nav-search" data-ph-th="ค้นหาหัวข้อ..." data-ph-en="Search topics..." data-ph-ja="トピックを検索..." placeholder="ค้นหาหัวข้อ...">
+    </div>
     <div data-lang="th">
-      <div class="group-title">เริ่มต้นใช้งาน</div>
-      <a href="#s1">1. หน้าเข้าสู่ระบบ</a>
-      <a href="#s2">2. เข้าสู่ระบบด้วย Microsoft 365</a>
-      <a href="#s3">3. เข้าสู่ระบบด้วยรหัสพนักงาน</a>
-      <a href="#s4">4. ลงทะเบียนใช้งานครั้งแรก</a>
-      <div class="group-title">แบบฟอร์มดิจิทัล (Digital Forms)</div>
-      <a href="#s5">5. แดชบอร์ดฟอร์ม</a>
-      <a href="#s7">7. ศูนย์บริการแบบฟอร์มดิจิทัล</a>
-      <a href="#s8">8. ส่งคำขอใช้บริการ</a>
-      <div class="group-title">เอกสารดิจิทัล OCR</div>
-      <a href="#s6">6. แดชบอร์ด OCR</a>
-      <a href="#s10">10. สร้างเอกสารดิจิทัล (OCR)</a>
-      <a href="#s11">11. ตรวจสอบและบันทึกผล OCR</a>
-      <a href="#s17">17. เอกสารหลายใบในไฟล์เดียว และการแชร์เอกสาร OCR</a>
-      <a href="#s18">18. ส่งออก Excel พร้อมกราฟ</a>
-      <a href="#s20">20. Master Data ผู้ขาย/องค์กร</a>
-      <div class="group-title">ศูนย์รวม Link แอปพลิเคชัน</div>
-      <a href="#s9">9. ศูนย์รวม Link แอปพลิเคชัน</a>
-      <div class="group-title">ภาพรวมและรายงาน</div>
-      <a href="#s19">19. ผลลัพธ์โครงการ</a>
-      <div class="group-title">การตั้งค่าและช่วยเหลือ</div>
-      <a href="#s12">12. การตั้งค่าส่วนตัว</a>
-      <a href="#s16">16. รายงานปัญหา / ข้อเสนอแนะ</a>
-      <div class="group-title">สำหรับผู้ดูแลระบบ</div>
-      <a href="#s13">13. สร้าง/จัดการแบบฟอร์มดิจิทัล</a>
-      <a href="#s14">14. แชร์บริการให้ฝ่ายอื่น</a>
-      <a href="#s15">15. สร้าง Link แอปพลิเคชัน</a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M8.3 7l4.4 3-4.4 3z" fill="currentColor" stroke="none"/></svg></span><span class="label">เริ่มต้นใช้งาน</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s1">หน้าเข้าสู่ระบบ</a>
+          <a href="#s2">เข้าสู่ระบบด้วย Microsoft 365</a>
+          <a href="#s3">เข้าสู่ระบบด้วยรหัสพนักงาน</a>
+          <a href="#s4">ลงทะเบียนใช้งานครั้งแรก</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.5h6l3 3v11a1 1 0 01-1 1h-8a1 1 0 01-1-1v-13a1 1 0 011-1z"/><path d="M11.5 2.5v3h3"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13.3" x2="13" y2="13.3"/><line x1="7" y1="16.1" x2="10.5" y2="16.1"/></svg></span><span class="label">แบบฟอร์มดิจิทัล</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s5">แดชบอร์ดฟอร์ม</a>
+          <a href="#s7">ศูนย์บริการแบบฟอร์มดิจิทัล</a>
+          <a href="#s8">ส่งคำขอใช้บริการ</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5V5.3a1 1 0 011-1H7"/><path d="M13 4.3h2a1 1 0 011 1V7.5"/><path d="M4 12.5v2.2a1 1 0 001 1H7"/><path d="M16 12.5v2.2a1 1 0 01-1 1H13"/><line x1="4" y1="10" x2="16" y2="10"/></svg></span><span class="label">เอกสารดิจิทัล OCR</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s6">แดชบอร์ด OCR</a>
+          <a href="#s10">สร้างเอกสารดิจิทัล (OCR)</a>
+          <a href="#s11">ตรวจสอบและบันทึกผล OCR</a>
+          <a href="#s17">เอกสารหลายใบในไฟล์เดียว และการแชร์เอกสาร OCR</a>
+          <a href="#s18">ส่งออก Excel พร้อมกราฟ</a>
+          <a href="#s20">Master Data ผู้ขาย/องค์กร</a>
+        </div>
+      </details>
+      <a class="group-link-single" href="#s9"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.3" width="6.5" height="4.2" rx="2.1"/><rect x="11" y="7.2" width="6.5" height="4.2" rx="2.1"/><line x1="8.3" y1="11" x2="11.7" y2="9.5"/></svg></span><span>ศูนย์รวม Link แอปพลิเคชัน</span></a>
+      <a class="group-link-single" href="#s19"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="16" x2="4" y2="10.5"/><line x1="10" y1="16" x2="10" y2="4.5"/><line x1="16" y1="16" x2="16" y2="12.5"/><line x1="2.3" y1="17" x2="17.7" y2="17"/></svg></span><span>ภาพรวมและรายงาน</span></a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="3"/><line x1="10" y1="2.2" x2="10" y2="4.3"/><line x1="10" y1="15.7" x2="10" y2="17.8"/><line x1="2.2" y1="10" x2="4.3" y2="10"/><line x1="15.7" y1="10" x2="17.8" y2="10"/><line x1="4.6" y1="4.6" x2="6.1" y2="6.1"/><line x1="13.9" y1="13.9" x2="15.4" y2="15.4"/><line x1="4.6" y1="15.4" x2="6.1" y2="13.9"/><line x1="13.9" y1="6.1" x2="15.4" y2="4.6"/></svg></span><span class="label">การตั้งค่าและช่วยเหลือ</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s12">การตั้งค่าส่วนตัว</a>
+          <a href="#s16">รายงานปัญหา / ข้อเสนอแนะ</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.3l6.3 2.6v4.6c0 4.6-3.1 6.9-6.3 7.8-3.2-.9-6.3-3.2-6.3-7.8V4.9z"/><path d="M7.2 10l1.9 1.9 3.7-3.7"/></svg></span><span class="label">สำหรับผู้ดูแลระบบ</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s13">สร้าง/จัดการแบบฟอร์มดิจิทัล</a>
+          <a href="#s14">แชร์บริการให้ฝ่ายอื่น</a>
+          <a href="#s15">สร้าง Link แอปพลิเคชัน</a>
+        </div>
+      </details>
     </div>
     <div data-lang="en">
-      <div class="group-title">Getting Started</div>
-      <a href="#s1">1. Login Page</a>
-      <a href="#s2">2. Sign in with Microsoft 365</a>
-      <a href="#s3">3. Sign in with Employee Code</a>
-      <a href="#s4">4. First-Time Registration</a>
-      <div class="group-title">Digital Forms</div>
-      <a href="#s5">5. Form Dashboard</a>
-      <a href="#s7">7. Digital Form Service Center</a>
-      <a href="#s8">8. Submitting a Request</a>
-      <div class="group-title">OCR Documents</div>
-      <a href="#s6">6. OCR Dashboard</a>
-      <a href="#s10">10. Digitize a Document (OCR)</a>
-      <a href="#s11">11. Review &amp; Save OCR Results</a>
-      <a href="#s17">17. Multi-Document Files &amp; Sharing a Saved OCR Document</a>
-      <a href="#s18">18. Export to Excel with Charts</a>
-      <a href="#s20">20. Vendor / Organization Master Data</a>
-      <div class="group-title">Application Link Hub</div>
-      <a href="#s9">9. Application Link Hub</a>
-      <div class="group-title">Overview & Reports</div>
-      <a href="#s19">19. Project Results (ROI)</a>
-      <div class="group-title">Settings & Support</div>
-      <a href="#s12">12. Personal Settings</a>
-      <a href="#s16">16. Report Issue / Suggestions</a>
-      <div class="group-title">For Administrators</div>
-      <a href="#s13">13. Manage Digital Forms</a>
-      <a href="#s14">14. Share a Service with Other Departments</a>
-      <a href="#s15">15. Manage Application Links</a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M8.3 7l4.4 3-4.4 3z" fill="currentColor" stroke="none"/></svg></span><span class="label">Getting Started</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s1">Login Page</a>
+          <a href="#s2">Sign in with Microsoft 365</a>
+          <a href="#s3">Sign in with Employee Code</a>
+          <a href="#s4">First-Time Registration</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.5h6l3 3v11a1 1 0 01-1 1h-8a1 1 0 01-1-1v-13a1 1 0 011-1z"/><path d="M11.5 2.5v3h3"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13.3" x2="13" y2="13.3"/><line x1="7" y1="16.1" x2="10.5" y2="16.1"/></svg></span><span class="label">Digital Forms</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s5">Form Dashboard</a>
+          <a href="#s7">Digital Form Service Center</a>
+          <a href="#s8">Submitting a Request</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5V5.3a1 1 0 011-1H7"/><path d="M13 4.3h2a1 1 0 011 1V7.5"/><path d="M4 12.5v2.2a1 1 0 001 1H7"/><path d="M16 12.5v2.2a1 1 0 01-1 1H13"/><line x1="4" y1="10" x2="16" y2="10"/></svg></span><span class="label">OCR Documents</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s6">OCR Dashboard</a>
+          <a href="#s10">Digitize a Document (OCR)</a>
+          <a href="#s11">Review &amp; Save OCR Results</a>
+          <a href="#s17">Multi-Document Files &amp; Sharing a Saved OCR Document</a>
+          <a href="#s18">Export to Excel with Charts</a>
+          <a href="#s20">Vendor / Organization Master Data</a>
+        </div>
+      </details>
+      <a class="group-link-single" href="#s9"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.3" width="6.5" height="4.2" rx="2.1"/><rect x="11" y="7.2" width="6.5" height="4.2" rx="2.1"/><line x1="8.3" y1="11" x2="11.7" y2="9.5"/></svg></span><span>Application Link Hub</span></a>
+      <a class="group-link-single" href="#s19"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="16" x2="4" y2="10.5"/><line x1="10" y1="16" x2="10" y2="4.5"/><line x1="16" y1="16" x2="16" y2="12.5"/><line x1="2.3" y1="17" x2="17.7" y2="17"/></svg></span><span>Overview & Reports</span></a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="3"/><line x1="10" y1="2.2" x2="10" y2="4.3"/><line x1="10" y1="15.7" x2="10" y2="17.8"/><line x1="2.2" y1="10" x2="4.3" y2="10"/><line x1="15.7" y1="10" x2="17.8" y2="10"/><line x1="4.6" y1="4.6" x2="6.1" y2="6.1"/><line x1="13.9" y1="13.9" x2="15.4" y2="15.4"/><line x1="4.6" y1="15.4" x2="6.1" y2="13.9"/><line x1="13.9" y1="6.1" x2="15.4" y2="4.6"/></svg></span><span class="label">Settings & Support</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s12">Personal Settings</a>
+          <a href="#s16">Report Issue / Suggestions</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.3l6.3 2.6v4.6c0 4.6-3.1 6.9-6.3 7.8-3.2-.9-6.3-3.2-6.3-7.8V4.9z"/><path d="M7.2 10l1.9 1.9 3.7-3.7"/></svg></span><span class="label">For Administrators</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s13">Manage Digital Forms</a>
+          <a href="#s14">Share a Service with Other Departments</a>
+          <a href="#s15">Manage Application Links</a>
+        </div>
+      </details>
     </div>
     <div data-lang="ja">
-      <div class="group-title">はじめに</div>
-      <a href="#s1">1. ログインページ</a>
-      <a href="#s2">2. Microsoft 365 でログイン</a>
-      <a href="#s3">3. 社員コードでログイン</a>
-      <a href="#s4">4. 初回登録</a>
-      <div class="group-title">デジタルフォーム</div>
-      <a href="#s5">5. フォームダッシュボード</a>
-      <a href="#s7">7. デジタルフォームサービスセンター</a>
-      <a href="#s8">8. 申請の送信</a>
-      <div class="group-title">OCR書類</div>
-      <a href="#s6">6. OCR ダッシュボード</a>
-      <a href="#s10">10. 書類のデジタル化(OCR)</a>
-      <a href="#s11">11. OCR結果の確認と保存</a>
-      <a href="#s17">17. 複数書類ファイルと保存済みOCR書類の共有</a>
-      <a href="#s18">18. Excelへのエクスポート(グラフ付き)</a>
-      <a href="#s20">20. 取引先/組織マスターデータ</a>
-      <div class="group-title">アプリケーションリンクハブ</div>
-      <a href="#s9">9. アプリケーションリンクハブ</a>
-      <div class="group-title">概要とレポート</div>
-      <a href="#s19">19. プロジェクト成果(ROI)</a>
-      <div class="group-title">設定とサポート</div>
-      <a href="#s12">12. 個人設定</a>
-      <a href="#s16">16. 問題報告 / ご提案</a>
-      <div class="group-title">管理者向け</div>
-      <a href="#s13">13. デジタルフォームの管理</a>
-      <a href="#s14">14. 他部門へのサービス共有</a>
-      <a href="#s15">15. アプリケーションリンクの管理</a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M8.3 7l4.4 3-4.4 3z" fill="currentColor" stroke="none"/></svg></span><span class="label">はじめに</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s1">ログインページ</a>
+          <a href="#s2">Microsoft 365 でログイン</a>
+          <a href="#s3">社員コードでログイン</a>
+          <a href="#s4">初回登録</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.5h6l3 3v11a1 1 0 01-1 1h-8a1 1 0 01-1-1v-13a1 1 0 011-1z"/><path d="M11.5 2.5v3h3"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13.3" x2="13" y2="13.3"/><line x1="7" y1="16.1" x2="10.5" y2="16.1"/></svg></span><span class="label">デジタルフォーム</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s5">フォームダッシュボード</a>
+          <a href="#s7">デジタルフォームサービスセンター</a>
+          <a href="#s8">申請の送信</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5V5.3a1 1 0 011-1H7"/><path d="M13 4.3h2a1 1 0 011 1V7.5"/><path d="M4 12.5v2.2a1 1 0 001 1H7"/><path d="M16 12.5v2.2a1 1 0 01-1 1H13"/><line x1="4" y1="10" x2="16" y2="10"/></svg></span><span class="label">OCR書類</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s6">OCR ダッシュボード</a>
+          <a href="#s10">書類のデジタル化(OCR)</a>
+          <a href="#s11">OCR結果の確認と保存</a>
+          <a href="#s17">複数書類ファイルと保存済みOCR書類の共有</a>
+          <a href="#s18">Excelへのエクスポート(グラフ付き)</a>
+          <a href="#s20">取引先/組織マスターデータ</a>
+        </div>
+      </details>
+      <a class="group-link-single" href="#s9"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.3" width="6.5" height="4.2" rx="2.1"/><rect x="11" y="7.2" width="6.5" height="4.2" rx="2.1"/><line x1="8.3" y1="11" x2="11.7" y2="9.5"/></svg></span><span>アプリケーションリンクハブ</span></a>
+      <a class="group-link-single" href="#s19"><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="16" x2="4" y2="10.5"/><line x1="10" y1="16" x2="10" y2="4.5"/><line x1="16" y1="16" x2="16" y2="12.5"/><line x1="2.3" y1="17" x2="17.7" y2="17"/></svg></span><span>概要とレポート</span></a>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="3"/><line x1="10" y1="2.2" x2="10" y2="4.3"/><line x1="10" y1="15.7" x2="10" y2="17.8"/><line x1="2.2" y1="10" x2="4.3" y2="10"/><line x1="15.7" y1="10" x2="17.8" y2="10"/><line x1="4.6" y1="4.6" x2="6.1" y2="6.1"/><line x1="13.9" y1="13.9" x2="15.4" y2="15.4"/><line x1="4.6" y1="15.4" x2="6.1" y2="13.9"/><line x1="13.9" y1="6.1" x2="15.4" y2="4.6"/></svg></span><span class="label">設定とサポート</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s12">個人設定</a>
+          <a href="#s16">問題報告 / ご提案</a>
+        </div>
+      </details>
+      <details class="nav-group" open>
+        <summary><span class="nav-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.3l6.3 2.6v4.6c0 4.6-3.1 6.9-6.3 7.8-3.2-.9-6.3-3.2-6.3-7.8V4.9z"/><path d="M7.2 10l1.9 1.9 3.7-3.7"/></svg></span><span class="label">管理者向け</span><svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l6 5-6 5"/></svg></summary>
+        <div class="group-items">
+          <a href="#s13">デジタルフォームの管理</a>
+          <a href="#s14">他部門へのサービス共有</a>
+          <a href="#s15">アプリケーションリンクの管理</a>
+        </div>
+      </details>
     </div>
   </nav>
 
@@ -864,6 +963,50 @@
       });
     }
   } catch (e) {}
+
+  (function () {
+    var sections = document.querySelectorAll('section.page[id]')
+    var navLinks = document.querySelectorAll('nav.toc a[href^="#"]')
+    var map = {}
+    navLinks.forEach(function (a) { var id = a.getAttribute('href'); (map[id] = map[id] || []).push(a) })
+    var current = null
+    function setActive(id) {
+      if (current) (map[current] || []).forEach(function (a) { a.classList.remove('active') })
+      current = id
+      ;(map[current] || []).forEach(function (a) {
+        a.classList.add('active')
+        var d = a.closest('details'); if (d) d.open = true
+      })
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) setActive('#' + e.target.id) })
+      }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 })
+      sections.forEach(function (s) { io.observe(s) })
+    }
+  })()
+
+  ;(function () {
+    var input = document.querySelector('.nav-search')
+    if (!input) return
+    function currentLang() { return (document.body.className.match(/lang-(\w+)/) || [])[1] || 'th' }
+    function applyPlaceholder() { input.placeholder = input.getAttribute('data-ph-' + currentLang()) || input.placeholder }
+    applyPlaceholder()
+    document.querySelectorAll('[data-setlang]').forEach(function (btn) { btn.addEventListener('click', applyPlaceholder) })
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase()
+      var scope = document.querySelector('nav.toc > div[data-lang="' + currentLang() + '"]')
+      if (!scope) return
+      scope.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.style.display = (!q || a.textContent.toLowerCase().indexOf(q) !== -1) ? '' : 'none'
+      })
+      scope.querySelectorAll('.nav-group').forEach(function (g) {
+        var anyVisible = Array.prototype.some.call(g.querySelectorAll('a[href^="#"]'), function (a) { return a.style.display !== 'none' })
+        g.style.display = anyVisible ? '' : 'none'
+        if (q && anyVisible) g.open = true
+      })
+    })
+  })()
 </script>
 </body>
 </html>
